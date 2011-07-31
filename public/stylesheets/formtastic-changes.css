@@ -1,0 +1,9 @@
+/* readonly ohne borders
+--------------------------------*/
+input[type=text][readonly] {
+  background-color: transparent;
+  border: 0 none;
+  box-shadow: 0 0;
+  color: #707173;
+}
+

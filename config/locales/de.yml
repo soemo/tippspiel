@@ -1,0 +1,164 @@
+de:
+  app_name: "Tippspiel"
+  text_maintenance: "Die Seite wird aktuell gewartet. Bitte probieren Sie es später wieder."
+  error_javascript: Bitte aktivieren Sie Javascript in Ihrem Browser, um mit der Seite zu arbeiten!
+  error_stale_object: Das Objekt wurde von einem anderen Nutzer bearbeitet. Bitte öffnen Sie es erneut und prüfen Sie die Daten
+  error_record_not_found: Das zu bearbeitende Objekt wurde nicht gefunden!
+  error_auth_token: Ihre Session ist abgelaufen. Bitte melden Sie sich erneut an (indem Sie den Browser schließen und neu öffnen).
+  error_ajax_request: Es ist ein interner Fehler aufgetreten! Bitte informieren Sie uns.
+  error_not_your_website: "Sie dürfen nur Ihre Webseiten editieren!"
+
+  delete_secure_question: "Sind Sie sicher?"
+
+  dashboard: "Mein Dashboard"
+  back_link: "Zurück"
+  edit_link: "Editieren"
+  delete_link: "Löschen"
+  add_a_forward_url: "Neue Forward-Url"
+
+  label_website_new: "Neue Webseite anlegen"
+
+  successfull_create_website: "Webseite wurde erfolgreich angelegt."
+  successfull_update_website: "Webseite wurde erfolgreich aktualisiert."
+
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%e. %b"
+      long: "%e. %B %Y"
+      only_day: "%e"
+      day_with_date: "%a. %d.%m.%Y"
+
+    day_names: [Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag]
+    abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+    abbr_month_names: [~, Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez]
+    order: [ :day, :month, :year ]
+
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+
+    am: "vormittags"
+    pm: "nachmittags"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: 'eine halbe Minute'
+      less_than_x_seconds:
+        zero: 'weniger als 1 Sekunde'
+        one: 'weniger als 1 Sekunde'
+        other: 'weniger als {{count}} Sekunden'
+      x_seconds:
+        one: '1 Sekunde'
+        other: '{{count}} Sekunden'
+      less_than_x_minutes:
+        zero: 'weniger als 1 Minute'
+        one: 'weniger als eine Minute'
+        other: 'weniger als {{count}} Minuten'
+      x_minutes:
+        one: '1 Minute'
+        other: '{{count}} Minuten'
+      about_x_hours:
+        one: 'etwa 1 Stunde'
+        other: 'etwa {{count}} Stunden'
+      x_days:
+        one: '1 Tag'
+        other: '{{count}} Tage'
+      about_x_months:
+        one: 'etwa 1 Monat'
+        other: 'etwa {{count}} Monate'
+      x_months:
+        one: '1 Monat'
+        other: '{{count}} Monate'
+      about_x_years:
+        one: 'etwa 1 Jahr'
+        other: 'etwa {{count}} Jahre'
+      over_x_years:
+        one: 'mehr als 1 Jahr'
+        other: 'mehr als {{count}} Jahre'
+
+  number:
+    format:
+      precision: 2
+      separator: ','
+      delimiter: '.'
+    currency:
+      format:
+        unit: '€'
+        format: '%n%u'
+        separator:
+        delimiter:
+        precision:
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+
+  support:
+    array:
+      sentence_connector: "und"
+      skip_last_comma: true
+
+  activerecord:
+    models:
+      user: Benutzer
+      website: Webseite
+    attributes:
+      website:
+        name: Name
+        url: URL
+        comment: Kommentar
+      forward_url:
+        url: "Forward-URL"
+    enums:
+      checker:
+        statuses:
+          disabled: "nicht aktiv"
+          sucess: "erfolgreich"
+          error: "fehlerhaft"
+        frequencies:
+          never: "nicht ausführen"
+          hourly: "stündlich ausführen"
+          daily: "täglich ausführen"
+          weekly: "wöchentlich ausführen"
+          monthly: "monatlich ausführen"
+    errors:
+      template:
+        header:
+          one:    "Konnte dieses {{model}} Objekt nicht speichern: 1 Fehler."
+          other:  "Konnte dieses {{model}} Objekt nicht speichern: {{count}} Fehler."
+        body: "Bitte überprüfen Sie die folgenden Felder:"
+
+      messages:
+        inclusion: "ist kein gültiger Wert"
+        exclusion: "ist nicht verfügbar"
+        invalid: "ist nicht gültig"
+        confirmation: "stimmt nicht mit der Bestätigung überein"
+        accepted: "muss akzeptiert werden"
+        empty: "muss ausgefüllt werden"
+        blank: "muss ausgefüllt werden"
+        too_long: "ist zu lang (nicht mehr als {{count}} Zeichen)"
+        too_short: "ist zu kurz (nicht weniger als {{count}} Zeichen)"
+        wrong_length: "hat die falsche Länge (muss genau {{count}} Zeichen haben)"
+        taken: "ist bereits vergeben"
+        not_a_number: "ist keine Zahl"
+        greater_than: "muss größer als {{count}} sein"
+        greater_than_or_equal_to: "muss größer oder gleich {{count}} sein"
+        equal_to: "muss genau {{count}} sein"
+        less_than: "muss kleiner als {{count}} sein"
+        less_than_or_equal_to: "muss kleiner oder gleich {{count}} sein"
+        odd: "muss ungerade sein"
+        even: "muss gerade sein"
+        record_invalid: "Validierung fehlgeschlagen: {{errors}}"
+        url_invalid: "ist nicht gültig (keine Parameterangaben erlaubt)"
+

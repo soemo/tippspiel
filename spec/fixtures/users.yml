@@ -1,0 +1,8 @@
+admin:
+  email: admin@test.de
+
+user:
+  email: user@test.de
+
+another_user:
+  email: other@test.de

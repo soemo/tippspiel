@@ -1,0 +1,7 @@
+
+Dieses Verzeichnis dient zum Customizing und Branding der reinen Ruby on Rails Anwendung
+Beim Deployment mittels Webistrano werden dann die kundenspezifischen Dateien aus dem jeweiligen Verzeichnis geholt und
+in die Anwendung kopiert.
+
+Recipe "customizing" aus Webistrano
+

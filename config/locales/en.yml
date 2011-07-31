@@ -1,0 +1,35 @@
+en:
+  app_name: "Tippspiel"
+  text_maintenance: At the moment the site isn't available due to maintenance issues. Please come back in a few minutes.
+  error_javascript: Please activate JavaScript in your browser.
+  error_stale_object: This object was edited by another user. Please reopen it and review the data
+  error_record_not_found: Record was not found!
+  error_auth_token: Your session expired. Please try again!
+  error_ajax_request: An internal error occurred! Please inform us.
+  error_not_your_website: "You could only edit your websites!"
+
+  delete_secure_question: "Are you sure?"
+
+  back_link: "back"
+  edit_link: "edit"
+  delete_link: "delete"
+
+  activerecord:
+    models:
+      user: Benutzer
+    attributes:
+    enums:
+      checker:
+        statuses:
+          disabled: "disabled"
+          sucess: "sucess"
+          error: "error"
+        frequencies:
+          never: "run never"
+          hourly: "run hourly"
+          daily: "run daily"
+          weekly: "run weekly"
+          monthly: "run monthly"
+    errors:
+      messages:
+        url_invalid: "not valid (no params allowed)"

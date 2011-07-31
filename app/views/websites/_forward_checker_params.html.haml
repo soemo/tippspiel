@@ -1,0 +1,6 @@
+- readonly ||= false
+
+= f.semantic_fields_for :forward_urls do |forward_url|
+  = render :partial=>"forward_url_fields", :locals=>{:readonly => readonly, :f => forward_url}
+- unless readonly
+  = f.link_to_add t(:add_a_forward_url), :forward_urls

@@ -1,0 +1,27 @@
+- readonly ||= false
+
+= semantic_nested_form_for website do |f|
+  = f.input :url, :as => :string, :input_html => {:readonly => readonly}
+  = f.input :name, :as => :string, :input_html => {:readonly => readonly}
+  = f.input :comment, :as => :string, :required => false, :input_html => { :readonly => readonly}
+
+  - Website::CHECKERS_SYMS.each do |checker_sym_typ|
+
+    = f.semantic_fields_for checker_sym_typ do |checker|
+      - checker_instance = website.send(checker_sym_typ) rescue nil
+      = checker.input :id, :as => :hidden
+
+      - options = options_for_frequency_select checker_sym_typ, readonly
+      - if readonly
+        -# wie kann ich hier auf die Übersetzung der Frequenz zugreifen
+
+        = checker.input :frequency, options.merge(:as => :string)
+      - else
+        = checker.input(:frequency_cd, options)
+
+      - if(checker_instance.present? && checker_instance.has_extra_params?)
+        %div{:id => checker_sym_typ.to_s+"_params"}
+          = render :partial=>checker_sym_typ.to_s+'_params', :locals=>{:readonly => readonly, :f => checker}
+
+  - unless readonly
+    = f.buttons

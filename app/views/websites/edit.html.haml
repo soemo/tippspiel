@@ -1,0 +1,2 @@
+= link_to(t(:delete_link), @website, :confirm => t(:delete_secure_question), :method => :delete) + " | " + link_to(t(:back_link), website_path(@website))
+= render :partial=>'form', :locals=>{:website=>@website, :readonly=>false}
