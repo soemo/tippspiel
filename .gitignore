@@ -10,3 +10,6 @@ vendor/bundle/ruby/1.8/doc/
 vendor/bundle/ruby/1.8/cache/
 vendor/bundle/ruby/1.8/gems/
 vendor/bundle/ruby/1.8/specifications/
+
+log/
+tmp/
