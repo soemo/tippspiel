@@ -1,0 +1,39 @@
+﻿TODO:
+- thin GEM
+
+- Weiterleitung von DF auf http://http://fussballtippspiel.herokuapp.com
+
+ - models = ActiveRecord::Base.send(:subclasses) -->für automatischen Admin
+oder models = ActiveRecord::Base.send(:subclasses).map(&:model_name)
+
+--
+interessante INFo http://splitshade.wordpress.com/2010/01/18/remote-repositories-mit-git-einrichten/
+
+---
+
+zu DF als Sicherung (ssh://ssh-117168-soemo@soerenmothes.de/kunden/117168_01099/git_repros/tippspiel)
+git push df_tippspiel_bare master:master
+
+
+----------
+http://devcenter.heroku.com/articles/rails3
+
+heroku ps
+heroku logs
+
+heroku run console
+
+heroku run rake db:migrate
+
+heroku run console
+
+----
+git push heroku master
+
+--------
+Manually Updating a Git Remote
+You can see all remotes and the git URLs they reference by typing git remote -v. You can also see and edit the full details for all remotes in your current git repo by editing the file .git/config.
+If you are inside the Git checkout directory, your remote will be updated automatically. Other checkouts, such as those belonging to other developers, will need to be updated manually:
+
+$ git remote rm heroku
+$ git remote add heroku git@heroku.com:newname.git

@@ -1,8 +1,14 @@
 admin:
+  firstname: adi
+  lastname: admin
   email: admin@test.de
 
 user:
+  firstname: test
+  lastname: user
   email: user@test.de
 
 another_user:
+  firstname: another
+  lastname: user
   email: other@test.de

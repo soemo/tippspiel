@@ -1,4 +1,5 @@
 Tippspiel::Application.routes.draw do
+
   get "help/index"
 
   # The priority is based upon order of creation:

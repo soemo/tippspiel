@@ -4,7 +4,6 @@ gem 'rails', '3.0.4'
 
 
 gem 'pg',    '= 0.11.0'
-gem 'mysql', '= 2.8.1'
 gem 'haml',  '= 3.0.5'
 gem 'devise', '= 1.1.7'
 gem 'formtastic', '= 2.0.0.rc3'  # TODO soeren 11.07.11 wenn neue Version dann weg von RC version
