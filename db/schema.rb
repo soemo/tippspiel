@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20111008133749) do
   end
 
   create_table "starttimes", :force => true do |t|
-    t.time     "name"
+    t.string   "name"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
