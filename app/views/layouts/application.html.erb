@@ -39,10 +39,9 @@
       <a href="#content" class="skip" title="Skip to content">Skip to content</a>
       <div class="menu">
         <ul>
-          <li class="current_page_item"><%= link_to "Home", "#" %></li>
-          <li><%= link_to "Aktuell", "#" %></li>
-          <li><%= link_to "FAQ", "#" %></li>
-          <li><%= link_to "Preise", "#" %></li>
+          <% main_nav.each do |key, path| %>
+            <li class="current_page_item"><%= link_to t(key), path %></li>
+          <% end %>
         </ul>
       </div>
     </nav>

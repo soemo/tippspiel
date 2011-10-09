@@ -10,16 +10,11 @@ de:
 
   delete_secure_question: "Sind Sie sicher?"
 
-  dashboard: "Mein Dashboard"
+  home: "Home"
+  help: "Hilfe"
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
-  add_a_forward_url: "Neue Forward-Url"
-
-  label_website_new: "Neue Webseite anlegen"
-
-  successfull_create_website: "Webseite wurde erfolgreich angelegt."
-  successfull_update_website: "Webseite wurde erfolgreich aktualisiert."
 
   date:
     formats:

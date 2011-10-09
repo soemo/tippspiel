@@ -10,6 +10,9 @@ en:
 
   delete_secure_question: "Are you sure?"
 
+  home: "Home"
+  help: "Hilfe"
+
   back_link: "back"
   edit_link: "edit"
   delete_link: "delete"
@@ -18,18 +21,6 @@ en:
     models:
       user: Benutzer
     attributes:
-    enums:
-      checker:
-        statuses:
-          disabled: "disabled"
-          sucess: "sucess"
-          error: "error"
-        frequencies:
-          never: "run never"
-          hourly: "run hourly"
-          daily: "run daily"
-          weekly: "run weekly"
-          monthly: "run monthly"
+
     errors:
       messages:
-        url_invalid: "not valid (no params allowed)"
