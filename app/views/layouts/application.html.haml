@@ -1,0 +1,62 @@
+!!! 5
+
+:erb
+  <!--[if lt IE 7 ]><html dir="ltr" lang="en-US" class="no-js ie ie6 lte7 lte8 lte9"><![endif]-->
+  <!--[if IE 7 ]><html dir="ltr" lang="en-US" class="no-js ie ie7 lte7 lte8 lte9"><![endif]-->
+  <!--[if IE 8 ]><html dir="ltr" lang="en-US" class="no-js ie ie8 lte8 lte9"><![endif]-->
+  <!--[if IE 9 ]><html dir="ltr" lang="en-US" class="no-js ie ie9 lte9"><![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--><html dir="ltr" lang="en-US" class="no-js"> <!--<![endif]-->
+  <!-- the "no-js" class is for Modernizr. -->
+
+%head
+  %meta{:charset => 'utf-8'}
+  %title= t('app_name')
+  = csrf_meta_tag
+  %meta{:name => 'description', :content => 'Fussball Tippspiel'}
+  %meta{:name => 'author', :content => 'Soeren Mothes'}
+  %link{:rel => "shortcut icon", :href => "/favicon.ico"}
+
+  = stylesheet_link_tag "base", "formtastic", "formtastic-changes", "tippspiel-style", "tippspiel-print", :cache => "tippspiel"
+  :erb
+    <!--[if IE 6]><%= stylesheet_link_tag 'formtastic_ie6' %><![endif]-->
+    <!--[if IE 7]><%= stylesheet_link_tag 'formtastic_ie7' %><![endif]-->
+
+  -# All JavaScript at the bottom, except for Modernizr which enables HTML5 elements and feature detects
+  = javascript_include_tag 'modernizr-1.7.min.js'
+
+%body
+  %noscript
+    %p.alert= t(:error_javascript)
+
+  %header{:role=>"banner"}
+    %h1#logo
+      %a{:href=>root_url, :title=>"Tippspiel", :rel=>"home"}="Fußball-EM 2012"
+    %span#header-slogan="Tippspiel auf SoeMo.org"
+    #global-nav
+      - write_global_nav
+    %nav#access{:role=>"navigation"}
+      %a{:href=>"#content", :class=>"skip", :title=>"Skip to content"}="Skip to content"
+      .menu
+        - write_main_nav
+
+  #wrapper
+    %section#content{:role=>"main"}
+      %p.error
+        - if flash[:error].present?
+          %span.flasherror= flash[:error]
+      %p.notice
+        - if flash[:notice].present?
+          %span.flasherror= flash[:notice]
+      - flash.discard
+
+      = yield
+
+    %section#sidebar
+      %p="Falls Sidebar erwünscht! Wäre hier der Einstieg"
+
+  %footer
+    = "© " + Time.now.strftime("%Y")
+    = link_to("Sören Mothes", "http://www.soemo.org/")
+
+  -# Javascript at the bottom for fast page loading
+  = javascript_include_tag 'plugins', :defaults, :cache => "tippspiel"

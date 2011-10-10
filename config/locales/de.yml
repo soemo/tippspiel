@@ -10,8 +10,17 @@ de:
 
   delete_secure_question: "Sind Sie sicher?"
 
+  signed_in_hello: "Hallo, "
+  sign_in: "Login"
+  sign_out: "Ausloggen"
+  sign_up: "Registrieren"
+  imprint: Impressum
+
   home: "Home"
   help: "Hilfe"
+  ranking: "Plazierung"
+  tournament: "Turnier"
+  tipps: "Tipps"
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"

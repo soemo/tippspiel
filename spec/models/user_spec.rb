@@ -11,7 +11,7 @@ describe User do
 
     it 'should add an error, if confirmation is too old' do
       u = User.new
-      u.confirmation_sent_at = 25.hour.ago
+      u.confirmation_sent_at = (User::CONFIRMATION_MAX_TIME + 1.hour).ago
       u.should_not_receive(:confirm_without_maximum_time!)
       u.confirm!
       u.errors[:base].should_not be_empty

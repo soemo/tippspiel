@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111008133749) do
+ActiveRecord::Schema.define(:version => 20111010191523) do
 
   create_table "days", :force => true do |t|
     t.date     "name"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20111008133749) do
     t.integer  "championtipppoints"
     t.integer  "championtipp_team_id"
     t.integer  "poll_id"
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

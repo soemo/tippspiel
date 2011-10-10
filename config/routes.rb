@@ -1,6 +1,10 @@
 Tippspiel::Application.routes.draw do
 
+  get "tipps/index"
+  get "tournament/index"
+  get "ranking/index"
   get "help/index"
+  get "main/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

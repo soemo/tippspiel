@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
 
   belongs_to :championtipp_team, :class_name => "Team"
   belongs_to :poll
@@ -30,5 +31,13 @@ class User < ActiveRecord::Base
     end
   end
   alias_method_chain(:confirm!, :maximum_time)
+
+  def to_s
+    name
+  end
+
+  def name
+    (firstname + " " + lastname) rescue email
+  end
 
 end

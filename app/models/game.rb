@@ -1,4 +1,5 @@
 class Game < ActiveRecord::Base
+  acts_as_paranoid
 
   belongs_to :day
   belongs_to :group

@@ -10,8 +10,17 @@ en:
 
   delete_secure_question: "Are you sure?"
 
+  signed_in_hello: "Hello, "
+  sign_in: "Login"
+  sign_out: "Logout"
+  sign_up: "Sign up"
+  imprint: imprint
+
   home: "Home"
   help: "Hilfe"
+  ranking: "Ranking"
+  tournament: "Tournament"
+  tipps: "Tips"
 
   back_link: "back"
   edit_link: "edit"
