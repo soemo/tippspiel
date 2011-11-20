@@ -1,10 +1,19 @@
 Tippspiel::Application.routes.draw do
 
-  get "tipps/index"
-  get "tournament/index"
-  get "ranking/index"
-  get "help/index"
-  get "main/index"
+  devise_for :user
+
+  # FIXME soeren 20.11.11 scheduler
+#  get 'scheduler/hourly'
+#  get 'scheduler/daily'
+#  get 'scheduler/weekly'
+#  get 'scheduler/monthly'
+
+  get "tipps" => "tipps#index"
+  get "tournament" => "tournament#index"
+  get "ranking" => "ranking#index"
+  get "help" => "help#index"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -53,12 +62,10 @@ Tippspiel::Application.routes.draw do
   #     resources :products
   #   end
 
+
+
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-
-  # Registrierung/Anmelden/Abmelden
-  devise_for :users
-
   root :to => "main#index"
 
   # See how all your routes lay out with "rake routes"

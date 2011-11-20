@@ -16,13 +16,13 @@
   %meta{:name => 'author', :content => 'Soeren Mothes'}
   %link{:rel => "shortcut icon", :href => "/favicon.ico"}
 
-  = stylesheet_link_tag "base", "formtastic", "formtastic-changes", "tippspiel-style", "tippspiel-print", :cache => "tippspiel"
+  = stylesheet_link_tag "application", :cache => true
   :erb
     <!--[if IE 6]><%= stylesheet_link_tag 'formtastic_ie6' %><![endif]-->
     <!--[if IE 7]><%= stylesheet_link_tag 'formtastic_ie7' %><![endif]-->
 
   -# All JavaScript at the bottom, except for Modernizr which enables HTML5 elements and feature detects
-  = javascript_include_tag 'modernizr-1.7.min.js'
+  = javascript_include_tag 'modernizr-1.7.min'
 
 %body
   %noscript
@@ -59,4 +59,4 @@
     = link_to("Sören Mothes", "http://www.soemo.org/")
 
   -# Javascript at the bottom for fast page loading
-  = javascript_include_tag 'plugins', :defaults, :cache => "tippspiel"
+  = javascript_include_tag 'application', :cache => true

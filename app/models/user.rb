@@ -1,23 +1,24 @@
 class User < ActiveRecord::Base
   acts_as_paranoid
+  validates_as_paranoid
 
   belongs_to :championtipp_team, :class_name => "Team"
   belongs_to :poll
 
-  # TODO soeren 09.10.11 oder macht das device
-  validates_presence_of :email
-  # TODO soeren 09.10.11 validates_format_of :email oder macht das device
-  validates_presence_of :firstname
-  validates_presence_of :lastname
+  validates                               :email,   :presence => true
+  validates_uniqueness_of_without_deleted :email,   :scope => Devise.authentication_keys[1..-1], :case_sensitive => false, :allow_blank => true
+  validates_format_of                     :email,   :with  => Devise.email_regexp, :allow_blank => true
+  validates                               :firstname, :presence => true
+  validates                               :lastname, :presence => true
 
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname, :firstname
 
   # Braucht ein Nutzer laenger als diese Zeit, um den Confirmation-Link aufzurufen,
   # ist das Token ungueltig

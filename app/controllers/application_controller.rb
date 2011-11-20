@@ -1,5 +1,3 @@
-require 'exceptions'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -16,6 +14,15 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_migrated
-    render :text => t(:text_maintenance) if ActiveRecord::Migrator.new(:up, "db/migrate/").pending_migrations.any?
+    unless Rails.env == "production"
+      if ActiveRecord::Migrator.new(:up, "db/migrate/").pending_migrations.any?
+        text = (t(:text_maintenance, :locale => :en) + "<br/>" + t(:text_maintenance, :locale => :de)).html_safe
+        if Rails.env == "test"
+          raise text
+        else
+          render :text => text, :status => 503
+        end
+      end
+    end
   end
 end

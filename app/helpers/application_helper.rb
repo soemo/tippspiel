@@ -4,10 +4,10 @@ module ApplicationHelper
   def main_nav_items
     [
             ["home", root_path, false],
-            ["tournament", tournament_index_path, true],
-            ["tipps", tipps_index_path, true],
-            ["ranking", ranking_index_path, true],
-            ["help", help_index_path, false]
+            ["tournament", tournament_path, true],
+            ["tipps", tipps_path, true],
+            ["ranking", ranking_path, true],
+            ["help", help_path, false]
     ]
 
   end
@@ -37,7 +37,7 @@ module ApplicationHelper
       haml_tag :li do
         write_user_sign_up_link
       end
-      haml_tag :li, link_to(t(:imprint), help_index_path)
+      haml_tag :li, link_to(t(:imprint), help_path)
     end
   end
 
