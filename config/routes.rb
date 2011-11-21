@@ -1,6 +1,9 @@
 Tippspiel::Application.routes.draw do
 
-  devise_for :user
+  ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  devise_for :users
 
   # FIXME soeren 20.11.11 scheduler
 #  get 'scheduler/hourly'

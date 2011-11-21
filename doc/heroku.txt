@@ -1,7 +1,8 @@
-﻿TODO:
-- thin GEM
-
+﻿Erledigt:
 - Weiterleitung von DF auf http://http://fussballtippspiel.herokuapp.com
+
+TODO:
+- thin GEM
 
  - models = ActiveRecord::Base.send(:subclasses) -->für automatischen Admin
 oder models = ActiveRecord::Base.send(:subclasses).map(&:model_name)
