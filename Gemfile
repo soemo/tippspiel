@@ -15,6 +15,8 @@ gem 'activeadmin'
 gem 'sass-rails'
 gem "meta_search", '>= 1.1.0.pre'
 
+gem 'newrelic_rpm'
+
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
   gem 'mysql',      '= 2.8.1'

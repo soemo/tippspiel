@@ -2,7 +2,7 @@
 - Weiterleitung von DF auf http://http://fussballtippspiel.herokuapp.com
 
 TODO:
-- thin GEM
+- https://addons.heroku.com/scheduler
 
  - models = ActiveRecord::Base.send(:subclasses) -->für automatischen Admin
 oder models = ActiveRecord::Base.send(:subclasses).map(&:model_name)

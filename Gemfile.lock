@@ -99,6 +99,7 @@ GEM
     mime-types (1.17.2)
     multi_json (1.0.3)
     mysql (2.8.1-x86-mingw32)
+    newrelic_rpm (3.3.0)
     nokogiri (1.5.0-x86-mingw32)
     orm_adapter (0.0.5)
     pg (0.11.0-x86-mingw32)
@@ -190,6 +191,7 @@ DEPENDENCIES
   jquery-rails (= 1.0.12)
   meta_search (>= 1.1.0.pre)
   mysql (= 2.8.1)
+  newrelic_rpm
   pg
   rails (= 3.1.0)
   rails3_acts_as_paranoid (= 0.1.1)
