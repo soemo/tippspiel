@@ -1,19 +1,86 @@
-# !!!!!!!!!!!!!!!!!!!
-# !!! ATTENTION   !!!
-# !!!!!!!!!!!!!!!!!!!
-# IF CLEAR_SEEDS IS SET TO TRUE YOU ERASE YOUR
-# MANUALLY CREATED DATA
+require File.expand_path('../seeds_data.rb', __FILE__)
 
-CLEAR_SEEDS = false
+include SeedsData
 
-def clear_seeds()
-  Day.delete_all
-  Group.delete_all
-  Place.delete_all
-  Poll.delete_all
-  Round.delete_all
-  Starttime.delete_all
+# ***************************************************************************
+# Achtung: Alle angelegten Daten werden bei seeds.rb Ausfuehrung geloescht!
+# ***************************************************************************
+
+def clear_seeds
+  # Alle Tabellen (inkl. N:M-Tabellen) werden geloescht
+  ActiveRecord::Base.connection.tables.each do |table|
+    next if ["schema_migrations", "users", "admin_users"].include?(table)
+    ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
+  end
+
+  # TODO soeren 22.11.11 user löschen, die testuser im nachnamen haben
 end
+
+
+def game_data
+  [
+    {"day" => "08.06.2012", "time" => "18:00", "place" => "Warschau"}
+
+
+  ]
+
+
+
+=begin
+Gruppe A
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+Fr 08.06. 18:00 Warschau Polen - A2 -:- (-:-)
+Fr 08.06. 20:45 Wroclaw A3 - A4 -:- (-:-)
+Di 12.06. 18:00 Wroclaw A2 - A4 -:- (-:-)
+Di 12.06. 20:45 Warschau Polen - A3 -:- (-:-)
+Sa 16.06. 20:45 Wroclaw A4 - Polen -:- (-:-)
+Warschau A2 - A3 -:- (-:-)
+
+Gruppe B
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+Sa 09.06. 18:00 Charkiw B1 - B2 -:- (-:-)
+Sa 09.06. 20:45 Lw iw B3 - B4 -:- (-:-)
+Mi 13.06. 18:00 Lw iw B2 - B4 -:- (-:-)
+Mi 13.06. 20:45 Charkiw B1 - B3 -:- (-:-)
+So 17.06. 20:45 Charkiw B4 - B1 -:- (-:-)
+Lw iw B2 - B3 -:- (-:-)
+
+Gruppe C
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+So 10.06. 18:00 Gdansk C1 - C2 -:- (-:-)
+So 10.06. 20:45 Poznan C3 - C4 -:- (-:-)
+Do 14.06. 18:00 Poznan C2 - C4 -:- (-:-)
+Do 14.06. 20:45 Gdansk C1 - C3 -:- (-:-)
+Mo 18.06. 20:45 Gdansk C4 - C1 -:- (-:-)
+Poznan C2 - C3 -:- (-:-)
+
+Gruppe D
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+Mo 11.06. 18:00 Donezk D3 - D4 -:- (-:-)
+Mo 11.06. 20:45 Kiew Ukraine - D2 -:- (-:-)
+Fr 15.06. 18:00 Kiew D2 - D4 -:- (-:-)
+Fr 15.06. 20:45 Donezk Ukraine - D3 -:- (-:-)
+Di 19.06. 20:45 Donezk D4 - Ukraine -:- (-:-)
+Kiew D2 - D3 -:- (-:-)
+
+Viertelfinale
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+Do 21.06. 20:45 Warschau Sieger Gruppe A - Zweiter Gruppe B -:- (-:-)
+Fr 22.06. 20:45 Gdansk Sieger Gruppe B - Zweiter Gruppe A -:- (-:-)
+Sa 23.06. 20:45 Donezk Sieger Gruppe C - Zweiter Gruppe D -:- (-:-)
+So 24.06. 20:45 Kiew Sieger Gruppe D - Zweiter Gruppe C -:- (-:-)
+
+Halbfinale
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+Mi 27.06. 20:45 Donezk Sieger Viertelfinale Warschau - Sieger Viertelfinale Donezk -:- (-:-)
+Do 28.06. 20:45 Warschau Sieger Viertelfinale Gdansk - Sieger Viertelfinale Kiew -:- (-:-)
+
+Finale
+Anstoß Ort Mannsch. I Mannsch. II Erg.
+So 01.07. 20:45 Kiew Sieger Halbfinale 1 - Sieger Halbfinale 2 -:- (-:-)
+=end
+end
+
 
 def create_days
   [
@@ -25,19 +92,19 @@ def create_days
   end
 end
 
-def create_group
+def create_groups
   ["A", "B", "C", "D"].each do |i|
     Group.find_or_create_by_name(i)
   end
 end
 
-def create_place
+def create_places
   ["Place A", "Place B", "Place C", "Place D"].each do |i|
     Place.find_or_create_by_name(i)
   end
 end
 
-def create_poll
+def create_polls
   [
           "nicht ins Achtelfinale",
           "ins Achtelfinale",
@@ -50,7 +117,7 @@ def create_poll
   end
 end
 
-def create_round
+def create_rounds
 
   [
           "Gruppenspiele",
@@ -68,7 +135,7 @@ def create_round
   end
 end
 
-def create_starttime
+def create_starttimes
   [
           "16:00", "20:00"
   ].each do |i|
@@ -76,14 +143,19 @@ def create_starttime
   end
 end
 
-if CLEAR_SEEDS
-  clear_seeds
-end
-
+puts "Lade seeds"
+puts "Alles loeschen..."
+clear_seeds
+puts "Neue Daten aufsetzen..."
 create_days
-create_group
-create_place
-create_poll
-create_round
-create_starttime
+# TODO soeren 22.11.11 create_games
+create_groups
+# TODO soeren 22.11.11 create_notice
+create_places
+create_polls
+create_rounds
+create_starttimes
+# TODO soeren 22.11.11 create_statistics
+# TODO soeren 22.11.11 create_teams
+# # TODO soeren 22.11.11 create_tipps
 
