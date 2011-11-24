@@ -10,11 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111120211003) do
+ActiveRecord::Schema.define(:version => 20111124202730) do
 
   create_table "active_admin_comments", :force => true do |t|
-    t.integer  "resource_id",                   :null => false
-    t.string   "resource_type", :default => "", :null => false
+    t.integer  "resource_id",   :null => false
+    t.string   "resource_type", :null => false
     t.integer  "author_id"
     t.string   "author_type"
     t.text     "body"
@@ -45,36 +45,21 @@ ActiveRecord::Schema.define(:version => 20111120211003) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "days", :force => true do |t|
-    t.date     "name"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lock_version", :default => 0
-  end
-
   create_table "games", :force => true do |t|
-    t.integer  "group_id"
-    t.integer  "place_id"
-    t.integer  "round_id"
-    t.integer  "day_id"
-    t.integer  "starttime_id"
     t.integer  "team1_id"
-    t.string   "team1_tore",   :limit => 2
+    t.string   "team1_tore",             :limit => 2
     t.integer  "team2_id"
-    t.string   "team2_tore",   :limit => 2
+    t.string   "team2_tore",             :limit => 2
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",              :default => 0
-  end
-
-  create_table "groups", :force => true do |t|
-    t.string   "name",         :limit => 30
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lock_version",               :default => 0
+    t.integer  "lock_version",                         :default => 0
+    t.string   "round",                  :limit => 30
+    t.string   "group",                  :limit => 30
+    t.string   "place",                  :limit => 30
+    t.datetime "start_at"
+    t.string   "team1_placeholder_name"
+    t.string   "team2_placeholder_name"
   end
 
   create_table "notices", :force => true do |t|
@@ -86,14 +71,6 @@ ActiveRecord::Schema.define(:version => 20111120211003) do
     t.integer  "lock_version",                :default => 0
   end
 
-  create_table "places", :force => true do |t|
-    t.string   "name",         :limit => 30
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lock_version",               :default => 0
-  end
-
   create_table "polls", :force => true do |t|
     t.string   "name"
     t.datetime "deleted_at"
@@ -102,28 +79,10 @@ ActiveRecord::Schema.define(:version => 20111120211003) do
     t.integer  "lock_version", :default => 0
   end
 
-  create_table "rounds", :force => true do |t|
-    t.integer  "start_day_id"
-    t.integer  "end_day_id"
-    t.string   "name",         :limit => 30
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lock_version",               :default => 0
-  end
-
   create_table "scheduler_runs", :force => true do |t|
     t.string   "schedule"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "starttimes", :force => true do |t|
-    t.string   "name"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "lock_version", :default => 0
   end
 
   create_table "statistics", :force => true do |t|

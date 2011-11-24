@@ -1,10 +1,3 @@
-require File.expand_path('../seeds_data.rb', __FILE__)
-
-include SeedsData
-
-# ***************************************************************************
-# Achtung: Alle angelegten Daten werden bei seeds.rb Ausfuehrung geloescht!
-# ***************************************************************************
 
 def clear_seeds
   # Alle Tabellen (inkl. N:M-Tabellen) werden geloescht
@@ -19,143 +12,75 @@ end
 
 def game_data
   [
-    {"day" => "08.06.2012", "time" => "18:00", "place" => "Warschau"}
+    {:start_at => "08.06.2012 18:00", :place => "Warschau", :team1_name => "Polen", :team2_name => "A2", :group=> "A", :round => Game::GROUP},
+    {:start_at => "08.06.2012 20:45", :place => "Wroclaw", :team1_name => "A3", :team2_name => "A4", :group=> "A", :round => Game::GROUP},
+    {:start_at => "12.06.2012 18:00", :place => "Wroclaw", :team1_name => "A2", :team2_name => "A4", :group=> "A", :round => Game::GROUP},
+    {:start_at => "12.06.2012 20:45", :place => "Warschau", :team1_name => "Polen", :team2_name => "A3", :group=> "A", :round => Game::GROUP},
+    {:start_at => "16.06.2012 20:45", :place => "Wroclaw", :team1_name => "A4", :team2_name => "Polen", :group=> "A", :round => Game::GROUP},
+    {:start_at => "16.06.2012 20:45", :place => "Warschau", :team1_name => "A2", :team2_name => "A3", :group=> "A", :round => Game::GROUP},
 
+    {:start_at => "09.06.2012 18:00", :place => "Charkiw", :team1_name => "B1", :team2_name => "B2", :group=> "B", :round => Game::GROUP},
+    {:start_at => "09.06.2012 20:45", :place => "Lwiw", :team1_name => "B3", :team2_name => "B4", :group=> "B", :round => Game::GROUP},
+    {:start_at => "13.06.2012 18:00", :place => "Lwiw", :team1_name => "B2", :team2_name => "B4", :group=> "B", :round => Game::GROUP},
+    {:start_at => "13.06.2012 20:45", :place => "Charkiw", :team1_name => "B1", :team2_name => "B3", :group=> "B", :round => Game::GROUP},
+    {:start_at => "17.06.2012 20:45", :place => "Charkiw", :team1_name => "B4", :team2_name => "B1", :group=> "B", :round => Game::GROUP},
+    {:start_at => "17.06.2012 20:45", :place => "Lwiw", :team1_name => "B2", :team2_name => "B3", :group=> "B", :round => Game::GROUP},
 
+    {:start_at => "10.06.2012 18:00", :place => "Gdansk", :team1_name => "C1", :team2_name => "C2", :group=> "C", :round => Game::GROUP},
+    {:start_at => "10.06.2012 20:45", :place => "Poznan", :team1_name => "C3", :team2_name => "C4", :group=> "C", :round => Game::GROUP},
+    {:start_at => "14.06.2012 18:00", :place => "Poznan", :team1_name => "C2", :team2_name => "C4", :group=> "C", :round => Game::GROUP},
+    {:start_at => "14.06.2012 20:45", :place => "Gdansk", :team1_name => "C1", :team2_name => "C3", :group=> "C", :round => Game::GROUP},
+    {:start_at => "18.06.2012 20:45", :place => "Gdansk", :team1_name => "C4", :team2_name => "C1", :group=> "C", :round => Game::GROUP},
+    {:start_at => "18.06.2012 20:45", :place => "Poznan", :team1_name => "C2", :team2_name => "C3", :group=> "C", :round => Game::GROUP},
+
+    {:start_at => "11.06.2012 18:00", :place => "Donezk", :team1_name => "D3", :team2_name => "D4", :group=> "D", :round => Game::GROUP},
+    {:start_at => "11.06.2012 20:45", :place => "Kiew", :team1_name => "Ukraine", :team2_name => "D2", :group=> "D", :round => Game::GROUP},
+    {:start_at => "15.06.2012 18:00", :place => "Kiew", :team1_name => "D2", :team2_name => "D4", :group=> "D", :round => Game::GROUP},
+    {:start_at => "15.06.2012 20:45", :place => "Donezk", :team1_name => "Ukraine", :team2_name => "D3", :group=> "D", :round => Game::GROUP},
+    {:start_at => "19.06.2012 20:45", :place => "Donezk", :team1_name => "D4", :team2_name => "Ukraine", :group=> "D", :round => Game::GROUP},
+    {:start_at => "19.06.2012 20:45", :place => "Kiew", :team1_name => "D2", :team2_name => "D3", :group=> "D", :round => Game::GROUP},
+
+    {:start_at => "21.06.2012 20:45", :place => "Warschau", :team1_placeholder_name => "Sieger Gruppe A", :team2_placeholder_name => "Zweiter Gruppe B", :group=> nil, :round => Game::QUARTERFINAL},
+    {:start_at => "22.06.2012 20:45", :place => "Gdansk", :team1_placeholder_name => "Sieger Gruppe B", :team2_placeholder_name => "Zweiter Gruppe A", :group=> nil, :round => Game::QUARTERFINAL},
+    {:start_at => "23.06.2012 20:45", :place => "Donezk", :team1_placeholder_name => "Sieger Gruppe C", :team2_placeholder_name => "Zweiter Gruppe D", :group=> nil, :round => Game::QUARTERFINAL},
+    {:start_at => "24.06.2012 20:45", :place => "Kiew", :team1_placeholder_name => "Sieger Gruppe D", :team2_placeholder_name => "Zweiter Gruppe C", :group=> nil, :round => Game::QUARTERFINAL},
+
+    {:start_at => "27.06.2012 20:45", :place => "Donezk", :team1_placeholder_name => "Sieger Viertelfinale Warschau", :team2_placeholder_name => "Sieger Viertelfinale Donezk", :group=> nil, :round => Game::SEMIFINAL},
+    {:start_at => "28.06.2012 20:45", :place => "Warschau", :team1_placeholder_name => "Sieger Viertelfinale Gdansk", :team2_placeholder_name => "Sieger Viertelfinale Kiew", :group=> nil, :round => Game::SEMIFINAL},
+
+    {:start_at => "01.07.2012 20:45", :place => "Warschau", :team1_placeholder_name => "Sieger Halbfinale 1", :team2_placeholder_name => "Sieger Halbfinale 2", :group=> nil, :round => Game::FINAL}
   ]
-
-
-
-=begin
-Gruppe A
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-Fr 08.06. 18:00 Warschau Polen - A2 -:- (-:-)
-Fr 08.06. 20:45 Wroclaw A3 - A4 -:- (-:-)
-Di 12.06. 18:00 Wroclaw A2 - A4 -:- (-:-)
-Di 12.06. 20:45 Warschau Polen - A3 -:- (-:-)
-Sa 16.06. 20:45 Wroclaw A4 - Polen -:- (-:-)
-Warschau A2 - A3 -:- (-:-)
-
-Gruppe B
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-Sa 09.06. 18:00 Charkiw B1 - B2 -:- (-:-)
-Sa 09.06. 20:45 Lw iw B3 - B4 -:- (-:-)
-Mi 13.06. 18:00 Lw iw B2 - B4 -:- (-:-)
-Mi 13.06. 20:45 Charkiw B1 - B3 -:- (-:-)
-So 17.06. 20:45 Charkiw B4 - B1 -:- (-:-)
-Lw iw B2 - B3 -:- (-:-)
-
-Gruppe C
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-So 10.06. 18:00 Gdansk C1 - C2 -:- (-:-)
-So 10.06. 20:45 Poznan C3 - C4 -:- (-:-)
-Do 14.06. 18:00 Poznan C2 - C4 -:- (-:-)
-Do 14.06. 20:45 Gdansk C1 - C3 -:- (-:-)
-Mo 18.06. 20:45 Gdansk C4 - C1 -:- (-:-)
-Poznan C2 - C3 -:- (-:-)
-
-Gruppe D
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-Mo 11.06. 18:00 Donezk D3 - D4 -:- (-:-)
-Mo 11.06. 20:45 Kiew Ukraine - D2 -:- (-:-)
-Fr 15.06. 18:00 Kiew D2 - D4 -:- (-:-)
-Fr 15.06. 20:45 Donezk Ukraine - D3 -:- (-:-)
-Di 19.06. 20:45 Donezk D4 - Ukraine -:- (-:-)
-Kiew D2 - D3 -:- (-:-)
-
-Viertelfinale
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-Do 21.06. 20:45 Warschau Sieger Gruppe A - Zweiter Gruppe B -:- (-:-)
-Fr 22.06. 20:45 Gdansk Sieger Gruppe B - Zweiter Gruppe A -:- (-:-)
-Sa 23.06. 20:45 Donezk Sieger Gruppe C - Zweiter Gruppe D -:- (-:-)
-So 24.06. 20:45 Kiew Sieger Gruppe D - Zweiter Gruppe C -:- (-:-)
-
-Halbfinale
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-Mi 27.06. 20:45 Donezk Sieger Viertelfinale Warschau - Sieger Viertelfinale Donezk -:- (-:-)
-Do 28.06. 20:45 Warschau Sieger Viertelfinale Gdansk - Sieger Viertelfinale Kiew -:- (-:-)
-
-Finale
-Anstoß Ort Mannsch. I Mannsch. II Erg.
-So 01.07. 20:45 Kiew Sieger Halbfinale 1 - Sieger Halbfinale 2 -:- (-:-)
-=end
 end
 
+def create_game_data
+  game_data.each do |data|
+    team1_name = data[:team1_name].present? ? data.delete(:team1_name) : nil
+    team2_name = data[:team2_name].present? ? data.delete(:team2_name) : nil
+    team_ids = {}
+    if team1_name.present?
+      team1 = Team.find_or_create_by_name(team1_name)
+      team_ids = team_ids.merge({:team1_id => team1.id})
+    end
+    if team2_name.present?
+      team2 = Team.find_or_create_by_name(team2_name)
+      team_ids = team_ids.merge({:team2_id => team2.id})
+    end
 
-def create_days
-  [
-          "21.06.2011",
-          "22.06.2012",
-          "23.06.2012"
-  ].each do |i|
-    Day.find_or_create_by_name(i)
+    game = Game.create!(data.merge(team_ids))
   end
+
 end
 
-def create_groups
-  ["A", "B", "C", "D"].each do |i|
-    Group.find_or_create_by_name(i)
-  end
-end
-
-def create_places
-  ["Place A", "Place B", "Place C", "Place D"].each do |i|
-    Place.find_or_create_by_name(i)
-  end
-end
-
-def create_polls
-  [
-          "nicht ins Achtelfinale",
-          "ins Achtelfinale",
-          "ins Viertelfinale",
-          "ins Halbfinale",
-          "ins Finale",
-          "Weltmeister"
-  ].each do |i|
-    Poll.find_or_create_by_name(i)
-  end
-end
-
-def create_rounds
-
-  [
-          "Gruppenspiele",
-          "Achtelfinale",
-          "Viertelfinale",
-          "Halbfinale",
-          #"Spiel um Platz 3",
-          "Finale"
-  ].each do |i|
-    r = Round.find_or_create_by_name(i, 1, 1)
-    # TODO soeren 09.10.11 muss besser werden
-    r.start_day = Day.first
-    r.start_day = Day.last
-    r.save
-  end
-end
-
-def create_starttimes
-  [
-          "16:00", "20:00"
-  ].each do |i|
-    Starttime.find_or_create_by_name(i)
-  end
-end
 
 puts "Lade seeds"
+
 puts "Alles loeschen..."
 clear_seeds
+
 puts "Neue Daten aufsetzen..."
-create_days
-# TODO soeren 22.11.11 create_games
-create_groups
+create_game_data
+# TODO soeren 22.11.11 create_polls
 # TODO soeren 22.11.11 create_notice
-create_places
-create_polls
-create_rounds
-create_starttimes
 # TODO soeren 22.11.11 create_statistics
-# TODO soeren 22.11.11 create_teams
-# # TODO soeren 22.11.11 create_tipps
+# TODO soeren 22.11.11 create_tipps
 

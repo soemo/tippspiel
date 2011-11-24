@@ -29,7 +29,3 @@ en:
   activerecord:
     models:
       user: Benutzer
-    attributes:
-
-    errors:
-      messages:
