@@ -12,7 +12,6 @@ de:
   delete_secure_question: "Sind Sie sicher?"
 
   succesfully_saved_tipps: "Die Tipps wurden gespeichert!"
-  error_saved_tipps: "Es konnten nicht alle Tipps gespeichert werden!"
 
   signed_in_hello: "Hallo, "
   sign_in: "Login"
@@ -32,7 +31,7 @@ de:
 
   home: "Home"
   help: "Hilfe"
-  ranking: "Platzierung"
+  ranking: "Rangliste"
   tournament: "Turnier"
   tipps: "Tipps"
   back_link: "Zurück"
@@ -144,6 +143,9 @@ de:
         other: Tipps
     attributes:
       user:
+        siegertipp: Siegertipp
+        points: Punkte
+        name: Name
         email: "E-Mail"
         firstname: "Vorname"
         lastname: "Nachname"

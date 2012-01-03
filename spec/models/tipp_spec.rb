@@ -40,5 +40,15 @@ describe Tipp do
 
   end
 
+  describe "tipp remove leading zero" do
+    it "should a remove leading zero" do
+      t = Tipp.new({:team1_tore => 00, :team2_tore => 02})
+      t.remove_leading_zero
+      t.team1_tore.should == 0
+      t.team2_tore.should == 2
+
+    end
+  end
+
 
 end

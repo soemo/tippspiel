@@ -24,6 +24,12 @@ class User < ActiveRecord::Base
   # ist das Token ungueltig
   CONFIRMATION_MAX_TIME = 7.day
 
+  scope :ranking_order, order("users.points DESC, users.count6points DESC, users.count4points DESC, users.count3points DESC")
+
+  def ranking_comparison_value
+    "#{points}#{count6points}#{count4points}#{count3points}".to_i
+  end
+
   def confirm_with_maximum_time!
     if self.confirmation_sent_at.present? && (self.confirmation_sent_at < CONFIRMATION_MAX_TIME.ago)
       self.errors.add(:base, :too_late)

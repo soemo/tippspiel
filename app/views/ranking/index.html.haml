@@ -1,0 +1,3 @@
+%h3= t("ranking")
+- user_hash = prepare_user_ranking(@ranking_user)
+= render :partial => "user_ranking", :locals => {:user_hash => user_hash}

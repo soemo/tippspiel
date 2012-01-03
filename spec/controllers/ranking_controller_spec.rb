@@ -20,4 +20,6 @@ describe RankingController do
     end
   end
 
+  # FIXME soeren 03.01.12 ranking test
+
 end

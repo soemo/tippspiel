@@ -12,8 +12,7 @@ class Tipp < ActiveRecord::Base
   validates_numericality_of :team2_tore, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
 
   def edit_allowed
-    #game.start_at > Time.now
-    game.start_at > Time.parse("11.06.2012")
+    game.start_at > Time.now
   end
 
   def self.user_tipps(user_id)
@@ -27,6 +26,15 @@ class Tipp < ActiveRecord::Base
     end
 
     result
+  end
+
+  def remove_leading_zero
+    if team1_tore.present?
+      self.team1_tore = team1_tore.to_i
+    end
+    if team2_tore.present?
+      self.team2_tore = team2_tore.to_i
+    end
   end
 
   private

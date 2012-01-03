@@ -3,7 +3,7 @@
     - tipps_round_hash.each do |index, round_with_tipps|
       - round_with_tipps.each_pair do |round_name, tipps|
         %h3= t(round_name, :scope => "round")
-        %table.games
+        %table.tipps
           %thead
             %tr
               %th= Game.human_attribute_name("start_at")
