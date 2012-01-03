@@ -29,3 +29,11 @@ en:
   activerecord:
     models:
       user: Benutzer
+    attributes:
+      user:
+      email: "E-Mail"
+      firstname: "Firstname"
+      lastname: "Surname"
+      password: "Passwordt"
+      new_password: "New password"
+      password_confirmation: "Password confirmation"

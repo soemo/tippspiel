@@ -12,10 +12,9 @@ Tippspiel::Application.routes.draw do
 #  get 'scheduler/monthly'
 
   get "tipps" => "tipps#index"
-  get "tournament" => "tournament#index"
+  post "save-tipps" => "tipps#save_tipps"
   get "ranking" => "ranking#index"
   get "help" => "help#index"
-
 
 
   # The priority is based upon order of creation:

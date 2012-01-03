@@ -1,1 +1,4 @@
-%p= @test
+
+- @games_round_hash.each do |index, round_with_games|
+  - round_with_games.each_pair do |round_name, games|
+    = render :partial => "/games/game_list", :locals => {:round_name => round_name, :games => games}

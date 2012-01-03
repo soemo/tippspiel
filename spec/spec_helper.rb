@@ -1,3 +1,5 @@
+require 'pp'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -37,3 +39,8 @@ def freeze_test_time
   now = Time.now
   Time.should_receive(:now).any_number_of_times.and_return(now)
 end
+
+def login user
+  post 'user/sign_in', :user=>{ :email=>user.email, :password=>user.lastname }
+end
+

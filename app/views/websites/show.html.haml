@@ -1,2 +1,0 @@
-= link_to( t(:edit_link), edit_website_path(@website)) + " | " + link_to(t(:delete_link), @website, :confirm => t(:delete_secure_question), :method => :delete) + " | " + link_to(t(:back_link), root_path)
-= render :partial=>'form', :locals=>{:website=>@website, :readonly=>true}

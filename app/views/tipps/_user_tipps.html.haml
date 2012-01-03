@@ -1,0 +1,41 @@
+- if tipps_round_hash.present?
+  = form_tag "/save-tipps" do
+    - tipps_round_hash.each do |index, round_with_tipps|
+      - round_with_tipps.each_pair do |round_name, tipps|
+        %h3= t(round_name, :scope => "round")
+        %table.games
+          %thead
+            %tr
+              %th= Game.human_attribute_name("start_at")
+              %th= Game.human_attribute_name("place")
+              %th= Game.human_attribute_name("team1")
+              %th= Game.human_attribute_name("team2")
+              %th= Game.human_attribute_name("result")
+              %th= Tipp.model_name.human
+              %th= Tipp.human_attribute_name("tipp_punkte")
+          %tfoot
+            %tr
+              %td{:cellspan => 7}=""
+          %tbody
+            - tipps.each do |tipp|
+              - game = tipp.game
+              - edit_allowed = tipp.edit_allowed
+              %tr{:class => cycle('even', 'odd')}
+                %td= l(game.start_at)
+                %td= game.place
+                %td= game.team1_view_name
+                %td= game.team1_view_name
+                %td= game.team1_tore.to_s + " - " + game.team2_tore.to_s
+                - if edit_allowed
+                  %td.tipp_input_td
+                    - write_tipp_input(tipp.id, "team1_tore", tipp.team1_tore)
+                    =":"
+                    - write_tipp_input(tipp.id, "team2_tore", tipp.team2_tore)
+
+                - else
+                  %td= "#{tipp.team1_tore}:#{tipp.team2_tore}"
+                %td= tipp.tipp_punkte
+    %div= submit_tag t('save_tipp')
+
+- else
+  %p= "No Tipps"

@@ -46,13 +46,13 @@
           %span.flasherror= flash[:error]
       %p.notice
         - if flash[:notice].present?
-          %span.flasherror= flash[:notice]
+          %span.flashnotice= flash[:notice]
       - flash.discard
 
       = yield
 
     %section#sidebar
-      %p="Falls Sidebar erwünscht! Wäre hier der Einstieg"
+      = content_for?(:sidebar) ? yield(:sidebar) : render("shared/sidebar")
 
   %footer
     = "© " + Time.now.strftime("%Y")

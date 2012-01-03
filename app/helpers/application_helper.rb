@@ -4,7 +4,6 @@ module ApplicationHelper
   def main_nav_items
     [
             ["home", root_path, false],
-            ["tournament", tournament_path, true],
             ["tipps", tipps_path, true],
             ["ranking", ranking_path, true],
             ["help", help_path, false]
@@ -47,7 +46,7 @@ module ApplicationHelper
       haml_concat current_user.name
       haml_concat link_to(t(:sign_out), destroy_user_session_path)
     else
-      haml_concat link_to(t(:sign_in), new_user_session_path)
+      haml_concat ""
     end
   end
 
@@ -57,6 +56,17 @@ module ApplicationHelper
     else
       haml_concat link_to(t(:sign_up), new_user_registration_path)
     end
+  end
+
+  # https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app
+  def resource_name
+    :user
+  end
+  def resource
+    @resource ||= User.new
+  end
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
   end
 
 end

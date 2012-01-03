@@ -2,10 +2,9 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 
+gem 'cancan', '1.6.7'
 gem 'haml-rails', '0.3.4'
 gem 'devise', '= 1.4.7'
-gem 'formtastic', '< 2.0.0'
-gem 'simple_enum', '= 1.3.2'
 gem 'rails3_acts_as_paranoid', '= 0.1.1'
 gem 'sass', '3.1.7'
 gem 'coffee-rails', '3.1.1'
@@ -24,7 +23,6 @@ group :development, :test do
 end
 
 group :production do
- # gem 'therubyracer-heroku', '0.8.1.pre3'  ## FIXME soeren 20.11.11 was ist damit brauche ich das
   gem 'pg'
 end
 

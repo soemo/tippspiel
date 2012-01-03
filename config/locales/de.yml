@@ -7,23 +7,43 @@ de:
   error_auth_token: Ihre Session ist abgelaufen. Bitte melden Sie sich erneut an (indem Sie den Browser schließen und neu öffnen).
   error_ajax_request: Es ist ein interner Fehler aufgetreten! Bitte informieren Sie uns.
   error_not_your_website: "Sie dürfen nur Ihre Webseiten editieren!"
+  error_access_denied: Sie haben keine Berechtigung für diese Aktion!
 
   delete_secure_question: "Sind Sie sicher?"
+
+  succesfully_saved_tipps: "Die Tipps wurden gespeichert!"
+  error_saved_tipps: "Es konnten nicht alle Tipps gespeichert werden!"
 
   signed_in_hello: "Hallo, "
   sign_in: "Login"
   sign_out: "Ausloggen"
   sign_up: "Registrieren"
+  save:    Speichern
+  edit:    Bearbeiten
+  back:    Zurück
+  show:    Anzeigen
   imprint: Impressum
+  sure:    Sind Sie sicher?
+  for_got_pw: "Passwort vergessen?"
+  change_pw: "Passwort ändern"
+  set_pw: "Passwort vergeben"
+  send_pw: "Neues Passwort schicken"
+  save_tipp: "Tipps speichern"
 
   home: "Home"
   help: "Hilfe"
-  ranking: "Plazierung"
+  ranking: "Platzierung"
   tournament: "Turnier"
   tipps: "Tipps"
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
+
+  round:
+    group: Gruppenspiel
+    quarterfinal: Viertelfinale
+    semifinal: Halbfinale
+    final: Finale
 
   date:
     formats:
@@ -41,7 +61,7 @@ de:
 
   time:
     formats:
-      default: "%A, %d. %B %Y, %H:%M Uhr"
+      default: "%d.%m.%Y, %H:%M Uhr"
       short: "%d. %B, %H:%M Uhr"
       long: "%A, %d. %B %Y, %H:%M Uhr"
       time: "%H:%M"
@@ -115,27 +135,30 @@ de:
 
   activerecord:
     models:
-      user: Benutzer
-      website: Webseite
+      user: Nutzer
+      game:
+        one: Spiel
+        other: Spiele
+      tipp:
+        one: Tipp
+        other: Tipps
     attributes:
-      website:
-        name: Name
-        url: URL
-        comment: Kommentar
-      forward_url:
-        url: "Forward-URL"
-    enums:
-      checker:
-        statuses:
-          disabled: "nicht aktiv"
-          sucess: "erfolgreich"
-          error: "fehlerhaft"
-        frequencies:
-          never: "nicht ausführen"
-          hourly: "stündlich ausführen"
-          daily: "täglich ausführen"
-          weekly: "wöchentlich ausführen"
-          monthly: "monatlich ausführen"
+      user:
+        email: "E-Mail"
+        firstname: "Vorname"
+        lastname: "Nachname"
+        password: "Passwort"
+        new_password: "Neues Passwort"
+        password_confirmation: "Passwortwiederholung"
+      game:
+        place: Spielort
+        round: Runde
+        start_at: Anstoss
+        team1: Mannschaft 1
+        team2: Mannschaft 2
+        result: Ergebnis
+      tipp:
+        tipp_punkte: "Punkte"
     errors:
       template:
         header:

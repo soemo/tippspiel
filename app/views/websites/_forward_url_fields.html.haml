@@ -1,9 +1,0 @@
-- readonly ||= false
-
-%p
-  = f.label :url, ForwardUrl.human_attribute_name(:url)
-  = f.semantic_errors :url
-  = f.text_field( :url, :readonly=>readonly)
-  - unless readonly
-    = f.link_to_remove(t(:delete_link))
-

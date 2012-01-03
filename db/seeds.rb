@@ -6,7 +6,12 @@ def clear_seeds
     ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
   end
 
-  # TODO soeren 22.11.11 user löschen, die testuser im nachnamen haben
+  # extra Löschen der Testuser
+  users = User.all.select{|u| u.firstname =~ /^test[0-5]{5}$/}
+  users.each do |u|
+    u.destroy!
+  end
+
 end
 
 
@@ -71,6 +76,30 @@ def create_game_data
 
 end
 
+# test und 5 Zahlen regex /^test[0-5]{5}$/
+def testuser_firstname
+  "test#{rand(5)}#{rand(5)}#{rand(5)}#{rand(5)}#{rand(5)}"
+end
+
+def create_testusers
+  10.times do |i|
+    n = i+1
+    user = User.new(:firstname => testuser_firstname, :lastname => "User#{n}", :email => "testuser#{n}@soemo.de", :password => "testuser#{n}", :password_confirmation => "testuser#{n}")
+    user.confirm!
+  end
+end
+
+def create_tipps
+  games = Game.all
+  users = User.all
+  users.each do |user|
+    games.each do |game|
+      Tipp.create!(:user => user, :game => game, :team1_tore => rand(3), :team2_tore => rand(3))
+    end
+  end
+
+end
+
 
 puts "Lade seeds"
 
@@ -79,8 +108,10 @@ clear_seeds
 
 puts "Neue Daten aufsetzen..."
 create_game_data
+create_testusers
+create_tipps
 # TODO soeren 22.11.11 create_polls
 # TODO soeren 22.11.11 create_notice
 # TODO soeren 22.11.11 create_statistics
-# TODO soeren 22.11.11 create_tipps
+puts "fertsch!"
 

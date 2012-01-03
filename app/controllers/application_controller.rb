@@ -1,3 +1,4 @@
+require 'pp'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -7,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   include ExceptionHandling
 
-  private
+  protected
 
   def set_host_to_mailers
     ActionMailer::Base.default_url_options[:host] = request.host_with_port

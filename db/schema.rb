@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124202730) do
+ActiveRecord::Schema.define(:version => 20111128163913) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -136,7 +136,6 @@ ActiveRecord::Schema.define(:version => 20111124202730) do
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "points"
-    t.integer  "good"
     t.integer  "count6points"
     t.integer  "count4points"
     t.integer  "count3points"

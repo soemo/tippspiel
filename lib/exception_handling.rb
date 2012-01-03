@@ -10,7 +10,7 @@ module ExceptionHandling
       # muss also nach oben!
       rescue_from ::Exception, :with => :show_javascript_errors
       rescue_from ::ActionController::InvalidAuthenticityToken, :with => :redirect_after_wrong_auth_token
-     # rescue_from ::CanCan::AccessDenied, :with => :redirect_after_access_denied
+      rescue_from ::CanCan::AccessDenied, :with => :redirect_after_access_denied
       rescue_from ::ActiveRecord::StaleObjectError, :with => :redirect_after_stale_object_error
       rescue_from ::ActiveRecord::RecordNotFound, :with => :redirect_after_record_not_found
       rescue_from ::TippspielError, ::ActionView::TemplateError, :with => :redirect_after_ba_error
@@ -37,10 +37,10 @@ module ExceptionHandling
     redirect_all_formats exception, :error_stale_object, false, get_url_for_stale_error
   end
 
-# nurtzen wenn ich cancan nutze
-#  def redirect_after_access_denied exception
-#    redirect_all_formats exception, :error_access_denied, false, get_controller_from_tab
-#  end
+  # nutzen wenn ich cancan nutze
+  def redirect_after_access_denied exception
+    redirect_all_formats exception, :error_access_denied, false, get_controller_from_tab
+  end
 
   def redirect_after_record_not_found exception
     redirect_all_formats exception, :error_record_not_found

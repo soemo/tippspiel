@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe User do
+
+  it "should use Factory" do
+    user = Factory(:user)
+    user.firstname.should == "test"
+  end
+
   describe 'confirm_with_max_time!' do
     it 'should call normal confirmation routine, if confirmation is in time' do
       u = User.new

@@ -1,0 +1,24 @@
+- if round_name.present? && games.present?
+  %h3= t(round_name, :scope => "round")
+  %table.games
+    %thead
+      %tr
+        %th= Game.human_attribute_name("start_at")
+        %th= Game.human_attribute_name("place")
+
+        %th= Game.human_attribute_name("team1")
+        %th= Game.human_attribute_name("team2")
+        %th= Game.human_attribute_name("result")
+    %tfoot
+      %tr
+        %td{:cellspan => 5}=""
+    %tbody
+      - games.each do |game|
+        %tr{:class => cycle('even', 'odd')}
+          %td= l(game.start_at)
+          %td= game.place
+          %td= game.team1_view_name
+          %td= game.team1_view_name
+          %td= game.team1_tore.to_s + " - " + game.team2_tore.to_s
+- else
+  %p= "No games"

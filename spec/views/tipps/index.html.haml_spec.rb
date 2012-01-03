@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "tipps/index.html.erb" do
+describe "tipps/index.html.haml" do
   pending "add some examples to (or delete) #{__FILE__}"
 end
