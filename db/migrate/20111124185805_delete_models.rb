@@ -1,6 +1,5 @@
 class DeleteModels < ActiveRecord::Migration
   def up
-    change_column :starttimes, :name, :datetime
     add_column :games, :round, :string, :limit=>30
     add_column :games, :group, :string, :limit=>30
     add_column :games, :place, :string, :limit=>30
