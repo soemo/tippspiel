@@ -1,5 +1,6 @@
 de:
-  app_name: "Tippspiel"
+  app_name: "Fussball Tippspiel"
+  tournament_name: "EM 2012"
   text_maintenance: "Die Seite wird aktuell gewartet. Bitte probieren Sie es später wieder."
   error_javascript: Bitte aktivieren Sie Javascript in Ihrem Browser, um mit der Seite zu arbeiten!
   error_stale_object: Das Objekt wurde von einem anderen Nutzer bearbeitet. Bitte öffnen Sie es erneut und prüfen Sie die Daten

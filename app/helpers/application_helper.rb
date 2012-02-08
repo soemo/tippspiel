@@ -11,14 +11,18 @@ module ApplicationHelper
 
   end
 
+  def get_title
+    t('app_name') + " " + t('tournament_name')
+  end
+
   def write_main_nav
     nav_items = main_nav_items
     unless user_signed_in?
       nav_items = main_nav_items.select{|i| i[2] == false}
     end
     if nav_items.present?
-      haml_tag :ul do
-        # # FIXME soeren 10.10.11 <li class="current_page_item">
+      haml_tag 'ul.nav' do
+        # # FIXME soeren 10.10.11 <li class="active">
         nav_items.each do |key, path, needs_login|
           haml_tag :li do
             haml_concat link_to t(key), path
@@ -28,16 +32,10 @@ module ApplicationHelper
     end
   end
 
-  def write_global_nav
-    haml_tag :ul do
-      haml_tag :li do
-        write_user_login_logout_link
-      end
-      haml_tag :li do
-        write_user_sign_up_link
-      end
-      haml_tag :li, link_to(t(:imprint), help_path)
-    end
+  def write_auth_nav
+    write_user_login_logout_link
+    write_user_sign_up_link
+    haml_concat link_to(t(:imprint), help_path)
   end
 
   def write_user_login_logout_link

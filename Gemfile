@@ -12,7 +12,9 @@ gem 'jquery-rails', '1.0.12'
 gem 'uglifier'
 gem 'activeadmin'
 gem 'sass-rails'
-gem "meta_search", '>= 1.1.0.pre'
+## FIXME soeren 08.02.12 brauche ich das gem "meta_search", '>= 1.1.0.pre'
+
+gem 'bootstrap-sass', '= 2.0.0'
 
 gem 'newrelic_rpm'
 

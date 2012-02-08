@@ -41,6 +41,7 @@ GEM
       multi_json (~> 1.0)
     arel (2.2.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    bootstrap-sass (2.0.0)
     builder (3.0.0)
     cancan (1.6.7)
     coffee-rails (3.1.1)
@@ -182,6 +183,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  bootstrap-sass (= 2.0.0)
   cancan (= 1.6.7)
   coffee-rails (= 3.1.1)
   devise (= 1.4.7)
@@ -189,7 +191,6 @@ DEPENDENCIES
   faker (= 0.9.5)
   haml-rails (= 0.3.4)
   jquery-rails (= 1.0.12)
-  meta_search (>= 1.1.0.pre)
   mysql (= 2.8.1)
   newrelic_rpm
   pg

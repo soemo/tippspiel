@@ -1,6 +1,6 @@
 - if round_name.present? && games.present?
   %h3= t(round_name, :scope => "round")
-  %table.games
+  %table.table.table-striped
     %thead
       %tr
         %th= Game.human_attribute_name("start_at")
@@ -9,9 +9,6 @@
         %th= Game.human_attribute_name("team1")
         %th= Game.human_attribute_name("team2")
         %th= Game.human_attribute_name("result")
-    %tfoot
-      %tr
-        %td{:cellspan => 5}=""
     %tbody
       - games.each do |game|
         %tr{:class => cycle('even', 'odd')}
