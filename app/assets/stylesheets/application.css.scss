@@ -17,13 +17,13 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 
-$navbarBackground: #f89406; /* @orange */
-$navbarBackgroundHighlight: #ffc40d;  /* @yellow */
-$navbarText: #9d261d; /* @red */
+$navbarBackground: $orange;
+$navbarBackgroundHighlight: $yellow;
+$navbarText: $red;
 $navbarLinkColor: $grayDark;
 
 @import "bootstrap";
-@import "bootstrap-responsive";
+
 
 
 body {
@@ -42,4 +42,6 @@ body {
 .navbar .nav > li > a {
   text-shadow: 0 0 0 rgba(0, 0, 0, 0.25)   /* no Shadow */
 }
+
+@import "bootstrap-responsive";
 

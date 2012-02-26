@@ -1,10 +1,15 @@
 //= require plugins
-//= require jquery-1.6.1.min
+//= require jquery-1.7.1.min
 //= require jquery_ujs
 //= require bootstrap
 
 $(function() {
   check_user_tipp();
+
+  //TEst Bootstrap
+  $('#testtooltip').tooltip();
+  // Test collapse
+  $(".collapse").collapse('hide');
 });
 
 
