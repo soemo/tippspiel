@@ -2,6 +2,7 @@
 - Weiterleitung von DF auf http://http://fussballtippspiel.herokuapp.com
 
 TODO:
+
 - Rails aktualisieren
 - Gems aktualisieren jquery-rails, ...
 - jquery-rails Gem JS Dateien in JS Verzeichnis bringen
