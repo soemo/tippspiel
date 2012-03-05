@@ -2,7 +2,7 @@
 - Weiterleitung von DF auf http://http://fussballtippspiel.herokuapp.com
 
 TODO:
-
+- uberspace DBs tippspiel-beta-em2012 und tippspiel-em2012  + customize rake task fuer capistrano
 - Rails aktualisieren
 - Gems aktualisieren jquery-rails, ...
 - jquery-rails Gem JS Dateien in JS Verzeichnis bringen
