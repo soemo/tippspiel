@@ -9,6 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+require File.join(File.dirname(__FILE__), 'version')
+
 module Tippspiel
   class Application < Rails::Application
     # Enable the asset pipeline

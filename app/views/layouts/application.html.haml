@@ -62,6 +62,7 @@
     %footer
       = "© " + Time.now.strftime("%Y")
       = link_to("Sören Mothes", "http://www.soemo.org/")
+      = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
 
   -# Javascript at the bottom for fast page loading
   = javascript_include_tag 'application', :cache => true

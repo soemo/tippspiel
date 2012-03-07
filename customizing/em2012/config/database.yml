@@ -1,0 +1,8 @@
+production:
+  adapter: mysql
+  encoding: utf8
+  database: soemo_tippspiel_em2012
+  pool: 5
+  username: soemo
+  password: BonHocjeehuvRom
+  host: localhost

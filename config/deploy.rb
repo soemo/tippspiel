@@ -24,11 +24,57 @@ set :deploy_env, 'production'
 set :keep_releases, 5
 after "deploy", "deploy:cleanup"
 
+### ## ## ## ## ## ## ## ## ## ## ## ## ##
+### Dont Modify following Tasks!
+###
+
+# TODO soeren 07.03.12 start stop fuer passenger
+
+namespace :db do
+ desc "run db:seed"
+ task :run_seed, :roles => [:web] do
+   run "cd #{current_release} && RAILS_ENV=production bundle exec rake db:seed"
+ end
+end
+
+namespace :deploy do
+ desc "set Versionnumber and Build-Date. Needs Rake Task APPLICATION:set_version (APPLICATION is the namespace)"
+ task :set_version_and_date, :roles => [:web] do
+   run "cd #{release_path} && bundle exec rake tippspiel:set_version"
+ end
+end
+after "deploy:update_code", "deploy:set_version_and_date"
 
 
-#test task
-task :uname do
-  run "uname -a"
+namespace :deploy do
+  desc "Customizing und Branding der reinen Ruby on Rails Anwendung"
+  task :customizing do
+    if customizing_dir.present?
+      customizing_parent_dir = "#{current_release}/customizing/"
+      customizing_path = "#{current_release}/customizing/#{customizing_dir}"
+      run "cp -r -v #{customizing_path}/* #{current_release}"
+      run "rm -rf #{customizing_parent_dir}"
+    end
+  end
+end
+after "deploy:finalize_update", "deploy:customizing"
+
+namespace :deploy do
+ desc "bundle install --deployment --without development test"
+ task :bundle_install, :roles => [:web] do
+   run "cd #{release_path} && bundle install --deployment --without development test"
+ end
+end
+after "deploy:finalize_update", "deploy:bundle_install"
+
+namespace :deploy do
+  desc 'Precompiling Assets'
+  task :precompile_assets, :roles => :app do
+    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
+    EOF
+  end
+  # Generate all the stylesheets manually (from their Sass templates) before each restart.
+  after 'deploy:update_code', 'deploy:precompile_assets'
 end
 
 ## # # FIXME soeren 05.03.12 abgleichen was ich brauche
@@ -42,40 +88,7 @@ end
 #    run "touch #{current_path}/tmp/restart.txt"
 #  end
 #
-#
-#  desc "Overwriten Symbolic link Task, Please dont change this"
-#  task :symlink, :roles => :app do
-#    on_rollback do
-#      if previous_release
-#      run "rm #{current_path}; ln -s ./releases/#{releases[-2]} #{current_path}"
-#      else
-#        logger.important "no previous release to rollback to, rollback of symlink skipped"
-#      end
-#    end
-#    run "cd #{deploy_to} && rm -f #{current_path}                      && ln -s ./releases/#{release_name} #{current_path}"
-#    run "cd #{deploy_to} && rm -f #{current_path}/config/database.yml  && ln -s ../../../shared/config/database.yml #{current_path}/config/"
-#    run "cd #{deploy_to} && rm -f #{current_path}/public/.htaccess     && ln -s ../../../shared/config/.htaccess #{current_path}/public/.htaccess"
-#    run "cd #{deploy_to} && rm -f ./current/log                        && ln -s ../../shared/log #{current_path}/"
-#    run "cd #{deploy_to} && rm -f ./current/pids                       && ln -s ../../shared/pids #{current_path}/"
-#    run "cd #{deploy_to} && rm -f ./current/public/system              && ln -s ../../../shared/system #{current_path}/public/"
-#  end
-#
-#  after "deploy:update_code" do
-#    # do not use bunlder on railshoster as it does not seem to play nice with browsercms... :-(
-#    run "cd #{deploy_to} && rm -f #{release_path}/Gemfile"
-#    run "cd #{deploy_to} && rm -f #{release_path}/Gemfile.lock"
-#  end
-#
-#  after "deploy:rollback" do
-#    if previous_release
-#      run "rm #{current_path}; ln -s ./releases/#{releases[-2]} #{current_path}"
-#    else
-#      abort "could not rollback the code because there is no prior release"
-#    end
-#  end
-#
 #end
-#
 #
 #namespace :bundle do
 #  desc "Bundle install"
@@ -83,27 +96,5 @@ end
 #    run "cd #{current_path} && bundle check || bundle install --path=/home/#{user}/.bundle --without=test"
 #  end
 #end
-#
-#
-#
-#namespace :rollback do
-#
-#  desc "overwrite rollback because of relative symlink paths"
-#  task :revision, :except => { :no_release => true } do
-#    if previous_release
-#      run "rm -f #{current_path}; ln -s ./releases/#{releases[-2]} #{current_path}"
-#    else
-#      abort "could not rollback the code because there is no prior release"
-#    end
-#  end
-#
-#end
-#
-#namespace :sitemap do
-#  task :verify_signatories, :roles => :app do
-#    rake = fetch(:rake, "rake")
-#    rails_env = fetch(:rails_env, "production")
-#    run "cd \#{current_path}; \#{rake} RAILS_ENV=\#{rails_env} sitemap:verify_signatories"
-#  end
-#end
-#after "deploy:finalize_update", "sitemap:verify_signatories"
+
+
