@@ -31,10 +31,10 @@ after "deploy", "deploy:cleanup"
 # TODO soeren 07.03.12 start stop fuer passenger
 
 namespace :db do
- desc "run db:seed"
- task :run_seed, :roles => [:web] do
-   run "cd #{current_release} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake db:seed"
- end
+  desc "run db:seed"
+  task :run_seed, :roles => [:web] do
+    run "cd #{current_release} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake db:seed"
+  end
 end
 
 # TODO soeren 07.03.12 wieder aktivieren
@@ -59,14 +59,14 @@ end
 after "deploy:finalize_update", "deploy:customizing"
 
 namespace :deploy do
- desc "bundle install --deployment --without development test"
- task :bundle_install, :roles => [:web] do
-   #run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle install --deployment --without development test"
-   run "ruby -v"
-   run "#{ruby_path}/bin/ruby -v"
- end
+  desc "bundle install --deployment --without development test"
+  task :bundle_install, :roles => [:web] do
+    run "cd #{release_path}"
+    run "bundle install --deployment --without development test"
+  end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
+
 
 # # TODO soeren wieder aktivieren
 #namespace :deploy do
