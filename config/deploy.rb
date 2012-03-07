@@ -49,12 +49,10 @@ after "deploy:update_code", "deploy:set_version_and_date"
 namespace :deploy do
   desc "Customizing und Branding der reinen Ruby on Rails Anwendung"
   task :customizing do
-    if customizing_dir.present?
-      customizing_parent_dir = "#{current_release}/customizing/"
-      customizing_path = "#{current_release}/customizing/#{customizing_dir}"
-      run "cp -r -v #{customizing_path}/* #{current_release}"
-      run "rm -rf #{customizing_parent_dir}"
-    end
+    customizing_parent_dir = "#{current_release}/customizing/"
+    customizing_path = "#{current_release}/customizing/#{customizing_dir}"
+    run "cp -r -v #{customizing_path}/* #{current_release}"
+    run "rm -rf #{customizing_parent_dir}"
   end
 end
 after "deploy:finalize_update", "deploy:customizing"
