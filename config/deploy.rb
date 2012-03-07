@@ -60,20 +60,22 @@ after "deploy:finalize_update", "deploy:customizing"
 namespace :deploy do
  desc "bundle install --deployment --without development test"
  task :bundle_install, :roles => [:web] do
-   run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle install --deployment --without development test"
+   #run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle install --deployment --without development test"
+   run "ruby -v"
+   run "#{ruby_path}/bin/ruby -v"
  end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
-
-namespace :deploy do
-  desc 'Precompiling Assets'
-  task :precompile_assets, :roles => :app do
-    run "cd #{release_path} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake assets:precompile"
-    EOF
-  end
-  # Generate all the stylesheets manually (from their Sass templates) before each restart.
-  after 'deploy:update_code', 'deploy:precompile_assets'
-end
+# # TODO soeren wieder aktrivieren
+#namespace :deploy do
+#  desc 'Precompiling Assets'
+#  task :precompile_assets, :roles => :app do
+#    run "cd #{release_path} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake assets:precompile"
+#    EOF
+#  end
+#  # Generate all the stylesheets manually (from their Sass templates) before each restart.
+#  after 'deploy:update_code', 'deploy:precompile_assets'
+#end
 
 ## # # FIXME soeren 05.03.12 abgleichen was ich brauche
 ### ## ## ## ## ## ## ## ## ## ## ## ## ##
