@@ -61,8 +61,7 @@ after "deploy:finalize_update", "deploy:customizing"
 namespace :deploy do
   desc "bundle install --deployment --without development test"
   task :bundle_install, :roles => [:web] do
-    run "cd #{release_path}"
-    run "bundle install --deployment --without development test"
+    run "export PATH=#{path} && cd #{release_path} && bundle install --deployment --without development test"
   end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
