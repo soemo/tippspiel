@@ -13,3 +13,4 @@ set :customizing_dir, "beta-em2012"
 set :default_environment, {
   'PATH' => "$HOME/.gem/ruby/1.8/bin:/package/host/localhost/ruby-1.8.7/bin/:$PATH:"
 }
+set :rake, "bundle exec rake"
