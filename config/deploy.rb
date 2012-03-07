@@ -29,6 +29,14 @@ after "deploy", "deploy:cleanup"
 ###
 
 # TODO soeren 07.03.12 start stop fuer passenger
+#namespace :deploy do
+#
+#  desc "Restarting mod_rails with restart.txt"
+#  task :restart, :roles => :app, :except => { :no_release => true } do
+#    run "touch #{current_path}/tmp/restart.txt"
+#  end
+#
+#end
 
 namespace :db do
   desc "run db:seed"
@@ -37,14 +45,13 @@ namespace :db do
   end
 end
 
-# TODO soeren 07.03.12 wieder aktivieren
-#namespace :deploy do
-# desc "set Versionnumber and Build-Date. Needs Rake Task APPLICATION:set_version (APPLICATION is the namespace)"
-# task :set_version_and_date, :roles => [:web] do
-#   run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle exec rake tippspiel:set_version"
-# end
-#end
-#after "deploy:update_code", "deploy:set_version_and_date"
+namespace :deploy do
+  desc "set Versionnumber and Build-Date. Needs Rake Task APPLICATION:set_version (APPLICATION is the namespace)"
+  task :set_version_and_date, :roles => [:web] do
+    run "cd #{release_path} && bundle exec rake tippspiel:set_version"
+  end
+end
+after "deploy:update_code", "deploy:set_version_and_date"
 
 
 namespace :deploy do
@@ -66,27 +73,16 @@ namespace :deploy do
 end
 after "deploy:finalize_update", "deploy:bundle_install"
 
+namespace :deploy do
+  desc 'Precompiling Assets'
+  task :precompile_assets, :roles => :app do
+    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
+  end
+  # Generate all the stylesheets manually (from their Sass templates) before each restart.
+  after 'deploy:update_code', 'deploy:precompile_assets'
+end
 
-# # TODO soeren wieder aktivieren
-#namespace :deploy do
-#  desc 'Precompiling Assets'
-#  task :precompile_assets, :roles => :app do
-#    run "cd #{release_path} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake assets:precompile"
-#    EOF
-#  end
-#  # Generate all the stylesheets manually (from their Sass templates) before each restart.
-#  after 'deploy:update_code', 'deploy:precompile_assets'
-#end
 
-## # # FIXME soeren 05.03.12 abgleichen was ich brauche
-#namespace :deploy do
-#
-#  desc "Restarting mod_rails with restart.txt"
-#  task :restart, :roles => :app, :except => { :no_release => true } do
-#    run "touch #{current_path}/tmp/restart.txt"
-#  end
-#
-#end
 
 
 
