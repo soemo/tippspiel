@@ -14,7 +14,12 @@ gem 'rails3_acts_as_paranoid', '= 0.2.0'
 gem 'sass', '3.1.15'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'jquery-rails', '2.0.0'
+gem 'execjs',       '= 1.3.0'
+gem 'therubyrhino', '= 1.72.8'
 gem 'activeadmin'
+
+# TODO soeren noch integrieren  gem 'cancan',  '= 1.6.7'
+# TODO soeren 07.03.12 noch integrieren gem 'exception_notification',  '= 2.5.2'
 
 gem 'bootstrap-sass', '= 2.0.0'
 
