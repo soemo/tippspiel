@@ -85,14 +85,15 @@ namespace :deploy do
 end
 after "deploy:finalize_update", "deploy:bundle_install"
 
-namespace :deploy do
-  desc 'Precompiling Assets'
-  task :precompile_assets, :roles => :app do
-    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
-  end
-  # Generate all the stylesheets manually (from their Sass templates) before each restart.
-  after 'deploy:update_code', 'deploy:precompile_assets'
-end
+# FIXME soeren 07.03.12 warum klappt das nicht ???
+#namespace :deploy do
+#  desc 'Precompiling Assets'
+#  task :precompile_assets, :roles => :app do
+#    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
+#  end
+#  # Generate all the stylesheets manually (from their Sass templates) before each restart.
+#  after 'deploy:update_code', 'deploy:precompile_assets'
+#end
 
 
 
