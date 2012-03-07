@@ -40,4 +40,7 @@ Tippspiel::Application.configure do
   # This config option was shown in the episode but is actually not used, so don't bother adding it.
   # config.assets.allow_debugging = true
 
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
+
 end

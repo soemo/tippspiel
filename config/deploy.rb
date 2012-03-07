@@ -37,13 +37,14 @@ namespace :db do
  end
 end
 
-namespace :deploy do
- desc "set Versionnumber and Build-Date. Needs Rake Task APPLICATION:set_version (APPLICATION is the namespace)"
- task :set_version_and_date, :roles => [:web] do
-   run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle exec rake tippspiel:set_version"
- end
-end
-after "deploy:update_code", "deploy:set_version_and_date"
+# TODO soeren 07.03.12 wieder aktivieren
+#namespace :deploy do
+# desc "set Versionnumber and Build-Date. Needs Rake Task APPLICATION:set_version (APPLICATION is the namespace)"
+# task :set_version_and_date, :roles => [:web] do
+#   run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle exec rake tippspiel:set_version"
+# end
+#end
+#after "deploy:update_code", "deploy:set_version_and_date"
 
 
 namespace :deploy do
