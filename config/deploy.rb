@@ -66,7 +66,8 @@ namespace :deploy do
  end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
-# # TODO soeren wieder aktrivieren
+
+# # TODO soeren wieder aktivieren
 #namespace :deploy do
 #  desc 'Precompiling Assets'
 #  task :precompile_assets, :roles => :app do
@@ -78,9 +79,6 @@ after "deploy:finalize_update", "deploy:bundle_install"
 #end
 
 ## # # FIXME soeren 05.03.12 abgleichen was ich brauche
-### ## ## ## ## ## ## ## ## ## ## ## ## ##
-### Dont Modify following Tasks!
-###
 #namespace :deploy do
 #
 #  desc "Restarting mod_rails with restart.txt"
@@ -89,12 +87,6 @@ after "deploy:finalize_update", "deploy:bundle_install"
 #  end
 #
 #end
-#
-#namespace :bundle do
-#  desc "Bundle install"
-#  task :install, :roles => :app do
-#    run "cd #{current_path} && bundle check || bundle install --path=/home/#{user}/.bundle --without=test"
-#  end
-#end
+
 
 
