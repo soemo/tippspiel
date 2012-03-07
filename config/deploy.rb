@@ -33,14 +33,14 @@ after "deploy", "deploy:cleanup"
 namespace :db do
  desc "run db:seed"
  task :run_seed, :roles => [:web] do
-   run "cd #{current_release} && RAILS_ENV=production bundle exec rake db:seed"
+   run "cd #{current_release} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake db:seed"
  end
 end
 
 namespace :deploy do
  desc "set Versionnumber and Build-Date. Needs Rake Task APPLICATION:set_version (APPLICATION is the namespace)"
  task :set_version_and_date, :roles => [:web] do
-   run "cd #{release_path} && bundle exec rake tippspiel:set_version"
+   run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle exec rake tippspiel:set_version"
  end
 end
 after "deploy:update_code", "deploy:set_version_and_date"
@@ -60,7 +60,7 @@ after "deploy:finalize_update", "deploy:customizing"
 namespace :deploy do
  desc "bundle install --deployment --without development test"
  task :bundle_install, :roles => [:web] do
-   run "cd #{release_path} && bundle install --deployment --without development test"
+   run "cd #{release_path} && #{ruby_path}/bin/ruby -S bundle install --deployment --without development test"
  end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
@@ -68,7 +68,7 @@ after "deploy:finalize_update", "deploy:bundle_install"
 namespace :deploy do
   desc 'Precompiling Assets'
   task :precompile_assets, :roles => :app do
-    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
+    run "cd #{release_path} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake assets:precompile"
     EOF
   end
   # Generate all the stylesheets manually (from their Sass templates) before each restart.
