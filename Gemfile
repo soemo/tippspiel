@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.2'
 
 gem 'passenger',               '~> 3.0.11'
-gem 'mysql2',                  '~> 0.3.11'
+gem 'mysql2',                  '< 0.3' ## TODO soeren 08.03.12 größere Nummern werden nicht auf dem Server mittels bundel install installiert. Warum?
 gem 'cancan',                  '1.6.7'
 gem 'haml-rails',              '0.3.4'
 gem 'devise',                  '= 1.4.7'

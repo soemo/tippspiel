@@ -13,4 +13,4 @@ set :customizing_dir, "beta-em2012"
 set :default_environment, {
   'PATH' => "$HOME/.gem/ruby/1.8/bin:/package/host/localhost/ruby-1.8.7/bin/:$PATH:"
 }
-#set :rake, "bundle exec rake" # FIXME soeren 08.03.12 warum kann ich die mysql2 gem nicht in vendor/bundle installieren?
+set :rake, "bundle exec rake"
