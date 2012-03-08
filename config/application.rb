@@ -19,6 +19,11 @@ module Tippspiel
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # http://guides.rubyonrails.org/asset_pipeline.html
+    # The default matcher for compiling files includes application.js, application.css and all non-JS/CSS files
+    # (i.e., .coffee and .scss files are not automatically included as they compile to JS/CSS)
+    config.assets.precompile += []
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

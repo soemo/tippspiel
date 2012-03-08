@@ -1,16 +1,16 @@
 ﻿Erledigt:
-- Weiterleitung von DF auf http://http://fussballtippspiel.herokuapp.com
 
 TODO:
+
 - uberspace DBs soemo_tippspiel_beta_em2012 und soemo_tippspiel_em2012  + customize rake task fuer capistrano
 - Rails aktualisieren
 - Gems aktualisieren jquery-rails, ...
 - jquery-rails Gem JS Dateien in JS Verzeichnis bringen
-- https://addons.heroku.com/scheduler
-- https://addons.heroku.com/pusher (Add realtime WebSocket goodness to your app in minutes!)
+- http://needim.github.com/noty/ Notification Tool
 - Availability monitoring im NewRelic
--
+
 - http://www.kicker.de/news/fussball/em/startseite/europameisterschaft/2012/-1/0/spieltag.html seeds.rb anpassen
+- Heroku abmelden
 ---
 
 zu DF als Sicherung (ssh://ssh-117168-soemo@soerenmothes.de/kunden/117168_01099/git_repros/tippspiel)

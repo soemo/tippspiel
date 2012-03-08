@@ -1,5 +1,5 @@
 production:
-  adapter: mysql
+  adapter: mysql2
   encoding: utf8
   database: soemo_tippspiel_beta_em2012
   pool: 5

@@ -103,15 +103,15 @@ module ExceptionHandling
       else
         flash[:error] = std_error_msg
 
-        # TODO soeren 18.10.11 Wenn wir das Exception Notifier Plugin drin haben diese Zeilen aktivieren
-        #request.format = :html
-        #notify_about_exception(exception)
-        #request.format = :js
+        request.format = :html
+        ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => "JS was doing something wrong"}).deliver
+        request.format = :js
       end
       controller = get_controller_from_tab
       redirect_target = {:controller => controller, :action => "index", :params => {}}
       render :template => "/unknown_error", :locals => {:redirect_target => redirect_target}
     else
+      ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver
       redirect_all_formats exception, std_error_msg, true
     end
   end

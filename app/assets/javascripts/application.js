@@ -1,5 +1,4 @@
-//= require plugins
-//= require jquery-1.7.1.min
+//= require jquery
 //= require jquery_ujs
 //= require bootstrap
 
