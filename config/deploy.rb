@@ -53,7 +53,7 @@ end
 namespace :db do
   desc "run db:seed"
   task :run_seed, :roles => [:web] do
-    run "cd #{current_release} && RAILS_ENV=production #{ruby_path}/bin/ruby -S bundle exec rake db:seed"
+    run "cd #{current_release} && RAILS_ENV=production bundle exec rake db:seed"
   end
 end
 
