@@ -43,6 +43,14 @@ $ git remote rm heroku
 $ git remote add heroku git@heroku.com:newname.git
 
 
+-- uberspace ---
+Start standalone passenger
+http://wiki.simonszu.de/howto/rails
+https://uberspace.de/dokuwiki/system:daemontools
+# TODO soeren eigene Anleitung schreiben.
+       cool wäre ein vorheriges Ausprobieren, ob der Port noch frei ist udn wenn ja dann die benötigten Dateien zu generieren
+
+
 -- footiefox ---
 
 # "requestLeagueBase: "+this.apiURL + "leagues/"+id+"/base.json "
