@@ -21,4 +21,4 @@ set :default_environment, {
   'GEM_PATH'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
   'BUNDLE_PATH'  => '$HOME/.rvm/gems/ruby-1.8.7-p358'  # If you are using bundler.
 }
-# set :rake, "bundle exec rake" # TODO soeren frage ob ich das noch brauche
+set :rake, "bundle exec rake" # TODO soeren frage ob ich das noch brauche
