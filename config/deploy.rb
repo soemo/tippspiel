@@ -70,7 +70,7 @@ end
 after "deploy:finalize_update", "deploy:customizing"
 
 ## TODO soeren 09.03.12 warum kann ich auf uberspace kein mysql oder mysql2 Gem per "bundle install" installieren
-## TODO soeren 09.03.12  deshalb aktuell kein bundle install
+## TODO soeren 09.03.12  http://stackoverflow.com/questions/3642085/make-bundler-use-different-gems-for-different-platforms
 namespace :deploy do
   desc "bundle install --deployment --without development test"
   task :bundle_install, :roles => [:web] do

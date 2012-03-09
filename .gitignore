@@ -6,6 +6,7 @@
 local.properties
 
 .bundle
+Gemfile.lock
 
 log/
 tmp/
