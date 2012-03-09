@@ -2,7 +2,6 @@ set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, "beta-tippspiel"
 
 require "capistrano/ext/multistage"
-#require "bundler/capistrano"
 
 set :repository, "ssh://soemo@taurus.uberspace.de/home/soemo/git/tippspiel.git"
 set :branch, "master"
@@ -26,9 +25,9 @@ set :deploy_env, 'production'
 set :keep_releases, 5
 after "deploy", "deploy:cleanup"
 
+
 ### ## ## ## ## ## ## ## ## ## ## ## ## ##
 ### Dont Modify following Tasks!
-###
 
 namespace :deploy do
   desc "Restarting mod_rails with restart.txt"
@@ -69,26 +68,22 @@ namespace :deploy do
 end
 after "deploy:finalize_update", "deploy:customizing"
 
-## TODO soeren 09.03.12 warum kann ich auf uberspace kein mysql oder mysql2 Gem per "bundle install" installieren
-## TODO soeren 09.03.12  http://stackoverflow.com/questions/3642085/make-bundler-use-different-gems-for-different-platforms
 namespace :deploy do
   desc "bundle install --deployment --without development test"
   task :bundle_install, :roles => [:web] do
     run "cd #{release_path} && bundle install --deployment --without development test"
-  #  run "gem install mysql2 --version=0.3.10 --install-dir='#{release_path}/vendor/bundle/ruby/1.8' --no-ri --no-rdoc"     # TODO soeren 09.03.12 test
   end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
 
-# FIXME soeren 07.03.12 warum klappt das nicht ???
-#namespace :deploy do
-#  desc 'Precompiling Assets'
-#  task :precompile_assets, :roles => :app do
-#    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
-#  end
-#  # Generate all the stylesheets manually (from their Sass templates) before each restart.
-#  after 'deploy:update_code', 'deploy:precompile_assets'
-#end
+namespace :deploy do
+  desc 'Precompiling Assets'
+  task :precompile_assets, :roles => :app do
+    run "cd #{release_path} && RAILS_ENV=production bundle exec rake assets:precompile"
+  end
+  # Generate all the stylesheets manually (from their Sass templates) before each restart.
+  after 'deploy:update_code', 'deploy:precompile_assets'
+end
 
 
 
