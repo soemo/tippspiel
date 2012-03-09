@@ -2,7 +2,7 @@ set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, "beta-tippspiel"
 
 require "capistrano/ext/multistage"
-require "bundler/capistrano"
+# TODO soeren 09.03.12 erstmal ohne require "bundler/capistrano"
 
 # TODO soeren 09.03.12 warum kann ich auf uberspace kein mysql oder mysql2 Gem per "bundle install" installieren
 
@@ -72,13 +72,13 @@ namespace :deploy do
 end
 after "deploy:finalize_update", "deploy:customizing"
 
-#namespace :deploy do
-#  desc "bundle install --deployment --without development test"
-#  task :bundle_install, :roles => [:web] do
-#    run "cd #{release_path} && bundle install --deployment --without development test"
-#  end
-#end
-#after "deploy:finalize_update", "deploy:bundle_install"
+namespace :deploy do
+  desc "bundle install --deployment --without development test"
+  task :bundle_install, :roles => [:web] do
+    run "cd #{release_path} && bundle install --deployment --without development test"
+  end
+end
+after "deploy:finalize_update", "deploy:bundle_install"
 
 # FIXME soeren 07.03.12 warum klappt das nicht ???
 #namespace :deploy do
