@@ -15,11 +15,10 @@ set :customizing_dir, "beta-em2012"
 #  'PATH' => "$HOME/.gem/ruby/1.8/bin:/package/host/localhost/ruby-1.8.7/bin/:$PATH:"
 #}
 set :default_environment, {
-  'PATH' => "$HOME/.rvm/gems/ruby-1.8.7-p358/bin:$HOME/.rvm/bin::$PATH",
+  'PATH' => "/home/soemo/.rvm/gems/ruby-1.8.7-p358/bin:$HOME/.rvm/bin::$PATH",
   'RUBY_VERSION' => 'ruby 1.8.7',
-  'GEM_HOME'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
-  'GEM_PATH'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
-  'BUNDLE_PATH'  => '$HOME/.rvm/gems/ruby-1.8.7-p358'  # If you are using bundler.
+  'GEM_HOME'     => '/home/soemo/.rvm/gems/ruby-1.8.7-p358',
+  'GEM_PATH'     => '/home/soemo/.rvm/gems/ruby-1.8.7-p358',
+  'BUNDLE_PATH'  => '/home/soemo/websites/beta-tippspiel.soemo.org/shared/bundle/ruby/1.8'
 }
-set :bundle_dir, '$HOME/.rvm/gems/ruby-1.8.7-p358'
 #set :rake, "bundle exec rake" # TODO soeren frage ob ich das noch brauche
