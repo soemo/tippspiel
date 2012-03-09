@@ -220,7 +220,7 @@ DEPENDENCIES
   faker (= 0.9.5)
   haml-rails (= 0.3.4)
   jquery-rails (= 2.0.0)
-  mysql (= 2.8.1)
+  mysql (~> 2.8.1)
   newrelic_rpm
   passenger (~> 3.0.11)
   rails (= 3.2.2)

@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.2'
 
 gem 'passenger',               '~> 3.0.11'
-gem 'mysql',                   '= 2.8.1'
+gem 'mysql',                   '~> 2.8.1'
 gem 'cancan',                  '1.6.7'
 gem 'haml-rails',              '0.3.4'
 gem 'devise',                  '= 1.4.7'
