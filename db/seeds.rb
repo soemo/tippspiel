@@ -107,9 +107,9 @@ puts "Alles loeschen..."
 clear_seeds
 
 puts "Neue Daten aufsetzen..."
-## FIXME soeren 08.02.12 create_game_data
-## FIXME soeren 08.02.12 create_testusers
-## FIXME soeren 08.02.12 create_tipps
+create_game_data
+create_testusers
+create_tipps
 # TODO soeren 22.11.11 create_polls
 # TODO soeren 22.11.11 create_notice
 # TODO soeren 22.11.11 create_statistics
