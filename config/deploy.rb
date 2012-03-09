@@ -74,7 +74,7 @@ after "deploy:finalize_update", "deploy:customizing"
 namespace :deploy do
   desc "bundle install --deployment --without development test"
   task :bundle_install, :roles => [:web] do
-    run "cd #{release_path} && bundle config build.mysql --with-mysql-config=/usr/lib64/mysql/bin/mysql_config"    ## TODO soeren test
+    run "cd #{release_path} && bundle config build.mysql --with-mysql-config=/usr/lib64/mysql/mysql_config"    ## TODO soeren test
     run "cd #{release_path} && bundle install --deployment --without development test"
   end
 end
