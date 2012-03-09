@@ -19,6 +19,6 @@ set :default_environment, {
   'RUBY_VERSION' => 'ruby 1.8.7',
   'GEM_HOME'     => '/home/soemo/.rvm/gems/ruby-1.8.7-p358',
   'GEM_PATH'     => '/home/soemo/.rvm/gems/ruby-1.8.7-p358',
-  'BUNDLE_PATH'  => '/home/soemo/websites/beta-tippspiel.soemo.org/shared/bundle/ruby/1.8'
+ # 'BUNDLE_PATH'  => '/home/soemo/websites/beta-tippspiel.soemo.org/shared/bundle/ruby/1.8'
 }
 #set :rake, "bundle exec rake" # TODO soeren frage ob ich das noch brauche
