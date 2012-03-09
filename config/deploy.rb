@@ -23,7 +23,7 @@ set :deploy_via, :remote_cache
 set :deploy_env, 'production'
 
 set :keep_releases, 5
-after "deploy", "deploy:cleanup"
+after "deploy:restart", "deploy:cleanup"
 
 
 ### ## ## ## ## ## ## ## ## ## ## ## ## ##

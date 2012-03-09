@@ -16,7 +16,7 @@ login_test: &login_test
     IO.read(file) if File.exist?(file) %>
 
 development:
-  adapter: mysql2
+  adapter: mysql
   encoding: utf8
   database: tippspiel_development
   pool: 5
@@ -26,7 +26,7 @@ development:
 # re-generated from your development database when you run 'rake'.
 # Do not set this db to the same as development or production.
 test:
-  adapter: mysql2
+  adapter: mysql
   encoding: utf8
   database: tippspiel_test
   pool: 5
@@ -34,7 +34,7 @@ test:
 
 # prod db == dev db
 production:
-  adapter: mysql2
+  adapter: mysql
   encoding: utf8
   database: tippspiel_development # hier nutzen wir auch lokal unser dev DB
   pool: 5

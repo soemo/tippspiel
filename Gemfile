@@ -3,8 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.2'
 
 gem 'passenger',               '~> 3.0.11'
-#gem 'mysql',                   '~> 2.8.1'
-gem 'mysql2',                  '~> 0.3.10'
+gem 'mysql',                   '~> 2.8.1'
 gem 'cancan',                  '1.6.7'
 gem 'haml-rails',              '0.3.4'
 gem 'devise',                  '= 1.4.7'
@@ -17,7 +16,7 @@ gem 'therubyrhino',            '= 1.72.8'
 gem 'activeadmin'
 gem 'cancan',                  '= 1.6.7'
 gem 'exception_notification',  '= 2.5.2'
-gem 'bootstrap-sass',          '= 2.0.0'
+gem 'bootstrap-sass',          '~> 2.0.1'
 gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
