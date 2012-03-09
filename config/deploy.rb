@@ -4,6 +4,8 @@ set :default_stage, "beta-tippspiel"
 require "capistrano/ext/multistage"
 require "bundler/capistrano"
 
+# TODO soeren 09.03.12 warum kann ich auf uberspace kein mysql oder mysql2 Gem per "bundle install" installieren
+
 set :repository, "ssh://soemo@taurus.uberspace.de/home/soemo/git/tippspiel.git"
 set :branch, "master"
 set :scm, :git
