@@ -74,9 +74,8 @@ after "deploy:finalize_update", "deploy:customizing"
 namespace :deploy do
   desc "bundle install --deployment --without development test"
   task :bundle_install, :roles => [:web] do
-    run "cd #{release_path} && bundle config build.mysql --with-mysql-config=/usr/lib64/mysql/mysql_config"    ## TODO soeren test
     run "cd #{release_path} && bundle install --deployment --without development test"
-    run "gem install mysql --version=2.8.1 --install-dir='#{release_path}/vendor/bundle/ruby/1.8' --no-ri --no-rdoc"     # TODO soeren 09.03.12 test
+    run "gem install mysql2 --version=0.3.10 --install-dir='#{release_path}/vendor/bundle/ruby/1.8' --no-ri --no-rdoc"     # TODO soeren 09.03.12 test
   end
 end
 after "deploy:finalize_update", "deploy:bundle_install"
