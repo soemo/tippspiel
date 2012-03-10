@@ -5,8 +5,6 @@
 $(function() {
   check_user_tipp();
 
-  //TEst Bootstrap
-  $('#testtooltip').tooltip();
   // Test collapse
   $(".collapse").collapse('hide');
 });
