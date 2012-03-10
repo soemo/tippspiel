@@ -30,24 +30,16 @@ after "deploy:restart", "deploy:cleanup"
 ### Dont Modify following Tasks!
 
 namespace :deploy do
-  desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-
-  [:start, :stop].each do |t|
-    desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
-  end
-end
-
-namespace :deploy do
+  desc "bundle exec passenger start"
   task :start, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && bundle exec passenger start #{current_path} -a 127.0.0.1 -p #{standalone_passenger_port} --daemonize --environment production"
+    run "cd #{current_path} && bundle exec passenger start #{current_path} -a 127.0.0.1 -p #{standalone_passenger_port} -d -e production"
   end
+  desc "bundle exec passenger stop"
   task :stop, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && bundle exec passenger stop --pid-file tmp/pids/passenger.pid"
+    #run "cd #{current_path} && bundle exec passenger stop --pid-file tmp/pids/passenger.pid"
+    run "cd #{current_path} && bundle exec passenger stop --pid-file passenger.#{standalone_passenger_port}.pid"
   end
+  desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => {:no_release => true} do
     run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
   end

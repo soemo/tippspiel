@@ -7,7 +7,7 @@ set :password, nil  # wird auf der Konsole angegeben
 set :application, "tippspiel.soemo.org"
 set :deploy_to, "/var/www/virtual/#{user}/#{application}"
 
-set :standalone_passenger_port, "26100"
+set :standalone_passenger_port, "26101"
 
 set :customizing_dir, "em2012"
 
