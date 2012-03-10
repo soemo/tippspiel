@@ -58,6 +58,4 @@ Tippspiel::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.assets.precompile += %w[active_admin.css active_admin.js]
-
 end
