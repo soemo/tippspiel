@@ -41,6 +41,18 @@ namespace :deploy do
   end
 end
 
+namespace :deploy do
+  task :start, :roles => :app, :except => {:no_release => true} do
+    run "cd #{current_path} && bundle exec passenger start #{current_path} -a 127.0.0.1 -p #{standalone_passenger_port} --daemonize --environment production"
+  end
+  task :stop, :roles => :app, :except => {:no_release => true} do
+    run "cd #{current_path} && bundle exec passenger stop --pid-file tmp/pids/passenger.pid"
+  end
+  task :restart, :roles => :app, :except => {:no_release => true} do
+    run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+  end
+end
+
 
 namespace :db do
   desc "run db:seed"

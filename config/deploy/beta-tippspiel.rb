@@ -7,6 +7,8 @@ set :password, nil  # wird auf der Konsole angegeben
 set :application, "beta-tippspiel.soemo.org"
 set :deploy_to, "/var/www/virtual/#{user}/#{application}"
 
+set :standalone_passenger_port, "26100"
+
 set :customizing_dir, "beta-em2012"
 
 # aktuell nutzt ich rvm - ruby-1.8.7-p358
