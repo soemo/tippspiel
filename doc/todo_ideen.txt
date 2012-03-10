@@ -3,44 +3,11 @@
 TODO:
 
 - uberspace DBs soemo_tippspiel_beta_em2012 und soemo_tippspiel_em2012  + customize rake task fuer capistrano
-- Rails aktualisieren
-- Gems aktualisieren jquery-rails, ...
-- jquery-rails Gem JS Dateien in JS Verzeichnis bringen
 - http://needim.github.com/noty/ Notification Tool
-- Availability monitoring im NewRelic
 
 - http://www.kicker.de/news/fussball/em/startseite/europameisterschaft/2012/-1/0/spieltag.html seeds.rb anpassen
-- Heroku abmelden
----
-
-zu DF als Sicherung (ssh://ssh-117168-soemo@soerenmothes.de/kunden/117168_01099/git_repros/tippspiel)
-git push df_tippspiel_bare master:master
 
 
-----------
-http://devcenter.heroku.com/articles/rails3
-
-heroku ps
-heroku logs
-
-heroku run console
-
-heroku run rake db:migrate
-
-heroku run console
-
-heroku releases
-
-----
-git push heroku master
-
---------
-Manually Updating a Git Remote
-You can see all remotes and the git URLs they reference by typing git remote -v. You can also see and edit the full details for all remotes in your current git repo by editing the file .git/config.
-If you are inside the Git checkout directory, your remote will be updated automatically. Other checkouts, such as those belonging to other developers, will need to be updated manually:
-
-$ git remote rm heroku
-$ git remote add heroku git@heroku.com:newname.git
 
 
 -- uberspace ---
