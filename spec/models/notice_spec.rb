@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Notice do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should use Factory" do
+      notice = Factory(:notice)
+      notice.text.should be_present
+      notice.user.should be_present
+  end
 end

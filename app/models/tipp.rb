@@ -6,13 +6,17 @@ class Tipp < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :game
-  validates_presence_of :team1_tore, :unless => lambda{ |object| object.new_record? }
-  validates_presence_of :team2_tore, :unless => lambda{ |object| object.new_record? }
-  validates_numericality_of :team1_tore, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
-  validates_numericality_of :team2_tore, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
+  validates_presence_of :team1_goals, :unless => lambda{ |object| object.new_record? }
+  validates_presence_of :team2_goals, :unless => lambda{ |object| object.new_record? }
+  validates_numericality_of :team1_goals, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
+  validates_numericality_of :team2_goals, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
 
-  def edit_allowed
+  def edit_allowed?
     game.start_at > Time.now
+  end
+
+  def complete_fill?
+    team1_goals.present? && team2_goals.present?
   end
 
   def self.user_tipps(user_id)
@@ -29,11 +33,11 @@ class Tipp < ActiveRecord::Base
   end
 
   def remove_leading_zero
-    if team1_tore.present?
-      self.team1_tore = team1_tore.to_i
+    if team1_goals.present?
+      self.team1_goals = team1_goals.to_i
     end
-    if team2_tore.present?
-      self.team2_tore = team2_tore.to_i
+    if team2_goals.present?
+      self.team2_goals = team2_goals.to_i
     end
   end
 

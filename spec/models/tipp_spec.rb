@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe Tipp do
 
+  it "should use Factory" do
+      tipp = Factory(:tipp)
+      tipp.game.should be_present
+      tipp.user.should be_present
+  end
+
   describe 'User Tipps' do
 
     it 'should get all user tipps' do
@@ -28,24 +34,29 @@ describe Tipp do
       first_tipp = @user_tipps.first
       game = first_tipp.game
       game.update_attribute(:start_at, Time.now + 1.minute)
-      first_tipp.edit_allowed.should be_true
+      first_tipp.edit_allowed?.should be_true
     end
 
     it "should not allowed" do
       first_tipp = @user_tipps.first
       game = first_tipp.game
       game.update_attribute(:start_at, Time.now)
-      first_tipp.edit_allowed.should be_false
+      first_tipp.edit_allowed?.should be_false
     end
 
   end
 
   describe "tipp remove leading zero" do
     it "should a remove leading zero" do
-      t = Tipp.new({:team1_tore => 00, :team2_tore => 02})
+      t = Tipp.new({:team1_goals => 00, :team2_goals => 02})
       t.remove_leading_zero
-      t.team1_tore.should == 0
-      t.team2_tore.should == 2
+      t.team1_goals.should == 0
+      t.team2_goals.should == 2
+
+      t = Tipp.new({:team1_goals => 10, :team2_goals => 11})
+      t.remove_leading_zero
+      t.team1_goals.should == 10
+      t.team2_goals.should == 11
 
     end
   end

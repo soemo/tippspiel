@@ -60,6 +60,11 @@ module Tippspiel
       g.test_framework  :rspec
     end
 
+    config.middleware.use(ExceptionNotifier,
+                          :email_prefix => "[Tippspiel Application Error] ",
+                          :sender_address => %{tippspiel@soemo.org},
+                          :exception_recipients => %w{tippspiel@soemo.org})
+
     config.after_initialize do |app|
       # 404 catch all route, hier definiert, damit sie immer die letzte Route ist
 

@@ -14,6 +14,10 @@ class Game < ActiveRecord::Base
   SEMIFINAL    = "semifinal"
   FINAL        = "final"
 
+  UNENTSCHIEDEN = 0
+  TEAM1_WIN     = 1
+  TEAM2_WIN     = 2
+
   default_scope order("start_at")
 
   scope :group_games,        where(:round => GROUP)
@@ -45,6 +49,18 @@ class Game < ActiveRecord::Base
     else
       self.team2_placeholder_name
     end
+  end
+
+  # wer hat gewonnen Team1 oder Team2, unentschieden == 0
+  def winner
+    result = nil
+    if team1_goals.present? && team2_goals.present?
+      result = TEAM1_WIN if team1_goals > team2_goals
+      result = TEAM2_WIN if team1_goals < team2_goals
+      result = UNENTSCHIEDEN if team1_goals == team2_goals
+    end
+
+    result
   end
 
   protected

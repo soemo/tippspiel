@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Team do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should use Factory" do
+      team = Factory(:team)
+      team.name.should be_present
+  end
 end

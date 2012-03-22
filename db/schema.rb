@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128163913) do
+ActiveRecord::Schema.define(:version => 20120318093645) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(:version => 20111128163913) do
 
   create_table "games", :force => true do |t|
     t.integer  "team1_id"
-    t.string   "team1_tore",             :limit => 2
+    t.integer  "team1_goals"
     t.integer  "team2_id"
-    t.string   "team2_tore",             :limit => 2
+    t.integer  "team2_goals"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20111128163913) do
     t.datetime "start_at"
     t.string   "team1_placeholder_name"
     t.string   "team2_placeholder_name"
+    t.boolean  "finished",                             :default => false
   end
 
   create_table "notices", :force => true do |t|
@@ -108,12 +109,12 @@ ActiveRecord::Schema.define(:version => 20111128163913) do
     t.integer  "user_id"
     t.integer  "game_id"
     t.integer  "tipp_punkte"
-    t.string   "team1_tore",   :limit => 2
-    t.string   "team2_tore",   :limit => 2
+    t.integer  "team1_goals"
+    t.integer  "team2_goals"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",              :default => 0
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "users", :force => true do |t|

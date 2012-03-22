@@ -104,7 +104,7 @@ module ExceptionHandling
         flash[:error] = std_error_msg
 
         request.format = :html
-        ExceptionNotifier::Notifier.exception_notification(request.env, exception, :data => {:message => "JS was doing something wrong"}).deliver
+        ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver
         request.format = :js
       end
       controller = get_controller_from_tab

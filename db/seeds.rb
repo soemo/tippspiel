@@ -94,7 +94,7 @@ def create_tipps
   users = User.all
   users.each do |user|
     games.each do |game|
-      Tipp.create!(:user => user, :game => game, :team1_tore => rand(3), :team2_tore => rand(3))
+      Tipp.create!(:user => user, :game => game, :team1_goals => rand(3), :team2_goals => rand(3))
     end
   end
 
