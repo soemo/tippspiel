@@ -6,6 +6,16 @@ module CalculatePoints
   POINTS_CORRECT_TREND = 3
   EXTRA_POINT          = 1
 
+  def calculate_user_points
+    # FIXME soeren 22.03.12 implement
+    #t.integer  "points"
+    #t.integer  "count6points"
+    #t.integer  "count4points"
+    #t.integer  "count3points"
+    #t.integer  "count0points"
+    #t.integer  "championtipppoints"
+  end
+
   def calculate_all_user_tipp_points
     games = Game.all
     games.each do |game|
@@ -39,17 +49,17 @@ module CalculatePoints
     points = 0
     if ((Game::UNENTSCHIEDEN == game_winner && tipp_team1_goals == tipp_team2_goals) ||
             (Game::TEAM1_WIN == game_winner && tipp_team1_goals > tipp_team2_goals) ||
-            (Game::TEAM1_WIN == game_winner && tipp_team1_goals > tipp_team2_goals))
-      new_points = points + POINTS_CORRECT_TREND
+            (Game::TEAM2_WIN == game_winner && tipp_team1_goals < tipp_team2_goals))
+      points = points + POINTS_CORRECT_TREND
     end
 
-    #nur wenn die Spieltendenz stimmt, gibt es auch die Punkte auf die richtige Toranzahl pro Team
+    # nur wenn die Spieltendenz stimmt, gibt es auch die Punkte auf die richtige Toranzahl pro Team
     if POINTS_CORRECT_TREND == points
-      new_points = points + EXTRA_POINT if game_team1_goals == tipp_team1_goals
-      new_points = points + EXTRA_POINT if game_team2_goals == tipp_team2_goals
+      points = points + EXTRA_POINT if game_team1_goals == tipp_team1_goals
+      points = points + EXTRA_POINT if game_team2_goals == tipp_team2_goals
     end
 
-    #1 Punkt fuer richtige Tordifferenz
+    # 1 Punkt fuer richtige Tordifferenz
     goal_diff = tipp_team1_goals - tipp_team2_goals
     game_diff = game_team1_goals - game_team2_goals
     points = points + EXTRA_POINT if goal_diff == game_diff
