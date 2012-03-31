@@ -2,7 +2,6 @@ module TippsHelper
 
   # Die Tipps werden so aufbereitet, das sie nach den Runden sortiert sind
   def prepare_tipps(user_tipps)
-    # TODO soeren 03.01.12 Cache
     result = {}
     if user_tipps.present?
       games_round_hash = Game.splited_by_rounds

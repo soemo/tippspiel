@@ -42,6 +42,7 @@ class Tipp < ActiveRecord::Base
   end
 
   private
+
   def self.tipps_with_games(user_id)
     if user_id.present?
       Tipp.includes(:game).where("user_id" => user_id)
@@ -49,7 +50,6 @@ class Tipp < ActiveRecord::Base
       []
     end
   end
-
   def self.create_user_tipps(user_id)
     games = Game.all
     if games.present?

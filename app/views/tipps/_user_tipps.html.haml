@@ -1,11 +1,12 @@
 - if tipps_round_hash.present?
   = form_tag "/save-tipps" do
-    - tipps_round_hash.each do |index, round_with_tipps|
-      - round_with_tipps.each_pair do |round_name, tipps|
-        %h3= t(round_name, :scope => "round")
-        %table.tipps
+    %table.table.table-striped.tipps
+      - tipps_round_hash.each do |index, round_with_tipps|
+        - round_with_tipps.each_pair do |round_name, tipps|
           %thead
             %tr
+              %th.round_name{:colspan => 7}= t(round_name, :scope => "round")
+            %tr.next_to_round_name
               %th= Game.human_attribute_name("start_at")
               %th= Game.human_attribute_name("place")
               %th= Game.human_attribute_name("team1")
@@ -13,15 +14,12 @@
               %th= Game.human_attribute_name("result")
               %th= Tipp.model_name.human
               %th= Tipp.human_attribute_name("tipp_punkte")
-          %tfoot
-            %tr
-              %td{:cellspan => 7}=""
           %tbody
             - tipps.each do |tipp|
               - game = tipp.game
               - edit_allowed = tipp.edit_allowed?
               %tr{:class => cycle('even', 'odd')}
-                %td= l(game.start_at)
+                %td= l(game.start_at, :format => :default)
                 %td= game.place
                 %td= game.team1_view_name
                 %td= game.team2_view_name
