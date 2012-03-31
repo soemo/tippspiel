@@ -16,7 +16,7 @@ gem 'therubyrhino',            '= 1.72.8'
 gem 'activeadmin'
 gem 'cancan',                  '= 1.6.7'
 gem 'exception_notification',  '= 2.5.2'
-gem 'bootstrap-sass',          '~> 2.0.1'
+gem 'bootstrap-sass',          '~> 2.0.2'
 gem 'newrelic_rpm'
 
 # Gems used only for assets and not required

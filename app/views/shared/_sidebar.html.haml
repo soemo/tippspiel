@@ -1,6 +1,6 @@
 - unless user_signed_in?
   %h2=t("sign_in")
-  %p="# TODO soeren uebersetzen test2"
+  %p="# TODO soeren uebersetzen I18n.locale: #{I18n.locale}"
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
     = devise_error_messages!
     %p

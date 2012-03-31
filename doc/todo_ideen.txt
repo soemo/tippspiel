@@ -13,8 +13,6 @@ TODO:
 - http://www.kicker.de/news/fussball/em/startseite/europameisterschaft/2012/-1/0/spieltag.html seeds.rb anpassen
 
 
-
-
 -- uberspace ---
 Start standalone passenger
 http://wiki.simonszu.de/howto/rails
@@ -22,6 +20,9 @@ https://uberspace.de/dokuwiki/system:daemontools
 # TODO soeren eigene Anleitung schreiben.
        cool wäre ein vorheriges Ausprobieren, ob der Port noch frei ist udn wenn ja dann die benötigten Dateien zu generieren
 
+--- Deployment ---
+cap -h
+cap -vT
 
 -- footiefox ---
 
