@@ -3,9 +3,10 @@
 module CalculatePoints
 
   # FIXME soeren 03.01.12 implement - Aufruf in schedulerController
+  MAX_POINTS_PRO_TIPP  = 6
   POINTS_CORRECT_TREND = 3
   EXTRA_POINT          = 1
-  SIEGER_TIPP_PUNKTE   = 6
+  CHAMPION_TIPP_POINTS = 6
 
   def calculate_user_points
     users = User.all
@@ -18,7 +19,7 @@ module CalculatePoints
         if Game.tournament_finished? &&
                 user.championtipp_team_id.present? &&
                 user.championtipp_team_id == Game.tournament_champion_team.id
-          champion_tipp_points = SIEGER_TIPP_PUNKTE
+          champion_tipp_points = CHAMPION_TIPP_POINTS
           total_points = total_points + champion_tipp_points
         end
 

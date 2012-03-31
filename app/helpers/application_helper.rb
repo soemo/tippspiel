@@ -35,7 +35,7 @@ module ApplicationHelper
   def write_auth_nav
     write_user_login_logout_link
     write_user_sign_up_link
-    haml_concat link_to(t(:imprint), help_path)
+    haml_concat link_to(t(:imprint), help_path + "#imprint")
   end
 
   def write_user_login_logout_link

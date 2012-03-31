@@ -14,6 +14,8 @@ class Game < ActiveRecord::Base
   SEMIFINAL    = "semifinal"
   FINAL        = "final"
 
+  ROUNDS = [GROUP, QUARTERFINAL, SEMIFINAL, FINAL]
+
   UNENTSCHIEDEN = 0
   TEAM1_WIN     = 1
   TEAM2_WIN     = 2
@@ -33,6 +35,14 @@ class Game < ActiveRecord::Base
     result[4] = {FINAL => Game.final_games}
 
     result
+  end
+
+  def self.round_start_end_date_time(round)
+    games = Game.where(:round => round).order("start_at asc").select("start_at")
+    start_date_time = games.first.start_at
+    end_date_time = games.last.start_at
+
+    [start_date_time, end_date_time]
   end
 
   def team1_view_name

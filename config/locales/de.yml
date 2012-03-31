@@ -40,7 +40,7 @@ de:
   delete_link: "Löschen"
 
   round:
-    group: Gruppenspiel
+    group: Gruppenspiele
     quarterfinal: Viertelfinale
     semifinal: Halbfinale
     final: Finale
@@ -65,6 +65,7 @@ de:
       short: "%d. %B, %H:%M Uhr"
       long: "%A, %d. %B %Y, %H:%M Uhr"
       time: "%H:%M"
+      only_date: "%d.%m.%Y"
 
     am: "vormittags"
     pm: "nachmittags"
@@ -72,6 +73,7 @@ de:
   datetime:
     formats:
       default: "%d.%m.%Y, %H:%M Uhr"
+      only_date: "%d.%m.%Y"
     distance_in_words:
       half_a_minute: 'eine halbe Minute'
       less_than_x_seconds:

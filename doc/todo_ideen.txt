@@ -1,8 +1,18 @@
 ﻿
 TODO:
+- RSS Feed UEFA FIFA ???
+** http://www.pauldix.net/2009/02/feedzirra-a-ruby-feed-library-built-for-speed.html
+** Asynchroner Aufruf !!
+- Devise anpassen Mailtemplates Formulare
 - Specs fuer Mailversand
+- JS Druck der Tipps
+- Siegertipp Abgeben
 - Berechnung der Statisitik (old saveStatistik)
-
+- Vergleich der Tipps
+- Umfrage
+- Notizen (200 Zeichen Texte)
+- Ergebniss Grabber (FootieFox oder ???)
+- Übersetzen Hilfe i18n yml ,....
 - Cronjob um regelmäßig alles Ergebnisse einzutragen und Berechnungen zu aktualisieren (old updateGamesinDB)
 ** Berechnungen werden bestimmt auch als after Filter der einzelnen Spiele erfolgen !
 
