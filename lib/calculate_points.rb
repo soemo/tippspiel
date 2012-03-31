@@ -5,28 +5,50 @@ module CalculatePoints
   # FIXME soeren 03.01.12 implement - Aufruf in schedulerController
   POINTS_CORRECT_TREND = 3
   EXTRA_POINT          = 1
+  SIEGER_TIPP_PUNKTE   = 6
 
   def calculate_user_points
-    # FIXME soeren 22.03.12 implement
-    #t.integer  "points"
-    #t.integer  "count6points"
-    #t.integer  "count4points"
-    #t.integer  "count3points"
-    #t.integer  "count0points"
-    #t.integer  "championtipppoints"
+    users = User.all
+    if users.present?
+      users.each do |user|
+        total_points  = Tipp.where(:user_id => user.id).sum(:tipp_punkte)
+        total_points  = 0 unless total_points.present?
+
+        champion_tipp_points = 0
+        if Game.tournament_finished? &&
+                user.championtipp_team_id.present? &&
+                user.championtipp_team_id == Game.tournament_champion_team.id
+          champion_tipp_points = SIEGER_TIPP_PUNKTE
+          total_points = total_points + champion_tipp_points
+        end
+
+        count_6points = Tipp.where({:user_id => user.id, :tipp_punkte => 6}).count
+        count_4points = Tipp.where({:user_id => user.id, :tipp_punkte => 4}).count
+        count_3points = Tipp.where({:user_id => user.id, :tipp_punkte => 3}).count
+        count_0points = Tipp.where({:user_id => user.id, :tipp_punkte => 0}).count
+
+        user.update_attributes({:points => total_points,
+                                :championtipppoints => champion_tipp_points,
+                                :count6points => count_6points,
+                                :count4points => count_4points,
+                                :count3points => count_3points,
+                                :count0points => count_0points,
+                               }, {:without_protection => true})
+      end
+    end
   end
 
   def calculate_all_user_tipp_points
     games = Game.all
     games.each do |game|
       if game.finished?
-        update_all_tipp_points_for_game(game)
+        update_all_tipp_points_for(game)
       end
     end
 
   end
 
-  def update_all_tipp_points_for_game(game)
+  def update_all_tipp_points_for(game)
     if game.present?
       new_points = 0
       game_winner = game.winner

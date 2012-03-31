@@ -8,4 +8,8 @@ FactoryGirl.define do
     round "round"
     start_at DateTime.now
   end
+
+  factory :final, :parent => :game do
+    round "final"
+  end
 end

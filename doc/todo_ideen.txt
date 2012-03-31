@@ -1,7 +1,5 @@
 ﻿
 TODO:
-- Berechnung aller Usertipppunkte (old calculateAllPointsForTipps)
-- Berechnung aller Usergesamtpunkte (old calculateTotalUserPoints)
 - Specs fuer Mailversand
 - Berechnung der Statisitik (old saveStatistik)
 

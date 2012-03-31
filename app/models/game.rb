@@ -63,6 +63,37 @@ class Game < ActiveRecord::Base
     result
   end
 
+  # bei Unentschieden wird nil geliefert ansonsten, das Siegerteam
+  def winner_team
+    result = nil
+    if team1_goals.present? && team2_goals.present?
+      result = team1 if team1_goals > team2_goals
+      result = team2 if team1_goals < team2_goals
+    end
+
+    result
+  end
+
+  def self.tournament_finished?
+    result = false
+    games = Game.final_games
+    if games.present?
+      result = games.first.finished?
+    end
+
+    result
+  end
+
+  def self.tournament_champion_team
+    result = nil
+    games = Game.final_games
+    if games.present?
+      result = games.first.winner_team
+    end
+
+    result
+  end
+
   protected
 
   def presence_of_teams
