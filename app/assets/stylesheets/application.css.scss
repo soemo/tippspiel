@@ -19,10 +19,14 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 
+/* http://twitter.github.com/bootstrap/less.html - Bootstrap variables*/
 $navbarBackground: $orange;
 $navbarBackgroundHighlight: $yellow;
 $navbarText: $red;
 $navbarLinkColor: $grayDark;
+$linkColor: $orange;
+$linkColorHover: darken($linkColor, 15%);
+$primaryButtonBackground: $orange;
 
 @import "bootstrap";
 
@@ -57,5 +61,7 @@ body {
   width: 18px;
 }
 
+
+/* wichtig dass das zum schluss kommt */
 @import "bootstrap-responsive";
 

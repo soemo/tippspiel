@@ -1,1 +1,7 @@
+.row-fluid
+  .span8
+    = render :partial => "welcome_infos"
+  .span3
+    = render :partial => "login_form_or_user_infos"
+
 = render :partial => "/games/game_list", :locals => {:games_round_hash => @games_round_hash}

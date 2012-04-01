@@ -2,34 +2,5 @@
   %h2=t("sign_in")
   %p="# TODO soeren Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
   %p="# TODO soeren uebersetzen I18n.locale: #{I18n.locale}"
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    = devise_error_messages!
-    %p
-      = f.label :email
-      %br
-      = f.text_field :email
-    %p
-      = f.label :password
-      %br
-      = f.password_field :password
 
-    - if devise_mapping.rememberable?
-      %p
-        = f.check_box :remember_me
-        = f.label :remember_me
-
-    %p= f.submit "Sign in"
-
-    = render :partial => "devise/shared/links"
-
-  -#= form_tag(user_session_path) do
-  -#  = text_field_tag 'user[email]'
-  -#  = password_field_tag 'user[password]'
-  -#  -#  TODO soeren 28.11.11 data-watermark
-  -#
-  -#  = check_box_tag 'user[remember_me]'
-  -#  = label_tag 'user[remember_me]', 'Remember me'
-  -#  %br
-  -#  = submit_tag t('sign_in')
-  -#  = link_to t('for_got_pw'), new_password_path('user')
 

@@ -12,9 +12,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_locale
-    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-    I18n.locale = extract_locale_from_accept_language_header
-    logger.debug "* Locale set to '#{I18n.locale}'"
+    I18n.locale = I18n.default_locale
+    # TODO soeren 01.04.12 erstmal nur deutsch
+    #logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
+    #I18n.locale = extract_locale_from_accept_language_header
+    #logger.debug "* Locale set to '#{I18n.locale}'"
   end
 
   def set_host_to_mailers

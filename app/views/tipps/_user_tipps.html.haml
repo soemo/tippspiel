@@ -1,6 +1,6 @@
 - if tipps_round_hash.present?
   = form_tag "/save-tipps" do
-    %table.table.table-striped.tipps
+    %table.table.table-striped.table-condensed.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
         - round_with_tipps.each_pair do |round_name, tipps|
           %thead

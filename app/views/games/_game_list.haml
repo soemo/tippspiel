@@ -1,5 +1,5 @@
 - if games_round_hash.present?
-  %table.table.table-striped
+  %table.table.table-striped.table-condensed
     - games_round_hash.each do |_, round_with_games|
       - round_with_games.each_pair do |round_name, games|
         %thead
