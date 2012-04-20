@@ -1,7 +1,12 @@
 .row-fluid
   .span8
-    = render :partial => "welcome_infos"
-  .span3
+    = render :partial => "welcome_infos", :locals => {:today_games => @today_games}
+  .span4
     = render :partial => "login_form_or_user_infos"
+
+%p
+  Spielplan der
+  = t(:tournament_name)
+
 
 = render :partial => "/games/game_list", :locals => {:games_round_hash => @games_round_hash}

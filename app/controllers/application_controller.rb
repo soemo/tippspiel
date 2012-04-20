@@ -2,14 +2,33 @@ require 'pp'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include RssReader
+
   before_filter :ensure_migrated
   before_filter :set_locale
   before_filter :authenticate_user!
   before_filter :set_host_to_mailers
+  before_filter :get_default_sidebar_content
 
   include ExceptionHandling
 
+  helper_method :tournament_finished?, :before_tournament?, :current_user
+
   protected
+
+
+  def get_default_sidebar_content
+    @rss_title, @last_rss_entries = get_top_x_entries_and_title(RSS_FEED_URL, 5)
+    @comments = Notice.limit(5).all
+  end
+
+  def tournament_finished?
+    Game.tournament_finished?
+  end
+
+  def before_tournament?
+    Game.before_tournament?
+  end
 
   def set_locale
     I18n.locale = I18n.default_locale

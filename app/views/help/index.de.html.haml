@@ -1,3 +1,25 @@
+- content_for :sidebar do
+  %a#imprint
+  %p
+    %h4= 'Impressum'
+    %p
+      Sören Mothes
+      %br
+      Petersburger Platz 6
+      %br
+      10249 Berlin
+      %br
+      = mail_to MAIL, MAIL, :encode => :hex
+  %p
+    %h4= 'Links'
+    %p
+      = link_to("UEFA", "http://de.uefa.com/uefaeuro/", :target =>"_blank")
+      %br
+      = link_to("EM2012 Wikipedia", "http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012", :target=>"_blank")
+      %br
+      = link_to("EM2012 Sportschau", "http://www.sportschau.de/fussball/uefaeuro2012/index.html", :target=>"_blank")
+
+
 %h2= t('app_name') + " - " + t('help')
 %br
 %p
@@ -56,13 +78,14 @@
     #{CalculatePoints::MAX_POINTS_PRO_TIPP} da Du die Spieltendenz richtig hast
     und #{CalculatePoints::EXTRA_POINT} für die richtige Tordifferenz.
 %p
+  %span.label.label-important
+    Wichtig
+  %br
   %b
     Tuniersieger-Tipp:
 %p
   Bei richtigem Tipp auf den Tuniersieger gibt es #{CalculatePoints::CHAMPION_TIPP_POINTS} Zusatzpunkte.
-  %br
-  %b
-    WICHTIG: Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
+  Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
 
 %p
   %b
@@ -77,27 +100,6 @@
   In diesem Sinne viel Spass beim Tippen!
   %br
   Sören "Harry" Mothes
-
-%br
-%h3= 'Links'
-%p
-  = link_to("UEFA", "http://de.uefa.com/uefaeuro/", :target =>"_blank")
-  %br
-  = link_to("EM2012 Wikipedia", "http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012", :target=>"_blank")
-  %br
-  = link_to("EM2012 Sportschau", "http://www.sportschau.de/sp/fussball/euro2012/", :target=>"_blank")
-
-%br
-%a#imprint
-%h3= 'Impressum'
-%p
-  Sören Mothes
-  %br
-  Petersburger Platz 6
-  %br
-  10249 Berlin
-  %br
-  = mail_to MAIL, MAIL, :encode => :hex
 
 %br
 %h3= 'Haftungsausschluss'

@@ -1,0 +1,8 @@
+%h3= t("notice")
+%br
+- if @notes.present?
+  - @notes.each do |notice|
+    - class_name = cycle("", "pull-right")
+    %blockquote{:class => class_name}
+      %p= notice.text
+      %small= l(notice.created_at) + ", " + notice.user.name

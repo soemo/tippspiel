@@ -1,27 +1,11 @@
 /*
-* damit man im prod-Modus die per asset:precomile erstelletn Bilder auch
+* damit man im prod-Modus die per asset:precomile erstellten Bilder auch
 * hier als Backgroundimage nutzen kann
 *
 *  http://stackoverflow.com/questions/6393315/how-do-i-use-reference-images-in-sass-when-using-rails-3-1
 */
 body {
-  background: url('<%= asset_path 'bg.png' %>');
-}
-
-#header-wrap {
-  background: url('<%= asset_path 'header-bg.png' %>') repeat-x;
-}
-
-#content-wrap {
-  background: url('<%= asset_path 'content.png' %>');
-}
-
-#content {
-  background: url('<%= asset_path 'content-bg.png' %>') repeat-y left top;
-}
-
-blockquote {
-  background: #F3F4F5 url('<%= asset_path 'quote.png' %>') no-repeat 20px 32px;
+  /*background: url('<%= asset_path 'bg.png' %>');*/
 }
 
 /* site-logo background-image wird nicht hier angegeben, sondern gleich als inline style, da es dymamisch berechnet werden muss */

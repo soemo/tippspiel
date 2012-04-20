@@ -1,6 +1,7 @@
 - if user_signed_in?
   %p
-    User ist eingeloggt
+    -#TODO soeren 20.04.12 Short Ranking
+    -#TODO soeren 20.04.12 today Games (getTodayGames)
 -else
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class=>""}) do |f|
     = devise_error_messages!

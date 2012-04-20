@@ -1,2 +1,42 @@
+= image_tag "pokal.jpg", :class => "pull-right", :width => '160px'
 %h3
   Sport Frei und ein fröhliches Hallo zur #{t('tournament_name')}
+%p
+  Auch dieses Mal gibt es ein Tippspiel. Einfach anmelden und los gehts!
+%p
+  Die einfachen Regeln findest Du in der #{link_to "Hilfe", help_path}.
+  Dem Gewinner winken unbeschreiblicher Ruhm, uneingeschräktes Prahlrecht
+  und ein umwerfender Tippspiel-Meister-Wanderpokal.
+  Falls noch Fragen oder Anregungen bestehen, meldet Euch bei mir.
+
+- if tournament_finished?
+  %p
+    %b
+      AUUUSSS AUUUSSS - das Spiel ist aus! Der Sieger steht fest!
+
+  - if current_user.present?
+    %p
+      Trommelwirbel - Herzlichen Glückwunsch
+      %b
+        - # TODO soeren 20.04.12 Gewinner Namen anzeigen
+    %p
+      Der Pokal wird schnellstmöglich den Weg zu Dir finden. Allen Anderen danke ich für die rege Teilnahme,
+      hoffe es hat Spaß gemacht und bis zum nächsten Mal in 2 Jahren.
+- else
+  - if today_games.present?
+    %h4
+      Spiele des heutigen Tages
+    %table.table.table-striped.table-condensed.size_70percent
+      %thead
+        %tr
+          %th= Game.human_attribute_name("start_at")
+          %th= Game.human_attribute_name("team1")
+          %th= Game.human_attribute_name("team2")
+          %th= Game.human_attribute_name("result")
+      - today_games.each do |game|
+        %tbody
+          %tr{:class => cycle('even', 'odd')}
+            %td= l(game.start_at, :format => :time)
+            %td= game.team1_view_name
+            %td= game.team2_view_name
+            %td= game.team1_goals.to_s + " - " + game.team2_goals.to_s

@@ -3,9 +3,10 @@ module ApplicationHelper
   # controllername, path, needs_login
   def main_nav_items
     [
-            ["home", root_path, false],
+            ["main", root_path, false],
             ["tipps", tipps_path, true],
             ["ranking", ranking_path, true],
+            ["notice", notice_path, true],
             ["help", help_path, false]
     ]
 
@@ -13,6 +14,46 @@ module ApplicationHelper
 
   def get_title
     t('app_name') + " " + t('tournament_name')
+  end
+
+  def default_sidebar_content
+    write_sidebar_notes
+    write_sidebar_rss_feed(@rss_title, @last_rss_entries)
+  end
+
+  def write_sidebar_notes
+    if current_user.present?
+      notes = Notice.limit(5).all
+      if notes.present?
+        haml_tag :h4, t("notice")
+        notes.each do |n|
+          haml_tag :p do
+            haml_tag "span.notice_user", n.user.name
+            haml_tag :br
+            haml_concat n.text
+          end
+        end
+      end
+      haml_concat link_to(t("write_notice"), notice_path)
+      haml_tag :br
+      haml_tag :br
+    end
+  end
+
+  def write_sidebar_rss_feed(title, entries)
+    haml_tag :h4, title if title.present?
+    haml_tag :br
+    if entries.present?
+      entries.each do |e|
+        haml_tag :p do
+          haml_tag "span.rss_date", l(e.date_published)
+          haml_tag :br
+          haml_concat link_to(e.title, e.url, :target => "_blank")
+          haml_tag :br
+          haml_concat e.content
+        end
+      end
+    end
   end
 
   def write_main_nav
@@ -24,7 +65,10 @@ module ApplicationHelper
       haml_tag 'ul.nav' do
         # # FIXME soeren 10.10.11 <li class="active">
         nav_items.each do |key, path, needs_login|
-          haml_tag :li do
+          class_name = key == controller.controller_name ? "active" : ""
+          pp "test sm" # FIXME soeren 20.04.12
+          pp controller.controller_name
+          haml_tag "li.#{class_name}" do
             haml_concat link_to t(key), path
           end
         end

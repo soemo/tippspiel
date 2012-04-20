@@ -43,20 +43,19 @@
 
     %div.row-fluid
       %div.span9
-        %div#content-wrap
-          %p.error
-            - if flash[:error].present?
-              %span.flasherror= flash[:error]
-          %p.notice
-            - if flash[:notice].present?
-              %span.flashnotice= flash[:notice]
-          - flash.discard
-
-          = yield
+        %p.error
+          - if flash[:error].present?
+            %span.flasherror= flash[:error]
+        %p.notice
+          - if flash[:notice].present?
+            %span.flashnotice= flash[:notice]
+        - flash.discard
+        = yield
 
       %div.span3
         %div.well.sidebar-nav
-          = content_for?(:sidebar) ? yield(:sidebar) : render("shared/sidebar")
+          = yield(:sidebar)
+          - default_sidebar_content
 
     %hr
 

@@ -27,6 +27,11 @@ class Game < ActiveRecord::Base
   scope :semifinal_games,    where(:round => SEMIFINAL)
   scope :final_games,        where(:round => FINAL)
 
+  def self.today_games
+    #Game.where(:start_at => [Time.now.midnight...Time.now.midnight+1.day]).all
+    Game.where(:start_at => ['2012-06-7 22:00:00'...'2012-06-8 22:00:00']).all
+  end
+
   def self.splited_by_rounds
     result = {}
     result[1] = {GROUP => Game.group_games}
@@ -91,6 +96,15 @@ class Game < ActiveRecord::Base
       result = games.first.finished?
     end
 
+    result
+  end
+
+  def self.before_tournament?
+    result = true
+    first_game = Game.order("start_at asc").first
+    if first_game.present? && first_game.start_at < Time.now
+      result = false
+    end
     result
   end
 

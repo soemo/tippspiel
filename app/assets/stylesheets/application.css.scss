@@ -50,15 +50,27 @@ body {
 }
 
 .table th.round_name {
-  font-size: 16px;
+  font-size: 14px;
+  padding-top: 10px;
 }
 
 .table tr.next_to_round_name th {
   border-top: 0;
 }
 
+table.size_70percent{
+  width: 70%;
+}
+
 .tipp_input {
   width: 18px;
+  margin-bottom: 0px;
+}
+
+.rss_date,
+.notice_user {
+  font-style: italic;
+  font-size: 10px;
 }
 
 

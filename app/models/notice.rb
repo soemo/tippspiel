@@ -5,4 +5,7 @@ class Notice < ActiveRecord::Base
 
   validates_presence_of :text
   validates_presence_of :user
+
+  default_scope order("created_at desc")
+
 end

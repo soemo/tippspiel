@@ -1,8 +1,5 @@
 ﻿
 TODO:
-- RSS Feed UEFA FIFA ???
-** http://www.pauldix.net/2009/02/feedzirra-a-ruby-feed-library-built-for-speed.html
-** Asynchroner Aufruf !!
 - http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
 - Devise anpassen Mailtemplates Formulare
