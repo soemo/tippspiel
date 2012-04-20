@@ -63,11 +63,8 @@ module ApplicationHelper
     end
     if nav_items.present?
       haml_tag 'ul.nav' do
-        # # FIXME soeren 10.10.11 <li class="active">
         nav_items.each do |key, path, needs_login|
           class_name = key == controller.controller_name ? "active" : ""
-          pp "test sm" # FIXME soeren 20.04.12
-          pp controller.controller_name
           haml_tag "li.#{class_name}" do
             haml_concat link_to t(key), path
           end

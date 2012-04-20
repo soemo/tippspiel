@@ -28,8 +28,7 @@ class Game < ActiveRecord::Base
   scope :final_games,        where(:round => FINAL)
 
   def self.today_games
-    #Game.where(:start_at => [Time.now.midnight...Time.now.midnight+1.day]).all
-    Game.where(:start_at => ['2012-06-7 22:00:00'...'2012-06-8 22:00:00']).all
+    Game.where(:start_at => [Time.now.midnight...Time.now.midnight+1.day]).all
   end
 
   def self.splited_by_rounds
