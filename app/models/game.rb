@@ -51,7 +51,7 @@ class Game < ActiveRecord::Base
 
   def team1_view_name
     if self.team1_id.present?
-      self.team1
+      self.team1.name
     else
       self.team1_placeholder_name
     end
@@ -59,7 +59,7 @@ class Game < ActiveRecord::Base
 
   def team2_view_name
     if self.team2_id.present?
-      self.team2
+      self.team2.name
     else
       self.team2_placeholder_name
     end

@@ -49,6 +49,11 @@ body {
   text-shadow: 0 0 0 rgba(0, 0, 0, 0.25)   /* no Shadow */
 }
 
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  background-color: transparent;
+}
+
 .table th.round_name {
   font-size: 14px;
   padding-top: 10px;

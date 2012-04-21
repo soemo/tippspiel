@@ -13,6 +13,8 @@ de:
   delete_secure_question: "Sind Sie sicher?"
 
   succesfully_saved_tipps: "Die Tipps wurden gespeichert!"
+  create_successful: "%{object_name} wurde erfolgreich angelegt"
+  notice_needs_a_comment: "Bitte keine null Nummern angeben."
 
   signed_in_hello: "Hallo, "
   sign_in: "Login"
@@ -143,6 +145,7 @@ de:
 
   activerecord:
     models:
+      notice: Bemerkung
       user: Nutzer
       game:
         one: Spiel

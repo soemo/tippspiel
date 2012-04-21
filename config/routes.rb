@@ -15,7 +15,9 @@ Tippspiel::Application.routes.draw do
   post "save-tipps" => "tipps#save_tipps"
   get "ranking" => "ranking#index"
   get "notice" => "notice#index"
+  post "save-notice" => "notice#create"
   get "help" => "help#index"
+
 
 
   # The priority is based upon order of creation:

@@ -9,11 +9,12 @@ TODO:
 - Berechnung der Statisitik (old saveStatistik)
 - Vergleich der Tipps
 - Umfrage
-- Notizen (200 Zeichen Texte)
 - Ergebniss Grabber (FootieFox oder ???)
 - Übersetzen Hilfe i18n yml ,....
 - Cronjob um regelmäßig alles Ergebnisse einzutragen und Berechnungen zu aktualisieren (old updateGamesinDB)
 ** Berechnungen werden bestimmt auch als after Filter der einzelnen Spiele erfolgen !
+- brauche ich den ActiveAdmin?
+- team1_view_name_with_flag für die Tabellen
 
 - uberspace DBs soemo_tippspiel_beta_em2012 erledigt
 ** todo soemo_tippspiel_em2012  + customize rake task fuer capistrano

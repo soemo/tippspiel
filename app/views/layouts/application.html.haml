@@ -45,10 +45,14 @@
       %div.span9
         %p.error
           - if flash[:error].present?
-            %span.flasherror= flash[:error]
+            .alert.alert-error
+              %a.close{"data-dismiss"=>"alert"}= "×"
+              = flash[:error]
         %p.notice
           - if flash[:notice].present?
-            %span.flashnotice= flash[:notice]
+            .alert.alert-success
+              %a.close{"data-dismiss"=>"alert"}= "×"
+              = flash[:notice]
         - flash.discard
         = yield
 

@@ -1,8 +1,24 @@
 %h3= t("notice")
 %br
+
+.row-fluid
+  .span6
+    = form_tag "/save-notice", :html => { :class=>"form-horizontal"} do
+      .control-group
+        %label.control-label{:for=>"text"}= "Na was hast du zu melden..."
+        .controls
+          = text_area_tag :text, nil, :class=>"span6"
+
+      %p
+        = submit_tag t(:save), :class => "btn"
+        = link_to t(:delete_link), notice_path
+
 - if @notes.present?
   - @notes.each do |notice|
     - class_name = cycle("", "pull-right")
     %blockquote{:class => class_name}
       %p= notice.text
       %small= l(notice.created_at) + ", " + notice.user.name
+  %br
+  %br
+  %br

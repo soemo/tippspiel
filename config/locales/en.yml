@@ -1,3 +1,4 @@
+-# FIXME soeren 21.04.12 nicht uebersetzt
 en:
   app_name: "Tippspiel"
   tournament_name: "EM 2012"
@@ -10,12 +11,15 @@ en:
   error_not_your_website: "You could only edit your websites!"
 
   delete_secure_question: "Are you sure?"
+  create_successful: "%{object_name} was successfully created"
+  notice_needs_a_comment: "Bitte keine null Nummern angeben."
 
   signed_in_hello: "Hello, "
   sign_in: "Login"
   sign_out: "Logout"
   sign_up: "Sign up"
   imprint: Imprint
+  save:    Save
 
   main: "Home"
   help: "Help"
@@ -42,7 +46,8 @@ en:
 
   activerecord:
     models:
-      user: Benutzer
+      notice: Notice
+      user: User
     attributes:
       user:
       email: "E-Mail"

@@ -33,7 +33,7 @@
                 - else
                   %td= "#{tipp.team1_goals}:#{tipp.team2_goals}"
                 %td= tipp.tipp_punkte
-    %div= submit_tag t('save_tipp')
+    %div= submit_tag t('save_tipp'), :class => "btn"
 
 - else
   %p= "No Tipps"
