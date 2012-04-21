@@ -48,4 +48,8 @@ class User < ActiveRecord::Base
     (firstname + " " + lastname) rescue email
   end
 
+  def has_champion_tipp?
+    championtipp_team_id.present?
+  end
+
 end

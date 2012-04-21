@@ -21,4 +21,18 @@ class TippsController < ApplicationController
     redirect_to({:action => "index"}, {:notice => t("succesfully_saved_tipps")})
   end
 
+  def save_champion_tipp
+    respond_to do |format|
+      if params[:champion_team_id].present?
+        current_user.championtipp_team_id = params[:champion_team_id]
+        if current_user.save
+          flash[:notice] = t(:succesfully_saved_championtipp)
+          format.html { redirect_to :action => "index" }
+        end # no else
+      else
+        format.html { redirect_to :action => "index" }
+      end
+    end
+  end
+
 end

@@ -13,6 +13,7 @@ Tippspiel::Application.routes.draw do
 
   get "tipps" => "tipps#index"
   post "save-tipps" => "tipps#save_tipps"
+  post "save-champion_tipp" => "tipps#save_champion_tipp"
   get "ranking" => "ranking#index"
   get "notice" => "notice#index"
   post "save-notice" => "notice#create"

@@ -1,0 +1,26 @@
+- championtipp_team = current_user.championtipp_team
+- if before_tournament?
+  .alert.alert-info
+    - if championtipp_team.present?
+      Du hast aktuell auf #{championtipp_team.to_s} als Tuniersieger getippt.
+    - else
+      %b
+        Du hast noch keinen Tuniersieger-Tipp abgegeben!
+      %br
+      Bei richtigem Tipp auf den Tuniersieger gibt es 6 Zusatzpunkte.
+      Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
+
+  = form_tag "/save-champion_tipp", :class => "form-horizontal" do
+    %fieldset
+      .control-group
+        %label.control-label{:for=>"champion_team_id"}= "Wer wird Tuniersieger?"
+        .controls
+          = select_tag("champion_team_id", options_from_collection_for_select(Team.order("name").all, "id", "to_s"), :prompt => t("please_select"))
+          = submit_tag t('save'), :class => "btn"
+
+- else
+  .alert.alert-info
+    - if championtipp_team.present?
+      Du hast auf #{championtipp_team.name} als Tuniersieger getippt.
+    - else
+      Leider hast du keinen Tuniersieger-Tipp abgegeben!

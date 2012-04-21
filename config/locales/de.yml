@@ -13,6 +13,7 @@ de:
   delete_secure_question: "Sind Sie sicher?"
 
   succesfully_saved_tipps: "Die Tipps wurden gespeichert!"
+  succesfully_saved_championtipp: "Der Tuniersieger-Tip wurden gespeichert!"
   create_successful: "%{object_name} wurde erfolgreich angelegt"
   notice_needs_a_comment: "Bitte keine null Nummern angeben."
 
@@ -41,6 +42,7 @@ de:
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
+  please_select: "Bitte auswählen"
 
   write_notice: Bemerkung schreiben
 

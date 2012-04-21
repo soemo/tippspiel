@@ -5,7 +5,11 @@ class Team < ActiveRecord::Base
   validates_presence_of :name
 
   def to_s
-    name
+    if name == "Deutschland"
+      "<b>".html_safe+name+"</b>".html_safe
+    else
+      name
+    end
   end
 
 end
