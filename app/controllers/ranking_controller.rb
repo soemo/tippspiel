@@ -1,7 +1,7 @@
 class RankingController < ApplicationController
 
   def index
-    @ranking_user = User.ranking_order
+    @user_ranking_hash = User.prepare_user_ranking
   end
 
 end

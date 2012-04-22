@@ -1,24 +1,4 @@
 - if user_hash.present?
-  %table.ranking
-    %thead
-      %tr
-        %th= t("ranking")
-        %th= "# TODO soeren statisitk icon "
-        %th= User.human_attribute_name("name")
-        %th= Game.human_attribute_name("siegertipp")
-        %th= Game.human_attribute_name("points")
-    %tfoot
-      %tr
-        %td{:cellspan => 5}=""
-    %tbody
-      - user_hash.each do |place, users_on_same_place|
-        - users_on_same_place.each do |user|
-          %tr{:class => cycle('even', 'odd')}
-            %td= place
-            %td= "to do link"
-            %td= user.name
-            %td= user.championtipp_team
-            %td= user.points
-
+  - write_ranking_table(user_hash, short_version)
 - else
   %p= "No User"

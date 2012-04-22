@@ -1,7 +1,10 @@
 - if user_signed_in?
   %p
-    -#TODO soeren 20.04.12 Short Ranking
-    -#TODO soeren 20.04.12 today Games (getTodayGames)
+    - if @own_position.present?
+      .alert.alert-info
+        Du bist auf dem #{@own_position}. Platz!
+    = render :partial => "ranking/user_ranking",
+             :locals => {:user_hash => @user_top3_ranking_hash, :short_version => true}
 -else
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class=>""}) do |f|
     = devise_error_messages!

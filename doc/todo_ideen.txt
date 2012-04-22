@@ -2,13 +2,12 @@
 TODO:
 - http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
+- JS Druck der Tipps (http://www.jquery4u.com/plugins/10-jquery-print-page-options/)
 - Devise anpassen Mailtemplates Formulare
 - Specs fuer Mailversand
-- JS Druck der Tipps
-- Siegertipp Abgeben
-- Berechnung der Statisitik (old saveStatistik)
+- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart jetzt vielleicht http://oesmith.github.com/morris.js/
 - Vergleich der Tipps
-- Umfrage
+- Umfrage ???
 - Ergebniss Grabber (FootieFox oder ???)
 - Übersetzen Hilfe i18n yml ,....
 - Cronjob um regelmäßig alles Ergebnisse einzutragen und Berechnungen zu aktualisieren (old updateGamesinDB)

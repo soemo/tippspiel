@@ -10,6 +10,11 @@
   und ein umwerfender Tippspiel-Meister-Wanderpokal.
   Falls noch Fragen oder Anregungen bestehen, meldet Euch bei mir.
 
+- if before_tournament?
+  %p
+    Der Spaß beginnt in
+  - write_countdown
+
 - if tournament_finished?
   %p
     %b

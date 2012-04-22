@@ -52,4 +52,55 @@ class User < ActiveRecord::Base
     championtipp_team_id.present?
   end
 
+  # bekommt eine Liste von Usern,
+  # sortiert nach Gesamtpounten, Anzahl6Punkte,Anzahl4Punkte und Anzahl3Punkte
+  # geliefert
+  # Es wird noch die Platzierung als Key hinzugefuegt
+  def self.prepare_user_ranking(ranking_users=User.ranking_order)
+    # TODO soeren 03.01.12 Cache
+    result = {}
+    if ranking_users.present?
+      place = 1
+      last_used_user = nil
+      ranking_users.each do |u|
+        if last_used_user.nil?
+          # erste User
+          result[place] = [u]
+        else
+          if last_used_user.ranking_comparison_value > u.ranking_comparison_value
+            place = place + 1
+            result[place] = u
+          elsif last_used_user.ranking_comparison_value == u.ranking_comparison_value
+            same_place_users = result[place]
+            result[place] = same_place_users + [u]
+          else
+            # no else
+          end
+        end
+        last_used_user = u
+      end
+    end
+
+    result
+  end
+
+  def self.top3_positions_and_own_position(own_user_id=nil)
+    result = {}
+    own_position = nil
+
+    user_ranking_hash = User.prepare_user_ranking
+    if user_ranking_hash.present?
+      3.times do |i|
+        result[i+1] = user_ranking_hash[i+1] if user_ranking_hash.has_key?(i+1)
+      end
+      if own_user_id.present?
+        user_ranking_hash.each_pair do |k,v|
+          own_position = k if v.map(&:id).include?(own_user_id)
+        end
+      end
+    end
+
+    [result, own_position]
+  end
+
 end

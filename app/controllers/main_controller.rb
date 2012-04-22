@@ -5,12 +5,9 @@ class MainController < ApplicationController
   def index
     @games_round_hash = Game.splited_by_rounds
     @today_games      = Game.today_games
-    if current_user.present?
-      # TODO soeren 20.04.12 Spiele von heute
-      # TODO soeren 20.04.12 top 3 Ranking
-      # TODO soeren 20.04.12 später den Sieger ermittlen
+    if user_signed_in?
+      @user_top3_ranking_hash, @own_position = User.top3_positions_and_own_position(current_user.id)
     end
-
   end
 
 end

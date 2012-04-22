@@ -1,12 +1,29 @@
 //= require jquery
 //= require jquery_ujs
+//= require jquery.lwtCountdown-1.0
 //= require bootstrap
 
 $(function() {
   check_user_tipp();
 
-  // Test collapse
+  // Navbar
   $(".collapse").collapse('hide');
+  // Ranking Statistik Punkte
+  $('.statistic_popover').popover({
+    placement: "left"
+  });
+
+  //Countdown - DATUM des ersten Spiels
+  $('#countdown_dashboard').countDown({
+    targetDate:{
+      'day':8,
+      'month':6,
+      'year':2012,
+      'hour':18,
+      'min':0,
+      'sec':0
+    }
+  });
 });
 
 

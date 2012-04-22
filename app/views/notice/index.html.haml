@@ -7,7 +7,9 @@
       %label.control-label{:for=>"text"}= "Na haste was zu melden..."
       .controls
         = text_area_tag :text, nil, :class=>"span6"
-        = submit_tag t(:save), :class => "btn"
+        %br.hidden-phone
+        %br
+        = button_tag(icon_with_text("icon-comment", t(:save)), :class => "btn")
         = link_to t(:delete_link), notice_path
 
 - if @notes.present?

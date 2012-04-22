@@ -23,4 +23,8 @@ describe User do
       u.errors[:base].should_not be_empty
     end
   end
+
+  describe "top3_positions_and_own_position" do
+    # FIXME soeren 22.04.12 implement
+  end
 end
