@@ -4,18 +4,25 @@
 - Active-Admin lauffähig machen
 
 - Finale ist in Kiew - nochmal alle Spiele ansehen und seeds abgleichen
-- favicon
+
 - http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
+
 - JS Druck der Tipps (http://www.jquery4u.com/plugins/10-jquery-print-page-options/)
+
 - Berechnung der Statisitik (old saveStatistik)  ehemals Highchart jetzt vielleicht http://oesmith.github.com/morris.js/
+
 - Vergleich der Tipps
+
 - Umfrage ???
+
 - Ergebniss Grabber (FootieFox oder ???)
+
 - Übersetzen Hilfe i18n yml ,....
+
 - Cronjob um regelmäßig alles Ergebnisse einzutragen und Berechnungen zu aktualisieren (old updateGamesinDB)
 ** Berechnungen werden bestimmt auch als after Filter der einzelnen Spiele erfolgen !
-- brauche ich den ActiveAdmin?
+
 - team1_view_name_with_flag für die Tabellen
 
 - uberspace DBs soemo_tippspiel_beta_em2012 erledigt

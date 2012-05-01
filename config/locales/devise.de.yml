@@ -22,7 +22,7 @@ de:
     change_password: Passwort zurücksetzen
     forgot_pw: "Passwort vergessen?"
     send_passwort_instructions: "Anleitung zum Passwort-Zurücksetzen senden"
-    not_receive_confirmation_info: "Keine Anleitung zur Bestätigung Ihres Account erhalten?"
+    not_receive_confirmation_info: "Keine Anleitung zur Bestätigung deines Account erhalten?"
     not_receive_unlock_info: "Keine Anleitung zum Entsperren Ihres Accounts erhalten?"
 
     failure:
