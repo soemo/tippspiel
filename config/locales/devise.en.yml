@@ -7,6 +7,19 @@ en:
       too_late: "Confirmation token is too old"
 
   devise:
+    sign_in: Sign in
+    sign_up: Sign up
+    update: Update
+    resend_confirmation_instruction: Resend confirmation instructions
+    resend_confirmation_instruction_btn: Resend
+    set_your_password: Set your password
+    send_invitation: Send invitation
+    change_password: Change password
+    forgot_pw: "Forgot your password?"
+    send_passwort_instructions: "Send me reset password instructions"
+    not_receive_confirmation_info: "Didn't receive confirmation instructions?"
+    not_receive_unlock_info: "Didn't receive unlock instructions?"
+
     failure:
       unauthenticated: 'You need to sign in or sign up before continuing.'
       unconfirmed: 'You have to confirm your account before continuing.'

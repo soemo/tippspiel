@@ -7,7 +7,7 @@
              :locals => {:user_hash => @user_top3_ranking_hash, :short_version => true}
 -else
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class=>""}) do |f|
-    = devise_error_messages!
+    = custom_devise_error_messages!
     = f.label :email
     = f.text_field :email, :class=>"span3"
     = f.label :password
@@ -18,6 +18,6 @@
         = f.check_box :remember_me
         = f.label :remember_me
 
-    %p= f.submit "Sign in", :class => "btn"
+    %p= f.submit t("devise.sign_in"), :class => "btn"
 
     = render :partial => "devise/shared/links"

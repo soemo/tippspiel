@@ -1,0 +1,11 @@
+%h3= t("devise.forgot_pw")
+%br
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+  = custom_devise_error_messages!
+
+  = f.label :email
+  = f.email_field :email
+
+  %p= f.submit t('devise.send_passwort_instructions'), :class=>"btn"
+
+= render :partial => "devise/shared/links"

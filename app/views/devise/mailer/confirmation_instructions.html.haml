@@ -1,0 +1,12 @@
+%p
+  Sport Frei #{@resource.name}
+%p
+  Damit du beim #{I18n.t(:app_name)} mitspielen kannst, mußt du deine Teilnahme mit dem Link bestätigen:
+%p= link_to 'Teilnahme bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+%p
+  Viel Spaß und Erfolg beim Tippspiel.
+  %br
+  Sören
+
+
+

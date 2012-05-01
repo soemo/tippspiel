@@ -12,6 +12,19 @@ de:
         other: "%{resource} konnte wegen %{count} Fehlern nicht gespeichert werden: "
 
   devise:
+    sign_in: Anmelden
+    sign_up: Registrieren
+    update: Update
+    resend_confirmation_instruction: Anleitung zur Bestätigung erneut senden
+    resend_confirmation_instruction_btn: Erneut senden
+    set_your_password: Passwort setzen
+    send_invitation: Einladung senden
+    change_password: Passwort zurücksetzen
+    forgot_pw: "Passwort vergessen?"
+    send_passwort_instructions: "Anleitung zum Passwort-Zurücksetzen senden"
+    not_receive_confirmation_info: "Keine Anleitung zur Bestätigung Ihres Account erhalten?"
+    not_receive_unlock_info: "Keine Anleitung zum Entsperren Ihres Accounts erhalten?"
+
     failure:
       already_authenticated: 'Sie sind bereits angemeldet'
       unauthenticated: 'Sie müssen sich anmelden oder registrieren, bevor Sie fortfahren können.'

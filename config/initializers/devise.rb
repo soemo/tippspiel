@@ -220,3 +220,22 @@ Devise.setup do |config|
   #When invite_for is 0 (the default), the invitation won't expire.
   #config.invite_for = 2.weeks
 end
+
+
+# Im Mail Betreff soll immer der App-Name am Anfang stehen
+module Devise
+  module Mailers
+    module Helpers
+
+      def headers_for_with_app_name_prefix(action)
+        headers = headers_for_without_app_name_prefix(action)
+        if headers[:subject].present?
+          headers[:subject] = "#{I18n.t('app_name')} - #{headers[:subject]}"
+        end
+        headers
+      end
+      alias_method_chain :headers_for, :app_name_prefix
+
+    end
+  end
+end

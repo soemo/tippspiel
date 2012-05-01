@@ -165,8 +165,10 @@ de:
         firstname: "Vorname"
         lastname: "Nachname"
         password: "Passwort"
-        new_password: "Neues Passwort"
-        password_confirmation: "Passwortwiederholung"
+        new_password: Neues Passwort
+        password_confirmation: Passwort bestätigen
+        remember_me: Angemeldet bleiben
+
       game:
         place: Spielort
         round: Runde

@@ -1,5 +1,19 @@
 module ApplicationHelper
 
+  # angepasste devise Methode
+  def custom_devise_error_messages!
+    return "" if resource.errors.empty?
+
+    messages = resource.errors.full_messages.join("<br/>")
+    html = <<-HTML
+      <div id="error_explanation" class="alert alert-error">
+        #{messages}
+      </div>
+    HTML
+
+    html.html_safe
+  end
+
   # controllername, path, needs_login
   def main_nav_items
     [
