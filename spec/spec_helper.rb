@@ -44,3 +44,8 @@ def login user
   post 'user/sign_in', :user=>{ :email=>user.email, :password=>user.lastname }
 end
 
+
+def test_scheduler_actions
+  ['hourly', 'admin']
+end
+

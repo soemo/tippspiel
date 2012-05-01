@@ -1,8 +1,10 @@
-# berechnet für alle Nutzer die Tipp-Punkte
+# berechnet für alle Nutzer die Punkte
+# calculate_user_points
+# calculate_all_user_tipp_points
+#
 
 module CalculatePoints
 
-  # FIXME soeren 03.01.12 implement - Aufruf in schedulerController
   MAX_POINTS_PRO_TIPP  = 6
   POINTS_CORRECT_TREND = 3
   EXTRA_POINT          = 1
@@ -35,6 +37,7 @@ module CalculatePoints
                                 :count3points => count_3points,
                                 :count0points => count_0points,
                                }, {:without_protection => true})
+        Rails.logger.info("CALCULATE_USER_POINTS: #{user.name} - totalpoints: #{total_points}") if Rails.logger.present?
       end
     end
   end
@@ -51,16 +54,17 @@ module CalculatePoints
 
   def update_all_tipp_points_for(game)
     if game.present?
-      new_points = 0
       game_winner = game.winner
 
       if game_winner.present?
+        Rails.logger.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}") if Rails.logger.present?
         tipps = Tipp.where(:game_id => game.id).all
         if tipps.present?
           tipps.each do |tipp|
             if tipp.complete_fill?
               points = calculate_tipp_points(game_winner, game.team1_goals, game.team2_goals, tipp.team1_goals, tipp.team2_goals)
               tipp.update_attribute(:tipp_punkte, points)
+              Rails.logger.info("UPDATE_ALL_TIPP_POINTS: tipp-id #{tipp.id} has #{points} points") if Rails.logger.present?
             end
           end
         end

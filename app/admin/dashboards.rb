@@ -1,4 +1,12 @@
 ActiveAdmin::Dashboards.build do
+  section "Calculate all user points" do
+    div do
+      link_to "Calculate all user points", scheduler_admin_path, :target => "_blank"
+    end
+
+  end
+
+
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just

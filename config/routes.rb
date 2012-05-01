@@ -5,11 +5,8 @@ Tippspiel::Application.routes.draw do
 
   devise_for :users
 
-  # FIXME soeren 20.11.11 scheduler
-#  get 'scheduler/hourly'
-#  get 'scheduler/daily'
-#  get 'scheduler/weekly'
-#  get 'scheduler/monthly'
+  get 'scheduler/hourly'
+  get 'scheduler/admin'
 
   get "tipps" => "tipps#index"
   post "save-tipps" => "tipps#save_tipps"
