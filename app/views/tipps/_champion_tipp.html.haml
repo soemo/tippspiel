@@ -15,7 +15,7 @@
       .control-group
         %label.control-label{:for=>"champion_team_id"}= "Wer wird Tuniersieger?"
         .controls
-          = select_tag("champion_team_id", options_from_collection_for_select(Team.order("name").all, "id", "to_s"), :prompt => t("please_select"))
+          = select_tag("champion_team_id", options_from_collection_for_select(Team.order("name").all, "id", "to_s", championtipp_team.id), :prompt => t("please_select"))
           = submit_tag t('save'), :class => "btn"
 
 - else

@@ -35,9 +35,8 @@ RSpec.configure do |config|
 
 end
 
-def freeze_test_time
-  now = Time.now
-  Time.should_receive(:now).any_number_of_times.and_return(now)
+def freeze_test_time(check_time=Time.now)
+  Time.should_receive(:now).any_number_of_times.and_return(check_time)
 end
 
 def login user

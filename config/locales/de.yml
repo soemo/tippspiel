@@ -15,7 +15,7 @@ de:
   succesfully_saved_tipps: "Die Tipps wurden gespeichert!"
   succesfully_saved_championtipp: "Der Tuniersieger-Tip wurden gespeichert!"
   create_successful: "%{object_name} wurde erfolgreich angelegt"
-  notice_needs_a_comment: "Bitte keine null Nummern angeben."
+  notice_needs_a_comment: "Bitte keine Null Nummer angeben."
 
   signed_in_hello: "Hallo, "
   sign_in: "Login"

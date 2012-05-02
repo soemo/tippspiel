@@ -1,6 +1,10 @@
 ﻿TODO:
 - TESTS ERWEITERN !!!!!
 
+- Hall of Fame mit Bildern
+
+- user, admin_users haben kein lockversion
+
 - In Spieleliste fehlt noch die Info - gruppe A oder B, ...
 
 - http://twitter.github.com/bootstrap/scaffolding.html
@@ -10,7 +14,7 @@
 
 - Berechnung der Statisitik (old saveStatistik)  ehemals Highchart jetzt vielleicht http://oesmith.github.com/morris.js/
 
-- Vergleich der Tipps
+- Vergleich der Tipps (wie soll es aussehen)
 
 - Umfrage ???
 
