@@ -46,6 +46,8 @@ de:
       send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie ihr Passwort zurücksetzten können.'
       send_paranoid_instructions: 'Falls Sie eine Email-Adresse angegeben haben, bekommen Sie eine Email mit der Anleitung zur Account-Bestätigung zugeschickt.'
       updated: 'Ihr Passwort wurde geändert. Sie sind angemeldet.'
+      user:
+        confirmed: 'Vielen Dank, Account wurde erfolgreich bestätigt. Sie sind jetzt angemeldet.'
     registrations:
       signed_up: 'Sie haben sich erfolgreich registriert. Es kann sein, dass Sie eine Aktivierungs-E-Mail erhalten.'
       inactive_signed_up: 'Sie haben sich erfolgreich registriert. Sie konnten jedoch nicht angemeldet werden, da ihr Account %{reason} ist. Sie erhalten ein Mail zur Bestätigung.'
