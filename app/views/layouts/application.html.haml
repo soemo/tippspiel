@@ -48,6 +48,11 @@
             .alert.alert-error
               %a.close{"data-dismiss"=>"alert"}= "×"
               = flash[:error]
+        %p.error
+          - if flash[:alert].present?
+            .alert.alert-error
+              %a.close{"data-dismiss"=>"alert"}= "×"
+              = flash[:alert]
         %p.notice
           - if flash[:notice].present?
             .alert.alert-success

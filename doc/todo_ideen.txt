@@ -80,3 +80,6 @@ JSON.parse('
     "status"=>"finished"
    }]
 }
+
+Später:
+- devise Upgrade
