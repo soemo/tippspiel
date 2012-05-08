@@ -3,33 +3,30 @@ module RankingHelper
   # schreibt die Rankingtabelle
   # solange das Turnier noch nicht begonnen hat, wird nichts angezeigt
   def write_ranking_table(user_hash, short=false)
-    unless before_tournament?
-      haml_tag "table.table.table-striped.table-condensed.ranking" do
-        haml_tag :thead do
-          haml_tag :tr do
-            haml_tag :th, t("standings")
-            haml_tag :th, "<i class='icon-signal'></i>".html_safe unless short
-            haml_tag :th, User.human_attribute_name("name")
-            haml_tag :th, Game.human_attribute_name("siegertipp") unless short
-            haml_tag :th,Game.human_attribute_name("points") unless short
-          end
+    haml_tag "table.table.table-striped.table-condensed.ranking" do
+      haml_tag :thead do
+        haml_tag :tr do
+          haml_tag :th, t("standings")
+          haml_tag :th, "<i class='icon-signal'></i>".html_safe unless short
+          haml_tag :th, User.human_attribute_name("name")
+          haml_tag :th, Game.human_attribute_name("siegertipp") unless short
+          haml_tag :th,Game.human_attribute_name("points") unless short
         end
-        haml_tag :thead do
-          user_hash.each do |place, users_on_same_place|
-            users_on_same_place.each do |user|
-              haml_tag "tr.#{cycle('even', 'odd')}" do
-                haml_tag :td, place
-                haml_tag :td, "to do link" unless short
-                haml_tag :td, user.name
-                haml_tag :td, before_tournament? ? "" : user.championtipp_team unless short
-                haml_tag :td, statistic_point_popover_link(user) unless short
-              end
+      end
+      haml_tag :thead do
+        user_hash.each do |place, users_on_same_place|
+          users_on_same_place.each do |user|
+            haml_tag "tr.#{cycle('even', 'odd')}" do
+              haml_tag :td, place
+              haml_tag :td, "to do link" unless short
+              haml_tag :td, user.name
+              haml_tag :td, before_tournament? ? "" : user.championtipp_team unless short
+              haml_tag :td, statistic_point_popover_link(user) unless short
             end
           end
         end
       end
     end
-
   end
 
   def statistic_point_popover_link(user, css_class ="statistic_popover")

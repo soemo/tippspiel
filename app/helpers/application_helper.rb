@@ -78,7 +78,7 @@ module ApplicationHelper
           haml_tag :p do
             haml_tag "span.notice_user", n.user.name
             haml_tag :br
-            haml_concat n.text
+            haml_concat html_escape(n.text)
           end
         end
       end
