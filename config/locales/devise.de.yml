@@ -48,7 +48,7 @@ de:
       updated: 'Ihr Passwort wurde geändert. Sie sind angemeldet.'
     registrations:
       signed_up: 'Sie haben sich erfolgreich registriert. Es kann sein, dass Sie eine Aktivierungs-E-Mail erhalten.'
-      inactive_signed_up: 'Sie haben sich erfolgreich registriert. Sie konnten jedoch nicht angemeldet werden, da ihr Account %{reason} ist.'
+      inactive_signed_up: 'Sie haben sich erfolgreich registriert. Sie konnten jedoch nicht angemeldet werden, da ihr Account %{reason} ist. Sie erhalten ein Mail zur Bestätigung.'
       updated: 'Die Angaben wurden erfolgreich geändert.'
       destroyed: 'Ihr Account wurde erfolgreich gelöscht.'
       reasons:

@@ -10,13 +10,13 @@ Tippspiel::Application.routes.draw do
 
   get "tipps" => "tipps#index"
   post "save-tipps" => "tipps#save_tipps"
-  post "save-champion_tipp" => "tipps#save_champion_tipp"
+  post "save-champion-tipp" => "tipps#save_champion_tipp"
   get "ranking" => "ranking#index"
   get "notice" => "notice#index"
   post "save-notice" => "notice#create"
   get "help" => "help#index"
 
-
+  match "tipps/compare(/:id)" => "tipps#compare", :as => "compare_tipps"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

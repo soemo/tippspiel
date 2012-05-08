@@ -1,6 +1,8 @@
 ﻿TODO:
 - TESTS ERWEITERN !!!!!
 
+- Devise.de Texte Sie -> Du
+
 - Hall of Fame mit Bildern
 
 - user, admin_users haben kein lockversion
@@ -34,6 +36,8 @@
 ** todo soemo_tippspiel_em2012  + customize rake task fuer capistrano
 
 - Anpassen für Tabletts und Phones
+
+- logrotate
 
 -- uberspace ---
 Start standalone passenger

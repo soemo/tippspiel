@@ -32,6 +32,7 @@ de:
   set_pw: "Passwort vergeben"
   send_pw: "Neues Passwort schicken"
   save_tipp: "Tipps speichern"
+  compare_tipps: "Tipps vergleichen"
 
   main: "Home"
   help: "Hilfe"
