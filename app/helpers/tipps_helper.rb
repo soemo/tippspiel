@@ -17,7 +17,7 @@ module TippsHelper
       end
     end
 
-    result
+    result.sort
   end
 
   def write_tipp_input(tipp_id, attr_name, attr_value)

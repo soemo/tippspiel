@@ -6,9 +6,10 @@
     .control-group
       %label.control-label{:for=>"text"}= "Na haste was zu melden?"
       .controls
-        = text_area_tag :text, nil, :id=>"notice_text", :class=>"span9",:max_length => 200
-        %br.hidden-phone
-        %br
+        = text_area_tag :text, nil, :id=>"notice_text", :class=>"span7",:maxlength => 200,:rows => 3
+        %p
+          = I18n.t("characters_remaining")
+          %span.js_chars_remaining
         = button_tag(icon_with_text("icon-comment", t(:save)), :class => "btn")
         = link_to t(:delete_link), notice_path
 

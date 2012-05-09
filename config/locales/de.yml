@@ -49,9 +49,14 @@ de:
   standings: Platz
 
   write_notice: Bemerkung schreiben
+  characters_remaining: "Verbleibende Zeichen: "
 
   round:
     group: Gruppenspiele
+    group_a: Spiele Gruppen A
+    group_b: Spiele Gruppen B
+    group_c: Spiele Gruppen C
+    group_d: Spiele Gruppen D
     quarterfinal: Viertelfinale
     semifinal: Halbfinale
     final: Finale

@@ -5,7 +5,7 @@
 
 $(function() {
   check_user_tipp();
-  check_max_input_notice_text();
+  update_textarea_maxlength();
 
   // Navbar
   $(".collapse").collapse('hide');
@@ -27,28 +27,22 @@ $(function() {
   });
 });
 
-/**
- * Checks the maxlength of textareas and give an error, when user
- * wants to add more characters.
- */
-function check_max_input_notice_text(){
-  $('#notice_text').keyup(function () {
-    var $this = $(this);
-    var val = $this.val();
-    var maxlength = $this.attr('maxlength');
-    var max = parseInt(maxlength);
+function update_textarea_maxlength(){
+  var onEditCallback = function (remaining) {
+    $(this).siblings("p").children('.js_chars_remaining').text(remaining);
 
-    var length_with_1_char_per_line_break = val.length;
-    var length_with_2_chars_per_line_break = val.replace(/\n/g, "\r\n").length;
-    var number_of_line_breaks = length_with_2_chars_per_line_break - length_with_1_char_per_line_break;
+    if (remaining > 0) {
+      $(this).css('background-color', 'white');
+    }
+  }
 
-    if (length_with_2_chars_per_line_break > max) {
-      $this.val(val.substr(0, max - number_of_line_breaks));
-      alert("The maximum input length of " + max + " has been reached!");
-      return false;
-    } // no else
+  var onLimitCallback = function () {
+    //$(this).css('background-color', 'red');
+  }
 
-    return true;
+  $('textarea[maxlength]').limitMaxlength({
+    onEdit:onEditCallback,
+    onLimit:onLimitCallback
   });
 }
 
@@ -66,6 +60,41 @@ function check_user_tipp() {
 
       $(this).val(cur_val);
   });
+}
+
+// http://that-matt.com/2010/04/updated-textarea-maxlength-with-jquery-plugin/
+jQuery.fn.limitMaxlength = function (options) {
+
+  var settings = jQuery.extend({
+    attribute:"maxlength",
+    onLimit:function () {
+    },
+    onEdit:function () {
+    }
+  }, options);
+
+  // Event handler to limit the textarea
+  var onEdit = function () {
+    var textarea = jQuery(this);
+    var maxlength = parseInt(textarea.attr(settings.attribute));
+
+    if (textarea.val().length > maxlength) {
+      textarea.val(textarea.val().substr(0, maxlength));
+
+      // Call the onlimit handler within the scope of the textarea
+      jQuery.proxy(settings.onLimit, this)();
+    }
+
+    // Call the onEdit handler within the scope of the textarea
+    jQuery.proxy(settings.onEdit, this)(maxlength - textarea.val().length);
+  }
+
+  this.each(onEdit);
+
+  return this.keyup(onEdit)
+          .keydown(onEdit)
+          .focus(onEdit)
+          .live('input paste', onEdit);
 }
 
 

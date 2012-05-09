@@ -13,9 +13,10 @@ module RankingHelper
           haml_tag :th,Game.human_attribute_name("points") unless short
         end
       end
-      haml_tag :thead do
+      haml_tag :tbody do
         user_hash.each do |place, users_on_same_place|
-          users_on_same_place.each do |user|
+          users_on_same_place.each_with_index do |user, index|
+            next if index > 3 && short.present? && before_tournament?  # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden.
             haml_tag "tr.#{cycle('even', 'odd')}" do
               haml_tag :td, place
               haml_tag :td, "to do link" unless short
@@ -25,6 +26,11 @@ module RankingHelper
             end
           end
         end
+      end
+    end
+    if short.present?
+      haml_tag :p do
+        haml_concat link_to(t("ranking"), ranking_path)
       end
     end
   end

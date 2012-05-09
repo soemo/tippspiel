@@ -17,6 +17,13 @@ class Game < ActiveRecord::Base
 
   ROUNDS = [GROUP, QUARTERFINAL, SEMIFINAL, FINAL]
 
+  GROUP_A      = "A"
+  GROUP_B      = "B"
+  GROUP_C      = "C"
+  GROUP_D      = "D"
+
+  GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D]
+
   UNENTSCHIEDEN = 0
   TEAM1_WIN     = 1
   TEAM2_WIN     = 2
@@ -40,12 +47,15 @@ class Game < ActiveRecord::Base
 
   def self.splited_by_rounds
     result = {}
-    result[1] = {GROUP => Game.group_games}
-    result[2] = {QUARTERFINAL => Game.quarterfinal_games}
-    result[3] = {SEMIFINAL => Game.semifinal_games}
-    result[4] = {FINAL => Game.final_games}
+    group_size = GROUPS.size
+    GROUPS.each_with_index do |group_name, index|
+      result[index+1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).all}
+    end
+    result[group_size+1] = {QUARTERFINAL => Game.quarterfinal_games.all}
+    result[group_size+2] = {SEMIFINAL => Game.semifinal_games.all}
+    result[group_size+3] = {FINAL => Game.final_games.all}
 
-    result
+    result.sort
   end
 
   def self.round_start_end_date_time(round)
