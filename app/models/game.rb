@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
 
   belongs_to :team1, :class_name => "Team"
   belongs_to :team2, :class_name => "Team"
+  has_many :tipps
 
   validates_presence_of :place
   validates_presence_of :round
@@ -26,6 +27,12 @@ class Game < ActiveRecord::Base
   scope :quarterfinal_games, where(:round => QUARTERFINAL)
   scope :semifinal_games,    where(:round => SEMIFINAL)
   scope :final_games,        where(:round => FINAL)
+
+  scope :games_for_compare,  lambda{ |time| where("start_at < ?", time)}
+
+  def to_s
+    "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
+  end
 
   def self.today_games
     Game.where(:start_at => [Time.now.midnight...Time.now.midnight+1.day]).all

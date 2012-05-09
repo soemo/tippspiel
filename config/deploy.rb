@@ -41,7 +41,8 @@ namespace :deploy do
   end
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => {:no_release => true} do
-    run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+    # FIXME soeren mal test ohen try sudo  run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+    run "touch #{File.join(current_path, 'tmp', 'restart.txt')}"
   end
 end
 

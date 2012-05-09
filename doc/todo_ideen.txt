@@ -1,28 +1,41 @@
 ﻿TODO:
+
+JN:
+* ich habe _zwei_ Bestätigungsmails bekommen   ???? Wie hat das Jesko geschafft???
+* es ist irritierend, dass Sören Mothes ganz oben steht, obwohl mein
+Vor- und mein (fiktiver) Nachname im Alphabet weiter vorne kommen => bei
+Punktegleichstand alphabetisch, nicht nach id sortieren?!
+
+- logrotate siehe DF server Aufruf mit cronjob
+
+- Ranking auf Mainseite verringern. Flag on_main_page mit reingeben?
+
+- Druck der Tipps mittels pdf pure ruby
+** Test von https://github.com/pdfkit/PDFKit
+** oder https://github.com/mileszs/wicked_pdf
+
+- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart jetzt vielleicht http://oesmith.github.com/morris.js/
+
+- Bemerkungen nur 200 Zeichen application.js -> check_max_input_notice_text()
+** http://that-matt.com/2010/04/updated-textarea-maxlength-with-jquery-plugin/
+
 - TESTS ERWEITERN !!!!!
 
 - Devise.de Texte Sie -> Du
 
-- Hall of Fame mit Bildern
+- Team Flagen
+** team1_view_name_with_flag für die Tabellen
 
 - user, admin_users haben kein lockversion
 
 - In Spieleliste fehlt noch die Info - gruppe A oder B, ...
 
-- http://twitter.github.com/bootstrap/scaffolding.html
+- Anpassen für Tabletts und Phones
+** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
 
-- JS Druck der Tipps (http://www.jquery4u.com/plugins/10-jquery-print-page-options/)
-
-- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart jetzt vielleicht http://oesmith.github.com/morris.js/
-
-- Vergleich der Tipps (wie soll es aussehen)
-
-- Umfrage ???
 
 - Ergebniss Grabber  vom FootieFox - Em2012 ist da
-
-- Übersetzen Hilfe i18n yml ,....
 
 - Cronjob oder ähnliches auf uberspace einrichten
 1. um regelmäßig alles Ergebnisse einzutragen
@@ -30,14 +43,9 @@
 ** Berechnungen werden bestimmt auch als after Filter der einzelnen Spiele erfolgen ???
 ** oder doch nur als scheduler/hourly
 
-- team1_view_name_with_flag für die Tabellen
 
 - uberspace DBs soemo_tippspiel_beta_em2012 erledigt
 ** todo soemo_tippspiel_em2012  + customize rake task fuer capistrano
-
-- Anpassen für Tabletts und Phones
-
-- logrotate
 
 -- uberspace ---
 Start standalone passenger
@@ -83,3 +91,7 @@ JSON.parse('
 
 Später:
 - devise Upgrade
+- ssh Key nutzen zum deployment
+- Umfrage ??? poll table und poll_id am user existieren schon
+- englische Seite
+** Übersetzen Hilfe i18n yml ,....

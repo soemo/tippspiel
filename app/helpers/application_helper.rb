@@ -65,9 +65,23 @@ module ApplicationHelper
   end
 
   def default_sidebar_content
+    write_sidebar_links
     write_sidebar_notes
     write_sidebar_rss_feed(@rss_title, @last_rss_entries)
   end
+
+  def write_sidebar_links
+    if current_user.present?
+      haml_tag :h5 do
+        haml_concat link_to(t("compare_tipps"), compare_tipps_path)
+      end
+      haml_tag :h5 do
+        haml_concat link_to(t("hall_of_fame"), hall_of_fame_path)
+      end
+    end
+    haml_tag :br
+  end
+
 
   def write_sidebar_notes
     if current_user.present?

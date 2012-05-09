@@ -17,6 +17,7 @@ Tippspiel::Application.routes.draw do
   get "help" => "help#index"
 
   match "tipps/compare(/:id)" => "tipps#compare", :as => "compare_tipps"
+  match "ranking/hall-of-fame" => "ranking#hall_of_fame", :as => "hall_of_fame"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

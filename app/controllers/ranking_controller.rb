@@ -4,4 +4,8 @@ class RankingController < ApplicationController
     @user_ranking_hash = User.prepare_user_ranking
   end
 
+  def hall_of_fame
+
+  end
+
 end

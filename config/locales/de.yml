@@ -22,6 +22,7 @@ de:
   sign_out: "Ausloggen"
   sign_up: "Registrieren"
   save:    Speichern
+  compare: Vergleichen
   edit:    Bearbeiten
   back:    Zurück
   show:    Anzeigen
@@ -33,6 +34,7 @@ de:
   send_pw: "Neues Passwort schicken"
   save_tipp: "Tipps speichern"
   compare_tipps: "Tipps vergleichen"
+  hall_of_fame: "Hall of Fame"
 
   main: "Home"
   help: "Hilfe"

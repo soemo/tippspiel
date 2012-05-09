@@ -4,6 +4,18 @@ class TippsController < ApplicationController
     @user_tipps = Tipp.user_tipps(current_user.id)
   end
 
+  def compare
+    @posible_games   = Game.games_for_compare(Time.now).all
+    @game_to_compare = nil
+    @tipps           = nil
+    if params[:id].present? && @posible_games.present? && @posible_games.map(&:id).include?(params[:id].to_i)
+      @game_to_compare = @posible_games.select {|g| g.id == params[:id].to_i}.first
+    elsif @posible_games.present?
+      @game_to_compare = @posible_games.last
+    end #no else
+    @tipps = @game_to_compare.tipps.order("tipp_punkte") if @game_to_compare.present?
+  end
+
   def save_tipps
     new_tipps = params[:tipps]
     if new_tipps.present?
