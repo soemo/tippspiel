@@ -6,6 +6,7 @@
 $(function() {
   check_user_tipp();
   update_textarea_maxlength();
+  ajax_load_modal_content();
 
   // Navbar
   $(".collapse").collapse('hide');
@@ -26,6 +27,30 @@ $(function() {
     }
   });
 });
+
+// Support for AJAX loaded modal window.
+// Focuses on first input textbox after it loads the window.
+function ajax_load_modal_content(){
+
+  $('[data-toggle="modal"]').click(function (e) {
+    // alte div class=modal wegraeumen
+    $('div.modal').remove();
+
+    e.preventDefault();
+    var href = $(this).attr('href');
+    if (href.indexOf('#') == 0) {
+      $(href).modal('open');
+    } else {
+      $.get(href,
+              function (data) {
+                $('<div class="modal" >' + data + '</div>').modal();
+              }).success(function () {
+                $('input:text:visible:first').focus();
+              });
+    }
+  });
+
+}
 
 function update_textarea_maxlength(){
   var onEditCallback = function (remaining) {

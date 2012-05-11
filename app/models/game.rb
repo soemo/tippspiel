@@ -66,6 +66,30 @@ class Game < ActiveRecord::Base
     [start_date_time, end_date_time]
   end
 
+  # Spieltage holen an dennen alle Spiele beendet sind
+  def self.finished_days_with_game_ids
+    game_days_with_game_ids = {}
+    not_finished_days = []
+    Game.select("id, start_at, finished").each do |game|
+      key = game.start_at.to_date.to_s
+      if game.finished == false
+        # Spiele diesen Tages aus game_days_with_game_ids wieder entfernen
+        game_days_with_game_ids = game_days_with_game_ids.delete_if{|k,_| k == key}
+        # und als nicht fertigen Tag kennzeichnen
+        not_finished_days << key
+      end
+      unless not_finished_days.include?(key)
+        if game_days_with_game_ids.has_key?(key)
+          game_days_with_game_ids[key] = game_days_with_game_ids[key] + [game.id]
+        else
+          game_days_with_game_ids[key] = [game.id]
+        end
+      end
+    end
+
+    game_days_with_game_ids
+  end
+
   def team1_view_name
     if self.team1_id.present?
       self.team1.to_s

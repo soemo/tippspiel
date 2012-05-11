@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :confirmable
+  devise :database_authenticatable, :confirmable, :registerable, :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname, :firstname
@@ -57,7 +56,6 @@ class User < ActiveRecord::Base
   # geliefert
   # Es wird noch die Platzierung als Key hinzugefuegt
   def self.prepare_user_ranking(ranking_users=User.ranking_order)
-    # TODO soeren 03.01.12 Cache
     result = {}
     if ranking_users.present?
       place = 1

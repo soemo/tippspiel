@@ -13,6 +13,7 @@ en:
   delete_secure_question: "Are you sure?"
   create_successful: "%{object_name} was successfully created"
   notice_needs_a_comment: "Bitte keine null Nummern angeben."
+  notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
   succesfully_saved_championtipp: "Der Tuniersieger-Tip wurden gespeichert!"
 
   signed_in_hello: "Hello, "

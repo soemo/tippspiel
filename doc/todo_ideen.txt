@@ -1,11 +1,15 @@
 ﻿TODO:
-- Daniel Lehmann als Beta-tester
+
+- Bug: doppelte Bestätigiungsmail !!!
 
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
 ** oder https://github.com/mileszs/wicked_pdf
 
-- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart jetzt vielleicht http://oesmith.github.com/morris.js/
+- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart
+** Highchart oder Raphael nutzen
+http://www.highcharts.com/demo/line-ajax
+http://raphaeljs.com/
 
 - TESTS ERWEITERN !!!!!
 

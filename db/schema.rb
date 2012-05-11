@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501193515) do
+ActiveRecord::Schema.define(:version => 20120510182521) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -95,11 +95,11 @@ ActiveRecord::Schema.define(:version => 20120501193515) do
   create_table "statistics", :force => true do |t|
     t.integer  "user_id"
     t.integer  "position"
-    t.integer  "day_id"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
+    t.date     "date_on",                     :null => false
   end
 
   create_table "teams", :force => true do |t|

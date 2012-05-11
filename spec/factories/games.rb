@@ -7,6 +7,7 @@ FactoryGirl.define do
     place "place"
     round "round"
     start_at DateTime.now
+    finished false
   end
 
   factory :final, :parent => :game do

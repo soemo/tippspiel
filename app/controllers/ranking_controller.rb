@@ -8,4 +8,11 @@ class RankingController < ApplicationController
 
   end
 
+  def user_statistic
+     # FIXME soeren 09.05.12 todo Daten laden
+    # Statistic Model
+    # TODO soeren 09.05.12 wann werden die Daten gespeichert
+    render :layout => false
+  end
+
 end

@@ -25,6 +25,7 @@ class SchedulerController < ApplicationController
   def start_calculate_points
     calculate_all_user_tipp_points
     calculate_user_points
+    # FIXME soeren 10.05.12 Statistic.calculate
   end
 
   def check_invoke_frequency

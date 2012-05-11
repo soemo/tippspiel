@@ -7,8 +7,10 @@ module RankingHelper
       haml_tag :thead do
         haml_tag :tr do
           haml_tag :th, t("standings")
-          haml_tag :th, "<i class='icon-signal'></i>".html_safe unless short
-          haml_tag :th, User.human_attribute_name("name")
+          haml_tag :th do
+            ## FIXME soeren 11.05.12 einblenden wenn Statistic soweit ist haml_concat "<i class='icon-signal'></i>".html_safe unless short
+            haml_concat User.human_attribute_name("name")
+          end
           haml_tag :th, Game.human_attribute_name("siegertipp") unless short
           haml_tag :th,Game.human_attribute_name("points") unless short
         end
@@ -19,8 +21,14 @@ module RankingHelper
             next if index > 3 && short.present? && before_tournament?  # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden.
             haml_tag "tr.#{cycle('even', 'odd')}" do
               haml_tag :td, place
-              haml_tag :td, "to do link" unless short
-              haml_tag :td, user.name
+              haml_tag :td do
+                if short
+                  haml_concat user.name
+                else
+                  haml_concat user.name
+                  ## FIXME soeren 11.05.12 einblenden wenn Statistic soweit isthaml_concat link_to(user.name, user_statistic_path(:id => user.id), "data-toggle"=>"modal")
+                end
+              end
               haml_tag :td, before_tournament? ? "" : user.championtipp_team unless short
               haml_tag :td, statistic_point_popover_link(user) unless short
             end
