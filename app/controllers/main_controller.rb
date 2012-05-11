@@ -10,4 +10,8 @@ class MainController < ApplicationController
     end
   end
 
+  def error
+    # view error wird gerendert
+  end
+
 end

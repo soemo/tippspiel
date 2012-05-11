@@ -3,7 +3,7 @@
 de:
   errors:
     messages:
-      expired: "abgelaufen. Bitte fordern Sie ein neues an"
+      expired: "abgelaufen. Bitte fordere ein neues an"
       not_found: "nicht gefunden"
       already_confirmed: "wurde bereits bestätigt"
       not_locked: "ist nicht gesperrt"
@@ -26,55 +26,55 @@ de:
     not_receive_unlock_info: "Keine Anleitung zum Entsperren Ihres Accounts erhalten?"
 
     failure:
-      already_authenticated: 'Sie sind bereits angemeldet'
-      unauthenticated: 'Sie müssen sich anmelden oder registrieren, bevor Sie fortfahren können.'
-      unconfirmed: 'Sie müssen Ihren Account bestätigen, bevor Sie fortfahren können.'
-      locked: 'Ihr Account ist gesperrt.'
+      already_authenticated: 'Du bist bereits angemeldet'
+      unauthenticated: 'Du mußt dich anmelden oder registrieren, bevor du fortfahren kannst.'
+      unconfirmed: 'Du mußt deinen Account bestätigen, bevor du fortfahren kannst.'
+      locked: 'Dein Account ist gesperrt.'
       invalid: 'Ungültige Anmeldedaten.'
       invalid_token: 'Ungültiges Authentifizierungs-Token.'
-      timeout: 'Ihre Sitzung ist abgelaufen, bitte melden Sie sich erneut an.'
-      inactive: 'Ihr Account ist nicht aktiv.'
+      timeout: 'Deine Sitzung ist abgelaufen, bitte melde dich erneut an.'
+      inactive: 'Dein Account ist nicht aktiv.'
     sessions:
       signed_in: 'Erfolgreich angemeldet.'
       signed_out: 'Erfolgreich abgemeldet.'
     passwords:
-      send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie ihr Passwort zurücksetzten können.'
-      updated: 'Ihr Passwort wurde geändert. Sie sind angemeldet.'
-      updated_not_active: 'Ihr Passwort wurde geändert.'
-      send_paranoid_instructions: "Falls Sie eine Email-Adresse angegeben haben, bekommen Sie einen Passwort-Recovery-Link zugeschickt"
+      send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du dein Passwort zurücksetzten kannst.'
+      updated: 'Dein Passwort wurde geändert. Du bist nun angemeldet.'
+      updated_not_active: 'Dein Passwort wurde geändert.'
+      send_paranoid_instructions: "Falls Du eine Email-Adresse angegeben hast, bekommst du einen Passwort-Recovery-Link zugeschickt"
     confirmations:
-      send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie ihr Passwort zurücksetzten können.'
-      send_paranoid_instructions: 'Falls Sie eine Email-Adresse angegeben haben, bekommen Sie eine Email mit der Anleitung zur Account-Bestätigung zugeschickt.'
-      updated: 'Ihr Passwort wurde geändert. Sie sind angemeldet.'
+      send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du dein Passwort zurücksetzen kannst.'
+      send_paranoid_instructions: 'Falls du eine Email-Adresse angegeben hast, bekommst du eine Email mit der Anleitung zur Account-Bestätigung zugeschickt.'
+      updated: 'Dein Passwort wurde geändert. Du bist nun angemeldet.'
       user:
-        confirmed: 'Vielen Dank, Account wurde erfolgreich bestätigt. Sie sind jetzt angemeldet.'
+        confirmed: 'Vielen Dank, Account wurde erfolgreich bestätigt. Du bist jetzt angemeldet.'
     registrations:
-      signed_up: 'Sie haben sich erfolgreich registriert. Es kann sein, dass Sie eine Aktivierungs-E-Mail erhalten.'
-      inactive_signed_up: 'Sie haben sich erfolgreich registriert. Sie konnten jedoch nicht angemeldet werden, da ihr Account %{reason} ist. Sie erhalten ein Mail zur Bestätigung.'
+      signed_up: 'Du hast dich erfolgreich registriert. Es kann sein, dass du eine Aktivierungs-E-Mail erhältst.'
+      inactive_signed_up: 'Du hast dich erfolgreich registriert. Du konntest jedoch nicht angemeldet werden, da dein Account %{reason} ist. Du erhältst ein Mail zur Bestätigung.'
       updated: 'Die Angaben wurden erfolgreich geändert.'
-      destroyed: 'Ihr Account wurde erfolgreich gelöscht.'
+      destroyed: 'Dein Account wurde erfolgreich gelöscht.'
       reasons:
         inactive: 'inaktiv'
         unconfirmed: 'unbestätigt'
         locked: 'gesperrt'
     unlocks:
-      send_instructions: 'Sie erhalten in wenigen Minuten eine E-Mail mit der Anleitung, wie Sie Ihren Account entsperren können.'
-      unlocked: 'Ihr Account wurde entsperrt. Sie sind angemeldet.'
-      send_paranoid_instructions: 'Wenn Ihr Account existiert, bekommen Sie per Email Instruktionen, wie Sie Ihren Account entsperren können.'
+      send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du deinen Account entsperren kannst.'
+      unlocked: 'Dein Account wurde entsperrt. Du bist nun angemeldet.'
+      send_paranoid_instructions: 'Wenn dein Account existiert, bekommst du per Email Instruktionen, wie du deinen Account entsperren kannst.'
     oauth_callbacks:
       success: 'Erfolgreich mit dem %{kind}-Account angemeldet.'
-      failure: 'Sie konnten nicht mit dem %{kind}-Account angemeldet werden, weil "%{reason}".'
+      failure: 'Du konntest nicht mit dem %{kind}-Account angemeldet werden, weil "%{reason}".'
     invitations:
       send_instructions: 'Eine Einladungsmail wurde an %{email} gesendet.'
       invitation_token_invalid: 'Ungültiger Einladungs-Authentifizierungs-Token!'
-      updated: 'Ihr Passwort wurde vergeben. Sie sind angemeldet.'
+      updated: 'Dein Passwort wurde vergeben. Du bist nun angemeldet.'
       no_invitations_remaining: 'Keine Einladungen mehr übrig'
     mailer:
       confirmation_instructions:
-        subject: 'Anleitung zur Bestätigung Ihres Accounts'
+        subject: 'Anleitung zur Bestätigung deines Accounts'
       reset_password_instructions:
         subject: 'Anleitung um das Passwort zurückzusetzten'
       unlock_instructions:
-        subject: 'Anleitung um Ihren Account freizuschalten'
+        subject: 'Anleitung um deinen Account freizuschalten'
       invitation_instructions:
-        subject: 'Anleitung um Ihren Account zu aktivieren'
+        subject: 'Anleitung um deinen Account zu aktivieren'

@@ -8,13 +8,12 @@ en:
   error_record_not_found: Record was not found!
   error_auth_token: Your session expired. Please try again!
   error_ajax_request: An internal error occurred! Please inform us.
-  error_not_your_website: "You could only edit your websites!"
 
   delete_secure_question: "Are you sure?"
   create_successful: "%{object_name} was successfully created"
   notice_needs_a_comment: "Bitte keine null Nummern angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
-  succesfully_saved_championtipp: "Der Tuniersieger-Tip wurden gespeichert!"
+  succesfully_saved_championtipp: "Dein Tuniersieger-Tip wurden gespeichert!"
 
   signed_in_hello: "Hello, "
   sign_in: "Login"

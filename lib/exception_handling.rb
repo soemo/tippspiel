@@ -13,7 +13,7 @@ module ExceptionHandling
       rescue_from ::CanCan::AccessDenied, :with => :redirect_after_access_denied
       rescue_from ::ActiveRecord::StaleObjectError, :with => :redirect_after_stale_object_error
       rescue_from ::ActiveRecord::RecordNotFound, :with => :redirect_after_record_not_found
-      rescue_from ::TippspielError, ::ActionView::TemplateError, :with => :redirect_after_ba_error
+      rescue_from ::TippspielError, ::ActionView::TemplateError, :with => :redirect_after_tippspiel_error
     end
   end
 
@@ -26,11 +26,11 @@ module ExceptionHandling
 
   # es wird ein TippspielError abgefangen.
   # Da dieser auch ab und an in Templates/Partials geworfen wird, kann hier auch ein TemplateError reingegeben werden
-  def redirect_after_ba_error exception
+  def redirect_after_tippspiel_error exception
     if exception.is_a?(ActionView::TemplateError)
       exception = exception.original_exception
     end
-    redirect_all_formats exception, exception.message, false, get_controller_from_tab
+    redirect_all_formats exception, exception.message, false, get_redirect_controller
   end
 
   def redirect_after_stale_object_error exception
@@ -39,7 +39,7 @@ module ExceptionHandling
 
   # nutzen wenn ich cancan nutze
   def redirect_after_access_denied exception
-    redirect_all_formats exception, :error_access_denied, false, get_controller_from_tab
+    redirect_all_formats exception, :error_access_denied, false, get_redirect_controller
   end
 
   def redirect_after_record_not_found exception
@@ -50,7 +50,7 @@ module ExceptionHandling
     redirect_all_formats exception, :error_auth_token
   end
 
-  def redirect_all_formats exception, message, reraise_error = false, controller_or_url_hash = get_controller_from_tab
+  def redirect_all_formats exception, message, reraise_error = false, controller_or_url_hash = get_redirect_controller
     flash[:error] = (message.is_a?(Symbol)) ? t(message) : message
     Rails.logger.error exception.message
     Rails.logger.error exception.backtrace.inspect
@@ -63,7 +63,7 @@ module ExceptionHandling
           redirect_target = controller_or_url_hash
         else
           # params dann sinnvoll, wenn redirect innerhalb einer Componente passiert
-          redirect_target = {:controller => controller_or_url_hash, :action => 'index', :params => {}}
+          redirect_target = {:controller => controller_or_url_hash, :action => get_redirect_action, :params => {}}
         end
 
         format.html { redirect_to redirect_target }
@@ -80,8 +80,12 @@ module ExceptionHandling
     {:action => :edit}
   end
 
-  def get_controller_from_tab
+  def get_redirect_controller
     "/main"
+  end
+
+  def get_redirect_action
+    "error"
   end
 
   # Behandelt alle Fehler, falls ein Javascript-Request vorliegt
@@ -89,8 +93,8 @@ module ExceptionHandling
     std_error_msg = t(:error_ajax_request)
     if request.format == :js
       # JS-Requests werden behandelt:
-      # Development => Wird auf "index"-Action weitergeleitet und Exception-Text angezeigt (Exception wird geloggt)
-      # Production  => Wird auf "index"-Action weitergeleitet und "Es ist ein unbekannter Fehler aufgetreten!" (Exception wird geloggt)
+      # Development => Wird auf get_redirect_action weitergeleitet und Exception-Text angezeigt (Exception wird geloggt)
+      # Production  => Wird auf get_redirect_action weitergeleitet und "Es ist ein unbekannter Fehler aufgetreten!" (Exception wird geloggt)
       if Rails.logger.present?
         Rails.logger.error(exception)
         Rails.logger.error(exception.backtrace.inspect)
@@ -107,8 +111,8 @@ module ExceptionHandling
         ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver
         request.format = :js
       end
-      controller = get_controller_from_tab
-      redirect_target = {:controller => controller, :action => "index", :params => {}}
+      controller = get_redirect_controller
+      redirect_target = {:controller => controller, :action => get_redirect_action, :params => {}}
       render :template => "/unknown_error", :locals => {:redirect_target => redirect_target}
     else
       ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver

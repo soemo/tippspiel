@@ -20,6 +20,8 @@ Tippspiel::Application.routes.draw do
   match "ranking/hall-of-fame" => "ranking#hall_of_fame", :as => "hall_of_fame"
   match "ranking/user-statistic(/:id)" => "ranking#user_statistic", :as => "user_statistic"
 
+  match "main/error" => "main#error", :as => :error
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -65,9 +65,12 @@ module ApplicationHelper
   end
 
   def default_sidebar_content
-    write_sidebar_links
-    write_sidebar_notes
-    write_sidebar_rss_feed(@rss_title, @last_rss_entries)
+    # im Fehlerfall wird keine Sidebar angezeigt
+    unless controller.controller_name == "main" && controller.action_name == "error"
+      write_sidebar_links
+      write_sidebar_notes
+      write_sidebar_rss_feed(@rss_title, @last_rss_entries)
+    end
   end
 
   def write_sidebar_links
