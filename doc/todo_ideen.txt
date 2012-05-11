@@ -1,5 +1,8 @@
 ﻿TODO:
 
+- Mail an Spieler der letzten WM schicken
+** + neue Leute hier in Berlin (coworking, Daniel, marko, nils ,...
+
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
 ** oder https://github.com/mileszs/wicked_pdf

@@ -60,7 +60,7 @@ class Game < ActiveRecord::Base
 
   def self.round_start_end_date_time(round)
     games = Game.where(:round => round).order("start_at asc").select("start_at")
-    if game.present?
+    if games.present?
       start_date_time = games.first.start_at
       end_date_time = games.last.start_at
     else
