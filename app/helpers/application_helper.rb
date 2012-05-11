@@ -90,7 +90,7 @@ module ApplicationHelper
         haml_tag :h4, t("notice")
         notes.each do |n|
           haml_tag :p do
-            haml_tag "span.notice_user", n.user.try{name}
+            haml_tag "span.notice_user", n.user.name if n.user.present?
             haml_tag :br
             haml_concat html_escape(n.text)
           end
