@@ -38,8 +38,7 @@ Tippspiel::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :sendmail # default :smtp aber auf uberspace lieber sendmail
 
-  # soeren
-  # Es wurden doppelte Mails verschickt, Das liegt an einem Zusammenspiel von Qmail und einen Bug in der ActionMailer-Komponente:
+  # 10.05.20102 SM: Es wurden doppelte Mails verschickt, Das liegt an einem Zusammenspiel von Qmail und einen Bug in der ActionMailer-Komponente:
   # ActionMailer adds recipient to command line for sendmail
   # https://github.com/rails/rails/issues/1755
   #

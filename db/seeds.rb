@@ -14,6 +14,11 @@ def clear_seeds
 
 end
 
+def clear_games
+  # Games Tabellen wird gelöscht
+  ActiveRecord::Base.connection.execute("TRUNCATE games")
+end
+
 
 def game_data
   [
@@ -76,42 +81,14 @@ def create_game_data
 
 end
 
-# test und 5 Zahlen regex /^test[0-5]{5}$/
-def testuser_firstname
-  "test#{rand(5)}#{rand(5)}#{rand(5)}#{rand(5)}#{rand(5)}"
-end
-
-def create_testusers
-  10.times do |i|
-    n = i+1
-    user = User.new(:firstname => testuser_firstname, :lastname => "User#{n}", :email => "testuser#{n}@soemo.de", :password => "testuser#{n}", :password_confirmation => "testuser#{n}")
-    user.confirm!
-  end
-end
-
-def create_tipps
-  games = Game.all
-  users = User.all
-  users.each do |user|
-    games.each do |game|
-      Tipp.create!(:user => user, :game => game, :team1_goals => rand(3), :team2_goals => rand(3))
-    end
-  end
-
-end
-
-
 puts "Lade seeds"
 
-puts "Alles loeschen..."
-clear_seeds
+# puts "Alles loeschen..."
+# Achtung nicht in prodution aufrufen clear_seeds
 
-puts "Neue Daten aufsetzen..."
+puts "Spiele neu aufsetzen..."
+clear_games
 create_game_data
-create_testusers
-create_tipps
-# TODO soeren 22.11.11 create_polls
-# TODO soeren 22.11.11 create_notice
-# TODO soeren 22.11.11 create_statistics
+
 puts "fertsch!"
 

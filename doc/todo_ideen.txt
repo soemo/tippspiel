@@ -11,8 +11,6 @@ http://raphaeljs.com/
 
 - TESTS ERWEITERN !!!!!
 
-- Devise.de Texte Sie -> Du
-
 - Team Flagen
 ** team1_view_name_with_flag für die Tabellen
 
