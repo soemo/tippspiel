@@ -18,7 +18,9 @@
     - class_name = cycle("", "pull-right")
     %blockquote{:class => class_name}
       %p= notice.text
-      %small= l(notice.created_at) + ", " + notice.user.name
+      %small
+        = l(notice.created_at) + ", "
+        = notice.user.name if notice.user.present?
   %br
   %br
   %br
