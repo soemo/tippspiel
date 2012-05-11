@@ -13,7 +13,7 @@ set :customizing_dir, "em2012"
 
 # aktuell nutzt ich rvm - ruby-1.8.7-p358
 set :default_environment, {
-  'PATH' => "$HOME/.rvm/gems/ruby-1.8.7-p358/bin:$HOME/.rvm/bin::$PATH",
+  'PATH' => "$HOME/.rvm/gems/ruby-1.8.7-p358/bin:$HOME/.rvm/bin:$PATH",
   'RUBY_VERSION' => 'ruby 1.8.7',
   'GEM_HOME'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
   'GEM_PATH'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
