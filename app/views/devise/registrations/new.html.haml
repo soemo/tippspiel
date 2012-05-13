@@ -1,25 +1,25 @@
-%h3= t("devise.sign_up")
-%br
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = custom_devise_error_messages!
+.alert.alert-info
+  %h3= t("devise.sign_up")
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = custom_devise_error_messages!
 
-  = f.label :email
-  = f.text_field :email
+    = f.label :email
+    = f.text_field :email
 
-  = f.label :firstname
-  = f.text_field :firstname
+    = f.label :firstname
+    = f.text_field :firstname
 
-  = f.label :lastname
-  = f.text_field :lastname
+    = f.label :lastname
+    = f.text_field :lastname
 
-  = f.label :password
-  = f.password_field :password
+    = f.label :password
+    = f.password_field :password
 
-  = f.label :password_confirmation
-  = f.password_field :password_confirmation
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
 
-  %p
-    = f.submit t("devise.sign_up"), :class=>"btn"
+    %p
+      = f.submit t("devise.sign_up"), :class=>"btn"
 
 
 = render :partial => "devise/shared/links"

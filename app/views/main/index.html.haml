@@ -1,12 +1,16 @@
-.row-fluid
-  .span8
+.row
+  .span5
     = render :partial => "welcome_infos", :locals => {:today_games => @today_games}
   .span4
-    = render :partial => "login_form_or_user_infos"
+    .alert.alert-info
+      = render :partial => "login_form_or_user_infos"
 
-%p
-  Spielplan der
-  = t(:tournament_name)
+.row
+  %hr
+  .span9
+    %h3
+      Spielplan der
+      = t(:tournament_name)
 
 
-= render :partial => "/games/game_list", :locals => {:games_round_hash => @games_round_hash}
+    = render :partial => "/games/game_list", :locals => {:games_round_hash => @games_round_hash}

@@ -14,9 +14,6 @@ http://raphaeljs.com/
 
 - TESTS ERWEITERN !!!!!
 
-- Team Flagen
-** team1_view_name_with_flag für die Tabellen
-
 - user, admin_users haben kein lockversion
 
 - Anpassen für Tabletts und Phones

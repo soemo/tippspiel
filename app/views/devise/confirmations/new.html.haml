@@ -1,11 +1,11 @@
-%h3= t("devise.resend_confirmation_instruction")
-%br
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  = custom_devise_error_messages!
+.alert.alert-info
+  %h3= t("devise.resend_confirmation_instruction")
+  = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+    = custom_devise_error_messages!
 
-  = f.label :email
-  = f.email_field :email
+    = f.label :email
+    = f.email_field :email
 
-  %p= f.submit t("devise.resend_confirmation_instruction_btn"), :class=>"btn"
+    %p= f.submit t("devise.resend_confirmation_instruction_btn"), :class=>"btn"
 
 = render :partial => "devise/shared/links"

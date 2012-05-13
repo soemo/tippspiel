@@ -1,10 +1,10 @@
 %p
-  Sport Frei #{@resource.name}
+  Hallo #{@resource.firstname}, Sport frei!
 %p
-  Damit du beim #{I18n.t(:app_name)} mitspielen kannst, mußt du deine Teilnahme mit dem Link bestätigen:
+  Bestätige bitte mit folgendem Link deine Teilnahme beim #{I18n.t(:tournament_name)} #{I18n.t(:app_name)} auf soemo.org:
 %p= link_to 'Teilnahme bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
 %p
-  Viel Spaß und Erfolg beim Tippspiel.
+  Viel Spaß und Erfolg!
   %br
   Sören
 

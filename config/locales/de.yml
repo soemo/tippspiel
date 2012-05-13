@@ -1,5 +1,5 @@
 de:
-  app_name: "Fussball Tippspiel"
+  app_name: "Tippspiel"
   tournament_name: "EM 2012"
   text_maintenance: "Die Seite wird aktuell gewartet. Bitte probiere es später wieder."
   error_javascript: Bitte aktiviere Javascript in deinem Browser, um mit der Seite zu arbeiten!
@@ -19,7 +19,7 @@ de:
 
   signed_in_hello: "Hallo, "
   sign_in: "Login"
-  sign_out: "Ausloggen"
+  sign_out: "Abmelden"
   sign_up: "Registrieren"
   save:    Speichern
   compare: Vergleichen
@@ -39,7 +39,7 @@ de:
   main: "Home"
   help: "Hilfe"
   ranking: "Rangliste"
-  notice: Bemerkungen
+  notice: Fachsimpeleien
   tournament: "Turnier"
   tipps: "Tipps"
   back_link: "Zurück"

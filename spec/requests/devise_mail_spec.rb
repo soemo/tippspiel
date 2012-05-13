@@ -35,7 +35,7 @@ describe "devise mail" do
     mail.subject.should =~ /#{I18n.t('app_name')} - #{I18n.t("devise.mailer.confirmation_instructions.subject")}/
     mail.from.should == ["tippspiel@soemo.org"]
     mail.to.should == [email]
-    mail.body.should =~ /#{user.name}/u
+    mail.body.should =~ /#{user.firstname}/u
     mail.body.should =~ /#{user_confirmation_path}\?confirmation_token=#{user.confirmation_token}/u
 
   end

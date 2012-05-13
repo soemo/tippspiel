@@ -26,8 +26,8 @@ module ApplicationHelper
 
   end
 
-  def icon_with_text(icon_name, text="dummytext")
-    icon_name.present? ? "<i class='#{icon_name}'></i>".html_safe + " " + text : text
+  def icon_with_text(icon_name, text="dummytext", add_on_ccs_class="")
+    icon_name.present? ? "<i class='#{icon_name} #{add_on_ccs_class}'></i>".html_safe + " " + text : text
   end
 
   def write_countdown
@@ -61,7 +61,7 @@ module ApplicationHelper
   end
 
   def get_title
-    t('app_name') + " " + t('tournament_name')
+    t('tournament_name') + " " + t('app_name')
   end
 
   def default_sidebar_content
@@ -81,8 +81,8 @@ module ApplicationHelper
       haml_tag :h5 do
         haml_concat link_to(t("hall_of_fame"), hall_of_fame_path)
       end
+      haml_tag :hr
     end
-    haml_tag :br
   end
 
 
@@ -101,7 +101,7 @@ module ApplicationHelper
       end
       haml_concat link_to(t("write_notice"), notice_path)
       haml_tag :br
-      haml_tag :br
+      haml_tag :hr
     end
   end
 
@@ -141,14 +141,13 @@ module ApplicationHelper
   def write_auth_nav
     write_user_login_logout_link
     write_user_sign_up_link
-    haml_concat link_to(t(:imprint), help_path + "#imprint")
   end
 
   def write_user_login_logout_link
     if user_signed_in?
       haml_concat t(:signed_in_hello)
-      haml_concat current_user.name
-      haml_concat link_to(t(:sign_out), destroy_user_session_path)
+      haml_concat current_user.firstname + " | "
+      haml_concat link_to(icon_with_text("icon-off", t(:sign_out), "icon-white"), destroy_user_session_path)
     else
       haml_concat ""
     end

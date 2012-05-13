@@ -26,22 +26,22 @@
 
   %div.navbar.navbar-fixed-top
     %div.navbar-inner
-      %div.container-fluid
+      -#container-fluid CS-Class wenn es die gesamte Bildschirmbreite einnehmen soll
+      %div.container
         %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        %a.brand{:href=> "/"}= get_title
+        %span.brand= image_tag("soccer_Ball.png", :class=>"soccer_ball") + get_title
         %div.nav-collapse.collapse
           - write_main_nav
           %p.navbar-text.pull-right
             - write_auth_nav
         :erb
           <!--/.nav-collapse -->
-
-  %div.container-fluid
-
-    %div.row-fluid
+  -#container-fluid CS-Class wenn es die gesamte Bildschirmbreite einnehmen soll
+  %div.container
+    %div.row
       %div.span9
         %p.error
           - if flash[:error].present?
@@ -71,6 +71,8 @@
     %footer
       = "© " + Time.now.strftime("%Y")
       = link_to("Sören Mothes", "http://www.soemo.org/")
+      = " | "
+      = link_to(t(:imprint), help_path + "#imprint")
       = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
 
   -# Javascript at the bottom for fast page loading

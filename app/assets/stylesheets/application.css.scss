@@ -20,6 +20,9 @@
 @import "bootstrap/mixins";
 
 /* http://twitter.github.com/bootstrap/less.html - Bootstrap variables*/
+
+/* Oranges Layout
+******************
 $navbarBackground: $orange;
 $navbarBackgroundHighlight: $yellow;
 $navbarText: $red;
@@ -28,15 +31,6 @@ $linkColor: $orange;
 $linkColorHover: darken($linkColor, 15%);
 $primaryButtonBackground: $orange;
 
-@import "bootstrap";
-
-
-
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-
 .navbar .brand {
   color: $red;
 }
@@ -44,6 +38,51 @@ body {
 .navbar-text a {
  color: $grayDark;
 }
+******************/
+
+
+/* kind of blue Layout
+******************    */
+$navbarBackground: $blue;
+$navbarBackgroundHighlight: #8CC9DF;
+$navbarText: $white;
+$navbarLinkColor: $white;
+$navbarLinkColorHover: darken($linkColor, 15%);
+
+$linkColor: $blue;
+$linkColorHover: $linkColor;
+
+.navbar .brand {
+  color: $blue;
+}
+
+.brand > img.soccer_ball {
+  padding: 0 5px 0 0;
+  height: 20px;
+  vertical-align: top;
+}
+
+/* wichtig erst includieren und dann Änderungen an den CSS Klassen und Co */
+@import "bootstrap";
+
+h3 {
+  border-bottom: solid 1px $blue;
+  margin-bottom: 12px;
+}
+
+.navbar .brand {
+  color: $gray;
+}
+
+.navbar-text a {
+ color: $white;
+}
+
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
 
 .navbar .nav > li > a {
   text-shadow: 0 0 0 rgba(0, 0, 0, 0.25)   /* no Shadow */
@@ -51,12 +90,18 @@ body {
 
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
-  background-color: transparent;
+  font-weight: bold;
+  background-color: $blue;
+}
+
+blockquote > p {
+  font-size: 13px;
 }
 
 .table th.round_name {
   font-size: 14px;
   padding-top: 10px;
+  color: $blue;
 }
 
 .table tr.next_to_round_name th {
@@ -83,8 +128,8 @@ table.size_70percent{
 }
 
 .popover-inner {
-  background: $orange; // has to be full background declaration for IE fallback
-  background: rgba(255,165,0,.8);
+  background: $blue; // has to be full background declaration for IE fallback
+  background: rgba(4,156,219,.8);
 }
 
 /* Countdown Start */
