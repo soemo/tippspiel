@@ -110,6 +110,14 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def team1_flag_path
+    self.team1_id.present? ? team1.flag_image_url : ""
+  end
+
+  def team2_flag_path
+    self.team2_id.present? ? team2.flag_image_url : ""
+  end
+
   # wer hat gewonnen Team1 oder Team2, unentschieden == 0
   def winner
     result = nil

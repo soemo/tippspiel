@@ -52,22 +52,23 @@ $navbarLinkColorHover: darken($linkColor, 15%);
 $linkColor: $blue;
 $linkColorHover: $linkColor;
 
-.navbar .brand {
-  color: $blue;
-}
-
-.brand > img.soccer_ball {
-  padding: 0 5px 0 0;
-  height: 20px;
-  vertical-align: top;
-}
+$tableBackgroundAccent: whiteSmoke;
+$tableBackgroundHover: #BCE8F1;
 
 /* wichtig erst includieren und dann Änderungen an den CSS Klassen und Co */
 @import "bootstrap";
 
+
+
 h3 {
   border-bottom: solid 1px $blue;
   margin-bottom: 12px;
+}
+
+.navbar .brand > img.soccer_ball {
+  padding: 0 5px 0 0;
+  height: 20px;
+  vertical-align: top;
 }
 
 .navbar .brand {
@@ -115,6 +116,8 @@ table.size_70percent{
 .tipp_input {
   width: 18px;
   margin-bottom: 0px;
+  height: 13px;
+  line-height: 13px;
 }
 
 .tipp_input_td {
@@ -130,6 +133,10 @@ table.size_70percent{
 .popover-inner {
   background: $blue; // has to be full background declaration for IE fallback
   background: rgba(4,156,219,.8);
+}
+
+td img.team_flag {
+  vertical-align: baseline;
 }
 
 /* Countdown Start */

@@ -84,3 +84,6 @@ Später:
 - Umfrage ??? poll table und poll_id am user existieren schon
 - englische Seite
 ** Übersetzen Hilfe i18n yml ,....
+- Flags als Image-Sprite
+** dann als BG-icon anzeigen und an Model Team ein Attr. css_flag_class oder eine Helper-Methode?
+

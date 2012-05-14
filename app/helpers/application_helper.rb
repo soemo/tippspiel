@@ -64,6 +64,11 @@ module ApplicationHelper
     t('tournament_name') + " " + t('app_name')
   end
 
+  def write_team_with_flag(team_name, flag_icon_path="")
+    haml_concat image_tag(flag_icon_path, :class=>"team_flag") if flag_icon_path.present?
+    haml_concat team_name
+  end
+
   def default_sidebar_content
     # im Fehlerfall wird keine Sidebar angezeigt
     unless controller.controller_name == "main" && controller.action_name == "error"
