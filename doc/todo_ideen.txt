@@ -1,5 +1,8 @@
 ﻿TODO:
 
+- Flagen in Selectbox?
+** http://www.marghoobsuleman.com/jquery-image-dropdown
+
 - Mail an Spieler der letzten WM schicken
 ** + neue Leute hier in Berlin (coworking, Daniel, marko, nils ,...
 

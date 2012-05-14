@@ -59,6 +59,9 @@ $tableBackgroundHover: #BCE8F1;
 @import "bootstrap";
 
 
+body {
+  background: white image-url("bg.png") fixed repeat;
+}
 
 h3 {
   border-bottom: solid 1px $blue;
