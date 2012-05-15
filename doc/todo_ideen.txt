@@ -90,3 +90,27 @@ Später:
 - Flags als Image-Sprite
 ** dann als BG-icon anzeigen und an Model Team ein Attr. css_flag_class oder eine Helper-Methode?
 
+
+### Einladungsmail EM2012 #########################
+soeren@mothes.org, cathleen@mothes.org, Knuddelelch58@gmx.de, jakobwolf@gmx.de, mirco.kretzschmar@gmx.de, albrecht.uhlig@gmx.de, der.nasenmann@gmx.de, mail@gilbertrobel.de, sebastiannestler@web.de, koehlert@online.de, chefplayer@web.de, voigt.henry@arcor.de, stb_240479@yahoo.de, puffer-dd@gmx.de, an-anja@gmx.de, ricardomai@gmx.de, ostwaerts@gmx.de, passodd@hotmail.com, j.ehrlich@web.de, heiko.hommen@web.de, rbeere@nouvex.de, rmeinhardt@gmx.net, die.norm@web.de, ennischwarz@web.de, sven72n@web.de, dusan@petek.de, brigitte.hommen@web.de, marko_krasselt@web.de, mr.chico@gmx.de, brigitte.hommen@t-online.de, JBruch@gmx.de, matthias_scholze@web.de, smileanders@web.de, dirschk@gmx.de, kurt.mothes@gmx.de, atze-tor@web.de, sebastianzaunseder@yahoo.de, gertig@gmx.de, 999flo@gmx.de, maik_mildner@web.de, insuma@t-online.de, Lars.Techritz@gmx.de, rico55@web.de, torsten080482@yahoo.de, tfied@gmx.de, schwarzgelbetreue@web.de, gomanda@arcor.de, Goertz.Hildesheim@web.de, robert_walther@gmx.de, ronny.hanl@freenet.de, angelavey@web.de, h.lessel@ibz-gmbh.de, mawy80@gmx.de, jay_reell@gmx.de, mschoetz@gmx.de, d.kiessling@gmx.de,
+8-weltwunder@web.de,  "Alexander Warg" <alex.warg@gmx.de>,  "alexander ziehe" <heinz-becker-kap@gmx.de>,  "André Bernhardt" <Berny2@aol.com>,  "Andre Wiese" <WieseAnd@aol.com>,  "Andreas Guethling" <aguethling@web.de>,  "Andreas Schrottke" <AndreasSchrottke@bundeswehr.org>,  "Anja Mösch" <moesch@webit.de>, annett.kuehne@gmail.com,  "Ben Drechsel" <bedrex@web.de>,  "Carina Kalz" <carina.kalz@gmx.de>,  "carola klose" <carolaklose@yahoo.de>,  "Carola Klose" <klosecarola@web.de>,  "Caroline Adler" <carlinschen@web.de>,  "Cathleen Passin" <c.passin@gmx.de>, "Christian Scheibe" <christian.scheibe@produktionsbuero.tv>, Christian.sc@web.de,  ChristinaSchoene@gmx.de,  claudi-gabel@gmx.de,  conny_striesen@freenet.de,  "Corinna Klose" <klosecorinna@web.de>,  Daniel.Groeber@infineon.com,  dirk.jesse@gmx.de,  h.c.@christian-hiller.de,  "Heiko Gleissert" <gleissert@griessbach.de>,  heiko.hommen@web.de,  "Helge Betzinger" <helge.betzinger@pcvisit.de>,  "Hendrik Fischer" <fischer.hendrik@hotmail.de>,  "Jan Richter" <Richter-Annaburg@t-online.de>, "Julia Ziemer" <juliaziemer@web.de>,  juliana_walther@web.de,  "Karen Lieske" <karen.lieske@bvl.bund.de>,  "Karen Ohl" <karinkarenohl@hotmail.com>,  karsten@claim-music.de,  "Katja Thieme" <kaddel.Thieme@gmx.de>,  katja.lissel@hotmail.de,  "Klaus John" <JohnKlaus@t-online.de>,  knut.smiley@gmx.de,  "Lars Jany" <lars.jany@web.de>,  lars.lesche@fh-potsdam.de,  "Livia Mothes" <livia.mothes@gmx.de>,  "Lutz Kraege" <kraege@web.de>,  "Madlen Kubitz" <Favela@gmx.li>,  "Marko Krasselt" <marko.krasselt@heiwoe.com>,  "marko schimmel" <marko.schimmel@web.de>,  "Markus Gödke" <prinz@goedke.com>,  "martin drechsel" <da_drex@web.de>,  "Martina Hommen" <hommen@webit.de>, "Mathias Knape" <Mathias.Knape@t-online.de>,  "Maxi Modes" <maximodes@gmx.de>,  "Michael Sander" <sander.liegau@web.de>,  "Michael Thieme" <mail@mt4.de>, "Michaela Mertes" <m_mertes1979@yahoo.de>,  "Monika Mothes" <monika_mothes@web.de>, "Nicole Hauptlorenz" <nicole-hau@freenet.de>,  "Nicole Tetzlaff" <nigy@gmx.net>,  "Norman Sander" <die.norm@web.de>,  "Norman Sander" <norman@nsander.de>,  "Raik Passin" <r.passin@web.de>, "Robert Walther" <robert_walther@gmx.de>,  "Ronald Bock" <R.Bock-Stahlbaumontage@gmx.de>,  "Ronny Schrottke" <ronnys76@web.de>,  "Ronny Wunderwald" <info@wirtuos.de>,  sabine.weisse@gmx.net,  "Sebastian Nestler" <sebastian@seiffen.com>, Soeren_Ohl@web.de,  "Stefan Mosig" <smosig@yupdesign.de>,  "Stefan Ocke" <stefan.ocke@googlemail.com>,  stephan.sachse@web.de,  store.wernigerode@jack-wolfskin.com,  "Thomas Mielchen" <thomas.mielchen@freenet.de>,  "Thomas Trompke" <info@itt-online.de>,  "Torsten Nowak" <Nowak.Torsten@gmx.de>,  "Torsten Scherer" <torsten.scherer@gmx.de>,  yvonne_birk@gmx.de
+"Saveen Krishnamurthy" <saveen@gmx.de>, <alex.und.stefan@web.de>, anja.bruch@googlemail.com
+
+EM 2012 Tippspiel auf soemo.org - Bereit zum Pokalgewinnen
+-------
+Hallo und Sport frei zur EM 2012,
+
+schwupps, schon wieder 2 Jahre um - die Fußball EM 2012 steht vor der Tür!
+Ole Ole, Ole Ole ... Dafür gibt es natürlich wieder unser beliebtes Tippspiel!
+
+Wenn du teilnehmen möchtest, kann du dich unter http://tippspiel.soemo.org anmelden.
+Freunde von dir kannst du natürlich auch gern dazu einladen.
+
+Ich hoffe es gibt auch dieses Jahr wieder eine rege Beteiligung und viel Spaß beim Tippen!
+Dem Gewinner winken unbeschreiblicher Ruhm, uneingeschränktes Prahlrecht und ein umwerfender Tippspiel-Wanderpokal.
+Falls noch Fragen oder Anregungen bestehen, melde dich bitte bei mir.
+
+Sport Frei
+Sören "Harry" Mothes
+
+Solltest Du keine weiteren E-Mails wünschen, teile es mir bitte an tippspiel@soemo.org mit.

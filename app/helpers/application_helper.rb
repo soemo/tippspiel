@@ -52,11 +52,12 @@ module ApplicationHelper
         haml_tag "div.digit", 0
         haml_tag "div.digit", 0
       end
-      haml_tag "div.dash.seconds_dash" do
-        haml_tag "span.dash_title", "Sekunden"
-        haml_tag "div.digit", 0
-        haml_tag "div.digit", 0
-      end
+      # Sekunden aktuell raus
+      #haml_tag "div.dash.seconds_dash" do
+      #  haml_tag "span.dash_title", "Sekunden"
+      #  haml_tag "div.digit", 0
+      #  haml_tag "div.digit", 0
+      #end
     end
   end
 
