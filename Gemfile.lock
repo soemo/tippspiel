@@ -42,7 +42,7 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
-    bootstrap-sass (2.0.2)
+    bootstrap-sass (2.0.3)
     bourbon (1.4.0)
       sass (>= 3.1)
     builder (3.0.0)
@@ -217,7 +217,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
-  bootstrap-sass (~> 2.0.2)
+  bootstrap-sass (~> 2.0.3)
   cancan (= 1.6.7)
   capistrano (~> 2.11.2)
   capistrano-ext (~> 1.2.1)
