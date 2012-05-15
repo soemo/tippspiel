@@ -1,7 +1,7 @@
 ﻿TODO:
 
 - Mail an Spieler der letzten WM schicken
-** neue Leute hier in Berlin (coworking, Daniel, marko, nils ,... Silvia, Micha
+** neue Leute hier in Berlin (coworking,, nils ,  , team@of
 
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
@@ -39,11 +39,7 @@ Start standalone passenger
 http://wiki.simonszu.de/howto/rails
 https://uberspace.de/dokuwiki/system:daemontools
 # TODO soeren eigene Anleitung schreiben.
-       cool wäre ein vorheriges Ausprobieren, ob der Port noch frei ist udn wenn ja dann die benötigten Dateien zu generieren
-
---- Deployment ---
-cap -h
-cap -vT
+       cool wäre ein vorheriges Ausprobieren, ob der Port noch frei ist und wenn ja dann die benötigten Dateien zu generieren
 
 -- footiefox ---
 
