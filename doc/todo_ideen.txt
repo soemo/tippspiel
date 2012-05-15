@@ -1,10 +1,7 @@
 ﻿TODO:
 
-- Flagen in Selectbox?
-** http://www.marghoobsuleman.com/jquery-image-dropdown
-
 - Mail an Spieler der letzten WM schicken
-** + neue Leute hier in Berlin (coworking, Daniel, marko, nils ,...
+** neue Leute hier in Berlin (coworking, Daniel, marko, nils ,... Silvia, Micha
 
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
@@ -89,6 +86,8 @@ Später:
 ** Übersetzen Hilfe i18n yml ,....
 - Flags als Image-Sprite
 ** dann als BG-icon anzeigen und an Model Team ein Attr. css_flag_class oder eine Helper-Methode?
+- Flagen in Selectbox?
+** http://www.marghoobsuleman.com/jquery-image-dropdown
 
 
 ### Einladungsmail EM2012 #########################
