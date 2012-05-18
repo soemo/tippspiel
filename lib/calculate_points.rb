@@ -64,7 +64,7 @@ module CalculatePoints
             if tipp.complete_fill?
               points = calculate_tipp_points(game_winner, game.team1_goals, game.team2_goals, tipp.team1_goals, tipp.team2_goals)
               tipp.update_attribute(:tipp_punkte, points)
-              Rails.logger.info("UPDATE_ALL_TIPP_POINTS: tipp-id #{tipp.id} has #{points} points") if Rails.logger.present?
+              Rails.logger.info("UPDATE_ALL_TIPP_POINTS:   tipp-id #{tipp.id} has #{points} points") if Rails.logger.present?
             end
           end
         end

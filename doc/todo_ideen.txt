@@ -1,8 +1,9 @@
 ﻿TODO:
 
-- Caching von RSSFeed
+- check/test ob hourly Scheduler mit runwhen funktioniert
+** erster Versuch war erfolgreich
 
-- Anzahl der  Teilnehmer auf Ranking Seite
+- Ergebniss Grabber  vom FootieFox - Em2012 ist da
 
 - logrotate siehe DF server Aufruf mit cronjob
 
@@ -23,17 +24,7 @@ http://raphaeljs.com/
 ** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
 
-- Ergebniss Grabber  vom FootieFox - Em2012 ist da
 
-- Cronjob oder ähnliches auf uberspace einrichten
-1. um regelmäßig alles Ergebnisse einzutragen
-2. Punkte zu aktualisieren
-** Berechnungen werden bestimmt auch als after Filter der einzelnen Spiele erfolgen ???
-** oder doch nur als scheduler/hourly
-
-
-- uberspace DBs soemo_tippspiel_beta_em2012 erledigt
-** todo soemo_tippspiel_em2012  + customize rake task fuer capistrano
 
 -- uberspace ---
 Start standalone passenger
@@ -42,6 +33,7 @@ https://uberspace.de/dokuwiki/system:daemontools
 # TODO soeren eigene Anleitung schreiben.
        cool wäre ein vorheriges Ausprobieren, ob der Port noch frei ist und wenn ja dann die benötigten Dateien zu generieren
 
+########################
 -- footiefox ---
 
 # "requestLeagueBase: "+this.apiURL + "leagues/"+id+"/base.json "
@@ -51,12 +43,7 @@ https://uberspace.de/dokuwiki/system:daemontools
 # http://api.footiefox.com/teams.dat
 # http://api.footiefox.com/leagues.dat
 ### EM2012 http://api.footiefox.com/leagues/107/base.json !!!!
-Result:
-JSON.parse('
-{"is_tournament": true, "leagueID": 107, "timestamp": "2008-06-29 22:37:10", "matches": [{"tournament_group": "Gruppe A", "matchID": 747128, "team1Id": 1303, "team2Id": 1333, "team2Score": 1, "team1Score": 0, "startTime": "2008-06-07 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe A", "matchID": 747129, "team1Id": 1323, "team2Id": 1311, "team2Score": 0, "team1Score": 2, "startTime": "2008-06-07 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe A", "matchID": 747130, "team1Id": 1303, "team2Id": 1311, "team2Score": 2, "team1Score": 1, "startTime": "2008-06-11 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe A", "matchID": 747131, "team1Id": 1333, "team2Id": 1323, "team2Score": 3, "team1Score": 1, "startTime": "2008-06-11 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe A", "matchID": 747132, "team1Id": 1303, "team2Id": 1323, "team2Score": 0, "team1Score": 2, "startTime": "2008-06-15 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe A", "matchID": 747133, "team1Id": 1311, "team2Id": 1333, "team2Score": 2, "team1Score": 3, "startTime": "2008-06-15 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe B", "matchID": 747134, "team1Id": 927, "team2Id": 951, "team2Score": 1, "team1Score": 0, "startTime": "2008-06-08 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe B", "matchID": 747135, "team1Id": 940, "team2Id": 1317, "team2Score": 0, "team1Score": 2, "startTime": "2008-06-08 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe B", "matchID": 747136, "team1Id": 927, "team2Id": 1317, "team2Score": 1, "team1Score": 1, "startTime": "2008-06-12 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe B", "matchID": 747137, "team1Id": 951, "team2Id": 940, "team2Score": 1, "team1Score": 2, "startTime": "2008-06-12 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe B", "matchID": 747138, "team1Id": 927, "team2Id": 940, "team2Score": 1, "team1Score": 0, "startTime": "2008-06-16 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe B", "matchID": 747139, "team1Id": 1317, "team2Id": 951, "team2Score": 1, "team1Score": 0, "startTime": "2008-06-16 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe C", "matchID": 747140, "team1Id": 944, "team2Id": 928, "team2Score": 0, "team1Score": 0, "startTime": "2008-06-09 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe C", "matchID": 747141, "team1Id": 936, "team2Id": 924, "team2Score": 0, "team1Score": 3, "startTime": "2008-06-09 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe C", "matchID": 747142, "team1Id": 924, "team2Id": 944, "team2Score": 1, "team1Score": 1, "startTime": "2008-06-13 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe C", "matchID": 747143, "team1Id": 936, "team2Id": 928, "team2Score": 1, "team1Score": 4, "startTime": "2008-06-13 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe C", "matchID": 747144, "team1Id": 936, "team2Id": 944, "team2Score": 0, "team1Score": 2, "startTime": "2008-06-17 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe C", "matchID": 747145, "team1Id": 928, "team2Id": 924, "team2Score": 2, "team1Score": 0, "startTime": "2008-06-17 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe D", "matchID": 747146, "team1Id": 1306, "team2Id": 1318, "team2Score": 2, "team1Score": 0, "startTime": "2008-06-10 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe D", "matchID": 747147, "team1Id": 932, "team2Id": 1335, "team2Score": 1, "team1Score": 4, "startTime": "2008-06-10 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe D", "matchID": 747149, "team1Id": 1306, "team2Id": 1335, "team2Score": 1, "team1Score": 0, "startTime": "2008-06-14 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe D", "matchID": 747150, "team1Id": 1318, "team2Id": 932, "team2Score": 2, "team1Score": 1, "startTime": "2008-06-14 16:00:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe D", "matchID": 747152, "team1Id": 1306, "team2Id": 932, "team2Score": 2, "team1Score": 1, "startTime": "2008-06-18 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Gruppe D", "matchID": 747153, "team1Id": 1335, "team2Id": 1318, "team2Score": 0, "team1Score": 2, "startTime": "2008-06-18 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Viertelfinale", "matchID": 747166, "team1Id": 1323, "team2Id": 940, "team2Score": 3, "team1Score": 2, "startTime": "2008-06-19 18:45:00", "status": "finished", "phase": 1}, {"tournament_group": "Viertelfinale", "matchID": 747167, "team1Id": 951, "team2Id": 1311, "team2Score": 3, "team1Score": 1, "startTime": "2008-06-20 18:45:00", "status": "finished", "phase": 5}, {"tournament_group": "Viertelfinale", "matchID": 747168, "team1Id": 936, "team2Id": 1335, "team2Score": 3, "team1Score": 1, "startTime": "2008-06-21 18:45:00", "status": "finished", "phase": 4}, {"tournament_group": "Viertelfinale", "matchID": 747169, "team1Id": 932, "team2Id": 924, "team2Score": 2, "team1Score": 4, "startTime": "2008-06-22 18:45:00", "status": "finished", "phase": 5}, {"tournament_group": "Halbfinale", "matchID": 747170, "team1Id": 940, "team2Id": 1311, "team2Score": 2, "team1Score": 3, "startTime": "2008-06-25 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Halbfinale", "matchID": 747171, "team1Id": 1335, "team2Id": 932, "team2Score": 3, "team1Score": 0, "startTime": "2008-06-26 18:45:00", "status": "finished", "phase": 2}, {"tournament_group": "Finale", "matchID": 747172, "team1Id": 940, "team2Id": 932, "team2Score": 1, "team1Score": 0, "startTime": "2008-06-29 18:45:00", "status": "finished", "phase": 2}]}
-')
 
->>>>
 {"leagueID"=>107,
  "is_tournament"=>true,
  "timestamp"=>"2008-06-29 22:37:10",
@@ -70,7 +57,7 @@ JSON.parse('
     "team1Score"=>0,
     "phase"=>2,
     "status"=>"finished"
-   }]
+   }] ...
 }
 
 ####################################
