@@ -53,10 +53,10 @@ de:
 
   round:
     group: Gruppenspiele
-    group_a: Spiele Gruppen A
-    group_b: Spiele Gruppen B
-    group_c: Spiele Gruppen C
-    group_d: Spiele Gruppen D
+    group_a: Spiele Gruppe A
+    group_b: Spiele Gruppe B
+    group_c: Spiele Gruppe C
+    group_d: Spiele Gruppe D
     quarterfinal: Viertelfinale
     semifinal: Halbfinale
     final: Finale

@@ -97,6 +97,7 @@ module ApplicationHelper
       notes = Notice.limit(5).all
       if notes.present?
         haml_tag :h4, t("notice")
+        haml_tag :br
         notes.each do |n|
           haml_tag :p do
             haml_tag "span.notice_user", n.user.name if n.user.present?

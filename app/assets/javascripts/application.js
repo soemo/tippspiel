@@ -8,8 +8,12 @@ $(function() {
   update_textarea_maxlength();
   ajax_load_modal_content();
 
-  // Navbar
-  $(".collapse").collapse('hide');
+  // Navbar, fuer IE < 9 wird sie nicht aktiv
+  if (! (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) < 9)) {
+    $(".collapse").collapse('hide');
+  } else{
+    //alert(parseInt(jQuery.browser.version, 10) ) ;
+  }
   // Ranking Statistik Punkte
   $('.statistic_popover').popover({
     placement: "left"

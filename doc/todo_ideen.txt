@@ -1,7 +1,10 @@
 ﻿TODO:
 
-- Mail an Spieler der letzten WM schicken
-** neue Leute hier in Berlin (coworking,, nils ,  , team@of
+- Caching von RSSFeed
+
+- Anzahl der  Teilnehmer auf Ranking Seite
+
+- logrotate siehe DF server Aufruf mit cronjob
 
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
@@ -19,8 +22,6 @@ http://raphaeljs.com/
 - Anpassen für Tabletts und Phones
 ** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
-
-- logrotate siehe DF server Aufruf mit cronjob
 
 - Ergebniss Grabber  vom FootieFox - Em2012 ist da
 
@@ -87,9 +88,164 @@ Später:
 
 
 ### Einladungsmail EM2012 #########################
-soeren@mothes.org, cathleen@mothes.org, Knuddelelch58@gmx.de, jakobwolf@gmx.de, mirco.kretzschmar@gmx.de, albrecht.uhlig@gmx.de, der.nasenmann@gmx.de, mail@gilbertrobel.de, sebastiannestler@web.de, koehlert@online.de, chefplayer@web.de, voigt.henry@arcor.de, stb_240479@yahoo.de, puffer-dd@gmx.de, an-anja@gmx.de, ricardomai@gmx.de, ostwaerts@gmx.de, passodd@hotmail.com, j.ehrlich@web.de, heiko.hommen@web.de, rbeere@nouvex.de, rmeinhardt@gmx.net, die.norm@web.de, ennischwarz@web.de, sven72n@web.de, dusan@petek.de, brigitte.hommen@web.de, marko_krasselt@web.de, mr.chico@gmx.de, brigitte.hommen@t-online.de, JBruch@gmx.de, matthias_scholze@web.de, smileanders@web.de, dirschk@gmx.de, kurt.mothes@gmx.de, atze-tor@web.de, sebastianzaunseder@yahoo.de, gertig@gmx.de, 999flo@gmx.de, maik_mildner@web.de, insuma@t-online.de, Lars.Techritz@gmx.de, rico55@web.de, torsten080482@yahoo.de, tfied@gmx.de, schwarzgelbetreue@web.de, gomanda@arcor.de, Goertz.Hildesheim@web.de, robert_walther@gmx.de, ronny.hanl@freenet.de, angelavey@web.de, h.lessel@ibz-gmbh.de, mawy80@gmx.de, jay_reell@gmx.de, mschoetz@gmx.de, d.kiessling@gmx.de,
-8-weltwunder@web.de,  "Alexander Warg" <alex.warg@gmx.de>,  "alexander ziehe" <heinz-becker-kap@gmx.de>,  "André Bernhardt" <Berny2@aol.com>,  "Andre Wiese" <WieseAnd@aol.com>,  "Andreas Guethling" <aguethling@web.de>,  "Andreas Schrottke" <AndreasSchrottke@bundeswehr.org>,  "Anja Mösch" <moesch@webit.de>, annett.kuehne@gmail.com,  "Ben Drechsel" <bedrex@web.de>,  "Carina Kalz" <carina.kalz@gmx.de>,  "carola klose" <carolaklose@yahoo.de>,  "Carola Klose" <klosecarola@web.de>,  "Caroline Adler" <carlinschen@web.de>,  "Cathleen Passin" <c.passin@gmx.de>, "Christian Scheibe" <christian.scheibe@produktionsbuero.tv>, Christian.sc@web.de,  ChristinaSchoene@gmx.de,  claudi-gabel@gmx.de,  conny_striesen@freenet.de,  "Corinna Klose" <klosecorinna@web.de>,  Daniel.Groeber@infineon.com,  dirk.jesse@gmx.de,  h.c.@christian-hiller.de,  "Heiko Gleissert" <gleissert@griessbach.de>,  heiko.hommen@web.de,  "Helge Betzinger" <helge.betzinger@pcvisit.de>,  "Hendrik Fischer" <fischer.hendrik@hotmail.de>,  "Jan Richter" <Richter-Annaburg@t-online.de>, "Julia Ziemer" <juliaziemer@web.de>,  juliana_walther@web.de,  "Karen Lieske" <karen.lieske@bvl.bund.de>,  "Karen Ohl" <karinkarenohl@hotmail.com>,  karsten@claim-music.de,  "Katja Thieme" <kaddel.Thieme@gmx.de>,  katja.lissel@hotmail.de,  "Klaus John" <JohnKlaus@t-online.de>,  knut.smiley@gmx.de,  "Lars Jany" <lars.jany@web.de>,  lars.lesche@fh-potsdam.de,  "Livia Mothes" <livia.mothes@gmx.de>,  "Lutz Kraege" <kraege@web.de>,  "Madlen Kubitz" <Favela@gmx.li>,  "Marko Krasselt" <marko.krasselt@heiwoe.com>,  "marko schimmel" <marko.schimmel@web.de>,  "Markus Gödke" <prinz@goedke.com>,  "martin drechsel" <da_drex@web.de>,  "Martina Hommen" <hommen@webit.de>, "Mathias Knape" <Mathias.Knape@t-online.de>,  "Maxi Modes" <maximodes@gmx.de>,  "Michael Sander" <sander.liegau@web.de>,  "Michael Thieme" <mail@mt4.de>, "Michaela Mertes" <m_mertes1979@yahoo.de>,  "Monika Mothes" <monika_mothes@web.de>, "Nicole Hauptlorenz" <nicole-hau@freenet.de>,  "Nicole Tetzlaff" <nigy@gmx.net>,  "Norman Sander" <die.norm@web.de>,  "Norman Sander" <norman@nsander.de>,  "Raik Passin" <r.passin@web.de>, "Robert Walther" <robert_walther@gmx.de>,  "Ronald Bock" <R.Bock-Stahlbaumontage@gmx.de>,  "Ronny Schrottke" <ronnys76@web.de>,  "Ronny Wunderwald" <info@wirtuos.de>,  sabine.weisse@gmx.net,  "Sebastian Nestler" <sebastian@seiffen.com>, Soeren_Ohl@web.de,  "Stefan Mosig" <smosig@yupdesign.de>,  "Stefan Ocke" <stefan.ocke@googlemail.com>,  stephan.sachse@web.de,  store.wernigerode@jack-wolfskin.com,  "Thomas Mielchen" <thomas.mielchen@freenet.de>,  "Thomas Trompke" <info@itt-online.de>,  "Torsten Nowak" <Nowak.Torsten@gmx.de>,  "Torsten Scherer" <torsten.scherer@gmx.de>,  yvonne_birk@gmx.de
-"Saveen Krishnamurthy" <saveen@gmx.de>, <alex.und.stefan@web.de>, anja.bruch@googlemail.com
+Uwe Scheidthauer <Knuddelelch58@gmx.de>;
+ Jakob Wolf <jakobwolf@gmx.de>;
+ Mirco Kretzschmar <mirco.kretzschmar@gmx.de>;
+ albrecht.uhlig@gmx.de;
+ chris zenker <der.nasenmann@gmx.de>;
+ "Robel, Gilbert" <mail@gilbertrobel.de>;
+ sebastiannestler@web.de;
+ Steffen Köhlert <koehlert@online.de>;
+ chefplayer@web.de;
+ voigt.henry@arcor.de;
+ stb_240479@yahoo.de;
+ puffer-dd@gmx.de;
+ Anja Seidel <an-anja@gmx.de>;
+ Ricardo Mai <ricardomai@gmx.de>;
+ Ulrike Teske <ostwaerts@gmx.de>;
+ passodd@hotmail.com;
+ j.ehrlich@web.de;
+ heiko.hommen@web.de;
+ Rene Bernhardt <rbeere@nouvex.de>;
+ Rico Meinhardt <rmeinhardt@gmx.net>;
+ sven72n@web.de;
+ dusan@petek.de;
+ brigitte.hommen@web.de;
+ Marko Krasselt <marko_krasselt@web.de>;
+ mr.chico@gmx.de;
+ brigitte.hommen@t-online.de;
+ JBruch@gmx.de;
+ matthias_scholze@web.de;
+ dirschk@gmx.de;
+ Kurt Mothes <kurt.mothes@gmx.de>;
+ atze-tor@web.de;
+ sebastianzaunseder@yahoo.de;
+ Marco Gertig <gertig@gmx.de>;
+ 999flo@gmx.de;
+ maik_mildner@web.de;
+ Lars.Techritz@gmx.de;
+ rico55@web.de;
+ torsten080482@yahoo.de;
+ tfied@gmx.de;
+ schwarzgelbetreue@web.de;
+ Christian Kurth <gomanda@arcor.de>;
+ Goertz.Hildesheim@web.de;
+ robert_walther@gmx.de;
+ ronny.hanl@freenet.de;
+ angelavey@web.de;
+ h.lessel@ibz-gmbh.de;
+ mawy80@gmx.de;
+ jay_reell@gmx.de;
+ mschoetz@gmx.de;
+ d.kiessling@gmx.de;
+ 8-weltwunder@web.de;
+ Alexander Warg <alex.warg@gmx.de>;
+ alexander ziehe <heinz-becker-kap@gmx.de>;
+ André Bernhardt <Berny2@aol.com>;
+ Andreas Guethling <aguethling@web.de>;
+ Andreas Schrottke <AndreasSchrottke@bundeswehr.org>;
+ annett.kuehne@gmail.com;
+ Ben Drechsel <bedrex@web.de>;
+ Carina Kalz <carina.kalz@gmx.de>;
+ carola klose <carolaklose@yahoo.de>;
+ Carola Klose <klosecarola@web.de>;
+ Caroline Adler <carlinschen@web.de>;
+ Cathleen Passin <c.passin@gmx.de>;
+ Christian Scheibe <christian.scheibe@produktionsbuero.tv>;
+ Christian.sc@web.de;
+ ChristinaSchoene@gmx.de;
+ claudi-gabel@gmx.de;
+ conny_striesen@freenet.de;
+ Corinna Klose <klosecorinna@web.de>;
+ Daniel.Groeber@infineon.com;
+ dirk.jesse@gmx.de;
+ h.c.@christian-hiller.de;
+ Heiko Gleissert <gleissert@griessbach.de>;
+ Helge Betzinger <helge.betzinger@pcvisit.de>;
+ Hendrik Fischer <fischer.hendrik@hotmail.de>;
+ Jan Richter <Richter-Annaburg@t-online.de>;
+ Julia Ziemer <juliaziemer@web.de>;
+ juliana_walther@web.de;
+ Karen Lieske <karen.lieske@bvl.bund.de>;
+ Karen Ohl <karinkarenohl@hotmail.com>;
+ karsten@claim-music.de;
+ Katja Thieme <kaddel.Thieme@gmx.de>;
+ katja.lissel@hotmail.de;
+ Klaus John <JohnKlaus@t-online.de>;
+ knut.smiley@gmx.de;
+ Lars Jany <lars.jany@web.de>;
+ lars.lesche@fh-potsdam.de;
+ Livia Mothes <livia.mothes@gmx.de>;
+ Lutz Kraege <kraege@web.de>;
+ Madlen Kubitz <Favela@gmx.li>;
+ Marko Krasselt <marko.krasselt@heiwoe.com>;
+ Marko Schimmel <marko.schimmel@web.de>;
+ Markus Gödke <prinz@goedke.com>;
+ martin drechsel <da_drex@web.de>;
+ Mathias Knape <Mathias.Knape@t-online.de>;
+ Maxi Modes <maximodes@gmx.de>;
+ Michael Sander <sander.liegau@web.de>;
+ Michael Thieme <mail@mt4.de>;
+ Michaela Mertes <m_mertes1979@yahoo.de>;
+ Monika Mothes <monika_mothes@web.de>;
+ Nicole Hauptlorenz <nicole-hau@freenet.de>;
+ Nicole Tetzlaff <nigy@gmx.net>;
+ Norman Sander <norman@nsander.de>;
+ Ronald Bock <R.Bock-Stahlbaumontage@gmx.de>;
+ Ronny Schrottke <ronnys76@web.de>;
+ Ronny Wunderwald <info@wirtuos.de>;
+ sabine.weisse@gmx.net;
+ Sebastian Nestler <sebastian@seiffen.com>;
+ Soeren_Ohl@web.de;
+ Stefan Mosig <smosig@yupdesign.de>;
+ Stefan Ocke <stefan.ocke@googlemail.com>;
+ stephan.sachse@web.de;
+ store.wernigerode@jack-wolfskin.com;
+ Thomas Mielchen <thomas.mielchen@freenet.de>;
+ Thomas Trompke <info@itt-online.de>;
+ Torsten Nowak <Nowak.Torsten@gmx.de>;
+ Torsten Scherer <torsten.scherer@gmx.de>;
+ Yvonne Birk <yvonne_birk@gmx.de>;
+ Saveen Krishnamurthy <saveen@gmx.de>;
+ alex.und.stefan@web.de;
+ anja.bruch@googlemail.com;
+ "Andreas.Trute@googlemail.com" <Andreas.Trute@googlemail.com>;
+ bendrechsel@web.de;
+ bianca.sc@web.de;
+ "Busching, Kristin" <Kristin.Busching@kla-tencor.com>;
+ "carolin.kahlisch@gmx.de" <carolin.kahlisch@gmx.de>;
+ Caroline Adler <caroline.adler@gmx.de>;
+ Claudia Pinternagel <claudia.pinternagel@googlemail.com>;
+ Corinna Klose <corinnaklose@googlemail.com>;
+ Daniel Lehmann <daniel-l@gmx.de>;
+ Daniel Weisser <daniel.weisser@gmx.de>;
+ Dawid <dawid@barockquelle.de>;
+ Gilbert Robel <gilbert.robel@googlemail.com>;
+ Hartmut Deiwick <hartmut.deiwick@berlin.de>;
+ Jan Weisse <janweisse@gmx.de>;
+ Jens Seidel <zu.Jens.Seidel@gmx.de>;
+ Kai Wiese <wiese.lauf@freenet.de>;
+ kai <kai@claim-music.de>;
+ Kristin Busching <kristin.busching@googlemail.com>;
+ Kristin Schubert <schubert.kristin@gmail.com>;
+ Marko Schilde <marko.schilde@gmail.com>;
+ Markus Gödke <markus@goedke.com>;
+ Marko Dinda <madinda@t-online.de>;
+ Matthias Scholze <matthias@schollinet.de>;
+ Michael Sander <sander.liegau@t-online.de>;
+ nadine.deiwick@berlin.de;
+ Nora Weisse <noraweisse@hotmail.com>;
+ ric colair <ric@colair.de>;
+ ronny wunderwald <ronny@kumpelsandfriends.com>;
+ Sabine Bischof <sabine_bischof@web.de>;
+ "sabine.mothes@gmx.de" <sabine.mothes@gmx.de>;
+ Silvia Sander <sander.liegau@googlemail.com>;
+ Sindy Warg <sindy.warg@gmx.de>;
+ sven.hesslich@web.de;
+ Thomas Görlitz <goerli110@web.de>;
+ Thomas Trompke <thomas.trompke@gmx.de>;
+ launch-coworking@googlegroups.com;
+ team@objectfab.de
 
 EM 2012 Tippspiel auf soemo.org - Bereit zum Pokalgewinnen
 -------
