@@ -1,11 +1,10 @@
 ﻿TODO:
 
-- check/test ob hourly Scheduler mit runwhen funktioniert
-** erster Versuch war erfolgreich
-
-- Ergebniss Grabber  vom FootieFox - Em2012 ist da
+- Ergebniss Grabber
+** Refactoring und Test
 
 - logrotate siehe DF server Aufruf mit cronjob
+** Test in einer Woche
 
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
@@ -17,8 +16,6 @@ http://www.highcharts.com/demo/line-ajax
 http://raphaeljs.com/
 
 - TESTS ERWEITERN !!!!!
-
-- user, admin_users haben kein lockversion
 
 - Anpassen für Tabletts und Phones
 ** http://twitter.github.com/bootstrap/scaffolding.html
@@ -63,6 +60,7 @@ https://uberspace.de/dokuwiki/system:daemontools
 ####################################
 
 Später:
+- user, admin_users haben kein lockversion
 - devise Upgrade
 - ssh Key nutzen zum deployment
 - Umfrage ??? poll table und poll_id am user existieren schon

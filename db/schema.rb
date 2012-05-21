@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120513221334) do
+ActiveRecord::Schema.define(:version => 20120518215257) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120513221334) do
     t.string   "team1_placeholder_name"
     t.string   "team2_placeholder_name"
     t.boolean  "finished",                             :default => false
+    t.integer  "api_match_id",                                            :null => false
   end
 
   create_table "notices", :force => true do |t|

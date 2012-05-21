@@ -9,8 +9,12 @@ describe Game do
   end
 
   it "should create" do
-    Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team1_id => 1, :team2_id => 2, :group=> "D", :round => Game::GROUP})
-    Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team1_placeholder_name => "D2", :team2_placeholder_name => "D3", :group=> "D", :round => Game::GROUP})
+    Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort",
+                  :team1_id => 1, :team2_id => 2, :group=> "D",
+                  :round => Game::GROUP, :api_match_id => 1})
+    Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort",
+                  :team1_placeholder_name => "D2", :team2_placeholder_name => "D3",
+                  :group=> "D", :round => Game::GROUP, :api_match_id => 2})
   end
 
   it "should not create" do

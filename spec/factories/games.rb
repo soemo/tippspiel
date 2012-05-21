@@ -8,6 +8,7 @@ FactoryGirl.define do
     round "round"
     start_at DateTime.now
     finished false
+    sequence(:api_match_id){|n| n }
   end
 
   factory :final, :parent => :game do

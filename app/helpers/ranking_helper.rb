@@ -26,7 +26,7 @@ module RankingHelper
                   haml_concat user.name
                 else
                   haml_concat user.name
-                  ## FIXME soeren 11.05.12 einblenden wenn Statistic soweit isthaml_concat link_to(user.name, user_statistic_path(:id => user.id), "data-toggle"=>"modal")
+                  ## FIXME soeren 11.05.12 einblenden wenn Statistic soweit ist haml_concat link_to(user.name, user_statistic_path(:id => user.id), "data-toggle"=>"modal")
                 end
               end
               haml_tag :td, before_tournament? ? "" : user.championtipp_team unless short

@@ -35,6 +35,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "webmock",            "~> 1.8.7"
   gem 'faker',              '= 0.9.5'
   gem 'factory_girl_rails', "= 1.4.0"
   gem 'webrat',             '= 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
