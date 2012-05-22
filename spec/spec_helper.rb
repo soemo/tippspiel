@@ -33,7 +33,13 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
 
-
+  # Mock des RSS-Feeds
+  config.before(:each) do
+    puts "before each"
+    WebMock.stub_http_request(:get, RSS_FEED_URL).
+            with(:headers => {'Accept' => '*/*'}).
+            to_return(:status => 200, :body => "", :headers => {})
+  end
 end
 
 def freeze_test_time(check_time=Time.now)

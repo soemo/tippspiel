@@ -44,7 +44,6 @@ module ResultGrabber
      end
    end
 
-   # FIXME soeren 21.05.12 refactoring
    def check_and_update_new_data(json_data)
      # pp json_data
      if json_data.present?
@@ -73,7 +72,9 @@ module ResultGrabber
                  raise(TippspielError, "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team1_id]} not exists!")
                end
              else
-               raise(TippspielError, "check_and_update_new_data - api_team1_id: #{api_team1_id} not in known_team_keys")
+               unless api_team1_id == -1
+                 raise(TippspielError, "check_and_update_new_data - api_team1_id: #{api_team1_id} not in known_team_keys")
+               end
              end
 
              # Teamname 2
@@ -86,7 +87,9 @@ module ResultGrabber
                  raise(TippspielError, "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team2_id]} not exists!")
                end
              else
-               raise(TippspielError, "check_and_update_new_data - api_team2_id: #{api_team2_id} not in known_team_keys")
+               unless api_team2_id == -1
+                 raise(TippspielError, "check_and_update_new_data - api_team2_id: #{api_team2_id} not in known_team_keys")
+               end
              end
 
              # Tore nur speichern, wenn das Spiel schon vorbei ist

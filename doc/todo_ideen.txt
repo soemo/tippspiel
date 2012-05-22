@@ -1,10 +1,9 @@
 ﻿TODO:
 
+- cache des RSS Feeds
+
 - Ergebniss Grabber
 ** Refactoring und Test
-
-- logrotate siehe DF server Aufruf mit cronjob
-** Test in einer Woche
 
 - Druck der Tipps mittels pdf pure ruby
 ** Test von https://github.com/pdfkit/PDFKit
