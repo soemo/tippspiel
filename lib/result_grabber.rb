@@ -61,45 +61,22 @@ module ResultGrabber
 
            game = Game.where(:api_match_id => api_match_id).first
            if game.present?
+             # nur update, wenn es in der DB noch als nicht finished markiert ist
+             unless game.finished?
 
-             # Teamname 1
-             if api_team1_id.present? && known_team_keys.include?(api_team1_id)
-               team = Team.find_by_name(EM20102_TEAMS[api_team1_id])
-               if team.present?
-                 game.update_attribute(:team1_id, team.id)
-                 Rails.logger.info("UPDATE_GAME_TEAM1: #{EM20102_TEAMS[api_team1_id]} (teamid #{team.id}) is new team for game id #{game.id}") if Rails.logger.present?
-               else
-                 raise(TippspielError, "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team1_id]} not exists!")
-               end
-             else
-               unless api_team1_id == -1
-                 raise(TippspielError, "check_and_update_new_data - api_team1_id: #{api_team1_id} not in known_team_keys")
-               end
-             end
+               # Teamname 1
+               update_team(api_team1_id, game, :team1_id, known_team_keys)
+               # Teamname 2
+               update_team(api_team2_id, game, :team2_id, known_team_keys)
 
-             # Teamname 2
-             if api_team2_id.present? && known_team_keys.include?(api_team2_id)
-               team = Team.find_by_name(EM20102_TEAMS[api_team2_id])
-               if team.present?
-                 game.update_attribute(:team2_id, team.id)
-                 Rails.logger.info("UPDATE_GAME_TEAM1: #{EM20102_TEAMS[api_team2_id]} (teamid #{team.id}) is new team for game id #{game.id}") if Rails.logger.present?
-               else
-                 raise(TippspielError, "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team2_id]} not exists!")
-               end
-             else
-               unless api_team2_id == -1
-                 raise(TippspielError, "check_and_update_new_data - api_team2_id: #{api_team2_id} not in known_team_keys")
+               # Tore nur speichern, wenn das Spiel schon vorbei ist
+               if api_status.present? && api_status == API_GAME_STATUS_FINISHED
+                 game.update_attributes({:team1_goals => api_team1_goals.to_i,
+                                         :team2_goals => api_team2_goals.to_i,
+                                         :finished => true})
+                 Rails.logger.info("UPDATE_GAME: Game(#{game.to_s}) got new score #{game.team1_goals}:#{game.team2_goals} and set to finished") if Rails.logger.present?
                end
              end
-
-             # Tore nur speichern, wenn das Spiel schon vorbei ist
-             if api_status.present? && api_status == API_GAME_STATUS_FINISHED
-               game.update_attributes({:team1_goals => api_team1_goals.to_i,
-                                       :team2_goals => api_team2_goals.to_i,
-                                       :finished => true})
-               Rails.logger.info("UPDATE_GAME: Game(#{game.to_s}) got new score #{game.team1_goals}:#{game.team2_goals} and set to finished") if Rails.logger.present?
-             end
-
            else
              raise(TippspielError, "check_and_update_new_data - no game with api_match_id: #{api_match_id}")
            end
@@ -108,8 +85,28 @@ module ResultGrabber
      end # no else
    end
 
+   private
 
-  # Diese Klasse ist für die lesende Kommunikation mit Footiefox vorgesehen
+   def update_team(api_team_id, game, game_attr_sym, known_team_keys)
+     if api_team_id.present? && known_team_keys.include?(api_team_id)
+       team = Team.find_by_name(EM20102_TEAMS[api_team_id])
+       if team.present?
+         if team.id != game.send(game_attr_sym)
+           game.update_attribute(game_attr_sym, team.id)
+           Rails.logger.info("UPDATE_GAME_TEAM1: #{EM20102_TEAMS[api_team_id]} (teamid #{team.id}) is new team for game id #{game.id}") if Rails.logger.present?
+         end
+       else
+         raise(TippspielError, "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team_id]} not exists!")
+       end
+     else
+       unless api_team_id == -1
+         raise(TippspielError, "check_and_update_new_data - api #{game_attr_sym}: #{api_team_id} not in known_team_keys")
+       end
+     end
+   end
+
+
+   # Diese Klasse ist für die lesende Kommunikation mit Footiefox vorgesehen
   class FootieFox
 
     REQUEST_TIMEOUT = 300

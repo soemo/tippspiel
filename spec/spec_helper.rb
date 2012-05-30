@@ -35,7 +35,6 @@ RSpec.configure do |config|
 
   # Mock des RSS-Feeds
   config.before(:each) do
-    puts "before each"
     WebMock.stub_http_request(:get, RSS_FEED_URL).
             with(:headers => {'Accept' => '*/*'}).
             to_return(:status => 200, :body => "", :headers => {})

@@ -2,24 +2,9 @@
 
 - cache des RSS Feeds
 
-- Ergebniss Grabber
-** Refactoring und Test
-
-- Druck der Tipps mittels pdf pure ruby
-** Test von https://github.com/pdfkit/PDFKit
-** oder https://github.com/mileszs/wicked_pdf
-
-- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart
-** Highchart oder Raphael nutzen
-http://www.highcharts.com/demo/line-ajax
-http://raphaeljs.com/
-
-- TESTS ERWEITERN !!!!!
-
 - Anpassen für Tabletts und Phones
 ** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
-
 
 
 -- uberspace ---
@@ -59,16 +44,32 @@ https://uberspace.de/dokuwiki/system:daemontools
 ####################################
 
 Später:
+- TESTS ERWEITERN !!!!!
+
 - user, admin_users haben kein lockversion
+
 - devise Upgrade
+
 - ssh Key nutzen zum deployment
+
 - Umfrage ??? poll table und poll_id am user existieren schon
+
 - englische Seite
 ** Übersetzen Hilfe i18n yml ,....
+
 - Flags als Image-Sprite
 ** dann als BG-icon anzeigen und an Model Team ein Attr. css_flag_class oder eine Helper-Methode?
+
 - Flagen in Selectbox?
 ** http://www.marghoobsuleman.com/jquery-image-dropdown
+
+- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart
+** Highchart nutzen http://www.highcharts.com/demo/line-labels
+
+- Druck der Tipps mittels pdf pure ruby
+** Test von https://github.com/pdfkit/PDFKit
+** oder https://github.com/mileszs/wicked_pdf
+
 
 
 ### Einladungsmail EM2012 #########################

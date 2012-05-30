@@ -7,7 +7,7 @@ describe ResultGrabber do
   describe "calculate all user tipp points" do
     before :each do
       Game.destroy_all
-      
+
       @italy_api_team_id   = 924
       Factory(:team, :name => ResultGrabber::EM20102_TEAMS[@italy_api_team_id])
       @germany_api_team_id = 940
@@ -61,6 +61,99 @@ describe ResultGrabber do
         end
       end
     end
+
+    it "should raise error" do
+      json_data = {"leagueID" => 107,
+                   "is_tournament" => true,
+                   "timestamp" => "2012-04-27 17:31:50",
+                   "matches" =>
+                           [
+                                   {"tournament_group" => "FINAL",
+                                    "matchID" => 42, #unknown match id
+                                    "team1Id" => 2, # unknown id
+                                    "team1Score" => @api_game3_team1_score,
+                                    "team2Id" => -1,
+                                    "team2Score" => @api_game3_team2_score,
+                                    "startTime" => "2012-06-16 18:45:00",
+                                    "status" => "scheduled",
+                                    "phase" => 0}
+                           ]}
+      lambda {
+        check_and_update_new_data(json_data)
+      }.should raise_error(TippspielError, "check_and_update_new_data - no game with api_match_id: 42")
+
+
+      json_data = {"leagueID" => 107,
+                   "is_tournament" => true,
+                   "timestamp" => "2012-04-27 17:31:50",
+                   "matches" =>
+                           [
+                                   {"tournament_group" => "FINAL",
+                                    "matchID" => @game3_api_match_id,
+                                    "team1Id" => 2, # unknown id
+                                    "team1Score" => @api_game3_team1_score,
+                                    "team2Id" => -1,
+                                    "team2Score" => @api_game3_team2_score,
+                                    "startTime" => "2012-06-16 18:45:00",
+                                    "status" => "scheduled",
+                                    "phase" => 0}
+                           ]}
+      lambda {
+        check_and_update_new_data(json_data)
+      }.should raise_error(TippspielError, "check_and_update_new_data - api team1_id: 2 not in known_team_keys")
+
+      json_data = {"leagueID" => 107,
+                   "is_tournament" => true,
+                   "timestamp" => "2012-04-27 17:31:50",
+                   "matches" =>
+                           [
+                                   {"tournament_group" => "FINAL",
+                                    "matchID" => @game3_api_match_id,
+                                    "team1Id" => -1,
+                                    "team1Score" => @api_game3_team1_score,
+                                    "team2Id" => 2,# unknown id
+                                    "team2Score" => @api_game3_team2_score,
+                                    "startTime" => "2012-06-16 18:45:00",
+                                    "status" => "scheduled",
+                                    "phase" => 0}
+                           ]}
+      lambda {
+        check_and_update_new_data(json_data)
+      }.should raise_error(TippspielError, "check_and_update_new_data - api team2_id: 2 not in known_team_keys")
+
+
+    end
+
+    it "should not update teams with teamId -1" do
+      json_data = {"leagueID" => 107,
+                   "is_tournament" => true,
+                   "timestamp" => "2012-04-27 17:31:50",
+                   "matches" =>
+                           [
+                            {"tournament_group" => "FINAL",
+                             "matchID" => @game3_api_match_id,
+                             "team1Id" => -1,
+                             "team1Score" => @api_game3_team1_score,
+                             "team2Id" => -1,
+                             "team2Score" => @api_game3_team2_score,
+                             "startTime" => "2012-06-16 18:45:00",
+                             "status" => "scheduled",
+                             "phase" => 0}
+                           ]}
+
+      check_and_update_new_data(json_data)
+
+      game3 = Game.find(@game3.id)
+      game3.team1.should == nil
+      game3.team1_placeholder_name.should =~ /teamname/
+      game3.team2.should == nil
+      game3.team2_placeholder_name.should =~ /teamname/
+      game3.team1_goals.should == nil
+      game3.team2_goals.should == nil
+      game3.finished.should == false
+
+    end
+
 
     it "should update team names but not game goals" do
       # Spiele sind noch nicht beendet
@@ -123,7 +216,6 @@ describe ResultGrabber do
     end
 
     it "should update team names and game1 goals" do
-      # Spiele sind noch nicht beendet
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
                    "timestamp" => "2012-04-27 17:31:50",
@@ -182,9 +274,37 @@ describe ResultGrabber do
 
     end
 
+    it "should not update team names and goals (because game is in DB marked as finished)" do
+      # Spiele sind noch nicht beendet
+      json_data = {"leagueID" => 107,
+                   "is_tournament" => true,
+                   "timestamp" => "2012-04-27 17:31:50",
+                   "matches" =>
+                           [{"tournament_group" => "Gruppe A",
+                             "matchID" => @game1_api_match_id,
+                             "team1Id" => @germany_api_team_id,
+                             "team1Score" => @api_game1_team1_score,
+                             "team2Id" => @italy_api_team_id,
+                             "team2Score" => @api_game1_team2_score,
+                             "startTime" => "2012-06-08 16:00:00",
+                             "status" => "finished", # <--- beendet
+                             "phase" => 0}
+                           ]}
+
+      game1 = Game.find(@game1.id)
+      game1.update_attribute(:finished, true)
+
+      check_and_update_new_data(json_data)
+
+      game1 = Game.find(@game1.id)
+      game1.team1.name.should_not == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
+      game1.team2.name.should_not == ResultGrabber::EM20102_TEAMS[@italy_api_team_id]
+      game1.team1_goals.should == nil
+      game1.team2_goals.should == nil
+      game1.finished.should == true
+    end
 
     it "should update team names and all game" do
-      # Spiele sind noch nicht beendet
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
                    "timestamp" => "2012-04-27 17:31:50",
