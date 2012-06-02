@@ -1,23 +1,47 @@
 - if games_round_hash.present?
-  %table.table.table-striped.table-condensed
-    - games_round_hash.each do |_, round_with_games|
-      - round_with_games.each_pair do |round_name, games|
-        %thead
-          %tr
-            %th.round_name{:colspan => 5}= t(round_name, :scope => "round")
-          %tr.next_to_round_name
-            %th= Game.human_attribute_name("start_at")
-            %th= Game.human_attribute_name("place")
-            %th= Game.human_attribute_name("team1")
-            %th= Game.human_attribute_name("team2")
-            %th= Game.human_attribute_name("result")
-        %tbody
-          - games.each do |game|
-            %tr{:class => cycle('even', 'odd')}
-              %td= l(game.start_at, :format => :default)
-              %td= game.place
-              %td
-                - write_team_with_flag(game.team1_view_name, game.team1_flag_path)
-              %td
-                - write_team_with_flag(game.team2_view_name, game.team2_flag_path)
-              %td= game.team1_goals.to_s + " - " + game.team2_goals.to_s
+
+  -# for phone
+  .visible-phone
+    %table.table.table-striped.table-condensed
+      - games_round_hash.each do |_, round_with_games|
+        - round_with_games.each_pair do |round_name, games|
+          %thead
+            %tr
+              %th.round_name{:colspan => 3}= t(round_name, :scope => "round")
+          %tbody
+            - games.each do |game|
+              %tr
+                %td
+                  = l(game.start_at, :format => :default)
+                  %br
+                  = game.place
+                %td
+                  - write_team_with_flag(game.team1_view_name, game.team1_flag_path, "#{game.team1_goals}<br/>".html_safe )
+                %td
+                  - write_team_with_flag(game.team2_view_name, game.team2_flag_path, "#{game.team2_goals}<br/>".html_safe)
+
+
+  -# not for phone
+  .hidden-phone
+    %table.table.table-striped.table-condensed
+      - games_round_hash.each do |_, round_with_games|
+        - round_with_games.each_pair do |round_name, games|
+          %thead
+            %tr
+              %th.round_name{:colspan => 5}= t(round_name, :scope => "round")
+            %tr.next_to_round_name
+              %th= Game.human_attribute_name("start_at")
+              %th= Game.human_attribute_name("place")
+              %th= Game.human_attribute_name("team1")
+              %th= Game.human_attribute_name("team2")
+              %th= Game.human_attribute_name("result")
+          %tbody
+            - games.each do |game|
+              %tr
+                %td= l(game.start_at, :format => :default)
+                %td= game.place
+                %td
+                  - write_team_with_flag(game.team1_view_name, game.team1_flag_path)
+                %td
+                  - write_team_with_flag(game.team2_view_name, game.team2_flag_path)
+                %td= game.team1_goals.to_s + " - " + game.team2_goals.to_s

@@ -44,10 +44,10 @@ module ResultGrabber
 
      Rails.logger.error(errors.inspect) if errors.present?
      Rails.logger.info(infos.inspect) if infos.present?
-       # FIXME soeren 02.06.12 wieder rein
-     #if errors.present? || infos.present?
+
+     if errors.present? || infos.present?
        AdminMailer.result_grabber_email(errors, infos).deliver
-     #end
+     end
    end
 
    def check_and_update_new_data(json_data, errors=[], infos=[])

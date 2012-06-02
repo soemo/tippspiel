@@ -3,7 +3,7 @@
 - Anpassen für Tabletts und Phones
 ** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
-
+-->Spieleliste schon gemacht
 
 -- uberspace ---
 Start standalone passenger

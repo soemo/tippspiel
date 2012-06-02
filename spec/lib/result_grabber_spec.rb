@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ResultGrabber do
 
   include ResultGrabber
-                 #FIXME soeren 02.06.12 test info array
+
   describe "calculate all user tipp points" do
     before :each do
       Game.destroy_all
