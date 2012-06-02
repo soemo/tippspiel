@@ -76,6 +76,7 @@ module ApplicationHelper
       write_sidebar_links
       write_sidebar_notes
       write_sidebar_rss_feed(@rss_title, @last_rss_entries)
+      write_extern_links
     end
   end
 
@@ -91,6 +92,20 @@ module ApplicationHelper
     end
   end
 
+  def write_extern_links
+    haml_tag :h4, 'Links'
+    haml_tag :br
+    haml_tag :p do
+      haml_concat link_to("EM Planer [PDF]", "http://motzigemba.de/files/planer2012.pdf", :target =>"_blank")
+      haml_tag :br
+      haml_concat link_to("UEFA", "http://de.uefa.com/uefaeuro/", :target =>"_blank")
+      haml_tag :br
+      haml_concat link_to("EM2012 Wikipedia", "http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012", :target=>"_blank")
+      haml_tag :br
+      haml_concat link_to("EM2012 Sportschau", "http://www.sportschau.de/fussball/uefaeuro2012/index.html", :target=>"_blank")
+    end
+    haml_tag :hr
+  end
 
   def write_sidebar_notes
     if current_user.present?
@@ -118,14 +133,15 @@ module ApplicationHelper
     if entries.present?
       entries.each do |e|
         haml_tag :p do
-          haml_tag "span.rss_date", l(e.date_published)
+          haml_tag "span.rss_date", l(e["date_published"].to_date)
           haml_tag :br
-          haml_concat link_to(e.title, e.url, :target => "_blank")
+          haml_concat link_to(e["title"], e["urls"][0], :target => "_blank")
           haml_tag :br
-          haml_concat e.content
+          haml_concat e["content"]
         end
       end
     end
+    haml_tag :hr
   end
 
   def write_main_nav

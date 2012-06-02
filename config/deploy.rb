@@ -3,7 +3,11 @@ set :default_stage, "beta-tippspiel"
 
 require "capistrano/ext/multistage"
 
-set :repository, "ssh://soemo@taurus.uberspace.de/home/soemo/git/tippspiel.git"
+# auf lokales git zugreifen
+set :repository, "/home/soemo/git/tippspiel.git"
+set :local_repository, "soemo@taurus.uberspace.de:git/tippspiel.git"
+# remote
+#set :repository, "ssh://soemo@taurus.uberspace.de/home/soemo/git/tippspiel.git"
 set :branch, "master"
 set :scm, :git
 set :scm_verbose, true

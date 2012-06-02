@@ -6,15 +6,31 @@ module RssReader
   require 'open-uri'
   require 'timeout'
 
+  # den Feed holen und in eine Datei abspeichern,
+  # nach 1h erst erneut holen
   def parse(url)
-    ## FIXME soeren 16.05.12 caching
     feed = nil
+
     begin
-    status = Timeout::timeout(5) {
-      feed = FeedNormalizer::FeedNormalizer.parse open(url)
-    }
-    rescue Timeout::Error => e
-      puts e.to_s
+      file = File.join(File.expand_path(Rails.root), "tmp", "rss_feed_cache.xml")
+      if (File.exists?(file) && File.mtime(file) < 1.hour.ago)
+        File.delete(file)
+      end
+
+      unless  File.exists?(file)
+        feed_xml_data = open(url)
+        feed = FeedNormalizer::FeedNormalizer.parse feed_xml_data if feed_xml_data.present?
+        feed = feed.to_json
+        if feed.present?
+          File.open(file, "w+") do |f|
+            f.write feed
+          end
+        end
+      end
+
+      feed =  JSON.parse(File.read(file)) if File.exists?(file)
+    rescue Exception => e
+      puts "Error by grab RSS-Feed : #{e.to_s}"
     end
 
     feed
@@ -25,8 +41,8 @@ module RssReader
     entries = []
     feed = parse(url)
     if feed.present?
-      title = feed.title
-      entries = feed.entries[0...size]
+      title = feed["title"]
+      entries = feed["items"][0...size]
     end
 
     [title, entries]

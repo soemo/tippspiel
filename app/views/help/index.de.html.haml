@@ -11,21 +11,14 @@
       %br
       = mail_to MAIL, MAIL, :encode => :hex
   %hr
-  %p
-    %h4= 'Links'
-    %p
-      = link_to("UEFA", "http://de.uefa.com/uefaeuro/", :target =>"_blank")
-      %br
-      = link_to("EM2012 Wikipedia", "http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012", :target=>"_blank")
-      %br
-      = link_to("EM2012 Sportschau", "http://www.sportschau.de/fussball/uefaeuro2012/index.html", :target=>"_blank")
-  %hr
+
 
 %h3= t('app_name') + " - " + t('help')
 %p
   Die Regeln sind recht einfach erklärt:
   %br
-    Jeder der sich anmeldet, kann mittippen. Alle Spieltipps können bis Beginn des Spieles abgegeben werden.
+    Jeder der sich anmeldet, kann mittippen.
+    Der Tipp für ein Spiel kann bis zum Anpfiff des Spieles abgegeben werden.
   %br
   %b
     Pro Spiel gibt es maximal #{CalculatePoints::MAX_POINTS_PRO_TIPP} Punkte:
