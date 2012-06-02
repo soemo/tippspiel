@@ -34,17 +34,23 @@ module ResultGrabber
    }
 
    def update_games
-     errors = []
+     errors     = []
+     infos      = []
      grabber = FootieFox.new(RESULT_URL_EM2012)
      json_result = grabber.get_result(errors)
      if json_result.present?
-       check_and_update_new_data(json_result)
-     else
-       Rails.logger.error(errors.inspect)
+       check_and_update_new_data(json_result, errors, infos)
      end
+
+     Rails.logger.error(errors.inspect) if errors.present?
+     Rails.logger.info(infos.inspect) if infos.present?
+       # FIXME soeren 02.06.12 wieder rein
+     #if errors.present? || infos.present?
+       AdminMailer.result_grabber_email(errors, infos).deliver
+     #end
    end
 
-   def check_and_update_new_data(json_data)
+   def check_and_update_new_data(json_data, errors=[], infos=[])
      # pp json_data
      if json_data.present?
        game_results = json_data["matches"]
@@ -65,20 +71,20 @@ module ResultGrabber
              unless game.finished?
 
                # Teamname 1
-               update_team(api_team1_id, game, :team1_id, known_team_keys)
+               update_team(api_team1_id, game, :team1_id, known_team_keys, errors, infos)
                # Teamname 2
-               update_team(api_team2_id, game, :team2_id, known_team_keys)
+               update_team(api_team2_id, game, :team2_id, known_team_keys, errors, infos)
 
                # Tore nur speichern, wenn das Spiel schon vorbei ist
                if api_status.present? && api_status == API_GAME_STATUS_FINISHED
                  game.update_attributes({:team1_goals => api_team1_goals.to_i,
                                          :team2_goals => api_team2_goals.to_i,
                                          :finished => true})
-                 Rails.logger.info("UPDATE_GAME: Game(#{game.to_s}) got new score #{game.team1_goals}:#{game.team2_goals} and set to finished") if Rails.logger.present?
+                 infos << "UPDATE_GAME: Game(#{game.to_s}) got new score #{game.team1_goals}:#{game.team2_goals} and set to finished"
                end
              end
            else
-             raise(TippspielError, "check_and_update_new_data - no game with api_match_id: #{api_match_id}")
+             errors << "check_and_update_new_data - no game with api_match_id: #{api_match_id}"
            end
          end
        end # no else
@@ -87,20 +93,20 @@ module ResultGrabber
 
    private
 
-   def update_team(api_team_id, game, game_attr_sym, known_team_keys)
+   def update_team(api_team_id, game, game_attr_sym, known_team_keys, errors, infos)
      if api_team_id.present? && known_team_keys.include?(api_team_id)
        team = Team.find_by_name(EM20102_TEAMS[api_team_id])
        if team.present?
          if team.id != game.send(game_attr_sym)
            game.update_attribute(game_attr_sym, team.id)
-           Rails.logger.info("UPDATE_GAME_TEAM1: #{EM20102_TEAMS[api_team_id]} (teamid #{team.id}) is new team for game id #{game.id}") if Rails.logger.present?
+           infos << "UPDATE_GAME_TEAM: #{EM20102_TEAMS[api_team_id]} (teamid #{team.id}) is new team for game id #{game.id}"
          end
        else
-         raise(TippspielError, "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team_id]} not exists!")
+         errors << "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team_id]} not exists!"
        end
      else
        unless api_team_id == -1
-         raise(TippspielError, "check_and_update_new_data - api #{game_attr_sym}: #{api_team_id} not in known_team_keys")
+         errors << "check_and_update_new_data - api #{game_attr_sym}: #{api_team_id} not in known_team_keys"
        end
      end
    end

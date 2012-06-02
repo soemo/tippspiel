@@ -102,7 +102,7 @@ module ApplicationHelper
       haml_tag :br
       haml_concat link_to("EM2012 Wikipedia", "http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012", :target=>"_blank")
       haml_tag :br
-      haml_concat link_to("EM2012 Sportschau", "http://www.sportschau.de/fussball/uefaeuro2012/index.html", :target=>"_blank")
+      haml_concat link_to("EM2012 Sportschau", "http://www.sportschau.de/uefaeuro2012/", :target=>"_blank")
     end
     haml_tag :hr
   end

@@ -1,0 +1,19 @@
+!!! 5
+%head
+  %meta{"http-equiv"=>"Content-Type", :content=>"text/html;charset=UTF-8"}
+%body
+  %h1
+    Result Grabber
+    = link_to root_path
+
+  - if @error_msg_array.present?
+    %h2
+      Errors
+    %p
+      = @error_msg_array.inspect
+
+  - if @info_msg_array
+    %h2
+      Infos
+    %p
+      = @info_msg_array.inspect

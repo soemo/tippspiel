@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ResultGrabber do
 
   include ResultGrabber
-
+                 #FIXME soeren 02.06.12 test info array
   describe "calculate all user tipp points" do
     before :each do
       Game.destroy_all
@@ -62,7 +62,9 @@ describe ResultGrabber do
       end
     end
 
-    it "should raise error" do
+    it "should get error" do
+      errors = []
+      infos  = []
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
                    "timestamp" => "2012-04-27 17:31:50",
@@ -78,10 +80,9 @@ describe ResultGrabber do
                                     "status" => "scheduled",
                                     "phase" => 0}
                            ]}
-      lambda {
-        check_and_update_new_data(json_data)
-      }.should raise_error(TippspielError, "check_and_update_new_data - no game with api_match_id: 42")
-
+      check_and_update_new_data(json_data, errors, infos)
+      errors[0].should == "check_and_update_new_data - no game with api_match_id: 42"
+      infos.should be_empty
 
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
@@ -98,9 +99,11 @@ describe ResultGrabber do
                                     "status" => "scheduled",
                                     "phase" => 0}
                            ]}
-      lambda {
-        check_and_update_new_data(json_data)
-      }.should raise_error(TippspielError, "check_and_update_new_data - api team1_id: 2 not in known_team_keys")
+      errors = []
+      infos  = []
+      check_and_update_new_data(json_data, errors, infos)
+      errors[0].should == "check_and_update_new_data - api team1_id: 2 not in known_team_keys"
+      infos.should be_empty
 
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
@@ -117,14 +120,16 @@ describe ResultGrabber do
                                     "status" => "scheduled",
                                     "phase" => 0}
                            ]}
-      lambda {
-        check_and_update_new_data(json_data)
-      }.should raise_error(TippspielError, "check_and_update_new_data - api team2_id: 2 not in known_team_keys")
-
-
+      errors = []
+      infos  = []
+      check_and_update_new_data(json_data, errors, infos)
+      errors[0].should == "check_and_update_new_data - api team2_id: 2 not in known_team_keys"
+      infos.should be_empty
     end
 
     it "should not update teams with teamId -1" do
+      errors = []
+      infos  = []
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
                    "timestamp" => "2012-04-27 17:31:50",
@@ -141,7 +146,9 @@ describe ResultGrabber do
                              "phase" => 0}
                            ]}
 
-      check_and_update_new_data(json_data)
+      check_and_update_new_data(json_data, errors, infos)
+      errors.should be_empty
+      infos.should be_empty
 
       game3 = Game.find(@game3.id)
       game3.team1.should == nil
@@ -156,6 +163,9 @@ describe ResultGrabber do
 
 
     it "should update team names but not game goals" do
+      errors = []
+      infos  = []
+
       # Spiele sind noch nicht beendet
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
@@ -190,8 +200,10 @@ describe ResultGrabber do
                              "phase" => 0}
                            ]}
 
-      check_and_update_new_data(json_data)
-      
+      check_and_update_new_data(json_data, errors, infos)
+      errors.should be_empty
+      infos.should be_present
+
       game1 = Game.find(@game1.id)
       game1.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
       game1.team2.name.should == ResultGrabber::EM20102_TEAMS[@italy_api_team_id]

@@ -1,7 +1,5 @@
 ﻿TODO:
 
-- cache des RSS Feeds
-
 - Anpassen für Tabletts und Phones
 ** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
