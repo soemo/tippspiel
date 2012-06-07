@@ -6,11 +6,21 @@
   %meta{:charset => 'utf-8'}
   %title= get_title
   = csrf_meta_tag
-  %meta{:name => 'description', :content => "Fußball-Tippspiel auf soemo.org"}
+  - description = "Fußball-Tippspiel auf soemo.org - Um einen Wanderpokal, verbunden mit unbeschreiblichem Ruhm und uneingeschräktem Prahlrecht."
+  %meta{:name => 'description', :content => description}
   %meta{:name => 'author', :content => 'Soeren Mothes'}
   %link{:rel => "shortcut icon", :href => "/favicon.ico"}
 
-  -# todo  Facebook metatags opengraph og
+  -# opengraph metatags
+  - url = "http://tippspiel.soemo.org"
+  %meta{:property=>"og:url", :content=>url}
+  %meta{:property=>"og:type", :content=>"website"}
+  %meta{:property=>"og:site_name", :content=>"#{t('app_name')}"}
+  %meta{:property=>"og:title", :content=>get_title}
+  %meta{:property=>"og:description", :content=>description}
+  - img_url = url + image_path("pokal.jpg")
+  %link{:rel=>"image_src", :href=>img_url}
+  %meta{:property=>"og:image", :content=>img_url}
 
   :erb
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
