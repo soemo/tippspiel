@@ -9,6 +9,7 @@ $(function() {
   ajax_load_modal_content();
 
   // Navbar, fuer IE < 9 wird sie nicht aktiv
+  //# FIXME soeren 06.06.12  passiert das auch noch mit einer neueren Bootstrap Version
   if (! (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) < 9)) {
     $(".collapse").collapse('hide');
   } else{

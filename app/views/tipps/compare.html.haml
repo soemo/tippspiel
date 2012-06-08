@@ -30,5 +30,5 @@
       - allowed_to_show = !tipp.edit_allowed?
       %tr{:class => cycle('even', 'odd')}
         %td= tipp.user.name
-        %td= allowed_to_show ? "#{tipp.team1_goals}:#{tipp.team2_goals}" : ""
+        %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""
         %td= allowed_to_show ? tipp.tipp_punkte : ""

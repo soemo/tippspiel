@@ -35,6 +35,7 @@ de:
   save_tipp: "Tipps speichern"
   compare_tipps: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
+  points_statistic: Punkteverteilung
 
   main: "Home"
   help: "Hilfe"
@@ -47,6 +48,7 @@ de:
   delete_link: "Löschen"
   please_select: "Bitte auswählen"
   standings: Platz
+  full_ranking_list: Komplette Rangliste
 
   write_notice: Bemerkung schreiben
   characters_remaining: "Verbleibende Zeichen: "

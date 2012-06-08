@@ -25,6 +25,7 @@ en:
   compare: Compare
   compare_tipps: "Compare tipps"
   hall_of_fame: "Hall of Fame"
+  points_statistic: Points statistic
 
   main: "Home"
   help: "Help"
@@ -32,6 +33,7 @@ en:
   notice: Shoptalk
   tournament: "Tournament"
   tipps: "Hints"
+  full_ranking_list: Full ranking list
 
   back_link: "back"
   edit_link: "edit"

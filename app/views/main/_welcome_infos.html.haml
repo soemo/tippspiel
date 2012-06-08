@@ -38,10 +38,12 @@
           %th= Game.human_attribute_name("team1")
           %th= Game.human_attribute_name("team2")
           %th= Game.human_attribute_name("result")
-      - today_games.each do |game|
-        %tbody
-          %tr{:class => cycle('even', 'odd')}
+      %tbody
+        - today_games.each do |game|
+          %tr
             %td= l(game.start_at, :format => :time)
-            %td= game.team1_view_name
-            %td= game.team2_view_name
-            %td= game.team1_goals.to_s + " - " + game.team2_goals.to_s
+            %td
+              - write_team_with_flag(game.team1_view_name, game.team1_flag_path)
+            %td
+              - write_team_with_flag(game.team2_view_name, game.team2_flag_path)
+            %td= "#{game.team1_goals} - #{game.team2_goals}"

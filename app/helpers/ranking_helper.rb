@@ -1,7 +1,6 @@
 module RankingHelper
 
   # schreibt die Rankingtabelle
-  # solange das Turnier noch nicht begonnen hat, wird nichts angezeigt
   def write_ranking_table(user_hash, short=false)
     haml_tag "table.table.table-striped.table-condensed.ranking" do
       haml_tag :thead do
@@ -18,7 +17,8 @@ module RankingHelper
       haml_tag :tbody do
         user_hash.each do |place, users_on_same_place|
           users_on_same_place.each_with_index do |user, index|
-            next if index > 3 && short.present? && before_tournament?  # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden.
+             # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden oder wenn die User noch 0 Punkte haben
+            next if index > 3 && short.present? && (before_tournament? || user.points == 0)
             haml_tag "tr.#{cycle('even', 'odd')}" do
               haml_tag :td, place
               haml_tag :td do
@@ -38,7 +38,7 @@ module RankingHelper
     end
     if short.present?
       haml_tag :p do
-        haml_concat link_to(t("ranking"), ranking_path)
+        haml_concat link_to(t("full_ranking_list"), ranking_path)
       end
     end
   end
@@ -46,8 +46,8 @@ module RankingHelper
   def statistic_point_popover_link(user, css_class ="statistic_popover")
     if user.present?
       content = statistik_tooltip(user)
-      title = "Punkteverteilung"
-      user_points = user.points.present? ? user_points.to_s : "0"
+      title = user.name
+      user_points = user.points.present? ? user.points.to_s : "0"
       link_to(user_points, "#",
               {:class => css_class, :rel => "popover", "data-content" => content,
               "data-original-title" => title})
@@ -56,7 +56,7 @@ module RankingHelper
 
   def statistik_tooltip(user)
     temp = []
-    temp << "#{user.name}"
+    temp << "<b>#{I18n.t('points_statistic')}</b>".html_safe
     temp << "#{user.count6points.present? ? user.count6points : 0} x 6 Punkte"
     temp << "#{user.count4points.present? ? user.count6points : 0} x 4 Punkte"
     temp << "#{user.count3points.present? ? user.count6points : 0} x 3 Punkte"
