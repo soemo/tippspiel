@@ -58,9 +58,9 @@ module RankingHelper
     temp = []
     temp << "<b>#{I18n.t('points_statistic')}</b>".html_safe
     temp << "#{user.count6points.present? ? user.count6points : 0} x 6 Punkte"
-    temp << "#{user.count4points.present? ? user.count6points : 0} x 4 Punkte"
-    temp << "#{user.count3points.present? ? user.count6points : 0} x 3 Punkte"
-    temp << "#{user.count0points.present? ? user.count6points : 0} x 0 Punkte"
+    temp << "#{user.count4points.present? ? user.count4points : 0} x 4 Punkte"
+    temp << "#{user.count3points.present? ? user.count3points : 0} x 3 Punkte"
+    temp << "#{user.count0points.present? ? user.count0points : 0} x 0 Punkte"
     temp << "Punkte Siegertipp: #{user.championtipppoints}"
     temp.join("<br/>")
   end
