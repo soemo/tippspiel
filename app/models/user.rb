@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   # geliefert
   # Es wird noch die Platzierung als Key hinzugefuegt
   def self.prepare_user_ranking(ranking_users=User.ranking_order)
+    # FIXME soeren 08.06.12 testen testen testen
     result = {}
     if ranking_users.present?
       place = 1
@@ -67,7 +68,7 @@ class User < ActiveRecord::Base
         else
           if last_used_user.ranking_comparison_value > u.ranking_comparison_value
             place = place + 1
-            result[place] = u
+            result[place] = [u]
           elsif last_used_user.ranking_comparison_value == u.ranking_comparison_value
             same_place_users = result[place]
             result[place] = same_place_users + [u]
