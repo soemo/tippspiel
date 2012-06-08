@@ -27,8 +27,9 @@
         %th= Tipp.human_attribute_name("tipp_punkte")
     %tbody
     - @tipps.each do |tipp|
-      - allowed_to_show = !tipp.edit_allowed?
-      %tr{:class => cycle('even', 'odd')}
-        %td= tipp.user.name  if tipp.user.present?
-        %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""
-        %td= allowed_to_show ? tipp.tipp_punkte : ""
+      - if tipp.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
+        - allowed_to_show = !tipp.edit_allowed?
+        %tr{:class => cycle('even', 'odd')}
+          %td= tipp.user.name
+          %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""
+          %td= allowed_to_show ? tipp.tipp_punkte : ""

@@ -1,5 +1,7 @@
 ﻿TODO:
 
+Bugfix: es gibt nun gelöschte Nutzer, bei denen aber die Tipps noch existieren :-(
+
 - Anpassen für Tabletts und Phones
 ** http://twitter.github.com/bootstrap/scaffolding.html
 ** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
