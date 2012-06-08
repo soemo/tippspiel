@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
       end
     end
 
+    result = result.sort
     result
   end
 

@@ -1,5 +1,11 @@
 ﻿TODO:
 
+# !!!! http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/
+--> in  ~/.passenger/standalone/config auf dem uberspace
+max_pool_size 2
+min_instances 1
+
+
 Bugfix: es gibt nun gelöschte Nutzer, bei denen aber die Tipps noch existieren :-(
 
 - Anpassen für Tabletts und Phones
