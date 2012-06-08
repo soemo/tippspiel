@@ -1,10 +1,6 @@
 ﻿TODO:
 
-# !!!! http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/
---> in  ~/.passenger/standalone/config auf dem uberspace
-max_pool_size 2
-min_instances 1
-
+- Tippvergleichen: Alle Tipps eines Nutzers ansehen
 
 Bugfix: es gibt nun gelöschte Nutzer, bei denen aber die Tipps noch existieren :-(
 
@@ -256,3 +252,53 @@ Sport Frei
 Sören "Harry" Mothes
 
 Solltest Du keine weiteren E-Mails wünschen, teile es mir bitte an tippspiel@soemo.org mit.
+
+
+
+#####
+
+[soemo@taurus ~]$ passenger start --help
+Usage: passenger start [directory] [options]
+Starts Phusion Passenger Standalone and serve one or more Ruby web applications.
+
+Options:
+    -a, --address HOST               Bind to HOST address (default: 0.0.0.0)
+    -p, --port NUMBER                Use the given port number (default: 3000)
+    -S, --socket FILE                Bind to Unix domain socket instead of TCP
+                                     socket
+
+    -e, --environment ENV            Framework environment (default:
+                                     development)
+    -R, --rackup FILE                If Rack application detected, run this
+                                     rackup file
+        --max-pool-size NUMBER       Maximum number of application processes
+                                     (default: 6)
+        --min-instances NUMBER       Minimum number of processes per application
+                                     (default: 1)
+        --spawn-method NAME          The spawn method to use (default:
+                                     smart-lv2)
+        --union-station-gateway HOST:PORT
+                                     Specify Union Station Gateway host and port
+        --union-station-key KEY      Specify Union Station key
+
+        --ping-port NUMBER           Use the given port number for checking
+                                     whether Nginx is alive (default: same as
+                                     the normal port)
+
+    -d, --daemonize                  Daemonize into the background
+        --user USERNAME              User to run as. Ignored unless running as
+                                     root.
+        --log-file FILENAME          Where to write log messages (default:
+                                     console, or /dev/null when daemonized)
+        --pid-file FILENAME          Where to store the PID file
+        --nginx-bin FILENAME         Nginx binary to use as core
+        --nginx-version VERSION      Nginx version to use as core (default:
+                                     1.0.10)
+        --nginx-tarball FILENAME     If Nginx needs to be installed, then the
+                                     given tarball will be used instead of
+                                     downloading from the Internet
+        --binaries-url-root URL      If Nginx needs to be installed, then the
+                                     specified URL will be checked for binaries
+                                     prior to a local build.
+    -h, --help                       Show this help message
+

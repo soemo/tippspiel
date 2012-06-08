@@ -36,7 +36,7 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   desc "bundle exec passenger start"
   task :start, :roles => :app, :except => {:no_release => true} do
-    run "cd #{current_path} && bundle exec passenger start #{current_path} -a 127.0.0.1 -p #{standalone_passenger_port} -d -e production"
+    run "cd #{current_path} && bundle exec passenger start #{current_path} -a 127.0.0.1 -p #{standalone_passenger_port} -d -e production --max-pool-size 2"
   end
   desc "bundle exec passenger stop"
   task :stop, :roles => :app, :except => {:no_release => true} do
