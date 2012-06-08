@@ -4,7 +4,7 @@
       .alert.alert-info
         Du bist auf dem #{@own_position}. Platz!
     = render :partial => "ranking/user_ranking",
-             :locals => {:user_hash => @user_top3_ranking_hash, :short_version => true}
+             :locals => {:user_ranking => @user_top3_ranking_hash, :short_version => true}
 -else
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class=>""}) do |f|
     = custom_devise_error_messages!

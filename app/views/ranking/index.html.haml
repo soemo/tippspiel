@@ -1,3 +1,3 @@
 %h3= t("ranking")
 %p= "#{@user_count} 'Fußball-Experten' wetteifern um den Sieg."
-= render :partial => "user_ranking", :locals => {:user_hash => @user_ranking_hash, :short_version => false}
+= render :partial => "user_ranking", :locals => {:user_ranking => @user_ranking_hash, :short_version => false}

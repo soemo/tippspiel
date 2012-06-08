@@ -1,4 +1,5 @@
-- if user_hash.present?
-  - write_ranking_table(user_hash, short_version)
+- if user_ranking.present?
+  - user_ranking = user_ranking.sort
+  - write_ranking_table(user_ranking, short_version)
 - else
   %p= "No User"

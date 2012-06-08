@@ -1,7 +1,7 @@
 module RankingHelper
 
   # schreibt die Rankingtabelle
-  def write_ranking_table(user_hash, short=false)
+  def write_ranking_table(user_ranking, short=false)
     haml_tag "table.table.table-striped.table-condensed.ranking" do
       haml_tag :thead do
         haml_tag :tr do
@@ -15,7 +15,7 @@ module RankingHelper
         end
       end
       haml_tag :tbody do
-        user_hash.each do |place, users_on_same_place|
+        user_ranking.each do |place, users_on_same_place|
           users_on_same_place.each_with_index do |user, index|
              # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden oder wenn die User noch 0 Punkte haben
             next if index > 3 && short.present? && (before_tournament? || user.points == 0)

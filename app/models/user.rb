@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
   # sortiert nach Gesamtpounten, Anzahl6Punkte,Anzahl4Punkte und Anzahl3Punkte
   # geliefert
   # Es wird noch die Platzierung als Key hinzugefuegt
+  # ACHTUNG DER HASH IST NICHT SORTIERT !!!!
   def self.prepare_user_ranking(ranking_users=User.ranking_order)
     # FIXME soeren 08.06.12 testen testen testen
     result = {}
@@ -80,7 +81,6 @@ class User < ActiveRecord::Base
       end
     end
 
-    result = result.sort
     result
   end
 
