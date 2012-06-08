@@ -29,6 +29,6 @@
     - @tipps.each do |tipp|
       - allowed_to_show = !tipp.edit_allowed?
       %tr{:class => cycle('even', 'odd')}
-        %td= tipp.user.name
+        %td= tipp.user.name  if tipp.user.present?
         %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""
         %td= allowed_to_show ? tipp.tipp_punkte : ""
