@@ -25,7 +25,7 @@
                   - write_team_with_flag(game.team1_view_name, game.team1_flag_path)
                 %td
                   - write_team_with_flag(game.team2_view_name, game.team2_flag_path)
-                %td= game.team1_goals.to_s + " - " + game.team2_goals.to_s
+                %td= game.team1_goals.to_s + " : " + game.team2_goals.to_s
                 - if edit_allowed
                   %td.tipp_input_td
                     - write_tipp_input(tipp.id, "team1_goals", tipp.team1_goals)
