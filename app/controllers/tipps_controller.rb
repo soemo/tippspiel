@@ -13,7 +13,7 @@ class TippsController < ApplicationController
     elsif @posible_games.present?
       @game_to_compare = @posible_games.last
     end #no else
-    @tipps = @game_to_compare.tipps.order("tipp_punkte") if @game_to_compare.present?
+    @tipps = @game_to_compare.tipps.order("tipp_punkte desc") if @game_to_compare.present?
   end
 
   def save_tipps
