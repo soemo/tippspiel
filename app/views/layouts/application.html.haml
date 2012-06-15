@@ -8,7 +8,7 @@
 
   %title= get_title
   %meta{:name => 'author', :content => 'Soeren Mothes'}
-  - url = "http://tippspiel.soemo.org"
+  - url = "#{request.protocol}#{request.host_with_port}"
   %meta{:property=>"og:url", :content=>url}
   %meta{:property=>"og:type", :content=>"website"}
   %meta{:property=>"og:site_name", :content=>"#{t('app_name')}"}

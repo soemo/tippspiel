@@ -143,6 +143,13 @@ describe CalculatePoints do
       Factory(:tipp, :user => @user5, :game => @game3, :team1_goals => 0, :team2_goals => 1)
       Factory(:tipp, :user => @user5, :game => @game4, :team1_goals => 2, :team2_goals => 1)
       Factory(:tipp, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
+      # hat keinen Tipp abgegeben
+      @user6 = Factory(:user, :championtipp_team_id => nil)
+      Factory(:tipp, :user => @user6, :game => @game1, :team1_goals => nil, :team2_goals => nil)
+      Factory(:tipp, :user => @user6, :game => @game2, :team1_goals => nil, :team2_goals => nil)
+      Factory(:tipp, :user => @user6, :game => @game3, :team1_goals => nil, :team2_goals => nil)
+      Factory(:tipp, :user => @user6, :game => @game4, :team1_goals => nil, :team2_goals => nil)
+      Factory(:tipp, :user => @user6, :game => @game5, :team1_goals => nil, :team2_goals => nil)
     end
 
     it "after first game finished" do
@@ -190,6 +197,14 @@ describe CalculatePoints do
       user.count4points.should == 0
       user.count3points.should == 0
       user.count0points.should == 0
+
+      user = User.find(@user6.id)
+      user.points.should == 0
+      user.championtipppoints.should == 0
+      user.count6points.should == 0
+      user.count4points.should == 0
+      user.count3points.should == 0
+      user.count0points.should == 1
 
     end
 
@@ -239,6 +254,14 @@ describe CalculatePoints do
       user.count4points.should == 0
       user.count3points.should == 0
       user.count0points.should == 0
+
+      user = User.find(@user6.id)
+      user.points.should == 0
+      user.championtipppoints.should == 0
+      user.count6points.should == 0
+      user.count4points.should == 0
+      user.count3points.should == 0
+      user.count0points.should == 2
     end
 
     it "after tournament is finished" do
@@ -290,6 +313,14 @@ describe CalculatePoints do
       user.count4points.should == 0
       user.count3points.should == 0
       user.count0points.should == 0
+
+      user = User.find(@user6.id)
+      user.points.should == 0
+      user.championtipppoints.should == 0
+      user.count6points.should == 0
+      user.count4points.should == 0
+      user.count3points.should == 0
+      user.count0points.should == 5
     end
 
   end

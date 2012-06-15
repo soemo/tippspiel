@@ -13,7 +13,14 @@ class TippsController < ApplicationController
     elsif @posible_games.present?
       @game_to_compare = @posible_games.last
     end #no else
-    @tipps = @game_to_compare.tipps.includes("user").order("tipps.tipp_punkte desc").order("users.firstname") if @game_to_compare.present?
+    if @game_to_compare.present?
+      @tipps = @game_to_compare.
+              tipps.
+              includes("user").
+              where("users.deleted_at" => nil).
+              order("tipps.tipp_punkte desc").
+              order("users.firstname")
+    end
   end
 
   def save_tipps
