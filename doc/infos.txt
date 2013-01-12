@@ -1,18 +1,4 @@
-﻿TODO:
-
-Bugfix: es gibt nun gelöschte Nutzer, bei denen aber die Tipps noch existieren :-(
-
-- Anpassen für Tabletts und Phones
-** http://twitter.github.com/bootstrap/scaffolding.html
-** Nutzen von .visible-phone. .visible-tablet, .visible-desktop  für die Tabellen
--->Spieleliste schon gemacht
-
--- uberspace ---
-Start standalone passenger
-http://wiki.simonszu.de/howto/rails
-https://uberspace.de/dokuwiki/system:daemontools
-# TODO soeren eigene Anleitung schreiben.
-       cool wäre ein vorheriges Ausprobieren, ob der Port noch frei ist und wenn ja dann die benötigten Dateien zu generieren
+﻿Nutzung von Planio https://soemo.plan.io als Projektverwaltungssoftware
 
 ########################
 -- footiefox ---
@@ -42,41 +28,6 @@ https://uberspace.de/dokuwiki/system:daemontools
 }
 
 ####################################
-
-Später:
-
-- uberspace daemontool nutzen um tippsiel am Laufen zu halten
-
-- TESTS ERWEITERN !!!!!
-
-- Nur Nutzer anzeigen, die aktiv sind ( confirmed_at muss gesetzt sein)
-
-- Tippvergleichen: Alle Tipps eines Nutzers ansehen
-
-- user, admin_users haben kein lockversion
-
-- devise Upgrade
-
-- ssh Key nutzen zum deployment
-
-- Umfrage ??? poll table und poll_id am user existieren schon
-
-- englische Seite
-** Übersetzen Hilfe i18n yml ,....
-
-- Flags als Image-Sprite
-** dann als BG-icon anzeigen und an Model Team ein Attr. css_flag_class oder eine Helper-Methode?
-
-- Flagen in Selectbox?
-** http://www.marghoobsuleman.com/jquery-image-dropdown
-
-- Berechnung der Statisitik (old saveStatistik)  ehemals Highchart
-** Highchart nutzen http://www.highcharts.com/demo/line-labels
-
-- Druck der Tipps mittels pdf pure ruby
-** Test von https://github.com/pdfkit/PDFKit
-** oder https://github.com/mileszs/wicked_pdf
-
 
 
 ### Einladungsmail EM2012 #########################
