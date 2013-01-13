@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddEm2012Teamflags < ActiveRecord::Migration
 
   class Team < ActiveRecord::Base;end

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeDayIdToDayOn < ActiveRecord::Migration
   def up
     remove_column :statistics, :day_id

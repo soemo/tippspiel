@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Fix für Rails3.1 ~> https://github.com/goncalossilva/rails3_acts_as_paranoid/issues/40
 
 module ParanoidValidations

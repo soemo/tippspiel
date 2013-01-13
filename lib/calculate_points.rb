@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # berechnet für alle Nutzer die Punkte
 # calculate_user_points
 # calculate_all_user_tipp_points

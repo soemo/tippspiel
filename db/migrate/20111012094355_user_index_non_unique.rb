@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UserIndexNonUnique < ActiveRecord::Migration
 
   # Email darf auf der DB nicht unique sein, da das mit acts_as_paranoid kollidiert

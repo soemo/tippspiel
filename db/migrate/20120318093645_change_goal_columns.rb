@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ChangeGoalColumns < ActiveRecord::Migration
   def up
     rename_column :games, :team1_tore, :team1_goals

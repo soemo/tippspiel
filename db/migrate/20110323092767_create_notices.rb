@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateNotices < ActiveRecord::Migration
   def self.up
     create_table :notices do |t|

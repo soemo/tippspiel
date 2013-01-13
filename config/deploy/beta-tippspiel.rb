@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 role :app, "beta-tippspiel.soemo.org"
 role :web, "beta-tippspiel.soemo.org"
 role :db,  "beta-tippspiel.soemo.org", :primary => true

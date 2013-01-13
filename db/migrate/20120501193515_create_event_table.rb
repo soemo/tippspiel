@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateEventTable < ActiveRecord::Migration
   def up
     create_table "events", :force => true do |t|

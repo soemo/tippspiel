@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MainController < ApplicationController
 
   skip_before_filter :authenticate_user!

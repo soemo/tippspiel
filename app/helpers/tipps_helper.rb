@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module TippsHelper
 
   # Die Tipps werden so aufbereitet, das sie nach den Runden sortiert sind

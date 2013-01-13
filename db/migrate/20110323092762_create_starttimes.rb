@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateStarttimes < ActiveRecord::Migration
   def self.up
     create_table :starttimes do |t|

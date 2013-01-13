@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module RankingHelper
 
   # schreibt die Rankingtabelle

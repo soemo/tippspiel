@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateDays < ActiveRecord::Migration
   def self.up
     create_table :days do |t|

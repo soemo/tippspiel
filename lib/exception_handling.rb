@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 #
 # Behandelt alle Exceptions, auf die im ApplicationController gesondert reagiert werden soll
 # rescue_from ActionController::RoutingError, :with => :rescue_404 musste in den application_controoler.rb und die route.rb ausgelagert werden #2498

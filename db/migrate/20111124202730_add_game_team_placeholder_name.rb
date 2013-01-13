@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddGameTeamPlaceholderName < ActiveRecord::Migration
   def up
     add_column :games, :team1_placeholder_name, :string

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CustomFailure < Devise::FailureApp
 
   def redirect_url

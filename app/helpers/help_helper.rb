@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module HelpHelper
 
   def write_round_infos

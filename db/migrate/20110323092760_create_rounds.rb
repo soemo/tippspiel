@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateRounds < ActiveRecord::Migration
   def self.up
     create_table :rounds do |t|

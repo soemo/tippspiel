@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # liefert die Eintraege des uebergebenen Feeds
 
 module RssReader

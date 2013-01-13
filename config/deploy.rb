@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, "beta-tippspiel"
 

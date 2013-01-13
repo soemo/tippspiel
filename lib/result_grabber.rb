@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding : utf-8 -*-
 
 # liefert die Spiel-Ergebnisse und Teams in den weiteren Runden
 # und aktualisiert die Spiele in der DB

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 
 def clear_seeds
   # Alle Tabellen (inkl. N:M-Tabellen) werden geloescht

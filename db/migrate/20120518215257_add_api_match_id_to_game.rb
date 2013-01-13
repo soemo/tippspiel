@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddApiMatchIdToGame < ActiveRecord::Migration
 
   class Game < ActiveRecord::Base;end

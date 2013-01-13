@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Tippspiel::Application.routes.draw do
 
   ActiveAdmin.routes(self)

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DeleteModels < ActiveRecord::Migration
   def up
     add_column :games, :round, :string, :limit=>30

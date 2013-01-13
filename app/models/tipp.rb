@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Tipp < ActiveRecord::Base
   acts_as_paranoid
 

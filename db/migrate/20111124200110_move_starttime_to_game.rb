@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MoveStarttimeToGame < ActiveRecord::Migration
   def up
     drop_table :starttimes

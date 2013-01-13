@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 MAIL = "tippspiel@soemo.org"
 
 # EM2012

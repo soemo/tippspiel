@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ControllerMacros
 
   def spec_login_user email="user@test.de"
