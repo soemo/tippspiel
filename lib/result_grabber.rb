@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # liefert die Spiel-Ergebnisse und Teams in den weiteren Runden
 # und aktualisiert die Spiele in der DB
 # Es wird *footiefox* genutzt
@@ -94,13 +96,9 @@ module ResultGrabber
    private
 
    def update_team(api_team_id, game, game_attr_sym, known_team_keys, errors, infos)
-     #infos << "TEST in update_team: api_team_id: #{api_team_id}, game:#{game.inspect}, game_attr_sym:#{game_attr_sym}" # FIXME soeren 18.06.12 raus
      if api_team_id.present? && known_team_keys.include?(api_team_id)
-       #infos << "TEST in update_team if" # FIXME soeren 18.06.12 raus
        team = Team.find_by_name(EM20102_TEAMS[api_team_id])
-       #infos << "TEST team: #{team.inspect}" # FIXME soeren 18.06.12 raus
        if team.present?
-         #infos << "TEST team exists" # FIXME soeren 18.06.12 raus
          if team.id != game.send(game_attr_sym)
            game.update_attribute(game_attr_sym, team.id)
            infos << "UPDATE_GAME_TEAM: #{EM20102_TEAMS[api_team_id]} (teamid #{team.id}) is new team for game id #{game.id}"

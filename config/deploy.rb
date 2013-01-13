@@ -41,7 +41,7 @@ namespace :deploy do
   desc "bundle exec passenger stop"
   task :stop, :roles => :app, :except => {:no_release => true} do
     #run "cd #{current_path} && bundle exec passenger stop --pid-file tmp/pids/passenger.pid"
-    run "cd #{current_path} && bundle exec passenger stop --pid-file passenger.#{standalone_passenger_port}.pid"
+    run "cd #{current_path} && bundle exec passenger stop -p #{standalone_passenger_port}"
   end
   desc "Restarting mod_rails with restart.txt"
   task :restart, :roles => :app, :except => {:no_release => true} do

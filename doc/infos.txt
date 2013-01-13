@@ -1,4 +1,6 @@
-﻿Nutzung von Planio https://soemo.plan.io als Projektverwaltungssoftware
+﻿* Planio https://soemo.plan.io als Projektverwaltungssoftware
+
+* https://rpm.newrelic.com/login Monitoring
 
 ########################
 -- footiefox ---

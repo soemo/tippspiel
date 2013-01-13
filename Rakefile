@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # Add your own tasks in files placed in lib/tasks ending in .rake,
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
@@ -15,7 +17,6 @@ namespace :tippspiel do
     puts today_date + " init Zeiterfassung Build"
     FileUtils.mkdir_p(File.join(Rails.root, "tmp"))
     ENV["RAILS_ENV"] = "test" # damit RSpec mitgeladen wird
-    ENV["PATH"] = ENV["PATH"] + ":#{Rails.root}/vendor/jruby/1.8/bin"
   end
 
   desc "Build Tippspiel with Tests, Specs, and Doc"
