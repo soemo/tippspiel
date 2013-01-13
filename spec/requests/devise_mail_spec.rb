@@ -33,7 +33,7 @@ describe "devise mail" do
     mails.size.should == 1
 
     mail = mails[0]
-    I18n::l(mail.date).should == I18n::l(DateTime.now)  # FIXME soeren 13.01.13 war rot   expected: "12.01.2013, 23:27 Uhr"    got: "13.01.2013, 00:27 Uhr" (using ==)
+    I18n::l(mail.date).should == I18n::l(DateTime.now)
     mail.subject.should =~ /#{I18n.t('app_name')} - #{I18n.t("devise.mailer.confirmation_instructions.subject")}/
     mail.from.should == ["tippspiel@soemo.org"]
     mail.to.should == [email]
