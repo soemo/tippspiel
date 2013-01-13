@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
     championtipp_team_id.present?
   end
 
+  def admin?
+    self.email == ADMIN_EMAIL
+  end
+
   # bekommt eine Liste von Usern,
   # sortiert nach Gesamtpounten, Anzahl6Punkte,Anzahl4Punkte und Anzahl3Punkte
   # geliefert

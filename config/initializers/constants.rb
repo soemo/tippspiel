@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
-MAIL = "tippspiel@soemo.org"
+MAIL        = "tippspiel@soemo.org"
+ADMIN_EMAIL = "soeren@mothes.org"
 
 # EM2012
 RSS_FEED_URL = "http://de.uefa.com/rssfeed/uefaeuro/rss.xml"

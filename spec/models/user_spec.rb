@@ -8,6 +8,13 @@ describe User do
     user.firstname.should == "test"
   end
 
+  it "should check of admin?" do
+    user = Factory(:user)
+    user.admin?.should be_false
+    user.update_attribute(:email, ADMIN_EMAIL)
+    user.admin?.should be_true
+  end
+
   describe 'confirm_with_max_time!' do
     it 'should call normal confirmation routine, if confirmation is in time' do
       u = User.new
