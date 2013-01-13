@@ -11,9 +11,9 @@ gem "sass",                    "~> 3.2.5"
 gem "jquery-rails",            "~> 2.1.4"
 gem "execjs",                  "~> 1.4.0"
 gem "therubyracer",            "~> 0.11.2", :platforms=>:ruby
-gem 'activeadmin'                          # TODO soeren 13.01.13 raus mit #15
+gem "rails_admin",             "~> 0.4.1"
 gem "exception_notification",  "~> 3.0.0"
-gem 'bootstrap-sass',          '~> 2.0.3'  # TODO soeren 13.01.13 update #32
+gem "bootstrap-sass",          "~> 2.2.2.0"  # TODO soeren 13.01.13 update #32 Anpassungen am LAyout nachziehen. neue Version ist schon installiert
 gem "newrelic_rpm",            "~> 3.5.5.38"
 gem "feed-normalizer",         "~> 1.5.2"
 
@@ -36,11 +36,12 @@ end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
-  gem "capistrano",     "~> 2.14.1"
-  gem "capistrano-ext", "~> 1.2.1"
-  gem "rspec-rails",    "~> 2.12.2"
-
-  gem "pry",            "~> 0.9.9.6"   #binding.pry -> debugging
+  gem "rails_best_practices", "~> 1.11.1" # a code metric tool for rails projects
+  gem "capistrano",           "~> 2.14.1"
+  gem "capistrano-ext",       "~> 1.2.1"
+  gem "rspec-rails",          "~> 2.12.2"
+  gem "thin",                 "~> 1.5.0"     # lokaler Dev Server
+  gem "pry",                  "~> 0.9.9.6"   # binding.pry -> debugging
 end
              # Fixme soeren 13.01.13 die hier auch noch updaten
 group :test do

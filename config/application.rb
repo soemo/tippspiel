@@ -23,7 +23,7 @@ module Tippspiel
     # http://guides.rubyonrails.org/asset_pipeline.html
     # The default matcher for compiling files includes application.js, application.css and all non-JS/CSS files
     # (i.e., .coffee and .scss files are not automatically included as they compile to JS/CSS)
-    config.assets.precompile += %w[active_admin.css active_admin.js]
+    config.assets.precompile += %w[]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
