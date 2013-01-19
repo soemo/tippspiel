@@ -9,7 +9,9 @@
 
 # By default, your app will be available in the root of your Uberspace. If you
 # have your own domain set up, you can configure it here
- set :domain, 'beta-tippspiel.soemo.org'
+set :domain, "beta-tippspiel.soemo.org"
+
+set :database_name_suffix, "beta_em2012" # FIXME soeren 19.01.13 jahr konfiguroerbar machen
 
 # a name for your app, will be used for your gemset,
 # databases, directories, etc.

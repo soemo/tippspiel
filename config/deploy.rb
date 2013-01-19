@@ -39,6 +39,8 @@ set :rvm_ruby_string, "ruby-1.9.3-p362"
 
 set :rake, "bundle exec rake"
 
+set :passenger_max_pool_size, 2
+
 
 # auf lokales git zugreifen
 #set :repository, "/home/soemo/git/tippspiel.git"
@@ -67,7 +69,7 @@ namespace :deploy do
     run "cd #{release_path} && bundle exec rake tippspiel:set_version"
   end
 end
-after "deploy:update_code", "deploy:set_version_and_date"
+#after "deploy:update_code", "deploy:set_version_and_date"
 
 namespace :deploy do
   desc "Customizing und Branding der reinen Ruby on Rails Anwendung"
@@ -78,7 +80,7 @@ namespace :deploy do
     run "rm -rf #{customizing_parent_dir}"
   end
 end
-after "deploy:finalize_update", "deploy:customizing"
+#after "deploy:finalize_update", "deploy:customizing"
 
 namespace :db do
   desc "run db:seed"
