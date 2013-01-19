@@ -94,6 +94,7 @@ module ApplicationHelper
     end
   end
 
+  # FIXME soeren 19.01.13 die Links auch über eine Config Einstellung laden key url => value title
   def write_extern_links
     haml_tag :h4, 'Links'
     haml_tag :br

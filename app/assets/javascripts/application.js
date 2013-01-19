@@ -21,6 +21,7 @@ $(function() {
   });
 
   //Countdown - DATUM des ersten Spiels
+  //# FIXME soeren 19.01.13 das Datummuss doch besser uebergeb bar sein
   $('#countdown_dashboard').countDown({
     targetDate:{
       'day':8,

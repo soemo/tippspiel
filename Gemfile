@@ -37,8 +37,10 @@ end
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
   gem "rails_best_practices", "~> 1.11.1" # a code metric tool for rails projects
+  gem "uberspacify", :git => "https://github.com/soemo/uberspacify.git" # FIXME soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
   gem "capistrano",           "~> 2.14.1"
   gem "capistrano-ext",       "~> 1.2.1"
+  gem "rvm-capistrano",       "~> 1.2.7" # FIXME soeren 19.01.13 try wenn es passt an Jan melden
   gem "rspec-rails",          "~> 2.12.2"
   gem "thin",                 "~> 1.5.0"     # lokaler Dev Server
   gem "pry",                  "~> 0.9.9.6"   # binding.pry -> debugging

@@ -7,7 +7,7 @@ class AddApiMatchIdToGame < ActiveRecord::Migration
     add_column :games, :api_match_id, :integer, :null => false
     Game.reset_column_information
 
-    data
+   # data nicht mehr ausfuehren
   end
 
   def data

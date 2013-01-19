@@ -85,7 +85,7 @@ end
 puts "Lade seeds"
 
 # puts "Alles loeschen..."
-# Achtung nicht in prodution aufrufen clear_seeds
+# Achtung nicht in production aufrufen clear_seeds
 
 puts "Spiele neu aufsetzen..."
 # TODO soeren 21.05.12 zur Sicherheit auskommentiert
