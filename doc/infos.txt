@@ -3,6 +3,10 @@
 * https://rpm.newrelic.com/login Monitoring
 
 
+Achtung auf der cmd
+> bundle exec cap -vT nutzen
+
+
 ########################
 -- footiefox ---
 
