@@ -1,12 +1,5 @@
 # -*- encoding : utf-8 -*-
 
-#role :app, "beta-tippspiel.soemo.org"
-#role :web, "beta-tippspiel.soemo.org"
-#role :db,  "beta-tippspiel.soemo.org", :primary => true
-
-#set :user, "soemo"
-#set :password, nil  # wird auf der Konsole angegeben
-
 # By default, your app will be available in the root of your Uberspace. If you
 # have your own domain set up, you can configure it here
 set :domain, "beta-tippspiel.soemo.org"

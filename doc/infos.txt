@@ -2,6 +2,9 @@
 
 * https://rpm.newrelic.com/login Monitoring
 
+* Nutzung von Gem uberspacify
+** database.yml der Stages liegt auf dem Server und nicht mehr hier im Projekt
+
 
 Achtung auf der cmd
 > bundle exec cap -vT nutzen
