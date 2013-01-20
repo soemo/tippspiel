@@ -17,13 +17,4 @@ set :deploy_to, "/var/www/virtual/#{user}/#{application}"
 # set this yourself, go ahead.
 set :passenger_port, 26100
 
-set :customizing_dir, "beta-em2012"
-
-# aktuell nutzt ich rvm - ruby-1.8.7-p358
-#set :default_environment, {
-#  'PATH' => "$HOME/.rvm/gems/ruby-1.8.7-p358/bin:$HOME/.rvm/bin:$PATH",
-#  'RUBY_VERSION' => 'ruby 1.8.7',
-#  'GEM_HOME'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
-#  'GEM_PATH'     => '$HOME/.rvm/gems/ruby-1.8.7-p358',
-#}
-#set :rake, "bundle exec rake"
+set :customizing_dir, "beta"
