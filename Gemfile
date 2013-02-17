@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem "rails",                   "~> 3.2.12"
 
 gem "mysql2",                  "~> 0.3.11"
 gem "cancan",                  "~> 1.6.8"
 gem "haml-rails",              "~> 0.3.5"
-gem 'devise',                  "~> 1.5.3" # TODO soeren 13.01.13 update #31
+gem "devise",                  "~> 2.2.3"
 gem "rails3_acts_as_paranoid", "~> 0.2.5"
 gem "sass",                    "~> 3.2.5"
 gem "jquery-rails",            "~> 2.1.4"
@@ -13,7 +13,7 @@ gem "execjs",                  "~> 1.4.0"
 gem "therubyracer",            "~> 0.11.2", :platforms=>:ruby
 gem "rails_admin",             "~> 0.4.1"
 gem "exception_notification",  "~> 3.0.0"
-gem "bootstrap-sass",          "~> 2.2.2.0"  # TODO soeren 13.01.13 update #32 Anpassungen am LAyout nachziehen. neue Version ist schon installiert
+gem "bootstrap-sass",          "~> 2.2.2.0"  # TODO soeren 13.01.13 update #32 Anpassungen am LAyout nachziehen.
 gem "newrelic_rpm",            "~> 3.5.5.38"
 gem "feed-normalizer",         "~> 1.5.2"
 
@@ -33,8 +33,10 @@ group :development, :production do
 end
 
 group :development do
-  gem "letter_opener",  "~> 1.0.0"
-  gem "magic_encoding", "~> 0.0.2"
+  gem "magic_encoding",    "~> 0.0.2"
+  gem "letter_opener",     "~> 1.0.0"
+  gem "better_errors",     "~> 0.5.0"    # Provides a better error page for Rails and other Rack apps
+  gem "binding_of_caller", "~> 0.6.8"    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
 end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind

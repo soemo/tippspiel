@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113195612) do
+ActiveRecord::Schema.define(:version => 20130217132047) do
 
   create_table "events", :force => true do |t|
     t.string   "event_type", :limit => 30, :default => "", :null => false
@@ -106,12 +106,11 @@ ActiveRecord::Schema.define(:version => 20130113195612) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
-    t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -119,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20130113195612) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "points"
@@ -132,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20130113195612) do
     t.integer  "championtipp_team_id"
     t.integer  "poll_id"
     t.datetime "deleted_at"
+    t.datetime "reset_password_sent_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

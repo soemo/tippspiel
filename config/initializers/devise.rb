@@ -74,13 +74,12 @@ Devise.setup do |config|
   # config.pepper = "f5f6c48c13d40a93da0c661527d3303677dbbd74b75af334aabcee0f82b1876ae0df273f93a04e2b6b5891d42ded55fc8ca6eecc101f73450a390f43b59ea2aa"
 
   # ==> Configuration for :confirmable
-  # The time you want to give your user to confirm his account. During this time
-  # he will be able to access your application without confirming. Default is 0.days
-  # When confirm_within is zero, the user won't be able to sign in without confirming.
-  # You can use this to let your user access some features of your application
-  # without confirming the account, but blocking it after a certain period
-  # (ie 2 days).
-  # config.confirm_within = 2.days
+  # A period that the user is allowed to access the website even without
+  # confirming his account. For instance, if set to 2.days, the user will be
+  # able to access the website for two days without confirming his account,
+  # access will be blocked just in the third day. Default is 0.days, meaning
+  # the user cannot access the website without confirming his account.
+  # config.allow_unconfirmed_access_for = 2.days
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [ :email ]
@@ -89,15 +88,8 @@ Devise.setup do |config|
   # The time the user will be remembered without asking for credentials again.
   # config.remember_for = 2.weeks
 
-  # If true, a valid remember token can be re-used between multiple browsers.
-  # config.remember_across_browsers = true
-
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
-
-  # If true, uses the password salt as remember token. This should be turned
-  # to false if you are not using database authenticatable.
- # config.use_salt_as_remember_token = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
@@ -105,7 +97,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
-  # config.password_length = 6..128
+  config.password_length = 6..128
 
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
@@ -148,7 +140,7 @@ Devise.setup do |config|
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
   # change their passwords.
- # config.reset_password_within = 2.hours
+  config.reset_password_within = 6.hours
 
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use
@@ -161,10 +153,6 @@ Devise.setup do |config|
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
   # config.token_authentication_key = :auth_token
-
-  # If true, authentication through token does not store user in session and needs
-  # to be supplied on each request. Useful if you are using the token as API token.
-  # config.stateless_token = false
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
@@ -228,8 +216,8 @@ module Devise
   module Mailers
     module Helpers
 
-      def headers_for_with_app_name_prefix(action)
-        headers = headers_for_without_app_name_prefix(action)
+      def headers_for_with_app_name_prefix(action, opts)
+        headers = headers_for_without_app_name_prefix(action, opts)
         if headers[:subject].present?
           headers[:subject] = "#{I18n.t('app_name')} - #{headers[:subject]}"
         end
@@ -240,3 +228,4 @@ module Devise
     end
   end
 end
+
