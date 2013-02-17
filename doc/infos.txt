@@ -1,6 +1,7 @@
 ﻿!!! Achtung auf der cmd
 > bundle exec cap -vT nutzen
 
+
 * Planio https://soemo.plan.io als Projektverwaltungssoftware
 
 * https://rpm.newrelic.com/login Monitoring
