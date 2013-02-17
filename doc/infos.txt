@@ -1,4 +1,7 @@
-﻿* Planio https://soemo.plan.io als Projektverwaltungssoftware
+﻿!!! Achtung auf der cmd
+> bundle exec cap -vT nutzen
+
+* Planio https://soemo.plan.io als Projektverwaltungssoftware
 
 * https://rpm.newrelic.com/login Monitoring
 
@@ -6,8 +9,6 @@
 ** database.yml der Stages liegt auf dem Server und nicht mehr hier im Projekt
 
 
-Achtung auf der cmd
-> bundle exec cap -vT nutzen
 
 
 ########################
