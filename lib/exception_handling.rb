@@ -109,14 +109,14 @@ module ExceptionHandling
         flash[:error] = std_error_msg
 
         request.format = :html
-        ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver
+        notify_airbrake(exception)
         request.format = :js
       end
       controller = get_redirect_controller
       redirect_target = {:controller => controller, :action => get_redirect_action, :params => {}}
       render :template => "/unknown_error", :locals => {:redirect_target => redirect_target}
     else
-      ExceptionNotifier::Notifier.exception_notification(request.env, exception).deliver
+      notify_airbrake(exception)
       redirect_all_formats exception, std_error_msg, true
     end
   end

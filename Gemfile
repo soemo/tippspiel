@@ -12,12 +12,14 @@ gem "jquery-rails",            "~> 2.1.4"
 gem "execjs",                  "~> 1.4.0"
 gem "therubyracer",            "~> 0.11.2", :platforms=>:ruby
 gem "rails_admin",             "~> 0.4.1"
-gem "exception_notification",  "~> 3.0.0"
 gem "bootstrap-sass",          "~> 2.2.2.0"  # TODO soeren 13.01.13 update #32 Anpassungen am LAyout nachziehen.
 gem "newrelic_rpm",            "~> 3.5.5.38"
 gem "feed-normalizer",         "~> 1.5.2"
 
 gem "lograge",                 "~> 0.1.2"
+
+# Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
+gem "airbrake",                "~> 3.1.8"
 
 
 # Gems used only for assets and not required
