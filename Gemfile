@@ -5,7 +5,7 @@ gem 'rails', '3.2.11'
 gem "mysql2",                  "~> 0.3.11"
 gem "cancan",                  "~> 1.6.8"
 gem "haml-rails",              "~> 0.3.5"
-gem 'devise',                  '= 1.4.7' # TODO soeren 13.01.13 update #31
+gem 'devise',                  "~> 1.5.3" # TODO soeren 13.01.13 update #31
 gem "rails3_acts_as_paranoid", "~> 0.2.5"
 gem "sass",                    "~> 3.2.5"
 gem "jquery-rails",            "~> 2.1.4"
@@ -16,6 +16,9 @@ gem "exception_notification",  "~> 3.0.0"
 gem "bootstrap-sass",          "~> 2.2.2.0"  # TODO soeren 13.01.13 update #32 Anpassungen am LAyout nachziehen. neue Version ist schon installiert
 gem "newrelic_rpm",            "~> 3.5.5.38"
 gem "feed-normalizer",         "~> 1.5.2"
+
+gem "lograge",                 "~> 0.1.2"
+
 
 # Gems used only for assets and not required
 # in production environments by default.

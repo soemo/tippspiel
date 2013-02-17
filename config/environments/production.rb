@@ -74,4 +74,7 @@ Tippspiel::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # better Log-Output https://github.com/roidrage/lograge
+  config.lograge.enabled = true
+
 end
