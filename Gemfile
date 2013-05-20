@@ -8,7 +8,7 @@ gem "haml-rails",              "~> 0.4"
 gem "devise",                  "~> 2.2.4"
 gem "rails3_acts_as_paranoid", "~> 0.2.5"
 gem "sass",                    "~> 3.2.5"
-gem "jquery-rails",            "~> 2.1.4"
+gem "jquery-rails",            "~> 2.2.1"
 gem "execjs",                  "~> 1.4.0"
 gem "therubyracer",            "~> 0.11.2", :platforms=>:ruby
 gem "rails_admin",             "~> 0.4.8"
@@ -37,7 +37,7 @@ end
 
 group :development do
   gem "magic_encoding",    "~> 0.0.2"
-  gem "letter_opener",     "~> 1.1.0"
+  gem "letter_opener",     "~> 1.1.1"
   gem "better_errors",     "~> 0.8.0"    # Provides a better error page for Rails and other Rack apps
   gem "binding_of_caller", "~> 0.7.1"    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
 end
@@ -53,10 +53,10 @@ group :development, :test do
   gem "thin",                 "~> 1.5.1"     # lokaler Dev Server
   gem "pry",                  "~> 0.9.12.2"   # binding.pry -> debugging
 end
-             # Fixme soeren 13.01.13 die hier auch noch updaten
+
 group :test do
   gem "webmock",            "~> 1.11.0"
   gem 'faker',              '~> 1.1.2'
   gem 'factory_girl_rails', "~> 4.2.1"
-  gem 'webrat',             '= 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
+  gem 'webrat',             '~> 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
 end
