@@ -50,12 +50,12 @@ group :development, :test do
   gem "rvm-capistrano",       "~> 1.2.7" # FIXME soeren 19.01.13 try wenn es passt an Jan melden
   gem "rspec-rails",          "~> 2.13.2"
   gem "thin",                 "~> 1.5.1"     # lokaler Dev Server
-  gem "pry",                  "~> 0.9.9.6"   # binding.pry -> debugging
+  gem "pry",                  "~> 0.9.12.2"   # binding.pry -> debugging
 end
              # Fixme soeren 13.01.13 die hier auch noch updaten
 group :test do
   gem "webmock",            "~> 1.11.0"
-  gem 'faker',              '= 0.9.5'
-  gem 'factory_girl_rails', "= 1.4.0" # TODO soeren 12.01.13 update
+  gem 'faker',              '~> 1.1.2'
+  gem 'factory_girl_rails', "~> 4.2.1"
   gem 'webrat',             '= 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
 end

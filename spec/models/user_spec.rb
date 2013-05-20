@@ -4,12 +4,12 @@ require 'spec_helper'
 describe User do
 
   it "should use Factory" do
-    user = Factory(:user)
+    user = FactoryGirl.create(:user)
     user.firstname.should == "test"
   end
 
   it "should check of admin?" do
-    user = Factory(:user)
+    user = FactoryGirl.create(:user)
     user.admin?.should be_false
     user.update_attribute(:email, ADMIN_EMAIL)
     user.admin?.should be_true
@@ -33,13 +33,13 @@ describe User do
   end
 
   it "should get correct ranking_comparison_value" do
-    user1 = Factory(:user,
+    user1 = FactoryGirl.create(:user,
                     :points=> 46,
                     :count6points=> 3,
                     :count4points=> 7,
                     :count3points=> 0,
                     :count0points=> 10)
-    user2 = Factory(:user,
+    user2 = FactoryGirl.create(:user,
                     :points => 46,
                     :count6points => 1,
                     :count4points => 10,

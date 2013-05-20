@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Game do
 
   it "should use Factory" do
-      game = Factory(:game)
+      game = FactoryGirl.create(:game)
       game.team1.should be_present
       game.team2.should be_present
   end
@@ -26,17 +26,17 @@ describe Game do
   end
 
   it "should get finished days with game ids" do
-    day1_game1 = Factory(:game, :start_at => "19.06.2012 20:45", :finished => true)
-    day1_game2 = Factory(:game, :start_at => "19.06.2012 20:45", :finished => true)
-    day1_game3 = Factory(:game, :start_at => "19.06.2012 20:45", :finished => true)
+    day1_game1 = FactoryGirl.create(:game, :start_at => "19.06.2012 20:45", :finished => true)
+    day1_game2 = FactoryGirl.create(:game, :start_at => "19.06.2012 20:45", :finished => true)
+    day1_game3 = FactoryGirl.create(:game, :start_at => "19.06.2012 20:45", :finished => true)
 
-    day2_game1 = Factory(:game, :start_at => "20.06.2012 18:00", :finished => true)
-    day2_game2 = Factory(:game, :start_at => "20.06.2012 18:00", :finished => true)
-    day2_game3 = Factory(:game, :start_at => "20.06.2012 20:45", :finished => false)
+    day2_game1 = FactoryGirl.create(:game, :start_at => "20.06.2012 18:00", :finished => true)
+    day2_game2 = FactoryGirl.create(:game, :start_at => "20.06.2012 18:00", :finished => true)
+    day2_game3 = FactoryGirl.create(:game, :start_at => "20.06.2012 20:45", :finished => false)
 
-    day3_game1 = Factory(:game, :start_at => "21.06.2012 18:00", :finished => true)
-    day3_game2 = Factory(:game, :start_at => "21.06.2012 18:00", :finished => false)
-    day3_game3 = Factory(:game, :start_at => "21.06.2012 20:45", :finished => true)
+    day3_game1 = FactoryGirl.create(:game, :start_at => "21.06.2012 18:00", :finished => true)
+    day3_game2 = FactoryGirl.create(:game, :start_at => "21.06.2012 18:00", :finished => false)
+    day3_game3 = FactoryGirl.create(:game, :start_at => "21.06.2012 20:45", :finished => true)
 
     game_days_with_game_ids = Game.finished_days_with_game_ids
     game_days_with_game_ids["2012-06-19"].sort.should == [day1_game1.id, day1_game2.id, day1_game3.id].sort

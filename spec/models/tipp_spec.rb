@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Tipp do
 
   it "should use Factory" do
-      tipp = Factory(:tipp)
+      tipp = FactoryGirl.create(:tipp)
       tipp.game.should be_present
       tipp.user.should be_present
   end

@@ -38,21 +38,21 @@ describe CalculatePoints do
       Tipp.destroy_all
       User.destroy_all
 
-      @game1 = Factory(:game, :team1_goals => 0, :team2_goals => 0)
-      @game2 = Factory(:game, :team1_goals => 1, :team2_goals => 0)
-      @game3 = Factory(:game, :team1_goals => 0, :team2_goals => 1)
-      @game4 = Factory(:game, :team1_goals => 2, :team2_goals => 1)
-      @game5 = Factory(:game, :team1_goals => 0, :team2_goals => 3)
+      @game1 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 0)
+      @game2 = FactoryGirl.create(:game, :team1_goals => 1, :team2_goals => 0)
+      @game3 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 1)
+      @game4 = FactoryGirl.create(:game, :team1_goals => 2, :team2_goals => 1)
+      @game5 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 3)
 
-      @user1 = Factory(:user)
-      @user2 = Factory(:user)
-      @user3 = Factory(:user)
-      @user4 = Factory(:user)
-      @user5 = Factory(:user)
+      @user1 = FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
+      @user3 = FactoryGirl.create(:user)
+      @user4 = FactoryGirl.create(:user)
+      @user5 = FactoryGirl.create(:user)
 
       User.all.each do |user|
         Game.all.each do |game|
-          Factory(:tipp, :user => user, :game => game, :team1_goals => rand(4), :team2_goals => rand(4))
+          FactoryGirl.create(:tipp, :user => user, :game => game, :team1_goals => rand(4), :team2_goals => rand(4))
         end
       end
 
@@ -99,58 +99,58 @@ describe CalculatePoints do
       Tipp.destroy_all
       User.destroy_all
 
-      winner_team = Factory(:team, :name => "winner")
-      no_winner_team = Factory(:team, :name => "no winner")
+      winner_team = FactoryGirl.create(:team, :name => "winner")
+      no_winner_team = FactoryGirl.create(:team, :name => "no winner")
 
-      @game1 = Factory(:game, :team1_goals => 0, :team2_goals => 0)
-      @game2 = Factory(:game, :team1_goals => 1, :team2_goals => 0)
-      @game3 = Factory(:game, :team1_goals => 0, :team2_goals => 1)
-      @game4 = Factory(:game, :team1_goals => 2, :team2_goals => 1)
-      @game5 = Factory(:final, :team1_goals => 0, :team2_goals => 3,
+      @game1 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 0)
+      @game2 = FactoryGirl.create(:game, :team1_goals => 1, :team2_goals => 0)
+      @game3 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 1)
+      @game4 = FactoryGirl.create(:game, :team1_goals => 2, :team2_goals => 1)
+      @game5 = FactoryGirl.create(:final, :team1_goals => 0, :team2_goals => 3,
                        :team1 => no_winner_team, :team2 => winner_team)
 
       # erwartet 6 Punkte
-      @user1 = Factory(:user)
-      Factory(:tipp, :user => @user1, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user1, :game => @game2, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user1, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user1, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user1, :game => @game5, :team1_goals => 0, :team2_goals => 0)
+      @user1 = FactoryGirl.create(:user)
+      FactoryGirl.create(:tipp, :user => @user1, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user1, :game => @game2, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user1, :game => @game3, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user1, :game => @game4, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user1, :game => @game5, :team1_goals => 0, :team2_goals => 0)
       # erwartet 16 Punkte
-      @user2 = Factory(:user, :championtipp_team_id => winner_team.id)
-      Factory(:tipp, :user => @user2, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user2, :game => @game2, :team1_goals => 3, :team2_goals => 2)
-      Factory(:tipp, :user => @user2, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user2, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user2, :game => @game5, :team1_goals => 0, :team2_goals => 0)
+      @user2 = FactoryGirl.create(:user, :championtipp_team_id => winner_team.id)
+      FactoryGirl.create(:tipp, :user => @user2, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user2, :game => @game2, :team1_goals => 3, :team2_goals => 2)
+      FactoryGirl.create(:tipp, :user => @user2, :game => @game3, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user2, :game => @game4, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user2, :game => @game5, :team1_goals => 0, :team2_goals => 0)
       # erwartet 10 Punkte
-      @user3 = Factory(:user)
-      Factory(:tipp, :user => @user3, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user3, :game => @game2, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user3, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user3, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user3, :game => @game5, :team1_goals => 0, :team2_goals => 1)
+      @user3 = FactoryGirl.create(:user)
+      FactoryGirl.create(:tipp, :user => @user3, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user3, :game => @game2, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user3, :game => @game3, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user3, :game => @game4, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user3, :game => @game5, :team1_goals => 0, :team2_goals => 1)
       # erwartet 16 Punkte
-      @user4 = Factory(:user, :championtipp_team_id => winner_team.id)
-      Factory(:tipp, :user => @user4, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user4, :game => @game2, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user4, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user4, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user4, :game => @game5, :team1_goals => 0, :team2_goals => 2)
+      @user4 = FactoryGirl.create(:user, :championtipp_team_id => winner_team.id)
+      FactoryGirl.create(:tipp, :user => @user4, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user4, :game => @game2, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user4, :game => @game3, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user4, :game => @game4, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user4, :game => @game5, :team1_goals => 0, :team2_goals => 2)
       # Alles richtig getippt + richtigen Siegertipp  (36 Punkte)
-      @user5 = Factory(:user, :championtipp_team_id => winner_team.id)
-      Factory(:tipp, :user => @user5, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      Factory(:tipp, :user => @user5, :game => @game2, :team1_goals => 1, :team2_goals => 0)
-      Factory(:tipp, :user => @user5, :game => @game3, :team1_goals => 0, :team2_goals => 1)
-      Factory(:tipp, :user => @user5, :game => @game4, :team1_goals => 2, :team2_goals => 1)
-      Factory(:tipp, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
+      @user5 = FactoryGirl.create(:user, :championtipp_team_id => winner_team.id)
+      FactoryGirl.create(:tipp, :user => @user5, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user5, :game => @game2, :team1_goals => 1, :team2_goals => 0)
+      FactoryGirl.create(:tipp, :user => @user5, :game => @game3, :team1_goals => 0, :team2_goals => 1)
+      FactoryGirl.create(:tipp, :user => @user5, :game => @game4, :team1_goals => 2, :team2_goals => 1)
+      FactoryGirl.create(:tipp, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
       # hat keinen Tipp abgegeben
-      @user6 = Factory(:user, :championtipp_team_id => nil)
-      Factory(:tipp, :user => @user6, :game => @game1, :team1_goals => nil, :team2_goals => nil)
-      Factory(:tipp, :user => @user6, :game => @game2, :team1_goals => nil, :team2_goals => nil)
-      Factory(:tipp, :user => @user6, :game => @game3, :team1_goals => nil, :team2_goals => nil)
-      Factory(:tipp, :user => @user6, :game => @game4, :team1_goals => nil, :team2_goals => nil)
-      Factory(:tipp, :user => @user6, :game => @game5, :team1_goals => nil, :team2_goals => nil)
+      @user6 = FactoryGirl.create(:user, :championtipp_team_id => nil)
+      FactoryGirl.create(:tipp, :user => @user6, :game => @game1, :team1_goals => nil, :team2_goals => nil)
+      FactoryGirl.create(:tipp, :user => @user6, :game => @game2, :team1_goals => nil, :team2_goals => nil)
+      FactoryGirl.create(:tipp, :user => @user6, :game => @game3, :team1_goals => nil, :team2_goals => nil)
+      FactoryGirl.create(:tipp, :user => @user6, :game => @game4, :team1_goals => nil, :team2_goals => nil)
+      FactoryGirl.create(:tipp, :user => @user6, :game => @game5, :team1_goals => nil, :team2_goals => nil)
     end
 
     it "after first game finished" do

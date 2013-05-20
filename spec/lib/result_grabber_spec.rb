@@ -10,13 +10,13 @@ describe ResultGrabber do
       Game.destroy_all
 
       @italy_api_team_id   = 924
-      Factory(:team, :name => ResultGrabber::EM20102_TEAMS[@italy_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@italy_api_team_id])
       @germany_api_team_id = 940
-      Factory(:team, :name => ResultGrabber::EM20102_TEAMS[@germany_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@germany_api_team_id])
       @england_api_team_id = 946
-      Factory(:team, :name => ResultGrabber::EM20102_TEAMS[@england_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@england_api_team_id])
       @polen_api_team_id   = 1317
-      Factory(:team, :name => ResultGrabber::EM20102_TEAMS[@polen_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@polen_api_team_id])
 
       @api_game1_team1_score = 1
       @api_game1_team2_score = 2
@@ -31,16 +31,16 @@ describe ResultGrabber do
       @game2_api_match_id = 2
       @game3_api_match_id = 3
 
-      @game1 = Factory(:game, 
+      @game1 = FactoryGirl.create(:game,
                        :team1_goals => nil, 
                        :team2_goals => nil, 
                        :api_match_id => @game1_api_match_id)
-      @game2 = Factory(:game, 
+      @game2 = FactoryGirl.create(:game,
                        :team1_goals => nil, 
                        :team2_goals => nil, 
                        :api_match_id => @game2_api_match_id)
       # Hat noch gar keine Teams, nur team_placeholder_name
-      @game3 = Factory(:game, 
+      @game3 = FactoryGirl.create(:game,
                        :team1_goals => nil, 
                        :team2_goals => nil,
                        :team1_id => nil,

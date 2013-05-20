@@ -34,6 +34,8 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
 
+  config.include FactoryGirl::Syntax::Methods
+
   # Mock des RSS-Feeds
   config.before(:each) do
     WebMock.stub_http_request(:get, RSS_FEED_URL).
