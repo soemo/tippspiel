@@ -2,13 +2,16 @@ admin:
   firstname: adi
   lastname: admin
   email: admin@test.de
+  confirmed_at: "2013-05-20 12:11:48"
 
 user:
   firstname: test
   lastname: user
   email: user@test.de
+  confirmed_at: "2013-05-20 12:11:48"
 
 another_user:
   firstname: another
   lastname: user
   email: other@test.de
+  confirmed_at: "2013-05-20 12:11:48"

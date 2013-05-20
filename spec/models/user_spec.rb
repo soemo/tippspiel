@@ -8,6 +8,13 @@ describe User do
     user.firstname.should == "test"
   end
 
+  it "should not found if inactive" do
+      user = FactoryGirl.create(:user)
+      User.active.all.should_not include(user)
+
+      User.inactive.all.should include(user)
+    end
+
   it "should check of admin?" do
     user = FactoryGirl.create(:user)
     user.admin?.should be_false

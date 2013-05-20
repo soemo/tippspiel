@@ -12,7 +12,7 @@ module CalculatePoints
   CHAMPION_TIPP_POINTS = 6
 
   def calculate_user_points
-    users = User.all
+    users = User.all  # FIXME soeren 20.05.13 hier all oder nur die active??
     if users.present?
       users.each do |user|
         total_points  = Tipp.where(:user_id => user.id).sum(:tipp_punkte)

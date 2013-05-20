@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217132047) do
+ActiveRecord::Schema.define(:version => 20130520115106) do
 
   create_table "events", :force => true do |t|
     t.string   "event_type", :limit => 30, :default => "", :null => false
@@ -38,6 +38,10 @@ ActiveRecord::Schema.define(:version => 20130217132047) do
     t.integer  "api_match_id",                                            :null => false
   end
 
+  add_index "games", ["api_match_id"], :name => "index_games_on_api_match_id"
+  add_index "games", ["team1_id"], :name => "index_games_on_team1_id"
+  add_index "games", ["team2_id"], :name => "index_games_on_team2_id"
+
   create_table "notices", :force => true do |t|
     t.integer  "user_id"
     t.string   "text",         :limit => 200
@@ -46,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20130217132047) do
     t.datetime "updated_at",                                 :null => false
     t.integer  "lock_version",                :default => 0
   end
+
+  add_index "notices", ["user_id"], :name => "index_notices_on_user_id"
 
   create_table "polls", :force => true do |t|
     t.string   "name"
@@ -68,12 +74,6 @@ ActiveRecord::Schema.define(:version => 20130217132047) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
-  create_table "scheduler_runs", :force => true do |t|
-    t.string   "schedule"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "statistics", :force => true do |t|
     t.integer  "user_id"
     t.integer  "position"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20130217132047) do
     t.integer  "lock_version", :default => 0
     t.date     "date_on",                     :null => false
   end
+
+  add_index "statistics", ["user_id"], :name => "index_statistics_on_user_id"
 
   create_table "teams", :force => true do |t|
     t.string   "flag_image_url"
@@ -104,6 +106,9 @@ ActiveRecord::Schema.define(:version => 20130217132047) do
     t.datetime "updated_at",                  :null => false
     t.integer  "lock_version", :default => 0
   end
+
+  add_index "tipps", ["game_id"], :name => "index_tipps_on_game_id"
+  add_index "tipps", ["user_id"], :name => "index_tipps_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -132,6 +137,7 @@ ActiveRecord::Schema.define(:version => 20130217132047) do
     t.integer  "poll_id"
     t.datetime "deleted_at"
     t.datetime "reset_password_sent_at"
+    t.integer  "lock_version",                          :default => 0
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

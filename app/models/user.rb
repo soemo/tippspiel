@@ -25,7 +25,10 @@ class User < ActiveRecord::Base
   # ist das Token ungueltig
   CONFIRMATION_MAX_TIME = 7.day
 
-  scope :ranking_order, order("users.points DESC, users.count6points DESC, users.count4points DESC, users.count3points DESC")
+  scope :active, where('confirmed_at is not null')
+  scope :inactive, where('confirmed_at is null')
+
+  scope :ranking_order, order('users.points DESC, users.count6points DESC, users.count4points DESC, users.count3points DESC')
 
   def ranking_comparison_value
     str_points = points.to_s.rjust(2,"0")
@@ -49,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    (firstname + " " + lastname) rescue email
+    (firstname + ' ' + lastname) rescue email
   end
 
   def has_champion_tipp?
@@ -65,7 +68,7 @@ class User < ActiveRecord::Base
   # geliefert
   # Es wird noch die Platzierung als Key hinzugefuegt
   # ACHTUNG DER HASH IST NICHT SORTIERT !!!!
-  def self.prepare_user_ranking(ranking_users=User.ranking_order)
+  def self.prepare_user_ranking(ranking_users=User.active.ranking_order)
     # FIXME soeren 08.06.12 testen testen testen
     result = {}
     if ranking_users.present?
