@@ -4,21 +4,11 @@
 //= require jquery-migrate.min
 //= require jquery.lwtCountdown-1.0
 //= require bootstrap
-//= require_tree .
-//= require_self
 
 $(function() {
   check_user_tipp();
   update_textarea_maxlength();
   ajax_load_modal_content();
-
-  // Navbar, fuer IE < 9 wird sie nicht aktiv
-  //# FIXME soeren 06.06.12  passiert das auch noch mit einer neueren Bootstrap Version
-/*  if (! (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) < 9)) {
-    $(".collapse").collapse('hide');
-  } else{
-    //alert(parseInt(jQuery.browser.version, 10) ) ;
-  }*/
 
   // Ranking Statistik Punkte
   $('.statistic_popover').popover({

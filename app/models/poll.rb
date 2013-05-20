@@ -4,4 +4,6 @@ class Poll < ActiveRecord::Base
 
   validates_presence_of :name
 
+  # FIXME soeren 20.05.13 Umfrage nutzen oder komplett entfernen
+
 end

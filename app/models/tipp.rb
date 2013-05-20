@@ -51,6 +51,7 @@ class Tipp < ActiveRecord::Base
       []
     end
   end
+
   def self.create_user_tipps(user_id)
     games = Game.all
     if games.present?

@@ -57,6 +57,17 @@ describe User do
     user2.ranking_comparison_value.should == 46011000
   end
 
+  it 'should delete tipps if user delete' do
+    user = FactoryGirl.create(:user)
+    5.times{ FactoryGirl.create(:tipp, :user => user) }
+
+    tipps = Tipp.where(:user_id => user.id).all
+    tipps.count.should == 5
+
+    user.destroy
+    Tipp.only_deleted.where(:user_id => user.id).map(&:id).should == tipps.map(&:id)
+  end
+
 
   describe "top3_positions_and_own_position" do
     # FIXME soeren 22.04.12 implement
