@@ -48,7 +48,7 @@ group :development, :test do
   gem "uberspacify", :git => "https://github.com/soemo/uberspacify.git" # FIXME soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
   gem "capistrano",           "~> 2.15.4"
   gem "capistrano-ext",       "~> 1.2.1"
-  gem "rvm-capistrano",       "~> 1.3.0" # FIXME soeren 19.01.13 try wenn es passt an Jan melden
+  gem "rvm-capistrano",       "~> 1.3.0"
   gem "rspec-rails",          "~> 2.13.2"
   gem "thin",                 "~> 1.5.1"     # lokaler Dev Server
   gem "pry",                  "~> 0.9.12.2"   # binding.pry -> debugging
