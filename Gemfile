@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem "rails",                   "~> 3.2.12"
+gem "rails",                   "~> 3.2.13"
 
 gem "mysql2",                  "~> 0.3.11"
 gem "cancan",                  "~> 1.6.8"
@@ -11,7 +11,7 @@ gem "sass",                    "~> 3.2.5"
 gem "jquery-rails",            "~> 2.1.4"
 gem "execjs",                  "~> 1.4.0"
 gem "therubyracer",            "~> 0.11.2", :platforms=>:ruby
-gem "rails_admin",             "~> 0.4.5"
+gem "rails_admin",             "~> 0.4.8"
 gem "bootstrap-sass",          "~> 2.2.2.0"  # TODO soeren 13.01.13 update #32 Anpassungen am LAyout nachziehen.
 gem "newrelic_rpm",            "~> 3.5.6.55"
 gem "feed-normalizer",         "~> 1.5.2"
