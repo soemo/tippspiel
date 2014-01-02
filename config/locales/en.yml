@@ -16,6 +16,8 @@ en:
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
   succesfully_saved_championtipp: "Dein Tuniersieger-Tip wurden gespeichert!"
 
+  x_user_bet: "%{user_count} 'football-experts' fight in the competition."
+
   signed_in_hello: "Hello, "
   sign_in: "Login"
   sign_out: "Logout"
@@ -26,6 +28,8 @@ en:
   compare_tipps: "Compare tipps"
   hall_of_fame: "Hall of Fame"
   points_statistic: Points statistic
+
+  no_user: No user
 
   main: "Home"
   help: "Help"

@@ -53,7 +53,7 @@ de:
       signed_up: 'Du hast dich erfolgreich registriert. Es kann sein, dass du eine Aktivierungs-E-Mail erhältst.'
       inactive_signed_up: 'Du hast dich erfolgreich registriert. Du konntest jedoch nicht angemeldet werden, da dein Account %{reason} ist. Du erhältst ein Mail zur Bestätigung.'
       signed_up_but_unconfirmed: "Vielen Dank.<br/><br/>
-                                  Sobald Du deine Email-Adresse bestätigt hast, kannst Du deinen neuen Account nutzen.</br>
+                                  Sobald Du deine Email-Adresse bestätigt hast, kannst Du deinen neuen Account nutzen.<br/>
                                   Folge dazu bitte dem Link in der Email."
       signed_up_but_inactive: 'Du hast dich erfolgreich registriert. Du bist aber noch nicht anmelden, da dein Account inaktiv ist.'
       signed_up_but_locked: 'Du hast dich erfolgreich registriert. Du bist aber noch nicht anmelden, da dein Account gesperrt ist.'

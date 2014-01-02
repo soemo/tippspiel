@@ -17,6 +17,8 @@ de:
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
 
+  x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
+
   signed_in_hello: "Hallo, "
   sign_in: "Login"
   sign_out: "Abmelden"
@@ -36,6 +38,8 @@ de:
   compare_tipps: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
   points_statistic: Punkteverteilung
+
+  no_user: Keine Nutzer
 
   main: "Home"
   help: "Hilfe"

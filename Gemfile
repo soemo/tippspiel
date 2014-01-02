@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem "rails",                   "~> 3.2.13"
+gem "rails",                   "~> 3.2.16"
+ruby '1.9.3'
 
 gem "mysql2",                  "~> 0.3.11"
 gem "cancan",                  "~> 1.6.10"

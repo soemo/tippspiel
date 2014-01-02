@@ -22,7 +22,9 @@ module ExceptionHandling
   def rescue_404
     # der Fehler fliegt z.B. auch, wenn man in einem link_to eine ungueltige Ziel-URL setzt
     Rails.logger.error("ERROR rescue_404 mit Params: #{params["a"]}") if Rails.logger.present?
-    render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
+    respond_to do |format|
+      format.all { render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false}
+    end
   end
 
   # es wird ein TippspielError abgefangen.

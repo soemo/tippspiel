@@ -12,7 +12,9 @@ $(function() {
 
   // Ranking Statistik Punkte
   $('.statistic_popover').popover({
-    placement: "left"
+    placement: "left",
+    html: true,
+    trigger: 'hover'
   });
 
   //Countdown - DATUM des ersten Spiels

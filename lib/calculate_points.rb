@@ -76,9 +76,9 @@ module CalculatePoints
 
   def calculate_tipp_points(game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
     points = 0
-    if ((Game::UNENTSCHIEDEN == game_winner && tipp_team1_goals == tipp_team2_goals) ||
+    if (Game::UNENTSCHIEDEN == game_winner && tipp_team1_goals == tipp_team2_goals) ||
             (Game::TEAM1_WIN == game_winner && tipp_team1_goals > tipp_team2_goals) ||
-            (Game::TEAM2_WIN == game_winner && tipp_team1_goals < tipp_team2_goals))
+            (Game::TEAM2_WIN == game_winner && tipp_team1_goals < tipp_team2_goals)
       points = points + POINTS_CORRECT_TREND
     end
 
