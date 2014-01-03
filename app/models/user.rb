@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
 
     result
   end
-            # FIXME soeren 20.05.13 spec
+
   def self.top3_positions_and_own_position(own_user_id=nil)
     result = {}
     own_position = nil
@@ -106,7 +106,8 @@ class User < ActiveRecord::Base
     user_ranking_hash = User.prepare_user_ranking
     if user_ranking_hash.present?
       3.times do |i|
-        result[i+1] = user_ranking_hash[i+1] if user_ranking_hash.has_key?(i+1)
+        counter = i + 1
+        result[counter] = user_ranking_hash[counter] if user_ranking_hash.has_key?(counter)
       end
       if own_user_id.present?
         user_ranking_hash.each_pair do |k,v|

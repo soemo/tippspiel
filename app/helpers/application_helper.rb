@@ -94,18 +94,15 @@ module ApplicationHelper
     end
   end
 
-  # FIXME soeren 19.01.13 die Links auch über eine Config Einstellung laden key url => value title
   def write_extern_links
     haml_tag :h4, 'Links'
-    haml_tag :br
     haml_tag :p do
-      haml_concat link_to("EM Planer [PDF]", "http://motzigemba.de/files/planer2012.pdf", :target =>"_blank")
-      haml_tag :br
-      haml_concat link_to("UEFA", "http://de.uefa.com/uefaeuro/", :target =>"_blank")
-      haml_tag :br
-      haml_concat link_to("EM2012 Wikipedia", "http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012", :target=>"_blank")
-      haml_tag :br
-      haml_concat link_to("EM2012 Sportschau", "http://www.sportschau.de/uefaeuro2012/", :target=>"_blank")
+      if SIDEBAR_EXTERN_LINKS.present?
+        SIDEBAR_EXTERN_LINKS.each do |link_data|
+          haml_concat link_to(link_data[:title], link_data[:url], :target =>"_blank")
+          haml_tag :br
+        end
+      end
     end
     haml_tag :hr
   end
@@ -115,7 +112,6 @@ module ApplicationHelper
       notes = Notice.limit(5).all
       if notes.present?
         haml_tag :h4, t("notice")
-        haml_tag :br
         notes.each do |n|
           haml_tag :p do
             haml_tag "span.notice_user", n.user.name if n.user.present?
@@ -132,7 +128,6 @@ module ApplicationHelper
 
   def write_sidebar_rss_feed(title, entries)
     haml_tag :h4, title if title.present?
-    haml_tag :br
     if entries.present?
       entries.each do |e|
         haml_tag :p do

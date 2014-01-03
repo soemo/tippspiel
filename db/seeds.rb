@@ -3,7 +3,7 @@
 def clear_seeds
   # Alle Tabellen (inkl. N:M-Tabellen) werden geloescht
   ActiveRecord::Base.connection.tables.each do |table|
-    next if ["schema_migrations", "users", "admin_users"].include?(table)
+    next if ["schema_migrations", "users"].include?(table)
     ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
   end
 

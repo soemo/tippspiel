@@ -5,6 +5,7 @@
 * Planio https://soemo.plan.io als Projektverwaltungssoftware
 
 * https://rpm.newrelic.com/login Monitoring
+**  soeren_mothes@web.de
 
 * Nutzung von Gem uberspacify
 ** database.yml der Stages liegt auf dem Server und nicht mehr hier im Projekt

@@ -68,8 +68,31 @@ describe User do
     Tipp.only_deleted.where(:user_id => user.id).map(&:id).should == tipps.map(&:id)
   end
 
+  it 'should get top3_positions_and_own_position' do
+    User.delete_all # fixture users delete
+    user_top3_ranking_hash, own_position = User.top3_positions_and_own_position(nil)
+    own_position.should == nil
+    user_top3_ranking_hash.should == {}
 
-  describe "top3_positions_and_own_position" do
-    # FIXME soeren 22.04.12 implement
+    # 10 User anlegen, alle auf der selben Platzierung
+    user_size = 10
+    points    = 13
+    user_size.times do |index|
+      FactoryGirl.create(:user,
+                        :lastname => "user#{index}",
+                        :points => points,
+                        :confirmed_at => Time.now - 5.minutes)
+    end
+
+    last_db_user = User.last
+    user_top3_ranking_hash, own_position = User.top3_positions_and_own_position(last_db_user.id)
+    own_position.should == 1
+    user_top3_ranking_hash.size.should == 1
+    user_top3_ranking_hash[1].size.should == User.count
+
+    user_top3_ranking_hash, own_position = User.top3_positions_and_own_position(nil)
+    own_position.should == nil
+    user_top3_ranking_hash.size.should == 1
+    user_top3_ranking_hash[1].size.should == User.count
   end
 end
