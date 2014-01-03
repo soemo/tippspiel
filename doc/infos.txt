@@ -7,8 +7,14 @@
 * https://rpm.newrelic.com/login Monitoring
 **  soeren_mothes@web.de
 
-* Nutzung von Gem uberspacify
+* Nutzung von Gem uberspacify https://github.com/soemo/uberspacify
 ** database.yml der Stages liegt auf dem Server und nicht mehr hier im Projekt
+
+* Check des Passengers
+** in current App Verzeichnis wechseln und in cmd folgendes nutzen:
+bundle exec passenger-status
+bundle exec passenger-memory-stats
+
 
 
 

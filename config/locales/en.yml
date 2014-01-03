@@ -1,4 +1,4 @@
-# FIXME soeren 21.04.12 nicht uebersetzt
+# FIXME soeren 21.04.12 nicht uebersetzt  und unvollständig
 
 en:
   app_name: "Tippspiel"
@@ -15,6 +15,13 @@ en:
   notice_needs_a_comment: "Bitte keine null Nummern angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
   succesfully_saved_championtipp: "Dein Tuniersieger-Tip wurden gespeichert!"
+
+  need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
+  need_champion_tipp_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es 6 Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
+  current_champion_tipp: 'Du hast aktuell auf %{championtipp_name} als Tuniersieger getippt.'
+  champion_tipp: 'Du hast auf %{championtipp_name} als Tuniersieger getippt.'
+  no_champion_tipp: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
+  who_will_be_champion: 'Wer wird Tuniersieger?'
 
   x_user_bet: "%{user_count} 'football-experts' fight in the competition."
 

@@ -26,6 +26,8 @@ describe TippsController do
 
     it "should only save tipps for games start in the future" do
       user = User.find_by_email("user@test.de") #email des eingeloggten Nutzers
+      FactoryGirl.create(:game)
+
       tipps = Tipp.user_tipps(user.id)
       tipps.size.should > 0
 

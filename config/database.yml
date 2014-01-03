@@ -18,7 +18,7 @@ login_test: &login_test
 development:
   adapter: mysql2
   encoding: utf8
-  database: tippspiel_development2
+  database: tippspiel_development2  #daten von em2012
   pool: 5
   <<: *login_dev
 

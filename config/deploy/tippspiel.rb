@@ -4,7 +4,7 @@
 # have your own domain set up, you can configure it here
 set :domain, "tippspiel.soemo.org"
 
-set :database_name_suffix, "em2012" # FIXME soeren 19.01.13 jahr konfiguroerbar machen
+set :database_name_suffix, "em2012" # FIXME soeren 19.01.13 jahr konfigurierbar machen AUS constants.rb? oder Module?
 
 # a name for your app, will be used for your gemset,
 # databases, directories, etc.

@@ -28,6 +28,7 @@ describe Tipp do
   describe "tipp edit allowed" do
     before do
       user = User.first
+      FactoryGirl.create(:game)
       @user_tipps = Tipp.user_tipps(user.id)
     end
 

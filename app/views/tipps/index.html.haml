@@ -1,6 +1,6 @@
-%h3= t("tipps")
+%h3= t('tipps')
 
-= render :partial => "champion_tipp"
+= render :partial => 'champion_tipp'
 
 - tipps_round_hash = prepare_tipps(@user_tipps)
-= render :partial => "user_tipps", :locals => {:tipps_round_hash => tipps_round_hash}
+= render :partial => 'user_tipps', :locals => {:tipps_round_hash => tipps_round_hash}

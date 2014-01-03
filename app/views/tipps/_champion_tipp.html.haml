@@ -1,27 +1,28 @@
-- championtipp_team = current_user.championtipp_team
+- championtipp_team = current_user.present? ? current_user.championtipp_team : nil
 - if before_tournament?
   .alert.alert-info
     - if championtipp_team.present?
-      Du hast aktuell auf #{championtipp_team.to_s} als Tuniersieger getippt.
+      %span= I18n.t('current_champion_tipp', :championtipp_name => championtipp_team.to_s)
     - else
       %b
-        Du hast noch keinen Tuniersieger-Tipp abgegeben!
+        = I18n.t('need_champion_tipp')
       %br
-      Bei richtigem Tipp auf den Tuniersieger gibt es 6 Zusatzpunkte.
-      Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
+      %span
+        = I18n.t('need_champion_tipp_info')
 
-  = form_tag "/save-champion-tipp", :class => "form-horizontal" do
+  = form_tag '/save-champion-tipp', :class => 'form-horizontal' do
     %fieldset
       .control-group
-        %label.control-label{:for=>"champion_team_id"}= "Wer wird Tuniersieger?"
+        %label.control-label{:for=>'champion_team_id'}= I18n.t('who_will_be_champion')
         .controls
-          - selected = championtipp_team.present? ? championtipp_team.id : ""
-          = select_tag("champion_team_id", options_from_collection_for_select(Team.order("name").all, "id", "to_s", selected), :prompt => t("please_select"))
-          = submit_tag t('save'), :class => "btn"
+          - selected = championtipp_team.present? ? championtipp_team.id : ''
+          = select_tag('champion_team_id', options_from_collection_for_select(Team.order('name').all, 'id', 'to_s', selected), :prompt => t('please_select'))
+          = submit_tag t('save'), :class => 'btn'
 
 - else
   .alert.alert-info
-    - if championtipp_team.present?
-      Du hast auf #{championtipp_team.name} als Tuniersieger getippt.
-    - else
-      Leider hast du keinen Tuniersieger-Tipp abgegeben!
+    %span
+      - if championtipp_team.present?
+        = I18n.t('champion_tipp', :championtipp_name => championtipp_team.to_s)
+      - else
+        = I18n.t('no_champion_tipp')

@@ -1,19 +1,19 @@
 - if tipps_round_hash.present?
-  = form_tag "/save-tipps" do
+  = form_tag '/save-tipps' do
     %table.table.table-striped.table-condensed.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
         - round_with_tipps.each_pair do |round_name, tipps|
           %thead
             %tr
-              %th.round_name{:colspan => 7}= t(round_name, :scope => "round")
+              %th.round_name{:colspan => 7}= t(round_name, :scope => 'round')
             %tr.next_to_round_name
-              %th= Game.human_attribute_name("start_at")
-              %th= Game.human_attribute_name("place")
-              %th= Game.human_attribute_name("team1")
-              %th= Game.human_attribute_name("team2")
-              %th= Game.human_attribute_name("result")
+              %th= Game.human_attribute_name('start_at')
+              %th= Game.human_attribute_name('place')
+              %th= Game.human_attribute_name('team1')
+              %th= Game.human_attribute_name('team2')
+              %th= Game.human_attribute_name('result')
               %th= Tipp.model_name.human
-              %th= Tipp.human_attribute_name("tipp_punkte")
+              %th= Tipp.human_attribute_name('tipp_punkte')
           %tbody
             - tipps.each do |tipp|
               - game = tipp.game
@@ -25,19 +25,19 @@
                   - write_team_with_flag(game.team1_view_name, game.team1_flag_path)
                 %td
                   - write_team_with_flag(game.team2_view_name, game.team2_flag_path)
-                %td= game.team1_goals.to_s + " : " + game.team2_goals.to_s
+                %td= game.team1_goals.to_s + ' : ' + game.team2_goals.to_s
                 - if edit_allowed
                   %td.tipp_input_td
-                    - write_tipp_input(tipp.id, "team1_goals", tipp.team1_goals)
-                    =":"
-                    - write_tipp_input(tipp.id, "team2_goals", tipp.team2_goals)
+                    - write_tipp_input(tipp.id, 'team1_goals', tipp.team1_goals)
+                    =':'
+                    - write_tipp_input(tipp.id, 'team2_goals', tipp.team2_goals)
 
                 - else
                   %td= "#{tipp.team1_goals} : #{tipp.team2_goals}"
                 %td= tipp.tipp_punkte
     %div
       %span.pull-right
-        = submit_tag t('save_tipp'), :class => "btn"
+        = submit_tag t('save_tipp'), :class => 'btn'
 
 - else
-  %p= "No Tipps"
+  %p= 'No Tipps'

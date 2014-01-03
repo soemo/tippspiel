@@ -32,8 +32,7 @@ group :assets do
 end
 
 group :development, :production do
-  #gem 'passenger',  '~> 3.0.19' #Fixme test mit 4.0.2 klappte nicht auf uberspace  'could not build the types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 32'
-  gem 'passenger',  '~> 4.0.33' #Fixme test mit 4.0.2 klappte nicht auf uberspace  'could not build the types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 32'
+  gem 'passenger',  '~> 4.0.33'
 
 end
 
