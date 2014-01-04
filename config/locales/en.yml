@@ -23,6 +23,9 @@ en:
   no_champion_tipp: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
+  tournament_starts_in: "Der Spaß beginnt in"
+  counter_desc: '(Tage : Stunden : Minuten : Sekunden)'
+
   x_user_bet: "%{user_count} 'football-experts' fight in the competition."
 
   signed_in_hello: "Hello, "
@@ -59,11 +62,13 @@ en:
   time:
     formats:
       only_date: "%Y-%m-%d"
+      for_js: "%Y-%m-%d %H:%M"  # String kann dann mit new Date(string) genutzt werden
   datetime:
     formats:
       default: "%Y-%m-%d, %H:%M"
       only_date: "%Y-%m-%d"
       time: "%H:%M"
+      for_js: "%Y-%m-%d %H:%M"  # String kann dann mit new Date(string) genutzt werden
 
   activerecord:
     models:

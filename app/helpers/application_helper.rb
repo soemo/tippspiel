@@ -31,37 +31,6 @@ module ApplicationHelper
     icon_name.present? ? "<i class='#{icon_name} #{add_on_ccs_class}'></i>".html_safe + " " + text : text
   end
 
-  def write_countdown
-    haml_tag "div#countdown_dashboard" do
-      haml_tag "div.dash.weeks_dash" do
-        haml_tag "span.dash_title", "Wochen"
-        haml_tag "div.digit", 0
-        haml_tag "div.digit", 0
-      end
-      haml_tag "div.dash.days_dash" do
-        haml_tag "span.dash_title", "Tage"
-        haml_tag "div.digit", 0
-        haml_tag "div.digit", 0
-      end
-      haml_tag "div.dash.hours_dash" do
-        haml_tag "span.dash_title", "Stunden"
-        haml_tag "div.digit", 0
-        haml_tag "div.digit", 0
-      end
-      haml_tag "div.dash.minutes_dash" do
-        haml_tag "span.dash_title", "Minuten"
-        haml_tag "div.digit", 0
-        haml_tag "div.digit", 0
-      end
-      # Sekunden aktuell raus
-      #haml_tag "div.dash.seconds_dash" do
-      #  haml_tag "span.dash_title", "Sekunden"
-      #  haml_tag "div.digit", 0
-      #  haml_tag "div.digit", 0
-      #end
-    end
-  end
-
   def get_title
     t('tournament_name') + " " + t('app_name')
   end

@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require jquery.livequery
 //= require jquery-migrate.min
-//= require jquery.lwtCountdown-1.0
+//= require jquery.countdown
 //= require bootstrap
 
 $(function() {
@@ -17,19 +17,20 @@ $(function() {
     trigger: 'hover'
   });
 
-  //Countdown - DATUM des ersten Spiels
-  //# FIXME soeren 19.01.13 das Datum muss doch besser uebergeb bar sein
-  //# FIXME soeren 20.05.13 neue Biblitohek suchen   jquery.lwtCountdown-1.0.js klappt nicht mti neustem jQuery
- /* $('#countdown_dashboard').countDown({
-    targetDate:{
-      'day':8,
-      'month':6,
-      'year':2012,
-      'hour':18,
-      'min':0,
-      'sec':0
-    }
-  });*/
+  if($('#counter').length > 0) {
+    //Countdown - DATUM des ersten Spiels
+    var _first_game_date_string = $('#counter').data('countdowndate');
+    var _date = new Date(_first_game_date_string);
+    console.log(_date);
+
+    $('#counter').countdown({
+      startTime: _date,
+      stepTime: 1,
+      image: "assets/countdown_digits_blue.png"
+    });
+  }
+
+
 });
 
 // Support for AJAX loaded modal window.

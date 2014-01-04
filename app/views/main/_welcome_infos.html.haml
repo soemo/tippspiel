@@ -10,11 +10,6 @@
 %p
   Falls es trotz der #{link_to "einfachen Regeln", help_path} noch Fragen gibt, einfach bei mir melden.
 
-- if before_tournament?
-  %p
-    Der Spaß beginnt in
-  - write_countdown
-
 - if tournament_finished?
   %p
     %b

@@ -9,15 +9,15 @@ gem 'haml-rails',              '~> 0.4'
 gem 'devise',                  '~> 2.2.4'
 gem 'rails3_acts_as_paranoid', '~> 0.2.5'
 gem 'sass',                    '~> 3.2.5'
-gem 'jquery-rails',            '~> 2.2.1'
+gem 'jquery-rails',            '~> 3.0.4'  # jQuery 1.10.2
 gem 'execjs',                  '~> 1.4.0'
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
-gem 'rails_admin',             '~> 0.4.8'
+gem 'rails_admin',             '~> 0.4.9'
 gem 'bootstrap-sass',          '~> 2.3.1.0'
 gem 'newrelic_rpm',            '~> 3.6.2.96'
 gem 'feed-normalizer',         '~> 1.5.2'
 
-gem 'lograge',                 '~> 0.2.0'
+gem 'lograge',                 '~> 0.2.2'
 
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 3.1.12'
@@ -39,8 +39,8 @@ end
 group :development do
   gem 'magic_encoding',    '~> 0.0.2'
   gem 'letter_opener',     '~> 1.1.1'
-  gem 'better_errors',     '~> 0.8.0'    # Provides a better error page for Rails and other Rack apps
-  gem 'binding_of_caller', '~> 0.7.1'    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
+  gem 'better_errors',     '~> 1.1.0'    # Provides a better error page for Rails and other Rack apps
+  gem 'binding_of_caller', '~> 0.7.2'    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
 end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind

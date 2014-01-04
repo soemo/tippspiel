@@ -154,9 +154,13 @@ class Game < ActiveRecord::Base
     result
   end
 
+  def self.first_game_in_tournament
+    Game.order('start_at asc').first
+  end
+
   def self.before_tournament?
     result = true
-    first_game = Game.order("start_at asc").first
+    first_game = Game.first_game_in_tournament
     if first_game.present? && first_game.start_at < Time.now
       result = false
     end

@@ -1,15 +1,19 @@
 .row
   .span5
-    = render :partial => "welcome_infos", :locals => {:today_games => @today_games}
+    = render :partial => 'welcome_infos', :locals => {:today_games => @today_games}
   .span4
     .alert.alert-info
-      = render :partial => "login_form_or_user_infos"
+      = render :partial => 'login_form_or_user_infos'
 
 .row
   .span9
+    = render :partial => 'countdown' ## FIXME soeren 04.01.14 wieder raus
+    - if before_tournament?
+      = render :partial => 'countdown'
+
     %h3
       Spielplan der
       = t(:tournament_name)
 
 
-    = render :partial => "/games/game_list", :locals => {:games_round_hash => @games_round_hash}
+    = render :partial => '/games/game_list', :locals => {:games_round_hash => @games_round_hash}
