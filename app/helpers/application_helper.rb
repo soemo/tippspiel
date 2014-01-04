@@ -82,11 +82,8 @@ module ApplicationHelper
       if notes.present?
         haml_tag 'h4.wrap_text', t('notice')
         notes.each do |n|
-          haml_tag :p do
-            haml_tag 'span.notice_user', n.user.name if n.user.present?
-            haml_tag :br
-            haml_tag 'span.wrap_text', html_escape(n.text)
-          end
+          haml_tag 'span.notice_user', n.user.name if n.user.present?
+          haml_tag 'p.wrap_text', html_escape(n.text)
         end
       end
       haml_concat link_to(t('write_notice'), notice_path)
@@ -104,7 +101,7 @@ module ApplicationHelper
           haml_tag :br
           haml_concat link_to(e['title'], e['urls'][0], :target => '_blank')
           haml_tag :br
-          haml_tag 'span.wrap_text', e['content']
+          haml_tag 'span.wrap_text', raw(e['content'])
         end
       end
     end
