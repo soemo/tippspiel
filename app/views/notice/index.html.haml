@@ -19,7 +19,7 @@
     .row
       .span9
         %blockquote{:class => class_name}
-          %p= notice.text
+          %p.wrap_text= notice.text
           %small
             = l(notice.created_at) + ", "
             = notice.user.name if notice.user.present?
