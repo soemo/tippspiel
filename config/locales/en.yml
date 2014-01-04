@@ -2,7 +2,8 @@
 
 en:
   app_name: "Tippspiel"
-  tournament_name: "EM 2012"
+  tournament_name: "WM 2014"  # Anpassen fuer jeweiliges Tunier # TODO soeren 04.01.14 was noch #50
+  games_of: "Spielplan der %{tournament_name}"
   text_maintenance: "At the moment the site isn't available due to maintenance issues. Please come back in a few minutes."
   error_javascript: Please activate JavaScript in your browser.
   error_stale_object: This object was edited by another user. Please reopen it and review the data
@@ -24,7 +25,8 @@ en:
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
   tournament_starts_in: "Der Spaß beginnt in"
-  counter_desc: '(Tage : Stunden : Minuten : Sekunden)'
+  counter_desc_desktop: '(Tage : Stunden : Minuten : Sekunden)'
+  counter_desc_tablet: '(Tage : Stunden : Minuten)'
 
   x_user_bet: "%{user_count} 'football-experts' fight in the competition."
 

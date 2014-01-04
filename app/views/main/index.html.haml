@@ -11,9 +11,6 @@
     - if before_tournament?
       = render :partial => 'countdown'
 
-    %h3
-      Spielplan der
-      = t(:tournament_name)
-
+    %h3=I18n.t('games_of', :tournament_name => I18n.t(:tournament_name))
 
     = render :partial => '/games/game_list', :locals => {:games_round_hash => @games_round_hash}

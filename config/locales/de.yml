@@ -1,6 +1,7 @@
 de:
   app_name: "Tippspiel"
-  tournament_name: "EM 2012"
+  tournament_name: "WM 2014" # Anpassen fuer jeweiliges Tunier # TODO soeren 04.01.14 was noch #50
+  games_of: "Spielplan der %{tournament_name}"
   text_maintenance: "Die Seite wird aktuell gewartet. Bitte probiere es später wieder."
   error_javascript: Bitte aktiviere Javascript in deinem Browser, um mit der Seite zu arbeiten!
   error_stale_object: Das Objekt wurde von einem anderen Nutzer bearbeitet. Bitte öffne es erneut und prüfe die Daten
@@ -25,7 +26,8 @@ de:
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
   tournament_starts_in: "Der Spaß beginnt in:"
-  counter_desc: '(Tage : Stunden : Minuten : Sekunden)'
+  counter_desc_desktop: '(Tage : Stunden : Minuten : Sekunden)'
+  counter_desc_tablet: '(Tage : Stunden : Minuten)'
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
 
@@ -276,4 +278,3 @@ de:
         even: "muss gerade sein"
         record_invalid: "Validierung fehlgeschlagen: %{errors}"
         url_invalid: "ist nicht gültig (keine Parameterangaben erlaubt)"
-

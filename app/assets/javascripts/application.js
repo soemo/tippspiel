@@ -17,21 +17,25 @@ $(function() {
     trigger: 'hover'
   });
 
-  if($('#counter').length > 0) {
+  init_countdown('counter_desktop');
+});
+
+
+
+function init_countdown(element_id_string){
+  if($('#'+element_id_string).length > 0) {
     //Countdown - DATUM des ersten Spiels
-    var _first_game_date_string = $('#counter').data('countdowndate');
+    var _first_game_date_string = $('#'+element_id_string).data('countdowndate');
     var _date = new Date(_first_game_date_string);
     console.log(_date);
 
-    $('#counter').countdown({
+    $('#'+element_id_string).countdown({
       startTime: _date,
       stepTime: 1,
       image: "assets/countdown_digits_blue.png"
     });
   }
-
-
-});
+}
 
 // Support for AJAX loaded modal window.
 // Focuses on first input textbox after it loads the window.

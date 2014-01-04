@@ -1,12 +1,16 @@
 # -*- encoding : utf-8 -*-
-MAIL        = "tippspiel@soemo.org"
-ADMIN_EMAIL = "soeren@mothes.org"
+MAIL        = 'tippspiel@soemo.org'
+ADMIN_EMAIL = 'soeren@mothes.org'
+
+# Anpassen fuer jeweiliges Tunier # TODO soeren 04.01.14 was noch #50
 
 # EM2012
-RSS_FEED_URL = "http://de.uefa.com/rssfeed/uefaeuro/rss.xml"
+#RSS_FEED_URL = 'http://de.uefa.com/rssfeed/uefaeuro/rss.xml'
+# WM2014
+RSS_FEED_URL = 'http://de.fifa.com/worldcup/news/rss.xml'
 
 SIDEBAR_EXTERN_LINKS = [
-    {:title => 'EM Planer [PDF]', :url => 'http://motzigemba.de/files/planer2012.pdf'},
-    {:title => 'UEFA', :url => 'http://de.uefa.com/uefaeuro/'},
-    {:title => 'EM2012 Wikipedia', :url => 'http://de.wikipedia.org/wiki/Fu%C3%9Fball-Europameisterschaft_2012'},
+    {:title => 'sportschau.de', :url => 'http://www.sportschau.de/fussball/fifawm2014'},
+    {:title => 'FIFA', :url => 'http://de.fifa.com/worldcup/index.html'},
+    {:title => 'Wikipedia', :url => 'http://de.wikipedia.org/wiki/Fu%C3%9Fball-Weltmeisterschaft_2014'},
 ]

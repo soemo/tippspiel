@@ -1,7 +1,7 @@
 - first_game  = Game.first_game_in_tournament
 - date_for_js = first_game.present? ? I18n.l(first_game.start_at, :format => :for_js) : ''
 
-%p
+%p.hidden-phone.hidden-tablet
   = I18n.t('tournament_starts_in')
-%div#counter.hidden-phone{'data-countdowndate'=> date_for_js}
-%div#counter_desc.hidden-phone=I18n.t('counter_desc')
+#counter_desktop.hidden-phone.hidden-tablet{'data-countdowndate'=> date_for_js}
+#counter_desc_desktop.hidden-phone.hidden-tablet=I18n.t('counter_desc_desktop')

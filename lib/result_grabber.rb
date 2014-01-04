@@ -8,6 +8,7 @@
 #
 # EM2012 http://api.footiefox.com/leagues/107/base.json
 
+# Anpassen fuer jeweiliges Tunier # TODO soeren 04.01.14 was noch #50
 
 module ResultGrabber
 
