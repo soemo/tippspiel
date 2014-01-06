@@ -143,7 +143,6 @@ de:
       long: "%A, %d. %B %Y, %H:%M Uhr"
       time: "%H:%M"
       only_date: "%d.%m.%Y"
-      for_js: "%Y-%m-%d %H:%M"  # String kann dann mit new Date(string) genutzt werden
 
     am: "vormittags"
     pm: "nachmittags"
@@ -153,7 +152,6 @@ de:
       default: "%d.%m.%Y, %H:%M Uhr"
       only_date: "%d.%m.%Y"
       time: "%H:%M"
-      for_js: "%Y-%m-%d %H:%M"  # String kann dann mit new Date(string) genutzt werden
     distance_in_words:
       half_a_minute: 'eine halbe Minute'
       less_than_x_seconds:

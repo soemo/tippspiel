@@ -25,12 +25,11 @@ $(function() {
 function init_countdown(element_id_string){
   if($('#'+element_id_string).length > 0) {
     //Countdown - DATUM des ersten Spiels
-    var _first_game_date_string = $('#'+element_id_string).data('countdowndate');
-    var _date = new Date(_first_game_date_string);
-    console.log(_date);
+    var first_game_date_timestamp = $('#'+element_id_string).data('countdowntimestamp');
+    var date = new Date(first_game_date_timestamp * 1000);
 
     $('#'+element_id_string).countdown({
-      startTime: _date,
+      startTime: date,
       stepTime: 1,
       image: "assets/countdown_digits_blue.png"
     });

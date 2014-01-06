@@ -64,13 +64,11 @@ en:
   time:
     formats:
       only_date: "%Y-%m-%d"
-      for_js: "%Y-%m-%d %H:%M"  # String kann dann mit new Date(string) genutzt werden
   datetime:
     formats:
       default: "%Y-%m-%d, %H:%M"
       only_date: "%Y-%m-%d"
       time: "%H:%M"
-      for_js: "%Y-%m-%d %H:%M"  # String kann dann mit new Date(string) genutzt werden
 
   activerecord:
     models:
