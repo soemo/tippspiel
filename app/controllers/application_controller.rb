@@ -3,15 +3,15 @@ require 'pp'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include ExceptionHandling
   include RssReader
 
   before_filter :ensure_migrated
   before_filter :set_locale
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :unless => :error_handling_method?
   before_filter :set_host_to_mailers
   before_filter :get_default_sidebar_content
 
-  include ExceptionHandling
 
   helper_method :tournament_finished?, :before_tournament?, :current_user
 

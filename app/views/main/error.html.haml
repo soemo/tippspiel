@@ -1,2 +1,6 @@
--# hier muss nichts hin. Es wird ein flash Error angezeigt.
--# Falls wir doch noch etwas Prosa auf die Error Seite schreiben wollen, waere hier die Stelle
+-# Es wird ein flash Error angezeigt.
+-# plus der extra Text in @error_msg kann entsprechend definiert werden
+
+- if @error_msg.present?
+  .error-text.well
+    %p= @error_msg[:text].html_safe

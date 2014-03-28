@@ -18,6 +18,38 @@ module ExceptionHandling
     end
   end
 
+  def error_handling_method?
+    result = false
+
+    if [:rescue_404,
+        :show_javascript_errors,
+        :redirect_after_wrong_auth_token,
+        :redirect_after_access_denied,
+        :redirect_after_stale_object_error,
+        :redirect_after_record_not_found,
+        :redirect_after_tippspiel_error].include?(action_name.to_sym)
+
+      result = action_name
+
+    end
+
+    result
+  end
+
+  #wird aufgerufen durch die route match '*a', :to => 'application#rescue_404' in routes.rb
+  def rescue_404
+    # der Fehler fliegt z.B. auch, wenn man in einem link_to eine ungueltige Ziel-URL setzt
+    Rails.logger.error("ERROR rescue_404 mit Params: #{params['a']}") if Rails.logger.present?
+    @error_msg = {
+        :text => t(:error_404_text, :requested_page =>params['a'])
+    }
+    # Format auf html umsetzen, da wir fuer die Action 'auth/error' nur ein html Template definiert haben
+    request.format = :html
+    respond_to do |format|
+      format.all { render :template => 'auth/error', :layout => 'application', :status => 404}
+    end
+  end
+
   #wird aufgerufen duch die route match '*a', :to => 'application#rescue_404' in routes.rb
   def rescue_404
     # der Fehler fliegt z.B. auch, wenn man in einem link_to eine ungueltige Ziel-URL setzt
@@ -57,7 +89,7 @@ module ExceptionHandling
     flash[:error] = (message.is_a?(Symbol)) ? t(message) : message
     Rails.logger.error exception.message
     Rails.logger.error exception.backtrace.inspect
-    if (Rails.env == "test" || Rails.env == "development") && reraise_error
+    if (Rails.env == 'test' || Rails.env == 'development') && reraise_error
       # Im Test wollen wir Fehler direkt mitbekommen
       raise exception
     else
@@ -71,7 +103,7 @@ module ExceptionHandling
 
         format.html { redirect_to redirect_target }
         format.xml { redirect_to redirect_target }
-        format.js { render :template => "/unknown_error", :locals => {:redirect_target => redirect_target}}
+        format.js { render :template => '/unknown_error', :locals => {:redirect_target => redirect_target}}
       end
     end
   end
@@ -84,16 +116,16 @@ module ExceptionHandling
   end
 
   def get_redirect_controller
-    "/main"
+    '/main'
   end
 
   def get_redirect_action
-    "error"
+    'error'
   end
 
   # Behandelt alle Fehler, falls ein Javascript-Request vorliegt
   def show_javascript_errors(exception)
-    std_error_msg = t(:error_ajax_request)
+    std_error_msg = I18n.t(:error_internal)
     if request.format == :js
       # JS-Requests werden behandelt:
       # Development => Wird auf get_redirect_action weitergeleitet und Exception-Text angezeigt (Exception wird geloggt)
@@ -116,7 +148,7 @@ module ExceptionHandling
       end
       controller = get_redirect_controller
       redirect_target = {:controller => controller, :action => get_redirect_action, :params => {}}
-      render :template => "/unknown_error", :locals => {:redirect_target => redirect_target}
+      render :template => '/unknown_error', :locals => {:redirect_target => redirect_target}
     else
       notify_airbrake(exception)
       redirect_all_formats exception, std_error_msg, true
