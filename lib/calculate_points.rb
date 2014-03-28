@@ -6,13 +6,14 @@
 
 module CalculatePoints
 
-  MAX_POINTS_PRO_TIPP  = 6
+  MAX_POINTS_PRO_TIPP  = 8
   POINTS_CORRECT_TREND = 3
+  EXTRA_POINT_GOALS    = 2
   EXTRA_POINT          = 1
-  CHAMPION_TIPP_POINTS = 6
+  CHAMPION_TIPP_POINTS = 8
 
   def calculate_user_points
-    users = User.all  # FIXME soeren 20.05.13 hier all oder nur die active??
+    users = User.active.all
     if users.present?
       users.each do |user|
         total_points  = Tipp.where(:user_id => user.id).sum(:tipp_punkte)
@@ -26,14 +27,16 @@ module CalculatePoints
           total_points = total_points + champion_tipp_points
         end
 
-        count_6points = Tipp.where({:user_id => user.id, :tipp_punkte => 6}).count
+        count_8points = Tipp.where({:user_id => user.id, :tipp_punkte => 8}).count
+        count_5points = Tipp.where({:user_id => user.id, :tipp_punkte => 5}).count
         count_4points = Tipp.where({:user_id => user.id, :tipp_punkte => 4}).count
         count_3points = Tipp.where({:user_id => user.id, :tipp_punkte => 3}).count
         count_0points = Tipp.where({:user_id => user.id, :tipp_punkte => 0}).count
 
         user.update_attributes({:points => total_points,
                                 :championtipppoints => champion_tipp_points,
-                                :count6points => count_6points,
+                                :count8points => count_8points,
+                                :count5points => count_5points,
                                 :count4points => count_4points,
                                 :count3points => count_3points,
                                 :count0points => count_0points,
@@ -84,8 +87,8 @@ module CalculatePoints
 
     # nur wenn die Spieltendenz stimmt, gibt es auch die Punkte auf die richtige Toranzahl pro Team
     if POINTS_CORRECT_TREND == points
-      points = points + EXTRA_POINT if game_team1_goals == tipp_team1_goals
-      points = points + EXTRA_POINT if game_team2_goals == tipp_team2_goals
+      points = points + EXTRA_POINT_GOALS if game_team1_goals == tipp_team1_goals
+      points = points + EXTRA_POINT_GOALS if game_team2_goals == tipp_team2_goals
     end
 
     # 1 Punkt fuer richtige Tordifferenz

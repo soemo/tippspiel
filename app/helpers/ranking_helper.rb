@@ -58,7 +58,8 @@ module RankingHelper
   def statistik_tooltip(user)
     result = "<b>#{I18n.t('points_statistic')}</b></br>"
 
-    temp   = {'6' => user.count6points,
+    temp   = {'8' => user.count8points,
+              '5' => user.count5points,
               '4' => user.count4points,
               '3' => user.count3points,
               '0' => user.count0points}

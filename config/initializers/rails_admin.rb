@@ -423,8 +423,9 @@ RailsAdmin.config do |config|
   #     configure :firstname, :string 
   #     configure :lastname, :string 
   #     configure :points, :integer 
-  #     configure :count6points, :integer 
-  #     configure :count4points, :integer 
+  #     configure :count8points, :integer
+  #     configure :count5points, :integer
+  #     configure :count4points, :integer
   #     configure :count3points, :integer 
   #     configure :count0points, :integer 
   #     configure :championtipppoints, :integer 

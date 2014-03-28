@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520115106) do
+ActiveRecord::Schema.define(:version => 20140106210337) do
 
   create_table "events", :force => true do |t|
     t.string   "event_type", :limit => 30, :default => "", :null => false
@@ -128,7 +128,6 @@ ActiveRecord::Schema.define(:version => 20130520115106) do
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "points"
-    t.integer  "count6points"
     t.integer  "count4points"
     t.integer  "count3points"
     t.integer  "count0points"
@@ -138,6 +137,8 @@ ActiveRecord::Schema.define(:version => 20130520115106) do
     t.datetime "deleted_at"
     t.datetime "reset_password_sent_at"
     t.integer  "lock_version",                          :default => 0
+    t.integer  "count5points"
+    t.integer  "count8points"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

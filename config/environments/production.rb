@@ -58,6 +58,10 @@ Tippspiel::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
 
+  # Wirft deprecation Warnung..., wenn nicht gesetzt;
+  # http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
+  I18n.enforce_available_locales = false # altes Verhalten eingestellt
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true

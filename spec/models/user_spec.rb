@@ -42,19 +42,21 @@ describe User do
   it "should get correct ranking_comparison_value" do
     user1 = FactoryGirl.create(:user,
                     :points=> 46,
-                    :count6points=> 3,
+                    :count8points=> 3,
+                    :count5points=> 4,
                     :count4points=> 7,
                     :count3points=> 0,
                     :count0points=> 10)
     user2 = FactoryGirl.create(:user,
                     :points => 46,
-                    :count6points => 1,
+                    :count8points => 1,
+                    :count5points => 1,
                     :count4points => 10,
                     :count3points => 0,
                     :count0points=> 9)
     (user1.ranking_comparison_value > user2.ranking_comparison_value).should be_true
-    user1.ranking_comparison_value.should == 46030700
-    user2.ranking_comparison_value.should == 46011000
+    user1.ranking_comparison_value.should == 4603040700
+    user2.ranking_comparison_value.should == 4601011000
   end
 
   it 'should delete tipps if user delete' do

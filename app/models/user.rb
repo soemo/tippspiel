@@ -28,14 +28,15 @@ class User < ActiveRecord::Base
   scope :active, where('confirmed_at is not null')
   scope :inactive, where('confirmed_at is null')
 
-  scope :ranking_order, order('users.points DESC, users.count6points DESC, users.count4points DESC, users.count3points DESC')
+  scope :ranking_order, order('users.points DESC, users.count8points DESC, users.count5points DESC, users.count4points DESC, users.count3points DESC')
 
   def ranking_comparison_value
-    str_points = points.to_s.rjust(2,"0")
-    str_count6points = count6points.to_s.rjust(2,"0")
+    str_points       = points.to_s.rjust(2,"0")
+    str_count8points = count8points.to_s.rjust(2,"0")
+    str_count5points = count5points.to_s.rjust(2,"0")
     str_count4points = count4points.to_s.rjust(2,"0")
     str_count3points = count3points.to_s.rjust(2,"0")
-    "#{str_points}#{str_count6points}#{str_count4points}#{str_count3points}".to_i
+    "#{str_points}#{str_count8points}#{str_count5points}#{str_count4points}#{str_count3points}".to_i
   end
 
   def confirm_with_maximum_time!
