@@ -23,6 +23,11 @@ en:
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
   succesfully_saved_championtipp: "Dein Tuniersieger-Tip wurden gespeichert!"
 
+  change_password_save_success: 'Saved password successful.'
+  change_password_wrong_pw_confirmation: 'Different password and password confirmation!'
+  change_password_need_all_all_input_fields: 'Please fill in all three password fields!'
+  change_password_wrong_old_pw: 'The old password is wrong!'
+
   need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
   need_champion_tipp_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es 6 Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
   current_champion_tipp: 'Du hast aktuell auf %{championtipp_name} als Tuniersieger getippt.'
@@ -63,6 +68,8 @@ en:
   please_select: "Please select"
   standings: Standing
 
+  password_change: Change password
+
   notes: Notes
   write_notice: Write notice
   characters_remaining: "Characters remaining: "
@@ -89,6 +96,8 @@ en:
         firstname: "Firstname"
         lastname: "Surname"
         password: "Passwordt"
+        old_password: Old password
         new_password: New password
         password_confirmation: Password confirmation
         remember_me: Remember me
+        preferences: User preferences

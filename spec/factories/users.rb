@@ -3,11 +3,15 @@
 
 FactoryGirl.define do
   factory :user do
-    firstname "test"
+    firstname 'test'
     sequence(:lastname){|n| "user#{n}" }
-    password  "test"
-    password_confirmation {|u| u.password}
+    password  'secret123'
+    password_confirmation 'secret123'
     sequence(:email){|n| "test#{n}@tippspiel.de" }
     points 0
   end
+
+  factory :active_user, parent => :user do
+     confirmed_at Time.now
+   end
 end

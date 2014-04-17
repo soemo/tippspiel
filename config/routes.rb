@@ -8,19 +8,24 @@ Tippspiel::Application.routes.draw do
   get 'scheduler/hourly'
   get 'scheduler/admin'
 
-  get "tipps" => "tipps#index"
-  post "save-tipps" => "tipps#save_tipps"
-  post "save-champion-tipp" => "tipps#save_champion_tipp"
-  get "ranking" => "ranking#index"
-  get "notice" => "notice#index"
-  post "save-notice" => "notice#create"
-  get "help" => "help#index"
+  get 'tipps' => 'tipps#index'
+  post 'save-tipps' => 'tipps#save_tipps'
+  post 'save-champion-tipp' => 'tipps#save_champion_tipp'
+  get 'ranking' => 'ranking#index'
+  get 'notice' => 'notice#index'
+  post 'save-notice' => 'notice#create'
+  get 'help' => 'help#index'
 
-  match "tipps/compare(/:id)" => "tipps#compare", :as => "compare_tipps"
-  match "ranking/hall-of-fame" => "ranking#hall_of_fame", :as => "hall_of_fame"
-  match "ranking/user-statistic(/:id)" => "ranking#user_statistic", :as => "user_statistic"
+  get '/user/preferences'
+  post '/user/save_preferences'
+  get '/user/edit_password'
+  post '/user/change_password'
+  
+  match 'tipps/compare(/:id)' => 'tipps#compare', :as => 'compare_tipps'
+  match 'ranking/hall-of-fame' => 'ranking#hall_of_fame', :as => 'hall_of_fame'
+  match 'ranking/user-statistic(/:id)' => 'ranking#user_statistic', :as => 'user_statistic'
 
-  match "main/error" => "main#error", :as => :error
+  match 'main/error' => 'main#error', :as => :error
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -71,11 +76,11 @@ Tippspiel::Application.routes.draw do
 
 
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with 'root'
   # just remember to delete public/index.html.
-  root :to => "main#index"
+  root :to => 'main#index'
 
-  # See how all your routes lay out with "rake routes"
+  # See how all your routes lay out with 'rake routes'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

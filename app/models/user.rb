@@ -120,4 +120,21 @@ class User < ActiveRecord::Base
     [result, own_position]
   end
 
+  # liefert im Fehlerfall ein Array von Error-Meldungen zurueck
+  def valid_password_change_params(old_password, password, password_confirmation)
+    error_messages = []
+
+    unless self.valid_password?(old_password)
+      error_messages << I18n.t(:change_password_wrong_old_pw)
+    end
+    if password.blank? || password_confirmation.blank? || old_password.blank?
+      error_messages << I18n.t(:change_password_need_all_all_input_fields)
+    end
+    if password.present? && password_confirmation.present? && password != password_confirmation
+      error_messages << I18n.t(:change_password_wrong_pw_confirmation)
+    end
+
+    error_messages
+  end
+
 end

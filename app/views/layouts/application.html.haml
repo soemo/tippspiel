@@ -35,21 +35,8 @@
   %noscript
     %p.alert= t(:error_javascript)
 
-  %div.navbar.navbar-fixed-top
-    %div.navbar-inner
-      -#container-fluid CS-Class wenn es die gesamte Bildschirmbreite einnehmen soll
-      %div.container
-        %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.brand{:href=> "/"}= image_tag("soccer_Ball.png", :class=>"soccer_ball") + get_title
-        %div.nav-collapse.collapse
-          - write_main_nav
-          %p.navbar-text.pull-right
-            - write_auth_nav
-        :erb
-          <!--/.nav-collapse -->
+  - write_navbar
+
   -#container-fluid CS-Class wenn es die gesamte Bildschirmbreite einnehmen soll
   %div.container
     %div.row

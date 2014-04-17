@@ -24,6 +24,11 @@ de:
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
 
+  change_password_save_success: 'Das Passwort wurde erfolgreich gespeichert.'
+  change_password_wrong_pw_confirmation: 'Die Passwort Bestätigung stimmt nicht mit dem neuen Passwort überein!'
+  change_password_need_all_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
+  change_password_wrong_old_pw: 'Das alte Passwort stimmt nicht!'
+
   need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
   need_champion_tipp_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es 6 Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
   current_champion_tipp: 'Du hast aktuell auf %{championtipp_name} als Tuniersieger getippt.'
@@ -48,6 +53,7 @@ de:
   show:    Anzeigen
   imprint: Impressum
   sure:    Bist du dir sicher?
+  password_change: Passwort ändern
   for_got_pw: "Passwort vergessen?"
   change_pw: "Passwort ändern"
   set_pw: "Passwort vergeben"
@@ -240,9 +246,11 @@ de:
         firstname: "Vorname"
         lastname: "Nachname"
         password: "Passwort"
+        old_password: Altes Passwort
         new_password: Neues Passwort
         password_confirmation: Passwort bestätigen
         remember_me: Angemeldet bleiben
+        preferences: Nutzereinstellungen
 
       game:
         place: Spielort

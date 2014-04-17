@@ -43,6 +43,10 @@ module Tippspiel
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Berlin'
 
+    # Wirft deprecation Warnung..., wenn nicht gesetzt;
+    # http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
+    I18n.enforce_available_locales = false # altes Verhalten eingestellt
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :de
@@ -54,7 +58,7 @@ module Tippspiel
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :password_confirmation, :old_password]
 
     config.generators do |g|
       g.template_engine :haml

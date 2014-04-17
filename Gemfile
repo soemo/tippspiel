@@ -13,7 +13,7 @@ gem 'jquery-rails',            '~> 3.0.4'  # jQuery 1.10.2
 gem 'execjs',                  '~> 1.4.0'
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.4.9'
-gem 'bootstrap-sass',          '~> 2.3.1.0'
+gem 'bootstrap-sass',          '~> 2.3.1.3'
 gem 'newrelic_rpm',            '~> 3.6.2.96'
 gem 'feed-normalizer',         '~> 1.5.2'
 
