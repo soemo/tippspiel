@@ -29,7 +29,7 @@ de:
   change_password_wrong_old_pw: 'Das alte Passwort stimmt nicht!'
 
   need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
-  need_champion_tipp_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es 6 Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
+  need_champion_tipp_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
   current_champion_tipp: 'Du hast aktuell auf %{championtipp_name} als Tuniersieger getippt.'
   champion_tipp: 'Du hast auf %{championtipp_name} als Tuniersieger getippt.'
   no_champion_tipp: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
