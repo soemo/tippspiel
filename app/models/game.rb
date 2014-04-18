@@ -2,8 +2,11 @@
 class Game < ActiveRecord::Base
   acts_as_paranoid
 
-  belongs_to :team1, :class_name => "Team"
-  belongs_to :team2, :class_name => "Team"
+  include WmConfig if IS_WM
+  include EmConfig if IS_EM
+
+  belongs_to :team1, :class_name => 'Team'
+  belongs_to :team2, :class_name => 'Team'
   has_many :tipps
 
   validates_presence_of :place
@@ -13,32 +16,15 @@ class Game < ActiveRecord::Base
   validates_uniqueness_of :api_match_id
   validate :presence_of_teams
 
-  GROUP        = "group"
-  QUARTERFINAL = "quarterfinal"
-  SEMIFINAL    = "semifinal"
-  FINAL        = "final"
-
-  ROUNDS = [GROUP, QUARTERFINAL, SEMIFINAL, FINAL]
-
-  GROUP_A      = "A"
-  GROUP_B      = "B"
-  GROUP_C      = "C"
-  GROUP_D      = "D"
-
-  GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D]
-
   UNENTSCHIEDEN = 0
   TEAM1_WIN     = 1
   TEAM2_WIN     = 2
 
-  default_scope order("start_at")
+  default_scope order('start_at')
 
   scope :group_games,        where(:round => GROUP)
-  scope :quarterfinal_games, where(:round => QUARTERFINAL)
-  scope :semifinal_games,    where(:round => SEMIFINAL)
   scope :final_games,        where(:round => FINAL)
-
-  scope :games_for_compare,  lambda{ |time| where("start_at < ?", time)}
+  scope :games_for_compare,  lambda{ |time| where('start_at < ?', time)}
 
   def to_s
     "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
@@ -52,20 +38,20 @@ class Game < ActiveRecord::Base
     result = {}
     group_size = GROUPS.size
     GROUPS.each_with_index do |group_name, index|
-      result[index+1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).all}
+      result[index + 1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).all}
     end
-    result[group_size+1] = {QUARTERFINAL => Game.quarterfinal_games.all}
-    result[group_size+2] = {SEMIFINAL => Game.semifinal_games.all}
-    result[group_size+3] = {FINAL => Game.final_games.all}
+    ROUNDS.each_with_index do |round, index|
+      result[group_size + index + 1] = {round => Game.where(:round => round).all}
+    end
 
     result.sort
   end
 
   def self.round_start_end_date_time(round)
-    games = Game.where(:round => round).order("start_at asc").select("start_at")
+    games = Game.where(:round => round).order('start_at asc').select('start_at')
     if games.present?
       start_date_time = games.first.start_at
-      end_date_time = games.last.start_at
+      end_date_time   = games.last.start_at
     else
       start_date_time = end_date_time = nil
     end
@@ -77,7 +63,7 @@ class Game < ActiveRecord::Base
   def self.finished_days_with_game_ids
     game_days_with_game_ids = {}
     not_finished_days = []
-    Game.select("id, start_at, finished").each do |game|
+    Game.select('id, start_at, finished').each do |game|
       key = game.start_at.to_date.to_s
       if game.finished == false
         # Spiele diesen Tages aus game_days_with_game_ids wieder entfernen
@@ -112,13 +98,13 @@ class Game < ActiveRecord::Base
       self.team2_placeholder_name
     end
   end
-
+                   # FIXME soeren 18.04.14 anpassen #20
   def team1_flag_path
-    self.team1_id.present? ? team1.flag_image_url : ""
+    self.team1_id.present? ? team1.flag_image_url : ''
   end
-
+               # FIXME soeren 18.04.14 anpassen #20
   def team2_flag_path
-    self.team2_id.present? ? team2.flag_image_url : ""
+    self.team2_id.present? ? team2.flag_image_url : ''
   end
 
   # wer hat gewonnen Team1 oder Team2, unentschieden == 0
@@ -180,10 +166,10 @@ class Game < ActiveRecord::Base
   protected
 
   def presence_of_teams
-    unless(team1_id.present? || team1_placeholder_name.present?)
+    unless team1_id.present? || team1_placeholder_name.present?
       errors.add_on_blank(:team1)
     end
-    unless(team2_id.present? || team2_placeholder_name.present?)
+    unless team2_id.present? || team2_placeholder_name.present?
       errors.add_on_blank(:team2)
     end
   end

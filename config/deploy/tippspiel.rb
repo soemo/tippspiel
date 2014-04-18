@@ -4,8 +4,7 @@
 # have your own domain set up, you can configure it here
 set :domain, "tippspiel.soemo.org"
 
-# Anpassen fuer jeweiliges Tunier # TODO soeren 04.01.14 was noch #50
-set :database_name_suffix, "em2012" # FIXME soeren 19.01.13 jahr konfigurierbar machen AUS constants.rb? oder Module?
+set :database_name_suffix, "#{TOURNAMENT_NAME.downcase.gsub(' ', '_')}"
 
 # a name for your app, will be used for your gemset,
 # databases, directories, etc.

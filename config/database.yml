@@ -15,10 +15,11 @@ login_test: &login_test
 <%= file = File.join(Rails.root, "config", "dblogin.yml")
     IO.read(file) if File.exist?(file) %>
 
+
 development:
   adapter: mysql2
   encoding: utf8
-  database: tippspiel_development_em2012
+  database: tippspiel_development_wm2014
   pool: 5
   <<: *login_dev
 
@@ -36,6 +37,6 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: tippspiel_development # hier nutzen wir auch lokal unser dev DB
+  database: tippspiel_development_wm2014 # hier nutzen wir auch lokal unser dev DB
   pool: 5
   <<: *login_dev

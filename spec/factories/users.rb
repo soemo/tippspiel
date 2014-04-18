@@ -11,7 +11,7 @@ FactoryGirl.define do
     points 0
   end
 
-  factory :active_user, parent => :user do
+  factory :active_user, :parent => :user do
      confirmed_at Time.now
    end
 end

@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def get_title
-    "#{t('tournament_name')} #{t('app_name')}"
+    "#{TOURNAMENT_NAME} #{t('app_name')}"
   end
 
   def write_team_with_flag(team_name, flag_icon_path='', spacer=nil)

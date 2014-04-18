@@ -1,12 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails',                   '~> 3.2.16'
+gem 'rails',                   '~> 3.2.17'
 ruby '1.9.3'
 
 gem 'mysql2',                  '~> 0.3.11'
 gem 'cancan',                  '~> 1.6.10'
 gem 'haml-rails',              '~> 0.4'
 gem 'devise',                  '~> 2.2.4'
+gem 'devise-encryptable',      '~> 0.1.2'
 gem 'rails3_acts_as_paranoid', '~> 0.2.5'
 gem 'sass',                    '~> 3.2.5'
 gem 'jquery-rails',            '~> 3.0.4'  # jQuery 1.10.2
@@ -32,7 +33,7 @@ group :assets do
 end
 
 group :development, :production do
-  gem 'passenger',  '~> 4.0.33'
+  gem 'passenger',  '~> 4.0.33'    # FIXME soeren 18.04.14 update
 
 end
 
