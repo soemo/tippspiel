@@ -35,8 +35,12 @@ module ApplicationHelper
     "#{TOURNAMENT_NAME} #{t('app_name')}"
   end
 
-  def write_team_with_flag(team_name, flag_icon_path='', spacer=nil)
-    haml_concat image_tag(flag_icon_path, :class=>'team_flag') if flag_icon_path.present?
+  def write_team_with_flag(team_name, country_code='', spacer=nil)
+    if country_code.present?
+      haml_tag 'span.f16' do
+        haml_tag "i.flag.#{country_code}"
+      end
+    end
     haml_concat spacer if spacer.present?
     haml_concat team_name
   end

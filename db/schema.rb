@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140106210337) do
+ActiveRecord::Schema.define(:version => 20140419211331) do
 
   create_table "events", :force => true do |t|
     t.string   "event_type", :limit => 30, :default => "", :null => false
@@ -87,12 +87,12 @@ ActiveRecord::Schema.define(:version => 20140106210337) do
   add_index "statistics", ["user_id"], :name => "index_statistics_on_user_id"
 
   create_table "teams", :force => true do |t|
-    t.string   "flag_image_url"
-    t.string   "name",           :limit => 30
+    t.string   "name",         :limit => 30
     t.datetime "deleted_at"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.integer  "lock_version",                 :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.integer  "lock_version",               :default => 0
+    t.string   "country_code"
   end
 
   create_table "tipps", :force => true do |t|

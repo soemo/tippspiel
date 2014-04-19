@@ -16,7 +16,7 @@ describe SchedulerController do
   describe "should work without login" do
     test_scheduler_actions.each do |action|
       it "should get #{action}" do
-        setup_net_mock(@mock_json_data, ResultGrabber::RESULT_URL_EM2012)
+        setup_net_mock(@mock_json_data, RESULT_URL)
         get action
         response.should be_success
       end
@@ -26,7 +26,7 @@ describe SchedulerController do
   describe "schould not run that often" do
     test_scheduler_actions.each do |action|
       it "should get #{action}" do
-        setup_net_mock(@mock_json_data, ResultGrabber::RESULT_URL_EM2012)
+        setup_net_mock(@mock_json_data, RESULT_URL)
         get action
         response.should be_success
         get action

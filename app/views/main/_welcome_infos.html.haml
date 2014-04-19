@@ -38,7 +38,7 @@
           %tr
             %td= l(game.start_at, :format => :time)
             %td
-              - write_team_with_flag(game.team1_view_name, game.team1_flag_path)
+              - write_team_with_flag(game.team1_view_name, game.team1_country_code)
             %td
-              - write_team_with_flag(game.team2_view_name, game.team2_flag_path)
+              - write_team_with_flag(game.team2_view_name, game.team2_country_code)
             %td= "#{game.team1_goals} : #{game.team2_goals}"

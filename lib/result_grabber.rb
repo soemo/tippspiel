@@ -7,39 +7,58 @@
 # http://api.footiefox.com/leagues.dat
 #
 # EM2012 http://api.footiefox.com/leagues/107/base.json
-
-# Anpassen fuer jeweiliges Tunier # TODO soeren 04.01.14 was noch #50
+# WM2014 http://api.footiefox.com/leagues/101/base.json
 
 module ResultGrabber
 
-   RESULT_URL_EM2012 = "http://api.footiefox.com/leagues/107/base.json"
-
-   API_GAME_STATUS_FINISHED = "finished"
+   API_GAME_STATUS_FINISHED = 'finished'
 
    # footiefox team id => Tippsiel DB Teamname
-   EM20102_TEAMS = {
-           924 => "Italien",
-           928 => "Frankreich",
-           931 => "Dänemark",
-           932 => "Spanien",
-           936 => "Niederlande",
-           940 => "Deutschland",
-           946 => "England",
-           951 => "Kroatien",
-           1306 => "Griechenland",
-           1315 => "Ukraine",
-           1317 => "Polen",
-           1318 => "Schweden",
-           1323 => "Portugal",
-           1327 => "Irland",
-           1333 => "Tschechien",
-           1335 => "Russland"
+   TEAMS = {
+       920 => 'Brasilien',
+       924 => 'Italien',
+       925 => 'Chile',
+       926 => 'Kamerun',
+       928 => 'Frankreich',
+       931 => 'Dänemark',
+       932 => 'Spanien',
+       933 => 'Nigeria',
+       936 => 'Niederlande',
+       937 => 'Belgien',
+       938 => 'Südkorea',
+       939 => 'Mexiko',
+       940 => 'Deutschland',
+       941 => 'USA',
+       943 => 'Iran',
+       945 => 'Kolumbien',
+       946 => 'England',
+       948 => 'Argentinien',
+       949 => 'Japan',
+       951 => 'Kroatien',
+       1303 => 'Schweiz',
+       1306 => 'Griechenland',
+       1315 => 'Ukraine',
+       1317 => 'Polen',
+       1318 => 'Schweden',
+       1323 => 'Portugal',
+       1327 => 'Irland',
+       1332 => 'Bosnien-Herzegowina',
+       1333 => 'Tschechien',
+       1335 => 'Russland',
+       1612 => 'Ghana',
+       1621 => 'Algerien',
+       3128 => 'Ecuador',
+       3130 => 'Uruguay',
+       3133 => 'Australien',
+       3500 => 'Costa Rica',
+       3560 => 'Honduras',
+       3599 => 'Elfenbeinküste',
    }
 
    def update_games
      errors     = []
      infos      = []
-     grabber = FootieFox.new(RESULT_URL_EM2012)
+     grabber = FootieFox.new(RESULT_URL)
      json_result = grabber.get_result(errors)
      if json_result.present?
        check_and_update_new_data(json_result, errors, infos)
@@ -56,17 +75,17 @@ module ResultGrabber
    def check_and_update_new_data(json_data, errors=[], infos=[])
      # pp json_data
      if json_data.present?
-       game_results = json_data["matches"]
+       game_results = json_data['matches']
        if game_results.present?
-         known_team_keys = EM20102_TEAMS.keys
+         known_team_keys = TEAMS.keys
 
          game_results.each do |game_result|
-           api_match_id = game_result["matchID"]
-           api_team1_id = game_result["team1Id"]
-           api_team2_id = game_result["team2Id"]
-           api_team1_goals = game_result["team1Score"]
-           api_team2_goals = game_result["team2Score"]
-           api_status = game_result["status"]
+           api_match_id = game_result['matchID']
+           api_team1_id = game_result['team1Id']
+           api_team2_id = game_result['team2Id']
+           api_team1_goals = game_result['team1Score']
+           api_team2_goals = game_result['team2Score']
+           api_status = game_result['status']
 
            game = Game.where(:api_match_id => api_match_id).first
            if game.present?
@@ -98,14 +117,14 @@ module ResultGrabber
 
    def update_team(api_team_id, game, game_attr_sym, known_team_keys, errors, infos)
      if api_team_id.present? && known_team_keys.include?(api_team_id)
-       team = Team.find_by_name(EM20102_TEAMS[api_team_id])
+       team = Team.find_by_name(TEAMS[api_team_id])
        if team.present?
          if team.id != game.send(game_attr_sym)
            game.update_attribute(game_attr_sym, team.id)
-           infos << "UPDATE_GAME_TEAM: #{EM20102_TEAMS[api_team_id]} (teamid #{team.id}) is new team for game id #{game.id}"
+           infos << "UPDATE_GAME_TEAM: #{TEAMS[api_team_id]} (teamid #{team.id}) is new team for game id #{game.id}"
          end
        else
-         errors << "check_and_update_new_data - team with name: #{EM20102_TEAMS[api_team_id]} not exists!"
+         errors << "check_and_update_new_data - team with name: #{TEAMS[api_team_id]} not exists!"
        end
      else
        unless api_team_id == -1
@@ -129,9 +148,6 @@ module ResultGrabber
       get(@url, error_array)
     end
 
-
-
-    private
 
     def get(url, error_array)
       result = nil

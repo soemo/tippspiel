@@ -2,6 +2,6 @@
 FactoryGirl.define do
   factory :team do
     sequence(:name){|n| "teamname#{n}" }
-    sequence(:flag_image_url){|n| "flag_image_url#{n}" }
+    sequence(:country_code){|n| "country_code#{n}" }
   end
 end

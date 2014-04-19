@@ -98,13 +98,13 @@ class Game < ActiveRecord::Base
       self.team2_placeholder_name
     end
   end
-                   # FIXME soeren 18.04.14 anpassen #20
-  def team1_flag_path
-    self.team1_id.present? ? team1.flag_image_url : ''
+
+  def team1_country_code
+    self.team1_id.present? ? team1.country_code : ''
   end
-               # FIXME soeren 18.04.14 anpassen #20
-  def team2_flag_path
-    self.team2_id.present? ? team2.flag_image_url : ''
+
+  def team2_country_code
+    self.team2_id.present? ? team2.country_code : ''
   end
 
   # wer hat gewonnen Team1 oder Team2, unentschieden == 0

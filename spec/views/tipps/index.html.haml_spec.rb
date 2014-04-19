@@ -29,7 +29,7 @@ describe 'tipps/index.html.haml'do
       rendered.should have_selector(:h3, :content => I18n.t('tipps'))
       rendered.should have_selector(:div, :class => 'alert alert-info') do |div|
         div.should have_selector(:b, :content => I18n.t('need_champion_tipp'))
-        div.should have_selector(:span, :content => I18n.t('need_champion_tipp_info'))
+        div.should have_selector(:span, :content => I18n.t('need_champion_tipp_info', :points => CalculatePoints::CHAMPION_TIPP_POINTS))
       end
 
       rendered.should have_selector(:form, :action => '/save-champion-tipp') do |form|

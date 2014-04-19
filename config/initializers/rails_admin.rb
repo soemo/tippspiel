@@ -306,7 +306,7 @@ RailsAdmin.config do |config|
   #   # Found columns:
 
   #     configure :id, :integer 
-  #     configure :flag_image_url, :string 
+  #     configure :country_code, :string
   #     configure :name, :string 
   #     configure :deleted_at, :datetime 
   #     configure :created_at, :datetime 

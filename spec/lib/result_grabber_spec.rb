@@ -8,15 +8,15 @@ describe ResultGrabber do
   describe "calculate all user tipp points" do
     before :each do
       Game.destroy_all
-
+            # FIXME soeren 17.04.14 #48
       @italy_api_team_id   = 924
-      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@italy_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::TEAMS[@italy_api_team_id])
       @germany_api_team_id = 940
-      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@germany_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::TEAMS[@germany_api_team_id])
       @england_api_team_id = 946
-      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@england_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::TEAMS[@england_api_team_id])
       @polen_api_team_id   = 1317
-      FactoryGirl.create(:team, :name => ResultGrabber::EM20102_TEAMS[@polen_api_team_id])
+      FactoryGirl.create(:team, :name => ResultGrabber::TEAMS[@polen_api_team_id])
 
       @api_game1_team1_score = 1
       @api_game1_team2_score = 2
@@ -206,22 +206,22 @@ describe ResultGrabber do
       infos.should be_present
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game1.team2.name.should == ResultGrabber::EM20102_TEAMS[@italy_api_team_id]
+      game1.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
+      game1.team2.name.should == ResultGrabber::TEAMS[@italy_api_team_id]
       game1.team1_goals.should == nil
       game1.team2_goals.should == nil
       game1.finished.should == false
 
       game2 = Game.find(@game2.id)
-      game2.team1.name.should == ResultGrabber::EM20102_TEAMS[@england_api_team_id]
-      game2.team2.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
+      game2.team1.name.should == ResultGrabber::TEAMS[@england_api_team_id]
+      game2.team2.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
       game2.team1_goals.should == nil
       game2.team2_goals.should == nil
       game2.finished.should == false
 
       game3 = Game.find(@game3.id)
-      game3.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game3.team2.name.should == ResultGrabber::EM20102_TEAMS[@polen_api_team_id]
+      game3.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
+      game3.team2.name.should == ResultGrabber::TEAMS[@polen_api_team_id]
       game3.team1_goals.should == nil
       game3.team2_goals.should == nil
       game3.finished.should == false
@@ -265,22 +265,22 @@ describe ResultGrabber do
       check_and_update_new_data(json_data)
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game1.team2.name.should == ResultGrabber::EM20102_TEAMS[@italy_api_team_id]
+      game1.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
+      game1.team2.name.should == ResultGrabber::TEAMS[@italy_api_team_id]
       game1.team1_goals.should == @api_game1_team1_score
       game1.team2_goals.should == @api_game1_team2_score
       game1.finished.should == true
 
       game2 = Game.find(@game2.id)
-      game2.team1.name.should == ResultGrabber::EM20102_TEAMS[@england_api_team_id]
-      game2.team2.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
+      game2.team1.name.should == ResultGrabber::TEAMS[@england_api_team_id]
+      game2.team2.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
       game2.team1_goals.should == nil
       game2.team2_goals.should == nil
       game2.finished.should == false
 
       game3 = Game.find(@game3.id)
-      game3.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game3.team2.name.should == ResultGrabber::EM20102_TEAMS[@polen_api_team_id]
+      game3.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
+      game3.team2.name.should == ResultGrabber::TEAMS[@polen_api_team_id]
       game3.team1_goals.should == nil
       game3.team2_goals.should == nil
       game3.finished.should == false
@@ -310,8 +310,8 @@ describe ResultGrabber do
       check_and_update_new_data(json_data)
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should_not == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game1.team2.name.should_not == ResultGrabber::EM20102_TEAMS[@italy_api_team_id]
+      game1.team1.name.should_not == ResultGrabber::TEAMS[@germany_api_team_id]
+      game1.team2.name.should_not == ResultGrabber::TEAMS[@italy_api_team_id]
       game1.team1_goals.should == nil
       game1.team2_goals.should == nil
       game1.finished.should == true
@@ -354,22 +354,22 @@ describe ResultGrabber do
       check_and_update_new_data(json_data)
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game1.team2.name.should == ResultGrabber::EM20102_TEAMS[@italy_api_team_id]
+      game1.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
+      game1.team2.name.should == ResultGrabber::TEAMS[@italy_api_team_id]
       game1.team1_goals.should == @api_game1_team1_score
       game1.team2_goals.should == @api_game1_team2_score
       game1.finished.should == true
 
       game2 = Game.find(@game2.id)
-      game2.team1.name.should == ResultGrabber::EM20102_TEAMS[@england_api_team_id]
-      game2.team2.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
+      game2.team1.name.should == ResultGrabber::TEAMS[@england_api_team_id]
+      game2.team2.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
       game2.team1_goals.should == @api_game2_team1_score
       game2.team2_goals.should == @api_game2_team2_score
       game2.finished.should == true
 
       game3 = Game.find(@game3.id)
-      game3.team1.name.should == ResultGrabber::EM20102_TEAMS[@germany_api_team_id]
-      game3.team2.name.should == ResultGrabber::EM20102_TEAMS[@polen_api_team_id]
+      game3.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
+      game3.team2.name.should == ResultGrabber::TEAMS[@polen_api_team_id]
       game3.team1_goals.should == @api_game3_team1_score
       game3.team2_goals.should == @api_game3_team2_score
       game3.finished.should == true
