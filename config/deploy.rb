@@ -1,10 +1,9 @@
 # -*- encoding : utf-8 -*-
-require '../initializers/01_constants'
 
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, 'beta-tippspiel'
 
-set :cap_tournament_name, TOURNAMENT_NAME  # FIXME soeren 22.04.14 #48 geht das besser
+set :cap_tournament_name, 'WM 2014'# TOURNAMENT_NAME  # FIXME soeren 22.04.14 #48 geht das besser
 
 require "capistrano/ext/multistage"
 
