@@ -3,6 +3,8 @@
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, "beta-tippspiel"
 
+set :cap_tournament_name, TOURNAMENT_NAME
+
 require "capistrano/ext/multistage"
 
 # bundle dir umsetzen soll in jedem Release neu gemacht werden (nicht im shared_path)

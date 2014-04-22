@@ -4,7 +4,7 @@
 # have your own domain set up, you can configure it here
 set :domain, "beta-tippspiel.soemo.org"
 
-set :database_name_suffix, "beta_#{TOURNAMENT_NAME.downcase.gsub(' ', '_')}"
+set :database_name_suffix, "beta_#{cap_tournament_name.downcase.gsub(' ', '_')}"
 
 # a name for your app, will be used for your gemset,
 # databases, directories, etc.
