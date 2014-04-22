@@ -40,7 +40,7 @@ class Game < ActiveRecord::Base
     GROUPS.each_with_index do |group_name, index|
       result[index + 1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).all}
     end
-    ROUNDS.each_with_index do |round, index|
+    (ROUNDS - [GROUP]).each_with_index do |round, index|
       result[group_size + index + 1] = {round => Game.where(:round => round).all}
     end
 
