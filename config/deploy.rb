@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'config/initializers/01_constants'
+require '../initializers/01_constants'
 
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, 'beta-tippspiel'
