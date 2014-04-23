@@ -187,8 +187,8 @@ puts 'Lade seeds'
 
 puts 'Spiele neu aufsetzen...'
 # TODO soeren 21.05.12 zur Sicherheit auskommentiert
-clear_games
-create_team_and_game_data
+#clear_games
+#create_team_and_game_data
 
 puts 'fertsch!'
 

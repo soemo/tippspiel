@@ -35,11 +35,9 @@ games = result['matches'].map{|i| {:api_match_id => i['matchID'], :start_at => I
 # Teamids
 teamids = games.map{|i| [i[:team1], i[:team2]]}.flatten.uniq.sort
 
-X. TODO ...
-
 B) Beta und Prod Stage
 1. set :cap_tournament_name   # wird fuer die DB-Namen genutzt
-2. (auf beiden Stages ausführen Wechsel: mittels cap tippspiel oder cap beta-tippspiel)
+2. (auf beiden Stages ausführen Wechsel: zum prod tippspiel indem man z.B. cap tippspiel deploy:setup nutzt)
    bundle exec cap deploy:setup
    bundle exec cap deploy:migrations
    bundle exec cap db:run_seed

@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = I18n.default_locale
-    # TODO soeren 01.04.12 erstmal nur deutsch
+    # TODO soeren 01.04.12 #21 erstmal nur deutsch
     #logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
     #I18n.locale = extract_locale_from_accept_language_header
     #logger.debug "* Locale set to '#{I18n.locale}'"
