@@ -76,5 +76,9 @@ Tippspiel::Application.configure do
 
   # better Log-Output https://github.com/roidrage/lograge
   config.lograge.enabled = true
+  # add time to lograge
+  config.lograge.custom_options = lambda do |event|
+    {:time => event.time}
+  end
 
 end
