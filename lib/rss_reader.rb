@@ -18,12 +18,12 @@ module RssReader
         File.delete(file)
       end
 
-      unless  File.exists?(file)
+      unless File.exists?(file)
         feed_xml_data = open(url)
         feed = FeedNormalizer::FeedNormalizer.parse feed_xml_data if feed_xml_data.present?
         if feed.present?
           feed = feed.to_json
-          File.open(file, "w+") do |f|
+          File.open(file, 'w+') do |f|
             f.write feed
           end
         end

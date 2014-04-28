@@ -8,7 +8,7 @@ describe ResultGrabber do
   describe "calculate all user tipp points" do
     before :each do
       Game.destroy_all
-            # FIXME soeren 17.04.14 #48
+
       @italy_api_team_id   = 924
       FactoryGirl.create(:team, :name => ResultGrabber::TEAMS[@italy_api_team_id])
       @germany_api_team_id = 940

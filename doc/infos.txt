@@ -41,6 +41,9 @@ B) Beta und Prod Stage
    bundle exec cap deploy:setup
    bundle exec cap deploy:migrations
    bundle exec cap db:run_seed
+3. Cronjob:
+   mittels svc -d ~/service/tippspiel_scheduler_hourly gestoppt
+   wieder starten mit svc -u ~/service/tippspiel_scheduler_hourly
 
 
 
