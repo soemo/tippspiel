@@ -52,11 +52,11 @@ de:
     registrations:
       signed_up: 'Du hast dich erfolgreich registriert. Es kann sein, dass du eine Aktivierungs-E-Mail erhältst.'
       inactive_signed_up: 'Du hast dich erfolgreich registriert. Du konntest jedoch nicht angemeldet werden, da dein Account %{reason} ist. Du erhältst ein Mail zur Bestätigung.'
-      signed_up_but_unconfirmed: "Vielen Dank. Sobald Du deine Email-Adresse bestätigt hast, kannst Du deinen neuen Account nutzen. Folge dazu bitte dem Link in der Email."
+      signed_up_but_unconfirmed: "Vielen Dank für die Registierung. Du bekommst eine Email mit Bestätigungslink zugeschickt. Sobald Du deine Email-Adresse bestätigt hast, kannst Du deinen neuen Account nutzen."
       signed_up_but_inactive: 'Du hast dich erfolgreich registriert. Du bist aber noch nicht anmelden, da dein Account inaktiv ist.'
       signed_up_but_locked: 'Du hast dich erfolgreich registriert. Du bist aber noch nicht anmelden, da dein Account gesperrt ist.'
       updated: 'Die Angaben wurden erfolgreich geändert.'
-      update_needs_confirmation: "Deine Daten wurden aktualisiert, aber Du musst deine neue E-Mail-Adresse bestätigen. Du erhälst in wenigen Minuten eine E-Mail, mit der Du die Änderung deiner E-Mail-Adresse abschließen kannst."
+      update_needs_confirmation: "Deine Daten wurden aktualisiert, aber Du musst deine neue E-Mail-Adresse bestätigen. Du erhältst in wenigen Minuten eine E-Mail, mit der Du die Änderung deiner E-Mail-Adresse abschließen kannst."
       destroyed: 'Dein Account wurde erfolgreich gelöscht.'
     unlocks:
       send_instructions: 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie du deinen Account entsperren kannst.'
