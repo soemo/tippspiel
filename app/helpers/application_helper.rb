@@ -48,68 +48,11 @@ module ApplicationHelper
   def default_sidebar_content
     # im Fehlerfall wird keine Sidebar angezeigt
     unless controller.controller_name == 'main' && controller.action_name == 'error'
-      write_sidebar_links
-      write_sidebar_notes
-      write_sidebar_rss_feed(@rss_title, @last_rss_entries)
-      write_extern_links
+      haml_concat render_cell(:user_sidebar_links, :show, :user => current_user)
+      haml_concat render_cell(:sidebar_notes, :show, :user => current_user, :item_count => 5)
+      haml_concat render_cell(:rss_feed, :show, :item_count => 5)
+      haml_concat render_cell(:extern_links, :show)
     end
-  end
-
-  def write_sidebar_links
-    if current_user.present?
-      haml_tag :h5 do
-        haml_concat link_to(t('compare_tipps'), compare_tipps_path)
-      end
-      haml_tag :h5 do
-        haml_concat link_to(t('hall_of_fame'), hall_of_fame_path)
-      end
-      haml_tag :hr
-    end
-  end
-
-  def write_extern_links
-    haml_tag :h4, 'Links'
-    haml_tag :p do
-      if SIDEBAR_EXTERN_LINKS.present?
-        SIDEBAR_EXTERN_LINKS.each do |link_data|
-          haml_concat link_to(link_data[:title], link_data[:url], :target =>'_blank')
-          haml_tag :br
-        end
-      end
-    end
-    haml_tag :hr
-  end
-
-  def write_sidebar_notes
-    if current_user.present?
-      notes = Notice.limit(5).all
-      if notes.present?
-        haml_tag 'h4.wrap_text', t('notice')
-        notes.each do |n|
-          haml_tag 'span.notice_user', n.user.name if n.user.present?
-          haml_tag 'p.wrap_text', html_escape(n.text)
-        end
-      end
-      haml_concat link_to(t('write_notice'), notice_path)
-      haml_tag :br
-      haml_tag :hr
-    end
-  end
-
-  def write_sidebar_rss_feed(title, entries)
-    haml_tag 'h4.wrap_text', title if title.present?
-    if entries.present?
-      entries.each do |e|
-        haml_tag :p do
-          haml_tag 'span.rss_date', l(e['date_published'].to_date)
-          haml_tag :br
-          haml_concat link_to(e['title'], e['urls'][0], :target => '_blank')
-          haml_tag :br
-          haml_tag 'span.wrap_text', raw(e['content'])
-        end
-      end
-    end
-    haml_tag :hr
   end
 
   def write_navbar

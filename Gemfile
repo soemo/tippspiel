@@ -17,7 +17,7 @@ gem 'rails_admin',             '~> 0.4.9'
 gem 'bootstrap-sass',          '~> 2.3.1.3'
 gem 'newrelic_rpm',            '~> 3.6.2.96'
 gem 'feed-normalizer',         '~> 1.5.2'
-
+gem 'cells',                   '~> 3.10.1'
 gem 'lograge',                 '~> 0.2.2'
 
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen

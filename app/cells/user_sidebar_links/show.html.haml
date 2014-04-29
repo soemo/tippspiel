@@ -1,0 +1,6 @@
+- if @current_user.present?
+  %h5
+    = link_to(t('compare_tipps'), compare_tipps_path)
+  %h5
+    = link_to(t('hall_of_fame'), hall_of_fame_path)
+  %hr

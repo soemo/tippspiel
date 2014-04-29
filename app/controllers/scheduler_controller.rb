@@ -9,7 +9,6 @@ class SchedulerController < ApplicationController
 
   before_filter      :check_invoke_frequency, :except => :admin
   skip_before_filter :authenticate_user!
-  skip_before_filter :get_default_sidebar_content
 
   def hourly
     start_calculate_points

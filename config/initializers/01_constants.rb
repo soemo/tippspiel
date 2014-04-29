@@ -6,9 +6,11 @@ TOURNAMENT_NAME = 'WM 2014'
 IS_EM = !IS_WM
 # Anpassen fuer jeweiliges Tunier
 # EM2012
-#RSS_FEED_URL = 'http://de.uefa.com/rssfeed/uefaeuro/rss.xml'
+#RSS_FEED_MAIN_URL = 'http://de.uefa.com'
+#RSS_FEED_URL      = "#{RSS_FEED_MAIN_URL}/rssfeed/uefaeuro/rss.xml"
 # WM2014
-RSS_FEED_URL = 'http://de.fifa.com/worldcup/news/rss.xml'
+RSS_FEED_MAIN_URL = 'http://de.fifa.com'
+RSS_FEED_URL      = "#{RSS_FEED_MAIN_URL}/worldcup/news/rss.xml"
 
 # Wird im ResultGrabber benutzt
 RESULT_URL = 'http://api.footiefox.com/leagues/101/base.json'

@@ -13,7 +13,7 @@ module RssReader
     feed = nil
 
     begin
-      file = File.join(File.expand_path(Rails.root), "tmp", "rss_feed_cache.xml")
+      file = File.join(File.expand_path(Rails.root), 'tmp', 'rss_feed_cache.xml')
       if (File.exists?(file) && File.mtime(file) < 1.hour.ago)
         File.delete(file)
       end
@@ -31,19 +31,19 @@ module RssReader
 
       feed =  JSON.parse(File.read(file)) if File.exists?(file)
     rescue Exception => e
-      puts "Error by grab RSS-Feed : #{e.to_s}"
+      Rails.logger.error("Error by grab RSS-Feed : #{e.to_s}")
     end
 
     feed
   end
 
   def get_top_x_entries_and_title(url, size=5)
-    title = ""
+    title = ''
     entries = []
     feed = parse(url)
     if feed.present?
-      title = feed["title"]
-      entries = feed["items"][0...size]
+      title = feed['title']
+      entries = feed['items'][0...size]
     end
 
     [title, entries]

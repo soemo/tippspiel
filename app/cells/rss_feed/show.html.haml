@@ -1,0 +1,12 @@
+- if @rss_title.present?
+  %h4.wrap_text= @rss_title
+- if @rss_entries.present?
+  - @rss_entries.each do |e|
+    %p
+      %span.rss_date= I18n.l(e['date_published'].to_date)
+      %br
+      = link_to(e['title'], "#{RSS_FEED_MAIN_URL}#{e['urls'][0]}", :target => '_blank')
+      %br
+      %span.wrap_text= raw(e['content'])
+
+  %hr

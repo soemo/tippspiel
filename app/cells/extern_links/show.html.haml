@@ -1,0 +1,7 @@
+%h4= 'Links'
+%p
+  - if SIDEBAR_EXTERN_LINKS.present?
+    - SIDEBAR_EXTERN_LINKS.each do |link_data|
+      = link_to(link_data[:title], link_data[:url], :target =>'_blank')
+      %br
+%hr
