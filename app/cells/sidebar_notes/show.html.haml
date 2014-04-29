@@ -1,4 +1,4 @@
-- if @current_user.present? && @notes.present?
+- if @notes.present?
   %h4.wrap_text= I18n.t('notice')
   - @notes.each do |n|
     %span.notice_user= n.user.name if n.user.present?
