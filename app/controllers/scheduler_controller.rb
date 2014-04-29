@@ -3,6 +3,7 @@ class SchedulerController < ApplicationController
 
   include CalculatePoints
   include ResultGrabber
+  include RssReader
 
   MIN_TIME_BETWEEN_RUNS = 5.minutes
   KEEP_SESSION_DAYS     = 7
@@ -13,6 +14,7 @@ class SchedulerController < ApplicationController
   def hourly
     start_calculate_points
     clean_invoke_table
+    write_rss_feed_cache_xml_file(RSS_FEED_URL)
     render :text => "Hourly scheduler run successful", :status => :ok
   end
 
@@ -28,7 +30,7 @@ class SchedulerController < ApplicationController
     update_games
     calculate_all_user_tipp_points
     calculate_user_points
-    # FIXME soeren 10.05.12 Statistic.calculate
+    # FIXME soeren 10.05.12 Statistic.calculate #24
   end
 
   def check_invoke_frequency
