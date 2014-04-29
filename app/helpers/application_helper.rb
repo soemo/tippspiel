@@ -49,7 +49,7 @@ module ApplicationHelper
     # im Fehlerfall wird keine Sidebar angezeigt
     unless controller.controller_name == 'main' && controller.action_name == 'error'
       haml_concat render_cell(:user_sidebar_links, :show, :user => current_user)
-      haml_concat render_cell(:sidebar_notes, :show, :user => current_user, :item_count => 5)
+      haml_concat render_cell(:sidebar_notes, :show, :user => current_user, :item_count => 5, :last_updated_at => Notice.last_updated.updated_at)
       haml_concat render_cell(:rss_feed, :show, :item_count => 5)
       haml_concat render_cell(:extern_links, :show)
     end
