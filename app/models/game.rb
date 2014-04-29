@@ -26,6 +26,10 @@ class Game < ActiveRecord::Base
   scope :final_games,        where(:round => FINAL)
   scope :games_for_compare,  lambda{ |time| where('start_at < ?', time)}
 
+  def self.last_updated_at
+    Game.unscoped.maximum('updated_at')
+  end
+
   def to_s
     "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
   end

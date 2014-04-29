@@ -4,6 +4,10 @@ class Team < ActiveRecord::Base
 
   validates_presence_of :name
 
+  def self.last_updated_at
+    Team.unscoped.maximum('updated_at')
+  end
+
   def to_s
     name
   end

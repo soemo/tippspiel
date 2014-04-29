@@ -3,7 +3,7 @@ class NoticeController < ApplicationController
 
   def index
     @notice = Notice.new
-    @notes = Notice.all
+    @notes = Notice.includes(:user).all
   end
 
   def create

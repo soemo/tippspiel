@@ -1,7 +1,7 @@
 class ExternLinksCell < Cell::Rails
   cache :show #Cache fuer immer
 
-  def show
+  def show(args)
     render
   end
 
