@@ -7,7 +7,7 @@ class RankingController < ApplicationController
   end
 
   def hall_of_fame
-
+    # wird intern mit fragment-cache gecached
   end
 
   def user_statistic

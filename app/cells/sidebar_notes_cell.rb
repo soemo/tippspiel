@@ -5,10 +5,9 @@ class SidebarNotesCell < Cell::Rails
   end
 
   def show(args)
-    Rails.logger.info("test sm in SidebarNotesCell Start") # FIXME soeren 29.04.14 wieder raus
     item_count    = args[:item_count]
     @notes        = Notice.limit(item_count).all
-    Rails.logger.info("test sm in SidebarNotesCell End") # FIXME soeren 29.04.14 wieder raus
+
     render
   end
 

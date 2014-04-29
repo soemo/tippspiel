@@ -61,4 +61,5 @@ group :test do
   gem 'faker',              '~> 1.1.2'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'webrat',             '~> 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
+  gem 'rspec-cells',        '~> 0.1.12'
 end
