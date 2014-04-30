@@ -58,6 +58,8 @@ de:
   set_pw: "Passwort vergeben"
   send_pw: "Neues Passwort schicken"
   save_tipp: "Tipps speichern"
+  random_tips: "Zufall-Tipps erstellen"
+  random_tips_description: "Wenn du zu faul zum Tippen bist, kannst du hier deine Tipps zufällig ausfüllen lassen (Tore von 0 bis 5). <b>Achtung:</b> Die Tipps werden nur in das Formular eingetragen und müssen noch explizit gespeichert werden."
   compare_tipps: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
   points_statistic: Punkteverteilung

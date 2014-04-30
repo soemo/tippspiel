@@ -17,9 +17,26 @@ $(function() {
     trigger: 'hover'
   });
 
+  init_random_user_tips();
   init_countdown('counter_desktop');
 });
 
+
+function init_random_user_tips(){
+  // Popover anzeigen
+  $('#js_fill_random_tips').popover({
+    placement: "bottom",
+    html: true,
+    trigger: 'hover'
+  });
+
+  $('#js_fill_random_tips').click(function() {
+    $.each($(".tipp_input"), function() {
+        $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen
+    });
+    return false; // damit danach kein GET ausgeloest wird
+  });
+}
 
 
 function init_countdown(element_id_string){

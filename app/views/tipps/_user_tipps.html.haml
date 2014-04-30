@@ -1,4 +1,11 @@
 - if tipps_round_hash.present?
+
+  %div.span2.offset7
+    - content = I18n.t('random_tips_description')
+    = link_to(t('random_tips'), '#',
+              {:id => 'js_fill_random_tips', :class => '', :remote => true,
+               :rel => 'popover', 'data-content' => content})
+
   = form_tag '/save-tipps' do
     %table.table.table-striped.table-condensed.tipps
       - tipps_round_hash.each do |index, round_with_tipps|

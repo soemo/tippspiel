@@ -62,4 +62,5 @@ group :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'webrat',             '~> 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
   gem 'rspec-cells',        '~> 0.1.12'
+  gem 'simplecov',          '~> 0.8.2'  # Code coverage for Ruby 1.9+
 end
