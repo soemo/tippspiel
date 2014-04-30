@@ -31,11 +31,24 @@ function init_random_user_tips(){
   });
 
   $('#js_fill_random_tips').click(function() {
-    $.each($(".tipp_input"), function() {
+    var inputs =  $(".tipp_input");
+    if(inputs.length) {
+      $.each(inputs, function() {
         $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen
-    });
+      });
+      show_overlay_tip_save();
+    }
     return false; // damit danach kein GET ausgeloest wird
   });
+
+  // Anzeige des Save Button Overlays
+  $(".tipp_input").change(function(){
+    show_overlay_tip_save();
+  });
+}
+
+function show_overlay_tip_save(){
+  $('#js_overlay_tip_save').removeClass('hidden');
 }
 
 

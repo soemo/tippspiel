@@ -45,6 +45,9 @@
     %div
       %span.pull-right
         = submit_tag t('save_tipp'), :class => 'btn'
+    %div#js_overlay_tip_save.hidden
+      %span
+        = submit_tag t('save_tipp'), :class => 'btn'
 
 - else
   %p= 'No Tipps'
