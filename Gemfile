@@ -33,7 +33,7 @@ group :assets do
 end
 
 group :development, :production do
-  gem 'passenger',  '~> 4.0.42'
+  gem 'passenger',  '~> 4.0.33'    # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen
 
 end
 
