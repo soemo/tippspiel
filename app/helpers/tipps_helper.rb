@@ -22,7 +22,7 @@ module TippsHelper
   end
 
   def write_tipp_input(tipp_id, attr_name, attr_value)
-    haml_concat text_field_tag( "tipps[#{tipp_id}][#{attr_name}]", attr_value, :maxlength => 2, :size => 2, :class => "tipp_input")
+    haml_concat text_field_tag( "tipps[#{tipp_id}][#{attr_name}]", attr_value, :maxlength => 2, :size => 2, :class => 'tipp_input')
   end
 
 end
