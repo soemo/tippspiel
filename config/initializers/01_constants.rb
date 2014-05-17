@@ -22,6 +22,7 @@ SIDEBAR_EXTERN_LINKS = [
     {:title => 'sportschau.de', :url => 'http://www.sportschau.de/fussball/fifawm2014'},
     {:title => 'FIFA', :url => 'http://de.fifa.com/worldcup/index.html'},
     {:title => 'Wikipedia', :url => 'http://de.wikipedia.org/wiki/Fu%C3%9Fball-Weltmeisterschaft_2014'},
+    {:title => 'Interaktiver Spielplan (ZDF)', :url => 'http://spielplan-wm2014.zdf.de/'},
 ]
 
 
