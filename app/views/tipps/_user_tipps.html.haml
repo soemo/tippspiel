@@ -9,14 +9,11 @@
   = form_tag '/save-tipps' do
     - tipps_round_hash.each do |index, round_with_tipps|
       - round_with_tipps.each_pair do |round_name, tipps|
-        -# eigenes table strip mittels css, daher kein .table-striped bei %table
-        %table.table.table-condensed.tipps
+        %table.table.table-striped.table-condensed.tipps
           %thead
-            %tr.hidden-phone.without_border_top
+            %tr
               %th.round_name{:colspan => 7}= t(round_name, :scope => 'round')
-            %tr.visible-phone.without_border_top
-              %th.round_name{:colspan => 3}= t(round_name, :scope => 'round')
-            %tr.hidden-phone.without_border_top
+            %tr.without_border_top
               %th= Game.human_attribute_name('start_at')
               %th= Game.human_attribute_name('place')
               %th= Game.human_attribute_name('team1')
@@ -28,10 +25,7 @@
             - tipps.each do |tipp|
               - game = tipp.game
               - edit_allowed = tipp.edit_allowed?
-              - row_class = cycle('even', 'odd')
-
-              -# not for phone
-              %tr{:class => "#{row_class} hidden-phone"}
+              %tr{:class => cycle('even', 'odd')}
                 %td= l(game.start_at, :format => :default)
                 %td= game.place
                 %td
@@ -48,31 +42,6 @@
                 - else
                   %td= "#{tipp.team1_goals} : #{tipp.team2_goals}"
                 %td= tipp.tipp_punkte
-
-              -# for phone
-              %tr{:class => "#{row_class} visible-phone"}
-                %td
-                  = l(game.start_at, :format => :default)
-                %td{:style => 'width:30%;'}
-                  - write_team_with_flag(game.team1_view_name, game.team1_country_code, "#{game.team1_goals}<br/>".html_safe )
-                %td{:style => 'width:30%;'}
-                  - write_team_with_flag(game.team2_view_name, game.team2_country_code, "#{game.team2_goals}<br/>".html_safe)
-              %tr{:class => "#{row_class} visible-phone without_border_top"}
-                %td
-                  - if edit_allowed
-                    %span.muted= Tipp.model_name.human
-                  - else
-                    %span.muted= "#{Tipp.model_name.human} (#{Tipp.human_attribute_name('tipp_punkte')})"
-                %td
-                  - if edit_allowed
-                    - write_tipp_input(tipp.id, 'team1_goals', tipp.team1_goals)
-                  - else
-                    = "#{tipp.team1_goals}" #{tipp.team2_goals} (#{tipp.tipp_punkte})"
-                %td
-                  - if edit_allowed
-                    - write_tipp_input(tipp.id, 'team2_goals', tipp.team2_goals)
-                  - else
-                    =  "#{tipp.team2_goals} (#{tipp.tipp_punkte})"
 
     .row
       %div

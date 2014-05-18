@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class TippsController < ApplicationController
 
+  include Mobylette::RespondToMobileRequests
+
   def index
     @user_tipps = Tipp.user_tipps(current_user.id)
   end
