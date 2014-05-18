@@ -64,6 +64,11 @@ body {
 
 }
 
+// wird auf der Tippseite genutzt, da ein eigenes Table-stripping
+tbody tr.even td {
+  background-color: $tableBackgroundAccent;
+}
+
 h3 {
   border-bottom: solid 1px $blue;
   margin-bottom: 12px;
@@ -133,7 +138,8 @@ blockquote > p {
   color: $blue;
 }
 
-.table tr.next_to_round_name th {
+.table tr.without_border_top th,
+.table tr.without_border_top td {
   border-top: 0;
 }
 
