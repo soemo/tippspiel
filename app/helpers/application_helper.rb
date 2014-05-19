@@ -20,6 +20,7 @@ module ApplicationHelper
     [
             ['main', root_path, false],
             ['tipps', tipps_path, true],
+            ['tipps_for_phone', tipps_path({:for_phone => true}), true], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
             ['ranking', ranking_path, true],
             ['notice', notice_path, true],
             ['help', help_path, false]
@@ -86,16 +87,32 @@ module ApplicationHelper
 
   def write_main_nav
     nav_items = main_nav_items
+
     unless user_signed_in?
       nav_items = main_nav_items.select{|i| i[2] == false}
     end
+
     if nav_items.present?
       haml_tag 'ul.nav' do
         nav_items.each do |key, path, needs_login|
           class_name = key == controller.controller_name ? 'active' : ''
-          haml_tag "li.#{class_name}" do
-            haml_concat link_to t(key), path
+
+          # TODO soeren 19.05.14 besser machen mit Rails4
+          # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
+          if key == 'tipps'
+            haml_tag "li.#{class_name}.hidden-phone" do
+              haml_concat link_to(t(key), path)
+            end
+          elsif key == 'tipps_for_phone'
+            haml_tag "li.#{class_name}.visible-phone" do
+              haml_concat link_to(t(key), path)
+            end
+          else
+            haml_tag "li.#{class_name}" do
+              haml_concat link_to(t(key), path)
+            end
           end
+
         end
       end
     end

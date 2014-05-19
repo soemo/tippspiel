@@ -23,10 +23,6 @@ gem 'lograge',                 '~> 0.2.2'
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 3.1.12'
 
-# Wird im TippsController benutzt
-gem 'mobylette',               '~> 3.5' # Adds the mobile format for rendering views for mobile device. # TODO soeren 18.05.14 mit Rails 4 kann es weg
-
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

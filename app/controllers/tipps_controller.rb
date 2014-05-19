@@ -1,11 +1,20 @@
 # -*- encoding : utf-8 -*-
 class TippsController < ApplicationController
 
-  include Mobylette::RespondToMobileRequests
-
   def index
+    # Liste der Tipps wird auf dem Phone komprimierter dargestellt
+    for_phone  = params.has_key?(:for_phone) ? true : false
     @user_tipps = Tipp.user_tipps(current_user.id)
+
+    respond_to do |format|
+      if for_phone
+        format.html { render 'index_for_phone' }
+      else
+        format.html { render 'index' }
+      end
+    end
   end
+
 
   def compare
     @posible_games   = Game.games_for_compare(Time.now).all

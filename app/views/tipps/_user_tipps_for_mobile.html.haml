@@ -7,10 +7,10 @@
                :rel => 'popover', 'data-content' => content})
 
   = form_tag '/save-tipps' do
-    - tipps_round_hash.each do |index, round_with_tipps|
-      - round_with_tipps.each_pair do |round_name, tipps|
-        -# eigenes table strip mittels css, daher kein .table-striped bei %table
-        %table.table.table-condensed.tipps
+    -# eigenes table strip mittels css, daher kein .table-striped bei %table
+    %table.table.table-condensed.tipps
+      - tipps_round_hash.each do |index, round_with_tipps|
+        - round_with_tipps.each_pair do |round_name, tipps|
           %thead
             %tr.without_border_top
               %th.round_name{:colspan => 3}= t(round_name, :scope => 'round')

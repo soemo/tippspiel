@@ -7,9 +7,9 @@
                :rel => 'popover', 'data-content' => content})
 
   = form_tag '/save-tipps' do
-    - tipps_round_hash.each do |index, round_with_tipps|
-      - round_with_tipps.each_pair do |round_name, tipps|
-        %table.table.table-striped.table-condensed.tipps
+    %table.table.table-striped.table-condensed.tipps
+      - tipps_round_hash.each do |index, round_with_tipps|
+        - round_with_tipps.each_pair do |round_name, tipps|
           %thead
             %tr
               %th.round_name{:colspan => 7}= t(round_name, :scope => 'round')

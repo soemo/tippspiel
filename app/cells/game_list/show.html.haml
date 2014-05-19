@@ -2,9 +2,9 @@
 
   -# for phone
   .visible-phone
-    - @games_round_hash.each do |_, round_with_games|
-      - round_with_games.each_pair do |round_name, games|
-        %table.table.table-striped.table-condensed
+    %table.table.table-striped.table-condensed
+      - @games_round_hash.each do |_, round_with_games|
+        - round_with_games.each_pair do |round_name, games|
           %thead
             %tr
               %th.round_name{:colspan => 3}= t(round_name, :scope => "round")
@@ -23,9 +23,9 @@
 
   -# not for phone
   .hidden-phone
-    - @games_round_hash.each do |_, round_with_games|
-      - round_with_games.each_pair do |round_name, games|
-        %table.table.table-striped.table-condensed
+    %table.table.table-striped.table-condensed
+      - @games_round_hash.each do |_, round_with_games|
+        - round_with_games.each_pair do |round_name, games|
           %thead
             %tr
               %th.round_name{:colspan => 5}= t(round_name, :scope => "round")
