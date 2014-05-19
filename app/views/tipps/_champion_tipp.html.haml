@@ -11,6 +11,8 @@
         = I18n.t('need_champion_tipp_info', :points => CalculatePoints::CHAMPION_TIPP_POINTS)
 
   = form_tag '/save-champion-tipp', :class => 'form-horizontal' do
+    -# # TODO soeren 19.05.14 #72 besser machen
+    = hidden_field_tag(:for_phone, @for_phone)
     %fieldset
       .control-group
         %label.control-label{:for=>'champion_team_id'}= I18n.t('who_will_be_champion')

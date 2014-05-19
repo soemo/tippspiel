@@ -1,5 +1,8 @@
-%h5
+-# 72 besser machen
+%h5.hidden-phone
   = link_to(t('compare_tipps'), compare_tipps_path)
+%h5.visible-phone
+  = link_to(t('compare_tipps'), compare_tipps_path({:for_phone => true}))
 %h5
   = link_to(t('hall_of_fame'), hall_of_fame_path)
 %hr

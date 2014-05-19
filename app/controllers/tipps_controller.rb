@@ -1,13 +1,18 @@
 # -*- encoding : utf-8 -*-
 class TippsController < ApplicationController
 
+  before_filter :get_for_phone
+
+  def get_for_phone
+    # Liste der Tipps wird auf dem Phone komprimierter dargestellt #72 besser machen
+    @for_phone = (params.has_key?(:for_phone) && params[:for_phone] == 'true') ? true : false
+  end
+
   def index
-    # Liste der Tipps wird auf dem Phone komprimierter dargestellt
-    for_phone  = params.has_key?(:for_phone) ? true : false
     @user_tipps = Tipp.user_tipps(current_user.id)
 
     respond_to do |format|
-      if for_phone
+      if @for_phone
         format.html { render 'index_for_phone' }
       else
         format.html { render 'index' }
@@ -28,10 +33,10 @@ class TippsController < ApplicationController
     if @game_to_compare.present?
       @tipps = @game_to_compare.
               tipps.
-              includes("user").
-              where("users.deleted_at" => nil).
-              order("tipps.tipp_punkte desc").
-              order("users.firstname")
+              includes('user').
+              where('users.deleted_at' => nil).
+              order('tipps.tipp_punkte desc').
+              order('users.firstname')
     end
   end
 
@@ -42,14 +47,14 @@ class TippsController < ApplicationController
       user_tipps = Tipp.user_tipps(current_user_id)
       user_tipps.each do |tipp|
         if (new_tipps["#{tipp.id}"].present? && can?(:update, tipp)) && tipp.edit_allowed?
-          tipp.team1_goals = new_tipps["#{tipp.id}"]["team1_goals"]
-          tipp.team2_goals = new_tipps["#{tipp.id}"]["team2_goals"]
+          tipp.team1_goals = new_tipps["#{tipp.id}"]['team1_goals']
+          tipp.team2_goals = new_tipps["#{tipp.id}"]['team2_goals']
           tipp.remove_leading_zero
           tipp.save
         end
       end
     end
-    redirect_to({:action => "index"}, {:notice => t("succesfully_saved_tipps")})
+    redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tipps')})
   end
 
   def save_champion_tipp
@@ -58,10 +63,10 @@ class TippsController < ApplicationController
         current_user.championtipp_team_id = params[:champion_team_id]
         if current_user.save
           flash[:notice] = t(:succesfully_saved_championtipp)
-          format.html { redirect_to :action => "index" }
+          format.html { redirect_to :action => 'index', :for_phone => @for_phone }
         end # no else
       else
-        format.html { redirect_to :action => "index" }
+        format.html { redirect_to :action => 'index', :for_phone => @for_phone }
       end
     end
   end

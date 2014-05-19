@@ -59,7 +59,7 @@ en:
   notice: Shoptalk
   tournament: "Tournament"
   tipps: "Hints"
-  tipps_for_phone: "Hints"
+  tipps_for_phone: "Hints"    #72 besser machen
   full_ranking_list: Full ranking list
 
   back_link: "back"

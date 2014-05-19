@@ -4,6 +4,8 @@
   Hier können die Tipps der laufenden und abgeschlossenen Spiele verglichen werden.
 
 = form_tag compare_tipps_path, :class => "form-inline" do
+  -# # TODO soeren 19.05.14 #72 besser machen
+  = hidden_field_tag(:for_phone, @for_phone)
   %fieldset
     .control-group
       .controls

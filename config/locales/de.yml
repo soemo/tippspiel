@@ -72,7 +72,7 @@ de:
   notice: Fachsimpeleien
   tournament: "Turnier"
   tipps: "Tipps"
-  tipps_for_phone: "Tipps"
+  tipps_for_phone: "Tipps" #72 besser machen
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"

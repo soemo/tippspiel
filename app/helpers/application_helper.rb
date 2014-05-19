@@ -97,7 +97,7 @@ module ApplicationHelper
         nav_items.each do |key, path, needs_login|
           class_name = key == controller.controller_name ? 'active' : ''
 
-          # TODO soeren 19.05.14 besser machen mit Rails4
+          # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
           # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
           if key == 'tipps'
             haml_tag "li.#{class_name}.hidden-phone" do

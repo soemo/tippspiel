@@ -7,6 +7,9 @@
                :rel => 'popover', 'data-content' => content})
 
   = form_tag '/save-tipps' do
+    -# # TODO soeren 19.05.14 #72 besser machen
+    = hidden_field_tag(:for_phone, @for_phone)
+
     -# eigenes table strip mittels css, daher kein .table-striped bei %table
     %table.table.table-condensed.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
