@@ -39,7 +39,7 @@ describe TippsController do
 
       # update erlaubt
       post 'save_tipps', {:tipps=>{"#{tipp.id}"=>{"team2_goals"=>"9", "team1_goals"=>"9"}}}
-      response.should redirect_to tipps_path
+      response.should redirect_to tipps_path({:for_phone=>false})
 
       t = Tipp.find(tipp.id)
       t.team1_goals.should == 9
@@ -49,7 +49,7 @@ describe TippsController do
 
       # update NICHT erlaubt
       post 'save_tipps', {:tipps=>{"#{tipp.id}"=>{"team2_goals"=>"3", "team1_goals"=>"0"}}}
-      response.should redirect_to tipps_path
+      response.should redirect_to tipps_path({:for_phone=>false})
 
       t = Tipp.find(tipp.id)
       t.team1_goals.should == 9 # Wert ist nicht veraendert

@@ -180,7 +180,51 @@ def create_team_and_game_data
 
 end
 
+
+def load_demo_user_and_random_tips
+  100.times.each do |i|
+    firstname = "test#{i+1}"
+    lastname = 'user'
+
+    # Wenn der Nutzer nicht schon existiert, wird er samt Zufallstipps angelegt
+    unless User.exists?(:firstname => firstname)
+      # gleich als angemeldeter Nutzer anlegen - confirmed_at
+      user = User.new({:email => "#{firstname}@soemo.org", :firstname => firstname, :lastname => lastname})
+      user.confirmed_at = Time.now.utc
+      user.save(:validation => false)
+      puts "Nutzer #{user.name} angelegt"
+      if user.present?
+        games = Game.all
+        if games.present?
+          games.each do |game|
+            Tipp.create!(:user_id => user.id, :game_id => game.id, :team1_goals => get_random_goal, :team2_goals => get_random_goal)
+          end
+        end
+      end
+    end
+  end
+end
+
+def get_random_goal
+  rand(5)
+end
+
+# setzt Zufallstore und das Spiel auf abgeschlossen
+def set_random_game_goals
+  games = Game.all
+  if games.present?
+    games.each do |game|
+      game.update_attributes({:team1_goals => get_random_goal,
+                              :team2_goals => get_random_goal,
+                              :finished => true})
+    end
+  end
+end
+
 puts 'Lade seeds'
+
+# Bei Rake-Task load_demo_data=true mitgeben
+load_demo_data = ENV['load_demo_data']
 
 # puts 'Alles loeschen...'
 # Achtung nicht in production aufrufen clear_seeds
@@ -189,6 +233,12 @@ puts 'Spiele neu aufsetzen...'
 # TODO soeren 21.05.12 zur Sicherheit auskommentiert
 #clear_games
 #create_team_and_game_data
+
+if load_demo_data == 'true'
+  puts ' load_demo_data !!!'
+  load_demo_user_and_random_tips
+  set_random_game_goals
+end
 
 puts 'fertsch!'
 

@@ -20,9 +20,10 @@ module CalculatePoints
         total_points  = 0 unless total_points.present?
 
         champion_tipp_points = 0
+        champion_team_id     = Game.tournament_champion_team.present? ? Game.tournament_champion_team.id : nil
         if Game.tournament_finished? &&
                 user.championtipp_team_id.present? &&
-                user.championtipp_team_id == Game.tournament_champion_team.id
+                user.championtipp_team_id == champion_team_id
           champion_tipp_points = CHAMPION_TIPP_POINTS
           total_points = total_points + champion_tipp_points
         end
