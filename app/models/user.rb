@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
   validates_as_paranoid
 
   belongs_to :championtipp_team, :class_name => "Team"
-  belongs_to :poll,  :dependent => :destroy
-  has_many  :tipps, :dependent => :destroy
+  has_many   :tipps, :dependent => :destroy
 
   validates                               :email,   :presence => true
   validates_uniqueness_of_without_deleted :email,   :scope => Devise.authentication_keys[1..-1], :case_sensitive => false, :allow_blank => true

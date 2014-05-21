@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140419211331) do
+ActiveRecord::Schema.define(:version => 20140521124259) do
 
   create_table "events", :force => true do |t|
     t.string   "event_type", :limit => 30, :default => "", :null => false
@@ -52,14 +52,6 @@ ActiveRecord::Schema.define(:version => 20140419211331) do
   end
 
   add_index "notices", ["user_id"], :name => "index_notices_on_user_id"
-
-  create_table "polls", :force => true do |t|
-    t.string   "name"
-    t.datetime "deleted_at"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "lock_version", :default => 0
-  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -134,7 +126,6 @@ ActiveRecord::Schema.define(:version => 20140419211331) do
     t.integer  "count0points"
     t.integer  "championtipppoints"
     t.integer  "championtipp_team_id"
-    t.integer  "poll_id"
     t.datetime "deleted_at"
     t.integer  "lock_version",           :default => 0
     t.integer  "count5points"
