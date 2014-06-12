@@ -15,7 +15,7 @@ gem 'execjs',                  '~> 1.4.0'
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.4.9'
 gem 'bootstrap-sass',          '~> 2.3.1.3'
-gem 'newrelic_rpm',            '~> 3.6.2.96'
+gem 'newrelic_rpm',            '~> 3.8.1.221'
 gem 'feed-normalizer',         '~> 1.5.2'
 gem 'cells',                   '~> 3.10.1'
 gem 'lograge',                 '~> 0.2.2'
