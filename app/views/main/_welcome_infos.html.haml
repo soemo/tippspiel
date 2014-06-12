@@ -20,19 +20,19 @@
       %b
         Trommelwirbel - Herzlichen Glückwunsch!
     %p
-      Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die rege Teilnahme,
+      Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die Teilnahme,
       hoffe es hat Spaß gemacht und bis zum nächsten Mal in 2 Jahren.
 - else
   - if today_games.present?
     %h4
       Spiele des heutigen Tages
-    %table.table.table-striped.table-condensed.size_70percent
-      %thead
+    %table.table.table-striped.table-condensed
+      %thead.hidden-phone
         %tr
-          %th= Game.human_attribute_name("start_at")
-          %th= Game.human_attribute_name("team1")
-          %th= Game.human_attribute_name("team2")
-          %th= Game.human_attribute_name("result")
+          %th= Game.human_attribute_name('start_at')
+          %th= Game.human_attribute_name('team1')
+          %th= Game.human_attribute_name('team2')
+          %th= Game.human_attribute_name('result')
       %tbody
         - today_games.each do |game|
           %tr

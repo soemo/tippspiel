@@ -35,7 +35,8 @@ class Game < ActiveRecord::Base
   end
 
   def self.today_games
-    Game.where(:start_at => [Time.now.midnight...Time.now.midnight+1.day]).all
+    t = Time.now.utc.midnight
+    Game.where(:start_at => [t...t+1.day]).all
   end
 
   def self.splited_by_rounds
@@ -134,6 +135,7 @@ class Game < ActiveRecord::Base
     result
   end
 
+  # Wenn das Finale als beendet markiert ist
   def self.tournament_finished?
     result = false
     games = Game.final_games
