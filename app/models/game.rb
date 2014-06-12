@@ -35,7 +35,7 @@ class Game < ActiveRecord::Base
   end
 
   def self.today_games
-    t = Time.now.utc.midnight
+    t = Time.now.midnight
     Game.where(:start_at => [t...t+1.day]).all
   end
 
