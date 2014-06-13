@@ -36,7 +36,7 @@ class Game < ActiveRecord::Base
 
   def self.today_games
     t = Time.now.midnight
-    Game.where(:start_at => [t...t+1.day]).all
+    Game.where(:start_at => [t..t+1.day]).all
   end
 
   def self.splited_by_rounds
