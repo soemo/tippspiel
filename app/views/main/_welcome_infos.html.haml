@@ -26,8 +26,9 @@
   - if today_games.present?
     %h4
       Spiele des heutigen Tages
-      = link_to(t('to_tip_page'), tipps_path, :class=>'hidden-phone')
-      = link_to(t('to_tip_page'), tipps_path({:for_phone => true}), :class=>'visible-phone')
+      - if user_signed_in?
+        = link_to(t('to_tip_page'), tipps_path, :class=>'hidden-phone')
+        = link_to(t('to_tip_page'), tipps_path({:for_phone => true}), :class=>'visible-phone')
     %table.table.table-striped.table-condensed
       %thead.hidden-phone
         %tr
