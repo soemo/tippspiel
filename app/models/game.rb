@@ -34,6 +34,8 @@ class Game < ActiveRecord::Base
     "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
   end
 
+  # Es werden die Spiele einschliesslich 00:00 bis 24:00
+  # des Tages angezeigt
   def self.today_games
     t = Time.now.midnight
     Game.where(:start_at => [t..t+1.day]).all

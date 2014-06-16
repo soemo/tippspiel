@@ -40,6 +40,8 @@ en:
 
   x_user_bet: "%{user_count} 'football-experts' fight in the competition."
 
+  to_tip_page: 'tip'
+
   signed_in_hello: "Hello, "
   sign_in: "Login"
   sign_out: "Logout"

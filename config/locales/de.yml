@@ -41,6 +41,8 @@ de:
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
 
+  to_tip_page: 'zum Tippen'
+
   signed_in_hello: "Hallo, "
   sign_in: "Login"
   sign_out: "Abmelden"
