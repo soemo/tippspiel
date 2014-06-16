@@ -1,7 +1,7 @@
 - if tipps_round_hash.present?
 
   = render :partial => 'random_tip_link'
-
+  %br
   = form_tag '/save-tipps', :id => 'js_save_tipps' do
     = render :partial => 'only_today_games_link'
 
