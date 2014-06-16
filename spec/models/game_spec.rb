@@ -41,26 +41,26 @@ describe Game do
 
     it 'should get games from today at 00:10' do
       freeze_test_time(@time_now.midnight + 10.minutes)
-      games = Game.today_games
+      games = Game.today_games.all
       games.should == [@today_game1, @today_game2, @today_game3]
     end
 
     it 'should get games from today at 22:00' do
       freeze_test_time(@time_now)
-      games = Game.today_games
+      games = Game.today_games.all
       games.should == [@today_game1, @today_game2, @today_game3]
     end
 
     it 'should get games from tommorrow at 22:00' do
       freeze_test_time(@time_now + 1.day)
-      games = Game.today_games
+      games = Game.today_games.all
       games.should == [@today_game3, @tommorrow_game1, @tommorrow_game2]
     end
 
     it 'should get games from yesterday at 22:00' do
       freeze_test_time(@time_now - 1.day)
-      games = Game.today_games
-      games.should == [@yesterday_game, @today_game1]
+      games = Game.today_games.pluck(:id)
+      games.should == [@yesterday_game.id, @today_game1.id]
     end
   end
 

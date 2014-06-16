@@ -1,12 +1,10 @@
 - if tipps_round_hash.present?
 
-  .random_tips
-    - content = I18n.t('random_tips_description')
-    = link_to(t('random_tips'), '#',
-              {:id => 'js_fill_random_tips', :class => '', :remote => true,
-               :rel => 'popover', 'data-content' => content})
+  = render :partial => 'random_tip_link'
 
-  = form_tag '/save-tipps' do
+  = form_tag '/save-tipps', :id => 'js_save_tipps' do
+    = render :partial => 'only_today_games_link'
+
     -# # TODO soeren 19.05.14 #72 besser machen
     = hidden_field_tag(:for_phone, @for_phone)
 
@@ -19,19 +17,20 @@
               %th.round_name{:colspan => 3}= t(round_name, :scope => 'round')
           %tbody
             - tipps.each do |tipp|
-              - game = tipp.game
-              - edit_allowed = tipp.edit_allowed?
-              - row_class = cycle('even', 'odd')
+              - game                 = tipp.game
+              - edit_allowed         = tipp.edit_allowed?
+              - row_class            = cycle('even', 'odd')
+              - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
 
               -# for phone
-              %tr{:class => "#{row_class}"}
+              %tr{:class => "#{row_class} #{today_game_css_class}"}
                 %td
                   = l(game.start_at, :format => :default)
                 %td{:style => 'width:30%;'}
                   - write_team_with_flag(game.team1_view_name, game.team1_country_code, "#{game.team1_goals}<br/>".html_safe )
                 %td{:style => 'width:30%;'}
                   - write_team_with_flag(game.team2_view_name, game.team2_country_code, "#{game.team2_goals}<br/>".html_safe)
-              %tr{:class => "#{row_class} without_border_top"}
+              %tr{:class => "#{row_class} without_border_top #{today_game_css_class}"}
                 %td
                   - if edit_allowed
                     %span.muted= Tipp.model_name.human

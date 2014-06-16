@@ -41,6 +41,8 @@ en:
   x_user_bet: "%{user_count} 'football-experts' fight in the competition."
   result_after_game_count: "Following points are taken after %{finshed_games_count} / %{all_games_count} games."
 
+  show_only_today_games: Show only today games.
+
   to_tip_page: 'tip'
 
   signed_in_hello: "Hello, "

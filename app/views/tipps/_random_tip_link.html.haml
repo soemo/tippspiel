@@ -1,0 +1,5 @@
+.random_tips
+  - content = I18n.t('random_tips_description')
+  = link_to(t('random_tips'), '#',
+            {:id => 'js_fill_random_tips', :class => '', :remote => true,
+             :rel => 'popover', 'data-content' => content})

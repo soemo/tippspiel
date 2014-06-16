@@ -3,4 +3,4 @@
 = render :partial => 'champion_tipp'
 %hr
 - tipps_round_hash = prepare_tipps(@user_tipps)
-= render :partial => 'user_tipps_for_mobile', :locals => {:tipps_round_hash => tipps_round_hash}
+= render :partial => 'user_tipps_for_mobile', :locals => {:tipps_round_hash => tipps_round_hash, :today_game_ids => @today_game_ids}

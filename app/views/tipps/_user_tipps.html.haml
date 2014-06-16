@@ -1,12 +1,10 @@
 - if tipps_round_hash.present?
 
-  .random_tips
-    - content = I18n.t('random_tips_description')
-    = link_to(t('random_tips'), '#',
-              {:id => 'js_fill_random_tips', :class => '', :remote => true,
-               :rel => 'popover', 'data-content' => content})
+  = render :partial => 'random_tip_link'
 
-  = form_tag '/save-tipps' do
+  = form_tag '/save-tipps', :id => 'js_save_tipps' do
+    = render :partial => 'only_today_games_link'
+
     %table.table.table-striped.table-condensed.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
         - round_with_tipps.each_pair do |round_name, tipps|
@@ -23,9 +21,10 @@
               %th= Tipp.human_attribute_name('tipp_punkte')
           %tbody
             - tipps.each do |tipp|
-              - game = tipp.game
-              - edit_allowed = tipp.edit_allowed?
-              %tr{:class => cycle('even', 'odd')}
+              - game                 = tipp.game
+              - edit_allowed         = tipp.edit_allowed?
+              - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
+              %tr{:class => "#{cycle('even', 'odd')} #{today_game_css_class}"}
                 %td= l(game.start_at, :format => :default)
                 %td= game.place
                 %td

@@ -37,10 +37,10 @@ class Game < ActiveRecord::Base
   end
 
   # Es werden die Spiele einschliesslich 00:00 bis 24:00
-  # des Tages angezeigt
+  # des Tages geliefert
   def self.today_games
     t = Time.now.midnight
-    Game.where(:start_at => [t..t+1.day]).all
+    Game.where(:start_at => [t..t+1.day])
   end
 
   def self.splited_by_rounds

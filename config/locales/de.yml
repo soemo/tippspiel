@@ -42,6 +42,8 @@ de:
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
   result_after_game_count: "Folgende Punkte wurden nach %{finshed_games_count} von %{all_games_count} Spielen erzielt."
 
+  show_only_today_games: Nur Spiele von heute anzeigen.
+
   to_tip_page: 'zum Tippen'
 
   signed_in_hello: "Hallo, "

@@ -9,7 +9,8 @@ class TippsController < ApplicationController
   end
 
   def index
-    @user_tipps = Tipp.user_tipps(current_user.id)
+    @today_game_ids = Game.today_games.pluck(:id)
+    @user_tipps     = Tipp.user_tipps(current_user.id)
 
     respond_to do |format|
       if @for_phone
@@ -57,6 +58,7 @@ class TippsController < ApplicationController
     redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tipps')})
   end
 
+  # FIXME soeren 12.06.2014 absichern, das nach Turnierstart nicht mehr gespeichert werden kann
   def save_champion_tipp
     respond_to do |format|
       if params[:champion_team_id].present?

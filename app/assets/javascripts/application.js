@@ -19,8 +19,18 @@ $(function() {
 
   init_random_user_tips();
   init_countdown('counter_desktop');
+  init_show_only_today_games();
 });
 
+
+function init_show_only_today_games (){
+  if($('#js_only_today_games').length > 0) {
+    $('#js_only_today_games').change(function() {
+      // die tr Zeilen, die nicht ein Spiel von heute sind, werden ein oder ausblenden
+      $("#js_save_tipps tr:not(.today_game)").toggle();
+    });
+  }
+}
 
 function init_random_user_tips(){
   // Popover anzeigen
@@ -31,7 +41,7 @@ function init_random_user_tips(){
   });
 
   $('#js_fill_random_tips').click(function() {
-    var inputs =  $(".tipp_input");
+    var inputs =  $(".tipp_input:visible");
     if(inputs.length) {
       $.each(inputs, function() {
         $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen
