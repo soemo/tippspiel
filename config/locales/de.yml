@@ -40,6 +40,7 @@ de:
   counter_desc_tablet: '(Tage : Stunden : Minuten)'
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
+  result_after_game_count: "Folgende Punkte wurden nach %{finshed_games_count} von %{all_games_count} Spielen erzielt."
 
   to_tip_page: 'zum Tippen'
 

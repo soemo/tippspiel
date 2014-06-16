@@ -89,4 +89,12 @@ describe Game do
     game_days_with_game_ids["2012-06-21"].should be_nil
 
   end
+
+  it 'should get finished games' do
+     game1 = FactoryGirl.create(:game, :start_at => '19.06.2012 20:45', :finished => nil)
+     game2 = FactoryGirl.create(:game, :start_at => '19.06.2012 20:45', :finished => false)
+     game3 = FactoryGirl.create(:game, :start_at => '19.06.2012 20:45', :finished => true)
+
+     Game.finished_games.should == [game3]
+  end
 end

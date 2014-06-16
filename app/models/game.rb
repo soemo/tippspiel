@@ -22,6 +22,8 @@ class Game < ActiveRecord::Base
 
   default_scope order('start_at')
 
+  scope :finished_games,     where(:finished => true)
+
   scope :group_games,        where(:round => GROUP)
   scope :final_games,        where(:round => FINAL)
   scope :games_for_compare,  lambda{ |time| where('start_at < ?', time)}
