@@ -20,6 +20,7 @@ $(function() {
   init_random_user_tips();
   init_countdown('counter_desktop');
   init_show_only_today_games();
+  init_save_tips_from_overlay_button();
 });
 
 
@@ -52,13 +53,25 @@ function init_random_user_tips(){
   });
 
   // Anzeige des Save Button Overlays
-  $(".tipp_input").change(function(){
+  $(".tipp_input").keyup(function(){
     show_overlay_tip_save();
   });
 }
 
 function show_overlay_tip_save(){
   $('#js_overlay_tip_save').removeClass('hidden');
+}
+
+function init_save_tips_from_overlay_button(){
+  var e = $('#js_tips_overlay_button');
+  if(e.length > 0) {
+    e.click(function() {
+      // Formular abschicken
+      $('#js_save_tipps').submit();
+    });
+  }
+
+  return false; // damit danach kein GET ausgeloest wird
 }
 
 
