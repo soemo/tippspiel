@@ -53,7 +53,7 @@ function init_random_user_tips(){
   });
 
   // Anzeige des Save Button Overlays
-  $(".tipp_input").keyup(function(){
+  $(".tipp_input").bind('change keyup', function() {
     show_overlay_tip_save();
   });
 }
