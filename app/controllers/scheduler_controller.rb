@@ -6,7 +6,6 @@ class SchedulerController < ApplicationController
   include RssReader
 
   MIN_TIME_BETWEEN_RUNS = 5.minutes
-  KEEP_SESSION_DAYS     = 7
 
   before_filter      :check_invoke_frequency, :except => :admin
   skip_before_filter :authenticate_user!
@@ -30,7 +29,6 @@ class SchedulerController < ApplicationController
     update_games
     calculate_all_user_tipp_points
     calculate_user_points
-    # FIXME soeren 10.05.12 Statistic.calculate #24
   end
 
   def check_invoke_frequency

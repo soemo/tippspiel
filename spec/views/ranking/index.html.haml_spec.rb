@@ -50,7 +50,7 @@ describe 'ranking/index.html.haml' do
         thead.should have_selector(:th, :content => I18n.t('standings'))
         thead.should have_selector(:th, :content => User.human_attribute_name('name'))
         thead.should have_selector(:th, :content => Game.human_attribute_name('siegertipp'))
-        thead.should have_selector(:th, :content =>  Game.human_attribute_name('points'))
+        thead.should have_selector(:th, :content => User.human_attribute_name('points'))
       end
       table.should have_selector(:tbody) do |tbody|
         tbody.should have_selector(:tr, :count => user_size)
@@ -105,7 +105,7 @@ describe 'ranking/index.html.haml' do
          thead.should have_selector(:th, :content => I18n.t('standings'))
          thead.should have_selector(:th, :content => User.human_attribute_name('name'))
          thead.should have_selector(:th, :content => Game.human_attribute_name('siegertipp'))
-         thead.should have_selector(:th, :content =>  Game.human_attribute_name('points'))
+         thead.should have_selector(:th, :content => User.human_attribute_name('points'))
        end
        table.should have_selector(:tbody) do |tbody|
          tbody.should have_selector(:tr, :count => user_size)

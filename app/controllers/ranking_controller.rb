@@ -10,11 +10,5 @@ class RankingController < ApplicationController
     # wird intern mit fragment-cache gecached
   end
 
-  def user_statistic
-     # FIXME soeren 09.05.12 #24 todo Daten laden
-    # Statistic Model
-    # TODO soeren 09.05.12 wann werden die Daten gespeichert
-    render :layout => false
-  end
 
 end

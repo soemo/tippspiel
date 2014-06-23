@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140521124259) do
+ActiveRecord::Schema.define(:version => 20140623082219) do
 
   create_table "events", :force => true do |t|
     t.string   "event_type", :limit => 30, :default => "", :null => false
@@ -65,18 +65,6 @@ ActiveRecord::Schema.define(:version => 20140521124259) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
-
-  create_table "statistics", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "position"
-    t.datetime "deleted_at"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "lock_version", :default => 0
-    t.date     "date_on",                     :null => false
-  end
-
-  add_index "statistics", ["user_id"], :name => "index_statistics_on_user_id"
 
   create_table "teams", :force => true do |t|
     t.string   "name",         :limit => 30
