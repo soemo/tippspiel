@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails',                   '~> 3.2.18'
+gem 'rails',                   '~> 3.2.19'
 ruby '1.9.3'
 
 gem 'mysql2',                  '~> 0.3.11'
@@ -45,14 +45,18 @@ end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
-  gem 'rails_best_practices', '~> 1.13.5' # a code metric tool for rails projects
-  gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git' # soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen bei ihm drin hat
-  gem 'capistrano',           '~> 2.15.4'
-  gem 'capistrano-ext',       '~> 1.2.1'
-  gem 'rvm-capistrano',       '~> 1.3.0'
-  gem 'rspec-rails',          '~> 2.13.2'
-  gem 'thin',                 '~> 1.5.1'     # lokaler Dev Server
-  gem 'pry',                  '~> 0.9.12.2'   # binding.pry -> debugging
+  gem 'rails_best_practices',      '~> 1.13.5' # a code metric tool for rails projects
+  gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git' # soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
+  gem 'capistrano',                '~> 2.15.4'
+  gem 'capistrano-ext',            '~> 1.2.1'
+  gem 'rvm-capistrano',            '~> 1.3.0'
+  gem 'rspec-rails',               '~> 2.99.0'
+  gem 'rspec-collection_matchers', '~> 1.0.0'    # Collection cardinality matchers, extracted from rspec-expectations
+  gem 'thin',                      '~> 1.6.2'    # lokaler Dev Server
+  gem 'pry',                       '~> 0.9.12.2' # binding.pry -> debugging
+
+  # TODO soeren 07.09.2014 wieder raus
+  #gem 'transpec', '~> 2.3.7'
 end
 
 group :test do

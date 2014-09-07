@@ -17,9 +17,9 @@ describe User do
 
   it "should check of admin?" do
     user = FactoryGirl.create(:user)
-    user.admin?.should be_false
+    user.admin?.should be_falsey
     user.update_attribute(:email, ADMIN_EMAIL)
-    user.admin?.should be_true
+    user.admin?.should be_truthy
   end
 
   describe 'confirm_with_max_time!' do
@@ -54,7 +54,7 @@ describe User do
                     :count4points => 10,
                     :count3points => 0,
                     :count0points=> 9)
-    (user1.ranking_comparison_value > user2.ranking_comparison_value).should be_true
+    (user1.ranking_comparison_value > user2.ranking_comparison_value).should be_truthy
     user1.ranking_comparison_value.should == 4603040700
     user2.ranking_comparison_value.should == 4601011000
   end

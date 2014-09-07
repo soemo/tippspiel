@@ -36,14 +36,14 @@ describe Tipp do
       first_tipp = @user_tipps.first
       game = first_tipp.game
       game.update_attribute(:start_at, Time.now + 1.minute)
-      first_tipp.edit_allowed?.should be_true
+      first_tipp.edit_allowed?.should be_truthy
     end
 
     it "should not allowed" do
       first_tipp = @user_tipps.first
       game = first_tipp.game
       game.update_attribute(:start_at, Time.now)
-      first_tipp.edit_allowed?.should be_false
+      first_tipp.edit_allowed?.should be_falsey
     end
 
   end

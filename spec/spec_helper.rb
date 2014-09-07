@@ -15,6 +15,12 @@ SimpleCov.start 'rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
+
+  # rspec-rails 3 will no longer automatically infer an example group's spec type
+  # from the file location. You can explicitly opt-in to this feature using this
+  # snippet:
+  config.infer_spec_type_from_file_location!
+
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -59,7 +65,7 @@ RSpec.configure do |config|
 end
 
 def freeze_test_time(check_time=Time.now)
-  Time.should_receive(:now).any_number_of_times.and_return(check_time)
+  Time.stub(:now).and_return(check_time)
 end
 
 def login user
