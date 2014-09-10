@@ -1,20 +1,20 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe RankingController do
+describe RankingController, :type => :controller do
 
   describe 'GET "index" with login' do
      spec_login_user
 
     it 'should be successful with login' do
       get 'index'
-      response.should be_success
+      expect(response).to be_success
       user_count = assigns(:user_count)
       user_ranking_hash = assigns(:user_ranking_hash)
 
-      user_count.should == 3 # 3 in den Fixtures
-      user_ranking_hash.has_key?(1).should be_present     # alle 3 auf dem ersten Platz
-      user_ranking_hash.has_key?(2).should_not be_present # keiner auf dem 2ten Platz
+      expect(user_count).to eq(3) # 3 in den Fixtures
+      expect(user_ranking_hash.has_key?(1)).to be_present     # alle 3 auf dem ersten Platz
+      expect(user_ranking_hash.has_key?(2)).not_to be_present # keiner auf dem 2ten Platz
     end
 
   end
@@ -23,7 +23,7 @@ describe RankingController do
 
     it 'should be redirected to root' do
       get 'index'
-      response.should redirect_to root_path
+      expect(response).to redirect_to root_path
     end
   end
 end

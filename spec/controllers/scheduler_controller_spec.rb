@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe SchedulerController do
+describe SchedulerController, :type => :controller do
   render_views
 
   before :each do
@@ -18,7 +18,7 @@ describe SchedulerController do
       it "should get #{action}" do
         setup_net_mock(@mock_json_data, RESULT_URL)
         get action
-        response.should be_success
+        expect(response).to be_success
       end
     end
   end
@@ -28,12 +28,12 @@ describe SchedulerController do
       it "should get #{action}" do
         setup_net_mock(@mock_json_data, RESULT_URL)
         get action
-        response.should be_success
+        expect(response).to be_success
         get action
         if action == "admin"
-          response.should be_success
+          expect(response).to be_success
         else
-          response.response_code.should == 400
+          expect(response.response_code).to eq(400)
         end
 
       end

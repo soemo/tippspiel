@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe Team do
+describe Team, :type => :model do
   it "should use Factory" do
       team = FactoryGirl.create(:team)
-      team.name.should be_present
+      expect(team.name).to be_present
   end
 end

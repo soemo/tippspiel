@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe ResultGrabber do
 
@@ -51,14 +51,14 @@ describe ResultGrabber do
       
       [@game1, @game2, @game3].each do |game|
         if game.team1.present?
-          game.team1.name.should =~ /teamname/
+          expect(game.team1.name).to match(/teamname/)
         else
-          game.team1_placeholder_name.should =~ /teamname/
+          expect(game.team1_placeholder_name).to match(/teamname/)
         end
         if game.team2.present?
-          game.team2.name.should =~ /teamname/
+          expect(game.team2.name).to match(/teamname/)
         else
-          game.team2_placeholder_name.should =~ /teamname/
+          expect(game.team2_placeholder_name).to match(/teamname/)
         end
       end
     end
@@ -82,8 +82,8 @@ describe ResultGrabber do
                                     "phase" => 0}
                            ]}
       check_and_update_new_data(json_data, errors, infos)
-      errors[0].should == "check_and_update_new_data - no game with api_match_id: 42"
-      infos.should be_empty
+      expect(errors[0]).to eq("check_and_update_new_data - no game with api_match_id: 42")
+      expect(infos).to be_empty
 
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
@@ -103,8 +103,8 @@ describe ResultGrabber do
       errors = []
       infos  = []
       check_and_update_new_data(json_data, errors, infos)
-      errors[0].should == "check_and_update_new_data - api team1_id: 2 not in known_team_keys"
-      infos.should be_empty
+      expect(errors[0]).to eq("check_and_update_new_data - api team1_id: 2 not in known_team_keys")
+      expect(infos).to be_empty
 
       json_data = {"leagueID" => 107,
                    "is_tournament" => true,
@@ -124,8 +124,8 @@ describe ResultGrabber do
       errors = []
       infos  = []
       check_and_update_new_data(json_data, errors, infos)
-      errors[0].should == "check_and_update_new_data - api team2_id: 2 not in known_team_keys"
-      infos.should be_empty
+      expect(errors[0]).to eq("check_and_update_new_data - api team2_id: 2 not in known_team_keys")
+      expect(infos).to be_empty
     end
 
     it "should not update teams with teamId -1" do
@@ -148,17 +148,17 @@ describe ResultGrabber do
                            ]}
 
       check_and_update_new_data(json_data, errors, infos)
-      errors.should be_empty
-      infos.should be_empty
+      expect(errors).to be_empty
+      expect(infos).to be_empty
 
       game3 = Game.find(@game3.id)
-      game3.team1.should == nil
-      game3.team1_placeholder_name.should =~ /teamname/
-      game3.team2.should == nil
-      game3.team2_placeholder_name.should =~ /teamname/
-      game3.team1_goals.should == nil
-      game3.team2_goals.should == nil
-      game3.finished.should == false
+      expect(game3.team1).to eq(nil)
+      expect(game3.team1_placeholder_name).to match(/teamname/)
+      expect(game3.team2).to eq(nil)
+      expect(game3.team2_placeholder_name).to match(/teamname/)
+      expect(game3.team1_goals).to eq(nil)
+      expect(game3.team2_goals).to eq(nil)
+      expect(game3.finished).to eq(false)
 
     end
 
@@ -202,29 +202,29 @@ describe ResultGrabber do
                            ]}
 
       check_and_update_new_data(json_data, errors, infos)
-      errors.should be_empty
-      infos.should be_present
+      expect(errors).to be_empty
+      expect(infos).to be_present
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game1.team2.name.should == ResultGrabber::TEAMS[@italy_api_team_id]
-      game1.team1_goals.should == nil
-      game1.team2_goals.should == nil
-      game1.finished.should == false
+      expect(game1.team1.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).to eq(ResultGrabber::TEAMS[@italy_api_team_id])
+      expect(game1.team1_goals).to eq(nil)
+      expect(game1.team2_goals).to eq(nil)
+      expect(game1.finished).to eq(false)
 
       game2 = Game.find(@game2.id)
-      game2.team1.name.should == ResultGrabber::TEAMS[@england_api_team_id]
-      game2.team2.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game2.team1_goals.should == nil
-      game2.team2_goals.should == nil
-      game2.finished.should == false
+      expect(game2.team1.name).to eq(ResultGrabber::TEAMS[@england_api_team_id])
+      expect(game2.team2.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game2.team1_goals).to eq(nil)
+      expect(game2.team2_goals).to eq(nil)
+      expect(game2.finished).to eq(false)
 
       game3 = Game.find(@game3.id)
-      game3.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game3.team2.name.should == ResultGrabber::TEAMS[@polen_api_team_id]
-      game3.team1_goals.should == nil
-      game3.team2_goals.should == nil
-      game3.finished.should == false
+      expect(game3.team1.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game3.team2.name).to eq(ResultGrabber::TEAMS[@polen_api_team_id])
+      expect(game3.team1_goals).to eq(nil)
+      expect(game3.team2_goals).to eq(nil)
+      expect(game3.finished).to eq(false)
 
     end
 
@@ -265,25 +265,25 @@ describe ResultGrabber do
       check_and_update_new_data(json_data)
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game1.team2.name.should == ResultGrabber::TEAMS[@italy_api_team_id]
-      game1.team1_goals.should == @api_game1_team1_score
-      game1.team2_goals.should == @api_game1_team2_score
-      game1.finished.should == true
+      expect(game1.team1.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).to eq(ResultGrabber::TEAMS[@italy_api_team_id])
+      expect(game1.team1_goals).to eq(@api_game1_team1_score)
+      expect(game1.team2_goals).to eq(@api_game1_team2_score)
+      expect(game1.finished).to eq(true)
 
       game2 = Game.find(@game2.id)
-      game2.team1.name.should == ResultGrabber::TEAMS[@england_api_team_id]
-      game2.team2.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game2.team1_goals.should == nil
-      game2.team2_goals.should == nil
-      game2.finished.should == false
+      expect(game2.team1.name).to eq(ResultGrabber::TEAMS[@england_api_team_id])
+      expect(game2.team2.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game2.team1_goals).to eq(nil)
+      expect(game2.team2_goals).to eq(nil)
+      expect(game2.finished).to eq(false)
 
       game3 = Game.find(@game3.id)
-      game3.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game3.team2.name.should == ResultGrabber::TEAMS[@polen_api_team_id]
-      game3.team1_goals.should == nil
-      game3.team2_goals.should == nil
-      game3.finished.should == false
+      expect(game3.team1.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game3.team2.name).to eq(ResultGrabber::TEAMS[@polen_api_team_id])
+      expect(game3.team1_goals).to eq(nil)
+      expect(game3.team2_goals).to eq(nil)
+      expect(game3.finished).to eq(false)
 
     end
 
@@ -310,11 +310,11 @@ describe ResultGrabber do
       check_and_update_new_data(json_data)
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should_not == ResultGrabber::TEAMS[@germany_api_team_id]
-      game1.team2.name.should_not == ResultGrabber::TEAMS[@italy_api_team_id]
-      game1.team1_goals.should == nil
-      game1.team2_goals.should == nil
-      game1.finished.should == true
+      expect(game1.team1.name).not_to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).not_to eq(ResultGrabber::TEAMS[@italy_api_team_id])
+      expect(game1.team1_goals).to eq(nil)
+      expect(game1.team2_goals).to eq(nil)
+      expect(game1.finished).to eq(true)
     end
 
     it "should update team names and all game" do
@@ -354,25 +354,25 @@ describe ResultGrabber do
       check_and_update_new_data(json_data)
 
       game1 = Game.find(@game1.id)
-      game1.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game1.team2.name.should == ResultGrabber::TEAMS[@italy_api_team_id]
-      game1.team1_goals.should == @api_game1_team1_score
-      game1.team2_goals.should == @api_game1_team2_score
-      game1.finished.should == true
+      expect(game1.team1.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).to eq(ResultGrabber::TEAMS[@italy_api_team_id])
+      expect(game1.team1_goals).to eq(@api_game1_team1_score)
+      expect(game1.team2_goals).to eq(@api_game1_team2_score)
+      expect(game1.finished).to eq(true)
 
       game2 = Game.find(@game2.id)
-      game2.team1.name.should == ResultGrabber::TEAMS[@england_api_team_id]
-      game2.team2.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game2.team1_goals.should == @api_game2_team1_score
-      game2.team2_goals.should == @api_game2_team2_score
-      game2.finished.should == true
+      expect(game2.team1.name).to eq(ResultGrabber::TEAMS[@england_api_team_id])
+      expect(game2.team2.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game2.team1_goals).to eq(@api_game2_team1_score)
+      expect(game2.team2_goals).to eq(@api_game2_team2_score)
+      expect(game2.finished).to eq(true)
 
       game3 = Game.find(@game3.id)
-      game3.team1.name.should == ResultGrabber::TEAMS[@germany_api_team_id]
-      game3.team2.name.should == ResultGrabber::TEAMS[@polen_api_team_id]
-      game3.team1_goals.should == @api_game3_team1_score
-      game3.team2_goals.should == @api_game3_team2_score
-      game3.finished.should == true
+      expect(game3.team1.name).to eq(ResultGrabber::TEAMS[@germany_api_team_id])
+      expect(game3.team2.name).to eq(ResultGrabber::TEAMS[@polen_api_team_id])
+      expect(game3.team1_goals).to eq(@api_game3_team1_score)
+      expect(game3.team2_goals).to eq(@api_game3_team2_score)
+      expect(game3.finished).to eq(true)
 
     end
 

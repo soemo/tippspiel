@@ -1,14 +1,14 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe TippsController do
+describe TippsController, :type => :controller do
 
   describe "GET 'index' with login" do
      spec_login_user
 
     it "should be successful with login" do
       get 'index'
-      response.should be_success
+      expect(response).to be_success
     end
 
   end
@@ -17,7 +17,7 @@ describe TippsController do
 
     it "should be redirected to root" do
       get 'index'
-      response.should redirect_to root_path
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -29,7 +29,7 @@ describe TippsController do
       FactoryGirl.create(:game)
 
       tipps = Tipp.user_tipps(user.id)
-      tipps.size.should > 0
+      expect(tipps.size).to be > 0
 
       tipp = Tipp.first
       game = tipp.game
@@ -39,21 +39,21 @@ describe TippsController do
 
       # update erlaubt
       post 'save_tipps', {:tipps=>{"#{tipp.id}"=>{"team2_goals"=>"9", "team1_goals"=>"9"}}}
-      response.should redirect_to tipps_path({:for_phone=>false})
+      expect(response).to redirect_to tipps_path({:for_phone=>false})
 
       t = Tipp.find(tipp.id)
-      t.team1_goals.should == 9
-      t.team2_goals.should == 9
+      expect(t.team1_goals).to eq(9)
+      expect(t.team2_goals).to eq(9)
 
       game.update_attribute(:start_at, Time.now) #Spiel startet genau jetzt
 
       # update NICHT erlaubt
       post 'save_tipps', {:tipps=>{"#{tipp.id}"=>{"team2_goals"=>"3", "team1_goals"=>"0"}}}
-      response.should redirect_to tipps_path({:for_phone=>false})
+      expect(response).to redirect_to tipps_path({:for_phone=>false})
 
       t = Tipp.find(tipp.id)
-      t.team1_goals.should == 9 # Wert ist nicht veraendert
-      t.team2_goals.should == 9 # Wert ist nicht veraendert
+      expect(t.team1_goals).to eq(9) # Wert ist nicht veraendert
+      expect(t.team2_goals).to eq(9) # Wert ist nicht veraendert
     end
   end
 

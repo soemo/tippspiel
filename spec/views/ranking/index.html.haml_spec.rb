@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe 'ranking/index.html.haml' do
+describe 'ranking/index', :type => :view do
 
   before :each do
     controller.singleton_class.class_eval do
@@ -11,6 +11,7 @@ describe 'ranking/index.html.haml' do
       end
       helper_method :before_tournament?
     end
+
   end
 
   it 'should show no user ranking if no user' do
@@ -18,9 +19,9 @@ describe 'ranking/index.html.haml' do
 
     render
 
-    rendered.should have_selector(:h3, :content => I18n.t('ranking'))
-    rendered.should have_selector(:p, :content => I18n.t('x_user_bet', :user_count => 0))
-    rendered.should have_selector(:p, :content => I18n.t('no_user'))
+    expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
+    expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => 0))
+    expect(rendered).to have_selector('p', :text => I18n.t('no_user'))
   end
 
   it 'should show correct user ranking - all user on place 1' do
@@ -42,23 +43,23 @@ describe 'ranking/index.html.haml' do
 
     render
 
-    rendered.should have_selector(:h3, :content => I18n.t('ranking'))
-    rendered.should have_selector(:p, :content => I18n.t('x_user_bet', :user_count => user_count))
+    expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
+    expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_count))
 
-    rendered.should have_selector(:table, :class => 'table table-striped table-condensed ranking') do |table|
-      table.should have_selector(:thead) do |thead|
-        thead.should have_selector(:th, :content => I18n.t('standings'))
-        thead.should have_selector(:th, :content => User.human_attribute_name('name'))
-        thead.should have_selector(:th, :content => Game.human_attribute_name('siegertipp'))
-        thead.should have_selector(:th, :content => User.human_attribute_name('points'))
+    expect(rendered).to have_selector('table.table.table-striped.table-condensed.ranking') do |table|
+      expect(table).to have_selector('thead') do |thead|
+        expect(thead).to have_selector('th', :text => I18n.t('standings'))
+        expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))
+        expect(thead).to have_selector('th', :text => Game.human_attribute_name('siegertipp'))
+        expect(thead).to have_selector('th', :text => User.human_attribute_name('points'))
       end
-      table.should have_selector(:tbody) do |tbody|
-        tbody.should have_selector(:tr, :count => user_size)
+      expect(table).to have_selector('tbody') do |tbody|
+        expect(tbody).to have_selector('tr', :count => user_size)
         user_size.times do |index|
-          tbody.should have_selector(:tr) do |tr|
-            tr.should have_selector(:td, :class=>'place', :content => '1')
-            tr.should have_selector(:td, :content => "test user#{index}")
-            tr.should have_selector(:a, :class => 'statistic_popover', :content => "#{points}")
+          expect(tbody).to have_selector('tr') do |tr|
+            expect(tr).to have_selector('td.place', :text => '1')
+            expect(tr).to have_selector('td', :text => "test user#{index}")
+            expect(tr).to have_selector('a.statistic_popover', :text => "#{points}")
           end
         end
       end
@@ -97,30 +98,29 @@ describe 'ranking/index.html.haml' do
 
      render
 
-     rendered.should have_selector(:h3, :content => I18n.t('ranking'))
-     rendered.should have_selector(:p, :content => I18n.t('x_user_bet', :user_count => user_count))
+     expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
+     expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_count))
 
-     rendered.should have_selector(:table, :class => 'table table-striped table-condensed ranking') do |table|
-       table.should have_selector(:thead) do |thead|
-         thead.should have_selector(:th, :content => I18n.t('standings'))
-         thead.should have_selector(:th, :content => User.human_attribute_name('name'))
-         thead.should have_selector(:th, :content => Game.human_attribute_name('siegertipp'))
-         thead.should have_selector(:th, :content => User.human_attribute_name('points'))
+     expect(rendered).to have_selector('table.table.table-striped.table-condensed.ranking') do |table|
+       expect(table).to have_selector('thead') do |thead|
+         expect(thead).to have_selector('th', :text => I18n.t('standings'))
+         expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))
+         expect(thead).to have_selector('th', :text => Game.human_attribute_name('siegertipp'))
+         expect(thead).to have_selector('th', :text => User.human_attribute_name('points'))
        end
-       table.should have_selector(:tbody) do |tbody|
-         tbody.should have_selector(:tr, :count => user_size)
+       expect(table).to have_selector('tbody') do |tbody|
+         expect(tbody).to have_selector('tr', :count => user_size)
 
          user_poins.each do |key, data|
-           tbody.should have_selector(:tr) do |tr|
-             tr.should have_selector(:td, :class=>'place', :content => data[:place].to_s)
-             tr.should have_selector(:td, :content => "test user_key_#{key}")
-             tr.should have_selector(:a, :class => 'statistic_popover', :content => data[:points].to_s)
+           expect(tbody).to have_selector('tr') do |tr|
+             expect(tr).to have_selector('td.place', :text => data[:place].to_s)
+             expect(tr).to have_selector('td', :text => "test user_key_#{key}")
+             expect(tr).to have_selector('a.statistic_popover', :text => data[:points].to_s)
            end
          end
 
        end
      end
 
-     #pp rendered
    end
 end

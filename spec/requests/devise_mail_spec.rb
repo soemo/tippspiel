@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "devise mail" do
+describe "devise mail", :type => :request do
 
   before :each do
     ActionMailer::Base.deliveries = [] # reset list of mails
@@ -15,30 +15,30 @@ describe "devise mail" do
     email = "new.registered-user@email.de"
     pw = "unknackbar123"
 
-    lambda {
+    expect {
       post "/users", {:user => {:firstname => "firstname", :lastname => "lastname",
                                :email => email, :password => pw,
                                :password_confirmation => pw}}
-    }.should change(User, :count).by(1)
+    }.to change(User, :count).by(1)
 
-    response.should redirect_to root_path
+    expect(response).to redirect_to root_path
 
     user = User.where(:email => email).first
-    user.should_not nil
-    user.confirmed_at.should be_nil
-    user.encrypted_password.should be_present
+    expect(user).not_to be_nil
+    expect(user.confirmed_at).to be_nil
+    expect(user.encrypted_password).to be_present
 
     mails = ActionMailer::Base.deliveries
-    mails.should_not be_empty
-    mails.size.should == 1
+    expect(mails).not_to be_empty
+    expect(mails.size).to eq(1)
 
     mail = mails[0]
-    I18n::l(mail.date).should == I18n::l(DateTime.now)
-    mail.subject.should =~ /#{I18n.t('app_name')} - #{I18n.t("devise.mailer.confirmation_instructions.subject")}/
-    mail.from.should == ["tippspiel@soemo.org"]
-    mail.to.should == [email]
-    mail.body.should =~ /#{user.firstname}/u
-    mail.body.should include("#{user_confirmation_path}?confirmation_token=#{user.confirmation_token}")
+    expect(I18n::l(mail.date)).to eq(I18n::l(DateTime.now))
+    expect(mail.subject).to match(/#{I18n.t('app_name')} - #{I18n.t("devise.mailer.confirmation_instructions.subject")}/)
+    expect(mail.from).to eq(["tippspiel@soemo.org"])
+    expect(mail.to).to eq([email])
+    expect(mail.body).to match(/#{user.firstname}/u)
+    expect(mail.body).to include("#{user_confirmation_path}?confirmation_token=#{user.confirmation_token}")
 
   end
 
@@ -48,49 +48,49 @@ describe "devise mail" do
     pw = "unknackbar123"
 
     # no email
-    lambda {
+    expect {
       post "/users", {:user => {:firstname => "firstname", :lastname => "lastname",
                                :email => nil, :password => pw,
                                :password_confirmation => pw}}
-    }.should_not change(User, :count)
+    }.not_to change(User, :count)
 
     # no firstname
-    lambda {
+    expect {
       post "/users", {:user => {:firstname => "", :lastname => "lastname",
                                :email => email, :password => pw,
                                :password_confirmation => pw}}
-    }.should_not change(User, :count)
+    }.not_to change(User, :count)
 
     # no lastname
-    lambda {
+    expect {
       post "/users", {:user => {:firstname => "firstname", :lastname => "",
                                :email => email, :password => pw,
                                :password_confirmation => pw}}
-    }.should_not change(User, :count)
+    }.not_to change(User, :count)
 
     # no pw
-    lambda {
+    expect {
       post "/users", {:user => {:firstname => "firstname", :lastname => "",
                                :email => email, :password => nil,
                                :password_confirmation => pw}}
-    }.should_not change(User, :count)
+    }.not_to change(User, :count)
 
     # no pw check
-    lambda {
+    expect {
       post "/users", {:user => {:firstname => "firstname", :lastname => "",
                                :email => email, :password => pw,
                                :password_confirmation => nil}}
-    }.should_not change(User, :count)
+    }.not_to change(User, :count)
 
-    response.should be_success
-    response.should render_template('new')
+    expect(response).to be_success
+    expect(response).to render_template('new')
 
     user = User.where(:email => email).first
-    user.should be_nil
+    expect(user).to be_nil
 
     mails = ActionMailer::Base.deliveries
-    mails.should be_empty
-    mails.size.should == 0
+    expect(mails).to be_empty
+    expect(mails.size).to eq(0)
   end
 
 

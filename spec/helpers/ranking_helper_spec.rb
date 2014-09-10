@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
 # the RankingHelper. For example:
@@ -11,7 +11,7 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe RankingHelper do
+describe RankingHelper, :type => :helper do
   it 'should get statistik_tooltip' do
     user = FactoryGirl.build(:user, :points => 13,
                                     :championtipppoints => 0,
@@ -21,7 +21,7 @@ describe RankingHelper do
                                     :count3points => 1,
                                     :count0points => 5)
 
-    statistik_tooltip(user).should == "<b>Punkteverteilung</b></br>1 x 8 Punkte</br>2 x 5 Punkte</br>1 x 4 Punkte</br>1 x 3 Punkte</br>5 x 0 Punkte</br>Punkte Siegertipp: 0"
+    expect(statistik_tooltip(user)).to eq("<b>Punkteverteilung</b></br>1 x 8 Punkte</br>2 x 5 Punkte</br>1 x 4 Punkte</br>1 x 3 Punkte</br>5 x 0 Punkte</br>Punkte Siegertipp: 0")
 
   end
 end

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe UserController do
+describe UserController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
@@ -26,12 +26,12 @@ describe UserController do
       post 'change_password', {:old_password => 'secret123', # das steht in der Factory zur Erstellung drin
                                :password => new_password,
                                :password_confirmation => new_password}
-      response.should redirect_to user_edit_password_path
-      flash[:error].should == nil
-      flash[:notice].should == I18n.t('change_password_save_success')
+      expect(response).to redirect_to user_edit_password_path
+      expect(flash[:error]).to eq(nil)
+      expect(flash[:notice]).to eq(I18n.t('change_password_save_success'))
 
       check_user = User.find(@user.id)
-      check_user.encrypted_password.should_not == old_encrypted_password
+      expect(check_user.encrypted_password).not_to eq(old_encrypted_password)
     end
 
     it 'should not change password' do
@@ -48,21 +48,21 @@ describe UserController do
           ['test', '', 'test']
       ].each do |old, pw, pw_confirmation|
         post 'change_password', {:old_password => '', :password => '', :password_confirmation => ''}
-        response.should redirect_to user_edit_password_path
-        flash[:error].should include(I18n.t('change_password_need_all_all_input_fields'))
+        expect(response).to redirect_to user_edit_password_path
+        expect(flash[:error]).to include(I18n.t('change_password_need_all_all_input_fields'))
       end
 
       post 'change_password', {:old_password => 'secret123', # das steht in der Factory zur Erstellung drin
                                :password => new_password,
                                :password_confirmation => new_password+'wrong_addon_part'}
-      response.should redirect_to user_edit_password_path
-      flash[:error].should == I18n.t('change_password_wrong_pw_confirmation')
+      expect(response).to redirect_to user_edit_password_path
+      expect(flash[:error]).to eq(I18n.t('change_password_wrong_pw_confirmation'))
 
       post 'change_password', {:old_password => 'WRONG_OLD_PW',
                                :password => new_password,
                                :password_confirmation => new_password}
-      response.should redirect_to user_edit_password_path
-      flash[:error].should == I18n.t('change_password_wrong_old_pw')
+      expect(response).to redirect_to user_edit_password_path
+      expect(flash[:error]).to eq(I18n.t('change_password_wrong_old_pw'))
 
     end
   end

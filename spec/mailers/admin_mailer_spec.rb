@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 require "spec_helper"
 
-describe AdminMailer do
+describe AdminMailer, :type => :mailer do
 
 end

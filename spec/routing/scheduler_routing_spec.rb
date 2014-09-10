@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require "spec_helper"
 
-describe SchedulerController do
+describe SchedulerController, :type => :routing do
 
   describe "routing" do
     test_scheduler_actions.each do |action|

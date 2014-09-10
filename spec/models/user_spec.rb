@@ -1,41 +1,41 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe User do
+describe User, :type => :model do
 
   it "should use Factory" do
     user = FactoryGirl.create(:user)
-    user.firstname.should == "test"
+    expect(user.firstname).to eq("test")
   end
 
   it "should not found if inactive" do
       user = FactoryGirl.create(:user)
-      User.active.all.should_not include(user)
+      expect(User.active.all).not_to include(user)
 
-      User.inactive.all.should include(user)
+      expect(User.inactive.all).to include(user)
     end
 
   it "should check of admin?" do
     user = FactoryGirl.create(:user)
-    user.admin?.should be_falsey
+    expect(user.admin?).to be_falsey
     user.update_attribute(:email, ADMIN_EMAIL)
-    user.admin?.should be_truthy
+    expect(user.admin?).to be_truthy
   end
 
   describe 'confirm_with_max_time!' do
     it 'should call normal confirmation routine, if confirmation is in time' do
       u = User.new
       u.confirmation_sent_at = 1.hour.ago
-      u.should_receive(:confirm_without_maximum_time!).and_return(true)
+      expect(u).to receive(:confirm_without_maximum_time!).and_return(true)
       u.confirm!
     end
 
     it 'should add an error, if confirmation is too old' do
       u = User.new
       u.confirmation_sent_at = (User::CONFIRMATION_MAX_TIME + 1.hour).ago
-      u.should_not_receive(:confirm_without_maximum_time!)
+      expect(u).not_to receive(:confirm_without_maximum_time!)
       u.confirm!
-      u.errors[:base].should_not be_empty
+      expect(u.errors[:base]).not_to be_empty
     end
   end
 
@@ -54,9 +54,9 @@ describe User do
                     :count4points => 10,
                     :count3points => 0,
                     :count0points=> 9)
-    (user1.ranking_comparison_value > user2.ranking_comparison_value).should be_truthy
-    user1.ranking_comparison_value.should == 4603040700
-    user2.ranking_comparison_value.should == 4601011000
+    expect(user1.ranking_comparison_value > user2.ranking_comparison_value).to be_truthy
+    expect(user1.ranking_comparison_value).to eq(4603040700)
+    expect(user2.ranking_comparison_value).to eq(4601011000)
   end
 
   it 'should delete tipps if user delete' do
@@ -64,17 +64,17 @@ describe User do
     5.times{ FactoryGirl.create(:tipp, :user => user) }
 
     tipps = Tipp.where(:user_id => user.id).all
-    tipps.count.should == 5
+    expect(tipps.count).to eq(5)
 
     user.destroy
-    Tipp.only_deleted.where(:user_id => user.id).map(&:id).should == tipps.map(&:id)
+    expect(Tipp.only_deleted.where(:user_id => user.id).map(&:id)).to eq(tipps.map(&:id))
   end
 
   it 'should get top3_positions_and_own_position' do
     User.delete_all # fixture users delete
     user_top3_ranking_hash, own_position = User.top3_positions_and_own_position(nil)
-    own_position.should == nil
-    user_top3_ranking_hash.should == {}
+    expect(own_position).to eq(nil)
+    expect(user_top3_ranking_hash).to eq({})
 
     # 10 User anlegen, alle auf der selben Platzierung
     user_size = 10
@@ -88,13 +88,13 @@ describe User do
 
     last_db_user = User.last
     user_top3_ranking_hash, own_position = User.top3_positions_and_own_position(last_db_user.id)
-    own_position.should == 1
-    user_top3_ranking_hash.size.should == 1
-    user_top3_ranking_hash[1].size.should == User.count
+    expect(own_position).to eq(1)
+    expect(user_top3_ranking_hash.size).to eq(1)
+    expect(user_top3_ranking_hash[1].size).to eq(User.count)
 
     user_top3_ranking_hash, own_position = User.top3_positions_and_own_position(nil)
-    own_position.should == nil
-    user_top3_ranking_hash.size.should == 1
-    user_top3_ranking_hash[1].size.should == User.count
+    expect(own_position).to eq(nil)
+    expect(user_top3_ranking_hash.size).to eq(1)
+    expect(user_top3_ranking_hash[1].size).to eq(User.count)
   end
 end

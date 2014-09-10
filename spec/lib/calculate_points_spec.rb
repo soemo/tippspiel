@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
 describe CalculatePoints do
 
@@ -7,29 +7,29 @@ describe CalculatePoints do
 
   it 'should get correct tipp points' do
     #calculate_tipp_points(game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
-    calculate_tipp_points(Game::TEAM1_WIN, 1, 0, 1, 0).should == 8
-    calculate_tipp_points(Game::TEAM1_WIN, 2, 0, 1, 0).should == 5
-    calculate_tipp_points(Game::TEAM1_WIN, 2, 1, 1, 0).should == 4
-    calculate_tipp_points(Game::TEAM1_WIN, 3, 1, 1, 0).should == 3
-    calculate_tipp_points(Game::TEAM1_WIN, 3, 1, 0, 1).should == 0
-    calculate_tipp_points(Game::TEAM1_WIN, 3, 1, 1, 1).should == 0
-    calculate_tipp_points(Game::TEAM1_WIN, 4, 2, 3, 2).should == 5
-    calculate_tipp_points(Game::TEAM1_WIN, 4, 2, 2, 0).should == 4
-    calculate_tipp_points(Game::TEAM1_WIN, 4, 2, 2, 1).should == 3
-    calculate_tipp_points(Game::TEAM1_WIN, 2, 1, 1, 1).should == 0
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 1, 0, 1, 0)).to eq(8)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 2, 0, 1, 0)).to eq(5)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 2, 1, 1, 0)).to eq(4)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 3, 1, 1, 0)).to eq(3)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 3, 1, 0, 1)).to eq(0)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 3, 1, 1, 1)).to eq(0)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 4, 2, 3, 2)).to eq(5)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 4, 2, 2, 0)).to eq(4)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 4, 2, 2, 1)).to eq(3)
+    expect(calculate_tipp_points(Game::TEAM1_WIN, 2, 1, 1, 1)).to eq(0)
 
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 0, 1).should == 8
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 0, 2).should == 5
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 1, 2).should == 4
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 1, 3).should == 3
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 2, 1, 2).should == 5
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 1, 1).should == 0
-    calculate_tipp_points(Game::TEAM2_WIN, 0, 3, 1, 2).should == 3
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 0, 1)).to eq(8)
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 0, 2)).to eq(5)
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 1, 2)).to eq(4)
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 1, 3)).to eq(3)
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 2, 1, 2)).to eq(5)
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 1, 1, 1)).to eq(0)
+    expect(calculate_tipp_points(Game::TEAM2_WIN, 0, 3, 1, 2)).to eq(3)
 
-    calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 0, 0).should == 8
-    calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 1, 1).should == 4
-    calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 2, 1).should == 0
-    calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 1, 2).should == 0
+    expect(calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 0, 0)).to eq(8)
+    expect(calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 1, 1)).to eq(4)
+    expect(calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 2, 1)).to eq(0)
+    expect(calculate_tipp_points(Game::UNENTSCHIEDEN, 0, 0, 1, 2)).to eq(0)
   end
 
   describe 'calculate all user tipp points' do
@@ -61,36 +61,36 @@ describe CalculatePoints do
     end
 
     it 'should update all tipp points for a game' do
-      Tipp.where(:game_id => @game1.id).size.should == 5
+      expect(Tipp.where(:game_id => @game1.id).size).to eq(5)
       where_sql = ["game_id = ? and tipp_punkte is not null", @game1.id]
       tipps = Tipp.where(where_sql).all
-      tipps.should_not be_present
+      expect(tipps).not_to be_present
 
       update_all_tipp_points_for(@game1)
 
       tipps = tipps = Tipp.where(where_sql).all
-      tipps.should be_present
+      expect(tipps).to be_present
       tipps.size == 5
     end
 
     it 'should update all tipp points for all games' do
       where_sql = ["tipp_punkte is not null"]
-      Tipp.where(where_sql).all.size.should == 0
+      expect(Tipp.where(where_sql).all.size).to eq(0)
 
       calculate_all_user_tipp_points
 
       # noch keine Tipp Punkte vergeben, da noch kein Spiel beendet
-      Tipp.where(where_sql).all.size.should == 0
+      expect(Tipp.where(where_sql).all.size).to eq(0)
 
       Game.first.update_attribute(:finished, true)
       calculate_all_user_tipp_points
       # Tipp Punkte fürs erste Spiel vergeben
-      Tipp.where(where_sql).all.size.should == 5
+      expect(Tipp.where(where_sql).all.size).to eq(5)
 
       Game.update_all("finished=true")
       calculate_all_user_tipp_points
       # alleTipp Punkte vergeben
-      Tipp.where(["tipp_punkte is null"]).all.size.should == 0
+      expect(Tipp.where(["tipp_punkte is null"]).all.size).to eq(0)
     end
   end
 
@@ -165,58 +165,58 @@ describe CalculatePoints do
       calculate_user_points
 
       user = User.find(@user1.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user2.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user3.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user4.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user5.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user6.id)
-      user.points.should == 0
-      user.championtipppoints.should == 0
-      user.count8points.should == 0
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 1
+      expect(user.points).to eq(0)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(0)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(1)
 
     end
 
@@ -228,58 +228,58 @@ describe CalculatePoints do
       calculate_user_points
 
       user = User.find(@user1.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 1
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(1)
 
       user = User.find(@user2.id)
-      user.points.should == 12
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 1
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(12)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(1)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user3.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 1
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(1)
 
       user = User.find(@user4.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 1
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(1)
 
       user = User.find(@user5.id)
-      user.points.should == 16
-      user.championtipppoints.should == 0
-      user.count8points.should == 2
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(16)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(2)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user6.id)
-      user.points.should == 0
-      user.championtipppoints.should == 0
-      user.count8points.should == 0
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 2
+      expect(user.points).to eq(0)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(0)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(2)
     end
 
     it 'after tournament is finished' do
@@ -293,58 +293,58 @@ describe CalculatePoints do
       calculate_user_points
 
       user = User.find(@user1.id)
-      user.points.should == 8
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 4
+      expect(user.points).to eq(8)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(4)
 
       user = User.find(@user2.id)
-      user.points.should == 20
-      user.championtipppoints.should == 8
-      user.count8points.should == 1
-      user.count5points.should == 0
-      user.count4points.should == 1
-      user.count3points.should == 0
-      user.count0points.should == 3
+      expect(user.points).to eq(20)
+      expect(user.championtipppoints).to eq(8)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(1)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(3)
 
       user = User.find(@user3.id)
-      user.points.should == 13
-      user.championtipppoints.should == 0
-      user.count8points.should == 1
-      user.count5points.should == 1
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 3
+      expect(user.points).to eq(13)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(1)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(3)
 
       user = User.find(@user4.id)
-      user.points.should == 21
-      user.championtipppoints.should == 8
-      user.count8points.should == 1
-      user.count5points.should == 1
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 3
+      expect(user.points).to eq(21)
+      expect(user.championtipppoints).to eq(8)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(1)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(3)
 
       user = User.find(@user5.id)
-      user.points.should == 48
-      user.championtipppoints.should == 8
-      user.count8points.should == 5
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 0
+      expect(user.points).to eq(48)
+      expect(user.championtipppoints).to eq(8)
+      expect(user.count8points).to eq(5)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
       user = User.find(@user6.id)
-      user.points.should == 0
-      user.championtipppoints.should == 0
-      user.count8points.should == 0
-      user.count5points.should == 0
-      user.count4points.should == 0
-      user.count3points.should == 0
-      user.count0points.should == 5
+      expect(user.points).to eq(0)
+      expect(user.championtipppoints).to eq(0)
+      expect(user.count8points).to eq(0)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(5)
     end
 
   end

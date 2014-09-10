@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe UserController do
+describe UserController, :type => :routing do
   describe 'routing' do
     it 'for User' do
         assert_routing({ :path => '/user/edit_password', :method => :get }, { :controller => 'user', :action => 'edit_password' })

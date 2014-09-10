@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
 
-describe Game do
+describe Game, :type => :model do
 
   it "should use Factory" do
       game = FactoryGirl.create(:game)
-      game.team1.should be_present
-      game.team2.should be_present
+      expect(game.team1).to be_present
+      expect(game.team2).to be_present
   end
 
   it "should create" do
@@ -19,10 +19,10 @@ describe Game do
   end
 
   it "should not create" do
-    lambda{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team1_id => 1, :group=> "D", :round => Game::GROUP})}.should raise_error(ActiveRecord::RecordInvalid)
-    lambda{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team2_id => 2, :group=> "D", :round => Game::GROUP})}.should raise_error(ActiveRecord::RecordInvalid)
-    lambda{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team1_placeholder_name => "test1", :group=> "D", :round => Game::GROUP})}.should raise_error(ActiveRecord::RecordInvalid)
-    lambda{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team2_placeholder_name => "test2", :group=> "D", :round => Game::GROUP})}.should raise_error(ActiveRecord::RecordInvalid)
+    expect{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team1_id => 1, :group=> "D", :round => Game::GROUP})}.to raise_error(ActiveRecord::RecordInvalid)
+    expect{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team2_id => 2, :group=> "D", :round => Game::GROUP})}.to raise_error(ActiveRecord::RecordInvalid)
+    expect{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team1_placeholder_name => "test1", :group=> "D", :round => Game::GROUP})}.to raise_error(ActiveRecord::RecordInvalid)
+    expect{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team2_placeholder_name => "test2", :group=> "D", :round => Game::GROUP})}.to raise_error(ActiveRecord::RecordInvalid)
   end
 
   describe 'should get today games' do
@@ -42,25 +42,25 @@ describe Game do
     it 'should get games from today at 00:10' do
       freeze_test_time(@time_now.midnight + 10.minutes)
       games = Game.today_games.all
-      games.should == [@today_game1, @today_game2, @today_game3]
+      expect(games).to eq([@today_game1, @today_game2, @today_game3])
     end
 
     it 'should get games from today at 22:00' do
       freeze_test_time(@time_now)
       games = Game.today_games.all
-      games.should == [@today_game1, @today_game2, @today_game3]
+      expect(games).to eq([@today_game1, @today_game2, @today_game3])
     end
 
     it 'should get games from tommorrow at 22:00' do
       freeze_test_time(@time_now + 1.day)
       games = Game.today_games.all
-      games.should == [@today_game3, @tommorrow_game1, @tommorrow_game2]
+      expect(games).to eq([@today_game3, @tommorrow_game1, @tommorrow_game2])
     end
 
     it 'should get games from yesterday at 22:00' do
       freeze_test_time(@time_now - 1.day)
       games = Game.today_games.pluck(:id)
-      games.should == [@yesterday_game.id, @today_game1.id]
+      expect(games).to eq([@yesterday_game.id, @today_game1.id])
     end
   end
 
@@ -78,15 +78,15 @@ describe Game do
     day3_game3 = FactoryGirl.create(:game, :start_at => "21.06.2012 20:45", :finished => true)
 
     game_days_with_game_ids = Game.finished_days_with_game_ids
-    game_days_with_game_ids["2012-06-19"].sort.should == [day1_game1.id, day1_game2.id, day1_game3.id].sort
-    game_days_with_game_ids["2012-06-20"].should be_nil
-    game_days_with_game_ids["2012-06-21"].should be_nil
+    expect(game_days_with_game_ids["2012-06-19"].sort).to eq([day1_game1.id, day1_game2.id, day1_game3.id].sort)
+    expect(game_days_with_game_ids["2012-06-20"]).to be_nil
+    expect(game_days_with_game_ids["2012-06-21"]).to be_nil
 
     day2_game3.update_attribute(:finished, true)
     game_days_with_game_ids = Game.finished_days_with_game_ids
-    game_days_with_game_ids["2012-06-19"].sort.should == [day1_game1.id, day1_game2.id, day1_game3.id].sort
-    game_days_with_game_ids["2012-06-20"].sort.should == [day2_game1.id, day2_game2.id, day2_game3.id].sort
-    game_days_with_game_ids["2012-06-21"].should be_nil
+    expect(game_days_with_game_ids["2012-06-19"].sort).to eq([day1_game1.id, day1_game2.id, day1_game3.id].sort)
+    expect(game_days_with_game_ids["2012-06-20"].sort).to eq([day2_game1.id, day2_game2.id, day2_game3.id].sort)
+    expect(game_days_with_game_ids["2012-06-21"]).to be_nil
 
   end
 
@@ -95,6 +95,6 @@ describe Game do
      game2 = FactoryGirl.create(:game, :start_at => '19.06.2012 20:45', :finished => false)
      game3 = FactoryGirl.create(:game, :start_at => '19.06.2012 20:45', :finished => true)
 
-     Game.finished_games.should == [game3]
+     expect(Game.finished_games).to eq([game3])
   end
 end

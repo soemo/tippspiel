@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails',                   '~> 3.2.19'
 ruby '1.9.3'
@@ -50,20 +50,20 @@ group :development, :test do
   gem 'capistrano',                '~> 2.15.4'
   gem 'capistrano-ext',            '~> 1.2.1'
   gem 'rvm-capistrano',            '~> 1.3.0'
-  gem 'rspec-rails',               '~> 2.99.0'
+
+  gem 'rspec-rails',               '~> 3.1.0'
   gem 'rspec-collection_matchers', '~> 1.0.0'    # Collection cardinality matchers, extracted from rspec-expectations
   gem 'thin',                      '~> 1.6.2'    # lokaler Dev Server
   gem 'pry',                       '~> 0.9.12.2' # binding.pry -> debugging
-
-  # TODO soeren 07.09.2014 wieder raus
-  #gem 'transpec', '~> 2.3.7'
+  # http://stackoverflow.com/a/14328137
+  gem 'capybara',                  '~> 2.4.1'    # rspec-rails braucht das um in den Views have_selector zu nutzen
 end
 
 group :test do
   gem 'webmock',            '~> 1.11.0'
   gem 'faker',              '~> 1.1.2'
-  gem 'factory_girl_rails', '~> 4.2.1'
-  gem 'webrat',             '~> 0.7.3' #rspec-rails 2 braucht das um in den Views have_selector zu nutzen
-  gem 'rspec-cells',        '~> 0.1.12'
-  gem 'simplecov',          '~> 0.8.2'  # Code coverage for Ruby 1.9+
+  gem 'factory_girl_rails', '~> 4.4.1'
+
+  gem 'rspec-cells',        '~> 0.2.2'
+  gem 'simplecov',          '~> 0.9.0'  # Code coverage for Ruby 1.9+
 end
