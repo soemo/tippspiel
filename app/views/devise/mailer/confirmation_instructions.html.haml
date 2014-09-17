@@ -3,7 +3,7 @@
   Hallo #{@resource.firstname}, Sport frei!
 %p
   Bestätige bitte mit folgendem Link deine Teilnahme beim #{TOURNAMENT_NAME} #{I18n.t(:app_name)} auf soemo.org:
-%p= link_to 'Teilnahme bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+%p= link_to 'Teilnahme bestätigen', confirmation_url(@resource, :confirmation_token => @token)
 %p
   Viel Spaß und Erfolg!
   %br

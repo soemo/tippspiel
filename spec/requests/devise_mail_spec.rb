@@ -38,7 +38,7 @@ describe "devise mail", :type => :request do
     expect(mail.from).to eq(["tippspiel@soemo.org"])
     expect(mail.to).to eq([email])
     expect(mail.body).to match(/#{user.firstname}/u)
-    expect(mail.body).to include("#{user_confirmation_path}?confirmation_token=#{user.confirmation_token}")
+    expect(mail.body).to include("#{user_confirmation_path}?confirmation_token=")
 
   end
 

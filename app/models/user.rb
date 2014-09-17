@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   validates               :firstname, :presence => true
   validates               :lastname, :presence => true
 
+  validates_presence_of     :password, if: :password_required?
+  validates_confirmation_of :password, if: :password_required?
+  validates_length_of       :password, within: Devise.password_length, allow_blank: true
+
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable , :reconfirmable and :timeoutable
@@ -139,5 +143,15 @@ class User < ActiveRecord::Base
 
     error_messages
   end
+
+  protected
+
+  # Checks whether a password is needed or not. For validations only.
+  # Passwords are always required if it's a new record, or if the password
+  # or confirmation are being set somewhere. from Devise
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
 
 end

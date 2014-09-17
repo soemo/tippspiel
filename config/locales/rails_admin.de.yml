@@ -27,7 +27,7 @@ de:
       log_out: "Abmelden"
       ago: "her"
     flash:
-      successful: "%{name} wurde erfolgreich %{action}"
+      successful: "%{name} wurde %{action}"
       error: "%{name} wurde nicht %{action}"
       noaction: "Keine Aktion ausgewählt"
       model_not_found: "Model '%{model}' wurde nicht gefunden"
@@ -66,7 +66,7 @@ de:
         title: "%{model_label} '%{object_label}' bearbeiten"
         menu: "Bearbeiten"
         breadcrumb: "Bearbeiten"
-        link: "%{model_label} earbeiten"
+        link: "%{model_label} bearbeiten"
         done: "aktualisiert"
       delete:
         title: "%{model_label} '%{object_label}' löschen"
