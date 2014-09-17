@@ -21,18 +21,6 @@ module Tippspiel
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    # FIXME soeren 10.09.2014 kommt weg Rails 4.1
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
-
-    # FIXME soeren 10.09.2014 kommt weg Rails 4.1
-    # http://guides.rubyonrails.org/asset_pipeline.html
-    # The default matcher for compiling files includes application.js, application.css and all non-JS/CSS files
-    # (i.e., .coffee and .scss files are not automatically included as they compile to JS/CSS)
-    config.assets.precompile += %w[]
-
-
-
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Berlin'

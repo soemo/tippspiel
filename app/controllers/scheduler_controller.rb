@@ -14,12 +14,12 @@ class SchedulerController < ApplicationController
     start_calculate_points
     clean_invoke_table
     write_rss_feed_cache_xml_file(RSS_FEED_URL)
-    render :text => "Hourly scheduler run successful", :status => :ok
+    render :plain => "Hourly scheduler run successful", :status => :ok
   end
 
   def admin
     start_calculate_points
-    render :text => "Admin scheduler run successful", :status => :ok
+    render :plain => "Admin scheduler run successful", :status => :ok
   end
 
 
@@ -35,7 +35,7 @@ class SchedulerController < ApplicationController
     event_type = "scheduler_#{action_name}"
     last_run = Event.order(:created_at).where(:event_type => event_type).last
     if last_run.present? && last_run.created_at > MIN_TIME_BETWEEN_RUNS.ago
-      render :text => "scheduler should not run that often", :status => :bad_request
+      render :plain => "scheduler should not run that often", :status => :bad_request
     else
       Event.create! :event_type => event_type
     end

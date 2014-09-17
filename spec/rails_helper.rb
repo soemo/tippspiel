@@ -18,13 +18,10 @@ require 'devise'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 
-# TODO soeren 08.09.2014 Rails 4.0.x
-ActiveRecord::Migration.check_pending!
-
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 # Rails 4.1+
-# TODO soeren 08.09.2014 ActiveRecord::Migration.maintain_test_schema!
+ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 

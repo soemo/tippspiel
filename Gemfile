@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails',                   '~> 4.0.9'
+gem 'rails',                   '4.1.6'
 ruby '1.9.3'
 
-gem 'mysql2',                  '= 0.3.11'      # FIXME soeren 10.09.2014 0.3.16 install siehe TTBN tracker
+gem 'mysql2',                  '~> 0.3.16'
 gem 'cancancan',               '~> 1.9.2'      # Authorization System
 gem 'haml-rails',              '~> 0.5.3'      # haml-Generatoren
-# FIXME soeren 10.09.2014 Anpassungen nötig #86
 gem 'devise',                  '~> 3.3.0'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
 
@@ -17,7 +16,7 @@ gem 'paranoia',                '~> 2.0.2'      # acts_as_paranoid fuer Rails4
 gem 'sass-rails',              '~> 4.0.3'
 gem 'coffee-rails',            '~> 4.0.1'
 gem 'uglifier',                '~> 2.5.3'
-gem 'jquery-rails',            '~> 3.1.1'      # mit jQuery 1.11.1 und jquery-ujs 1.0.0 # FIXME soeren 10.09.2014 vorher #86 '~> 3.0.4'  # jQuery 1.10.2
+gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
 gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript code from Ruby.
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby  # # FIXME soeren 10.09.2014  neuere Version auf uberspace testen
 gem 'rails_admin',             '~> 0.6.3'      # Interface zur Daten-Administration
@@ -33,12 +32,13 @@ gem 'airbrake',                '~> 4.1.0' # FIXME soeren 10.09.2014 #86 testen  
 # TODO soeren 22.07.2014 #4642 Rails 4.0 has removed attr_accessible and attr_protected feature in favor of Strong Parameters. You can use the Protected Attributes gem for a smooth upgrade path.
 gem 'protected_attributes',     '~> 1.0.8'
 
-group :doc do
-  gem 'sdoc', require: false
-end
+# gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+
+# https://github.com/tzinfo/tzinfo/wiki/Resolving-TZInfo::DataSourceNotFound-Errors
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger',  '~> 4.0.50'  # a modern web server and application server for Ruby
+  gem 'passenger', '~> 4.0.33' # '~> 4.0.50'  # a modern web server and application server for Ruby
   # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen
 end
 
@@ -50,9 +50,10 @@ end
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
   gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git' # soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
-  gem 'capistrano',                '~> 2.15.4'  # FIXME soeren 10.09.2014 neuer Version testen
+  gem 'capistrano-rails',          '~> 1.1.2'  # Rails specific Capistrano tasks
+  #gem 'capistrano',                '~> 2.15.4' # FIXME soeren 10.09.2014 neue Version testen jetzt 3.2.1
   gem 'capistrano-ext',            '~> 1.2.1'
-  gem 'rvm-capistrano',            '~> 1.3.0'  # FIXME soeren 10.09.2014 neuer Version testen
+  gem 'rvm-capistrano',            '~> 1.3.0'  # FIXME soeren 10.09.2014 neue Version testen
 
   gem 'rspec-rails',               '~> 3.1.0'
   gem 'rspec-collection_matchers', '~> 1.0.0'    # Collection cardinality matchers, extracted from rspec-expectations

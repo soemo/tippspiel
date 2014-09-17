@@ -35,7 +35,7 @@ module CalculatePoints
         count_3points = Tipp.where({:user_id => user.id, :tipp_punkte => 3}).count
         count_0points = Tipp.where({:user_id => user.id, :tipp_punkte => 0}).count
 
-        # FIXME soeren 10.09.2014 oder update_columns  + Strongparameters
+        # FIXME soeren 10.09.2014 oder update_columns  + Strongparameters  +  without_protection ??? https://github.com/rails/protected_attributes
         user.update_attributes({:points => total_points,
                                 :championtipppoints => champion_tipp_points,
                                 :count8points => count_8points,
