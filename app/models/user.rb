@@ -1,16 +1,16 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   acts_as_paranoid
-  validates_as_paranoid
+
 
   belongs_to :championtipp_team, :class_name => "Team"
   has_many   :tipps, :dependent => :destroy
 
-  validates                               :email,   :presence => true
-  validates_uniqueness_of_without_deleted :email,   :scope => Devise.authentication_keys[1..-1], :case_sensitive => false, :allow_blank => true
-  validates_format_of                     :email,   :with  => Devise.email_regexp, :allow_blank => true
-  validates                               :firstname, :presence => true
-  validates                               :lastname, :presence => true
+  validates               :email, :presence => true
+  validates_uniqueness_of :email, :allow_blank => true, :scope => :deleted_at, :case_sensitive => false, :if => :email_changed?
+  validates_format_of     :email, :with  => Devise.email_regexp, :allow_blank => true
+  validates               :firstname, :presence => true
+  validates               :lastname, :presence => true
 
 
   # Include default devise modules. Others available are:
@@ -24,10 +24,10 @@ class User < ActiveRecord::Base
   # ist das Token ungueltig
   CONFIRMATION_MAX_TIME = 7.day
 
-  scope :active, where('confirmed_at is not null')
-  scope :inactive, where('confirmed_at is null')
+  scope :active,   -> { where('confirmed_at is not null') }
+  scope :inactive, -> { where('confirmed_at is null') }
 
-  scope :ranking_order, order('users.points DESC, users.count8points DESC, users.count5points DESC, users.count4points DESC, users.count3points DESC')
+  scope :ranking_order, -> { order('users.points DESC, users.count8points DESC, users.count5points DESC, users.count4points DESC, users.count3points DESC') }
 
   def self.last_updated_at
     User.unscoped.maximum('updated_at')

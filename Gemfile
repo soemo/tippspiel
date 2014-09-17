@@ -1,67 +1,69 @@
 source 'https://rubygems.org'
 
-gem 'rails',                   '~> 3.2.19'
+gem 'rails',                   '~> 4.0.9'
 ruby '1.9.3'
 
-gem 'mysql2',                  '~> 0.3.11'
-gem 'cancan',                  '~> 1.6.10'
-gem 'haml-rails',              '~> 0.4'
-gem 'devise',                  '~> 2.2.4'
-gem 'devise-encryptable',      '~> 0.1.2'
-gem 'rails3_acts_as_paranoid', '~> 0.2.5'
-gem 'sass',                    '~> 3.2.5'
-gem 'jquery-rails',            '~> 3.0.4'  # jQuery 1.10.2
-gem 'execjs',                  '~> 1.4.0'
-gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
-gem 'rails_admin',             '~> 0.4.9'
-gem 'bootstrap-sass',          '~> 2.3.1.3'
-gem 'newrelic_rpm',            '~> 3.8.1.221'
-gem 'feed-normalizer',         '~> 1.5.2'
-gem 'cells',                   '~> 3.10.1'
-gem 'lograge',                 '~> 0.2.2'
+gem 'mysql2',                  '= 0.3.11'      # FIXME soeren 10.09.2014 0.3.16 install siehe TTBN tracker
+gem 'cancancan',               '~> 1.9.2'      # Authorization System
+gem 'haml-rails',              '~> 0.5.3'      # haml-Generatoren
+# FIXME soeren 10.09.2014 Anpassungen nötig #86
+gem 'devise',                  '~> 3.3.0'      # Authentifizierungssystem
+gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# Wird aktuell von uns nicht benutzt gem 'turbolinks'
+
+gem 'paranoia',                '~> 2.0.2'      # acts_as_paranoid fuer Rails4
+gem 'sass-rails',              '~> 4.0.3'
+gem 'coffee-rails',            '~> 4.0.1'
+gem 'uglifier',                '~> 2.5.3'
+gem 'jquery-rails',            '~> 3.1.1'      # mit jQuery 1.11.1 und jquery-ujs 1.0.0 # FIXME soeren 10.09.2014 vorher #86 '~> 3.0.4'  # jQuery 1.10.2
+gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript code from Ruby.
+gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby  # # FIXME soeren 10.09.2014  neuere Version auf uberspace testen
+gem 'rails_admin',             '~> 0.6.3'      # Interface zur Daten-Administration
+gem 'bootstrap-sass',          '~> 2.3.1.3'    # FIXME soeren 10.09.2014 Umstieg auf Foundation
+gem 'newrelic_rpm',            '~> 3.9.4.245'  # performance management system, developed by New Relic
+gem 'feed-normalizer',         '~> 1.5.2'      # wrapper for Atom and RSS parsers
+gem 'cells',                   '~> 3.11.2'     # Cells are view components for Rails.
+gem 'lograge',                 '~> 0.3.0'
 
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
-gem 'airbrake',                '~> 3.1.12'
+gem 'airbrake',                '~> 4.1.0' # FIXME soeren 10.09.2014 #86 testen  https://github.com/airbrake/airbrake/blob/master/CHANGELOG
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'coffee-rails', '~> 3.2.2'
-  gem 'sass-rails',   '~> 3.2.6'
-  gem 'uglifier',     '~> 1.3.0'
+# TODO soeren 22.07.2014 #4642 Rails 4.0 has removed attr_accessible and attr_protected feature in favor of Strong Parameters. You can use the Protected Attributes gem for a smooth upgrade path.
+gem 'protected_attributes',     '~> 1.0.8'
+
+group :doc do
+  gem 'sdoc', require: false
 end
 
 group :development, :production do
-  gem 'passenger',  '~> 4.0.33'    # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen
-
+  gem 'passenger',  '~> 4.0.50'  # a modern web server and application server for Ruby
+  # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen
 end
 
 group :development do
-  gem 'magic_encoding',    '~> 0.0.2'
-  gem 'letter_opener',     '~> 1.1.1'
   gem 'better_errors',     '~> 1.1.0'    # Provides a better error page for Rails and other Rack apps
   gem 'binding_of_caller', '~> 0.7.2'    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
 end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
-  gem 'rails_best_practices',      '~> 1.13.5' # a code metric tool for rails projects
   gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git' # soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
-  gem 'capistrano',                '~> 2.15.4'
+  gem 'capistrano',                '~> 2.15.4'  # FIXME soeren 10.09.2014 neuer Version testen
   gem 'capistrano-ext',            '~> 1.2.1'
-  gem 'rvm-capistrano',            '~> 1.3.0'
+  gem 'rvm-capistrano',            '~> 1.3.0'  # FIXME soeren 10.09.2014 neuer Version testen
 
   gem 'rspec-rails',               '~> 3.1.0'
   gem 'rspec-collection_matchers', '~> 1.0.0'    # Collection cardinality matchers, extracted from rspec-expectations
   gem 'thin',                      '~> 1.6.2'    # lokaler Dev Server
-  gem 'pry',                       '~> 0.9.12.2' # binding.pry -> debugging
   # http://stackoverflow.com/a/14328137
   gem 'capybara',                  '~> 2.4.1'    # rspec-rails braucht das um in den Views have_selector zu nutzen
 end
 
 group :test do
-  gem 'webmock',            '~> 1.11.0'
-  gem 'faker',              '~> 1.1.2'
+  gem 'webmock',            '~> 1.18.0'
+  gem 'faker',              '~> 1.1.2'  # FIXME soeren 10.09.2014 nutze ich das ueberhaupt noch
   gem 'factory_girl_rails', '~> 4.4.1'
 
   gem 'rspec-cells',        '~> 0.2.2'

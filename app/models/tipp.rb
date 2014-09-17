@@ -12,6 +12,8 @@ class Tipp < ActiveRecord::Base
   validates_numericality_of :team1_goals, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
   validates_numericality_of :team2_goals, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
 
+  attr_accessible :user_id, :game_id, :team1_goals, :team2_goals
+
   def edit_allowed?
     game.start_at > Time.now
   end
@@ -23,6 +25,7 @@ class Tipp < ActiveRecord::Base
   def self.user_tipps(user_id)
     result = []
     if user_id.present?
+      # FIXME soeren 17.09.2014 geht das nicht besser find_or_create ???
       result = Tipp.tipps_with_games(user_id)
       unless result.present?
         Tipp.create_user_tipps(user_id)
@@ -53,6 +56,7 @@ class Tipp < ActiveRecord::Base
   end
 
   def self.create_user_tipps(user_id)
+    # FIXME soeren 06.09.2014 .all ? ich brauche doch nur die ids
     games = Game.all
     if games.present?
       games.each do |game|

@@ -7,7 +7,10 @@ class Game < ActiveRecord::Base
 
   belongs_to :team1, :class_name => 'Team'
   belongs_to :team2, :class_name => 'Team'
-  has_many :tipps
+  has_many   :tipps
+
+  attr_accessible :start_at, :place, :team1_id, :team2_id, :group, :round, :api_match_id,
+                  :team1_placeholder_name,:team2_placeholder_name, :team1_goals, :team2_goals, :finished
 
   validates_presence_of :place
   validates_presence_of :round
@@ -20,12 +23,12 @@ class Game < ActiveRecord::Base
   TEAM1_WIN     = 1
   TEAM2_WIN     = 2
 
-  default_scope order('start_at')
+  default_scope { order('start_at') }
 
-  scope :finished_games,     where(:finished => true)
+  scope :finished_games,    -> { where(:finished => true) }
 
-  scope :group_games,        where(:round => GROUP)
-  scope :final_games,        where(:round => FINAL)
+  scope :group_games,       -> { where(:round => GROUP) }
+  scope :final_games,       -> { where(:round => FINAL) }
   scope :games_for_compare,  lambda{ |time| where('start_at < ?', time)}
 
   def self.last_updated_at
@@ -47,9 +50,11 @@ class Game < ActiveRecord::Base
     result = {}
     group_size = GROUPS.size
     GROUPS.each_with_index do |group_name, index|
+      # FIXME soeren 06.09.2014 .all ?
       result[index + 1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).all}
     end
     (ROUNDS - [GROUP]).each_with_index do |round, index|
+      # FIXME soeren 06.09.2014 .all ?
       result[group_size + index + 1] = {round => Game.where(:round => round).all}
     end
 

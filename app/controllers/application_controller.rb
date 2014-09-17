@@ -1,17 +1,18 @@
 # -*- encoding : utf-8 -*-
 require 'pp'
 class ApplicationController < ActionController::Base
-  protect_from_forgery
 
   include ExceptionHandling
 
-  before_filter :ensure_migrated
   before_filter :set_locale
   before_filter :authenticate_user!, :unless => :error_handling_method?
   before_filter :set_host_to_mailers
 
-
   helper_method :tournament_finished?, :before_tournament?, :current_user
+
+    # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
 
   protected
 
@@ -33,19 +34,6 @@ class ApplicationController < ActionController::Base
 
   def set_host_to_mailers
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
-  end
-
-  def ensure_migrated
-    unless Rails.env == "production"
-      if ActiveRecord::Migrator.new(:up, "db/migrate/").pending_migrations.any?
-        text = (t(:text_maintenance, :locale => :en) + "<br/>" + t(:text_maintenance, :locale => :de)).html_safe
-        if Rails.env == "test"
-          raise text
-        else
-          render :text => text, :status => 503
-        end
-      end
-    end
   end
 
   private

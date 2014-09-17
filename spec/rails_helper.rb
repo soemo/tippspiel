@@ -19,7 +19,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 
 # TODO soeren 08.09.2014 Rails 4.0.x
-# ActiveRecord::Migration.check_pending!
+ActiveRecord::Migration.check_pending!
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

@@ -8,7 +8,7 @@ class Notice < ActiveRecord::Base
   validates_length_of :text, :maximum => 200
   validates_presence_of :user
 
-  default_scope order("created_at desc")
+  default_scope { order("created_at desc") }
 
   def self.last_updated_at
     Notice.unscoped.maximum('updated_at')
