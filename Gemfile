@@ -50,8 +50,8 @@ end
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
   gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git' # soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
-  gem 'capistrano-rails',          '~> 1.1.2'  # Rails specific Capistrano tasks
-  #gem 'capistrano',                '~> 2.15.4' # FIXME soeren 10.09.2014 neue Version testen jetzt 3.2.1
+  # FIXME soeren 17.09.2014 gem 'capistrano-rails',          '~> 1.1.2'  # Rails specific Capistrano tasks
+  gem 'capistrano',                '~> 2.15.4' # FIXME soeren 10.09.2014 neue Version testen
   gem 'capistrano-ext',            '~> 1.2.1'
   gem 'rvm-capistrano',            '~> 1.3.0'  # FIXME soeren 10.09.2014 neue Version testen
 
