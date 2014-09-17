@@ -50,12 +50,10 @@ class Game < ActiveRecord::Base
     result = {}
     group_size = GROUPS.size
     GROUPS.each_with_index do |group_name, index|
-      # FIXME soeren 06.09.2014 .all ?
-      result[index + 1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).all}
+      result[index + 1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).to_a}
     end
     (ROUNDS - [GROUP]).each_with_index do |round, index|
-      # FIXME soeren 06.09.2014 .all ?
-      result[group_size + index + 1] = {round => Game.where(:round => round).all}
+      result[group_size + index + 1] = {round => Game.where(:round => round).to_a}
     end
 
     result.sort

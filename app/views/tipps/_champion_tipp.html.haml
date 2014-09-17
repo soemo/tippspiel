@@ -18,8 +18,8 @@
         %label.control-label{:for=>'champion_team_id'}= I18n.t('who_will_be_champion')
         .controls
           - selected = championtipp_team.present? ? championtipp_team.id : ''
-          -# FIXME soeren 06.09.2014 .all ? Auslagern
-          = select_tag('champion_team_id', options_from_collection_for_select(Team.order('name').all, 'id', 'to_s', selected), :prompt => t('please_select'))
+          - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
+          = select_tag('champion_team_id', options, :prompt => t('please_select'))
           = submit_tag t('save'), :class => 'btn'
 
 - else

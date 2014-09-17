@@ -10,9 +10,9 @@ describe User, :type => :model do
 
   it "should not found if inactive" do
       user = FactoryGirl.create(:user)
-      expect(User.active.all).not_to include(user)
+      expect(User.active.to_a).not_to include(user)
 
-      expect(User.inactive.all).to include(user)
+      expect(User.inactive.to_a).to include(user)
     end
 
   it "should check of admin?" do
@@ -63,11 +63,11 @@ describe User, :type => :model do
     user = FactoryGirl.create(:user)
     5.times{ FactoryGirl.create(:tipp, :user => user) }
 
-    tipps = Tipp.where(:user_id => user.id).all
-    expect(tipps.count).to eq(5)
+    tipp_ids = Tipp.where(:user_id => user.id).pluck(:id)
+    expect(tipp_ids.count).to eq(5)
 
     user.destroy
-    expect(Tipp.only_deleted.where(:user_id => user.id).map(&:id)).to eq(tipps.map(&:id))
+    expect(Tipp.only_deleted.where(:user_id => user.id).pluck(:id)).to eq(tipp_ids)
   end
 
   it 'should get top3_positions_and_own_position' do

@@ -7,7 +7,7 @@ class TippsController < ApplicationController
     # Liste der Tipps wird auf dem Phone komprimierter dargestellt #72 besser machen
     @for_phone = (params.has_key?(:for_phone) && params[:for_phone] == 'true') ? true : false
   end
-
+  # FIXME soeren 10.09.2014 Service
   def index
     @today_game_ids = Game.today_games.pluck(:id)
     @user_tipps     = Tipp.user_tipps(current_user.id)
@@ -21,9 +21,9 @@ class TippsController < ApplicationController
     end
   end
 
-
+                # FIXME soeren 10.09.2014 Service
   def compare
-    @posible_games   = Game.games_for_compare(Time.now).all
+    @posible_games   = Game.games_for_compare(Time.now).all  # FIXME soeren 06.09.2014 .all ?
     @game_to_compare = nil
     @tipps           = nil
     if params[:id].present? && @posible_games.present? && @posible_games.map(&:id).include?(params[:id].to_i)
@@ -40,7 +40,7 @@ class TippsController < ApplicationController
               order('users.firstname')
     end
   end
-
+                # FIXME soeren 10.09.2014 Service
   def save_tipps
     new_tipps = params[:tipps]
     if new_tipps.present?

@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class SchedulerController < ApplicationController
 
-  include CalculatePoints
-  include ResultGrabber
-  include RssReader
+  include CalculatePoints     # FIXME soeren 06.09.2014 #81 Service?
+  include ResultGrabber       # FIXME soeren 06.09.2014 #81 Service?
+  include RssReader           # FIXME soeren 06.09.2014 #81 Service?
 
   MIN_TIME_BETWEEN_RUNS = 5.minutes
 
@@ -33,7 +33,7 @@ class SchedulerController < ApplicationController
 
   def check_invoke_frequency
     event_type = "scheduler_#{action_name}"
-    last_run = Event.last(:order => :created_at, :conditions => {:event_type => event_type})
+    last_run = Event.order(:created_at).where(:event_type => event_type).last
     if last_run.present? && last_run.created_at > MIN_TIME_BETWEEN_RUNS.ago
       render :text => "scheduler should not run that often", :status => :bad_request
     else

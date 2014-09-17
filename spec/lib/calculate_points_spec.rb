@@ -63,34 +63,34 @@ describe CalculatePoints do
     it 'should update all tipp points for a game' do
       expect(Tipp.where(:game_id => @game1.id).size).to eq(5)
       where_sql = ["game_id = ? and tipp_punkte is not null", @game1.id]
-      tipps = Tipp.where(where_sql).all
+      tipps = Tipp.where(where_sql).to_a
       expect(tipps).not_to be_present
 
       update_all_tipp_points_for(@game1)
 
-      tipps = tipps = Tipp.where(where_sql).all
+      tipps = tipps = Tipp.where(where_sql).to_a
       expect(tipps).to be_present
       tipps.size == 5
     end
 
     it 'should update all tipp points for all games' do
       where_sql = ["tipp_punkte is not null"]
-      expect(Tipp.where(where_sql).all.size).to eq(0)
+      expect(Tipp.where(where_sql).count).to eq(0)
 
       calculate_all_user_tipp_points
 
       # noch keine Tipp Punkte vergeben, da noch kein Spiel beendet
-      expect(Tipp.where(where_sql).all.size).to eq(0)
+      expect(Tipp.where(where_sql).count).to eq(0)
 
       Game.first.update_attribute(:finished, true)
       calculate_all_user_tipp_points
       # Tipp Punkte fürs erste Spiel vergeben
-      expect(Tipp.where(where_sql).all.size).to eq(5)
+      expect(Tipp.where(where_sql).count).to eq(5)
 
       Game.update_all("finished=true")
       calculate_all_user_tipp_points
       # alleTipp Punkte vergeben
-      expect(Tipp.where(["tipp_punkte is null"]).all.size).to eq(0)
+      expect(Tipp.where(["tipp_punkte is null"]).count).to eq(0)
     end
   end
 

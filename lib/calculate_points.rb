@@ -13,7 +13,8 @@ module CalculatePoints
   CHAMPION_TIPP_POINTS = 8
 
   def calculate_user_points
-    users = User.active.all
+    # FIXME soeren 06.09.2014  reicht ein User mit nur den benoetigten Attributen id, championtipp_team_id
+    users = User.active
     if users.present?
       users.each do |user|
         total_points  = Tipp.where(:user_id => user.id).sum(:tipp_punkte)
@@ -34,6 +35,7 @@ module CalculatePoints
         count_3points = Tipp.where({:user_id => user.id, :tipp_punkte => 3}).count
         count_0points = Tipp.where({:user_id => user.id, :tipp_punkte => 0}).count
 
+        # FIXME soeren 10.09.2014 oder update_columns  + Strongparameters
         user.update_attributes({:points => total_points,
                                 :championtipppoints => champion_tipp_points,
                                 :count8points => count_8points,
@@ -63,13 +65,14 @@ module CalculatePoints
 
       if game_winner.present?
         Rails.logger.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}") if Rails.logger.present?
-        tipps = Tipp.where(:game_id => game.id).all
+        tipps = Tipp.where(:game_id => game.id)   # FIXME soeren 10.09.2014 recht id, team1.goals, team2.goals
         if tipps.present?
           tipps.each do |tipp|
             points = 0
             if tipp.complete_fill?
               points = calculate_tipp_points(game_winner, game.team1_goals, game.team2_goals, tipp.team1_goals, tipp.team2_goals)
             end
+            # FIXME soeren 10.09.2014 update_column
             tipp.update_attribute(:tipp_punkte, points)
             Rails.logger.info("UPDATE_ALL_TIPP_POINTS:   tipp-id #{tipp.id} has #{points} points") if Rails.logger.present?
           end
