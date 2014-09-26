@@ -18,7 +18,7 @@ gem 'coffee-rails',            '~> 4.0.1'
 gem 'uglifier',                '~> 2.5.3'
 gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
 gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript code from Ruby.
-gem 'therubyracer',            '~> 0.12.1', :platforms=>:ruby
+gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.6.3'      # Interface zur Daten-Administration
 gem 'bootstrap-sass',          '~> 2.3.1.3'    # FIXME soeren 10.09.2014 Upgrade auf Version 3
 gem 'newrelic_rpm',            '~> 3.9.4.245'  # performance management system, developed by New Relic
