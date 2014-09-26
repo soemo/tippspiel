@@ -164,7 +164,7 @@ module ApplicationHelper
           {:links => [
               {:text => t(:password_change), :url => user_edit_password_path},
               {:divider => true},
-              {:text => icon_with_text('icon-off', t(:sign_out), 'icon'), :url => destroy_user_session_path}
+              {:text => icon_with_text('icon-off', t(:sign_out), 'icon'), :url => logout_path}
           ]}
 
       result
