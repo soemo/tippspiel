@@ -7,8 +7,12 @@ set :cap_tournament_name, 'WM 2014'# TOURNAMENT_NAME # TODO soeren 22.04.14 geht
 
 require "capistrano/ext/multistage"
 
-# bundle dir umsetzen soll in jedem Release neu gemacht werden (nicht im shared_path)
-set(:bundle_dir) {File.join(fetch(:release_path), 'bundle')}
+# siehe https://wiki.uberspace.de/development:ruby#nokogiri
+before "bundle:install" do
+  run "cd #{fetch(:latest_release)} && bundle config build.nokogiri --with-xml2-lib=$HOME/.toast/armed/lib --with-xml2-include=$HOME/.toast/armed/include/libxml2 --with-xslt-dir=$HOME/.toast/armed"
+end
+
+# INFO: bundle der gems wird in shared Verzeichnis gelegt. Daher wercden nur neue Gens installiert
 set(:bundle_flags) { "--deployment --quiet" }
 
 # include uberspacify base recipes
@@ -28,10 +32,10 @@ set :user, 'soemo'
 set :scm, :git
 #set :repository, 'https://github.com/yeah/dummyapp.git'
 # ich nutze ein lokales git bei uberspace
-set :repository,       "/home/#{user}/git/tippspiel.git"
-set :local_repository, "#{user}@taurus.uberspace.de:git/tippspiel.git"
+set :repository, "file:///home/#{user}/git/tippspiel.git"
+set :local_repository, "file://."
 set :scm_verbose,      true
-set :deploy_via,       :remote_cache
+set :deploy_via,       :export
 set :deploy_env,       'production'
 
 # By default, Ruby Enterprise Edition 1.8.7 is used for Uberspace. If you
@@ -43,7 +47,7 @@ set :rake, "bundle exec rake"
 
 set :passenger_max_pool_size, 2
 
-set :keep_releases, 5
+set :keep_releases, 3
 
 
 
