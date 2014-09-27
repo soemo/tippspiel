@@ -25,45 +25,6 @@ describe Game, :type => :model do
     expect{Game.create!({:start_at => "19.06.2012 20:45", :place => "Ort", :team2_placeholder_name => "test2", :group=> "D", :round => Game::GROUP})}.to raise_error(ActiveRecord::RecordInvalid)
   end
 
-  describe 'should get today games' do
-    before :each do
-      @time_now = Time.parse('19.06.2014 22:00')
-
-      @yesterday_game  = FactoryGirl.create(:game, :start_at => @time_now - 1.day)          # gestern 22:00
-
-      @today_game1     = FactoryGirl.create(:game, :start_at => @time_now.midnight)         # heute 00:00
-      @today_game2     = FactoryGirl.create(:game, :start_at => @time_now)                  # heute 22:00
-      @today_game3     = FactoryGirl.create(:game, :start_at => @time_now.midnight + 1.day) # heute 24:00
-
-      @tommorrow_game1 = FactoryGirl.create(:game, :start_at => @time_now + 1.day)          # morgen 22:00
-      @tommorrow_game2 = FactoryGirl.create(:game, :start_at => @time_now.midnight + 2.day) # morgen 24:00
-    end
-
-    it 'should get games from today at 00:10' do
-      freeze_test_time(@time_now.midnight + 10.minutes)
-      games = Game.today_games.to_a
-      expect(games).to eq([@today_game1, @today_game2, @today_game3])
-    end
-
-    it 'should get games from today at 22:00' do
-      freeze_test_time(@time_now)
-      games = Game.today_games.to_a
-      expect(games).to eq([@today_game1, @today_game2, @today_game3])
-    end
-
-    it 'should get games from tommorrow at 22:00' do
-      freeze_test_time(@time_now + 1.day)
-      games = Game.today_games.to_a
-      expect(games).to eq([@today_game3, @tommorrow_game1, @tommorrow_game2])
-    end
-
-    it 'should get games from yesterday at 22:00' do
-      freeze_test_time(@time_now - 1.day)
-      games = Game.today_games.pluck(:id)
-      expect(games).to eq([@yesterday_game.id, @today_game1.id])
-    end
-  end
-
   it "should get finished days with game ids" do
     day1_game1 = FactoryGirl.create(:game, :start_at => "19.06.2012 20:45", :finished => true)
     day1_game2 = FactoryGirl.create(:game, :start_at => "19.06.2012 20:45", :finished => true)

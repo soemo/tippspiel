@@ -22,7 +22,7 @@ describe 'tipps/index.html.haml', :type => :view do
     end
 
     it 'should show info to select champion' do
-      assign(:user_tipps, Tipp.user_tipps(@user.id))
+      assign(:user_tipps, GetUserTipps.call(:user_id => @user.id))
 
       render
 

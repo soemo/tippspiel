@@ -36,13 +36,6 @@ class Game < ActiveRecord::Base
     "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
   end
 
-  # Es werden die Spiele einschliesslich 00:00 bis 24:00
-  # des Tages geliefert
-  def self.today_games
-    t = Time.now.midnight
-    Game.where(:start_at => [t..t+1.day])
-  end
-
   def self.splited_by_rounds
     result = {}
     group_size = GROUPS.size

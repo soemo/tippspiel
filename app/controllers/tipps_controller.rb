@@ -9,8 +9,8 @@ class TippsController < ApplicationController
   end
   # FIXME soeren 10.09.2014 Service
   def index
-    @today_game_ids = Game.today_games.pluck(:id)
-    @user_tipps     = Tipp.user_tipps(current_user.id)
+    @today_game_ids = GetTodayGames.call.pluck(:id)
+    @user_tipps     = GetUserTipps.call(:user_id => current_user.id)
 
     respond_to do |format|
       if @for_phone
@@ -45,7 +45,7 @@ class TippsController < ApplicationController
     new_tipps = params[:tipps]
     if new_tipps.present?
       current_user_id = current_user.id
-      user_tipps = Tipp.user_tipps(current_user_id)
+      user_tipps = GetUserTipps.call(:user_id => current_user_id)
       user_tipps.each do |tipp|
         if (new_tipps["#{tipp.id}"].present? && can?(:update, tipp)) && tipp.edit_allowed?
           tipp.team1_goals = new_tipps["#{tipp.id}"]['team1_goals']

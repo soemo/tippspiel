@@ -28,7 +28,7 @@ describe TippsController, :type => :controller do
       user = User.find_by_email("user@test.de") #email des eingeloggten Nutzers
       FactoryGirl.create(:game)
 
-      tipps = Tipp.user_tipps(user.id)
+      tipps = GetUserTipps.call(:user_id => user.id)
       expect(tipps.size).to be > 0
 
       tipp = Tipp.first
