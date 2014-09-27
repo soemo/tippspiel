@@ -9,9 +9,6 @@ class Game < ActiveRecord::Base
   belongs_to :team2, :class_name => 'Team'
   has_many   :tipps
 
-  attr_accessible :start_at, :place, :team1_id, :team2_id, :group, :round, :api_match_id,
-                  :team1_placeholder_name,:team2_placeholder_name, :team1_goals, :team2_goals, :finished
-
   validates_presence_of :place
   validates_presence_of :round
   validates_presence_of :start_at

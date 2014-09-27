@@ -82,7 +82,7 @@ describe CalculatePoints do
       # noch keine Tipp Punkte vergeben, da noch kein Spiel beendet
       expect(Tipp.where(where_sql).count).to eq(0)
 
-      Game.first.update_attribute(:finished, true)
+      Game.first.update_column(:finished, true)
       calculate_all_user_tipp_points
       # Tipp Punkte fürs erste Spiel vergeben
       expect(Tipp.where(where_sql).count).to eq(5)

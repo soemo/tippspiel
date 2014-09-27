@@ -49,7 +49,7 @@ describe UserController, :type => :controller do
       ].each do |old, pw, pw_confirmation|
         post 'change_password', {:old_password => '', :password => '', :password_confirmation => ''}
         expect(response).to redirect_to user_edit_password_path
-        expect(flash[:error]).to include(I18n.t('change_password_need_all_all_input_fields'))
+        expect(flash[:error]).to include(I18n.t('change_password_need_all_input_fields'))
       end
 
       post 'change_password', {:old_password => 'secret123', # das steht in der Factory zur Erstellung drin

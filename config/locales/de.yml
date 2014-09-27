@@ -25,7 +25,7 @@ de:
 
   change_password_save_success: 'Das Passwort wurde erfolgreich gespeichert.'
   change_password_wrong_pw_confirmation: 'Die Passwort Bestätigung stimmt nicht mit dem neuen Passwort überein!'
-  change_password_need_all_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
+  change_password_need_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
   change_password_wrong_old_pw: 'Das alte Passwort stimmt nicht!'
 
   need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'

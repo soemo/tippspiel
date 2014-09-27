@@ -35,7 +35,7 @@ describe TippsController, :type => :controller do
       game = tipp.game
 
       freeze_test_time
-      game.update_attribute(:start_at, Time.now+1.second) #Spielstart in der Zukunft
+      game.update_column(:start_at, Time.now+1.second) #Spielstart in der Zukunft
 
       # update erlaubt
       post 'save_tipps', {:tipps=>{"#{tipp.id}"=>{"team2_goals"=>"9", "team1_goals"=>"9"}}}

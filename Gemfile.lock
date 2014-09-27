@@ -164,8 +164,6 @@ GEM
       daemon_controller (>= 1.2.0)
       rack
       rake (>= 0.8.1)
-    protected_attributes (1.0.8)
-      activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -303,7 +301,6 @@ DEPENDENCIES
   newrelic_rpm (~> 3.9.4.245)
   paranoia (~> 2.0.2)
   passenger (~> 4.0.33)
-  protected_attributes (~> 1.0.8)
   rails (= 4.1.6)
   rails_admin (~> 0.6.3)
   rspec-cells (~> 0.2.2)

@@ -29,9 +29,6 @@ gem 'lograge',                 '~> 0.3.0'
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 4.1.0' # FIXME soeren 10.09.2014 #86 testen  https://github.com/airbrake/airbrake/blob/master/CHANGELOG
 
-# TODO soeren 22.07.2014 #4642 Rails 4.0 has removed attr_accessible and attr_protected feature in favor of Strong Parameters. You can use the Protected Attributes gem for a smooth upgrade path.
-gem 'protected_attributes',     '~> 1.0.8'
-
 # gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
 # https://github.com/tzinfo/tzinfo/wiki/Resolving-TZInfo::DataSourceNotFound-Errors

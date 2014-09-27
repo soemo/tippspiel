@@ -35,14 +35,14 @@ describe Tipp, :type => :model do
     it "should allowed" do
       first_tipp = @user_tipps.first
       game = first_tipp.game
-      game.update_attribute(:start_at, Time.now + 1.minute)
+      game.update_column(:start_at, Time.now + 1.minute)
       expect(first_tipp.edit_allowed?).to be_truthy
     end
 
     it "should not allowed" do
       first_tipp = @user_tipps.first
       game = first_tipp.game
-      game.update_attribute(:start_at, Time.now)
+      game.update_column(:start_at, Time.now)
       expect(first_tipp.edit_allowed?).to be_falsey
     end
 

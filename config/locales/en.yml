@@ -24,7 +24,7 @@ en:
 
   change_password_save_success: 'Saved password successful.'
   change_password_wrong_pw_confirmation: 'Different password and password confirmation!'
-  change_password_need_all_all_input_fields: 'Please fill in all three password fields!'
+  change_password_need_all_input_fields: 'Please fill in all three password fields!'
   change_password_wrong_old_pw: 'The old password is wrong!'
 
   need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'

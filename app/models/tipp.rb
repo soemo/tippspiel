@@ -12,8 +12,6 @@ class Tipp < ActiveRecord::Base
   validates_numericality_of :team1_goals, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
   validates_numericality_of :team2_goals, :allow_nil => true, :on => :update, :greater_than_or_equal_to => 0
 
-  attr_accessible :user_id, :game_id, :team1_goals, :team2_goals
-
   def edit_allowed?
     game.start_at > Time.now
   end

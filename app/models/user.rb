@@ -21,9 +21,6 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :lockable , :reconfirmable and :timeoutable
   devise :database_authenticatable, :confirmable, :registerable, :recoverable, :rememberable, :trackable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :lastname, :firstname
-
   # Braucht ein Nutzer laenger als diese Zeit, um den Confirmation-Link aufzurufen,
   # ist das Token ungueltig
   CONFIRMATION_MAX_TIME = 7.day
@@ -135,7 +132,7 @@ class User < ActiveRecord::Base
       error_messages << I18n.t(:change_password_wrong_old_pw)
     end
     if password.blank? || password_confirmation.blank? || old_password.blank?
-      error_messages << I18n.t(:change_password_need_all_all_input_fields)
+      error_messages << I18n.t(:change_password_need_all_input_fields)
     end
     if password.present? && password_confirmation.present? && password != password_confirmation
       error_messages << I18n.t(:change_password_wrong_pw_confirmation)
