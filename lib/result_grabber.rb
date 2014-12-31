@@ -68,7 +68,7 @@ module ResultGrabber
      Rails.logger.info(infos.inspect) if infos.present?
 
      if errors.present? || infos.present?
-       AdminMailer.result_grabber_email(errors, infos).deliver
+       AdminMailer.result_grabber_email(errors, infos).deliver_now
      end
    end
 

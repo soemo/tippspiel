@@ -2,8 +2,6 @@
 > bundle exec cap -vT nutzen
 * vielleicht voher set HOME=c:\Users\soeren.mothes\ ausfuehren
 
-* Newrelic
-soeren_mothes@web.de
 
 * Ab WM2014 Mails per https://login.mailchimp.com versenden
 ** Kostenlosen Account dort
