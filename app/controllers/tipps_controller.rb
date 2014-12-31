@@ -7,7 +7,7 @@ class TippsController < ApplicationController
     # Liste der Tipps wird auf dem Phone komprimierter dargestellt #72 besser machen
     @for_phone = (params.has_key?(:for_phone) && params[:for_phone] == 'true') ? true : false
   end
-  # FIXME soeren 10.09.2014 Service
+
   def index
     @today_game_ids = GetTodayGames.call.pluck(:id)
     @user_tipps     = GetUserTipps.call(:user_id => current_user.id)
