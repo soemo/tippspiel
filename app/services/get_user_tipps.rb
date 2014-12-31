@@ -1,8 +1,5 @@
 # -*- encoding : utf-8 -*-
-class GetUserTipps
-
-  include BaseService
-  include Virtus.model
+class GetUserTipps < BaseService
 
   attribute :user_id, Integer
 

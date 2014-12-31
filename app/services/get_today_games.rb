@@ -1,7 +1,5 @@
 # -*- encoding : utf-8 -*-
-class GetTodayGames
-
-  include BaseService
+class GetTodayGames < BaseService
 
   def call
     today_games

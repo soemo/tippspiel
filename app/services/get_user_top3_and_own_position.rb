@@ -1,8 +1,5 @@
 # -*- encoding : utf-8 -*-
-class GetUserTop3AndOwnPosition
-
-  include BaseService
-  include Virtus.model
+class GetUserTop3AndOwnPosition < BaseService
 
   attribute :user_id, Integer
 

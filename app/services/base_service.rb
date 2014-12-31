@@ -1,10 +1,9 @@
 # -*- encoding : utf-8 -*-
-module BaseService
-  extend ActiveSupport::Concern
+class BaseService
 
-  included do
-    def self.call(*args)
-      new(*args).call
-    end
+  include Virtus.model
+
+  def self.call(*args)
+    new(*args).call
   end
 end

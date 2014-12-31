@@ -1,8 +1,5 @@
 # -*- encoding : utf-8 -*-
-class PrepareUserRanking
-
-  include BaseService
-  include Virtus.model
+class PrepareUserRanking < BaseService
 
   attribute :users_for_ranking, Array[User]
 
