@@ -41,9 +41,8 @@ gem 'virtus',                  '~> 1.0.3'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  #gem 'passenger', '~> 5.0.0.beta2'
-  gem 'passenger', '~> 4.0.33' # '~> 4.0.50'  # a modern web server and application server for Ruby
-  # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen
+  gem 'passenger', '~> 5.0.0.beta2' # '~> 4.0.50'  # a modern web server and application server for Ruby
+  # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen - per svc den daemon nue durchstarten
 end
 
 group :development do
