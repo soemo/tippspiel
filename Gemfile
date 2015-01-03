@@ -25,7 +25,7 @@ gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript 
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.6.6'      # Interface zur Daten-Administration
 gem 'bootstrap-sass',          '~> 2.3.1.3'    # FIXME soeren 10.09.2014 Upgrade auf Version 3
-gem 'newrelic_rpm',            '~> 3.9.4.245'  # performance management system, developed by New Relic
+gem 'newrelic_rpm',            '~> 3.9.9.275'  # performance management system, developed by New Relic
 gem 'feed-normalizer',         '~> 1.5.2'      # wrapper for Atom and RSS parsers
 gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.
 gem 'lograge',                 '~> 0.3.0'
@@ -41,8 +41,8 @@ gem 'virtus',                  '~> 1.0.3'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '~> 5.0.0.beta2' # '~> 4.0.50'  # a modern web server and application server for Ruby
-  # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen - per svc den daemon nue durchstarten
+  gem 'passenger', '~> 4.0.57' #  # a modern web server and application server for Ruby
+  # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen - per svc den daemon neu durchstarten
 end
 
 group :development do
