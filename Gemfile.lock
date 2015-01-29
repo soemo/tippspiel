@@ -217,7 +217,7 @@ GEM
     orm_adapter (0.5.0)
     paranoia (2.0.2)
       activerecord (~> 4.0)
-    passenger (4.0.58)
+    passenger (4.0.57)
       daemon_controller (>= 1.2.0)
       rack
       rake (>= 0.8.1)
@@ -346,8 +346,6 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2014.7)
-      tzinfo (>= 1.0.0)
     uber (0.0.12)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
@@ -397,7 +395,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.17)
   newrelic_rpm (~> 3.9.9.275)
   paranoia (~> 2.0.2)
-  passenger (~> 4.0.58)
+  passenger (= 4.0.57)
   quiet_assets (~> 1.1.0)
   rack-livereload
   rails (~> 4.2.0)
