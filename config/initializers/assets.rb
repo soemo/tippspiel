@@ -11,4 +11,4 @@ Rails.application.config.assets.version = '1.0'
 # (i.e., .coffee and .scss files are not automatically included as they compile to JS/CSS)
 
 Rails.application.config.assets.precompile +=
-    %w(print_pdf.css application_print.css jquery.ui.datepicker-de.js jquery.ui.datepicker-en.js)
+    %w(print_pdf.css application_print.css jquery.ui.datepicker-de.js jquery.ui.datepicker-en.js glyphicons-halflings.png glyphicons-halflings-white.png)

@@ -9,9 +9,6 @@ gem 'haml-rails',              '~> 0.5.3'      # haml-Generatoren
 gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
 
-gem 'eventmachine', '~> 1.0.4'
-
-# TODO soeren 30.12.2014 gem 'responders',              '~> 2.0.2'      # FIXME soeren 30.12.2014 https://github.com/plataformatec/responders
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # Wird aktuell von uns nicht benutzt gem 'turbolinks'
@@ -41,7 +38,7 @@ gem 'virtus',                  '~> 1.0.3'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '~> 4.0.57' #  # a modern web server and application server for Ruby
+  gem 'passenger', '~> 4.0.58' #  # a modern web server and application server for Ruby
   # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen - per svc den daemon neu durchstarten
 end
 
@@ -50,12 +47,18 @@ group :development do
   gem 'binding_of_caller', '~> 0.7.2'    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
 
   gem 'web-console',       '~> 2.0.0'    # A set of debugging tools for your Rails application.
+
+  gem 'spring', '~> 1.2.0'
+  gem 'spring-commands-rspec', '~>1.0.2'
+  gem 'rack-livereload'
+  gem 'guard-livereload', require: false
 end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
-  gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git' # TODO soeren 19.01.13 jans wieder nutzen, wenn er meine Anpassungen drin hat
+  gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git'
 
+  gem 'quiet_assets',              '~> 1.1.0'
   gem 'capistrano',                '~> 2.15.4'
   gem 'capistrano-ext',            '~> 1.2.1'
   gem 'rvm-capistrano',            '~> 1.3.0'
@@ -63,9 +66,10 @@ group :development, :test do
   gem 'rspec-rails',               '~> 3.1.0'
   # FIXME soeren 31.12.2014 entfernen rspec-collection_matchers
   gem 'rspec-collection_matchers', '~> 1.0.0'    # Collection cardinality matchers, extracted from rspec-expectations
-  gem 'thin',                      '~> 1.6.3'    # lokaler Dev Server
   # http://stackoverflow.com/a/14328137
   gem 'capybara',                  '~> 2.4.4'    # rspec-rails braucht das um in den Views have_selector zu nutzen
+
+  gem 'guard-rspec', require: false
 end
 
 group :test do
