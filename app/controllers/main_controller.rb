@@ -4,10 +4,8 @@ class MainController < ApplicationController
   skip_before_filter :authenticate_user!
 
   def index
-    @today_games = GetTodayGames.call
-    if user_signed_in?
-      @user_top3_ranking_hash, @own_position = GetUserTop3AndOwnPosition.call(:user_id => current_user.id)
-    end
+    user = user_signed_in? ? current_user : nil
+    @presenter = MainIndexPresenter.new(user)
   end
 
   def error

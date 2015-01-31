@@ -1,9 +1,9 @@
 .row
   .span5
-    = render :partial => 'welcome_infos', :locals => {:today_games => @today_games}
+    = render :partial => 'welcome_infos', :locals => {:today_games => @presenter.today_games}
   .span4
     .alert.alert-info
-      = render :partial => 'login_form_or_user_infos'
+      = render :partial => 'login_form_or_user_infos', :locals => {:presenter => @presenter}
 
 .row
   .span9

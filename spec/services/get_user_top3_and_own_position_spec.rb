@@ -5,7 +5,10 @@ describe GetUserTop3AndOwnPosition do
 
   it 'should get top3_positions_and_own_position' do
     User.delete_all # fixture users delete
-    user_top3_ranking_hash, own_position = GetUserTop3AndOwnPosition.call(:user_id => nil)
+    result = GetUserTop3AndOwnPosition.call(:user_id => nil)
+    user_top3_ranking_hash = result.user_top3_ranking_hash
+    own_position = result.own_position
+
     expect(own_position).to eq(nil)
     expect(user_top3_ranking_hash).to eq({})
 
@@ -20,12 +23,18 @@ describe GetUserTop3AndOwnPosition do
     end
 
     last_db_user = User.last
-    user_top3_ranking_hash, own_position = GetUserTop3AndOwnPosition.call(:user_id => last_db_user.id)
+    result = GetUserTop3AndOwnPosition.call(:user_id => last_db_user.id)
+    user_top3_ranking_hash = result.user_top3_ranking_hash
+    own_position = result.own_position
+
     expect(own_position).to eq(1)
     expect(user_top3_ranking_hash.size).to eq(1)
     expect(user_top3_ranking_hash[1].size).to eq(User.count)
 
-    user_top3_ranking_hash, own_position = GetUserTop3AndOwnPosition.call(:user_id => nil)
+    result = GetUserTop3AndOwnPosition.call(:user_id => nil)
+    user_top3_ranking_hash = result.user_top3_ranking_hash
+    own_position = result.own_position
+
     expect(own_position).to eq(nil)
     expect(user_top3_ranking_hash.size).to eq(1)
     expect(user_top3_ranking_hash[1].size).to eq(User.count)

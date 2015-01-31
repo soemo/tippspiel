@@ -6,7 +6,7 @@ class SidebarNotesCell < Cell::Rails
 
   def show(args)
     item_count    = args[:item_count]
-    @notes        = Notice.limit(item_count).all #FIXME soeren 06.09.2014 .all ?
+    @notes        = Notice.limit(item_count).all
 
     render
   end
