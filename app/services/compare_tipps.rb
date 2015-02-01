@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class CompareTipps < BaseService
-
+  # FIXME soeren 01.02.15 spec
   attribute :game_id, Integer
 
-  Result = Struct.new(:posssible_games, :game_to_compare, :tipps)
+  Result = Struct.new(:possible_games, :game_to_compare, :tipps)
 
   def call
     compare_tipps
@@ -12,14 +12,14 @@ class CompareTipps < BaseService
   private
 
   def compare_tipps
-    posssible_games = Game.games_for_compare(Time.now)
+    possible_games = Game.games_for_compare(Time.now)
     game_to_compare = nil
     tipps           = nil
 
-    if game_id.present? && posssible_games.present? && posssible_games.pluck(:id).include?(game_id)
-      game_to_compare = posssible_games.where(id: game_id).first
-    elsif posssible_games.present?
-      game_to_compare = posssible_games.last
+    if game_id.present? && possible_games.present? && possible_games.pluck(:id).include?(game_id)
+      game_to_compare = possible_games.where(id: game_id).first
+    elsif possible_games.present?
+      game_to_compare = possible_games.last
     end #no else
 
     if game_to_compare.present?
@@ -31,7 +31,7 @@ class CompareTipps < BaseService
           order('users.firstname')
     end
 
-    Result.new(posssible_games, game_to_compare, tipps)
+    Result.new(possible_games, game_to_compare, tipps)
   end
 
   def possible_games

@@ -1,11 +1,11 @@
 class TippsComparePresenter
-
-  attr_reader :posssible_games
+         # FIXME soeren 01.02.15 spec
+  attr_reader :possible_games
   attr_reader :game_to_compare
   attr_reader :tipps
 
-  def initialize(posssible_games, game_to_compare, tipps)
-    @posssible_games = posssible_games
+  def initialize(possible_games, game_to_compare, tipps)
+    @possible_games  = possible_games
     @game_to_compare = game_to_compare
     @tipps           = tipps
   end
