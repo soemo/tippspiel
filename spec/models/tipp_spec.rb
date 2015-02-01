@@ -11,16 +11,19 @@ describe Tipp, :type => :model do
 
   describe 'User Tipps' do
 
-    it 'should get all user tipps' do
-      user = users(:another_user)
+    it 'gets all user tipps' do
+      5.times{create(:game)}
+
       games = Game.all
+      user = users(:another_user)
       games_size = games.size
 
-      user_tipps = Tipp.where("user_id" => user.id)
-      expect(user_tipps).to eq([])
+      user_tipp_count = Tipp.where("user_id" => user.id).count
+      expect(user_tipp_count).to eq(0)
 
       user_tipps = GetUserTipps.call(:user_id => user.id)
       expect(user_tipps.size).to eq(games_size)
+      expect(user_tipps.pluck(:game_id)).to eq(games.pluck(:id))
     end
 
   end

@@ -18,7 +18,6 @@
 
 require 'pp'
 require 'webmock/rspec'
-require 'rspec/collection_matchers'
 
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

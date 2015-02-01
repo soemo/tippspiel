@@ -35,9 +35,17 @@ class GetUserTipps < BaseService
   def create_user_tipps
     game_ids = Game.pluck(:id)
     if game_ids.present?
+
+      # https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
+      values = []
+      time = Time.current.to_s(:db)
+
       game_ids.each do |game_id|
-        Tipp.create!(:user_id => user_id, :game_id => game_id)
+        values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
       end
+
+      sql = "INSERT INTO tipps (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
+      Tipp.connection.execute(sql)
     end
   end
 

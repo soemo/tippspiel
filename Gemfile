@@ -64,9 +64,6 @@ group :development, :test do
   gem 'rvm-capistrano',            '~> 1.3.0'
 
   gem 'rspec-rails',               '~> 3.1.0'
-  # FIXME soeren 31.12.2014 entfernen rspec-collection_matchers
-  gem 'rspec-collection_matchers', '~> 1.0.0'    # Collection cardinality matchers, extracted from rspec-expectations
-  # http://stackoverflow.com/a/14328137
   gem 'capybara',                  '~> 2.4.4'    # rspec-rails braucht das um in den Views have_selector zu nutzen
 
   gem 'guard-rspec', require: false

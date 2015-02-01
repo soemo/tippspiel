@@ -1,9 +1,11 @@
 # -*- encoding : utf-8 -*-
 
+load 'config/initializers/01_constants' # um z.B. an den TOURNAMENT_NAME zu kommen
+
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, 'beta-tippspiel'
 
-set :cap_tournament_name, 'WM 2014'# TOURNAMENT_NAME # TODO soeren 22.04.14 geht das besser
+set :cap_tournament_name, TOURNAMENT_NAME
 
 require "capistrano/ext/multistage"
 
