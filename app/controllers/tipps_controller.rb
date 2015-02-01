@@ -45,18 +45,18 @@ class TippsController < ApplicationController
     redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tipps')})
   end
 
-  # FIXME soeren 12.06.2014 absichern, das nach Turnierstart nicht mehr gespeichert werden kann
   def save_champion_tipp
-    respond_to do |format|
+    if before_tournament?
       if params[:champion_team_id].present?
         current_user.championtipp_team_id = params[:champion_team_id]
         if current_user.save
           flash[:notice] = t(:succesfully_saved_championtipp)
-          format.html { redirect_to :action => 'index', :for_phone => @for_phone }
         end # no else
-      else
-        format.html { redirect_to :action => 'index', :for_phone => @for_phone }
       end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'index', :for_phone => @for_phone }
     end
   end
 

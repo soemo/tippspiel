@@ -34,7 +34,7 @@
     %tbody
     - tipps.each do |tipp|
       - if tipp.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
-        - allowed_to_show = allowed_to_show?(tipp)
+        - allowed_to_show = @presenter.allowed_to_show?(tipp)
         %tr{:class => cycle('even', 'odd')}
           %td= tipp.user.name
           %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""
