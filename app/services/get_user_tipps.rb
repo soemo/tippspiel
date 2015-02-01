@@ -13,7 +13,6 @@ class GetUserTipps < BaseService
     result = []
 
     if user_id.present?
-      # FIXME soeren 17.09.2014 geht das nicht besser find_or_create ???
       result = tipps_with_games
       unless result.present?
         create_user_tipps

@@ -3,23 +3,27 @@
 %p
   Hier können die Tipps der laufenden und abgeschlossenen Spiele verglichen werden.
 
+- game_to_compare = @presenter.game_to_compare
+- possible_games  = @presenter.possible_games
+- tipps           = @presenter.tipps
+
 = form_tag compare_tipps_path, :class => "form-inline" do
   -# # TODO soeren 19.05.14 #72 besser machen
   = hidden_field_tag(:for_phone, @for_phone)
   %fieldset
     .control-group
       .controls
-        - selected = @game_to_compare.present? ? @game_to_compare.id : ""
-        = select_tag("id", options_from_collection_for_select(@posible_games, "id", "to_s", selected), :prompt => t("please_select"), :class => "span6")
+        - selected = game_to_compare.present? ? game_to_compare.id : ""
+        = select_tag("id", options_from_collection_for_select(possible_games, "id", "to_s", selected), :prompt => t("please_select"), :class => "span6")
         = submit_tag t('compare'), :class => "btn"
 
-- if @game_to_compare.present? && @tipps.present?
+- if game_to_compare.present? && tipps.present?
   %p
-    = @game_to_compare.to_s
+    = game_to_compare.to_s
     %br
     %b
       = Game.human_attribute_name("result")
-      = @game_to_compare.team1_goals.to_s + " - " + @game_to_compare.team2_goals.to_s
+      = game_to_compare.team1_goals.to_s + " - " + game_to_compare.team2_goals.to_s
 
   %table.table.table-striped.table-condensed.tipps
     %thead
@@ -28,9 +32,9 @@
         %th= Tipp.model_name.human
         %th= Tipp.human_attribute_name("tipp_punkte")
     %tbody
-    - @tipps.each do |tipp|
+    - tipps.each do |tipp|
       - if tipp.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
-        - allowed_to_show = !tipp.edit_allowed?
+        - allowed_to_show = allowed_to_show?(tipp)
         %tr{:class => cycle('even', 'odd')}
           %td= tipp.user.name
           %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""

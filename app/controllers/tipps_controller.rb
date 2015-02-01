@@ -21,24 +21,11 @@ class TippsController < ApplicationController
     end
   end
 
-                # FIXME soeren 10.09.2014 Service
   def compare
-    @posible_games   = Game.games_for_compare(Time.now).all  # FIXME soeren 06.09.2014 .all ?
-    @game_to_compare = nil
-    @tipps           = nil
-    if params[:id].present? && @posible_games.present? && @posible_games.map(&:id).include?(params[:id].to_i)
-      @game_to_compare = @posible_games.select {|g| g.id == params[:id].to_i}.first
-    elsif @posible_games.present?
-      @game_to_compare = @posible_games.last
-    end #no else
-    if @game_to_compare.present?
-      @tipps = @game_to_compare.
-              tipps.
-              includes('user').
-              where('users.deleted_at' => nil).
-              order('tipps.tipp_punkte desc').
-              order('users.firstname')
-    end
+    result = CompareTipps.call(:game_id => params[:id])
+    @presenter = TippsComparePresenter.new(result.posssible_games,
+                                           result.game_to_compare,
+                                           result.tipps)
   end
                 # FIXME soeren 10.09.2014 Service
   def save_tipps

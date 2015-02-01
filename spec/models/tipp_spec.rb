@@ -4,7 +4,7 @@ require 'rails_helper'
 describe Tipp, :type => :model do
 
   it "should use Factory" do
-      tipp = FactoryGirl.create(:tipp)
+      tipp = FactoryGirl.build(:tipp)
       expect(tipp.game).to be_present
       expect(tipp.user).to be_present
   end
@@ -62,7 +62,6 @@ describe Tipp, :type => :model do
       t.remove_leading_zero
       expect(t.team1_goals).to eq(10)
       expect(t.team2_goals).to eq(11)
-
     end
   end
 
