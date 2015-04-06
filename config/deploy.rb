@@ -14,7 +14,7 @@ before "bundle:install" do
   run "cd #{fetch(:latest_release)} && bundle config build.nokogiri --with-xml2-lib=$HOME/.toast/armed/lib --with-xml2-include=$HOME/.toast/armed/include/libxml2 --with-xslt-dir=$HOME/.toast/armed"
 end
 
-# INFO: bundle der gems wird in shared Verzeichnis gelegt. Daher wercden nur neue Gens installiert
+# INFO: bundle der gems wird in shared Verzeichnis gelegt. Daher werden nur neue Gems installiert
 set(:bundle_flags) { "--deployment --quiet" }
 
 # include uberspacify base recipes

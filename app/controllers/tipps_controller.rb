@@ -27,21 +27,9 @@ class TippsController < ApplicationController
                                            result.game_to_compare,
                                            result.tipps)
   end
-                # FIXME soeren 10.09.2014 Service
+
   def save_tipps
-    new_tipps = params[:tipps]
-    if new_tipps.present?
-      current_user_id = current_user.id
-      user_tipps = GetUserTipps.call(:user_id => current_user_id)
-      user_tipps.each do |tipp|
-        if (new_tipps["#{tipp.id}"].present? && can?(:update, tipp)) && tipp.edit_allowed?
-          tipp.team1_goals = new_tipps["#{tipp.id}"]['team1_goals']
-          tipp.team2_goals = new_tipps["#{tipp.id}"]['team2_goals']
-          tipp.remove_leading_zero
-          tipp.save
-        end
-      end
-    end
+    SaveTipps.call(tipps_params: params[:tipps], current_user: current_user)
     redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tipps')})
   end
 
