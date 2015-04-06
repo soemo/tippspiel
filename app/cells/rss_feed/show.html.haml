@@ -1,16 +1,16 @@
-- if @rss_title.present?
-  %h4.wrap_text= @rss_title
-- if @rss_entries.present?
-  - @rss_entries.each do |e|
+- if rss_title.present?
+  %h4.wrap_text= rss_title
+- if rss_entries.present?
+  - rss_entries.each do |e|
     %p
-      %span.rss_date= I18n.l(e['date_published'].to_date)
+      %span.rss_date= I18n.l(e['published'].to_date)
       %br
-      - link = e['urls'][0]
+      - link = e.url
       - if link.starts_with?("#{RSS_FEED_MAIN_URL}")
-        = link_to(e['title'], "#{link}", :target => '_blank')
+        = link_to(e.title, "#{link}", :target => '_blank')
       - else
-        = link_to(e['title'], "#{RSS_FEED_MAIN_URL}#{link}", :target => '_blank')
+        = link_to(e.title, "#{RSS_FEED_MAIN_URL}#{link}", :target => '_blank')
       %br
-      %span.wrap_text= raw(e['content'])
+      %span.wrap_text= raw(e.summary)
 
   %hr

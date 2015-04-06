@@ -3,7 +3,6 @@ class SchedulerController < ApplicationController
 
   include CalculatePoints     # FIXME soeren 06.09.2014 #81 Service?
   include ResultGrabber       # FIXME soeren 06.09.2014 #81 Service?
-  include RssReader           # FIXME soeren 06.09.2014 #81 Service?
 
   MIN_TIME_BETWEEN_RUNS = 5.minutes
 
@@ -13,7 +12,7 @@ class SchedulerController < ApplicationController
   def hourly
     start_calculate_points
     clean_invoke_table
-    write_rss_feed_cache_xml_file(RSS_FEED_URL)
+    RssFeedWriteCache.call(rss_feed_url: RSS_FEED_URL)
     render :plain => "Hourly scheduler run successful", :status => :ok
   end
 

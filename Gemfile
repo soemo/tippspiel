@@ -23,7 +23,7 @@ gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.6.6'      # Interface zur Daten-Administration
 gem 'bootstrap-sass',          '~> 2.3.1.3'    # FIXME soeren 10.09.2014 Upgrade auf Version 3
 gem 'newrelic_rpm',            '~> 3.9.9.275'  # performance management system, developed by New Relic
-gem 'feed-normalizer',         '~> 1.5.2'      # wrapper for Atom and RSS parsers
+gem 'feedjira',                '~> 1.6.0'      # RSS parsers
 gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.
 gem 'lograge',                 '~> 0.3.0'
 

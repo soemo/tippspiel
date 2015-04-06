@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class SaveTipps < BaseService
-  # FIXME soeren 01.02.15 spec
+
   attribute :current_user, User
   attribute :tipps_params
 

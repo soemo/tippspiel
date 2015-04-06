@@ -17,6 +17,12 @@ module Tippspiel
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths += Dir["#{config.root}/app/controllers/concerns/{**/}"]
+    config.autoload_paths += Dir["#{config.root}/app/models/{**/}"]
+    config.autoload_paths += Dir["#{config.root}/app/models/concerns/{**/}"]
+    config.autoload_paths += Dir["#{config.root}/app/presenters/{**/}"]
+    config.autoload_paths += Dir["#{config.root}/app/services/{**/}"]
+    config.autoload_paths += Dir["#{config.root}/app/serializers/{**/}"]
 
     # Enable the asset pipeline
     config.assets.enabled = true

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CompareTipps < BaseService
-  # FIXME soeren 01.02.15 spec
+
   attribute :game_id, Integer
 
   Result = Struct.new(:possible_games, :game_to_compare, :tipps)
