@@ -1,8 +1,5 @@
 ﻿!!! Achtung auf der cmd
-> uru ls
-> uru 215p273
 > bundle exec cap -vT nutzen
-* vielleicht voher set HOME=c:\Users\soeren.mothes\ ausfuehren
 
 
 * Ab WM2014 Mails per https://login.mailchimp.com versenden
