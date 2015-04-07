@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 Tippspiel::Application.routes.draw do
 
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-
   devise_scope :user do
     get '/login'  => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   # Eigener Controller noetig, damit eigene Attribute den strong_params von devise bekannt gemacht werden koennen
    devise_for :users, :controllers => { :registrations => 'registrations' }

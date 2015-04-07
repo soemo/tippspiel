@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
-ruby '2.1.5'
+ruby '2.2.1'
 
-gem 'mysql2',                  '~> 0.3.17'
+gem 'mysql2',                  '~> 0.3.18'
 gem 'cancancan',               '~> 1.9.2'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
 gem 'haml-rails',              '~> 0.5.3'      # haml-Generatoren
 gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
@@ -20,17 +20,17 @@ gem 'uglifier',                '~> 2.5.3'
 gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
 gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript code from Ruby.
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
-gem 'rails_admin',             '~> 0.6.6'      # Interface zur Daten-Administration
+gem 'rails_admin',             '~> 0.6.7'      # Interface zur Daten-Administration
 gem 'bootstrap-sass',          '~> 2.3.1.3'    # FIXME soeren 10.09.2014 Upgrade auf Version 3
-gem 'newrelic_rpm',            '~> 3.9.9.275'  # performance management system, developed by New Relic
+gem 'newrelic_rpm'
 gem 'feedjira',                '~> 1.6.0'      # RSS parsers
 gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.
-gem 'lograge',                 '~> 0.3.0'
+gem 'lograge',                 '~> 0.3.1'
 
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
-gem 'airbrake',                '~> 4.1.0' # FIXME soeren 10.09.2014 #86 testen  https://github.com/airbrake/airbrake/blob/master/CHANGELOG
+gem 'airbrake',                '~> 4.1.0'
 
-gem 'virtus',                  '~> 1.0.3'     # Attributes on Steroids for Plain Old Ruby Objects
+gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain Old Ruby Objects
 
 # gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
@@ -38,8 +38,7 @@ gem 'virtus',                  '~> 1.0.3'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '= 4.0.57' #  # a modern web server and application server for Ruby
-  # FIXME soeren 18.04.14 update was muss ich da bei uberspace noch machen - per svc den daemon neu durchstarten
+  gem 'passenger', '~> 5.0.6'
 end
 
 group :development do
@@ -48,8 +47,8 @@ group :development do
 
   gem 'web-console',       '~> 2.0.0'    # A set of debugging tools for your Rails application.
 
-  gem 'spring', '~> 1.2.0'
-  gem 'spring-commands-rspec', '~>1.0.2'
+  gem 'spring', '~> 1.3.4'
+  gem 'spring-commands-rspec', '~>1.0.4'
   gem 'rack-livereload'
   gem 'guard-livereload', require: false
 end
@@ -61,9 +60,9 @@ group :development, :test do
   gem 'quiet_assets',              '~> 1.1.0'
   gem 'capistrano',                '~> 2.15.4'
   gem 'capistrano-ext',            '~> 1.2.1'
-  gem 'rvm-capistrano',            '~> 1.3.0'
+  gem 'rvm-capistrano',            '~> 1.3.0',  require: false
 
-  gem 'rspec-rails',               '~> 3.1.0'
+  gem 'rspec-rails',               '~> 3.2.1'
   gem 'capybara',                  '~> 2.4.4'    # rspec-rails braucht das um in den Views have_selector zu nutzen
 
   gem 'guard-rspec', require: false

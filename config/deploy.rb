@@ -1,13 +1,22 @@
 # -*- encoding : utf-8 -*-
 
+require "capistrano/ext/multistage"
+
+# include uberspacify base recipes
+require 'uberspacify/base'
+
+# comment this if you don't use MySQL
+require 'uberspacify/mysql'
+
 load 'config/initializers/01_constants' # um z.B. an den TOURNAMENT_NAME zu kommen
+
+
 
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, 'beta-tippspiel'
 
 set :cap_tournament_name, TOURNAMENT_NAME
 
-require "capistrano/ext/multistage"
 
 # siehe https://wiki.uberspace.de/development:ruby#nokogiri
 before "bundle:install" do
@@ -17,11 +26,7 @@ end
 # INFO: bundle der gems wird in shared Verzeichnis gelegt. Daher werden nur neue Gems installiert
 set(:bundle_flags) { "--deployment --quiet" }
 
-# include uberspacify base recipes
-require 'uberspacify/base'
 
-# comment this if you don't use MySQL
-require 'uberspacify/mysql'
 
 # your Uberspace username
 set :user, 'soemo'
@@ -40,7 +45,7 @@ set :deploy_via,       :remote_cache
 set :copy_exclude,     [ '.git' ]
 set :deploy_env,       'production'
 
-set :rvm_ruby_string, "ruby-2.1.5"   # TODO soeren 07.04.15
+set :rvm_ruby_string, "ruby-2.2.1"
 
 set :rake, "bundle exec rake"
 
