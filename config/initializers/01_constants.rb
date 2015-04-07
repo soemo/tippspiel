@@ -12,7 +12,7 @@ IS_EM = !IS_WM
 RSS_FEED_MAIN_URL = 'http://de.fifa.com'
 RSS_FEED_URL      = "#{RSS_FEED_MAIN_URL}/worldcup/news/rss.xml"
 
-# Wird im ResultGrabber benutzt
+# Wird im FootieFoxUpdateGames benutzt
 RESULT_URL = 'http://api.footiefox.com/leagues/101/base.json'
 
 MAIL        = 'tippspiel@soemo.org'

@@ -2,7 +2,6 @@
 class SchedulerController < ApplicationController
 
   include CalculatePoints     # FIXME soeren 06.09.2014 #81 Service?
-  include ResultGrabber       # FIXME soeren 06.09.2014 #81 Service?
 
   MIN_TIME_BETWEEN_RUNS = 5.minutes
 
@@ -25,7 +24,7 @@ class SchedulerController < ApplicationController
   private
 
   def start_calculate_points
-    update_games
+    FootieFoxUpdateGames.call
     calculate_all_user_tipp_points
     calculate_user_points
   end
