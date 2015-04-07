@@ -23,27 +23,24 @@ require 'uberspacify/base'
 # comment this if you don't use MySQL
 require 'uberspacify/mysql'
 
-# the Uberspace server you are on
-server 'taurus.uberspace.de', :web, :app, :db, :primary => true
-
 # your Uberspace username
 set :user, 'soemo'
 
+# the Uberspace server you are on
+server 'taurus.uberspace.de', :web, :app, :db, :primary => true, user: fetch(:user)
 
-# the repo where your code is hosted
+
 set :scm, :git
-#set :repository, 'https://github.com/yeah/dummyapp.git'
 # ich nutze ein lokales git bei uberspace
 set :repository, "file:///home/#{user}/git/tippspiel.git"
-set :local_repository, "file://."
-set :scm_verbose,      true
-set :deploy_via,       :export
+set :local_repository, "#{fetch(:user)}@taurus.uberspace.de:/home/#{user}/git/tippspiel.git"
+set :branch,           'master'
+set :scm_verbose,      false
+set :deploy_via,       :remote_cache
+set :copy_exclude,     [ '.git' ]
 set :deploy_env,       'production'
 
-# By default, Ruby Enterprise Edition 1.8.7 is used for Uberspace. If you
-# prefer Ruby 1.9 or any other version, please refer to the RVM documentation
-# at https://rvm.io/integration/capistrano/ and set this variable.
-set :rvm_ruby_string, "ruby-2.1.5"
+set :rvm_ruby_string, "ruby-2.1.5"   # TODO soeren 07.04.15
 
 set :rake, "bundle exec rake"
 
