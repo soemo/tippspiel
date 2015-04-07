@@ -38,7 +38,7 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '~> 5.0.2'
+  gem 'passenger', '= 5.0.2' # TODO soeren 07.04.15   git schon 5.0.6
 end
 
 group :development do
