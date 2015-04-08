@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class SchedulerController < ApplicationController
 
-  include CalculatePoints     # FIXME soeren 06.09.2014 #81 Service?
-
   MIN_TIME_BETWEEN_RUNS = 5.minutes
 
   before_filter      :check_invoke_frequency, :except => :admin
@@ -25,8 +23,8 @@ class SchedulerController < ApplicationController
 
   def start_calculate_points
     FootieFoxUpdateGames.call
-    calculate_all_user_tipp_points
-    calculate_user_points
+    UpdateTippsPoints.call
+    UpdateUserPoints.call
   end
 
   def check_invoke_frequency

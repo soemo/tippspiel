@@ -29,7 +29,7 @@ describe 'tipps/index.html.haml', :type => :view do
       expect(rendered).to have_selector('h3', :text => I18n.t('tipps'))
       expect(rendered).to have_selector('div.alert.alert-info') do |div|
         expect(div).to have_selector('b', :text => I18n.t('need_champion_tipp'))
-        expect(div).to have_selector('span', :text => I18n.t('need_champion_tipp_info', :points => CalculatePoints::CHAMPION_TIPP_POINTS))
+        expect(div).to have_selector('span', :text => I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS))
       end
 
       expect(rendered).to have_xpath("//form[@action='/save-champion-tipp']") do |form|

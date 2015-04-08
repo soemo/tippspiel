@@ -14,14 +14,15 @@ gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-
 # Wird aktuell von uns nicht benutzt gem 'turbolinks'
 
 gem 'paranoia',                '~> 2.0.2'      # acts_as_paranoid fuer Rails4
-gem 'sass-rails',              '~> 4.0.3'
-gem 'coffee-rails',            '~> 4.0.1'
-gem 'uglifier',                '~> 2.5.3'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
 gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript code from Ruby.
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.6.7'      # Interface zur Daten-Administration
-gem 'bootstrap-sass',          '~> 2.3.1.3'    # FIXME soeren 10.09.2014 Upgrade auf Version 3
+gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 gem 'newrelic_rpm'
 gem 'feedjira',                '~> 1.6.0'      # RSS parsers
 gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.
@@ -38,7 +39,7 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '= 5.0.4' # TODO soeren 07.04.15   git schon 5.0.6
+  gem 'passenger', '~> 4.0.59' #'5.0.6'   # TODO soeren 07.04.15
 end
 
 group :development do
