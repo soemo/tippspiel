@@ -29,53 +29,38 @@
   -# other js is at the bottom of the body tag for fast page loading
 
 %body
-  %noscript
-    %p.alert= t(:error_javascript)
-
-
-  %div.row
-    %div.large-12.columns
+  .off-canvas-wrap{data: {offcanvas: ''}}
+    .inner-wrap
       - write_navbar
 
-  %div.row
-    %div.large-12.columns
-      = yield(:hero_image)
+      %noscript
+        %p.alert= t(:error_javascript)
+
+      %div.row
+        %div.large-12.columns
+          = yield(:hero_image)
 
 
-  %div.row
-    %div.large-9.columns{role: "content"}
-      - # FIXME soeren 08.04.15 "#{"large-9 columns" role="content"}"92 auslagern in helper methode
-      %p.error
-        - if flash[:error].present?
-          .alert.alert-error
-            %a.close{"data-dismiss"=>"alert"}= "×"
-            = flash[:error]
-      %p.error
-        - if flash[:alert].present?
-          .alert.alert-error
-            %a.close{"data-dismiss"=>"alert"}= "×"
-            = flash[:alert]
-      %p.notice
-        - if flash[:notice].present?
-          .alert.alert-success
-            %a.close{"data-dismiss"=>"alert"}= "×"
-            = flash[:notice]
-      - flash.discard
-      = yield
+      %div.row
+        %div.large-9.columns{role: "content"}
+          - write_flash_messages
+          = yield
 
-    %aside.large-3.columns
-      = yield(:sidebar)
-      - default_sidebar_content
+        %aside.large-3.columns
+          = yield(:sidebar)
+          - default_sidebar_content
 
-    %hr
+        %hr
 
-    %footer.row
-      %div.large-12.columns
-        = "© " + Time.now.strftime("%Y")
-        = link_to("Sören Mothes", "http://www.soemo.org/")
-        = " | "
-        = link_to(t(:imprint), help_path + "#imprint")
-        = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
+        %footer.row
+          %div.large-12.columns
+            = "© " + Time.now.strftime("%Y")
+            = link_to("Sören Mothes", "http://www.soemo.org/")
+            = " | "
+            = link_to(t(:imprint), help_path + "#imprint")
+            = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
+
+      %a.exit-off-canvas
 
   -# Javascript at the bottom for fast page loading
   = javascript_include_tag 'application'

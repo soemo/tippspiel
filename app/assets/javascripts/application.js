@@ -19,11 +19,13 @@ $(function() {
   ajax_load_modal_content();
 
   // Ranking Statistik Punkte
+  /*
+  # FIXME soeren 08.04.15 gab es nur in Bootstrap
   $('.statistic_popover').popover({
     placement: "left",
     html: true,
     trigger: 'hover'
-  });
+  });*/
 
   init_random_user_tips();
   init_countdown('counter_desktop');
@@ -43,12 +45,14 @@ function init_show_only_today_games (){
 
 function init_random_user_tips(){
   // Popover anzeigen
+/*
+ # FIXME soeren 08.04.15 gab es nur in Bootstrap
   $('#js_fill_random_tips').popover({
     placement: "bottom",
     html: true,
     trigger: 'hover'
   });
-
+*/
   $('#js_fill_random_tips').click(function() {
     var inputs =  $(".tipp_input:visible");
     if(inputs.length) {
@@ -188,7 +192,7 @@ jQuery.fn.limitMaxlength = function (options) {
   return this.keyup(onEdit)
           .keydown(onEdit)
           .focus(onEdit)
-          .live('input paste', onEdit);
+          .livequery('input paste', onEdit);
 }
 
 

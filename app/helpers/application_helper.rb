@@ -58,9 +58,44 @@ module ApplicationHelper
     end
   end
 
+  def write_flash_messages
+    haml_tag 'p.error' do
+      if flash[:error].present?
+        haml_tag 'div.alert.alert-error' do
+          haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
+          haml_concat flash[:error]
+        end
+      end
+    end
+    haml_tag 'p.error' do
+      if flash[:alert].present?
+        haml_tag 'div.alert.alert-error' do
+          haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
+          haml_concat flash[:alert]
+        end
+      end
+    end
+    haml_tag 'p.notice' do
+      if flash[:notice].present?
+        haml_tag 'div.alert.alert-success' do
+          haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
+          haml_concat flash[:notice]
+        end
+      end
+    end
+
+    flash.discard
+  end
+
   def write_navbar
-    haml_tag 'div.fixed.contain-to-grid' do
-      haml_tag 'nav.top-bar', {'data-topbar' => '', role: 'navigation'} do
+    # TODO soeren 08.04.15 optimieren #92
+    # 1. Navbar ist hidden-for-small-only: Also sichtbar auf Tablett und groesser
+    # 2. Navbar ist visible-for-small-only: Off-Canvas Menu
+
+    haml_tag 'div.contain-to-grid' do
+
+      # 1.
+      haml_tag 'nav.top-bar.hidden-for-small-only', {data: {topbar: ''}, role: 'navigation'} do
         haml_tag 'ul.title-area' do
           haml_tag 'li.name' do
             haml_tag :h1 do
@@ -90,9 +125,40 @@ module ApplicationHelper
             # wenn man links auch ein Menue haben will
           end
         end
+      end
+
+      # 2.
+      haml_tag 'div.visible-for-small-only' do
+        haml_tag 'nav.tab-bar' do
+          haml_tag 'section.left-small' do
+            haml_tag 'a.left-off-canvas-toggle.menu-icon', {href: '#'} do
+              haml_tag :span, ''
+            end
+          end
+
+          haml_tag 'section.middle.tab-bar-section' do
+            haml_tag 'h1.left' do
+              haml_tag 'a.brand', {:href=> '/'} do
+                haml_concat image_tag('soccer_Ball.png', :class=>'soccer_ball')
+                haml_concat get_title
+                if FEATURE_BETA_TEXT.present?
+                  haml_tag 'small.label.warning.round', 'BETA'
+                end
+              end
+            end
+          end
+        end
+
+        haml_tag 'nav.left-off-canvas-menu' do
+          haml_tag 'ul.off-canvas-list' do
+            write_main_nav('')
+          end
+        end
 
       end
+
     end
+
   end
 
   def write_main_nav(ul_class)
