@@ -30,7 +30,7 @@
         = link_to(t('to_tip_page'), tipps_path, :class=>'hidden-phone')
         = link_to(t('to_tip_page'), tipps_path({:for_phone => true}), :class=>'visible-phone')
     %table.table.table-striped.table-condensed
-      %thead.hidden-phone
+      %thead.hidden-for-small-only
         %tr
           %th= Game.human_attribute_name('start_at')
           %th= Game.human_attribute_name('team1')

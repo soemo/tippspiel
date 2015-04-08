@@ -59,33 +59,43 @@ module ApplicationHelper
   end
 
   def write_navbar
-    haml_tag 'div.navbar.navbar-fixed-top' do
-      haml_tag 'div.navbar-inner' do
-        haml_tag 'div.container' do
-          haml_tag 'a.btn.btn-navbar', {'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'} do
-            haml_tag 'span.icon-bar'
-            haml_tag 'span.icon-bar'
-            haml_tag 'span.icon-bar'
-          end
-          haml_tag 'a.brand', {:href=> '/'} do
-            haml_concat image_tag('soccer_Ball.png', :class=>'soccer_ball') + get_title
-          end
-          if FEATURE_BETA_TEXT.present?
-            haml_tag 'a.brand', {:href=>'#'} do
-              haml_concat '<span class="label label-warning beta-label">BETA</span>'
+    haml_tag 'div.fixed.contain-to-grid' do
+      haml_tag 'nav.top-bar', {'data-topbar' => '', role: 'navigation'} do
+        haml_tag 'ul.title-area' do
+          haml_tag 'li.name' do
+            haml_tag :h1 do
+              haml_tag 'a.brand', {:href=> '/'} do
+                haml_concat image_tag('soccer_Ball.png', :class=>'soccer_ball')
+                haml_concat get_title
+                if FEATURE_BETA_TEXT.present?
+                  haml_tag 'small.label.warning.round', 'BETA'
+                end
+              end
             end
           end
-
-          haml_tag 'div.nav-collapse.collapse' do
-            write_main_nav
-            write_auth_nav
+          haml_tag 'li.toggle-topbar.menu-icon' do
+            haml_tag 'a', {href: "#"} do
+              haml_tag :span, ''
+            end
           end
         end
+
+        haml_tag 'section.top-bar-section' do
+          haml_tag 'ul.right' do
+            write_main_nav('right')
+            write_auth_nav('right')
+          end
+
+          haml_tag 'ul.left' do
+            # wenn man links auch ein Menue haben will
+          end
+        end
+
       end
     end
   end
 
-  def write_main_nav
+  def write_main_nav(ul_class)
     nav_items = main_nav_items
 
     unless user_signed_in?
@@ -93,55 +103,47 @@ module ApplicationHelper
     end
 
     if nav_items.present?
-      haml_tag 'ul.nav' do
-        nav_items.each do |key, path, needs_login|
-          class_name = key == controller.controller_name ? 'active' : ''
+      nav_items.each do |key, path, needs_login|
+        class_name = key == controller.controller_name ? 'active' : ''
 
-          # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
-          # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
-          if key == 'tipps'
-            haml_tag "li.#{class_name}.hidden-phone" do
-              haml_concat link_to(t(key), path)
-            end
-          elsif key == 'tipps_for_phone'
-            haml_tag "li.#{class_name}.visible-phone" do
-              haml_concat link_to(t(key), path)
-            end
-          else
-            haml_tag "li.#{class_name}" do
-              haml_concat link_to(t(key), path)
-            end
+        # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
+        # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
+        if key == 'tipps'
+          haml_tag "li.#{class_name}.hidden-for-small-only" do
+            haml_concat link_to(t(key), path)
           end
-
+        elsif key == 'tipps_for_phone'
+          haml_tag "li.#{class_name}.visible-for-small-only" do
+            haml_concat link_to(t(key), path)
+          end
+        else
+          haml_tag "li.#{class_name}" do
+            haml_concat link_to(t(key), path)
+          end
         end
       end
     end
   end
 
-  def write_auth_nav
+  def write_auth_nav(ul_class)
     if user_signed_in?
-      haml_tag 'ul.nav.pull-right' do
-        haml_tag 'li.divider-vertical'
-        sub_menu_id = MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID
-        css_class = (controller_name == 'user')  ? 'active' : ""
-        sub_menu = get_main_subnavigation_array
-        nav_text = get_user_name_or_sign_in_link
-        if sub_menu[sub_menu_id].present?
-          write_sub_menu(sub_menu_id, sub_menu[sub_menu_id][:links], nav_text, css_class)
-        end
+      haml_tag 'li.divider'
+      sub_menu_id = MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID
+      css_class = (controller_name == 'user')  ? 'active' : ""
+      sub_menu = get_main_subnavigation_array
+      nav_text = get_user_name_or_sign_in_link
+      if sub_menu[sub_menu_id].present?
+        write_sub_menu(sub_menu_id, sub_menu[sub_menu_id][:links], nav_text, css_class)
       end
     end  # no else
   end
 
   def write_sub_menu(sub_menu_id, links, main_menu_text, css_class='')
     if sub_menu_id.present? && links.present? && main_menu_text.present?
-      haml_tag "li##{sub_menu_id}.dropdown.#{css_class}" do
+      haml_tag "li##{sub_menu_id}.has-dropdown.#{css_class}" do
 
-        haml_tag :a, {:href => '#', 'data-toggle' => 'dropdown', :class=>'dropdown-toggle'} do
-          haml_concat main_menu_text
-          haml_tag 'b.caret'
-        end
-        haml_tag 'ul.dropdown-menu' do
+        haml_tag :a,  main_menu_text
+        haml_tag 'ul.dropdown' do
           links.each do |link|
             if link[:divider].present?
               haml_tag 'li.divider'

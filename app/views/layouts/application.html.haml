@@ -23,55 +23,59 @@
   %meta{:property=>"og:image", :content=>img_url}
   %link{:rel => "shortcut icon", :href => "/favicon.ico"}
 
-  :erb
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 
   = stylesheet_link_tag "application", :media=>:all
+  = javascript_include_tag "vendor/modernizr"
+  -# other js is at the bottom of the body tag for fast page loading
 
 %body
   %noscript
     %p.alert= t(:error_javascript)
 
-  - write_navbar
 
-  -#container-fluid CS-Class wenn es die gesamte Bildschirmbreite einnehmen soll
-  %div.container
-    %div.row
-      %div.span9
-        %p.error
-          - if flash[:error].present?
-            .alert.alert-error
-              %a.close{"data-dismiss"=>"alert"}= "×"
-              = flash[:error]
-        %p.error
-          - if flash[:alert].present?
-            .alert.alert-error
-              %a.close{"data-dismiss"=>"alert"}= "×"
-              = flash[:alert]
-        %p.notice
-          - if flash[:notice].present?
-            .alert.alert-success
-              %a.close{"data-dismiss"=>"alert"}= "×"
-              = flash[:notice]
-        - flash.discard
-        = yield
+  %div.row
+    %div.large-12.columns
+      - write_navbar
 
-      %div.span3
-        %div.well.sidebar-nav
-          = yield(:sidebar)
-          - default_sidebar_content
+  %div.row
+    %div.large-12.columns
+      = yield(:hero_image)
+
+
+  %div.row
+    %div.large-9.columns{role: "content"}
+      - # FIXME soeren 08.04.15 "#{"large-9 columns" role="content"}"92 auslagern in helper methode
+      %p.error
+        - if flash[:error].present?
+          .alert.alert-error
+            %a.close{"data-dismiss"=>"alert"}= "×"
+            = flash[:error]
+      %p.error
+        - if flash[:alert].present?
+          .alert.alert-error
+            %a.close{"data-dismiss"=>"alert"}= "×"
+            = flash[:alert]
+      %p.notice
+        - if flash[:notice].present?
+          .alert.alert-success
+            %a.close{"data-dismiss"=>"alert"}= "×"
+            = flash[:notice]
+      - flash.discard
+      = yield
+
+    %aside.large-3.columns
+      = yield(:sidebar)
+      - default_sidebar_content
 
     %hr
 
-    %footer
-      = "© " + Time.now.strftime("%Y")
-      = link_to("Sören Mothes", "http://www.soemo.org/")
-      = " | "
-      = link_to(t(:imprint), help_path + "#imprint")
-      = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
+    %footer.row
+      %div.large-12.columns
+        = "© " + Time.now.strftime("%Y")
+        = link_to("Sören Mothes", "http://www.soemo.org/")
+        = " | "
+        = link_to(t(:imprint), help_path + "#imprint")
+        = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
 
   -# Javascript at the bottom for fast page loading
   = javascript_include_tag 'application'

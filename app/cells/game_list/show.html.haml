@@ -1,7 +1,7 @@
 - if @games_round_hash.present?
 
-  -# for phone
-  .visible-phone
+  -# # FIXME soeren 08.04.15 #72 for phone
+  .visible-for-small-only
     %table.table.table-striped.table-condensed
       - @games_round_hash.each do |_, round_with_games|
         - round_with_games.each_pair do |round_name, games|
@@ -21,8 +21,8 @@
                   - write_team_with_flag(game.team2_view_name, game.team2_country_code, "#{game.team2_goals}<br/>".html_safe)
 
 
-  -# not for phone
-  .hidden-phone
+  -# # FIXME soeren 08.04.15 #72 not for phone
+  .hidden-for-small-only
     %table.table.table-striped.table-condensed
       - @games_round_hash.each do |_, round_with_games|
         - round_with_games.each_pair do |round_name, games|

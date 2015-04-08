@@ -1,9 +1,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.livequery
-//= require jquery-migrate.min
 //= require jquery.countdown
-//= require bootstrap
+//= require foundation
+
+
+$(function(){
+  $(document).foundation();
+});
+
+
+
+// # FIXME soeren 08.04.15 ab hier schaune was wir noch brauchen
 
 $(function() {
   check_user_tipp();

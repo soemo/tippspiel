@@ -1,3 +1,6 @@
+- content_for :hero_image do
+  %p 'Test sm hier soll ein Hero image hin http://zurb.com/building-blocks/hero-image-with-text-and-image'
+
 .row
   .span5
     = render :partial => 'welcome_infos', :locals => {:today_games => @presenter.today_games}
