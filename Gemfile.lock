@@ -222,7 +222,7 @@ GEM
     orm_adapter (0.5.0)
     paranoia (2.0.5)
       activerecord (~> 4.0)
-    passenger (4.0.59)
+    passenger (4.0.57)
       daemon_controller (>= 1.2.0)
       rack
       rake (>= 0.8.1)
@@ -401,7 +401,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.18)
   newrelic_rpm
   paranoia (~> 2.0.2)
-  passenger (~> 4.0.59)
+  passenger (= 4.0.57)
   quiet_assets (~> 1.1.0)
   rack-livereload
   rails (~> 4.2.0)
