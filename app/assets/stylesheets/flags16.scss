@@ -1,7 +1,7 @@
 .f16 {
 
     .flag{
-      background:url(asset-path('flags16.png', image)) no-repeat;
+      background:url(image_path('flags16.png')) no-repeat;
       width: 16px;
       height: 16px;
       display: inline-block;
