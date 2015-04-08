@@ -100,7 +100,7 @@ module ApplicationHelper
           haml_tag 'li.name' do
             haml_tag :h1 do
               haml_tag 'a.brand', {:href=> '/'} do
-                haml_concat image_tag('soccer_Ball.png', :class=>'soccer_ball')
+                haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball')
                 haml_concat get_title
                 if FEATURE_BETA_TEXT.present?
                   haml_tag 'small.label.warning.round', 'BETA'
@@ -139,7 +139,7 @@ module ApplicationHelper
           haml_tag 'section.middle.tab-bar-section' do
             haml_tag 'h1.left' do
               haml_tag 'a.brand', {:href=> '/'} do
-                haml_concat image_tag('soccer_Ball.png', :class=>'soccer_ball')
+                haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball')
                 haml_concat get_title
                 if FEATURE_BETA_TEXT.present?
                   haml_tag 'small.label.warning.round', 'BETA'
