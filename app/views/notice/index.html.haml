@@ -17,7 +17,7 @@
   - @notes.each do |notice|
     - class_name = cycle("", "pull-right")
     .row
-      .span9
+      .small-12.columns
         %blockquote{:class => class_name}
           %p.wrap_text= notice.text
           %small

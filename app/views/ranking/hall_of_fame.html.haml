@@ -16,7 +16,7 @@
 
   %ul.thumbnails
     - champions.each do |champ|
-      %li.span3
+      %li
         .thumbnail
           = image_tag(champ[:img], :alt=>champ[:name])
           .caption

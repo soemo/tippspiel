@@ -14,12 +14,12 @@
 */
 
 /* Icon font test Style */
-.style3 {
+.style1 {
   font-size: 70px;
   color: #E33100;
   text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #E33100,0 0 30px #E33100,0 0 40px #E33100,0 0 50px #E33100,0 0 75px #E33100;
 }
-.style6 {
+.style2 {
   font-size: 70px;
   color: rgba(245,159,26,0.8);
   text-shadow: 1px 4px 6px #FFF,0 0 0 #000,1px 4px 6px #FFF;
@@ -100,10 +100,6 @@ body {
   margin-bottom: 20px;
   background-color: transparent;
   border-top: 0px solid #e5e5e5;
-}
-
-blockquote > p {
-  font-size: 14px;
 }
 
 .table th.round_name {

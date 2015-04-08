@@ -36,13 +36,13 @@
       %noscript
         %p.alert= t(:error_javascript)
 
-      %div.row
-        %div.large-12.columns
+      .row
+        .large-12.columns
           = yield(:hero_image)
 
 
-      %div.row
-        %div.large-9.columns{role: "content"}
+      .row
+        .large-9.columns{role: "content"}
           - write_flash_messages
           = yield
 
@@ -52,13 +52,10 @@
 
         %hr
 
-        %footer.row
-          %div.large-12.columns
-            = "© " + Time.now.strftime("%Y")
-            = link_to("Sören Mothes", "http://www.soemo.org/")
-            = " | "
-            = link_to(t(:imprint), help_path + "#imprint")
-            = " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
+        %footer
+          .row
+            .small-11.small-centered.large-uncentered.columns
+              - write_footer_content
 
       %a.exit-off-canvas
 
