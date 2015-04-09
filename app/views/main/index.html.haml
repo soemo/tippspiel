@@ -1,12 +1,11 @@
 - content_for :hero_image do
-  %p 'Test sm hier soll ein Hero image hin http://zurb.com/building-blocks/hero-image-with-text-and-image'
-  %i.fi-heart.style1
-  %i.fi-heart.style2
+  - unless user_signed_in?
+    = render :partial => 'hero_image'
 
 .row
   .large-5.large-push-7.columns
     .alert.alert-info
-      = render :partial => 'login_form_or_user_infos', :locals => {:presenter => @presenter}
+      = render :partial => 'user_infos', :locals => {:presenter => @presenter}
   .large-7.large-pull-5.columns
     = render :partial => 'welcome_infos', :locals => {:today_games => @presenter.today_games}
 

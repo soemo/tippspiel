@@ -152,6 +152,7 @@ module ApplicationHelper
         haml_tag 'nav.left-off-canvas-menu' do
           haml_tag 'ul.off-canvas-list' do
             write_main_nav('')
+            write_auth_nav('')  # FIXME soeren 09.04.15 #92 passt so nicht ganz
           end
         end
 
