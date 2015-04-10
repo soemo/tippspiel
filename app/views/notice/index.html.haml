@@ -10,7 +10,7 @@
         %p
           = I18n.t("characters_remaining")
           %span.js_chars_remaining
-        = button_tag(icon_with_text("comment", t(:save)), :class => "btn")
+        = button_tag(icon_with_text("comment", t(:save)), :class => "button")
         = link_to t(:delete_link), notice_path
 
 - if @notes.present?

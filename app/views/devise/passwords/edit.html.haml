@@ -10,6 +10,6 @@
   = f.label :password_confirmation, User.human_attribute_name('password_confirmation')
   = f.password_field :password_confirmation
 
-  %p= f.submit t("devise.change_password"), :class=>"btn"
+  %p= f.submit t("devise.change_password"), :class=>"button"
 
 = render :partial => "devise/shared/links"

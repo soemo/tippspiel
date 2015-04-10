@@ -20,7 +20,7 @@
           - selected = championtipp_team.present? ? championtipp_team.id : ''
           - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
           = select_tag('champion_team_id', options, :prompt => t('please_select'))
-          = submit_tag t('save'), :class => 'btn'
+          = submit_tag t('save'), :class => 'button'
 
 - else
   .alert.alert-info

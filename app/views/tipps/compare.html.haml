@@ -15,7 +15,7 @@
       .controls
         - selected = game_to_compare.present? ? game_to_compare.id : ""
         = select_tag("id", options_from_collection_for_select(possible_games, "id", "to_s", selected), :prompt => t("please_select"), :class => "span6")
-        = submit_tag t('compare'), :class => "btn"
+        = submit_tag t('compare'), :class => "button"
 
 - if game_to_compare.present? && tipps.present?
   %p
