@@ -1,16 +1,19 @@
-- content_for :hero_image do
-  - unless user_signed_in?
+- unless user_signed_in?
+  - content_for :hero_image do
     = render :partial => 'hero_image'
 
-.row
-  .large-5.large-push-7.columns
-    .alert.alert-info
+- else
+  .row
+    .small-12.columns
+      = render :partial => 'welcome_text_infos'
+  .row
+    .small-12.large-5.large-push-7.columns
       = render :partial => 'user_infos', :locals => {:presenter => @presenter}
-  .large-7.large-pull-5.columns
-    = render :partial => 'welcome_infos', :locals => {:today_games => @presenter.today_games}
+    .small-12.large-7.large-pull-5.columns
+      = render :partial => 'tournament_infos', :locals => {:today_games => @presenter.today_games}
 
 .row
-  .large-12.columns
+  .small-12.columns
     - if before_tournament?
       = render :partial => 'countdown'
 

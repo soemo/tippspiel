@@ -46,7 +46,7 @@ de:
 
   to_tip_page: 'zum Tippen'
 
-  signed_in_hello: "Hallo, "
+  signed_in_hello: "Hallo "
   sign_in: "Login"
   sign_out: "Abmelden"
   sign_up: "Registrieren"
@@ -70,6 +70,7 @@ de:
   points_statistic: Punkteverteilung
 
   no_user: Keine Nutzer
+  or: oder
 
   main: "Home"
   help: "Hilfe"

@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def icon_with_text(icon_name, text='dummytext', add_on_ccs_class='')
-    icon_name.present? ? "<i class='#{icon_name} #{add_on_ccs_class}'></i>".html_safe + ' ' + text : text
+    icon_name.present? ? "<i class='fi-#{icon_name} #{add_on_ccs_class}'></i>".html_safe + ' ' + text : text
   end
 
   def get_title
@@ -59,24 +59,24 @@ module ApplicationHelper
   end
 
   def write_flash_messages
-    haml_tag 'p.error' do
-      if flash[:error].present?
+    if flash[:error].present?
+      haml_tag 'p.error' do
         haml_tag 'div.alert.alert-error' do
           haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
           haml_concat flash[:error]
         end
       end
     end
-    haml_tag 'p.error' do
-      if flash[:alert].present?
+    if flash[:alert].present?
+      haml_tag 'p.error' do
         haml_tag 'div.alert.alert-error' do
           haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
           haml_concat flash[:alert]
         end
       end
     end
-    haml_tag 'p.notice' do
-      if flash[:notice].present?
+    if flash[:notice].present?
+      haml_tag 'p.notice' do
         haml_tag 'div.alert.alert-success' do
           haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
           haml_concat flash[:notice]
@@ -233,7 +233,7 @@ module ApplicationHelper
           {:links => [
               {:text => t(:password_change), :url => user_edit_password_path},
               {:divider => true},
-              {:text => icon_with_text('icon-off', t(:sign_out), 'icon'), :url => logout_path}
+              {:text => icon_with_text('x-circle', t(:sign_out), 'icon'), :url => logout_path}
           ]}
 
       result
@@ -242,11 +242,16 @@ module ApplicationHelper
 
   def get_user_name_or_sign_in_link
     if user_signed_in?
-      "#{t(:signed_in_hello)} #{current_user.firstname}"
+      hello_user_name
     else
       link_to(t(:sign_up), new_user_registration_path)
     end
   end
+
+  def hello_user_name
+    "#{t(:signed_in_hello)} #{current_user.firstname}"
+  end
+
 
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app

@@ -46,7 +46,7 @@ describe 'ranking/index', :type => :view do
     expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
     expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_count))
 
-    expect(rendered).to have_selector('table.table.table-striped.table-condensed.ranking') do |table|
+    expect(rendered).to have_selector('table.ranking') do |table|
       expect(table).to have_selector('thead') do |thead|
         expect(thead).to have_selector('th', :text => I18n.t('standings'))
         expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))
@@ -101,7 +101,7 @@ describe 'ranking/index', :type => :view do
      expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
      expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_count))
 
-     expect(rendered).to have_selector('table.table.table-striped.table-condensed.ranking') do |table|
+     expect(rendered).to have_selector('table.ranking') do |table|
        expect(table).to have_selector('thead') do |thead|
          expect(thead).to have_selector('th', :text => I18n.t('standings'))
          expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))

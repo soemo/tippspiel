@@ -25,7 +25,7 @@
       = Game.human_attribute_name("result")
       = game_to_compare.team1_goals.to_s + " - " + game_to_compare.team2_goals.to_s
 
-  %table.table.table-striped.table-condensed.tipps
+  %table.tipps
     %thead
       %tr
         %th= User.human_attribute_name("name")
@@ -35,7 +35,8 @@
     - tipps.each do |tipp|
       - if tipp.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
         - allowed_to_show = @presenter.allowed_to_show?(tipp)
-        %tr{:class => cycle('even', 'odd')}
+        -## TODO soeren 10.04.15 #92 %tr{:class => cycle('even', 'odd')}
+        %tr
           %td= tipp.user.name
           %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""
           %td= allowed_to_show ? tipp.tipp_punkte : ""

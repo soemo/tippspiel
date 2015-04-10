@@ -2,7 +2,7 @@
 
   -# # FIXME soeren 08.04.15 #72 for phone
   .visible-for-small-only
-    %table.table.table-striped.table-condensed
+    %table
       - @games_round_hash.each do |_, round_with_games|
         - round_with_games.each_pair do |round_name, games|
           %thead
@@ -23,7 +23,7 @@
 
   -# # FIXME soeren 08.04.15 #72 not for phone
   .hidden-for-small-only
-    %table.table.table-striped.table-condensed
+    %table
       - @games_round_hash.each do |_, round_with_games|
         - round_with_games.each_pair do |round_name, games|
           %thead

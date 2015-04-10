@@ -4,7 +4,6 @@
   - user_top3_ranking_hash = result.user_top3_ranking_hash
   %p
     - if own_position.present?
-      .alert.alert-info
-        Du bist auf dem #{own_position}. Platz!
+      Du bist auf dem #{own_position}. Platz!
     = render :partial => "ranking/user_ranking",
              :locals => {:user_ranking => user_top3_ranking_hash, :short_version => true}

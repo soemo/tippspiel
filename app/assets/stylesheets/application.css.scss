@@ -8,11 +8,30 @@
 @import 'foundation_and_overrides';
 
 
+
+body {
+
+}
+
+#main-content {
+  padding-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+table {
+  width: 100%;
+}
+
+
 /* ##### Start Hero Image on Main Page ##### */
 #hero-div {
   width: 100%;
   position: relative;
   float: left;
+  padding-bottom: 2rem;
 }
 
 .hero {
@@ -55,9 +74,14 @@
     margin-bottom: 1rem;
   }
   p,
-  label {
+  label,
+  a {
     color: $white;
   }
+  a:hover {
+    text-decoration: underline;
+  }
+
   .pokal-img {
     background: url(image_path('pokalsieger.jpg')) no-repeat center center;
     background-size: cover;
@@ -102,50 +126,6 @@
   text-shadow: 1px 4px 6px #FFF,0 0 0 #000,1px 4px 6px #FFF;
 }
 
-/* Oranges Layout
-******************
-$navbarBackground: $orange;
-$navbarBackgroundHighlight: $yellow;
-$navbarText: $red;
-$navbarLinkColor: $grayDark;
-$linkColor: $orange;
-$linkColorHover: darken($linkColor, 15%);
-$primaryButtonBackground: $orange;
-
-.navbar .brand {
-  color: $red;
-}
-
-.navbar-text a {
- color: $grayDark;
-}
-******************/
-
-
-/* kind of blue Layout
-******************
-$navbarBackground: $blue;
-$navbarBackgroundHighlight: #8CC9DF;
-$navbarText: $white;
-$navbarLinkColor: $white;
-$navbarLinkColorHover: darken($linkColor, 15%);
-
-$linkColor: $blue;
-$linkColorHover: $linkColor;
-
-$tableBackgroundAccent: whiteSmoke;
-$tableBackgroundHover: #BCE8F1;
- */
-
-
-body {
-
-}
-
-// wird auf der Tippseite genutzt, da ein eigenes Table-stripping
-tbody tr.even td {
- // background-color: $tableBackgroundAccent;
-}
 
 h3 {
  // border-bottom: solid 1px $blue;
@@ -165,9 +145,6 @@ a.brand {
  //color: $white;
 }
 
-body {
-
-}
 
 
 // form_action uberschrieben, keine topborader und kein grauer Hintergrund

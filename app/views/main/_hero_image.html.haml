@@ -1,4 +1,6 @@
-%section.hero
+-# FIXME soeren 10.04.15 #92 unterschiedliche hro-images fuer small machen
+%section.hero{'data-interchange' => "[#{asset_path('hero-image-green-gras.jpg')}, (small)], [#{asset_path('hero-image-green-gras.jpg')}, (medium)], [#{asset_path('hero-image-green-gras.jpg')}, (large)]"}
+
   -# Space placeholder, diffent on small, ..., large
   .row.show-for-small-only
     .medium-12.columns.space-top-small-up
@@ -7,8 +9,7 @@
 
   .row
     .small-centered.medium-uncentered.medium-6.large-7.columns
-      %h1= "Hallo und Sport frei zur #{TOURNAMENT_NAME}!"
-      %p.hidden-for-small-only= "Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschränktem Prahlrecht mit nach Hause nehmen?"
+      = render :partial => 'welcome_text_infos'
       = render :partial => 'login_form'
     .small-centered.medium-uncentered.medium-6.large-5.columns
       .pokal-img

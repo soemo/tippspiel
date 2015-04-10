@@ -5,7 +5,7 @@
   = form_tag '/save-tipps', :id => 'js_save_tipps' do
     = render :partial => 'only_today_games_link'
 
-    %table.table.table-striped.table-condensed.tipps
+    %table.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
         - round_with_tipps.each_pair do |round_name, tipps|
           %thead
@@ -24,7 +24,7 @@
               - game                 = tipp.game
               - edit_allowed         = tipp.edit_allowed?
               - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
-              %tr{:class => "#{cycle('even', 'odd')} #{today_game_css_class}"}
+              %tr{:class => "#{today_game_css_class}"}
                 %td= l(game.start_at, :format => :default)
                 %td= game.place
                 %td

@@ -9,7 +9,7 @@
     = hidden_field_tag(:for_phone, @for_phone)
 
     -# eigenes table strip mittels css, daher kein .table-striped bei %table
-    %table.table.table-condensed.tipps
+    %table.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
         - round_with_tipps.each_pair do |round_name, tipps|
           %thead
@@ -19,7 +19,7 @@
             - tipps.each do |tipp|
               - game                 = tipp.game
               - edit_allowed         = tipp.edit_allowed?
-              - row_class            = cycle('even', 'odd')
+              - row_class            = ''# TODO soeren 10.04.15 #92  cycle('even', 'odd')
               - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
 
               -# for phone

@@ -45,7 +45,7 @@ en:
 
   to_tip_page: 'tip'
 
-  signed_in_hello: "Hello, "
+  signed_in_hello: "Hello "
   sign_in: "Login"
   sign_out: "Logout"
   sign_up: "Sign up"
@@ -57,6 +57,7 @@ en:
   points_statistic: Points statistic
 
   no_user: No user
+  or: or
 
   main: "Home"
   help: "Help"
