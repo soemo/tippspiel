@@ -19,17 +19,17 @@
   background: url(image_path('hero-image-green-gras.jpg')) no-repeat center center;
   background-size: cover;
   height: 100vh;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    //# TODO soeren 09.04.15  background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
-    background-image: linear-gradient(to bottom right,#fff, #2edc06);
-    opacity: .5;
-  }
+//  &:before {
+//    content: '';
+//    position: absolute;
+//    top: 0;
+//    right: 0;
+//    bottom: 0;
+//    left: 0;
+//    //# TODO soeren 09.04.15  background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+//    background-image: linear-gradient(to bottom right,#fff, #2edc06);
+//    opacity: .5;
+//  }
   .intro {
     padding: 3rem;
     position: relative;
