@@ -1,5 +1,11 @@
 %section.hero
-  .row.intro
+  -# Space placeholder, diffent on small, ..., large
+  .row.show-for-small-only
+    .medium-12.columns.space-top-small-up
+  .row.show-for-medium-up
+    .medium-12.columns.space-top-medium-up
+
+  .row
     .small-centered.medium-uncentered.medium-6.large-7.columns
       %h1= "Hallo und Sport frei zur #{TOURNAMENT_NAME}!"
       %p.hidden-for-small-only= "Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschränktem Prahlrecht mit nach Hause nehmen?"
