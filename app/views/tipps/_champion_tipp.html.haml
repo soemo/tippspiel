@@ -1,14 +1,13 @@
 - championtipp_team = current_user.present? ? current_user.championtipp_team : nil
 - if before_tournament?
-  .alert.alert-info
-    - if championtipp_team.present?
-      %span= I18n.t('current_champion_tipp', :championtipp_name => championtipp_team.to_s)
-    - else
-      %b
-        = I18n.t('need_champion_tipp')
-      %br
-      %span
-        = I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS)
+  - if championtipp_team.present?
+    %span= I18n.t('current_champion_tipp', :championtipp_name => championtipp_team.to_s)
+  - else
+    %b
+      = I18n.t('need_champion_tipp')
+    %br
+    %span
+      = I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS)
 
   = form_tag '/save-champion-tipp', :class => 'form-horizontal' do
     -# # TODO soeren 19.05.14 #72 besser machen
@@ -23,9 +22,8 @@
           = submit_tag t('save'), :class => 'button'
 
 - else
-  .alert.alert-info
-    %span
-      - if championtipp_team.present?
-        = I18n.t('champion_tipp', :championtipp_name => championtipp_team.to_s)
-      - else
-        = I18n.t('no_champion_tipp')
+  %span
+    - if championtipp_team.present?
+      = I18n.t('champion_tipp', :championtipp_name => championtipp_team.to_s)
+    - else
+      = I18n.t('no_champion_tipp')

@@ -22,7 +22,7 @@ gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript 
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin',             '~> 0.6.7'      # Interface zur Daten-Administration
 gem 'foundation-rails'
-gem 'foundation-icons-sass-rails'
+gem 'font-awesome-sass'
 gem 'newrelic_rpm'
 gem 'feedjira',                '~> 1.6.0'      # RSS parsers
 gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.

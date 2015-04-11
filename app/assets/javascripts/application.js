@@ -7,15 +7,93 @@
 
 $(function(){
   $(document).foundation();
+
+  init_scroll_to_top();
+  update_textarea_maxlength();
 });
 
 
+function init_scroll_to_top(){
 
-// # FIXME soeren 08.04.15 ab hier schaune was wir noch brauchen
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 100) {
+      $('.scroll-to-top').fadeIn();
+    } else {
+      $('.scroll-to-top').fadeOut();
+    }
+  });
+
+  $('.scroll-to-top').click(function () {
+    $("html, body").animate({
+      scrollTop: 0
+    }, 200);
+    return false;
+  });
+
+}
+
+function update_textarea_maxlength(){
+  var onEditCallback = function (remaining) {
+    $(this).siblings("div").children('.js_chars_remaining').text(remaining);
+
+    if (remaining > 0) {
+      $(this).css('background-color', 'white');
+    }
+  }
+
+  var onLimitCallback = function () {
+    //$(this).css('background-color', 'red');
+  }
+
+  $('textarea[maxlength]').limitMaxlength({
+    onEdit:onEditCallback,
+    onLimit:onLimitCallback
+  });
+}
+
+// http://that-matt.com/2010/04/updated-textarea-maxlength-with-jquery-plugin/
+jQuery.fn.limitMaxlength = function (options) {
+
+  var settings = jQuery.extend({
+    attribute:"maxlength",
+    onLimit:function () {
+    },
+    onEdit:function () {
+    }
+  }, options);
+
+  // Event handler to limit the textarea
+  var onEdit = function () {
+    var textarea = jQuery(this);
+    var maxlength = parseInt(textarea.attr(settings.attribute));
+
+    if (textarea.val().length > maxlength) {
+      textarea.val(textarea.val().substr(0, maxlength));
+
+      // Call the onlimit handler within the scope of the textarea
+      jQuery.proxy(settings.onLimit, this)();
+    }
+
+    // Call the onEdit handler within the scope of the textarea
+    jQuery.proxy(settings.onEdit, this)(maxlength - textarea.val().length);
+  }
+
+  this.each(onEdit);
+
+  return this.keyup(onEdit)
+      .keydown(onEdit)
+      .focus(onEdit)
+      .livequery('input paste', onEdit);
+}
+
+
+
+
+
+// # FIXME soeren 08.04.15 ab hier schauen was wir noch brauchen #92
 
 $(function() {
   check_user_tipp();
-  update_textarea_maxlength();
   ajax_load_modal_content();
 
   // Ranking Statistik Punkte
@@ -71,7 +149,7 @@ function init_random_user_tips(){
 }
 
 function show_overlay_tip_save(){
-  $('#js_overlay_tip_save').removeClass('hidden');
+  $('#js_overlay_tip_save').removeClass('hide');
 }
 
 function init_save_tips_from_overlay_button(){
@@ -125,24 +203,7 @@ function ajax_load_modal_content(){
 
 }
 
-function update_textarea_maxlength(){
-  var onEditCallback = function (remaining) {
-    $(this).siblings("p").children('.js_chars_remaining').text(remaining);
 
-    if (remaining > 0) {
-      $(this).css('background-color', 'white');
-    }
-  }
-
-  var onLimitCallback = function () {
-    //$(this).css('background-color', 'red');
-  }
-
-  $('textarea[maxlength]').limitMaxlength({
-    onEdit:onEditCallback,
-    onLimit:onLimitCallback
-  });
-}
 
 
 function check_user_tipp() {
@@ -160,40 +221,6 @@ function check_user_tipp() {
   });
 }
 
-// http://that-matt.com/2010/04/updated-textarea-maxlength-with-jquery-plugin/
-jQuery.fn.limitMaxlength = function (options) {
-
-  var settings = jQuery.extend({
-    attribute:"maxlength",
-    onLimit:function () {
-    },
-    onEdit:function () {
-    }
-  }, options);
-
-  // Event handler to limit the textarea
-  var onEdit = function () {
-    var textarea = jQuery(this);
-    var maxlength = parseInt(textarea.attr(settings.attribute));
-
-    if (textarea.val().length > maxlength) {
-      textarea.val(textarea.val().substr(0, maxlength));
-
-      // Call the onlimit handler within the scope of the textarea
-      jQuery.proxy(settings.onLimit, this)();
-    }
-
-    // Call the onEdit handler within the scope of the textarea
-    jQuery.proxy(settings.onEdit, this)(maxlength - textarea.val().length);
-  }
-
-  this.each(onEdit);
-
-  return this.keyup(onEdit)
-          .keydown(onEdit)
-          .focus(onEdit)
-          .livequery('input paste', onEdit);
-}
 
 
 

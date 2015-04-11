@@ -1,11 +1,11 @@
--# FIXME soeren 10.04.15 #92 unterschiedliche hro-images fuer small machen
+-# FIXME soeren 10.04.15 #92 unterschiedliche hero-images fuer small machen
 %section.hero{'data-interchange' => "[#{asset_path('hero-image-green-gras.jpg')}, (small)], [#{asset_path('hero-image-green-gras.jpg')}, (medium)], [#{asset_path('hero-image-green-gras.jpg')}, (large)]"}
 
-  -# Space placeholder, diffent on small, ..., large
+  -# Space placeholder
   .row.show-for-small-only
-    .medium-12.columns.space-top-small-up
+    .medium-12.columns.space-small
   .row.show-for-medium-up
-    .medium-12.columns.space-top-medium-up
+    .medium-12.columns.space-medium-up
 
   .row
     .small-centered.medium-uncentered.medium-6.large-7.columns
@@ -13,3 +13,9 @@
       = render :partial => 'login_form'
     .small-centered.medium-uncentered.medium-6.large-5.columns
       .pokal-img
+
+  -# Space placeholder
+  .row.show-for-small-only
+    .medium-12.columns.space-small
+  .row.show-for-medium-up
+    .medium-12.columns.space-medium-up

@@ -135,10 +135,9 @@ GEM
     ffi (1.9.8)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    font-awesome-sass (4.3.2.1)
+      sass (~> 3.2)
     formatador (0.2.5)
-    foundation-icons-sass-rails (3.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     foundation-rails (5.5.0.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0, < 3.4)
@@ -391,7 +390,7 @@ DEPENDENCIES
   execjs (~> 2.2.1)
   factory_girl_rails (~> 4.5.0)
   feedjira (~> 1.6.0)
-  foundation-icons-sass-rails
+  font-awesome-sass
   foundation-rails
   guard-livereload
   guard-rspec

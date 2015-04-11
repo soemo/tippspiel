@@ -44,7 +44,7 @@
           - write_flash_messages
           = yield
 
-        %aside.large-3.columns
+        %aside.sidebar.large-3.columns
           = yield(:sidebar)
           - default_sidebar_content
 
@@ -56,6 +56,9 @@
               - write_footer_content
 
       %a.exit-off-canvas
+
+      -# Scroll to top
+      %a.scroll-to-top{href: "#"}= 'Scroll'
 
   -# Javascript at the bottom for fast page loading
   = javascript_include_tag 'application'

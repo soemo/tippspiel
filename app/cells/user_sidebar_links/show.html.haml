@@ -1,7 +1,7 @@
 -# # FIXME soeren 08.04.15 72 besser machen
-%h5.hidden-for-small-only
+%h5.hide-for-small-only
   = link_to(t('compare_tipps'), compare_tipps_path)
-%h5.visible-for-small-only
+%h5.show-for-small-only
   = link_to(t('compare_tipps'), compare_tipps_path({:for_phone => true}))
 %h5
   = link_to(t('hall_of_fame'), hall_of_fame_path)

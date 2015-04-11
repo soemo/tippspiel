@@ -1,9 +1,9 @@
 - if user_signed_in?
-  %h1= "#{hello_user_name}, Sport frei zur #{TOURNAMENT_NAME}!"
+  %h2= "#{hello_user_name}, Sport frei zur #{TOURNAMENT_NAME}!"
 - else
-  %h1= "Hallo, Sport frei zur #{TOURNAMENT_NAME}!"
+  %h2= "Hallo, Sport frei zur #{TOURNAMENT_NAME}!"
 
-%p.hidden-for-small-only
+%p.hide-for-small-only
   Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal
   verbunden mit unbeschreiblichem Ruhm und uneingeschränktem
   Prahlrecht mit nach Hause nehmen?

@@ -3,10 +3,12 @@
     = custom_devise_error_messages!
     .row
       .small-12.large-7.columns.right
-        = f.text_field :email, placeholder: User.human_attribute_name(:email)
+        = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'envelope-o'} do
+          = f.email_field :email, placeholder: User.human_attribute_name(:email)
     .row
       .small-12.large-7.columns.right
-        = f.password_field :password, placeholder: User.human_attribute_name(:password)
+        = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'lock'} do
+          = f.password_field :password, placeholder: User.human_attribute_name(:password)
     .row
       .small-12.large-7.columns.right
         - if devise_mapping.rememberable?
@@ -21,7 +23,7 @@
           .small-6.large-6.columns
             = link_to(t("devise.sign_up"),
                       new_registration_path(resource_name),
-                      class: 'button secondary')
+                      class: 'button secondary right')
 
     .row
       .small-12.columns

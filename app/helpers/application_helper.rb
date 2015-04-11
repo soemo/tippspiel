@@ -28,10 +28,6 @@ module ApplicationHelper
 
   end
 
-  def icon_with_text(icon_name, text='dummytext', add_on_ccs_class='')
-    icon_name.present? ? "<i class='fi-#{icon_name} #{add_on_ccs_class}'></i>".html_safe + ' ' + text : text
-  end
-
   def get_title
     "#{TOURNAMENT_NAME} #{t('app_name')}"
   end
@@ -51,10 +47,12 @@ module ApplicationHelper
     unless controller.controller_name == 'main' && controller.action_name == 'error'
       if current_user.present?
         haml_concat render_cell(:user_sidebar_links, :show)
-        haml_concat render_cell(:sidebar_notes, :show, :item_count => 5, :last_updated_at => Notice.last_updated_at)
+        unless controller.controller_name == 'notice'
+          haml_concat render_cell(:sidebar_notes, :show, :item_count => 5, :last_updated_at => Notice.last_updated_at)
+        end
       end
-      haml_concat render_cell(:rss_feed, :show, :item_count => 5)
       haml_concat render_cell(:extern_links, :show)
+      haml_concat render_cell(:rss_feed, :show, :item_count => 5)
     end
   end
 
@@ -89,13 +87,13 @@ module ApplicationHelper
 
   def write_navbar
     # TODO soeren 08.04.15 optimieren #92
-    # 1. Navbar ist hidden-for-small-only: Also sichtbar auf Tablett und groesser
-    # 2. Navbar ist visible-for-small-only: Off-Canvas Menu
+    # 1. Navbar ist hide-for-small-only: Also sichtbar auf Tablett und groesser
+    # 2. Navbar ist show-for-small-only: Off-Canvas Menu
 
     haml_tag 'div.contain-to-grid' do
 
       # 1.
-      haml_tag 'nav.top-bar.hidden-for-small-only', {data: {topbar: ''}, role: 'navigation'} do
+      haml_tag 'nav.top-bar.hide-for-small-only', {data: {topbar: ''}, role: 'navigation'} do
         haml_tag 'ul.title-area' do
           haml_tag 'li.name' do
             haml_tag :h1 do
@@ -128,7 +126,7 @@ module ApplicationHelper
       end
 
       # 2.
-      haml_tag 'div.visible-for-small-only' do
+      haml_tag 'div.show-for-small-only' do
         haml_tag 'nav.tab-bar' do
           haml_tag 'section.left-small' do
             haml_tag 'a.left-off-canvas-toggle.menu-icon', {href: '#'} do
@@ -176,11 +174,11 @@ module ApplicationHelper
         # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
         # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
         if key == 'tipps'
-          haml_tag "li.#{class_name}.hidden-for-small-only" do
+          haml_tag "li.#{class_name}.hide-for-small-only" do
             haml_concat link_to(t(key), path)
           end
         elsif key == 'tipps_for_phone'
-          haml_tag "li.#{class_name}.visible-for-small-only" do
+          haml_tag "li.#{class_name}.show-for-small-only" do
             haml_concat link_to(t(key), path)
           end
         else
@@ -233,7 +231,7 @@ module ApplicationHelper
           {:links => [
               {:text => t(:password_change), :url => user_edit_password_path},
               {:divider => true},
-              {:text => icon_with_text('x-circle', t(:sign_out), 'icon'), :url => logout_path}
+              {:text => t(:sign_out), :url => logout_path}
           ]}
 
       result

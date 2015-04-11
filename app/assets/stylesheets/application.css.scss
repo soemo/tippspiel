@@ -3,9 +3,11 @@
 *= require_self
 */
 
-@import 'foundation';
-@import 'foundation-icons';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 @import 'foundation_and_overrides';
+@import 'foundation';
 
 
 
@@ -21,9 +23,93 @@ h1 {
   font-size: 2rem;
 }
 
+h2,
+h3 {
+  border-bottom: solid 1px $primary-color;
+}
+h3 {
+  margin-bottom: 12px;
+}
+
 table {
   width: 100%;
+  border-spacing: 0;
+
+  td {
+    border-top: 1px solid $gainsboro;
+  }
 }
+
+table thead tr th.round_name {
+  font-size: 14px;
+  padding-top: 10px;
+  color: $primary-color;
+}
+
+table thead tr.without_border_top th,
+table thead tr.without_border_top td {
+  border-top: 0;
+  background-color: $white;
+}
+
+input.tipp_input {
+  width: 18px;
+  margin-bottom: 0px;
+  height: 13px;
+  line-height: 13px;
+}
+
+.tipp_input_td {
+  white-space: nowrap;
+}
+
+.sidebar {
+  border: 1px solid $iron;
+  background-color: $snow;
+  -webkit-box-shadow: 2x 2px 8px rgba(0,0,0,0.27);
+  -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.27);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.27)
+}
+
+a.brand {
+  color: $white;
+  font-weight: normal;
+}
+
+.rss_date,
+.notice_user {
+  font-style: italic;
+  font-size: 10px;
+}
+
+.wrap_text {
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+
+/* ##### Start Countdown ### */
+
+#counter_desktop {
+  opacity: 0.8;
+  height: 77px;
+}
+#counter_desc_desktop {
+  color: #ddd;
+}
+
+.cntSeparator {
+  font-size: 54px;
+  margin: 25px 7px;
+  color: rgba(4,156,219,.8);
+}
+
+/* ##### End Countdown ### */
 
 
 /* ##### Start Hero Image on Main Page ##### */
@@ -35,30 +121,21 @@ table {
 }
 
 .hero {
-  background: url(image_path('hero-image-green-gras.jpg')) no-repeat center center;
+  background: url(image_path('hero-image-green-gras.jpg')) no-repeat top center;
   background-size: cover;
-  height: 100vh;
-//  &:before {
-//    content: '';
-//    position: absolute;
-//    top: 0;
-//    right: 0;
-//    bottom: 0;
-//    left: 0;
-//    //# TODO soeren 09.04.15  background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
-//    background-image: linear-gradient(to bottom right, $white, #2edc06);
-//    opacity: .5;
-//  }
-  .space-top-medium-up {
+  height: 100%;
+
+  .space-medium-up {
     display: block;
     height: 7rem;
   }
-  .space-top-small-up {
+  .space-small {
     display: block;
     height: 2rem;
   }
 
-  h1 {
+  h2 {
+    border-bottom: solid 0px $primary-color;
     color: $white;
     font-size: 1.5rem;
     line-height: 1.5em;
@@ -96,8 +173,7 @@ table {
       height: 20rem;
       width: 20rem;
     }
-    h1 {
-      //padding-top: 4.5rem;
+    h2 {
       text-align: right;
       font-size: 2.1rem;
     }
@@ -109,119 +185,21 @@ table {
 /* ##### End Hero Image on Main Page ##### */
 
 
-
-/* # FIXME soeren 08.04.15 was brauche ich noch
-####################################################
-*/
-
-/* Icon font test Style */
-.style1 {
-  font-size: 70px;
-  color: #E33100;
-  text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #E33100,0 0 30px #E33100,0 0 40px #E33100,0 0 50px #E33100,0 0 75px #E33100;
-}
-.style2 {
-  font-size: 70px;
-  color: rgba(245,159,26,0.8);
-  text-shadow: 1px 4px 6px #FFF,0 0 0 #000,1px 4px 6px #FFF;
-}
-
-
-h3 {
- // border-bottom: solid 1px $blue;
-  margin-bottom: 12px;
-}
-
-.popover h3 {
-  margin-bottom: 0px;
-}
-
-a.brand {
-  color: $white;
-  font-weight: normal;
-}
-
-.navbar-text a {
- //color: $white;
-}
-
-
-
-// form_action uberschrieben, keine topborader und kein grauer Hintergrund
-.form-actions {
-  padding: 0;
-  margin-top: 0px;
-  margin-bottom: 20px;
+/* ##### Start Scroll to top ##### */
+.scroll-to-top {
+  width: 37px;
+  height: 18px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: none;
+  text-indent: -9999px;
+  background: url(image_path('scroll-to-top.png')) no-repeat;
   background-color: transparent;
-  border-top: 0px solid #e5e5e5;
 }
+/* ##### End Scroll to top ##### */
 
-.table th.round_name {
-  font-size: 14px;
-  padding-top: 10px;
-  //color: $blue;
-}
-
-.table tr.without_border_top th,
-.table tr.without_border_top td {
-  border-top: 0;
-}
-
-input.tipp_input {
-  width: 18px;
-  margin-bottom: 0px;
-  height: 13px;
-  line-height: 13px;
-}
-
-.tipp_input_td {
-  white-space: nowrap;
-}
-
-// Div fuer den Random Tipp Link
-.random_tips {
-  //text-align: right;
-}
-
-.rss_date,
-.notice_user {
-  font-style: italic;
-  font-size: 10px;
-}
-
-.wrap_text {
-  white-space: pre;           /* CSS 2.0 */
-  white-space: pre-wrap;      /* CSS 2.1 */
-  white-space: pre-line;      /* CSS 3.0 */
-  white-space: -pre-wrap;     /* Opera 4-6 */
-  white-space: -o-pre-wrap;   /* Opera 7 */
-  white-space: -moz-pre-wrap; /* Mozilla */
-  white-space: -hp-pre-wrap;  /* HP Printers */
-  word-wrap: break-word;      /* IE 5+ */
-}
-
-.popover-inner {
- // background: $blue; // has to be full background declaration for IE fallback
-  background: rgba(4,156,219,.8);
-}
-
-/* Countdown Start */
-
-#counter_desktop {
-  opacity: 0.8;
-  height: 77px;
-}
-#counter_desc_desktop {
-  color: #ddd;
-}
-
-.cntSeparator {
-    font-size: 54px;
-    margin: 25px 7px;
-    color: rgba(4,156,219,.8);
-}
-
-/* Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat */
+/* ##### Start Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat ####*/
 #js_overlay_tip_save {
   background-color: whitesmoke; //rgba(130, 130, 130, 0.5);
   border: 1px solid #e3e3e3;
@@ -235,6 +213,10 @@ input.tipp_input {
   color: #000;
   z-index: 4;
   opacity: 0.9;
+
+  .button {
+    margin: 0;
+  }
 }
 
 #js_overlay_tip_save span {
@@ -245,7 +227,18 @@ input.tipp_input {
   border: 0px solid #8a8d7f;
 }
 
-/* Countdown End */
+/* ##### Start Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat ####*/
 
 
 
+/* # FIXME soeren 08.04.15 was brauche ich noch #92
+####################################################
+*/
+.popover h3 {
+  margin-bottom: 0px;
+}
+
+.popover-inner {
+  background: $primary-color; // has to be full background declaration for IE fallback
+  background: rgba(4,156,219,.8);
+}

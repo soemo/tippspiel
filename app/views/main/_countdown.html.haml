@@ -1,6 +1,6 @@
 - first_game  = Game.first_game_in_tournament
 - if first_game.present?
-  %p.hidden-for-small-only
+  %p.hide-for-small-only
     = I18n.t('tournament_starts_in')
-  #counter_desktop.hidden-for-small-only{'data-countdowntimestamp'=> first_game.start_at.to_i}
-  #counter_desc_desktop.hidden-for-small-only=I18n.t('counter_desc_desktop')
+  #counter_desktop.hide-for-small-only{'data-countdowntimestamp'=> first_game.start_at.to_i}
+  #counter_desc_desktop.hide-for-small-only=I18n.t('counter_desc_desktop')

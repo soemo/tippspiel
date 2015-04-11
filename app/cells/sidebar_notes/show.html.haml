@@ -1,8 +1,8 @@
 - if @notes.present?
   %h4.wrap_text= I18n.t('notice')
+  = link_to(t('write_notice'), notice_path, class: 'button small')
+  %br
   - @notes.each do |n|
     %span.notice_user= n.user.name if n.user.present?
     %p.wrap_text= html_escape(n.text)
-  = link_to(t('write_notice'), notice_path)
-  %br
   %hr

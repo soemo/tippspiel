@@ -1,7 +1,7 @@
 - if @games_round_hash.present?
 
   -# # FIXME soeren 08.04.15 #72 for phone
-  .visible-for-small-only
+  .show-for-small-only
     %table
       - @games_round_hash.each do |_, round_with_games|
         - round_with_games.each_pair do |round_name, games|
@@ -22,7 +22,7 @@
 
 
   -# # FIXME soeren 08.04.15 #72 not for phone
-  .hidden-for-small-only
+  .hide-for-small-only
     %table
       - @games_round_hash.each do |_, round_with_games|
         - round_with_games.each_pair do |round_name, games|

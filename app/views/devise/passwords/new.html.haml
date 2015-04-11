@@ -1,11 +1,13 @@
-.alert.alert-info
-  %h3= t("devise.forgot_pw")
-  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-    = custom_devise_error_messages!
+%h3= t("devise.forgot_pw")
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+  = custom_devise_error_messages!
 
-    = f.label :email
-    = f.email_field :email
-
-    %p= f.submit t('devise.send_passwort_instructions'), :class=>"button"
+  .row
+    .small-12.large-7.columns
+      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'envelope-o'} do
+        = f.email_field :email, placeholder: User.human_attribute_name(:email)
+  .row
+    .small-12.large-7.columns
+      = f.submit t('devise.send_passwort_instructions'), :class=>"button"
 
 = render :partial => "devise/shared/links"
