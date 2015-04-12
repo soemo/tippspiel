@@ -86,7 +86,7 @@ module ApplicationHelper
   end
 
   def write_navbar
-    # TODO soeren 08.04.15 optimieren #92
+    # TODO soeren 08.04.15 optimieren
     # 1. Navbar ist hide-for-small-only: Also sichtbar auf Tablett und groesser
     # 2. Navbar ist show-for-small-only: Off-Canvas Menu
 
@@ -115,8 +115,8 @@ module ApplicationHelper
 
         haml_tag 'section.top-bar-section' do
           haml_tag 'ul.right' do
-            write_main_nav('right')
-            write_auth_nav('right')
+            write_main_nav
+            write_auth_nav
           end
 
           haml_tag 'ul.left' do
@@ -149,8 +149,8 @@ module ApplicationHelper
 
         haml_tag 'nav.left-off-canvas-menu' do
           haml_tag 'ul.off-canvas-list' do
-            write_main_nav('')
-            write_auth_nav('')  # FIXME soeren 09.04.15 #92 passt so nicht ganz
+            write_main_nav
+            write_auth_nav(true)
           end
         end
 
@@ -160,7 +160,7 @@ module ApplicationHelper
 
   end
 
-  def write_main_nav(ul_class)
+  def write_main_nav
     nav_items = main_nav_items
 
     unless user_signed_in?
@@ -190,7 +190,7 @@ module ApplicationHelper
     end
   end
 
-  def write_auth_nav(ul_class)
+  def write_auth_nav(for_off_canvas = false)
     if user_signed_in?
       haml_tag 'li.divider'
       sub_menu_id = MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID
@@ -198,7 +198,11 @@ module ApplicationHelper
       sub_menu = get_main_subnavigation_array
       nav_text = get_user_name_or_sign_in_link
       if sub_menu[sub_menu_id].present?
-        write_sub_menu(sub_menu_id, sub_menu[sub_menu_id][:links], nav_text, css_class)
+        if for_off_canvas
+          write_sub_menu_for_off_canvas(sub_menu[sub_menu_id][:links], nav_text)
+        else
+          write_sub_menu(sub_menu_id, sub_menu[sub_menu_id][:links], nav_text, css_class)
+        end
       end
     end  # no else
   end
@@ -220,6 +224,24 @@ module ApplicationHelper
           end
         end
 
+      end
+    end
+  end
+
+  def write_sub_menu_for_off_canvas(links, main_menu_text)
+    if links.present? && main_menu_text.present?
+      haml_tag :li do
+        haml_tag :label, main_menu_text
+      end
+
+      links.each do |link|
+        if link[:divider].present?
+          haml_tag 'li.divider'
+        else
+          haml_tag :li do
+            haml_concat link_to(link[:text], link[:url])
+          end
+        end
       end
     end
   end

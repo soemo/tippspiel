@@ -35,7 +35,6 @@
     - tipps.each do |tipp|
       - if tipp.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
         - allowed_to_show = @presenter.allowed_to_show?(tipp)
-        -## TODO soeren 10.04.15 #92 %tr{:class => cycle('even', 'odd')}
         %tr
           %td= tipp.user.name
           %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ""

@@ -8,18 +8,18 @@
     -# # TODO soeren 19.05.14 #72 besser machen
     = hidden_field_tag(:for_phone, @for_phone)
 
-    -# eigenes table strip mittels css, daher kein .table-striped bei %table
+    -# eigenes table strip mittels css
     %table.tipps
       - tipps_round_hash.each do |index, round_with_tipps|
         - round_with_tipps.each_pair do |round_name, tipps|
           %thead
-            %tr.without_border_top
+            %tr.without_border_top.white-bg
               %th.round_name{:colspan => 3}= t(round_name, :scope => 'round')
           %tbody
             - tipps.each do |tipp|
               - game                 = tipp.game
               - edit_allowed         = tipp.edit_allowed?
-              - row_class            = ''# TODO soeren 10.04.15 #92  cycle('even', 'odd')
+              - row_class            = cycle('my-even', 'my-odd')
               - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
 
               -# for phone

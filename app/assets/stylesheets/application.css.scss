@@ -47,6 +47,16 @@ table {
   td {
     border-top: 1px solid $gainsboro;
   }
+  tr.without_border_top td {
+    border-top: 0px solid $gainsboro;
+  }
+
+  tr.my-even {
+    background-color: $table-bg;
+  }
+  tr.my-odd {
+    background-color: $table-even-row-bg;
+  }
 }
 
 table thead tr th.round_name {
@@ -58,6 +68,10 @@ table thead tr th.round_name {
 table thead tr.without_border_top th,
 table thead tr.without_border_top td {
   border-top: 0;
+}
+
+table thead tr.white-bg th,
+table thead tr.white-bg td {
   background-color: $white;
 }
 
@@ -88,6 +102,10 @@ a.brand {
 .notice_user {
   font-style: italic;
   font-size: 10px;
+}
+
+.muted {
+  color: $aluminum;
 }
 
 .wrap_text {
@@ -265,7 +283,7 @@ a.brand {
 /*### End Alert Messages als PopUp ###*/
 
 
-/* # FIXME soeren 08.04.15 was brauche ich noch #92
+/* # FIXME soeren 08.04.15 was brauche ich noch #93
 ####################################################
 */
 .popover h3 {
