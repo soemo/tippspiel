@@ -15,15 +15,15 @@ module ApplicationHelper
     html.html_safe
   end
 
-  # controllername, path, needs_login
+  # controllername, path, needs_login, font-awesome icon_class_name
   def main_nav_items
     [
-            ['main', root_path, false],
-            ['tipps', tipps_path, true],
-            ['tipps_for_phone', tipps_path({:for_phone => true}), true], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
-            ['ranking', ranking_path, true],
-            ['notice', notice_path, true],
-            ['help', help_path, false]
+            ['main', root_path, false, 'home'],
+            ['tipps', tipps_path, true, 'bullseye'],
+            ['tipps_for_phone', tipps_path({:for_phone => true}), true, 'bullseye'], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
+            ['ranking', ranking_path, true, 'list-ol'],
+            ['notice', notice_path, true, 'comment'],
+            ['help', help_path, false, 'info']
     ]
 
   end
@@ -86,7 +86,6 @@ module ApplicationHelper
   end
 
   def write_navbar
-    # TODO soeren 08.04.15 optimieren
     # 1. Navbar ist hide-for-small-only: Also sichtbar auf Tablett und groesser
     # 2. Navbar ist show-for-small-only: Off-Canvas Menu
 
@@ -164,26 +163,31 @@ module ApplicationHelper
     nav_items = main_nav_items
 
     unless user_signed_in?
-      nav_items = main_nav_items.select{|i| i[2] == false}
+      nav_items = nav_items.select{|i| i[2] == false}
     end
 
     if nav_items.present?
-      nav_items.each do |key, path, needs_login|
+      nav_items.each do |key, path, needs_login, icon_class_name|
+        if icon_class_name.present?
+          link_text = icon(icon_class_name, t(key))
+        else
+          link_text = t(key)
+        end
         class_name = key == controller.controller_name ? 'active' : ''
 
         # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
         # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
         if key == 'tipps'
           haml_tag "li.#{class_name}.hide-for-small-only" do
-            haml_concat link_to(t(key), path)
+            haml_concat link_to(link_text, path)
           end
         elsif key == 'tipps_for_phone'
           haml_tag "li.#{class_name}.show-for-small-only" do
-            haml_concat link_to(t(key), path)
+            haml_concat link_to(link_text, path)
           end
         else
           haml_tag "li.#{class_name}" do
-            haml_concat link_to(t(key), path)
+            haml_concat link_to(link_text, path)
           end
         end
       end
@@ -218,7 +222,7 @@ module ApplicationHelper
               haml_tag 'li.divider'
             else
               haml_tag :li do
-                haml_concat link_to(link[:text], link[:url])
+                haml_concat link_to(icon(link[:icon_class], link[:text]), link[:url])
               end
             end
           end
@@ -239,7 +243,7 @@ module ApplicationHelper
           haml_tag 'li.divider'
         else
           haml_tag :li do
-            haml_concat link_to(link[:text], link[:url])
+            haml_concat link_to(icon(link[:icon_class], link[:text]), link[:url])
           end
         end
       end
@@ -247,17 +251,17 @@ module ApplicationHelper
   end
 
   # main subnavigation
-    def get_main_subnavigation_array
-      result = {}
-      result[MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID] =
-          {:links => [
-              {:text => t(:password_change), :url => user_edit_password_path},
-              {:divider => true},
-              {:text => t(:sign_out), :url => logout_path}
-          ]}
+  def get_main_subnavigation_array
+    result = {}
+    result[MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID] =
+        {:links => [
+            {:text => t(:password_change), :url => user_edit_password_path, icon_class: 'unlock-alt'},
+            {:divider => true},
+            {:text => t(:sign_out), :url => logout_path, icon_class: 'sign-out'}
+        ]}
 
-      result
-    end
+    result
+  end
 
 
   def get_user_name_or_sign_in_link
