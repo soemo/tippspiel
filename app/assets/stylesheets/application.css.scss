@@ -64,6 +64,8 @@ input.tipp_input {
 }
 
 .sidebar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border: 1px solid $iron;
   background-color: $snow;
   -webkit-box-shadow: 2x 2px 8px rgba(0,0,0,0.27);
@@ -227,8 +229,28 @@ a.brand {
   border: 0px solid #8a8d7f;
 }
 
-/* ##### Start Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat ####*/
+/* ##### End Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat ####*/
 
+
+/*### Start Alert Messages als PopUp ###*/
+// wird per JS repositionOfFlashMessages neu positioniert und angezeigt
+.alert-box {
+  position: fixed;
+  //right: 20px;
+  top: 80px;
+  width: 300px;
+  z-index: 200;
+  display: none;
+  border-width: 3px;
+  //center
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+.alert-box ul {
+  margin-bottom: 0px;
+}
+/*### End Alert Messages als PopUp ###*/
 
 
 /* # FIXME soeren 08.04.15 was brauche ich noch #92

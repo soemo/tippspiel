@@ -7,7 +7,7 @@ module ApplicationHelper
 
     messages = resource.errors.full_messages.join('<br/>')
     html = <<-HTML
-      <div id='error_explanation' class='alert alert-error'>
+      <div data-alert id='error_explanation' class='alert-box alert'>
         #{messages}
       </div>
     HTML
@@ -57,32 +57,32 @@ module ApplicationHelper
   end
 
   def write_flash_messages
-    if flash[:error].present?
-      haml_tag 'p.error' do
-        haml_tag 'div.alert.alert-error' do
-          haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
-          haml_concat flash[:error]
-        end
-      end
-    end
-    if flash[:alert].present?
-      haml_tag 'p.error' do
-        haml_tag 'div.alert.alert-error' do
-          haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
-          haml_concat flash[:alert]
-        end
-      end
-    end
-    if flash[:notice].present?
-      haml_tag 'p.notice' do
-        haml_tag 'div.alert.alert-success' do
-          haml_tag 'a.close', {"data-dismiss"=>"alert"}, "×"
-          haml_concat flash[:notice]
-        end
-      end
+    haml_tag 'div#flash_messages' do
+      write_flash(flash[:error], 'alert')
+      write_flash(flash[:alert], 'alert')
+      write_flash(flash[:notice], 'success')
     end
 
     flash.discard
+  end
+
+  def write_flash(msg, div_alert_css_class)
+    if msg.kind_of?(Array)
+      if msg.size > 1
+        raise "Mehrelementige Textparameter verboten: #{msg}"
+      else
+        msg = msg.first
+      end
+    end
+
+    if msg.present?
+      haml_tag "div.alert-box.#{div_alert_css_class}", {'data-alert' => ''} do
+        haml_tag 'a.close', {'data-dismiss' => 'alert'} do
+          haml_concat '&times;'
+        end
+        haml_concat msg
+      end
+    end
   end
 
   def write_navbar

@@ -1,4 +1,4 @@
-%h3= t("devise.sign_up")
+%h3= t('devise.sign_up')
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = custom_devise_error_messages!
 
@@ -29,6 +29,6 @@
 
   .row
     .small-12.large-7.columns
-    = f.submit t("devise.sign_up"), :class=>"button icon-search"
+      = f.submit t('devise.sign_up'), :class=>'button'
 
-= render :partial => "devise/shared/links"
+= render :partial => 'devise/shared/links'

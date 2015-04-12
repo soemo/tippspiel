@@ -8,12 +8,15 @@
 $(function(){
   $(document).foundation();
 
-  init_scroll_to_top();
-  update_textarea_maxlength();
+  initScrollToTop();
+  updateTextareaMaxlength();
+  repositionOfFlashMessages();
+  repositionOfFlashMessagesIfOneIsClosed();
+  autoCloseSuccessMessage();
 });
 
 
-function init_scroll_to_top(){
+function initScrollToTop(){
 
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
@@ -32,7 +35,7 @@ function init_scroll_to_top(){
 
 }
 
-function update_textarea_maxlength(){
+function updateTextareaMaxlength(){
   var onEditCallback = function (remaining) {
     $(this).siblings("div").children('.js_chars_remaining').text(remaining);
 
@@ -84,6 +87,65 @@ jQuery.fn.limitMaxlength = function (options) {
       .keydown(onEdit)
       .focus(onEdit)
       .livequery('input paste', onEdit);
+}
+
+
+// die Flash-Popup Meldungen werden anhand der Brand_bar (Logo und simple-time Text) ausgerichtet
+// die Brandbar ist auf jeder Seite vorhanden
+// die erste Meldung ist rechtsbuendig auf Hoehe der Brandbar ausgerichtet
+// alle Weiteren werden direkt unter der Vorherigen angezeigt
+function repositionOfFlashMessages(){
+  var flash_messages = $("div.alert-box");
+  return flash_messages.livequery(function() {
+    var container, containerLeft, containerTop, lastBottom;
+    if (flash_messages.length > 0) {
+      containerLeft = $("div#main-content").offset().left;
+      containerTop = $("div#hero-div").offset().top + 10;
+      lastBottom = containerTop;
+      return flash_messages.each(function(index) {
+        var top;
+        top = lastBottom;
+        //$(this).css("right", containerLeft);
+        $(this).css("top", top);
+        $(this).show();
+        return lastBottom = lastBottom + $(this).outerHeight();
+      });
+    }
+  });
+}
+
+// wenn eine Flash-Meldung verschwindet, sollten die Meldungen darunter hochrutschen
+function repositionOfFlashMessagesIfOneIsClosed(){
+  var dom_flash_messages_close = "div.alert-box a.close";
+  var dom_flash_messages_name  = "div.alert-box";
+
+  $(dom_flash_messages_close).click(function() {
+    var closed_element_flash_message = $(this).parent();
+    var closed_element_height        = closed_element_flash_message.outerHeight();
+    var index                        = $(dom_flash_messages_name).index(closed_element_flash_message);
+
+    // alle nachfolgenden Flash-Meldungen hochrutschen lassen
+    var elements = $(dom_flash_messages_name+":gt("+index+")");
+    if(elements.length > 0){
+      elements.each(function() {
+        $(this).css("top", $(this).offset().top - closed_element_height);
+      });
+    }
+
+  });
+}
+
+function autoCloseSuccessMessage(){
+  // Blendet alert-success Messages nach x Sekunden aus
+  var elem = $("div.alert-box.success")
+  return elem.livequery(function() {
+    return setTimeout((function() {
+      return elem.fadeOut("slow", function() {
+        $(this).children("a.close").first().trigger("click");
+        return $(this).remove();
+      });
+    }), 6000);
+  });
 }
 
 
