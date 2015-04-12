@@ -19,6 +19,11 @@ body {
 }
 
 footer {
+  padding-top: 15px;
+
+  p {
+    font-size: 0.8rem;
+  }
 
 }
 
@@ -106,6 +111,10 @@ a.brand {
 
 .muted {
   color: $aluminum;
+}
+
+.blue-primary-color {
+  color: $primary-color;
 }
 
 .wrap_text {

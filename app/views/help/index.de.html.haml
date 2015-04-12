@@ -15,19 +15,16 @@
 
 %h3= t('app_name') + " - " + t('help')
 %p
-  Die Regeln sind recht einfach erklärt:
+  Die Regeln sind einfach erklärt. Jeder der sich anmeldet, kann die Spiele und den Tuniersieger tippen.
+  Wer die meisten Punkte hat gewinnt. Ein Tipp für ein Spiel kann bis zur angegebenen Spiel-Startzeit abgegeben werden.
   %br
-    Jeder der sich angemeldet hat, kann mittippen.
-    Der Tipp für ein Spiel kann bis zum Anpfiff des Spieles abgegeben werden.
-  %br
-  %b
-    Pro Spiel gibt es maximal #{UpdateTippsPoints::MAX_POINTS_PRO_TIPP} Punkte:
+  .panel.callout
+    Pro Spiel gibt es maximal #{UpdateTippsPoints::MAX_POINTS_PRO_TIPP} Punkte!
 
 %ul.hilfe
   %li
-    Für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage gibt es
     #{UpdateTippsPoints::POINTS_CORRECT_TREND}
-    Punkte (Spieltendenz).
+    Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage (Spieltendenz).
   %li
     Je
     #{UpdateTippsPoints::EXTRA_POINT_GOALS}
@@ -38,56 +35,82 @@
   %li
     Den letzten Extrapunkt gibt es bei richtiger Tordifferenz.
 
-%p
-  %b
-    Achtung: Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
+.panel.callout
+  %span.warning.label
+    Achtung
+  %br
+  Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
 
 %p
   %b
     Mögliche Punkte pro Tipp
-%ul.hilfe
+%ul.hilfe.no-bullet
   %li
-    0 Punkte: alles falsch
+    %p
+      - 8.times do
+        = icon('circle-thin', '', class: 'blue-primary-color')
+      %br
+      0 Punkte: alles falsch
   %li
-    #{UpdateTippsPoints::POINTS_CORRECT_TREND} Punkte: Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams
+    %p
+      - 3.times do
+        = icon('circle', '', class: 'blue-primary-color')
+      - 5.times do
+        = icon('circle-thin', '', class: 'blue-primary-color')
+      %br
+      #{UpdateTippsPoints::POINTS_CORRECT_TREND} Punkte: Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams
   %li
-    #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT} Punkte: Spieltendenz richtig und die Tordifferenz
+    %p
+      - 4.times do
+        = icon('circle', '', class: 'blue-primary-color')
+      - 4.times do
+        = icon('circle-thin', '', class: 'blue-primary-color')
+      %br
+      #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT} Punkte: Spieltendenz richtig und die Tordifferenz
   %li
-    #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT_GOALS} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
+    %p
+      - 5.times do
+        = icon('circle', '', class: 'blue-primary-color')
+      - 3.times do
+        = icon('circle-thin', '', class: 'blue-primary-color')
+      %br
+      #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT_GOALS} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
   %li
-    #{UpdateTippsPoints::MAX_POINTS_PRO_TIPP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
+    %p
+      - 8.times do
+        = icon('circle', '', class: 'blue-primary-color')
+      %br
+      #{UpdateTippsPoints::MAX_POINTS_PRO_TIPP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
 
 %p
-  Bei Punktgleichheit im Ranking wird die Platzierung über die Anzahl der erreichten Tipppunkte entschieden.
+  Bei Punktgleichheit wird die Platzierung über die Anzahl der erreichten Tipppunkte entschieden.
   %br
   Wer mehr "#{UpdateTippsPoints::MAX_POINTS_PRO_TIPP} Punktetipps" hat liegt bei Punktgleichheit vorn.
   Wenn auch die "#{UpdateTippsPoints::MAX_POINTS_PRO_TIPP} Punktetipps" gleich sind entscheiden
   die "#{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT_GOALS} Punktetipps".
   Liegt auch hier Gleichheit vor dann die "#{UpdateTippsPoints::POINTS_CORRECT_TREND  + UpdateTippsPoints::EXTRA_POINT} Punktetipps" usw.
 
-%p
-  %b
-    Beispiele:
-%ul.hilfe
-  %li
+.panel
+  %span.label
+    Beispiele
+  %p
     Frankreich - Schweiz spielt 3:0 und Du hast 3:1 getippt.
     Dann bekommst Du insgesamt #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
-    #{UpdateTippsPoints::POINTS_CORRECT_TREND} da Du die Spieltendenz richtig hast
+    #{UpdateTippsPoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
     und #{UpdateTippsPoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
-  %li
-    Deutschland - Italien spielt 1:0 und Du hast 2:1 getippt.
-    Dann bekommst Du insgesamt #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT} Punkte auf das Spiel.
-    #{UpdateTippsPoints::POINTS_CORRECT_TREND} da Du die Spieltendenz richtig hast
+    %br
+    %br
+    Deutschland - Italien spielt 1:0 und du hast 2:1 getippt.
+    Dann bekommst du insgesamt #{UpdateTippsPoints::POINTS_CORRECT_TREND + UpdateTippsPoints::EXTRA_POINT} Punkte auf das Spiel.
+    #{UpdateTippsPoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
     und #{UpdateTippsPoints::EXTRA_POINT} für die richtige Tordifferenz.
-%p
-  %span.label.label-important
-    Wichtig
-  %br
-  %b
+
+.panel.callout
+  %span.label.warning
     Tuniersieger-Tipp:
-%p
-  Bei richtigem Tipp auf den Tuniersieger gibt es #{UpdateUserPoints::CHAMPION_TIPP_POINTS} Zusatzpunkte.
-  Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
+  %p
+    Bei richtigem Tipp auf den Tuniersieger gibt es #{UpdateUserPoints::CHAMPION_TIPP_POINTS} Zusatzpunkte.
+    Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
 
 %p
   %b
@@ -103,10 +126,11 @@
   %br
   Sören "Harry" Mothes
 
+%br
+%br
+%br
 
 %h3= 'Haftungsausschluss'
-%h4
-  1. Inhalt des Onlineangebotes
 %p
   Der Autor übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen.
   Haftungsansprüche gegen den Autor, welche sich auf Schäden materieller oder ideeller Art beziehen,
