@@ -286,7 +286,7 @@ module ApplicationHelper
   end
 
   def write_footer_content
-     haml_tag :p do
+     haml_tag 'p.text-center' do
        haml_concat "© " + Time.now.strftime("%Y")
        haml_concat link_to("Sören Mothes", "http://www.soemo.org/")
        haml_concat " | "

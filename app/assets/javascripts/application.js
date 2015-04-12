@@ -144,7 +144,7 @@ function autoCloseSuccessMessage(){
         $(this).children("a.close").first().trigger("click");
         return $(this).remove();
       });
-    }), 6000);
+    }), 4000);
   });
 }
 

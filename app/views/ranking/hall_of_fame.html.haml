@@ -6,22 +6,22 @@
     Seit 2002 findet zu den Europa- und Weltmeisterschaften dieses kleine Tippspiel statt.
     Auch Du kannst in die Geschichte eingehen und einen Platz in der Hall of Fame erringen!
 
-  - champions = [{:name => '???',                          :description => 'Sieger des WM 2014 Tippspiels', :img => 'pokalsieger.jpg'},
-                 {:name => 'Christian Kurth',              :description => 'Sieger des EM 2012 Tippspiels', :img => 'em2012sieger.jpg'},
-                 {:name => 'Markus Gödke',                 :description => 'Sieger des WM 2010 Tippspiels', :img => 'wm2010sieger.jpg' },
-                 {:name => 'Jens Bruch',                   :description => 'Sieger des EM 2008 Tippspiels', :img => 'em2008sieger.gif'},
-                 {:name => 'Enrico Schwarz',               :description => 'Sieger des WM 2006 Tippspiels', :img => 'wm2006sieger.jpg'},
-                 {:name => 'Chris Zenker',                 :description => 'Sieger des EM 2004 Tippspiels', :img => 'em2004sieger.jpg'},
-                 {:name => 'Ina Foedisch und Ricardo Mai', :description => 'Sieger des WM 2002 Tippspiels', :img => 'pokalsieger.jpg'}]
+  - champions = [{:name => '???',                          :description => 'Sieger EM 2016 Tippspiel', :img => 'pokalsieger.jpg'},
+                 {:name => 'Uwe Scheithauer',              :description => 'Sieger WM 2014 Tippspiel', :img => 'pokalsieger.jpg'},
+                 {:name => 'Christian Kurth',              :description => 'Sieger EM 2012 Tippspiel', :img => 'em2012sieger.jpg'},
+                 {:name => 'Markus Gödke',                 :description => 'Sieger WM 2010 Tippspiel', :img => 'wm2010sieger.jpg' },
+                 {:name => 'Jens Bruch',                   :description => 'Sieger EM 2008 Tippspiel', :img => 'em2008sieger.gif'},
+                 {:name => 'Enrico Schwarz',               :description => 'Sieger WM 2006 Tippspiel', :img => 'wm2006sieger.jpg'},
+                 {:name => 'Chris Zenker',                 :description => 'Sieger EM 2004 Tippspiel', :img => 'em2004sieger.jpg'},
+                 {:name => 'Ina Foedisch und Ricardo Mai', :description => 'Sieger WM 2002 Tippspiel', :img => 'pokalsieger.jpg'}]
 
-  %ul.thumbnails
+  %ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
     - champions.each do |champ|
       %li
-        .thumbnail
+        %span.th.text-center
           = image_tag(champ[:img], :alt=>champ[:name])
-          .caption
-            %h5
-              = champ[:name]
+          %div.panel.callout
             %p
-              = champ[:description]
+              = champ[:name]
+            %span.label= champ[:description]
 
