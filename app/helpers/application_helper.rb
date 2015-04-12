@@ -80,7 +80,7 @@ module ApplicationHelper
         haml_tag 'a.close', {'data-dismiss' => 'alert'} do
           haml_concat '&times;'
         end
-        haml_concat msg
+        haml_tag :p, msg
       end
     end
   end
