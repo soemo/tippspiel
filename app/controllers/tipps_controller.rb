@@ -22,13 +22,6 @@ class TippsController < ApplicationController
     end
   end
 
-  def compare
-    result = Tipps::Compare.call(:game_id => params[:id])
-    @presenter = TippsComparePresenter.new(result.possible_games,
-                                           result.game_to_compare,
-                                           result.tipps)
-  end
-
   def save_tipps
     SaveTipps.call(tipps_params: params[:tipps], current_user: current_user)
     redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tipps')})
