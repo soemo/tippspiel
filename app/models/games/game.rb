@@ -35,19 +35,6 @@ class Game < ActiveRecord::Base
     "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
   end
 
-  def self.splited_by_rounds
-    result = {}
-    group_size = GROUPS.size
-    GROUPS.each_with_index do |group_name, index|
-      result[index + 1] = {"#{GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).to_a}
-    end
-    (ROUNDS - [GROUP]).each_with_index do |round, index|
-      result[group_size + index + 1] = {round => Game.where(:round => round).to_a}
-    end
-
-    result.sort
-  end
-
   def self.round_start_end_date_time(round)
     games = Game.where(:round => round).order('start_at asc').select('start_at')
     if games.present?

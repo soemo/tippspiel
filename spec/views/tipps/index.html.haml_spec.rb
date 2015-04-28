@@ -4,13 +4,11 @@ require 'rails_helper'
 describe 'tipps/index.html.haml', :type => :view do
   before :each do
     @user = create(:user)
-    5.times{FactoryGirl.create(:game)}
-
     allow(view).to receive(:current_user).and_return(@user)
   end
 
 
-  describe 'before_tournament == true' do
+  context 'when before_tournament == true' do
     before :each do
       controller.singleton_class.class_eval do
         protected
@@ -21,8 +19,7 @@ describe 'tipps/index.html.haml', :type => :view do
       end
     end
 
-    it 'should show info to select champion' do
-      assign(:user_tipps, GetUserTipps.call(:user_id => @user.id))
+    it 'shows info to select champion' do
 
       render
 
@@ -37,7 +34,7 @@ describe 'tipps/index.html.haml', :type => :view do
 
   end
 
-  describe 'before_tournament == false' do
+  context 'when before_tournament == false' do
     before :each do
       controller.singleton_class.class_eval do
         protected

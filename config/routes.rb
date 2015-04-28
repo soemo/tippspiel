@@ -9,7 +9,7 @@ Tippspiel::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   # Eigener Controller noetig, damit eigene Attribute den strong_params von devise bekannt gemacht werden koennen
-   devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :users, :controllers => { :registrations => 'registrations' }
 
   get 'scheduler/hourly'
   get 'scheduler/admin'
@@ -22,11 +22,9 @@ Tippspiel::Application.routes.draw do
   post 'save-notice' => 'notice#create'
   get 'help' => 'help#index'
 
-  get '/user/preferences'
-  post '/user/save_preferences'
   get '/user/edit_password'
   post '/user/change_password'
-  
+
   match 'tipps/compare(/:id)' => 'tipps#compare', :as => 'compare_tipps', :via => [:get, :post]
   get 'ranking/hall-of-fame' => 'ranking#hall_of_fame', :as => 'hall_of_fame'
 

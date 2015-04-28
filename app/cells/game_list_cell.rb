@@ -7,7 +7,7 @@ class GameListCell < Cell::Rails
   end
 
   def show(args)
-    @games_round_hash = Game.splited_by_rounds
+    @games_round_hash = Games::SeparatedByRounds.call
 
     render
   end

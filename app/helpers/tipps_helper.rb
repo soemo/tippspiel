@@ -1,26 +1,6 @@
 # -*- encoding : utf-8 -*-
 module TippsHelper
 
-  # Die Tipps werden so aufbereitet, das sie nach den Runden sortiert sind
-  def prepare_tipps(user_tipps)
-    result = {}
-    if user_tipps.present?
-      games_round_hash = Game.splited_by_rounds
-      games_round_hash.each do |index, round_with_games|
-        round_with_games.each_pair do |round_name, games|
-          temp_tipps = []
-          games.each do |game|
-            tipp = user_tipps.select{|tipp| tipp.game_id == game.id}
-            temp_tipps << tipp.first
-          end
-          result[index] = {round_name => temp_tipps}
-        end
-      end
-    end
-
-    result.sort
-  end
-
   def get_today_game_css_class(today_game_ids, game_id)
     result = ''
     if today_game_ids.present? && game_id.present?

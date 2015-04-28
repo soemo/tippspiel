@@ -30,12 +30,19 @@ describe TippsHelper, :type => :helper do
     end
   end
 
-  context '#prepare_tipps' do
-    # FIXME soeren 28.04.15
-  end
-
   context '#write_tipp_input' do
-    # FIXME soeren 28.04.15
+
+    it 'returns corrct input html' do
+      helper.extend Haml
+      helper.extend Haml::Helpers
+      helper.send :init_haml_helpers
+
+      value = helper.capture_haml{
+        expect(helper.write_tipp_input(1, 'team1_goals', 2))
+      }
+      expect(value).to eq("<input type=\"text\" name=\"tipps[1][team1_goals]\" id=\"tipps_1_team1_goals\" value=\"2\" maxlength=\"2\" size=\"2\" class=\"tipp_input\" />\n")
+
+    end
   end
 
 end

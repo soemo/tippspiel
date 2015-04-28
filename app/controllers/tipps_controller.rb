@@ -9,8 +9,9 @@ class TippsController < ApplicationController
   end
 
   def index
-    @today_game_ids = GetTodayGames.call.pluck(:id)
-    @user_tipps     = GetUserTipps.call(:user_id => current_user.id)
+    @today_game_ids   = GetTodayGames.call.pluck(:id)
+    user_tipps        = GetUserTipps.call(:user_id => current_user.id)
+    @tipps_round_hash = Tipps::SeparatedByRounds.call(tipps: user_tipps)
 
     respond_to do |format|
       if @for_phone
