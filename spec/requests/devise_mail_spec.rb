@@ -6,7 +6,7 @@ describe "devise mail", :type => :request do
 
   before :each do
     ActionMailer::Base.deliveries = [] # reset list of mails
-    freeze_test_time
+    Timecop.freeze(Time.now)
   end
 
 

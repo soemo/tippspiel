@@ -24,7 +24,7 @@ describe RssFeedWriteCache do
     it 'file older then cache_time_out' do
       file = RssFeedWriteCache.new.send('cache_file')
       cache_time_out = RssFeedWriteCache.new.send('cache_time_out')
-      freeze_test_time(cache_time_out - 1.minute)
+      Timecop.freeze(cache_time_out - 1.minute)
 
       expect(Rails.logger).to     receive(:info).with('CHECK RSS-FEED-XML-FILE')
       expect(Rails.logger).not_to receive(:info).with('DELETE OLD RSS-FEED-XML-FILE')

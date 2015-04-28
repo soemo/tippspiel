@@ -346,6 +346,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    timecop (0.7.3)
     timers (4.0.1)
       hitimes
     tzinfo (1.2.2)
@@ -403,7 +404,7 @@ DEPENDENCIES
   passenger (= 4.0.57)
   quiet_assets (~> 1.1.0)
   rack-livereload
-  rails (~> 4.2.0)
+  rails (~> 4.2.1)
   rails_admin (~> 0.6.7)
   rspec-cells (~> 0.2.2)
   rspec-rails (~> 3.2.1)
@@ -413,6 +414,7 @@ DEPENDENCIES
   spring (~> 1.3.4)
   spring-commands-rspec (~> 1.0.4)
   therubyracer (~> 0.11.2)
+  timecop
   tzinfo-data
   uberspacify!
   uglifier

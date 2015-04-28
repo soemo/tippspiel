@@ -3,18 +3,20 @@ require 'rails_helper'
 
 describe FootieFoxUpdateGames do
 
+  subject { FootieFoxUpdateGames }
+
   describe "calculate all user tipp points" do
     before :each do
       Game.destroy_all
 
       @italy_api_team_id   = 924
-      FactoryGirl.create(:team, :name => FootieFoxUpdateGames::TEAMS[@italy_api_team_id])
+      create(:team, :name => subject::TEAMS[@italy_api_team_id])
       @germany_api_team_id = 940
-      FactoryGirl.create(:team, :name => FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
+      create(:team, :name => subject::TEAMS[@germany_api_team_id])
       @england_api_team_id = 946
-      FactoryGirl.create(:team, :name => FootieFoxUpdateGames::TEAMS[@england_api_team_id])
+      create(:team, :name => subject::TEAMS[@england_api_team_id])
       @polen_api_team_id   = 1317
-      FactoryGirl.create(:team, :name => FootieFoxUpdateGames::TEAMS[@polen_api_team_id])
+      create(:team, :name => subject::TEAMS[@polen_api_team_id])
 
       @api_game1_team1_score = 1
       @api_game1_team2_score = 2
@@ -29,23 +31,23 @@ describe FootieFoxUpdateGames do
       @game2_api_match_id = 2
       @game3_api_match_id = 3
 
-      @game1 = FactoryGirl.create(:game,
-                                  :team1_goals => nil,
-                                  :team2_goals => nil,
-                                  :api_match_id => @game1_api_match_id)
-      @game2 = FactoryGirl.create(:game,
-                                  :team1_goals => nil,
-                                  :team2_goals => nil,
-                                  :api_match_id => @game2_api_match_id)
+      @game1 = create(:game,
+                      :team1_goals => nil,
+                      :team2_goals => nil,
+                      :api_match_id => @game1_api_match_id)
+      @game2 = create(:game,
+                      :team1_goals => nil,
+                      :team2_goals => nil,
+                      :api_match_id => @game2_api_match_id)
       # Hat noch gar keine Teams, nur team_placeholder_name
-      @game3 = FactoryGirl.create(:game,
-                                  :team1_goals => nil,
-                                  :team2_goals => nil,
-                                  :team1_id => nil,
-                                  :team2_id => nil,
-                                  :team1_placeholder_name => "teamname placeholder 1",
-                                  :team2_placeholder_name => "teamname placeholder 2",
-                                  :api_match_id => @game3_api_match_id)
+      @game3 = create(:game,
+                      :team1_goals => nil,
+                      :team2_goals => nil,
+                      :team1_id => nil,
+                      :team2_id => nil,
+                      :team1_placeholder_name => "teamname placeholder 1",
+                      :team2_placeholder_name => "teamname placeholder 2",
+                      :api_match_id => @game3_api_match_id)
 
       [@game1, @game2, @game3].each do |game|
         if game.team1.present?
@@ -79,7 +81,7 @@ describe FootieFoxUpdateGames do
                             "status" => "scheduled",
                             "phase" => 0}
                        ]}
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data, errors, infos)
+      subject.new.send('check_and_update_new_data', json_data, errors, infos)
       expect(errors[0]).to eq("check_and_update_new_data - no game with api_match_id: 42")
       expect(infos).to be_empty
 
@@ -100,7 +102,7 @@ describe FootieFoxUpdateGames do
                        ]}
       errors = []
       infos  = []
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data, errors, infos)
+      subject.new.send('check_and_update_new_data', json_data, errors, infos)
       expect(errors[0]).to eq("check_and_update_new_data - api team1_id: 2 not in known_team_keys")
       expect(infos).to be_empty
 
@@ -121,7 +123,7 @@ describe FootieFoxUpdateGames do
                        ]}
       errors = []
       infos  = []
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data, errors, infos)
+      subject.new.send('check_and_update_new_data', json_data, errors, infos)
       expect(errors[0]).to eq("check_and_update_new_data - api team2_id: 2 not in known_team_keys")
       expect(infos).to be_empty
     end
@@ -145,7 +147,7 @@ describe FootieFoxUpdateGames do
                             "phase" => 0}
                        ]}
 
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data, errors, infos)
+      subject.new.send('check_and_update_new_data', json_data, errors, infos)
       expect(errors).to be_empty
       expect(infos).to be_empty
 
@@ -199,27 +201,27 @@ describe FootieFoxUpdateGames do
                          "phase" => 0}
                        ]}
 
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data, errors, infos)
+      subject.new.send('check_and_update_new_data', json_data, errors, infos)
       expect(errors).to be_empty
       expect(infos).to be_present
 
       game1 = Game.find(@game1.id)
-      expect(game1.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game1.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@italy_api_team_id])
+      expect(game1.team1.name).to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).to eq(subject::TEAMS[@italy_api_team_id])
       expect(game1.team1_goals).to eq(nil)
       expect(game1.team2_goals).to eq(nil)
       expect(game1.finished).to eq(false)
 
       game2 = Game.find(@game2.id)
-      expect(game2.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@england_api_team_id])
-      expect(game2.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
+      expect(game2.team1.name).to eq(subject::TEAMS[@england_api_team_id])
+      expect(game2.team2.name).to eq(subject::TEAMS[@germany_api_team_id])
       expect(game2.team1_goals).to eq(nil)
       expect(game2.team2_goals).to eq(nil)
       expect(game2.finished).to eq(false)
 
       game3 = Game.find(@game3.id)
-      expect(game3.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game3.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@polen_api_team_id])
+      expect(game3.team1.name).to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game3.team2.name).to eq(subject::TEAMS[@polen_api_team_id])
       expect(game3.team1_goals).to eq(nil)
       expect(game3.team2_goals).to eq(nil)
       expect(game3.finished).to eq(false)
@@ -260,25 +262,25 @@ describe FootieFoxUpdateGames do
                          "phase" => 0}
                        ]}
 
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data)
+      subject.new.send('check_and_update_new_data', json_data)
 
       game1 = Game.find(@game1.id)
-      expect(game1.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game1.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@italy_api_team_id])
+      expect(game1.team1.name).to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).to eq(subject::TEAMS[@italy_api_team_id])
       expect(game1.team1_goals).to eq(@api_game1_team1_score)
       expect(game1.team2_goals).to eq(@api_game1_team2_score)
       expect(game1.finished).to eq(true)
 
       game2 = Game.find(@game2.id)
-      expect(game2.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@england_api_team_id])
-      expect(game2.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
+      expect(game2.team1.name).to eq(subject::TEAMS[@england_api_team_id])
+      expect(game2.team2.name).to eq(subject::TEAMS[@germany_api_team_id])
       expect(game2.team1_goals).to eq(nil)
       expect(game2.team2_goals).to eq(nil)
       expect(game2.finished).to eq(false)
 
       game3 = Game.find(@game3.id)
-      expect(game3.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game3.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@polen_api_team_id])
+      expect(game3.team1.name).to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game3.team2.name).to eq(subject::TEAMS[@polen_api_team_id])
       expect(game3.team1_goals).to eq(nil)
       expect(game3.team2_goals).to eq(nil)
       expect(game3.finished).to eq(false)
@@ -305,11 +307,11 @@ describe FootieFoxUpdateGames do
       game1 = Game.find(@game1.id)
       game1.update_attribute(:finished, true)
 
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data)
+      subject.new.send('check_and_update_new_data', json_data)
 
       game1 = Game.find(@game1.id)
-      expect(game1.team1.name).not_to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game1.team2.name).not_to eq(FootieFoxUpdateGames::TEAMS[@italy_api_team_id])
+      expect(game1.team1.name).not_to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).not_to eq(subject::TEAMS[@italy_api_team_id])
       expect(game1.team1_goals).to eq(nil)
       expect(game1.team2_goals).to eq(nil)
       expect(game1.finished).to eq(true)
@@ -349,25 +351,25 @@ describe FootieFoxUpdateGames do
                          "phase" => 0}
                        ]}
 
-      FootieFoxUpdateGames.new.send('check_and_update_new_data', json_data)
+      subject.new.send('check_and_update_new_data', json_data)
 
       game1 = Game.find(@game1.id)
-      expect(game1.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game1.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@italy_api_team_id])
+      expect(game1.team1.name).to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game1.team2.name).to eq(subject::TEAMS[@italy_api_team_id])
       expect(game1.team1_goals).to eq(@api_game1_team1_score)
       expect(game1.team2_goals).to eq(@api_game1_team2_score)
       expect(game1.finished).to eq(true)
 
       game2 = Game.find(@game2.id)
-      expect(game2.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@england_api_team_id])
-      expect(game2.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
+      expect(game2.team1.name).to eq(subject::TEAMS[@england_api_team_id])
+      expect(game2.team2.name).to eq(subject::TEAMS[@germany_api_team_id])
       expect(game2.team1_goals).to eq(@api_game2_team1_score)
       expect(game2.team2_goals).to eq(@api_game2_team2_score)
       expect(game2.finished).to eq(true)
 
       game3 = Game.find(@game3.id)
-      expect(game3.team1.name).to eq(FootieFoxUpdateGames::TEAMS[@germany_api_team_id])
-      expect(game3.team2.name).to eq(FootieFoxUpdateGames::TEAMS[@polen_api_team_id])
+      expect(game3.team1.name).to eq(subject::TEAMS[@germany_api_team_id])
+      expect(game3.team2.name).to eq(subject::TEAMS[@polen_api_team_id])
       expect(game3.team1_goals).to eq(@api_game3_team1_score)
       expect(game3.team2_goals).to eq(@api_game3_team2_score)
       expect(game3.finished).to eq(true)

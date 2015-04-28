@@ -22,7 +22,7 @@ class TippsController < ApplicationController
   end
 
   def compare
-    result = CompareTipps.call(:game_id => params[:id])
+    result = Tipps::Compare.call(:game_id => params[:id])
     @presenter = TippsComparePresenter.new(result.possible_games,
                                            result.game_to_compare,
                                            result.tipps)

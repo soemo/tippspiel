@@ -26,7 +26,6 @@ class Game < ActiveRecord::Base
 
   scope :group_games,       -> { where(:round => GROUP) }
   scope :final_games,       -> { where(:round => FINAL) }
-  scope :games_for_compare, lambda{ |time| where('start_at < ?', time)}
 
   def self.last_updated_at
     Game.unscoped.maximum('updated_at')

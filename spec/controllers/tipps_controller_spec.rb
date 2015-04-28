@@ -34,7 +34,7 @@ describe TippsController, :type => :controller do
       tipp = Tipp.first
       game = tipp.game
 
-      freeze_test_time
+      Timecop.freeze(Time.now)
       game.update_column(:start_at, Time.now+1.second) #Spielstart in der Zukunft
 
       # update erlaubt

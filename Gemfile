@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 4.2.1'
 ruby '2.2.1'
 
 gem 'mysql2',                  '~> 0.3.18'
@@ -72,6 +72,8 @@ end
 group :test do
   gem 'webmock',            '~> 1.20.4'
   gem 'factory_girl_rails', '~> 4.5.0'
+
+  gem 'timecop'
 
   gem 'rspec-cells',        '~> 0.2.2'
   gem 'simplecov',          '~> 0.9.1'  # Code coverage for Ruby 1.9+

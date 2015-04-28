@@ -20,25 +20,25 @@ describe GetTodayGames do
 
   it 'should get games from today at 00:10' do
     expected = [today_game1, today_game2, today_game3]
-    freeze_test_time(time_now.midnight + 10.minutes)
+    Timecop.freeze(time_now.midnight + 10.minutes)
     expect(GetTodayGames.call.to_a).to eq(expected)
   end
 
   it 'should get games from today at 22:00' do
     expected = [today_game1, today_game2, today_game3]
-    freeze_test_time(time_now)
+    Timecop.freeze(time_now)
     expect(GetTodayGames.call.to_a).to eq(expected)
   end
 
   it 'should get games from tommorrow at 22:00' do
     expected = [today_game3, tommorrow_game1, tommorrow_game2]
-    freeze_test_time(time_now + 1.day)
+    Timecop.freeze(time_now + 1.day)
     expect(GetTodayGames.call.to_a).to eq(expected)
   end
 
   it 'should get games from yesterday at 22:00' do
     expected = [yesterday_game.id, today_game1.id]
-    freeze_test_time(time_now - 1.day)
+    Timecop.freeze(time_now - 1.day)
     expect(GetTodayGames.call.pluck(:id)).to eq(expected)
 
   end

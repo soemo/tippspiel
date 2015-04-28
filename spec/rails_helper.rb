@@ -62,10 +62,6 @@ RSpec.configure do |config|
   end
 end
 
-def freeze_test_time(check_time=Time.now)
-  allow(Time).to receive(:now).and_return(check_time)
-end
-
 def login user
   post 'user/sign_in', :user=>{ :email=>user.email, :password=>user.lastname }
 end
