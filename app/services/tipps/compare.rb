@@ -14,7 +14,7 @@ module Tipps
     private
 
     def compare
-      possible_games = get_possible_games
+      possible_games = GameQueries.started_games
       game_to_compare = nil
       tipps           = nil
 
@@ -25,19 +25,10 @@ module Tipps
       end #no else
 
       if game_to_compare.present?
-        tipps = game_to_compare.
-            tipps.
-            includes('user').
-            where('users.deleted_at' => nil).
-            order('tipps.tipp_punkte desc').
-            order('users.firstname')
+        tipps = ::TippQueries.get_ordered_tipps_for_game_id(game_to_compare.id)
       end
 
       Result.new(possible_games, game_to_compare, tipps)
-    end
-
-    def get_possible_games
-      Game.where('start_at < ?', Time.now)
     end
 
   end

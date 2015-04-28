@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe 'tipps/index.html.haml', :type => :view do
   before :each do
-    @user = User.first
+    @user = create(:user)
     5.times{FactoryGirl.create(:game)}
 
     allow(view).to receive(:current_user).and_return(@user)

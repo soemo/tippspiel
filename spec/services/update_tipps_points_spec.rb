@@ -56,10 +56,10 @@ describe UpdateTippsPoints do
 
       User.all.each do |user|
         Game.all.each do |game|
-          FactoryGirl.create(:tipp, :user => user, :game => game, :team1_goals => rand(4), :team2_goals => rand(4))
+          create(:tipp, :user => user, :game => game,
+                 :team1_goals => rand(4), :team2_goals => rand(4))
         end
       end
-
     end
 
     it 'should update all tipp points for a game' do

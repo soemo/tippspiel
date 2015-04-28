@@ -66,7 +66,7 @@ def login user
   post 'user/sign_in', :user=>{ :email=>user.email, :password=>user.lastname }
 end
 
-def create_active_user(u = FactoryGirl.create(:user))
+def create_active_user(u = create(:user))
   u.confirmation_sent_at = 1.hour.ago
   u.confirm!
   u

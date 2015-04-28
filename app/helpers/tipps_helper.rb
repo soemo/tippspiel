@@ -24,7 +24,7 @@ module TippsHelper
   def get_today_game_css_class(today_game_ids, game_id)
     result = ''
     if today_game_ids.present? && game_id.present?
-      result = today_game_ids.include?(game_id) ? 'today_game' : ''
+      result = Array(today_game_ids).include?(game_id) ? 'today_game' : ''
     end
 
     result

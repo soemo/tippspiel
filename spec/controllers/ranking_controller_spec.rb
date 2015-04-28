@@ -12,9 +12,9 @@ describe RankingController, :type => :controller do
       user_count = assigns(:user_count)
       user_ranking_hash = assigns(:user_ranking_hash)
 
-      expect(user_count).to eq(3) # 3 in den Fixtures
-      expect(user_ranking_hash.has_key?(1)).to be_present     # alle 3 auf dem ersten Platz
-      expect(user_ranking_hash.has_key?(2)).not_to be_present # keiner auf dem 2ten Platz
+      expect(user_count).to eq(1)
+      expect(user_ranking_hash.has_key?(1)).to be_present
+      expect(user_ranking_hash.has_key?(2)).not_to be_present
     end
 
   end

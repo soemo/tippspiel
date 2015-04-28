@@ -9,6 +9,15 @@ guard :rspec, cmd: 'bundle exec spring rspec --tag ~slow', failed_mode: :none do
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
   watch('config/routes.rb')                           { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
+
+  watch(%r{^spec/factories/(.+)\.rb$}) do |m|
+    %W[
+      spec/factories/factories_spec.rb
+      spec/models/#{m[1].singularize}_spec.rb
+      spec/controllers/#{m[1]}_controller_spec.rb
+      spec/requests/#{m[1]}_spec.rb
+    ]
+  end
 end
 
 guard :livereload do

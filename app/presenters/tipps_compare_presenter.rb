@@ -1,5 +1,5 @@
 class TippsComparePresenter
-         # FIXME soeren 01.02.15 spec
+
   attr_reader :possible_games
   attr_reader :game_to_compare
   attr_reader :tipps
