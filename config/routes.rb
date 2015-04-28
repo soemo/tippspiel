@@ -25,7 +25,7 @@ Tippspiel::Application.routes.draw do
   get '/user/edit_password'
   post '/user/change_password'
 
-  match 'tipps/compare(/:id)' => 'tipps#compare', :as => 'compare_tipps', :via => [:get, :post]
+  match 'compare_tips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
   get 'ranking/hall-of-fame' => 'ranking#hall_of_fame', :as => 'hall_of_fame'
 
   get 'main/error' => 'main#error', :as => :error
