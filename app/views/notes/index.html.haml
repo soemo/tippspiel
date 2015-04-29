@@ -1,0 +1,30 @@
+%h3= t("notice")
+
+= form_tag "/save-notice", :class=>"form-inline" do
+  .row
+    .small-12.columns
+      %label
+        ="Na haste was zu melden?"
+        = text_area_tag :text, nil, :id=>"notice_text", :class=>"span7",:maxlength => 200,:rows => 3
+        %div
+          = I18n.t("characters_remaining")
+          %span.js_chars_remaining
+  .row
+    .small-12.columns
+      = button_tag(type: 'submit') do
+        = icon("comment", t(:save))
+      = '&nbsp;&nbsp;'.html_safe
+      = link_to t(:delete_link), notes_path
+
+- if @notes.present?
+  - @notes.each do |notice|
+    .row
+      .small-12.columns
+        %blockquote
+          %span.wrap_text= notice.text
+          %cite
+            = l(notice.created_at) + ", "
+            = notice.user.name if notice.user.present?
+  %br
+  %br
+  %br

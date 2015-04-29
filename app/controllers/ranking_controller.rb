@@ -6,9 +6,4 @@ class RankingController < ApplicationController
     @user_ranking_hash = PrepareUserRanking.call
   end
 
-  def hall_of_fame
-    # wird intern mit fragment-cache gecached
-  end
-
-
 end

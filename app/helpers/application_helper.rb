@@ -15,15 +15,17 @@ module ApplicationHelper
     html.html_safe
   end
 
-  # controllername, path, needs_login, font-awesome icon_class_name
+  # controllername, path, needs_login
   def main_nav_items
     [
-            ['main', root_path, false, 'home'],
-            ['tipps', tipps_path, true, 'bullseye'],
-            ['tipps_for_phone', tipps_path({:for_phone => true}), true, 'bullseye'], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
-            ['ranking', ranking_path, true, 'list-ol'],
-            ['notice', notice_path, true, 'comment'],
-            ['help', help_path, false, 'info']
+        ['main', root_path, false],
+        ['tipps', tipps_path, true],
+        ['tipps_for_phone', tipps_path({:for_phone => true}), true], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
+        ['ranking', ranking_path, true],
+        ['notice', notes_path, true],
+        ['compare_tips', compare_tips_path],
+        ['hall_of_fame', hall_of_fame_path],
+        ['help', help_path, false]
     ]
 
   end
@@ -46,9 +48,11 @@ module ApplicationHelper
     # im Fehlerfall wird keine Sidebar angezeigt
     unless controller.controller_name == 'main' && controller.action_name == 'error'
       if current_user.present?
-        haml_concat render_cell(:user_sidebar_links, :show)
         unless controller.controller_name == 'notice'
-          haml_concat render_cell(:sidebar_notes, :show, :item_count => 5, :last_updated_at => Notice.last_updated_at)
+          haml_concat render_cell(:sidebar_notes,
+                                  :show,
+                                  :item_count => 5,
+                                  :last_updated_at => NoticeQueries.last_updated_at)
         end
       end
       haml_concat render_cell(:extern_links, :show)
@@ -159,21 +163,25 @@ module ApplicationHelper
 
   end
 
+  def is_selected_controller?(link_controller_name)
+    if link_controller_name.present?
+      link_controller_name.gsub('-', '_').pluralize == controller.controller_name
+    else
+      false
+    end
+  end
+
   def write_main_nav
     nav_items = main_nav_items
 
     unless user_signed_in?
-      nav_items = nav_items.select{|i| i[2] == false}
+      nav_items = nav_items.select{|i| !i[2] }
     end
 
     if nav_items.present?
-      nav_items.each do |key, path, needs_login, icon_class_name|
-        if icon_class_name.present?
-          link_text = icon(icon_class_name, t(key))
-        else
-          link_text = t(key)
-        end
-        class_name = key == controller.controller_name ? 'active' : ''
+      nav_items.each do |key, path, _|
+        link_text = t(key)
+        class_name = is_selected_controller?(key) ? 'active' : ''
 
         # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
         # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
@@ -197,7 +205,7 @@ module ApplicationHelper
   def write_auth_nav(for_off_canvas = false)
     if user_signed_in?
       haml_tag 'li.divider'
-      sub_menu_id = MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID
+      sub_menu_id = MAIN_NAV_USER_SUBMENU_ID
       css_class = (controller_name == 'user')  ? 'active' : ""
       sub_menu = get_main_subnavigation_array
       nav_text = get_user_name_or_sign_in_link
@@ -222,7 +230,7 @@ module ApplicationHelper
               haml_tag 'li.divider'
             else
               haml_tag :li do
-                haml_concat link_to(icon(link[:icon_class], link[:text]), link[:url])
+                haml_concat link_to(link[:text], link[:url])
               end
             end
           end
@@ -243,7 +251,7 @@ module ApplicationHelper
           haml_tag 'li.divider'
         else
           haml_tag :li do
-            haml_concat link_to(icon(link[:icon_class], link[:text]), link[:url])
+            haml_concat link_to(link[:text], link[:url])
           end
         end
       end
@@ -253,11 +261,11 @@ module ApplicationHelper
   # main subnavigation
   def get_main_subnavigation_array
     result = {}
-    result[MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID] =
+    result[MAIN_NAV_USER_SUBMENU_ID] =
         {:links => [
-            {:text => t(:password_change), :url => user_edit_password_path, icon_class: 'unlock-alt'},
+            {:text => t(:password_change), :url => user_edit_password_path},
             {:divider => true},
-            {:text => t(:sign_out), :url => logout_path, icon_class: 'sign-out'}
+            {:text => t(:sign_out), :url => logout_path}
         ]}
 
     result

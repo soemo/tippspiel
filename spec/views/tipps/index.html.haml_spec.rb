@@ -25,7 +25,7 @@ describe 'tipps/index.html.haml', :type => :view do
 
       expect(rendered).to have_selector('h3', :text => I18n.t('tipps'))
       expect(rendered).to have_selector('b', :text => I18n.t('need_champion_tipp'))
-      expect(rendered).to have_selector('span', :text => I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS))
+      expect(rendered).to have_content(I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS))
 
       expect(rendered).to have_xpath("//form[@action='/save-champion-tipp']") do |form|
         expect(form).to have_selector('label', :text => I18n.t('who_will_be_champion'))
@@ -49,7 +49,7 @@ describe 'tipps/index.html.haml', :type => :view do
       render
 
       expect(rendered).to have_selector('h3', :text => I18n.t('tipps'))
-      expect(rendered).to have_selector('span', :text => I18n.t('no_champion_tipp'))
+      expect(rendered).to have_content(I18n.t('no_champion_tipp'))
 
     end
   end

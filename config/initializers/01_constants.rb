@@ -26,4 +26,4 @@ SIDEBAR_EXTERN_LINKS = [
 ]
 
 
-MAIN_NAV_ITEM_CURRENT_USER_SUBMENU_ID = 'current_user_sub_menu'
+MAIN_NAV_USER_SUBMENU_ID = 'current_user_sub_menu'

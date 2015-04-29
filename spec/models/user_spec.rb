@@ -17,9 +17,9 @@ describe User, :type => :model do
 
   it "should check of admin?" do
     user = FactoryGirl.create(:user)
-    expect(user.admin?).to be_falsey
+    expect(user.admin?).to be false
     user.update_attribute(:email, ADMIN_EMAIL)
-    expect(user.admin?).to be_truthy
+    expect(user.admin?).to be true
   end
 
   describe 'confirm_with_max_time!' do
@@ -54,7 +54,7 @@ describe User, :type => :model do
                     :count4points => 10,
                     :count3points => 0,
                     :count0points=> 9)
-    expect(user1.ranking_comparison_value > user2.ranking_comparison_value).to be_truthy
+    expect(user1.ranking_comparison_value > user2.ranking_comparison_value).to be true
     expect(user1.ranking_comparison_value).to eq(4603040700)
     expect(user2.ranking_comparison_value).to eq(4601011000)
   end

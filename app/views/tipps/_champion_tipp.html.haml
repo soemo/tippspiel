@@ -1,28 +1,27 @@
 - championtipp_team = current_user.present? ? current_user.championtipp_team : nil
-- if before_tournament?
-  - if championtipp_team.present?
-    %span= I18n.t('current_champion_tipp', :championtipp_name => championtipp_team.to_s)
+.panel.callout
+  - if before_tournament?
+    %p
+      - if championtipp_team.present?
+        = I18n.t('current_champion_tipp', :championtipp_name => championtipp_team.to_s)
+      - else
+        %b
+          = I18n.t('need_champion_tipp')
+        %br
+        = I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS)
+
+    = form_tag '/save-champion-tipp', :class => 'form-horizontal' do
+      -# # TODO soeren 19.05.14 #72 besser machen
+      = hidden_field_tag(:for_phone, @for_phone)
+      -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
+      - selected = championtipp_team.present? ? championtipp_team.id : ''
+      - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
+      = render partial: 'widgets/selectbox_with_postifx_button',
+               locals: {select_id: 'champion_team_id',
+                        select_options: options,
+                        button_text: t('save') }
+
   - else
-    %b
-      = I18n.t('need_champion_tipp')
-    %br
-    %span
-      = I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS)
-
-  = form_tag '/save-champion-tipp', :class => 'form-horizontal' do
-    -# # TODO soeren 19.05.14 #72 besser machen
-    = hidden_field_tag(:for_phone, @for_phone)
-    %fieldset
-      .control-group
-        %label.control-label{:for=>'champion_team_id'}= I18n.t('who_will_be_champion')
-        .controls
-          - selected = championtipp_team.present? ? championtipp_team.id : ''
-          - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
-          = select_tag('champion_team_id', options, :prompt => t('please_select'))
-          = submit_tag t('save'), :class => 'button'
-
-- else
-  %span
     - if championtipp_team.present?
       = I18n.t('champion_tipp', :championtipp_name => championtipp_team.to_s)
     - else

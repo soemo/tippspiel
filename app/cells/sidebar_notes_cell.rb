@@ -6,7 +6,7 @@ class SidebarNotesCell < Cell::Rails
 
   def show(args)
     item_count    = args[:item_count]
-    @notes        = Notice.limit(item_count).all
+    @notes        = NoticeQueries.order_by_created_at_asc.limit(item_count)
 
     render
   end

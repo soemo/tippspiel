@@ -1,0 +1,27 @@
+- cache('hall_of_fame_caching') do
+
+  %h3= t('hall_of_fame')
+
+  %p
+    Seit 2002 findet zu den Europa- und Weltmeisterschaften dieses kleine Tippspiel statt.
+    Auch Du kannst in die Geschichte eingehen und einen Platz in der Hall of Fame erringen!
+
+  - champions = [{:name => '???',                          :description => 'Sieger EM 2016 Tippspiel', :img => 'pokalsieger.jpg'},
+                 {:name => 'Uwe Scheithauer',              :description => 'Sieger WM 2014 Tippspiel', :img => 'pokalsieger.jpg'},
+                 {:name => 'Christian Kurth',              :description => 'Sieger EM 2012 Tippspiel', :img => 'em2012sieger.jpg'},
+                 {:name => 'Markus Gödke',                 :description => 'Sieger WM 2010 Tippspiel', :img => 'wm2010sieger.jpg' },
+                 {:name => 'Jens Bruch',                   :description => 'Sieger EM 2008 Tippspiel', :img => 'em2008sieger.gif'},
+                 {:name => 'Enrico Schwarz',               :description => 'Sieger WM 2006 Tippspiel', :img => 'wm2006sieger.jpg'},
+                 {:name => 'Chris Zenker',                 :description => 'Sieger EM 2004 Tippspiel', :img => 'em2004sieger.jpg'},
+                 {:name => 'Ina Foedisch und Ricardo Mai', :description => 'Sieger WM 2002 Tippspiel', :img => 'pokalsieger.jpg'}]
+
+  %ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+    - champions.each do |champ|
+      %li
+        %span.th.text-center
+          = image_tag(champ[:img], :alt=>champ[:name])
+          %div.panel.callout
+            %p
+              = champ[:name]
+            %span.label= champ[:description]
+

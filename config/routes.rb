@@ -18,15 +18,15 @@ Tippspiel::Application.routes.draw do
   post 'save-tipps' => 'tipps#save_tipps'
   post 'save-champion-tipp' => 'tipps#save_champion_tipp'
   get 'ranking' => 'ranking#index'
-  get 'notice' => 'notice#index'
-  post 'save-notice' => 'notice#create'
+  get 'notes' => 'notes#index'
+  post 'save-notice' => 'notes#create'
   get 'help' => 'help#index'
 
   get '/user/edit_password'
   post '/user/change_password'
 
-  match 'compare_tips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
-  get 'ranking/hall-of-fame' => 'ranking#hall_of_fame', :as => 'hall_of_fame'
+  match 'compare-tips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
+  get 'hall-of-fame' => 'hall_of_fames#show'
 
   get 'main/error' => 'main#error', :as => :error
 
