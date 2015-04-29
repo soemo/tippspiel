@@ -39,7 +39,7 @@ describe 'ranking/index', :type => :view do
                                  :confirmed_at => Time.now - 5.minutes)
     end
 
-    assign(:user_ranking_hash, PrepareUserRanking.call(:users_for_ranking => users))
+    assign(:user_ranking_hash, Users::PrepareRanking.call(:users_for_ranking => users))
 
     render
 
@@ -94,7 +94,7 @@ describe 'ranking/index', :type => :view do
                                   :confirmed_at => Time.now - 5.minutes)
      end
 
-     assign(:user_ranking_hash, PrepareUserRanking.call(:users_for_ranking => users))
+     assign(:user_ranking_hash, Users::PrepareRanking.call(:users_for_ranking => users))
 
      render
 

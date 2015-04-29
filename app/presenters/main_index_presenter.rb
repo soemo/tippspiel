@@ -7,11 +7,11 @@ class MainIndexPresenter
   end
 
   def today_games
-    GetTodayGames.call
+    Games::PlayToday.call
   end
 
   def get_user_top3_and_own_position
-    GetUserTop3AndOwnPosition.call(:user_id => current_user.id)
+    Users::Top3AndOwnPosition.call(:user_id => current_user.id)
   end
 
 end

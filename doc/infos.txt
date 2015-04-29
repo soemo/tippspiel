@@ -27,13 +27,13 @@ A) Lokal
 2. DB Migrieren
 3. Konfiguration (URLS, Tuniername, EM oder WM)
 4. in den Seeds die Spiele anlegen, samt api_key zu Footifox
-5. FootieFoxUpdateGames::TEAMS erweitern um noch nicht vorhandene Teams
+5. FootieFox::UpdateGames::TEAMS erweitern um noch nicht vorhandene Teams
 6. Mapping API-ID und Teamnamen
 uri               = URI.parse(RESULT_URL)
 http              = Net::HTTP.new(uri.host, uri.port)
 response          = http.start { http.request(Net::HTTP::Get.new("#{uri.path}")) }
 result = JSON.parse(response.body)
-games = result['matches'].map{|i| {:api_match_id => i['matchID'], :start_at => I18n.l(DateTime.parse(i['startTime']).in_time_zone(Time.zone)), :team1 => FootieFoxUpdateGames::TEAMS[i['team1Id']], :team2 => FootieFoxUpdateGames::TEAMS[i['team2Id']]}}
+games = result['matches'].map{|i| {:api_match_id => i['matchID'], :start_at => I18n.l(DateTime.parse(i['startTime']).in_time_zone(Time.zone)), :team1 => FootieFox::UpdateGames::TEAMS[i['team1Id']], :team2 => FootieFox::UpdateGames::TEAMS[i['team2Id']]}}
 # Teamids
 teamids = games.map{|i| [i[:team1], i[:team2]]}.flatten.uniq.sort
 

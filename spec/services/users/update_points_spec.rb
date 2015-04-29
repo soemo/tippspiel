@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe UpdateUserPoints do
+describe Users::UpdatePoints do
+
+  subject { Users::UpdatePoints }
 
   describe 'calculate user points' do
     before :each do
@@ -70,8 +72,8 @@ describe UpdateUserPoints do
     it 'after first game finished' do
       @game1.update_attribute(:finished, true)
 
-      UpdateTippsPoints.call
-      UpdateUserPoints.call
+      Tipps::UpdatePoints.call
+      subject.call
 
       user = User.find(@user1.id)
       expect(user.points).to eq(8)
@@ -133,8 +135,8 @@ describe UpdateUserPoints do
       @game1.update_attribute(:finished, true)
       @game2.update_attribute(:finished, true)
 
-      UpdateTippsPoints.call
-      UpdateUserPoints.call
+      Tipps::UpdatePoints.call
+      subject.call
 
       user = User.find(@user1.id)
       expect(user.points).to eq(8)
@@ -198,8 +200,8 @@ describe UpdateUserPoints do
       @game4.update_attribute(:finished, true)
       @game5.update_attribute(:finished, true)
 
-      UpdateTippsPoints.call
-      UpdateUserPoints.call
+      Tipps::UpdatePoints.call
+      subject.call
 
       user = User.find(@user1.id)
       expect(user.points).to eq(8)

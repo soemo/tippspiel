@@ -8,7 +8,7 @@
         %b
           = I18n.t('need_champion_tipp')
         %br
-        = I18n.t('need_champion_tipp_info', :points => UpdateUserPoints::CHAMPION_TIPP_POINTS)
+        = I18n.t('need_champion_tipp_info', :points => Users::UpdatePoints::CHAMPION_TIPP_POINTS)
 
     = form_tag '/save-champion-tipp', :class => 'form-horizontal' do
       -# # TODO soeren 19.05.14 #72 besser machen

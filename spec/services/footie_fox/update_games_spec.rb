@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe FootieFoxUpdateGames do
+describe FootieFox::UpdateGames do
 
-  subject { FootieFoxUpdateGames }
+  subject { FootieFox::UpdateGames }
 
   describe "calculate all user tipp points" do
     before :each do

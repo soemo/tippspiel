@@ -9,7 +9,7 @@ class SchedulerController < ApplicationController
   def hourly
     start_calculate_points
     clean_invoke_table
-    RssFeedWriteCache.call(rss_feed_url: RSS_FEED_URL)
+    RssFeed::WriteCache.call(rss_feed_url: RSS_FEED_URL)
     render :plain => "Hourly scheduler run successful", :status => :ok
   end
 
@@ -22,9 +22,9 @@ class SchedulerController < ApplicationController
   private
 
   def start_calculate_points
-    FootieFoxUpdateGames.call
-    UpdateTippsPoints.call
-    UpdateUserPoints.call
+    FootieFox::UpdateGames.call
+    Tipps::UpdatePoints.call
+    Users::UpdatePoints.call
   end
 
   def check_invoke_frequency

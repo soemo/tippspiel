@@ -4,7 +4,7 @@ class RssFeedCell < Cell::Rails
 
   def show(args)
     item_count = args[:item_count]
-    result = RssFeedGetTopXEntriesAndTitle.call(rss_feed_url: RSS_FEED_URL,
+    result = RssFeed::GetTopXEntriesAndTitle.call(rss_feed_url: RSS_FEED_URL,
                                                 entry_size: item_count)
 
     render locals: {rss_title: result.title, rss_entries: result.entries}

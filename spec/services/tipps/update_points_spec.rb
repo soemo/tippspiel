@@ -1,10 +1,12 @@
 # -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe UpdateTippsPoints do
+describe Tipps::UpdatePoints do
+
+  subject { Tipps::UpdatePoints }
 
   def ctp_call_helper(game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
-     UpdateTippsPoints.new.send('calculate_tipp_points', game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
+    subject.new.send('calculate_tipp_points', game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
   end
 
   it 'get correct tipp points' do
@@ -42,11 +44,11 @@ describe UpdateTippsPoints do
       Tipp.destroy_all
       User.destroy_all
 
-      @game1 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 0)
-      @game2 = FactoryGirl.create(:game, :team1_goals => 1, :team2_goals => 0)
-      @game3 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 1)
-      @game4 = FactoryGirl.create(:game, :team1_goals => 2, :team2_goals => 1)
-      @game5 = FactoryGirl.create(:game, :team1_goals => 0, :team2_goals => 3)
+      @game1 = create(:game, :team1_goals => 0, :team2_goals => 0)
+      @game2 = create(:game, :team1_goals => 1, :team2_goals => 0)
+      @game3 = create(:game, :team1_goals => 0, :team2_goals => 1)
+      @game4 = create(:game, :team1_goals => 2, :team2_goals => 1)
+      @game5 = create(:game, :team1_goals => 0, :team2_goals => 3)
 
       @user1 = create_active_user
       @user2 = create_active_user
@@ -68,7 +70,7 @@ describe UpdateTippsPoints do
       tipps = Tipp.where(where_sql).to_a
       expect(tipps).not_to be_present
 
-      UpdateTippsPoints.new.send('update_all_tipp_points_for', @game1)
+      subject.new.send('update_all_tipp_points_for', @game1)
 
       tipps = Tipp.where(where_sql).to_a
       expect(tipps).to be_present
@@ -79,18 +81,18 @@ describe UpdateTippsPoints do
       where_sql = ["tipp_punkte is not null"]
       expect(Tipp.where(where_sql).count).to eq(0)
 
-      UpdateTippsPoints.call
+      subject.call
 
       # noch keine Tipp Punkte vergeben, da noch kein Spiel beendet
       expect(Tipp.where(where_sql).count).to eq(0)
 
       Game.first.update_column(:finished, true)
-      UpdateTippsPoints.call
+      subject.call
       # Tipp Punkte fürs erste Spiel vergeben
       expect(Tipp.where(where_sql).count).to eq(5)
 
       Game.update_all("finished=true")
-      UpdateTippsPoints.call
+      subject.call
       # alleTipp Punkte vergeben
       expect(Tipp.where(["tipp_punkte is null"]).count).to eq(0)
     end

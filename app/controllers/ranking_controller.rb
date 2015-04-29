@@ -3,7 +3,7 @@ class RankingController < ApplicationController
 
   def index
     @user_count        = User.active.count
-    @user_ranking_hash = PrepareUserRanking.call
+    @user_ranking_hash = Users::PrepareRanking.call
   end
 
 end

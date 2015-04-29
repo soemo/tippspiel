@@ -30,10 +30,6 @@ class User < ActiveRecord::Base
 
   scope :ranking_order, -> { order('users.points DESC, users.count8points DESC, users.count5points DESC, users.count4points DESC, users.count3points DESC') }
 
-  def self.last_updated_at
-    User.unscoped.maximum('updated_at')
-  end
-
   def ranking_comparison_value
     str_points       = points.to_s.rjust(2,"0")
     str_count8points = count8points.to_s.rjust(2,"0")

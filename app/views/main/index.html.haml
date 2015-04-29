@@ -19,4 +19,4 @@
 
     %h3=I18n.t('games_of', :tournament_name => TOURNAMENT_NAME)
 
-    = render_cell(:game_list, :show, :last_updated_at => [Game.last_updated_at, TeamQueries.last_updated_at].max )
+    = render_cell(:game_list, :show, :last_updated_at => [GameQueries.last_updated_at, TeamQueries.last_updated_at].max )

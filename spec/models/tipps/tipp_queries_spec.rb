@@ -4,7 +4,7 @@ describe TippQueries do
 
   subject { TippQueries }
 
-  describe '#get_ordered_tipps_for_game_id' do
+  context '.get_ordered_tipps_for_game_id' do
 
     let!(:user1) {create(:user, firstname: 'ZZZ')}
     let!(:user2) {create(:user, firstname: 'AAA')}

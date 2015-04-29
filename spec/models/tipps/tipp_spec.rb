@@ -21,7 +21,7 @@ describe Tipp, :type => :model do
       user_tipp_count = Tipp.where("user_id" => user.id).count
       expect(user_tipp_count).to eq(0)
 
-      user_tipps = GetUserTipps.call(:user_id => user.id)
+      user_tipps = Tipps::FromUser.call(:user_id => user.id)
       expect(user_tipps.size).to eq(games_size)
       expect(user_tipps.pluck(:game_id)).to eq(games.pluck(:id))
     end
@@ -32,7 +32,7 @@ describe Tipp, :type => :model do
     before do
       user = create(:user)
       FactoryGirl.create(:game)
-      @user_tipps = GetUserTipps.call(:user_id => user.id)
+      @user_tipps = Tipps::FromUser.call(:user_id => user.id)
     end
 
     it "should allowed" do

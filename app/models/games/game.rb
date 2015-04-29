@@ -20,16 +20,12 @@ class Game < ActiveRecord::Base
   TEAM1_WIN     = 1
   TEAM2_WIN     = 2
 
-  default_scope { order('start_at') }
+  default_scope { order('start_at') }   # FIXME soeren 29.04.15 entfernen und besser machen
 
   scope :finished_games,    -> { where(:finished => true) }
 
   scope :group_games,       -> { where(:round => GROUP) }
   scope :final_games,       -> { where(:round => FINAL) }
-
-  def self.last_updated_at
-    Game.unscoped.maximum('updated_at')
-  end
 
   def to_s
     "#{I18n.l(start_at, :format => :default)}:  #{team1_view_name} - #{team2_view_name}"
@@ -129,13 +125,9 @@ class Game < ActiveRecord::Base
     result
   end
 
-  def self.first_game_in_tournament
-    Game.order('start_at asc').first
-  end
-
   def self.before_tournament?
     result = true
-    first_game = Game.first_game_in_tournament
+    first_game = GameQueries.first_game_in_tournament
     if first_game.present? && first_game.start_at < Time.now
       result = false
     end

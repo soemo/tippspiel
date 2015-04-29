@@ -9,8 +9,8 @@ class TippsController < ApplicationController
   end
 
   def index
-    @today_game_ids   = GetTodayGames.call.pluck(:id)
-    user_tipps        = GetUserTipps.call(:user_id => current_user.id)
+    @today_game_ids   = Games::PlayToday.call.pluck(:id)
+    user_tipps        = Tipps::FromUser.call(:user_id => current_user.id)
     @tipps_round_hash = Tipps::SeparatedByRounds.call(tipps: user_tipps)
 
     respond_to do |format|
@@ -23,7 +23,7 @@ class TippsController < ApplicationController
   end
 
   def save_tipps
-    SaveTipps.call(tipps_params: params[:tipps], current_user: current_user)
+    Tipps::Save.call(tipps_params: params[:tipps], current_user: current_user)
     redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tipps')})
   end
 

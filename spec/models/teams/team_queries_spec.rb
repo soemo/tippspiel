@@ -4,7 +4,7 @@ describe TeamQueries do
 
   subject { TeamQueries }
 
-  context '#last_updated_at' do
+  context '.last_updated_at' do
 
     it 'returns max updated_at' do
       Timecop.freeze(Time.now)
