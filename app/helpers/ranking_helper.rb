@@ -15,12 +15,12 @@ module RankingHelper
       haml_tag :tbody do
         user_ranking.each do |place, users_on_same_place|
           users_on_same_place.each_with_index do |user, index|
-            # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden oder wenn die User noch 0 Punkte haben
-            next if index > 3 && short.present? && (before_tournament? || user.points == 0)
+            # vor dem Tunier soll in der Kurzform nur 3 Zeilen angezeigt werden
+            next if index > 3 && short.present? && Tournament.not_yet_started?
             haml_tag :tr do
               haml_tag 'td.place', place
               haml_tag :td, user.name
-              haml_tag :td, before_tournament? ? '' : user.championtipp_team unless short
+              haml_tag :td, Tournament.not_yet_started? ? '' : user.championtipp_team unless short
               haml_tag :td, statistic_point_popover_link(user)
             end
           end

@@ -1,6 +1,6 @@
 - championtipp_team = current_user.present? ? current_user.championtipp_team : nil
 .panel.callout
-  - if before_tournament?
+  - if Tournament.not_yet_started?
     %p
       - if championtipp_team.present?
         = I18n.t('current_champion_tipp', :championtipp_name => championtipp_team.to_s)

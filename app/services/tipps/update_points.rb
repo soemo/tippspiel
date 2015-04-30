@@ -9,6 +9,10 @@ module Tipps
     EXTRA_POINT_GOALS    = 2
     EXTRA_POINT          = 1
 
+    DRAW      = 0
+    TEAM1_WIN = 1
+    TEAM2_WIN = 2
+
     def call
       update_all_user_tipp_points
     end
@@ -28,7 +32,7 @@ module Tipps
 
     def update_all_tipp_points_for(game)
       if game.present?
-        game_winner = game.winner
+        game_winner = winner(game)
 
         if game_winner.present?
           Rails.logger.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}") if Rails.logger.present?
@@ -36,7 +40,7 @@ module Tipps
           if tipps.present?
             tipps.each do |tipp|
               points = 0
-              if tipp.complete_fill?
+              if tipp.team1_goals.present? && tipp.team2_goals.present?
                 points = calculate_tipp_points(game_winner, game.team1_goals, game.team2_goals, tipp.team1_goals, tipp.team2_goals)
               end
               tipp.update_column(:tipp_punkte, points)
@@ -49,9 +53,9 @@ module Tipps
 
     def calculate_tipp_points(game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
       points = 0
-      if (Game::UNENTSCHIEDEN == game_winner && tipp_team1_goals == tipp_team2_goals) ||
-          (Game::TEAM1_WIN == game_winner && tipp_team1_goals > tipp_team2_goals) ||
-          (Game::TEAM2_WIN == game_winner && tipp_team1_goals < tipp_team2_goals)
+      if (DRAW == game_winner && tipp_team1_goals == tipp_team2_goals) ||
+          (TEAM1_WIN == game_winner && tipp_team1_goals > tipp_team2_goals) ||
+          (TEAM2_WIN == game_winner && tipp_team1_goals < tipp_team2_goals)
         points = points + POINTS_CORRECT_TREND
       end
 
@@ -67,6 +71,18 @@ module Tipps
       points = points + EXTRA_POINT if goal_diff == game_diff
 
       points
+    end
+
+    # wer hat gewonnen Team1 oder Team2, unentschieden == 0
+    def winner(game)
+      result = nil
+      if game.team1_goals.present? && game.team2_goals.present?
+        result = TEAM1_WIN if game.team1_goals > game.team2_goals
+        result = TEAM2_WIN if game.team1_goals < game.team2_goals
+        result = DRAW if game.team1_goals == game.team2_goals
+      end
+
+      result
     end
 
 

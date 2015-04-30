@@ -8,21 +8,13 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!, :unless => :error_handling_method?
   before_filter :set_host_to_mailers
 
-  helper_method :tournament_finished?, :before_tournament?, :current_user
+  helper_method :current_user
 
     # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
   protected
-
-  def tournament_finished?
-    Game.tournament_finished?
-  end
-
-  def before_tournament?
-    Game.before_tournament?
-  end
 
   def set_locale
     I18n.locale = I18n.default_locale

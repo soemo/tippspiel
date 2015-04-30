@@ -15,11 +15,7 @@ class Tipp < ActiveRecord::Base
   def edit_allowed?
     game.start_at > Time.now
   end
-
-  def complete_fill?
-    team1_goals.present? && team2_goals.present?
-  end
-
+          # TODO soeren 30.04.15 move to Tipps::Save Service
   def remove_leading_zero
     if team1_goals.present?
       self.team1_goals = team1_goals.to_i

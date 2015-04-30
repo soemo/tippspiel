@@ -52,4 +52,28 @@ describe GameQueries do
     end
   end
 
+  context '.for_round_ordered_by_started_at_asc' do
+
+    let!(:game1) { create(:game, round: Game::GROUP,
+                          group: Game::GROUP_A, start_at: Time.now + 1.day)}
+    let!(:game2) { create(:game, round: Game::GROUP,
+                          group: Game::GROUP_A, start_at: Time.now + 2.day)}
+    let!(:game3) { create(:game, round: Game::GROUP,
+                          group: Game::GROUP_B, start_at: Time.now - 2.day)}
+    let!(:game4) { create(:game, round: Game::GROUP,
+                          group: Game::GROUP_C, start_at: Time.now - 1.day)}
+
+    let!(:game5) { create(:game, round: Game::SEMIFINAL,
+                          group: nil, start_at: Time.now + 5.day)}
+
+
+    it 'gets start and end date of group-round' do
+      ordered_started_at_asc = subject.ordered_started_at_for(Game::GROUP)
+      expected = [game3.start_at, game4.start_at, game1.start_at, game2.start_at]
+      expect(ordered_started_at_asc.map(&:to_i)).to eql(expected.map(&:to_i))
+    end
+
+  end
+
+
 end

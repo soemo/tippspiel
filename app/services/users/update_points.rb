@@ -29,8 +29,9 @@ module Users
           total_points  = 0 unless total_points.present?
 
           champion_tipp_points = 0
-          champion_team_id     = Game.tournament_champion_team.present? ? Game.tournament_champion_team.id : nil
-          if Game.tournament_finished? &&
+          tournament_champion_team = get_tournament_champion_team
+          champion_team_id     = tournament_champion_team.present? ? tournament_champion_team.id : nil
+          if Tournament.finished? &&
               user.championtipp_team_id.present? &&
               user.championtipp_team_id == champion_team_id
             champion_tipp_points = CHAMPION_TIPP_POINTS
@@ -55,6 +56,29 @@ module Users
         end
       end
     end
+
+    def get_tournament_champion_team
+      result = nil
+      games = ::Game.final_games
+      if games.present?
+        result = winner_team(games.first)
+      end
+
+      result
+    end
+
+    # bei Unentschieden wird nil geliefert ansonsten, das Siegerteam
+    def winner_team(game)
+      result = nil
+      if game.team1_goals.present? && game.team2_goals.present?
+        result = game.team1 if game.team1_goals > game.team2_goals
+        result = game.team2 if game.team1_goals < game.team2_goals
+      end
+
+      result
+    end
+
+
 
   end
 end

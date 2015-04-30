@@ -18,7 +18,7 @@ class SchedulerController < ApplicationController
     render :plain => "Admin scheduler run successful", :status => :ok
   end
 
-
+  # TODO soeren 30.04.15 #94 refactoring
   private
 
   def start_calculate_points

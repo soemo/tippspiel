@@ -8,4 +8,5 @@ class RailsAdminAbility
       can :manage, :all
     end
   end
+  # TODO soeren 30.04.15 brauche ich noch den RailsAdmin???
 end

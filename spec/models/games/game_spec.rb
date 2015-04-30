@@ -33,32 +33,6 @@ describe Game, :type => :model do
                          :round => Game::GROUP})}.to raise_error(ActiveRecord::RecordInvalid)
   end
 
-  it 'gets finished days with game ids' do
-    day1_game1 = create(:game, :start_at => '19.06.2012 20:45', :finished => true)
-    day1_game2 = create(:game, :start_at => '19.06.2012 20:45', :finished => true)
-    day1_game3 = create(:game, :start_at => '19.06.2012 20:45', :finished => true)
-
-    day2_game1 = create(:game, :start_at => '20.06.2012 18:00', :finished => true)
-    day2_game2 = create(:game, :start_at => '20.06.2012 18:00', :finished => true)
-    day2_game3 = create(:game, :start_at => '20.06.2012 20:45', :finished => false)
-
-    day3_game1 = create(:game, :start_at => '21.06.2012 18:00', :finished => true)
-    day3_game2 = create(:game, :start_at => '21.06.2012 18:00', :finished => false)
-    day3_game3 = create(:game, :start_at => '21.06.2012 20:45', :finished => true)
-
-    game_days_with_game_ids = Game.finished_days_with_game_ids
-    expect(game_days_with_game_ids['2012-06-19'].sort).to eq([day1_game1.id, day1_game2.id, day1_game3.id].sort)
-    expect(game_days_with_game_ids['2012-06-20']).to be_nil
-    expect(game_days_with_game_ids['2012-06-21']).to be_nil
-
-    day2_game3.update_attribute(:finished, true)
-    game_days_with_game_ids = Game.finished_days_with_game_ids
-    expect(game_days_with_game_ids['2012-06-19'].sort).to eq([day1_game1.id, day1_game2.id, day1_game3.id].sort)
-    expect(game_days_with_game_ids['2012-06-20'].sort).to eq([day2_game1.id, day2_game2.id, day2_game3.id].sort)
-    expect(game_days_with_game_ids['2012-06-21']).to be_nil
-
-  end
-
   it 'gets finished games' do
      game1 = create(:game, :start_at => '19.06.2012 20:45', :finished => nil)
      game2 = create(:game, :start_at => '19.06.2012 20:45', :finished => false)
@@ -67,21 +41,4 @@ describe Game, :type => :model do
      expect(Game.finished_games).to eq([game3])
   end
 
-  context '#before_tournament?' do
-
-    it 'returns true, if first game is in the future' do
-      Timecop.freeze(Time.now)
-      create(:game, :start_at => Time.now + 1.second)
-
-      expect(Game.before_tournament?).to be true
-    end
-
-    it 'returns false, if first game is not in the future' do
-      Timecop.freeze(Time.now)
-      create(:game, :start_at => Time.now - 1.second)
-
-      expect(Game.before_tournament?).to be false
-    end
-
-  end
 end

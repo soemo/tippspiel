@@ -107,9 +107,9 @@ module FootieFox
 
                 # Tore nur speichern, wenn das Spiel schon vorbei ist
                 if api_status.present? && api_status == API_GAME_STATUS_FINISHED
-                  game.update_columns({:team1_goals => api_team1_goals.to_i,
-                                       :team2_goals => api_team2_goals.to_i,
-                                       :finished    => true})
+                  game.update_columns({team1_goals: api_team1_goals.to_i,
+                                       team2_goals: api_team2_goals.to_i,
+                                       finished: true})
                   infos << "UPDATE_GAME: Game(#{game.to_s}) got new score #{game.team1_goals}:#{game.team2_goals} and set to finished"
                 end
               end

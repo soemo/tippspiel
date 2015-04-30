@@ -4,14 +4,7 @@ require 'rails_helper'
 describe 'ranking/index', :type => :view do
 
   before :each do
-    controller.singleton_class.class_eval do
-      protected
-      def before_tournament?
-        false
-      end
-      helper_method :before_tournament?
-    end
-
+    allow(Tournament).to receive(:started?).and_return(true)
   end
 
   it 'should show no user ranking if no user' do

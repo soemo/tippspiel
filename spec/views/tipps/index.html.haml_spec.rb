@@ -8,15 +8,9 @@ describe 'tipps/index.html.haml', :type => :view do
   end
 
 
-  context 'when before_tournament == true' do
+  context 'when tournament is not started' do
     before :each do
-      controller.singleton_class.class_eval do
-        protected
-        def before_tournament?
-          true
-        end
-        helper_method :before_tournament?
-      end
+      allow(Tournament).to receive(:started?).and_return(false)
     end
 
     it 'shows info to select champion' do
@@ -34,15 +28,9 @@ describe 'tipps/index.html.haml', :type => :view do
 
   end
 
-  context 'when before_tournament == false' do
+  context 'when tournament is started' do
     before :each do
-      controller.singleton_class.class_eval do
-        protected
-        def before_tournament?
-          false
-        end
-        helper_method :before_tournament?
-      end
+      allow(Tournament).to receive(:started?).and_return(true)
     end
 
     it 'should say no champion tipp' do

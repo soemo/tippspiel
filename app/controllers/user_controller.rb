@@ -7,7 +7,7 @@ class UserController < ApplicationController
       format.html
     end
   end
-
+         # TODO soeren 30.04.15 use own service
   def change_password
     old_password          = params[:old_password]
     password              = params[:password]

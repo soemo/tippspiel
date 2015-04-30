@@ -10,11 +10,12 @@
     .small-12.large-5.large-push-7.columns
       = render :partial => 'user_infos', :locals => {:presenter => @presenter}
     .small-12.large-7.large-pull-5.columns
-      = render :partial => 'tournament_infos', :locals => {:today_games => @presenter.today_games}
+      = render :partial => 'tournament_infos', :locals => {today_games: @presenter.today_games,
+                                                           tournament_finished: @presenter.tournament_finished?}
 
 .row
   .small-12.columns
-    - if before_tournament?
+    - if @presenter.tournament_started?
       = render :partial => 'countdown'
 
     %h3=I18n.t('games_of', :tournament_name => TOURNAMENT_NAME)
