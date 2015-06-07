@@ -21,7 +21,11 @@ module RankingHelper
               haml_tag 'td.place', place
               haml_tag :td, user.name
               haml_tag :td, Tournament.not_yet_started? ? '' : user.championtipp_team unless short
-              haml_tag :td, statistic_point_popover_link(user)
+              haml_tag :td do
+                haml_concat statistic_hover_dropdown_link(user)
+                haml_concat statistic_hover_dropdown_content(user)
+              end
+
             end
           end
         end
@@ -34,30 +38,38 @@ module RankingHelper
     end
   end
 
-  def statistic_point_popover_link(user, css_class ='statistic_popover')
+  def statistic_hover_dropdown_link(user)
     if user.present?
-      content = statistik_tooltip(user)
-      title = user.name
+
       user_points = user.points.present? ? user.points.to_s : '0'
-      link_to(user_points, '#',
-              {:class => css_class, :rel => 'popover', 'data-content' => content,
-              'data-original-title' => title})
+
+      link_to(user_points, '#', {data: {dropdown: get_dropdown_id(user.id), options: 'is_hover:true; align:left'}})
     end
   end
 
-  def statistik_tooltip(user)
-    result = "<b>#{I18n.t('points_statistic')}</b></br>"
+  def get_dropdown_id(user_id)
+    "statistik_#{user_id}"
+  end
 
-    temp   = {'8' => user.count8points,
-              '5' => user.count5points,
-              '4' => user.count4points,
-              '3' => user.count3points,
-              '0' => user.count0points}
-    temp.each do |key, count|
-      result << "#{count.present? ? count : 0} x #{key} #{User.human_attribute_name('points')}</br>"
+  def statistic_hover_dropdown_content(user)
+    result = ''
+    if user.present?
+      result << "<div id='#{get_dropdown_id(user.id)}' data-dropdown-content class='f-dropdown content' aria-hidden='true' tabindex='-1'>"
+      result << "<b>#{user.name}</br>"
+      result << "#{I18n.t('points_statistic')}</b></br>"
+
+      temp   = {'8' => user.count8points,
+                '5' => user.count5points,
+                '4' => user.count4points,
+                '3' => user.count3points,
+                '0' => user.count0points}
+      temp.each do |key, count|
+        result << "#{count.present? ? count : 0} x #{key} #{User.human_attribute_name('points')}</br>"
+      end
+      result << "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{user.championtipppoints}"
+
+      result << '</div>'
     end
-    result << "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{user.championtipppoints}"
-
     result
   end
 end

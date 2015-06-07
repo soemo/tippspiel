@@ -290,16 +290,3 @@ a.brand {
   margin-bottom: 0px;
 }
 /*### End Alert Messages als PopUp ###*/
-
-
-/* # FIXME soeren 08.04.15 was brauche ich noch #93
-####################################################
-*/
-.popover h3 {
-  margin-bottom: 0px;
-}
-
-.popover-inner {
-  background: $primary-color; // has to be full background declaration for IE fallback
-  background: rgba(4,156,219,.8);
-}

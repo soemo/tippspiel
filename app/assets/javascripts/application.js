@@ -13,6 +13,12 @@ $(function(){
   repositionOfFlashMessages();
   repositionOfFlashMessagesIfOneIsClosed();
   autoCloseSuccessMessage();
+
+  check_user_tipp();
+  init_random_user_tips();
+  init_countdown('counter_desktop');
+  init_show_only_today_games();
+  init_save_tips_from_overlay_button();
 });
 
 
@@ -148,30 +154,20 @@ function autoCloseSuccessMessage(){
   });
 }
 
+function check_user_tipp() {
+  $(".tipp_input").keyup( function() {
+    var cur_val = $(this).val(); // grab what's in the field
+    // do stuff with cur_val so that it's what you want
+    if (isNaN( cur_val )) {
+      // It isn't a number
+      cur_val = cur_val.substr(0,cur_val.length-1);
+    } else {
+      // It is a number
+    }
 
-
-
-
-// # FIXME soeren 08.04.15 ab hier schauen was wir noch brauchen #93
-
-$(function() {
-  check_user_tipp();
-  ajax_load_modal_content();
-
-  // Ranking Statistik Punkte
-  /*
-  # FIXME soeren 08.04.15 gab es nur in Bootstrap
-  $('.statistic_popover').popover({
-    placement: "left",
-    html: true,
-    trigger: 'hover'
-  });*/
-
-  init_random_user_tips();
-  init_countdown('counter_desktop');
-  init_show_only_today_games();
-  init_save_tips_from_overlay_button();
-});
+    $(this).val(cur_val);
+  });
+}
 
 
 function init_show_only_today_games (){
@@ -184,15 +180,6 @@ function init_show_only_today_games (){
 }
 
 function init_random_user_tips(){
-  // Popover anzeigen
-/*
- # FIXME soeren 08.04.15 gab es nur in Bootstrap
-  $('#js_fill_random_tips').popover({
-    placement: "bottom",
-    html: true,
-    trigger: 'hover'
-  });
-*/
   $('#js_fill_random_tips').click(function() {
     var inputs =  $(".tipp_input:visible");
     if(inputs.length) {
@@ -240,53 +227,3 @@ function init_countdown(element_id_string){
     });
   }
 }
-
-// Support for AJAX loaded modal window.
-// Focuses on first input textbox after it loads the window.
-function ajax_load_modal_content(){
-
-  $('[data-toggle="modal"]').click(function (e) {
-    // alte div class=modal wegraeumen
-    $('div.modal').remove();
-
-    e.preventDefault();
-    var href = $(this).attr('href');
-    if (href.indexOf('#') == 0) {
-      $(href).modal('open');
-    } else {
-      $.get(href,
-              function (data) {
-                $('<div class="modal" >' + data + '</div>').modal();
-              }).success(function () {
-                $('input:text:visible:first').focus();
-              });
-    }
-  });
-
-}
-
-
-
-
-function check_user_tipp() {
-  $(".tipp_input").keyup( function() {
-      var cur_val = $(this).val(); // grab what's in the field
-      // do stuff with cur_val so that it's what you want
-      if (isNaN( cur_val )) {
-        // It isn't a number
-        cur_val = cur_val.substr(0,cur_val.length-1);
-      } else {
-        // It is a number
-       }
-
-      $(this).val(cur_val);
-  });
-}
-
-
-
-
-
-
-
-

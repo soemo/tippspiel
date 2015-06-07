@@ -1,5 +1,9 @@
 .random_tips
-  - content = I18n.t('random_tips_description')
+  - content_id = 'random_tip_tooltip'
   = link_to(t('random_tips'), '#',
-            {:id => 'js_fill_random_tips', :class => '', :remote => true,
-             :rel => 'popover', 'data-content' => content})
+            {:id => 'js_fill_random_tips', :remote => true,
+             data: {dropdown: content_id, options: 'is_hover:true; align:top'}})
+
+  %div{id: content_id, 'data-dropdown-content' => nil,  class: 'f-dropdown content medium',
+       'aria-hidden' => 'true', tabindex: '-1'}
+    = raw(I18n.t('random_tips_description'))
