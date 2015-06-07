@@ -15,7 +15,7 @@
 
 .row
   .small-12.columns
-    - if @presenter.tournament_started?
+    - unless @presenter.tournament_started?
       = render :partial => 'countdown'
 
     %h3=I18n.t('games_of', :tournament_name => TOURNAMENT_NAME)
