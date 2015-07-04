@@ -14,7 +14,7 @@ $(function(){
   repositionOfFlashMessagesIfOneIsClosed();
   autoCloseSuccessMessage();
 
-  check_user_tipp();
+  check_user_tip();
   init_random_user_tips();
   init_countdown('counter_desktop');
   init_show_only_today_games();
@@ -154,8 +154,8 @@ function autoCloseSuccessMessage(){
   });
 }
 
-function check_user_tipp() {
-  $(".tipp_input").keyup( function() {
+function check_user_tip() {
+  $(".tip_input").keyup( function() {
     var cur_val = $(this).val(); // grab what's in the field
     // do stuff with cur_val so that it's what you want
     if (isNaN( cur_val )) {
@@ -174,14 +174,14 @@ function init_show_only_today_games (){
   if($('#js_only_today_games').length > 0) {
     $('#js_only_today_games').change(function() {
       // die tr Zeilen, die nicht ein Spiel von heute sind, werden ein oder ausblenden
-      $("#js_save_tipps tr:not(.today_game)").toggle();
+      $("#js_save_tips tr:not(.today_game)").toggle();
     });
   }
 }
 
 function init_random_user_tips(){
   $('#js_fill_random_tips').click(function() {
-    var inputs =  $(".tipp_input:visible");
+    var inputs =  $(".tip_input:visible");
     if(inputs.length) {
       $.each(inputs, function() {
         $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen
@@ -192,7 +192,7 @@ function init_random_user_tips(){
   });
 
   // Anzeige des Save Button Overlays
-  $(".tipp_input").bind('change keyup', function() {
+  $(".tip_input").bind('change keyup', function() {
     show_overlay_tip_save();
   });
 }
@@ -206,7 +206,7 @@ function init_save_tips_from_overlay_button(){
   if(e.length > 0) {
     e.click(function() {
       // Formular abschicken
-      $('#js_save_tipps').submit();
+      $('#js_save_tips').submit();
     });
   }
 

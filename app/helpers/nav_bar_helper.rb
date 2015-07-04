@@ -5,8 +5,8 @@ module NavBarHelper
   def main_nav_items
     [
         ['main', root_path, false],
-        ['tipps', tipps_path, true],
-        ['tipps_for_phone', tipps_path({:for_phone => true}), true], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
+        ['tips', tips_path, true],
+        ['tips_for_phone', tips_path({:for_phone => true}), true], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
         ['ranking', ranking_path, true],
         ['notice', notes_path, true],
         ['compare_tips', compare_tips_path, true],
@@ -106,11 +106,11 @@ module NavBarHelper
 
         # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
         # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
-        if key == 'tipps'
+        if key == 'tips'
           haml_tag "li.#{class_name}.hide-for-small-only" do
             haml_concat link_to(link_text, path)
           end
-        elsif key == 'tipps_for_phone'
+        elsif key == 'tips_for_phone'
           haml_tag "li.#{class_name}.show-for-small-only" do
             haml_concat link_to(link_text, path)
           end

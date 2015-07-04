@@ -19,15 +19,15 @@
   Wer die meisten Punkte hat gewinnt. Ein Tipp für ein Spiel kann bis zur angegebenen Spiel-Startzeit abgegeben werden.
   %br
   .panel.callout
-    Pro Spiel gibt es maximal #{Tipps::UpdatePoints::MAX_POINTS_PRO_TIPP} Punkte!
+    Pro Spiel gibt es maximal #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte!
 
 %ul.hilfe
   %li
-    #{Tipps::UpdatePoints::POINTS_CORRECT_TREND}
+    #{Tips::UpdatePoints::POINTS_CORRECT_TREND}
     Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage (Spieltendenz).
   %li
     Je
-    #{Tipps::UpdatePoints::EXTRA_POINT_GOALS}
+    #{Tips::UpdatePoints::EXTRA_POINT_GOALS}
     weitere Punkte gibt es bei Übereinstimmung der getippten und der tatsächlich erzielten Tore
     einer Mannschaft. Allerdings gibt es diese Punkte
     %b
@@ -58,7 +58,7 @@
       - 5.times do
         = icon('circle-thin', '', class: 'blue-primary-color')
       %br
-      #{Tipps::UpdatePoints::POINTS_CORRECT_TREND} Punkte: Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte: Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams
   %li
     %p
       - 4.times do
@@ -66,7 +66,7 @@
       - 4.times do
         = icon('circle-thin', '', class: 'blue-primary-color')
       %br
-      #{Tipps::UpdatePoints::POINTS_CORRECT_TREND + Tipps::UpdatePoints::EXTRA_POINT} Punkte: Spieltendenz richtig und die Tordifferenz
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte: Spieltendenz richtig und die Tordifferenz
   %li
     %p
       - 5.times do
@@ -74,42 +74,42 @@
       - 3.times do
         = icon('circle-thin', '', class: 'blue-primary-color')
       %br
-      #{Tipps::UpdatePoints::POINTS_CORRECT_TREND + Tipps::UpdatePoints::EXTRA_POINT_GOALS} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
   %li
     %p
       - 8.times do
         = icon('circle', '', class: 'blue-primary-color')
       %br
-      #{Tipps::UpdatePoints::MAX_POINTS_PRO_TIPP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
+      #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
 
 %p
   Bei Punktgleichheit wird die Platzierung über die Anzahl der erreichten Tipppunkte entschieden.
   %br
-  Wer mehr "#{Tipps::UpdatePoints::MAX_POINTS_PRO_TIPP} Punktetipps" hat liegt bei Punktgleichheit vorn.
-  Wenn auch die "#{Tipps::UpdatePoints::MAX_POINTS_PRO_TIPP} Punktetipps" gleich sind entscheiden
-  die "#{Tipps::UpdatePoints::POINTS_CORRECT_TREND + Tipps::UpdatePoints::EXTRA_POINT_GOALS} Punktetipps".
-  Liegt auch hier Gleichheit vor dann die "#{Tipps::UpdatePoints::POINTS_CORRECT_TREND  + Tipps::UpdatePoints::EXTRA_POINT} Punktetipps" usw.
+  Wer mehr "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punktetipps" hat liegt bei Punktgleichheit vorn.
+  Wenn auch die "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punktetipps" gleich sind entscheiden
+  die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punktetipps".
+  Liegt auch hier Gleichheit vor dann die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND  + Tips::UpdatePoints::EXTRA_POINT} Punktetipps" usw.
 
 .panel
   %span.label
     Beispiele
   %p
     Frankreich - Schweiz spielt 3:0 und Du hast 3:1 getippt.
-    Dann bekommst Du insgesamt #{Tipps::UpdatePoints::POINTS_CORRECT_TREND + Tipps::UpdatePoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
-    #{Tipps::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
-    und #{Tipps::UpdatePoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
+    Dann bekommst Du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
+    #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
+    und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
     %br
     %br
     Deutschland - Italien spielt 1:0 und du hast 2:1 getippt.
-    Dann bekommst du insgesamt #{Tipps::UpdatePoints::POINTS_CORRECT_TREND + Tipps::UpdatePoints::EXTRA_POINT} Punkte auf das Spiel.
-    #{Tipps::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
-    und #{Tipps::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
+    Dann bekommst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte auf das Spiel.
+    #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
+    und #{Tips::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
 
 .panel.callout
   %span.label.warning
     Tuniersieger-Tipp:
   %p
-    Bei richtigem Tipp auf den Tuniersieger gibt es #{Users::UpdatePoints::CHAMPION_TIPP_POINTS} Zusatzpunkte.
+    Bei richtigem Tipp auf den Tuniersieger gibt es #{Users::UpdatePoints::CHAMPION_TIP_POINTS} Zusatzpunkte.
     Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
 
 %p

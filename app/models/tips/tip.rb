@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Tipp < ActiveRecord::Base
+class Tip < ActiveRecord::Base
   acts_as_paranoid
 
   belongs_to :game
@@ -15,7 +15,7 @@ class Tipp < ActiveRecord::Base
   def edit_allowed?
     game.start_at > Time.now
   end
-          # TODO soeren 30.04.15 move to Tipps::Save Service
+          # TODO soeren 30.04.15 move to Tips::Save Service
   def remove_leading_zero
     if team1_goals.present?
       self.team1_goals = team1_goals.to_i

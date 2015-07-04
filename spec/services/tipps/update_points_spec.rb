@@ -1,16 +1,16 @@
 # -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe Tipps::UpdatePoints do
+describe Tips::UpdatePoints do
 
-  subject { Tipps::UpdatePoints }
+  subject { Tips::UpdatePoints }
 
-  def ctp_call_helper(game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
-    subject.new.send('calculate_tipp_points', game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
+  def ctp_call_helper(game_winner, game_team1_goals, game_team2_goals, tip_team1_goals, tip_team2_goals)
+    subject.new.send('calculate_tip_points', game_winner, game_team1_goals, game_team2_goals, tip_team1_goals, tip_team2_goals)
   end
 
-  it 'get correct tipp points' do
-    #calculate_tipp_points(game_winner, game_team1_goals, game_team2_goals, tipp_team1_goals, tipp_team2_goals)
+  it 'get correct tip points' do
+    #calculate_tip_points(game_winner, game_team1_goals, game_team2_goals, tip_team1_goals, tip_team2_goals)
     expect(ctp_call_helper(subject::TEAM1_WIN, 1, 0, 1, 0)).to eq(8)
     expect(ctp_call_helper(subject::TEAM1_WIN, 2, 0, 1, 0)).to eq(5)
     expect(ctp_call_helper(subject::TEAM1_WIN, 2, 1, 1, 0)).to eq(4)
@@ -37,11 +37,11 @@ describe Tipps::UpdatePoints do
   end
 
 
-  describe 'calculate all user tipp points' do
+  describe 'calculate all user tip points' do
 
     before :each do
       Game.destroy_all
-      Tipp.destroy_all
+      Tip.destroy_all
       User.destroy_all
 
       @game1 = create(:game, :team1_goals => 0, :team2_goals => 0)
@@ -58,43 +58,43 @@ describe Tipps::UpdatePoints do
 
       User.all.each do |user|
         Game.all.each do |game|
-          create(:tipp, :user => user, :game => game,
+          create(:tip, :user => user, :game => game,
                  :team1_goals => rand(4), :team2_goals => rand(4))
         end
       end
     end
 
-    it 'should update all tipp points for a game' do
-      expect(Tipp.where(:game_id => @game1.id).size).to eq(5)
-      where_sql = ["game_id = ? and tipp_punkte is not null", @game1.id]
-      tipps = Tipp.where(where_sql).to_a
-      expect(tipps).not_to be_present
+    it 'should update all tip points for a game' do
+      expect(Tip.where(:game_id => @game1.id).size).to eq(5)
+      where_sql = ["game_id = ? and tip_points is not null", @game1.id]
+      tips = Tip.where(where_sql).to_a
+      expect(tips).not_to be_present
 
-      subject.new.send('update_all_tipp_points_for', @game1)
+      subject.new.send('update_all_tip_points_for', @game1)
 
-      tipps = Tipp.where(where_sql).to_a
-      expect(tipps).to be_present
-      tipps.size == 5
+      tips = Tip.where(where_sql).to_a
+      expect(tips).to be_present
+      tips.size == 5
     end
 
-    it 'should update all tipp points for all games' do
-      where_sql = ["tipp_punkte is not null"]
-      expect(Tipp.where(where_sql).count).to eq(0)
+    it 'should update all tip points for all games' do
+      where_sql = ["tip_points is not null"]
+      expect(Tip.where(where_sql).count).to eq(0)
 
       subject.call
 
       # noch keine Tipp Punkte vergeben, da noch kein Spiel beendet
-      expect(Tipp.where(where_sql).count).to eq(0)
+      expect(Tip.where(where_sql).count).to eq(0)
 
       Game.first.update_column(:finished, true)
       subject.call
       # Tipp Punkte fürs erste Spiel vergeben
-      expect(Tipp.where(where_sql).count).to eq(5)
+      expect(Tip.where(where_sql).count).to eq(5)
 
       Game.update_all("finished=true")
       subject.call
       # alleTipp Punkte vergeben
-      expect(Tipp.where(["tipp_punkte is null"]).count).to eq(0)
+      expect(Tip.where(["tip_points is null"]).count).to eq(0)
     end
   end
 

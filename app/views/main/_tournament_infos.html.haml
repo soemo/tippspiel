@@ -16,8 +16,8 @@
       Spiele des heutigen Tages
       - if user_signed_in?
         -# FIXME soeren 11.04.15 #72
-        = link_to(t('to_tip_page'), tipps_path, :class=>'hide-for-small-only')
-        = link_to(t('to_tip_page'), tipps_path({:for_phone => true}), :class=>'show-for-small-only')
+        = link_to(t('to_tip_page'), tips_path, :class=>'hide-for-small-only')
+        = link_to(t('to_tip_page'), tips_path({:for_phone => true}), :class=>'show-for-small-only')
     %table
       %thead.hide-for-small-only
         %tr

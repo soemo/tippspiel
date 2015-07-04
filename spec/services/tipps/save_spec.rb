@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe Tipps::Save do
+describe Tips::Save do
 
   subject { Tips::Save }
 

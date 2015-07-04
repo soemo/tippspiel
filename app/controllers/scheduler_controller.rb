@@ -23,7 +23,7 @@ class SchedulerController < ApplicationController
 
   def start_calculate_points
     FootieFox::UpdateGames.call
-    Tipps::UpdatePoints.call
+    Tips::UpdatePoints.call
     Users::UpdatePoints.call
   end
 

@@ -29,10 +29,10 @@ RailsAdmin.config do |config|
   config.default_items_per_page = 50
 
   # Exclude specific models (keep the others):
-  # config.excluded_models = ['Event', 'Game', 'Notice', 'Team', 'Tipp', 'User']
+  # config.excluded_models = ['Event', 'Game', 'Notice', 'Team', 'Tip', 'User']
 
   # Include specific models (exclude the others):
-  # config.included_models = ['Event', 'Game', 'Notice', 'Team', 'Tipp', 'User']
+  # config.included_models = ['Event', 'Game', 'Notice', 'Team', 'Tip', 'User']
 
   # Label methods for model instances:
   # config.label_methods << :description # Default is [:name, :title]
@@ -107,7 +107,7 @@ RailsAdmin.config do |config|
 
   #     configure :team1, :belongs_to_association 
   #     configure :team2, :belongs_to_association 
-  #     configure :tipps, :has_many_association 
+  #     configure :tips, :has_many_association
 
   #   # Found columns:
 
@@ -247,11 +247,11 @@ RailsAdmin.config do |config|
   # end
 
 
-  ###  Tipp  ###
+  ###  Tip  ###
 
-  # config.model 'Tipp' do
+  # config.model 'Tip' do
 
-  #   # You can copy this to a 'rails_admin do ... end' block inside your tipp.rb model definition
+  #   # You can copy this to a 'rails_admin do ... end' block inside your tip.rb model definition
 
   #   # Found associations:
 
@@ -263,7 +263,7 @@ RailsAdmin.config do |config|
   #     configure :id, :integer 
   #     configure :user_id, :integer         # Hidden 
   #     configure :game_id, :integer         # Hidden 
-  #     configure :tipp_punkte, :integer 
+  #     configure :tip_points, :integer
   #     configure :team1_goals, :integer 
   #     configure :team2_goals, :integer 
   #     configure :deleted_at, :datetime 
@@ -305,8 +305,8 @@ RailsAdmin.config do |config|
 
   #   # Found associations:
 
-  #     configure :championtipp_team, :belongs_to_association 
-  #     configure :tipps, :has_many_association
+  #     configure :championtip_team, :belongs_to_association
+  #     configure :tips, :has_many_association
 
   #   # Found columns:
 
@@ -335,8 +335,8 @@ RailsAdmin.config do |config|
   #     configure :count4points, :integer
   #     configure :count3points, :integer 
   #     configure :count0points, :integer 
-  #     configure :championtipppoints, :integer 
-  #     configure :championtipp_team_id, :integer         # Hidden 
+  #     configure :championtippoints, :integer
+  #     configure :championtip_team_id, :integer         # Hidden
   #     configure :deleted_at, :datetime
 
   #   # Cross-section configuration:

@@ -17,8 +17,8 @@ de:
 
   delete_secure_question: "Bist du dir sicher?"
 
-  succesfully_saved_tipps: "Deine Tipps wurden gespeichert!"
-  succesfully_saved_championtipp: "Dein Tuniersieger-Tip wurden gespeichert!"
+  succesfully_saved_tips: "Deine Tips wurden gespeichert!"
+  succesfully_saved_championtip: "Dein Tuniersieger-Tip wurden gespeichert!"
   create_successful: "%{object_name} wurde erfolgreich angelegt"
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
@@ -28,11 +28,11 @@ de:
   change_password_need_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
   change_password_wrong_old_pw: 'Das alte Passwort stimmt nicht!'
 
-  need_champion_tipp: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
-  need_champion_tipp_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
-  current_champion_tipp: 'Du hast aktuell auf %{championtipp_name} als Tuniersieger getippt.'
-  champion_tipp: 'Du hast auf %{championtipp_name} als Tuniersieger getippt.'
-  no_champion_tipp: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
+  need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
+  need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
+  current_champion_tip: 'Du hast aktuell auf %{championtip_name} als Tuniersieger getippt.'
+  champion_tip: 'Du hast auf %{championtip_name} als Tuniersieger getippt.'
+  no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
   tournament_starts_in: "Der Spaß beginnt in:"
@@ -62,11 +62,11 @@ de:
   change_pw: "Passwort ändern"
   set_pw: "Passwort vergeben"
   send_pw: "Neues Passwort schicken"
-  save_tipp: "Tipps speichern"
-  random_tips: "Zufall-Tipps erstellen"
-  random_tips_description: "Wenn du zu faul zum Tippen bist, kannst du deine Tipps per Zufall ausfüllen lassen (Tore von 0 bis 5).
-  <b>Achtung:</b> Die Tipps werden nur in das Formular eingetragen und müssen noch gespeichert werden."
-  compare_tips: "Tipps vergleichen"
+  save_tip: "Tips speichern"
+  random_tips: "Zufall-Tips erstellen"
+  random_tips_description: "Wenn du zu faul zum Tippen bist, kannst du deine Tips per Zufall ausfüllen lassen (Tore von 0 bis 5).
+  <b>Achtung:</b> Die Tips werden nur in das Formular eingetragen und müssen noch gespeichert werden."
+  compare_tips: "Tips vergleichen"
   hall_of_fame: "Hall of Fame"
   points_statistic: Punkteverteilung
 
@@ -78,8 +78,8 @@ de:
   ranking: "Rangliste"
   notice: Fachsimpeleien
   tournament: "Turnier"
-  tipps: "Tipps"
-  tipps_for_phone: "Tipps" #72 besser machen
+  tips: "Tips"
+  tips_for_phone: "Tips" #72 besser machen
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
@@ -249,9 +249,9 @@ de:
       game:
         one: Spiel
         other: Spiele
-      tipp:
+      tip:
         one: Tipp
-        other: Tipps
+        other: Tips
     attributes:
       user:
         siegertipp: Siegertipp
@@ -273,8 +273,8 @@ de:
         team1: Mannschaft 1
         team2: Mannschaft 2
         result: Ergebnis
-      tipp:
-        tipp_punkte: "Punkte"
+      tip:
+        tip_points: "Punkte"
     errors:
       template:
         header:

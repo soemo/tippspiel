@@ -59,15 +59,15 @@ describe User, :type => :model do
     expect(user2.ranking_comparison_value).to eq(4601011000)
   end
 
-  it 'should delete tipps if user delete' do
+  it 'should delete tips if user delete' do
     user = FactoryGirl.create(:user)
-    5.times{ FactoryGirl.create(:tipp, :user => user) }
+    5.times{ FactoryGirl.create(:tip, :user => user) }
 
-    tipp_ids = Tipp.where(:user_id => user.id).pluck(:id)
-    expect(tipp_ids.count).to eq(5)
+    tip_ids = Tip.where(:user_id => user.id).pluck(:id)
+    expect(tip_ids.count).to eq(5)
 
     user.destroy
-    expect(Tipp.only_deleted.where(:user_id => user.id).pluck(:id)).to eq(tipp_ids)
+    expect(Tip.only_deleted.where(:user_id => user.id).pluck(:id)).to eq(tip_ids)
   end
 
 end

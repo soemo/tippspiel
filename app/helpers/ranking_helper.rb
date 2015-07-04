@@ -20,7 +20,7 @@ module RankingHelper
             haml_tag :tr do
               haml_tag 'td.place', place
               haml_tag :td, user.name
-              haml_tag :td, Tournament.not_yet_started? ? '' : user.championtipp_team unless short
+              haml_tag :td, Tournament.not_yet_started? ? '' : user.championtip_team unless short
               haml_tag :td do
                 haml_concat statistic_hover_dropdown_link(user)
                 haml_concat statistic_hover_dropdown_content(user)
@@ -66,7 +66,7 @@ module RankingHelper
       temp.each do |key, count|
         result << "#{count.present? ? count : 0} x #{key} #{User.human_attribute_name('points')}</br>"
       end
-      result << "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{user.championtipppoints}"
+      result << "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{user.championtippoints}"
 
       result << '</div>'
     end

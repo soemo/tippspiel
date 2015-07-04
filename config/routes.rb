@@ -14,9 +14,9 @@ Tippspiel::Application.routes.draw do
   get 'scheduler/hourly'
   get 'scheduler/admin'
 
-  get 'tipps' => 'tipps#index'
-  post 'save-tipps' => 'tipps#save_tipps'
-  post 'save-champion-tipp' => 'tipps#save_champion_tipp'
+  get 'tips' => 'tips#index'
+  post 'save-tips' => 'tips#save_tips'
+  post 'save-champion-tip' => 'tips#save_champion_tip'
   get 'ranking' => 'ranking#index'
   get 'notes' => 'notes#index'
   post 'save-notice' => 'notes#create'

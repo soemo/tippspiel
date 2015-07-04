@@ -30,7 +30,7 @@ class Ability
     can :access, :help
 
     if user.present?
-      can :manage, Tipp, :user_id => user.id
+      can :manage, Tip, :user_id => user.id
     end
   end
 end

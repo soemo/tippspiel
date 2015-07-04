@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
-module Tipps
+module Tips
   class SeparatedByRounds < BaseService
 
-    attribute :tipps, Array
+    attribute :tips, Array
 
     def call
       separated_by_rounds
@@ -13,16 +13,16 @@ module Tipps
 
     def separated_by_rounds
       result = {}
-      if tipps.present?
+      if tips.present?
         games_round_hash = Games::SeparatedByRounds.call
         games_round_hash.each do |index, round_with_games|
           round_with_games.each_pair do |round_name, games|
-            temp_tipps = []
+            temp_tips = []
             games.each do |game|
-              tipp = tipps.select{|t| t.game_id == game.id}
-              temp_tipps << tipp.first
+              tip = tips.select{|t| t.game_id == game.id}
+              temp_tips << tip.first
             end
-            result[index] = {round_name => temp_tipps}
+            result[index] = {round_name => temp_tips}
           end
         end
       end

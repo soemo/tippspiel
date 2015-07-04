@@ -1,24 +1,24 @@
-- if tipps_round_hash.present?
+- if tips_round_hash.present?
 
   = render :partial => 'random_tip_link'
   %br
-  = form_tag '/save-tipps', :id => 'js_save_tipps' do
+  = form_tag '/save-tips', :id => 'js_save_tips' do
     = render :partial => 'only_today_games_link'
 
     -# # TODO soeren 19.05.14 #72 besser machen
     = hidden_field_tag(:for_phone, @for_phone)
 
     -# eigenes table strip mittels css
-    %table.tipps
-      - tipps_round_hash.each do |index, round_with_tipps|
-        - round_with_tipps.each_pair do |round_name, tipps|
+    %table.tips
+      - tips_round_hash.each do |index, round_with_tips|
+        - round_with_tips.each_pair do |round_name, tips|
           %thead
             %tr.without_border_top.white-bg
               %th.round_name{:colspan => 3}= t(round_name, :scope => 'round')
           %tbody
-            - tipps.each do |tipp|
-              - game                 = tipp.game
-              - edit_allowed         = tipp.edit_allowed?
+            - tips.each do |tip|
+              - game                 = tip.game
+              - edit_allowed         = tip.edit_allowed?
               - row_class            = cycle('my-even', 'my-odd')
               - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
 
@@ -33,25 +33,25 @@
               %tr{:class => "#{row_class} without_border_top #{today_game_css_class}"}
                 %td
                   - if edit_allowed
-                    %span.muted= Tipp.model_name.human
+                    %span.muted= tip.model_name.human
                   - else
-                    %span.muted= "#{Tipp.model_name.human} (#{Tipp.human_attribute_name('tipp_punkte')})"
+                    %span.muted= "#{Tip.model_name.human} (#{Tip.human_attribute_name('tip_points')})"
                 %td
                   - if edit_allowed
-                    - write_tipp_input(tipp.id, 'team1_goals', tipp.team1_goals)
+                    - write_tip_input(tip.id, 'team1_goals', tip.team1_goals)
                   - else
-                    = "#{tipp.team1_goals}" #{tipp.team2_goals} (#{tipp.tipp_punkte})"
+                    = "#{tip.team1_goals}" #{tip.team2_goals} (#{tip.tip_points})"
                 %td
                   - if edit_allowed
-                    - write_tipp_input(tipp.id, 'team2_goals', tipp.team2_goals)
+                    - write_tip_input(tip.id, 'team2_goals', tip.team2_goals)
                   - else
-                    =  "#{tipp.team2_goals} (#{tipp.tipp_punkte})"
+                    =  "#{tip.team2_goals} (#{tip.tip_points})"
 
     .row
       %div
         %span.pull-right
-          = submit_tag t('save_tipp'), :class => 'button'
+          = submit_tag t('save_tip'), :class => 'button'
       = render :partial => 'overlay_submit_button_link'
 
 - else
-  %p= 'No Tipps'
+  %p= 'No Tips'

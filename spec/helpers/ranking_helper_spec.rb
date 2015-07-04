@@ -5,7 +5,7 @@ describe RankingHelper, :type => :helper do
   it 'should get statistik_tooltip' do
     user = FactoryGirl.build(:user, :id => 42,
                              :points => 13,
-                             :championtipppoints => 0,
+                             :championtippoints => 0,
                              :count8points => 1,
                              :count5points => 2,
                              :count4points => 1,

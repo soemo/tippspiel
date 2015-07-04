@@ -1,0 +1,52 @@
+- if tips_round_hash.present?
+
+  = render :partial => 'random_tip_link'
+
+  = form_tag '/save-tips', :id => 'js_save_tips' do
+    = render :partial => 'only_today_games_link'
+
+    %table.tips
+      - tips_round_hash.each do |index, round_with_tips|
+        - round_with_tips.each_pair do |round_name, tips|
+          %thead
+            %tr
+              %th.round_name{:colspan => 7}= t(round_name, :scope => 'round')
+            %tr.without_border_top.white-bg
+              %th= Game.human_attribute_name('start_at')
+              %th= Game.human_attribute_name('place')
+              %th= Game.human_attribute_name('team1')
+              %th= Game.human_attribute_name('team2')
+              %th= Game.human_attribute_name('result')
+              %th= Tip.model_name.human
+              %th= Tip.human_attribute_name('tip_points')
+          %tbody
+            - tips.each do |tip|
+              - game                 = tip.game
+              - edit_allowed         = tip.edit_allowed?
+              - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
+              %tr{:class => "#{today_game_css_class}"}
+                %td= l(game.start_at, :format => :default)
+                %td= game.place
+                %td
+                  - write_team_with_flag(game.team1_view_name, game.team1_country_code)
+                %td
+                  - write_team_with_flag(game.team2_view_name, game.team2_country_code)
+                %td= game.team1_goals.to_s + ' : ' + game.team2_goals.to_s
+                - if edit_allowed
+                  %td.tip_input_td
+                    - write_tip_input(tip.id, 'team1_goals', tip.team1_goals)
+                    =':'
+                    - write_tip_input(tip.id, 'team2_goals', tip.team2_goals)
+
+                - else
+                  %td= "#{tip.team1_goals} : #{tip.team2_goals}"
+                %td= tip.tip_points
+
+    .row
+      %div
+        %span.pull-right
+          = submit_tag t('save_tip'), :class => 'button'
+      = render :partial => 'overlay_submit_button_link'
+
+- else
+  %p= 'No Tips'

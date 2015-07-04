@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe Tipps::SeparatedByRounds do
+describe Tips::SeparatedByRounds do
 
-  subject { Tipps::SeparatedByRounds }
+  subject { Tips::SeparatedByRounds }
 
   context 'when no tips present?' do
     it 'returns empty array' do
-      expect(subject.call(tipps: [])).to eq([])
+      expect(subject.call(tips: [])).to eq([])
     end
   end
 
@@ -35,32 +35,32 @@ describe Tipps::SeparatedByRounds do
     let!(:game_f) { create(:game, round: Game::FINAL, group: nil)}
 
 
-    let!(:tip1_group_a) { create(:tipp, game: game1_group_a)}
-    let!(:tip2_group_a) { create(:tipp, game: game2_group_a)}
+    let!(:tip1_group_a) { create(:tip, game: game1_group_a)}
+    let!(:tip2_group_a) { create(:tip, game: game2_group_a)}
 
-    let!(:tip1_group_b) { create(:tipp, game: game1_group_b)}
-    let!(:tip2_group_b) { create(:tipp, game: game2_group_b)}
+    let!(:tip1_group_b) { create(:tip, game: game1_group_b)}
+    let!(:tip2_group_b) { create(:tip, game: game2_group_b)}
 
-    let!(:tip1_group_c) { create(:tipp, game: game1_group_c)}
-    let!(:tip2_group_c) { create(:tipp, game: game2_group_c)}
+    let!(:tip1_group_c) { create(:tip, game: game1_group_c)}
+    let!(:tip2_group_c) { create(:tip, game: game2_group_c)}
 
     # no tips for group d - h  (groups e - h only if WM)
     # no tips for round of 16 (only WM)
 
-    let!(:tip1_quarter) { create(:tipp, game: game1_quarter)}
-    let!(:tip2_quarter) { create(:tipp, game: game2_quarter)}
+    let!(:tip1_quarter) { create(:tip, game: game1_quarter)}
+    let!(:tip2_quarter) { create(:tip, game: game2_quarter)}
 
-    let!(:tip1_sf) { create(:tipp, game: game1_sf)}
-    let!(:tip2_sf) { create(:tipp, game: game2_sf)}
+    let!(:tip1_sf) { create(:tip, game: game1_sf)}
+    let!(:tip2_sf) { create(:tip, game: game2_sf)}
 
     # no game for place 3 (only WM)
 
-    let!(:tip_f) { create(:tipp, game: game_f)}
+    let!(:tip_f) { create(:tip, game: game_f)}
 
 
     it 'returns games seperated by rounds' do
       expect(Game.count).to eq(11)
-      expect(Tipp.count).to eq(11)
+      expect(Tip.count).to eq(11)
 
       if IS_WM
         expected = [
@@ -91,7 +91,7 @@ describe Tipps::SeparatedByRounds do
       end
 
 
-      expect(subject.call(tipps: Tipp.all)).to eq(expected)
+      expect(subject.call(tips: Tip.all)).to eq(expected)
     end
 
   end

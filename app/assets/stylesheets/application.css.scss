@@ -80,14 +80,14 @@ table thead tr.white-bg td {
   background-color: $white;
 }
 
-input.tipp_input {
+input.tip_input {
   width: 18px;
   margin-bottom: 0px;
   height: 13px;
   line-height: 13px;
 }
 
-.tipp_input_td {
+.tip_input_td {
   white-space: nowrap;
 }
 
@@ -234,7 +234,7 @@ a.brand {
 }
 /* ##### End Scroll to top ##### */
 
-/* ##### Start Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat ####*/
+/* ##### Start Overlay Tip Save Button, wenn sich ein Tipp geaendert hat ####*/
 #js_overlay_tip_save {
   background-color: whitesmoke; //rgba(130, 130, 130, 0.5);
   border: 1px solid #e3e3e3;
@@ -262,7 +262,7 @@ a.brand {
   border: 0px solid #8a8d7f;
 }
 
-/* ##### End Overlax Tipp Save Button, wenn sich ein Tipp geaendert hat ####*/
+/* ##### End Overlay Tip Save Button, wenn sich ein Tipp geaendert hat ####*/
 
 
 /*### Start Alert Messages als PopUp ###*/

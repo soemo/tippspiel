@@ -5,7 +5,7 @@ describe FootieFox::UpdateGames do
 
   subject { FootieFox::UpdateGames }
 
-  describe "calculate all user tipp points" do
+  describe "calculate all user tip points" do
     before :each do
       Game.destroy_all
 

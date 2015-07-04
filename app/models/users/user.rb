@@ -2,8 +2,8 @@
 class User < ActiveRecord::Base
   acts_as_paranoid
 
-  belongs_to :championtipp_team, :class_name => "Team"
-  has_many   :tipps, :dependent => :destroy
+  belongs_to :championtip_team, :class_name => "Team"
+  has_many   :tips, :dependent => :destroy
 
   validates               :email, :presence => true
   validates_uniqueness_of :email, :allow_blank => true, :scope => :deleted_at, :case_sensitive => false, :if => :email_changed?

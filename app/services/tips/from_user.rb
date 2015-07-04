@@ -1,38 +1,38 @@
 # -*- encoding : utf-8 -*-
-module Tipps
+module Tips
   class FromUser < BaseService
 
     attribute :user_id, Integer
 
     def call
-      user_tipps
+      user_tips
     end
 
     private
 
-    def user_tipps
+    def user_tips
       result = []
 
       if user_id.present?
-        result = tipps_with_games
+        result = tips_with_games
         unless result.present?
-          create_user_tipps
-          result = tipps_with_games
+          create_user_tips
+          result = tips_with_games
         end
       end
 
       result
     end
 
-    def tipps_with_games
+    def tips_with_games
       if user_id.present?
-        ::Tipp.includes(:game).where("user_id" => user_id)
+        ::Tip.includes(:game).where("user_id" => user_id)
       else
         []
       end
     end
 
-    def create_user_tipps
+    def create_user_tips
       game_ids = ::Game.pluck(:id)
       if game_ids.present?
 
@@ -44,8 +44,8 @@ module Tipps
           values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
         end
 
-        sql = "INSERT INTO tipps (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
-        ::Tipp.connection.execute(sql)
+        sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
+        ::Tip.connection.execute(sql)
       end
     end
 

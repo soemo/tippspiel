@@ -197,7 +197,7 @@ def load_demo_user_and_random_tips
         games = Game.all
         if games.present?
           games.each do |game|
-            Tipp.create!(:user_id => user.id, :game_id => game.id, :team1_goals => get_random_goal, :team2_goals => get_random_goal)
+            Tip.create!(:user_id => user.id, :game_id => game.id, :team1_goals => get_random_goal, :team2_goals => get_random_goal)
           end
         end
       end

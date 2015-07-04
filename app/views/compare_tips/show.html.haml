@@ -5,7 +5,7 @@
 
 - game_to_compare = @presenter.game_to_compare
 - possible_games  = @presenter.possible_games
-- tipps           = @presenter.tipps
+- tips           = @presenter.tips
 
 = form_tag compare_tips_path, :class => 'form-inline' do
   -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
@@ -16,7 +16,7 @@
                     select_options: options,
                     button_text: t('compare') }
 
-- if game_to_compare.present? && tipps.present?
+- if game_to_compare.present? && tips.present?
   .panel.callout
     %p
       = game_to_compare.to_s
@@ -25,17 +25,17 @@
         = Game.human_attribute_name('result')
         = game_to_compare.team1_goals.to_s + ' - ' + game_to_compare.team2_goals.to_s
 
-  %table.tipps
+  %table.tips
     %thead
       %tr
         %th= User.human_attribute_name('name')
-        %th= Tipp.model_name.human
-        %th= Tipp.human_attribute_name('tipp_punkte')
+        %th= Tip.model_name.human
+        %th= Tip.human_attribute_name('tip_points')
     %tbody
-    - tipps.each do |tipp|
-      - if tipp.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
-        - allowed_to_show = @presenter.allowed_to_show?(tipp)
+    - tips.each do |tip|
+      - if tip.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
+        - allowed_to_show = @presenter.allowed_to_show?(tip)
         %tr
-          %td= tipp.user.name
-          %td= allowed_to_show ? "#{tipp.team1_goals} : #{tipp.team2_goals}" : ''
-          %td= allowed_to_show ? tipp.tipp_punkte : ''
+          %td= tip.user.name
+          %td= allowed_to_show ? "#{tip.team1_goals} : #{tip.team2_goals}" : ''
+          %td= allowed_to_show ? tip.tip_points : ''

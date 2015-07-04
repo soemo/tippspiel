@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-# Berechnet fuer alle Nutzer die Punkte (tipp_punkte)
+# Berechnet fuer alle Nutzer die Punkte (tip_points)
 #
 # Speichern der Anzahl von
 #   count_8points
@@ -11,7 +11,7 @@
 module Users
   class UpdatePoints < BaseService
 
-    CHAMPION_TIPP_POINTS = 8
+    CHAMPION_TIP_POINTS = 8
 
     def call
       update_user_points
@@ -25,27 +25,27 @@ module Users
       users = User.active
       if users.present?
         users.each do |user|
-          total_points  = Tipp.where(:user_id => user.id).sum(:tipp_punkte)
+          total_points  = Tip.where(:user_id => user.id).sum(:tip_points)
           total_points  = 0 unless total_points.present?
 
-          champion_tipp_points = 0
+          champion_tip_points = 0
           tournament_champion_team = get_tournament_champion_team
           champion_team_id     = tournament_champion_team.present? ? tournament_champion_team.id : nil
           if Tournament.finished? &&
-              user.championtipp_team_id.present? &&
-              user.championtipp_team_id == champion_team_id
-            champion_tipp_points = CHAMPION_TIPP_POINTS
-            total_points = total_points + champion_tipp_points
+              user.championtip_team_id.present? &&
+              user.championtip_team_id == champion_team_id
+            champion_tip_points = CHAMPION_TIP_POINTS
+            total_points = total_points + champion_tip_points
           end
 
-          count_8points = Tipp.where({:user_id => user.id, :tipp_punkte => 8}).count
-          count_5points = Tipp.where({:user_id => user.id, :tipp_punkte => 5}).count
-          count_4points = Tipp.where({:user_id => user.id, :tipp_punkte => 4}).count
-          count_3points = Tipp.where({:user_id => user.id, :tipp_punkte => 3}).count
-          count_0points = Tipp.where({:user_id => user.id, :tipp_punkte => 0}).count
+          count_8points = Tip.where({:user_id => user.id, :tip_points => 8}).count
+          count_5points = Tip.where({:user_id => user.id, :tip_points => 5}).count
+          count_4points = Tip.where({:user_id => user.id, :tip_points => 4}).count
+          count_3points = Tip.where({:user_id => user.id, :tip_points => 3}).count
+          count_0points = Tip.where({:user_id => user.id, :tip_points => 0}).count
 
           user.update_columns({:points => total_points,
-                               :championtipppoints => champion_tipp_points,
+                               :championtippoints => champion_tip_points,
                                :count8points => count_8points,
                                :count5points => count_5points,
                                :count4points => count_4points,
