@@ -412,6 +412,3 @@ DEPENDENCIES
   virtus (~> 1.0.5)
   web-console (~> 2.0.0)
   webmock (~> 1.20.4)
-
-BUNDLED WITH
-   1.10.6

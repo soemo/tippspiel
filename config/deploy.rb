@@ -10,7 +10,7 @@ require 'uberspacify/mysql'
 
 load 'config/initializers/01_constants' # um z.B. an den TOURNAMENT_NAME zu kommen
 
-set :ruby_version, '2.2.3'
+set :ruby_version, '2.2.2'
 
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, 'beta-tippspiel'
