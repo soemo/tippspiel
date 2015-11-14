@@ -17,13 +17,9 @@ set :default_stage, 'beta-tippspiel'
 
 set :cap_tournament_name, TOURNAMENT_NAME
 
-before "deploy:finalize_update" do
-  run "export PATH=/package/host/localhost/ruby-#{ruby_version}/bin:$HOME/.gem/ruby/#{ruby_version}/bin:$PATH"
-end
-
-
 # siehe https://wiki.uberspace.de/development:ruby#nokogiri
 before "bundle:install" do
+  run "export PATH=/package/host/localhost/ruby-#{ruby_version}/bin:$HOME/.gem/ruby/#{ruby_version}/bin:$PATH"
   run "cd #{fetch(:latest_release)} && ruby -v" #&& bundle config build.nokogiri --with-xml2-lib=$HOME/.toast/armed/lib --with-xml2-include=$HOME/.toast/armed/include/libxml2 --with-xslt-dir=$HOME/.toast/armed"
 end
 
