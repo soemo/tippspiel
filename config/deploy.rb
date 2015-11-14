@@ -19,9 +19,9 @@ set :cap_tournament_name, TOURNAMENT_NAME
 
 
 # siehe https://wiki.uberspace.de/development:ruby#nokogiri
-before "bundle:install" do
-  run "cd #{fetch(:latest_release)} && bundle config build.nokogiri --with-xml2-lib=$HOME/.toast/armed/lib --with-xml2-include=$HOME/.toast/armed/include/libxml2 --with-xslt-dir=$HOME/.toast/armed"
-end
+#before "bundle:install" do
+#  run "cd #{fetch(:latest_release)} && bundle config build.nokogiri --with-xml2-lib=$HOME/.toast/armed/lib --with-xml2-include=$HOME/.toast/armed/include/libxml2 --with-xslt-dir=$HOME/.toast/armed"
+#end
 
 # INFO: bundle der gems wird in shared Verzeichnis gelegt. Daher werden nur neue Gems installiert
 set(:bundle_flags) { "--deployment --quiet" }
