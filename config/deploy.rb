@@ -17,7 +17,7 @@ set :default_stage, 'beta-tippspiel'
 
 set :cap_tournament_name, TOURNAMENT_NAME
 
-before "deploy" do
+before "deploy:finalize_update" do
   run "export PATH=/package/host/localhost/ruby-#{ruby_version}/bin:$HOME/.gem/ruby/#{ruby_version}/bin:$PATH"
 end
 
