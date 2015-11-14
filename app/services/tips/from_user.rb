@@ -43,7 +43,7 @@ module Tips
         game_ids.each do |game_id|
           values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
         end
-
+        # FIXME soeren 12.10.15 in TipQueries verlagern
         sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
         ::Tip.connection.execute(sql)
       end

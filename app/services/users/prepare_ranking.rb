@@ -10,21 +10,20 @@ module Users
 
     private
 
-    # bekommt eine Liste von Usern - entweder per call an den Service uebergeben oder es werden alle aktiven User genommen,
+    # bekommt eine Liste von Usern
     # sortiert nach Gesamtpunkten, Anzahl6Punkte, Anzahl4Punkte und Anzahl3Punkte geliefert
     # Es wird noch die Platzierung als Key hinzugefuegt
     # (wenn 3 Leute erster sind, ist der nächste dann auf Platz 4)
     # ACHTUNG DER HASH IST NICHT SORTIERT !!!!
     def prepare_user_ranking
       result = {}
-      users  = users_for_ranking.present? ? users_for_ranking : ranking_users
 
-      if users.present?
+      if users_for_ranking.present?
         place                    = 1
         user_count_on_same_place = 1
         last_used_user           = nil
 
-        users.each do |u|
+        users_for_ranking.each do |u|
           if last_used_user.nil?
             # erste User
             result[place] = [u]
@@ -47,10 +46,5 @@ module Users
 
       result
     end
-
-    def ranking_users
-      User.active.ranking_order
-    end
-
   end
 end

@@ -25,7 +25,7 @@ module Users
       users = User.active
       if users.present?
         users.each do |user|
-          total_points  = Tip.where(:user_id => user.id).sum(:tip_points)
+          total_points  = ::TipQueries.sum_tip_points_by_user_id(user.id)
           total_points  = 0 unless total_points.present?
 
           champion_tip_points = 0
@@ -38,11 +38,11 @@ module Users
             total_points = total_points + champion_tip_points
           end
 
-          count_8points = Tip.where({:user_id => user.id, :tip_points => 8}).count
-          count_5points = Tip.where({:user_id => user.id, :tip_points => 5}).count
-          count_4points = Tip.where({:user_id => user.id, :tip_points => 4}).count
-          count_3points = Tip.where({:user_id => user.id, :tip_points => 3}).count
-          count_0points = Tip.where({:user_id => user.id, :tip_points => 0}).count
+          count_8points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 8).count
+          count_5points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 5).count
+          count_4points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 4).count
+          count_3points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 3).count
+          count_0points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 0).count
 
           user.update_columns({:points => total_points,
                                :championtippoints => champion_tip_points,

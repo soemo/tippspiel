@@ -25,7 +25,7 @@ module Tips
       end #no else
 
       if game_to_compare.present?
-        tips = ::TipQueries.get_ordered_tips_for_game_id(game_to_compare.id)
+        tips = ::TipQueries.all_ordered_by_tip_points_and_user_firstname_by_game_id(game_to_compare.id)
       end
 
       Result.new(possible_games, game_to_compare, tips)

@@ -14,7 +14,12 @@ module GameQueries
     end
 
     def ordered_started_at_for(round)
-      Game.where(:round => round).order('start_at asc').pluck('start_at')
+      Game.where(:round => round).order(start_at: :asc).pluck('start_at')
+    end
+          # FIXME soeren 19.09.15 spec
+
+    def all_finished_ordered_by_start_at
+      Game.finished.order(start_at: :asc)
     end
 
   end

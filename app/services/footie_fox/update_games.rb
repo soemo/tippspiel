@@ -57,12 +57,6 @@ module FootieFox
     }
 
     def call
-      update_games
-    end
-
-    private
-
-    def update_games
       infos       = []
       result      = FootieFox::GetResults.call(result_url: RESULT_URL)
       json_result = result.json_result
@@ -79,6 +73,8 @@ module FootieFox
         AdminMailer.result_grabber_email(errors, infos).deliver_now
       end
     end
+
+    private
 
     def check_and_update_new_data(json_data, errors=[], infos=[])
       # pp json_data
@@ -107,7 +103,7 @@ module FootieFox
 
                 # Tore nur speichern, wenn das Spiel schon vorbei ist
                 if api_status.present? && api_status == API_GAME_STATUS_FINISHED
-                  game.update_columns({team1_goals: api_team1_goals.to_i,
+                  game.update_attributes({team1_goals: api_team1_goals.to_i,
                                        team2_goals: api_team2_goals.to_i,
                                        finished: true})
                   infos << "UPDATE_GAME: Game(#{game.to_s}) got new score #{game.team1_goals}:#{game.team2_goals} and set to finished"

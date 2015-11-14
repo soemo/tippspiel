@@ -14,38 +14,40 @@ module Tips
     TEAM2_WIN = 2
 
     def call
-      update_all_user_tip_points
-    end
-
-
-
-    private
-
-    def update_all_user_tip_points
       games = Game.all
       games.each do |game|
         if game.finished?
+          Rails.logger.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}") if Rails.logger.present?
           update_all_tip_points_for(game)
         end
       end
     end
+
+    private
 
     def update_all_tip_points_for(game)
       if game.present?
         game_winner = winner(game)
 
         if game_winner.present?
-          Rails.logger.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}") if Rails.logger.present?
-          tips = Tip.where(:game_id => game.id)
+          tips = ::Tip.where(game_id: game.id)
           if tips.present?
+
+            # mass-updating
+            sql_when_values = []
+            sql_where_all_ids = tips.map(&:id)
+
             tips.each do |tip|
               points = 0
               if tip.team1_goals.present? && tip.team2_goals.present?
-                points = calculate_tip_points(game_winner, game.team1_goals, game.team2_goals, tip.team1_goals, tip.team2_goals)
+                points = calculate_tip_points(game_winner,
+                                              game.team1_goals, game.team2_goals,
+                                              tip.team1_goals, tip.team2_goals)
               end
-              tip.update_column(:tip_points, points)
-              Rails.logger.info("UPDATE_ALL_TIPP_POINTS:   tip-id #{tip.id} has #{points} points") if Rails.logger.present?
+              sql_when_values << "WHEN id = #{tip.id} THEN #{points}"
             end
+            sql = "UPDATE tips SET tip_points = CASE #{sql_when_values.join(' ')} END WHERE id IN (#{sql_where_all_ids.join(',')})"
+            ::Tip.connection.execute(sql)
           end
         end
       end

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.1'
-ruby '2.2.1'
+gem 'rails', '~> 4.2.3'
+ruby '2.2.3'
 
 gem 'mysql2',                  '~> 0.3.18'
 gem 'cancancan',               '~> 1.9.2'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
@@ -39,7 +39,7 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '= 4.0.57' #'5.0.6'   # TODO soeren 07.04.15
+  gem 'passenger', '= 5.0.6'
 end
 
 group :development do
@@ -61,7 +61,6 @@ group :development, :test do
   gem 'quiet_assets',              '~> 1.1.0'
   gem 'capistrano',                '~> 2.15.4'
   gem 'capistrano-ext',            '~> 1.2.1'
-  gem 'rvm-capistrano',            '~> 1.3.0',  require: false
 
   gem 'rspec-rails',               '~> 3.2.1'
   gem 'capybara',                  '~> 2.4.4'    # rspec-rails braucht das um in den Views have_selector zu nutzen

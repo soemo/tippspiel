@@ -26,7 +26,7 @@
 
   = stylesheet_link_tag "application", :media=>:all
   = javascript_include_tag "vendor/modernizr"
-  -# other js is at the bottom of the body tag for fast page loading
+  = javascript_include_tag 'application'
 
 %body
   .off-canvas-wrap{data: {offcanvas: ''}}
@@ -60,6 +60,3 @@
 
       -# Scroll to top
       %a.scroll-to-top{href: "#"}= 'Scroll'
-
-  -# Javascript at the bottom for fast page loading
-  = javascript_include_tag 'application'

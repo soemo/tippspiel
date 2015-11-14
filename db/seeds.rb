@@ -165,19 +165,18 @@ def create_team_and_game_data
     team2_name = data[:team2_name].present? ? data.delete(:team2_name) : nil
     team_ids = {}
     if team1_name.present?
-      team1 = Team.find_or_create_by_name(team1_name)
+      team1 = Team.where(name: team1_name).first_or_create
       team1.update_column(:country_code, country_codes[team1_name])
       team_ids = team_ids.merge({:team1_id => team1.id})
     end
     if team2_name.present?
-      team2 = Team.find_or_create_by_name(team2_name)
+      team2 = Team.where(name: team2_name).first_or_create
       team2.update_column(:country_code, country_codes[team2_name])
       team_ids = team_ids.merge({:team2_id => team2.id})
     end
 
     Game.create!(data.merge(team_ids))
   end
-
 end
 
 
@@ -187,17 +186,20 @@ def load_demo_user_and_random_tips
     lastname = 'user'
 
     # Wenn der Nutzer nicht schon existiert, wird er samt Zufallstipps angelegt
-    unless User.exists?(:firstname => firstname)
+    unless User.exists?(firstname: firstname)
       # gleich als angemeldeter Nutzer anlegen - confirmed_at
-      user = User.new({:email => "#{firstname}@soemo.org", :firstname => firstname, :lastname => lastname})
+      user = User.new({email: "#{firstname}@soemo.org",
+                       password: 'testtest',
+                       firstname: firstname, lastname: lastname})
       user.confirmed_at = Time.now.utc
-      user.save(:validation => false)
+      user.confirmation_sent_at = 1.hour.ago
+      user.confirm!
       puts "Nutzer #{user.name} angelegt"
       if user.present?
         games = Game.all
         if games.present?
           games.each do |game|
-            Tip.create!(:user_id => user.id, :game_id => game.id, :team1_goals => get_random_goal, :team2_goals => get_random_goal)
+            Tip.create!(user: user, game: game, team1_goals: get_random_goal, team2_goals: get_random_goal)
           end
         end
       end

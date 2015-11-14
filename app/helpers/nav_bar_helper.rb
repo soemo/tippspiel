@@ -184,6 +184,7 @@ module NavBarHelper
     result = {}
     result[MAIN_NAV_USER_SUBMENU_ID] =
         {:links => [
+            {:text => t(:your_ranking_per_game), :url => user_ranking_per_game_path},
             {:text => t(:password_change), :url => user_edit_password_path},
             {:divider => true},
             {:text => t(:sign_out), :url => logout_path}

@@ -4,7 +4,7 @@ describe TipQueries do
 
   subject { TipQueries }
 
-  context '.get_ordered_tips_for_game_id' do
+  context ':all_ordered_by_tip_points_and_user_firstname_by_game_id' do
 
     let!(:user1) {create(:user, firstname: 'ZZZ')}
     let!(:user2) {create(:user, firstname: 'AAA')}
@@ -31,29 +31,29 @@ describe TipQueries do
     end
 
     it 'returns empty Array if no game_id given' do
-      tips = subject.get_ordered_tips_for_game_id(nil)
+      tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(nil)
       expect(tips).to eq ([])
     end
 
     context 'when game_id given' do
       it 'returns tips ordered by user firstname' do
-        tips = subject.get_ordered_tips_for_game_id(game1.id)
+        tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(game1.id)
         expect(tips.to_a).to eq([tip_g1_u2, tip_g1_u3, tip_g1_u1])
 
-        tips = subject.get_ordered_tips_for_game_id(game2.id)
+        tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(game2.id)
         expect(tips.to_a).to eq([tip_g2_u2, tip_g2_u3, tip_g2_u1])
 
-        tips = subject.get_ordered_tips_for_game_id(game3.id)
+        tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(game3.id)
         expect(tips.to_a).to eq([tip_g3_u2, tip_g3_u3, tip_g3_u1])
       end
 
       it 'returns ordered tips with tip points' do
         tip_g1_u1.update_column(:tip_points, 8)
-        tips = subject.get_ordered_tips_for_game_id(game1.id)
+        tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(game1.id)
         expect(tips.to_a).to eq([tip_g1_u1, tip_g1_u2, tip_g1_u3])
 
         tip_g1_u3.update_column(:tip_points, 1)
-        tips = subject.get_ordered_tips_for_game_id(game1.id)
+        tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(game1.id)
         expect(tips.to_a).to eq([tip_g1_u1, tip_g1_u3, tip_g1_u2])
 
       end
@@ -61,7 +61,7 @@ describe TipQueries do
       it 'returns ordered tips for existing users' do
         user1.destroy
 
-        tips = subject.get_ordered_tips_for_game_id(game1.id)
+        tips = subject.all_ordered_by_tip_points_and_user_firstname_by_game_id(game1.id)
         expect(tips.to_a).to eq([tip_g1_u2, tip_g1_u3])
       end
     end

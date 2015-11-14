@@ -16,9 +16,9 @@ class Game < ActiveRecord::Base
   validates_uniqueness_of :api_match_id
   validate :presence_of_teams
 
-  default_scope { order('start_at') }   # FIXME soeren 29.04.15 entfernen und besser machen
+  default_scope { order(start_at: :asc) }   # FIXME soeren 29.04.15 entfernen und besser machen
 
-  scope :finished_games,    -> { where(:finished => true) }   # TODO soeren 30.04.15 in GameQueries
+  scope :finished, -> { where(:finished => true) }   # TODO soeren 30.04.15 in GameQueries
 
   scope :group_games,       -> { where(:round => GROUP) }     # TODO soeren 30.04.15 in GameQueries
   scope :final_games,       -> { where(:round => FINAL) }     # TODO soeren 30.04.15 in GameQueries

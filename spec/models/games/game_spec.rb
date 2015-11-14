@@ -38,7 +38,7 @@ describe Game, :type => :model do
      game2 = create(:game, :start_at => '19.06.2012 20:45', :finished => false)
      game3 = create(:game, :start_at => '19.06.2012 20:45', :finished => true)
 
-     expect(Game.finished_games).to eq([game3])
+     expect(Game.finished).to eq([game3])
   end
 
 end

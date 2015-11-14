@@ -16,7 +16,7 @@ module Users
       user_top3_ranking_hash = {}
       own_position = nil
 
-      user_ranking_hash = Users::PrepareRanking.call
+      user_ranking_hash = Users::PrepareRanking.call(users_for_ranking: UserQueries.all_for_ranking_ordered_by_points)
       if user_ranking_hash.present?
         3.times do |i|
           counter = i + 1

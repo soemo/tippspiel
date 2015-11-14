@@ -3,6 +3,7 @@
 //= require jquery.livequery
 //= require jquery.countdown
 //= require foundation
+//= require chart.min
 
 
 $(function(){

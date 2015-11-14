@@ -55,7 +55,7 @@ module RankingHelper
     result = ''
     if user.present?
       result << "<div id='#{get_dropdown_id(user.id)}' data-dropdown-content class='f-dropdown content' aria-hidden='true' tabindex='-1'>"
-      result << "<b>#{user.name}</br>"
+      result << "<div class='text-right'><b>#{user.name}</br>"
       result << "#{I18n.t('points_statistic')}</b></br>"
 
       temp   = {'8' => user.count8points,
@@ -64,11 +64,12 @@ module RankingHelper
                 '3' => user.count3points,
                 '0' => user.count0points}
       temp.each do |key, count|
-        result << "#{count.present? ? count : 0} x #{key} #{User.human_attribute_name('points')}</br>"
+        count = count.present? ? count : 0
+        result << "#{count} x #{key} #{User.human_attribute_name('points')}</br>"
       end
       result << "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{user.championtippoints}"
 
-      result << '</div>'
+      result << '</div></div>'
     end
     result
   end

@@ -3,28 +3,29 @@ class SchedulerController < ApplicationController
 
   MIN_TIME_BETWEEN_RUNS = 5.minutes
 
-  before_filter      :check_invoke_frequency, :except => :admin
+  before_filter      :check_invoke_frequency, except: :admin
   skip_before_filter :authenticate_user!
 
   def hourly
-    start_calculate_points
+    start_calculating
     clean_invoke_table
     RssFeed::WriteCache.call(rss_feed_url: RSS_FEED_URL)
     render :plain => "Hourly scheduler run successful", :status => :ok
   end
 
   def admin
-    start_calculate_points
+    start_calculating
     render :plain => "Admin scheduler run successful", :status => :ok
   end
 
   # TODO soeren 30.04.15 #94 refactoring
   private
 
-  def start_calculate_points
+  def start_calculating
     FootieFox::UpdateGames.call
     Tips::UpdatePoints.call
     Users::UpdatePoints.call
+    Users::UpdateRankingPerGame.call
   end
 
   def check_invoke_frequency

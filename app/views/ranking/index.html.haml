@@ -1,5 +1,5 @@
 %h3= t('ranking')
 %p
-  = t('x_user_bet', :user_count => @user_count)
-  = t('result_after_game_count', :finshed_games_count => Game.finished_games.count, :all_games_count => Game.count)
-= render :partial => 'user_ranking', :locals => {:user_ranking => @user_ranking_hash, :short_version => false}
+  = t('x_user_bet', user_count: @user_count)
+  = t('result_after_game_count', finshed_games_count: Game.finished.count, all_games_count: Game.count)
+= render partial: 'user_ranking', locals: {user_ranking: @user_ranking_hash, short_version: false}

@@ -45,7 +45,7 @@ set :deploy_via,       :remote_cache
 set :copy_exclude,     [ '.git' ]
 set :deploy_env,       'production'
 
-set :rvm_ruby_string, "ruby-2.2.1"
+#set :rvm_ruby_string, "ruby-2.2.1"
 
 set :rake, "bundle exec rake"
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704110909) do
+ActiveRecord::Schema.define(version: 20150919150614) do
 
   create_table "events", force: :cascade do |t|
     t.string   "event_type", limit: 30, default: "", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150704110909) do
     t.datetime "start_at"
     t.string   "team1_placeholder_name", limit: 255
     t.string   "team2_placeholder_name", limit: 255
-    t.boolean  "finished",               limit: 1,   default: false
+    t.boolean  "finished",                           default: false
     t.integer  "api_match_id",           limit: 4,                   null: false
   end
 
@@ -76,15 +76,16 @@ ActiveRecord::Schema.define(version: 20150704110909) do
   end
 
   create_table "tips", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
-    t.integer  "game_id",      limit: 4
-    t.integer  "tip_points",   limit: 4
-    t.integer  "team1_goals",  limit: 4
-    t.integer  "team2_goals",  limit: 4
+    t.integer  "user_id",       limit: 4
+    t.integer  "game_id",       limit: 4
+    t.integer  "tip_points",    limit: 4
+    t.integer  "team1_goals",   limit: 4
+    t.integer  "team2_goals",   limit: 4
     t.datetime "deleted_at"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "lock_version", limit: 4, default: 0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "lock_version",  limit: 4, default: 0
+    t.integer  "ranking_place", limit: 4
   end
 
   add_index "tips", ["game_id"], name: "index_tips_on_game_id", using: :btree
