@@ -10,12 +10,16 @@ require 'uberspacify/mysql'
 
 load 'config/initializers/01_constants' # um z.B. an den TOURNAMENT_NAME zu kommen
 
-
+set :ruby_version, '2.2.3'
 
 set :stages, %w(tippspiel beta-tippspiel)
 set :default_stage, 'beta-tippspiel'
 
 set :cap_tournament_name, TOURNAMENT_NAME
+
+before "deploy" do
+  run "export PATH=/package/host/localhost/ruby-#{ruby_version}/bin:$HOME/.gem/ruby/#{ruby_version}/bin:$PATH"
+end
 
 
 # siehe https://wiki.uberspace.de/development:ruby#nokogiri
