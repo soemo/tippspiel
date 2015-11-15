@@ -4,7 +4,7 @@ gem 'rails', '~> 4.2.5'
 ruby '2.2.2'
 
 gem 'mysql2',                  '~> 0.3.18'
-gem 'cancancan',               '~> 1.9.2'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
+gem 'cancancan',               '~> 1.13.1'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
 gem 'haml-rails',              '~> 0.5.3'      # haml-Generatoren
 gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise

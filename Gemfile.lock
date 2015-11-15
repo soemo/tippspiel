@@ -65,7 +65,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    cancancan (1.9.2)
+    cancancan (1.13.1)
     capistrano (2.15.6)
       highline
       net-scp (>= 1.0.0)
@@ -372,7 +372,7 @@ DEPENDENCIES
   airbrake (~> 4.1.0)
   better_errors (~> 2.1.0)
   binding_of_caller (~> 0.7.2)
-  cancancan (~> 1.9.2)
+  cancancan (~> 1.13.1)
   capistrano (~> 2.15.4)
   capistrano-ext (~> 1.2.1)
   capybara (~> 2.4.4)
