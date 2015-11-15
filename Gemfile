@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.5'
-ruby '2.2.2'
+ruby '2.2.3'
 
 gem 'mysql2',                  '~> 0.3.18'
 gem 'cancancan',               '~> 1.13.1'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
@@ -56,12 +56,8 @@ end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
-  gem 'uberspacify', :git => 'https://github.com/soemo/uberspacify.git'
-
+  gem 'capistrano-uberspace', github: 'soemo/capistrano-uberspace', branch: 'master'
   gem 'quiet_assets',              '~> 1.1.0'
-  gem 'capistrano',                '~> 2.15.4'
-  gem 'capistrano-ext',            '~> 1.2.1'
-
   gem 'rspec-rails',               '~> 3.2.1'
   gem 'capybara',                  '~> 2.4.4'    # rspec-rails braucht das um in den Views have_selector zu nutzen
 

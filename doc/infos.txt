@@ -47,6 +47,8 @@ B) Beta und Prod Stage
    mittels svc -d ~/service/tippspiel_scheduler_hourly gestoppt
    wieder starten mit svc -u ~/service/tippspiel_scheduler_hourly
 
+########################
+https://wiki.uberspace.de/system:daemontools
 
 
 ########################

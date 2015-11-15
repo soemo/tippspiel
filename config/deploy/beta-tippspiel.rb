@@ -1,14 +1,15 @@
-# -*- encoding : utf-8 -*-
+# a name for your app, will be used for your gemset,
+# databases, directories, etc.
+set :application, 'beta-tippspiel'
 
 # By default, your app will be available in the root of your Uberspace. If you
 # have your own domain set up, you can configure it here
-set :domain, "beta-tippspiel.soemo.org"
+set :domain, 'beta-tippspiel.soemo.org'
 
 set :database_name_suffix, "beta_#{cap_tournament_name.downcase.gsub(' ', '_')}"
 
-# a name for your app, will be used for your gemset,
-# databases, directories, etc.
-set :application, "beta-tippspiel.soemo.org"
+# You have to set where to store the code
+# the default /var/www/my_app_name won't work on uberspace
 set :deploy_to, "/var/www/virtual/#{user}/#{application}"
 
 # By default, uberspacify will generate a random port number for Passenger to
@@ -17,4 +18,4 @@ set :deploy_to, "/var/www/virtual/#{user}/#{application}"
 # set this yourself, go ahead.
 set :passenger_port, 26100
 
-set :customizing_dir, "beta"
+set :customizing_dir, 'beta'
