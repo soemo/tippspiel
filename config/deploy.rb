@@ -18,7 +18,7 @@ set :rails_env, 'production'
 
 set :default_env, { path: "/package/host/localhost/ruby-#{fetch(:ruby_version, -> { get_ruby_version })}/bin:$PATH" }
 
-set :passenger_max_pool_size, 2
+# set :passenger_max_pool_size, 2  # TODO soeren #15.11.15
 
 set :keep_releases, 3
 

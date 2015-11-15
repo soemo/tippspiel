@@ -39,7 +39,7 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  gem 'passenger', '= 5.0.6'
+  # TODO soeren 15.11.15  gem 'passenger', '= 5.0.6'
 end
 
 group :development do
@@ -48,8 +48,8 @@ group :development do
 
   gem 'web-console',       '~> 2.0.0'    # A set of debugging tools for your Rails application.
 
-  gem 'spring', '~> 1.3.4'
-  gem 'spring-commands-rspec', '~>1.0.4'
+  gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'rack-livereload'
   gem 'guard-livereload', require: false
 end

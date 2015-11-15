@@ -16,6 +16,6 @@ set :deploy_to, "/var/www/virtual/#{fetch(:user)}/#{fetch(:application)}"
 # listen on. This is fine, since only Apache will use it. Your app will always
 # be available on port 80 and 443 from the outside. However, if you'd like to
 # set this yourself, go ahead.
-set :passenger_port, 26100
+#set :passenger_port, 26100 # TODO soeren #15.11.15
 
 set :customizing_dir, 'beta'
