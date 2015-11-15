@@ -8,6 +8,8 @@ set :user, 'soemo'
 
 server 'taurus.uberspace.de', user: fetch(:user), roles: %w{app db web}
 
+set :repository, "ssh://soemo@taurus.uberspace.de/home/soemo/git/tippspiel.git"
+=begin
 set :scm, :git
 # ich nutze ein lokales git bei uberspace
 set :repository, "file:///home/#{fetch(:user)}/git/tippspiel.git"
@@ -17,7 +19,7 @@ set :scm_verbose,      false
 set :deploy_via,       :remote_cache
 set :copy_exclude,     [ '.git' ]
 set :deploy_env,       'production'
-
+=end
 #SSHKit.config.command_map[:rake]  = "bundle exec rake"
 
 #SSHKit.config.command_map[:rails] = "bundle exec rails"
