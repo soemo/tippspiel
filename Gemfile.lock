@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/soemo/capistrano-uberspace.git
-  revision: 4e96930a22fb5c6133cd6c7698e3e01802d6b3a0
+  revision: a7ae24a1192420966de1e297ff12c5db83acfb51
   branch: master
   specs:
     capistrano-uberspace (0.0.1)

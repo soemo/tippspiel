@@ -28,7 +28,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'public/system')
 
 # Default value for :log_level is :debug
 set :log_level, :info
