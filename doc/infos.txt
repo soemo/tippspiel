@@ -1,5 +1,5 @@
 ﻿!!! Achtung auf der cmd
-> bundle exec cap -vT nutzen
+> bundle exec cap -T nutzen
 
 
 * Ab WM2014 Mails per https://login.mailchimp.com versenden
@@ -40,9 +40,9 @@ teamids = games.map{|i| [i[:team1], i[:team2]]}.flatten.uniq.sort
 B) Beta und Prod Stage
 1. set :cap_tournament_name   # wird fuer die DB-Namen genutzt
 2. (auf beiden Stages ausführen Wechsel: zum prod tippspiel indem man z.B. cap tippspiel deploy:setup nutzt)
-   bundle exec cap deploy:setup
-   bundle exec cap deploy:migrations
-   bundle exec cap db:run_seed
+   bundle exec cap [beta-tippspiel|tippspiel] setup
+   bundle exec cap [beta-tippspiel|tippspiel] deploy
+   bundle exec cap [beta-tippspiel|tippspiel] db:run_seed
 3. Cronjob:
    mittels svc -d ~/service/tippspiel_scheduler_hourly gestoppt
    wieder starten mit svc -u ~/service/tippspiel_scheduler_hourly

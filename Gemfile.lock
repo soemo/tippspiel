@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/soemo/capistrano-uberspace.git
-  revision: 7d5c91ddfa1ebc81a0753c68f15cd5f2511c5efc
+  revision: 43a3d186ed40c519a4ae3d7fa92144c350ba849a
   branch: master
   specs:
     capistrano-uberspace (0.0.1)
@@ -73,6 +73,9 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-rails (1.1.5)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
     capistrano-secrets-yml (1.0.0)
       capistrano (>= 3.1)
       sshkit (>= 1.2.0)
@@ -376,6 +379,7 @@ DEPENDENCIES
   better_errors (~> 2.1.0)
   binding_of_caller (~> 0.7.2)
   cancancan (~> 1.13.1)
+  capistrano-rails
   capistrano-uberspace!
   capybara (~> 2.4.4)
   cells (~> 3.11.3)
@@ -413,3 +417,6 @@ DEPENDENCIES
   virtus (~> 1.0.5)
   web-console (~> 2.0.0)
   webmock (~> 1.20.4)
+
+BUNDLED WITH
+   1.10.6

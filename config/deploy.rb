@@ -1,4 +1,5 @@
-load 'config/initializers/01_constants' # um z.B. an den TOURNAMENT_NAME zu kommen
+# um z.B. an den TOURNAMENT_NAME zu kommen
+load File.expand_path('../initializers/01_constants.rb', __FILE__)
 
 set :cap_tournament_name, TOURNAMENT_NAME
 
@@ -17,13 +18,21 @@ set :deploy_via,       :remote_cache
 set :copy_exclude,     [ '.git' ]
 set :deploy_env,       'production'
 
-set :rake, "bundle exec rake"
+#SSHKit.config.command_map[:rake]  = "bundle exec rake"
+
+#SSHKit.config.command_map[:rails] = "bundle exec rails"
 
 set :passenger_max_pool_size, 2
 
 set :keep_releases, 3
 
+# Default value for :log_level is :debug
+set :log_level, :info
+
 # By default, Capistrano::Uberspace uses the ruby versions installed on your uberspace that matches your `.ruby-version` file.
+
+# As of Capistrano 3.x, the `deploy:restart` task is not called automatically.
+after 'deploy:finished', 'deploy:restart'
 
 # Laden der Rezepte
 Dir['config/deploy/recipes/*.rb'].each { |r| load(r) }
