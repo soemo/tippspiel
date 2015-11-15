@@ -39,7 +39,7 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :development, :production do
-  # TODO soeren 15.11.15  gem 'passenger', '= 5.0.6'
+  gem 'unicorn-rails'
 end
 
 group :development do
