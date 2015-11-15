@@ -16,7 +16,7 @@ namespace :deploy do
     on roles(:web) do
       customizing_parent_dir = "#{release_path}/customizing"
 
-      if customizing_parent_dir.size > 0 && stage_names.size > 0
+      if customizing_parent_dir.size > 0
         customizing_path = "#{customizing_parent_dir}/#{fetch(:customizing_dir)}"
 
         info "copy files from #{customizing_path}"
