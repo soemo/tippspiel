@@ -4,18 +4,12 @@ module Users
 
     attribute :users_for_ranking, Array[User]
 
-    def call
-      prepare_user_ranking
-    end
-
-    private
-
     # bekommt eine Liste von Usern
     # sortiert nach Gesamtpunkten, Anzahl6Punkte, Anzahl4Punkte und Anzahl3Punkte geliefert
     # Es wird noch die Platzierung als Key hinzugefuegt
     # (wenn 3 Leute erster sind, ist der nächste dann auf Platz 4)
     # ACHTUNG DER HASH IST NICHT SORTIERT !!!!
-    def prepare_user_ranking
+    def call
       result = {}
 
       if users_for_ranking.present?
@@ -46,5 +40,6 @@ module Users
 
       result
     end
+
   end
 end

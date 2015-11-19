@@ -27,8 +27,6 @@ class User < ActiveRecord::Base
   scope :active,   -> { where('confirmed_at is not null') }
   scope :inactive, -> { where('confirmed_at is null') }
 
-  scope :ranking_order, -> { order('users.points DESC, users.count8points DESC, users.count5points DESC, users.count4points DESC, users.count3points DESC') }
-   # TODO soeren 30.04.15 move to Users:PrepareRanking Service
   def ranking_comparison_value
     str_points       = points.to_s.rjust(2,"0")
     str_count8points = count8points.to_s.rjust(2,"0")

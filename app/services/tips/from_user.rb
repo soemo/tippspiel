@@ -5,12 +5,6 @@ module Tips
     attribute :user_id, Integer
 
     def call
-      user_tips
-    end
-
-    private
-
-    def user_tips
       result = []
 
       if user_id.present?
@@ -24,16 +18,15 @@ module Tips
       result
     end
 
+
+    private
+
     def tips_with_games
-      if user_id.present?
-        ::Tip.includes(:game).where("user_id" => user_id)
-      else
-        []
-      end
+      ::TipQueries.all_by_user_id_with_preloaded_games(user_id)
     end
 
     def create_user_tips
-      game_ids = ::Game.pluck(:id)
+      game_ids = ::GameQueries.all_game_ids
       if game_ids.present?
 
         # https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
@@ -43,7 +36,6 @@ module Tips
         game_ids.each do |game_id|
           values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
         end
-        # FIXME soeren 12.10.15 in TipQueries verlagern
         sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
         ::Tip.connection.execute(sql)
       end

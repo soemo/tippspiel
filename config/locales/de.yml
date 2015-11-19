@@ -17,8 +17,8 @@ de:
 
   delete_secure_question: "Bist du dir sicher?"
 
-  succesfully_saved_tips: "Deine Tips wurden gespeichert!"
-  succesfully_saved_championtip: "Dein Tuniersieger-Tip wurden gespeichert!"
+  succesfully_saved_tips: "Deine Tipps wurden gespeichert!"
+  succesfully_saved_championtip: "Dein Tuniersieger-Tipp wurden gespeichert!"
   create_successful: "%{object_name} wurde erfolgreich angelegt"
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
@@ -45,6 +45,7 @@ de:
   show_only_today_games: Nur Spiele von heute anzeigen.
 
   your_ranking_per_game: Deine Platzierung pro Spiel
+  ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
   to_tip_page: 'zum Tippen'
 
@@ -64,11 +65,11 @@ de:
   change_pw: "Passwort ändern"
   set_pw: "Passwort vergeben"
   send_pw: "Neues Passwort schicken"
-  save_tip: "Tips speichern"
-  random_tips: "Zufall-Tips erstellen"
-  random_tips_description: "Wenn du zu faul zum Tippen bist, kannst du deine Tips per Zufall ausfüllen lassen (Tore von 0 bis 5).
-  <b>Achtung:</b> Die Tips werden nur in das Formular eingetragen und müssen noch gespeichert werden."
-  compare_tips: "Tips vergleichen"
+  save_tip: "Tipps speichern"
+  random_tips: "Zufall-Tipps erstellen"
+  random_tips_description: "Wenn du zu faul zum Tippen bist, kannst du deine Tipps per Zufall ausfüllen lassen (Tore von 0 bis 5).
+  <b>Achtung:</b> Die Tipps werden nur in das Formular eingetragen und müssen noch gespeichert werden."
+  compare_tips: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
   points_statistic: Punkteverteilung
 
@@ -80,8 +81,8 @@ de:
   ranking: "Rangliste"
   notice: Fachsimpeleien
   tournament: "Turnier"
-  tips: "Tips"
-  tips_for_phone: "Tips" #72 besser machen
+  tips: "Tipps"
+  tips_for_phone: "Tipps" #72 besser machen
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
@@ -253,7 +254,7 @@ de:
         other: Spiele
       tip:
         one: Tipp
-        other: Tips
+        other: Tipps
     attributes:
       user:
         siegertipp: Siegertipp

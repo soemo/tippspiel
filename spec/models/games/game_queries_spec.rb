@@ -4,7 +4,18 @@ describe GameQueries do
 
   subject { GameQueries }
 
-  context '.first_game_in_tournament' do
+  describe '::all_game_ids' do
+
+    it 'returns ids of all games' do
+      game1 = create(:game)
+      game2 = create(:game)
+      game3 = create(:game)
+
+      expect(subject.all_game_ids).to eq([game1.id, game2.id, game3.id])
+    end
+  end
+
+  describe '::first_game_in_tournament' do
 
     it 'returns first game' do
       Timecop.freeze(Time.now)
@@ -17,7 +28,7 @@ describe GameQueries do
     end
   end
 
-  context '.last_updated_at' do
+  describe '::last_updated_at' do
 
     it 'returns max updated_at' do
       Timecop.freeze(Time.now)
@@ -31,7 +42,7 @@ describe GameQueries do
     end
   end
 
-  context '.started_games' do
+  describe '::started_games' do
 
     it 'returns games where start_date < Time.now' do
       Timecop.freeze(Time.now)
@@ -52,7 +63,7 @@ describe GameQueries do
     end
   end
 
-  context '.for_round_ordered_by_started_at_asc' do
+  describe '::ordered_started_at_for' do
 
     let!(:game1) { create(:game, round: Game::GROUP,
                           group: Game::GROUP_A, start_at: Time.now + 1.day)}
@@ -72,8 +83,38 @@ describe GameQueries do
       expected = [game3.start_at, game4.start_at, game1.start_at, game2.start_at]
       expect(ordered_started_at_asc.map(&:to_i)).to eql(expected.map(&:to_i))
     end
-
   end
 
+  describe '::all_finished_ordered_by_start_at' do
 
+    let!(:game1) { create(:game,
+                          finished: true,
+                          round: Game::GROUP,
+                          group: Game::GROUP_A,
+                          start_at: Time.now + 1.day)}
+    let!(:game2) { create(:game,
+                          finished: true,
+                          round: Game::GROUP,
+                          group: Game::GROUP_A,
+                          start_at: Time.now + 2.day)}
+    let!(:game3) { create(:game,
+                          finished: true,
+                          round: Game::GROUP,
+                          group: Game::GROUP_B,
+                          start_at: Time.now - 2.day)}
+    let!(:game4) { create(:game,
+                          finished: false,
+                          round: Game::GROUP,
+                          group: Game::GROUP_C,
+                          start_at: Time.now - 1.day)}
+
+    it 'returns finished games ordered by start_at' do
+      expect(subject.all_finished_ordered_by_start_at.to_a).to eq([
+                                                              game3,
+                                                              game1,
+                                                              game2
+                                                            ])
+    end
+
+  end
 end

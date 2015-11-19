@@ -1,6 +1,10 @@
 module GameQueries
   class << self
 
+    def all_game_ids
+      Game.pluck(:id)
+    end
+
     def first_game_in_tournament
       Game.order('start_at asc').first
     end
@@ -16,7 +20,6 @@ module GameQueries
     def ordered_started_at_for(round)
       Game.where(:round => round).order(start_at: :asc).pluck('start_at')
     end
-          # FIXME soeren 19.09.15 spec
 
     def all_finished_ordered_by_start_at
       Game.finished.order(start_at: :asc)
