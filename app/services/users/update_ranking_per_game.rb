@@ -87,8 +87,6 @@ module Users
       end
 
       sql = "UPDATE tips SET ranking_place = CASE #{sql_when_values.join(' ')} END WHERE id IN (#{sql_where_all_ids.join(',')})"
-      pp "test sm "
-      pp sql
       ::Tip.connection.execute(sql)
     end
   end

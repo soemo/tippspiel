@@ -11,7 +11,7 @@ module TipsHelper
   end
 
   def write_tip_input(tip_id, attr_name, attr_value)
-    haml_concat text_field_tag( "tips[#{tip_id}][#{attr_name}]", attr_value, :maxlength => 2, :size => 2, :class => 'tip_input')
+    haml_concat text_field_tag("tips[#{tip_id}][#{attr_name}]", attr_value, maxlength: 2, size: 2, class: 'tip_input')
   end
 
 end

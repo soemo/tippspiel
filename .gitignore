@@ -14,3 +14,4 @@
 /public/system
 /public/assets
 /spec/examples.txt
+/config/initializers/rubymine_passenger_debug.rb

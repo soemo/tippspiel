@@ -8,12 +8,6 @@ module RssFeed
     Result = Struct.new(:title, :entries)
 
     def call
-      get_top_x_entries_and_title
-    end
-
-    private
-
-    def get_top_x_entries_and_title
       title = ''
       entries = []
       feed = parse
@@ -24,6 +18,8 @@ module RssFeed
 
       Result.new(title, entries)
     end
+
+    private
 
     def parse
       result = nil
