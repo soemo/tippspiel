@@ -18,16 +18,14 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
-gem 'execjs',                  '~> 2.2.1'      # ExecJS lets you run JavaScript code from Ruby.
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
-gem 'rails_admin',             '~> 0.6.7'      # Interface zur Daten-Administration
+gem 'rails_admin'                              # Interface zur Daten-Administration
 gem 'foundation-rails'
 gem 'font-awesome-sass'
 gem 'newrelic_rpm'
 gem 'feedjira',                '~> 1.6.0'      # RSS parsers
 gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.
 gem 'lograge',                 '~> 0.3.1'
-
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 4.1.0'
 
