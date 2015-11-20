@@ -5,7 +5,32 @@ describe FootieFox::UpdateGames do
 
   subject { FootieFox::UpdateGames }
 
+  describe "call update games with no games in db" do
+
+    it 'sends Admin Mail' do
+      ActionMailer::Base.deliveries = []
+
+      subject.call
+
+      mails = ActionMailer::Base.deliveries
+      expect(mails.count).to eq(1)
+      expect(mails[0].subject).to eq("[Fussball Tippspiel] - Result Grabber Infos")
+    end
+  end
+
+  it 'call update games with footiefox json result"' do
+    ActionMailer::Base.deliveries = []
+    expect(FootieFox::GetResults).to receive(:call).
+                                         and_return(double('result', errors: ['testerror'], json_result: {'test' => 1}))
+    expect(Rails.logger).to receive(:error).with("#{['testerror'].inspect}")
+
+    subject.call
+
+    expect(ActionMailer::Base.deliveries.count).to eq(1)
+  end
+
   describe "calculate all user tip points" do
+
     before :each do
       Game.destroy_all
 
@@ -128,24 +153,57 @@ describe FootieFox::UpdateGames do
       expect(infos).to be_empty
     end
 
+    it 'sends error if team with name not found' do
+      errors = []
+      infos  = []
+      json_data = {
+          "leagueID" => 107,
+          "is_tournament" => true,
+          "timestamp" => "2012-04-27 17:31:50",
+          "matches" =>
+              [
+                  {"tournament_group" => "Gruppe A",
+                   "matchID" => @game1_api_match_id,
+                   "team1Id" => @germany_api_team_id,
+                   "team1Score" => @api_game1_team1_score,
+                   "team2Id" => -1,
+                   "team2Score" => @api_game1_team2_score,
+                   "startTime" => "2012-06-08 16:00:00",
+                   "status" => "scheduled",
+                   "phase" => 0}
+              ]
+      }
+
+      expect(TeamQueries).to receive(:by_name).
+                                 with(FootieFox::UpdateGames::TEAMS[@germany_api_team_id]).
+                                 and_return([])
+
+      subject.new.send('check_and_update_new_data', json_data, errors, infos)
+      expect(errors).to eq(["check_and_update_new_data - team with name: Deutschland not exists!"])
+      expect(infos).to be_empty
+
+    end
+
     it "not update teams with teamId -1" do
       errors = []
       infos  = []
-      json_data = {"leagueID" => 107,
-                   "is_tournament" => true,
-                   "timestamp" => "2012-04-27 17:31:50",
-                   "matches" =>
-                       [
-                           {"tournament_group" => "FINAL",
-                            "matchID" => @game3_api_match_id,
-                            "team1Id" => -1,
-                            "team1Score" => @api_game3_team1_score,
-                            "team2Id" => -1,
-                            "team2Score" => @api_game3_team2_score,
-                            "startTime" => "2012-06-16 18:45:00",
-                            "status" => "scheduled",
-                            "phase" => 0}
-                       ]}
+      json_data = {
+          "leagueID" => 107,
+          "is_tournament" => true,
+          "timestamp" => "2012-04-27 17:31:50",
+          "matches" =>
+              [
+                  {"tournament_group" => "FINAL",
+                   "matchID" => @game3_api_match_id,
+                   "team1Id" => -1,
+                   "team1Score" => @api_game3_team1_score,
+                   "team2Id" => -1,
+                   "team2Score" => @api_game3_team2_score,
+                   "startTime" => "2012-06-16 18:45:00",
+                   "status" => "scheduled",
+                   "phase" => 0}
+              ]
+      }
 
       subject.new.send('check_and_update_new_data', json_data, errors, infos)
       expect(errors).to be_empty

@@ -4,7 +4,17 @@ describe TeamQueries do
 
   subject { TeamQueries }
 
-  context '.last_updated_at' do
+  describe '::by_name' do
+
+    it 'returns team by name' do
+      team1 = create(:team, name: 'test111')
+      team2 = create(:team)
+
+      expect(subject.by_name('test111')).to eq([team1])
+    end
+  end
+
+  describe '::last_updated_at' do
 
     it 'returns max updated_at' do
       Timecop.freeze(Time.now)

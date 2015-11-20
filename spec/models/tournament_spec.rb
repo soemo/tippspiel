@@ -79,24 +79,24 @@ describe Tournament, :type => :model do
 
   context '.round_start_end_date_time' do
 
-    let!(:game1) { create(:game, round: Game::GROUP,
-                          group: Game::GROUP_A, start_at: Time.now + 1.day)}
-    let!(:game2) { create(:game, round: Game::GROUP,
-                          group: Game::GROUP_A, start_at: Time.now + 2.day)}
-    let!(:game3) { create(:game, round: Game::GROUP,
-                           group: Game::GROUP_B, start_at: Time.now - 2.day)}
-    let!(:game4) { create(:game, round: Game::GROUP,
-                           group: Game::GROUP_C, start_at: Time.now - 1.day)}
+    let!(:game1) { create(:game, round: GROUP,
+                          group: GROUP_A, start_at: Time.now + 1.day)}
+    let!(:game2) { create(:game, round: GROUP,
+                          group: GROUP_A, start_at: Time.now + 2.day)}
+    let!(:game3) { create(:game, round: GROUP,
+                           group: GROUP_B, start_at: Time.now - 2.day)}
+    let!(:game4) { create(:game, round: GROUP,
+                           group: GROUP_C, start_at: Time.now - 1.day)}
 
 
     it 'gets start and end date of group-round' do
-      start_date_time, end_date_time = subject.round_start_end_date_time(Game::GROUP)
+      start_date_time, end_date_time = subject.round_start_end_date_time(GROUP)
       expect(start_date_time).to be_equal_to_time(game3.start_at)
       expect(end_date_time).to be_equal_to_time(game2.start_at)
     end
 
     it 'gets start and end date of round with no games' do
-      start_date_time, end_date_time = subject.round_start_end_date_time(Game::SEMIFINAL)
+      start_date_time, end_date_time = subject.round_start_end_date_time(SEMIFINAL)
       expect(start_date_time).to be nil
       expect(end_date_time).to be nil
     end

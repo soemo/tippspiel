@@ -27,7 +27,7 @@ class TipsController < ApplicationController
     redirect_to({:action => 'index', :for_phone => @for_phone}, {:notice => t('succesfully_saved_tips')})
   end
 
-  # TODO soeren 30.04.15 Use Service and maybe own Controller
+  # TODO soeren 30.04.15 Use Service and Controller with Specs!!!
   def save_champion_tip
     if Tournament.before?
       if params[:champion_team_id].present?

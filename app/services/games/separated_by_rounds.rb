@@ -11,12 +11,14 @@ module Games
 
     def separated_by_rounds
       result = {}
-      group_size = Game::GROUPS.size
-      Game::GROUPS.each_with_index do |group_name, index|
-        result[index + 1] = {"#{Game::GROUP}_#{group_name}".downcase => Game.group_games.where(:group => group_name).to_a}
+      group_size = GROUPS.size
+      GROUPS.each_with_index do |group_name, index|
+        # FIXME soeren 20.11.15 neue komplette Query
+        games = ::GameQueries.group_games_ordered_by_start_at.where(group: group_name).to_a
+        result[index + 1] = {"#{GROUP}_#{group_name}".downcase => games}
       end
-      (Game::ROUNDS - [Game::GROUP]).each_with_index do |round, index|
-        result[group_size + index + 1] = {round => Game.where(:round => round).to_a}
+      (ROUNDS - [GROUP]).each_with_index do |round, index|
+        result[group_size + index + 1] = {round => GameQueries.all_by_round(round).to_a}
       end
 
       result.sort

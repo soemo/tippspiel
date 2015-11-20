@@ -60,7 +60,7 @@ https://wiki.uberspace.de/system:daemontools
 # footiefox_d_message("requestLeagueUpdate: "+ this.apiURL + "leagues/"+id+"/update.json");
 # http://api.footiefox.com/teams.dat
 # http://api.footiefox.com/leagues.dat
-### EM2012 http://api.footiefox.com/leagues/107/base.json !!!!
+### EM http://api.footiefox.com/leagues/107/base.json !!!!
 ### WM http://api.footiefox.com/leagues/101/base.json !!!!
 
 {"leagueID"=>107,

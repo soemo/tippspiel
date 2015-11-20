@@ -4,27 +4,27 @@ describe Games::SeparatedByRounds do
 
   subject { Games::SeparatedByRounds }
 
-  let!(:game1_group_a) { create(:game, round: Game::GROUP, group: Game::GROUP_A)}
-  let!(:game2_group_a) { create(:game, round: Game::GROUP, group: Game::GROUP_A)}
+  let!(:game1_group_a) { create(:game, round: GROUP, group: GROUP_A)}
+  let!(:game2_group_a) { create(:game, round: GROUP, group: GROUP_A)}
 
-  let!(:game1_group_b) { create(:game, round: Game::GROUP, group: Game::GROUP_B)}
-  let!(:game2_group_b) { create(:game, round: Game::GROUP, group: Game::GROUP_B)}
+  let!(:game1_group_b) { create(:game, round: GROUP, group: GROUP_B)}
+  let!(:game2_group_b) { create(:game, round: GROUP, group: GROUP_B)}
 
-  let!(:game1_group_c) { create(:game, round: Game::GROUP, group: Game::GROUP_C)}
-  let!(:game2_group_c) { create(:game, round: Game::GROUP, group: Game::GROUP_C)}
+  let!(:game1_group_c) { create(:game, round: GROUP, group: GROUP_C)}
+  let!(:game2_group_c) { create(:game, round: GROUP, group: GROUP_C)}
 
   # no games for group d - h  (groups e - h only if WM)
   # no games for round of 16 (only WM)
 
-  let!(:game1_quarter) { create(:game, round: Game::QUARTERFINAL, group: nil)}
-  let!(:game2_quarter) { create(:game, round: Game::QUARTERFINAL, group: nil)}
+  let!(:game1_quarter) { create(:game, round: QUARTERFINAL, group: nil)}
+  let!(:game2_quarter) { create(:game, round: QUARTERFINAL, group: nil)}
 
-  let!(:game1_sf) { create(:game, round: Game::SEMIFINAL, group: nil)}
-  let!(:game2_sf) { create(:game, round: Game::SEMIFINAL, group: nil)}
+  let!(:game1_sf) { create(:game, round: SEMIFINAL, group: nil)}
+  let!(:game2_sf) { create(:game, round: SEMIFINAL, group: nil)}
 
   # no game for place 3 (only WM)
 
-  let!(:game_f) { create(:game, round: Game::FINAL, group: nil)}
+  let!(:game_f) { create(:game, round: FINAL, group: nil)}
 
 
   it 'returns games seperated by rounds' do

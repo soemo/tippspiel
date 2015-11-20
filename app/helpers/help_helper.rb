@@ -2,7 +2,7 @@
 module HelpHelper
 
   def write_round_infos
-    rounds = Game::ROUNDS
+    rounds = ROUNDS
     if rounds.present?
       haml_tag :ul, :class => 'hilfe' do
         rounds.each do |round|

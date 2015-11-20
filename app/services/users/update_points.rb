@@ -59,9 +59,9 @@ module Users
 
     def get_tournament_champion_team
       result = nil
-      games = ::Game.final_games
-      if games.present?
-        result = winner_team(games.first)
+      final_game = ::GameQueries.final_game
+      if final_game.present?
+        result = winner_team(final_game)
       end
 
       result

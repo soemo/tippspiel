@@ -66,6 +66,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers', require: false
   gem 'webmock',            '~> 1.20.4'
   gem 'factory_girl_rails', '~> 4.5.0'
 

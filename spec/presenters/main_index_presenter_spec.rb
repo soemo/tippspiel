@@ -11,7 +11,7 @@ describe MainIndexPresenter do
     @presenter = subject.new(user)
   end
 
-  context '#today_games' do
+  describe '#today_games' do
 
     it 'returns no games if no game available' do
       expect(@presenter.today_games).to eq([])
@@ -27,10 +27,26 @@ describe MainIndexPresenter do
 
       expect(@presenter.today_games.to_a).to eq([game2, game3, game4, game5])
     end
-
   end
 
-  context '#get_user_top3_and_own_position' do
+  describe '#tournament_started?' do
+
+    it 'calls Tournament.started?' do
+      expect(Tournament).to receive(:started?)
+      @presenter.tournament_started?
+    end
+  end
+
+  describe '#tournament_finished?' do
+
+    it 'calls Tournament.finished?' do
+      expect(Tournament).to receive(:finished?)
+      @presenter.tournament_finished?
+    end
+  end
+
+  describe '#get_user_top3_and_own_position' do
+
     it 'returns both one if only one user is available' do
       result = @presenter.get_user_top3_and_own_position
       expect(result.own_position).to eq(1)
@@ -53,7 +69,6 @@ describe MainIndexPresenter do
                                                    2 => [u2],
                                                    3 => [user]})
     end
-
   end
 
 end

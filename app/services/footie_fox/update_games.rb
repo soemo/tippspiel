@@ -91,7 +91,7 @@ module FootieFox
             api_team2_goals = game_result['team2Score']
             api_status = game_result['status']
 
-            game = Game.where(:api_match_id => api_match_id).first
+            game = GameQueries.all_by_api_match_id(api_match_id).first
             if game.present?
               # nur update, wenn es in der DB noch als nicht finished markiert ist
               unless game.finished?
@@ -119,7 +119,7 @@ module FootieFox
 
     def update_team(api_team_id, game, game_attr_sym, known_team_keys, errors, infos)
       if api_team_id.present? && known_team_keys.include?(api_team_id)
-        team = Team.find_by_name(TEAMS[api_team_id])
+        team = TeamQueries.by_name(TEAMS[api_team_id]).first
         if team.present?
           if team.id != game.send(game_attr_sym)
             game.update_attribute(game_attr_sym, team.id)

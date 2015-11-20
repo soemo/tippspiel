@@ -20,9 +20,9 @@ class Tournament
   # is true, if the final game is marked as finished
   def self.finished?
     result = false
-    games = Game.final_games
-    if games.present?
-      result = games.first.finished?
+    final_game = GameQueries.final_game
+    if final_game.present?
+      result = final_game.finished?
     end
 
     result

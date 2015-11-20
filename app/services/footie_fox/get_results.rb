@@ -10,7 +10,7 @@
 # footiefox_d_message("requestLeagueUpdate: "+ this.apiURL + "leagues/"+id+"/update.json");
 # http://api.footiefox.com/teams.dat
 # http://api.footiefox.com/leagues.dat
-### EM2012 http://api.footiefox.com/leagues/107/base.json !!!!
+### EM http://api.footiefox.com/leagues/107/base.json !!!!
 ### WM http://api.footiefox.com/leagues/101/base.json !!!!
 
 {"leagueID"=>107,
@@ -37,16 +37,11 @@ module FootieFox
     Result = Struct.new(:json_result, :errors)
 
     def call
-      get_results
+      json_result, errors = get(result_url)
+      Result.new(json_result, errors)
     end
 
     private
-
-    def get_results
-      json_result, errors = get(result_url)
-
-      Result.new(json_result, errors)
-    end
 
     def request_timeout
       300
