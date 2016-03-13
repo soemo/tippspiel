@@ -24,39 +24,34 @@
   %link{:rel => "shortcut icon", :href => "/favicon.ico"}
 
 
-  = stylesheet_link_tag "application", :media=>:all
-  = javascript_include_tag "vendor/modernizr"
+  = stylesheet_link_tag 'application', :media=>:all
   = javascript_include_tag 'application'
 
 %body
-  .off-canvas-wrap{data: {offcanvas: ''}}
-    .inner-wrap
+  .off-canvas-wrapper
+    .off-canvas-wrapper-inner{data: {'off-canvas-wrapper': ''}}
       - write_navbar
 
-      %noscript
-        %p.alert= t(:error_javascript)
-
-      #hero-div
-        = yield(:hero_image)
-
-      .row
-        .large-9.columns#main-content{role: "content"}
-          - write_flash_messages
-          = yield
-
-        %aside.sidebar.large-3.columns
-          = yield(:sidebar)
-          - default_sidebar_content
+      .off-canvas-content{data: {'off-canvas-content': ''}}
+        #hero-div
+          = yield(:hero_image)
 
         .row
-          .small-12.columns#bottom-bg-image
+          .large-9.columns#main-content{role: 'content'}
+            - write_flash_messages
+            = yield
 
-        %footer
+          %aside.sidebar.large-3.columns
+            = yield(:sidebar)
+            - default_sidebar_content
+
           .row
-            .small-11.small-centered.large-uncentered.columns
-              - write_footer_content
+            .small-12.columns#bottom-bg-image
 
-      %a.exit-off-canvas
+          %footer
+            .row
+              .small-11.small-centered.large-uncentered.columns
+                - write_footer_content
 
       -# Scroll to top
-      %a.scroll-to-top{href: "#"}= 'Scroll'
+      %a.scroll-to-top{href: '#'}= 'Scroll'

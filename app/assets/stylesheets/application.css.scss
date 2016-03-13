@@ -3,13 +3,20 @@
 *= require_self
 */
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
 @import 'foundation_and_overrides';
-@import 'foundation';
 
+$menu-brand-color: $dark-gray;
 
+//# FIXME soeren 3/12/16
+$aluminum    : #999999;
+$gainsboro   : #DDDDDD;
+$iron        : #CCCCCC;
+$snow        : #F9F9F9;
+//# TODO soeren 3/12/16
+// enabling flexbox http://foundation.zurb.com/sites/docs/flexbox.html
 
 body {
 }
@@ -29,7 +36,7 @@ footer {
 
 #bottom-bg-image {
   height: 80px;
-  background: url(image_path('pokalsieger.jpg')) no-repeat center 0px;
+  background: url(image_path('pokalsieger.jpg')) no-repeat center 0;
   border-bottom: 1px solid $iron;
 }
 
@@ -53,14 +60,14 @@ table {
     border-top: 1px solid $gainsboro;
   }
   tr.without_border_top td {
-    border-top: 0px solid $gainsboro;
+    border-top: 0 solid $gainsboro;
   }
 
   tr.my-even {
-    background-color: $table-bg;
+    background-color: $table-background;
   }
   tr.my-odd {
-    background-color: $table-even-row-bg;
+    background-color: $table-striped-background;
   }
 }
 
@@ -68,6 +75,8 @@ table thead tr th.round_name {
   font-size: 14px;
   padding-top: 10px;
   color: $primary-color;
+  border: 0 solid #f1f1f1;
+  background-color: $body-background;
 }
 
 table thead tr.without_border_top th,
@@ -98,8 +107,13 @@ input.tip_input {
 }
 
 a.brand {
-  color: $white;
-  font-weight: normal;
+  color: $menu-brand-color;
+ // font-weight: normal;
+}
+.menu-text {
+  a.brand {
+    font-size: 20px;
+  }
 }
 
 .rss_date,
@@ -113,7 +127,23 @@ a.brand {
 }
 
 .blue-primary-color {
+  //# TODO soeren 3/13/16 raus
   color: $primary-color;
+}
+.null_point_color {
+  color: $secondary-color;
+}
+.three_point_color {
+ color: $warning-color;
+}
+.four_point_color {
+  color: $alert-color;
+}
+.five_point_color {
+  color: $primary-color;
+}
+.eight_point_color {
+  color: $success-color;
 }
 
 .wrap_text {
@@ -159,7 +189,7 @@ a.brand {
   background-size: cover;
   height: 100%;
 
-  .space-medium-up {
+  .space-medium {
     display: block;
     height: 7rem;
   }
@@ -169,7 +199,7 @@ a.brand {
   }
 
   h2 {
-    border-bottom: solid 0px $primary-color;
+    border-bottom: solid 0 $primary-color;
     color: $white;
     font-size: 1.5rem;
     line-height: 1.5em;
@@ -228,8 +258,7 @@ a.brand {
   right: 10px;
   display: none;
   text-indent: -9999px;
-  background: url(image_path('scroll-to-top.png')) no-repeat;
-  background-color: transparent;
+  background: transparent url(image_path('scroll-to-top.png')) no-repeat;
 }
 /* ##### End Scroll to top ##### */
 
@@ -258,7 +287,7 @@ a.brand {
   background-color: #ffa;
   margin: 0 12px;
   padding: .5em 0;
-  border: 0px solid #8a8d7f;
+  border: 0 solid #8a8d7f;
 }
 
 /* ##### End Overlay Tip Save Button, wenn sich ein Tipp geaendert hat ####*/
@@ -286,11 +315,15 @@ a.brand {
   }
 }
 .alert-box ul {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 /*### End Alert Messages als PopUp ###*/
 
 .padding-left-right-5 {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+div.input-group-label {
+  width: 15%;
 }

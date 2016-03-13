@@ -10,7 +10,6 @@ en:
                   Maybe you've klicked on an old bookmark?"
 
   text_maintenance: "At the moment the site isn't available due to maintenance issues. Please come back in a few minutes."
-  error_javascript: Please activate JavaScript in your browser.
   error_stale_object: This object was edited by another user. Please reopen it and review the data
   error_record_not_found: Record was not found!
   error_auth_token: Your session expired. Please try again!

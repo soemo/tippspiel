@@ -12,12 +12,75 @@ module NavBarHelper
         ['compare_tips', compare_tips_path, true],
         ['hall_of_fame', hall_of_fame_path, true],
         ['help', help_path, false]
-    ]
+  ]
 
+  end
+
+  def write_menu_text
+    haml_tag :span do
+      haml_tag 'a.brand', {:href=> '/'} do
+        haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball')
+        haml_concat get_title
+        if FEATURE_BETA_TEXT.present?
+          haml_tag 'small.label.warning', 'BETA'
+        end
+      end
+    end
   end
 
 
   def write_navbar
+
+    # off-canvas title bar for 'small' screen
+    haml_tag :div,
+             class: 'title-bar',
+             data: {'responsive-toggle': 'widemenu',
+                    'hide-for': 'medium'}  do
+       haml_tag :div, class: 'title-bar-left' do
+         haml_tag :button,
+                  class: 'menu-icon dark',
+                  type: 'button',
+                  data: {open: 'offCanvasLeft'}
+         haml_tag :span, class: 'title-bar-title' do
+           write_menu_text
+         end
+       end
+    end
+
+    # off-canvas left menu
+    haml_tag :div,
+             class: 'off-canvas position-left',
+             id: 'offCanvasLeft',
+             data: {'off-canvas': ''} do
+      haml_tag :ul,
+               class: 'vertical dropdown menu',
+               data: {'dropdown-menu': ''} do
+        write_main_nav
+        write_auth_nav(true)
+      end
+    end
+
+    # "wider" top-bar menu for 'medium' and up
+    haml_tag :nav, class: 'column row' do
+      haml_tag :div, id: 'widemenu', class: 'top-bar' do
+        haml_tag :div, class: 'top-bar-left' do
+          haml_tag :ul, class: 'dropdown medium-horizontal menu', data: {'dropdown-menu': ''} do
+            haml_tag :li, class: 'menu-text' do
+              write_menu_text
+            end
+          end
+        end
+        haml_tag :div, class: 'top-bar-right' do
+          haml_tag :ul, class: 'menu' do
+            write_main_nav
+            write_auth_nav
+          end
+        end
+      end
+    end
+
+
+=begin
     # 1. Navbar ist hide-for-small-only: Also sichtbar auf Tablett und groesser
     # 2. Navbar ist show-for-small-only: Off-Canvas Menu
 
@@ -87,8 +150,9 @@ module NavBarHelper
 
       end
 
-    end
 
+    end
+=end
   end
 
 
@@ -127,7 +191,7 @@ module NavBarHelper
     if user_signed_in?
       haml_tag 'li.divider'
       sub_menu_id = MAIN_NAV_USER_SUBMENU_ID
-      css_class = (controller_name == 'user')  ? 'active' : ""
+      css_class = (controller_name == 'user')  ? 'active' : ''
       sub_menu = get_main_subnavigation_array
       nav_text = get_user_name_or_sign_in_link
       if sub_menu[sub_menu_id].present?

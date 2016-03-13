@@ -8,7 +8,6 @@ de:
                   Stimmt da vielleicht ein Lesezeichen nicht mehr?"
 
   text_maintenance: "Die Seite wird aktuell gewartet. Bitte probiere es später wieder."
-  error_javascript: Bitte aktiviere Javascript in deinem Browser, um mit der Seite zu arbeiten!
   error_stale_object: Das Objekt wurde von einem anderen Nutzer bearbeitet. Bitte öffne es erneut und prüfe die Daten
   error_record_not_found: Das zu bearbeitende Objekt wurde nicht gefunden!
   error_auth_token: Ihre Session ist abgelaufen. Bitte melde dich erneut an (indem du den Browser schließst und neu öffnest).

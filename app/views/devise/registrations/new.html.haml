@@ -4,28 +4,38 @@
 
   .row
     .small-12.large-7.columns
-      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'envelope-o'} do
-        = f.email_field :email, placeholder: User.human_attribute_name(:email)
+      .input-group
+        .input-group-label
+          = icon('envelope-o')
+        = f.email_field :email, class: 'input-group-field', placeholder: User.human_attribute_name(:email)
 
   .row
     .small-12.large-7.columns
-      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'pencil'} do
-        = f.text_field :firstname, placeholder: User.human_attribute_name(:firstname)
+      .input-group
+        .input-group-label
+          = icon('pencil')
+        = f.text_field :firstname, class: 'input-group-field', placeholder: User.human_attribute_name(:firstname)
 
   .row
     .small-12.large-7.columns
-      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'pencil'} do
-        = f.text_field :lastname, placeholder: User.human_attribute_name(:lastname)
+      .input-group
+        .input-group-label
+          = icon('pencil')
+        = f.text_field :lastname, class: 'input-group-field', placeholder: User.human_attribute_name(:lastname)
 
   .row
     .small-12.large-7.columns
-      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'lock'} do
-        = f.password_field :password, placeholder: User.human_attribute_name(:password)
+      .input-group
+        .input-group-label
+          = icon('lock')
+        = f.password_field :password, class: 'input-group-field', placeholder: User.human_attribute_name(:password)
 
   .row
     .small-12.large-7.columns
-      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'lock'} do
-        = f.password_field :password_confirmation, placeholder: User.human_attribute_name(:password_confirmation)
+      .input-group
+        .input-group-label
+          = icon('lock')
+        = f.password_field :password_confirmation, class: 'input-group-field', placeholder: User.human_attribute_name(:password_confirmation)
 
   .row
     .small-12.large-7.columns

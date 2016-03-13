@@ -66,6 +66,12 @@ ActiveRecord::Schema.define(version: 20150919150614) do
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
 
+  create_table "scheduler_runs", force: :cascade do |t|
+    t.string   "schedule",   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string   "name",         limit: 30
     t.datetime "deleted_at"

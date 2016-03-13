@@ -1,5 +1,5 @@
 - championtip_team = current_user.present? ? current_user.championtip_team : nil
-.panel.callout
+.callout.primary
   - if Tournament.not_yet_started?
     %p
       - if championtip_team.present?

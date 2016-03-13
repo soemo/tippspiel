@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.5'
+gem 'rails', '= 4.2.5.2'
 ruby '2.2.3'
 
 gem 'mysql2',                  '~> 0.3.18'
@@ -17,6 +17,7 @@ gem 'paranoia',                '~> 2.0.2'      # acts_as_paranoid fuer Rails4
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
+# FIXME soeren update
 gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
 gem 'therubyracer',            '~> 0.11.2', :platforms=>:ruby
 gem 'rails_admin'                              # Interface zur Daten-Administration
@@ -31,21 +32,12 @@ gem 'airbrake',                '~> 4.1.0'
 
 gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain Old Ruby Objects
 
-# gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-
-# https://github.com/tzinfo/tzinfo/wiki/Resolving-TZInfo::DataSourceNotFound-Errors
-gem 'tzinfo-data', platforms: [:mingw, :mswin]
-
 group :development, :production do
-  gem 'passenger', '= 4.0.57'
+  #gem 'passenger', '= 4.0.57'
+  gem 'passenger'
 end
 
 group :development do
-  gem 'better_errors',     '~> 2.1.0'    # Provides a better error page for Rails and other Rack apps
-  gem 'binding_of_caller', '~> 0.7.2'    # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
-
-  gem 'web-console',       '~> 2.0.0'    # A set of debugging tools for your Rails application.
-
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'rack-livereload'

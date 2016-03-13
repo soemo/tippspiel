@@ -18,7 +18,7 @@
   Die Regeln sind einfach erklärt. Jeder der sich anmeldet, kann die Spiele und den Tuniersieger tippen.
   Wer die meisten Punkte hat gewinnt. Ein Tipp für ein Spiel kann bis zur angegebenen Spiel-Startzeit abgegeben werden.
   %br
-  .panel.callout
+  .callout.primary
     Pro Spiel gibt es maximal #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte!
 
 %ul.hilfe
@@ -35,10 +35,9 @@
   %li
     Den letzten Extrapunkt gibt es bei richtiger Tordifferenz.
 
-.panel.callout
+.callout.primary
   %span.warning.label
     Achtung
-  %br
   Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
 
 %p
@@ -90,7 +89,7 @@
   die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punktetipps".
   Liegt auch hier Gleichheit vor dann die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND  + Tips::UpdatePoints::EXTRA_POINT} Punktetipps" usw.
 
-.panel
+.callout.secondary
   %span.label
     Beispiele
   %p
@@ -105,7 +104,7 @@
     #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
     und #{Tips::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
 
-.panel.callout
+.callout.primary
   %span.label.warning
     Tuniersieger-Tipp:
   %p
