@@ -3,9 +3,9 @@ require 'rails_helper'
 
 describe ApplicationHelper, :type => :helper do
 
-  context  '#is_selected_controller?' do
+  describe  '#is_selected_controller?' do
 
-    context "when controller is HallOfFame" do
+    context 'hall-of-fame' do
       before :each do
         expect(helper).to receive(:controller).and_return(HallOfFamesController)
       end

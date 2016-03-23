@@ -1,0 +1,197 @@
+// # FIXME soeren 3/16/16 aufraeumen
+
+// http://foundation.zurb.com/sites/docs/media-queries.html
+// new way to set media queries in scss, with breakpoint mixins
+
+#main-content {
+  padding-bottom: 2rem;
+}
+
+footer {
+  padding-top: 15px;
+
+  p {
+    font-size: 0.8rem;
+  }
+
+}
+
+#bottom-bg-image {
+  height: 80px;
+  background: url(image_path('pokalsieger.jpg')) no-repeat center 0;
+  border-bottom: 1px solid $iron;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2,
+h3 {
+  border-bottom: solid 1px $primary-color;
+}
+h3 {
+  margin-bottom: 12px;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+
+  td {
+    border-top: 1px solid $gainsboro;
+  }
+}
+
+table thead tr th.round_name {
+  font-size: 14px;
+  padding-top: 20px;
+  color: $primary-color;
+  border: 0 solid #f1f1f1;
+  background-color: $body-background;
+}
+
+
+table thead tr.white-bg th,
+table thead tr.white-bg td {
+  background-color: $white;
+}
+
+input.tip_input {
+  padding: 4px;
+  width: 26px;
+  text-align: center;
+}
+
+.tip_input_td {
+  white-space: nowrap;
+}
+
+.sidebar {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid $iron;
+  background-color: $snow;
+}
+
+a.brand {
+  color: $menu-brand-color;
+}
+
+
+.rss_date,
+.notice_user {
+  font-style: italic;
+  font-size: 10px;
+}
+
+.muted {
+  color: $aluminum;
+}
+
+.null-point-color {
+  color: $secondary-color;
+}
+.null-point-background-color {
+  background-color: $secondary-color;
+}
+
+.three-point-color {
+  color: $alert-color;
+}
+.three-point-background-color {
+  background-color: $alert-color;
+}
+
+.four-point-color {
+  color: $warning-color;
+}
+.four-point-background-color {
+  background-color: $warning-color;
+}
+
+.five-point-color {
+  color: $primary-color;
+}
+.five-point-background-color {
+  background-color: $primary-color;
+}
+
+.eight-point-color {
+  color: $success-color;
+}
+.eight-point-background-color {
+  background-color: $success-color;
+}
+
+.point-explaning
+{
+  padding-right: 10px;
+}
+
+.wrap_text {
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+
+
+
+
+/* ##### Start Scroll to top ##### */
+.scroll-to-top {
+  width: 37px;
+  height: 18px;
+  position: fixed;
+  bottom: 15px;
+  right: 10px;
+  display: none;
+  text-indent: -9999px;
+  background: transparent url(image_path('scroll-to-top.png')) no-repeat;
+}
+/* ##### End Scroll to top ##### */
+
+
+/*### Start Alert Messages als PopUp ###*/
+// wird per JS repositionOfFlashMessages neu positioniert und angezeigt
+.alert-box {
+  position: fixed;
+  //right: 20px;
+  top: 80px;
+  //width: 300px;
+  z-index: 200;
+  display: none;
+  border-width: 3px;
+  //center
+  margin: auto;
+  left: 0;
+  right: 0;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+.alert-box ul {
+  margin-bottom: 0;
+}
+/*### End Alert Messages als PopUp ###*/
+
+.padding-left-right-5 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div.input-group-label {
+  width: 15%;
+}
+
+.large-point-badge {
+  font-size: 1.2em;
+}

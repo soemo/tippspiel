@@ -2,4 +2,22 @@
 %p
   = t('x_user_bet', user_count: @user_count)
   = t('result_after_game_count', finshed_games_count: GameQueries.finished.count, all_games_count: Game.count)
+  %br
+  %small
+    %span.point-explaning
+      = icon('circle', '', class: 'eight-point-color')
+      = "x #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte"
+    %span.point-explaning
+      = icon('circle', '', class: 'five-point-color')
+      = "x #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte"
+    %span.point-explaning
+      = icon('circle', '', class: 'four-point-color')
+      = "x #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte"
+    %span.point-explaning
+      = icon('circle', '', class: 'three-point-color')
+      = "x #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte"
+    %span.point-explaning
+      = icon('circle', '', class: 'null-point-color')
+      = 'x 0 Punkte'
+
 = render partial: 'user_ranking', locals: {user_ranking: @user_ranking_hash, short_version: false}

@@ -1,8 +1,11 @@
-# -*- encoding : utf-8 -*-
 module ApplicationHelper
 
   def get_title
     "#{TOURNAMENT_NAME} #{t('app_name')}"
+  end
+
+  def pointbadge_with_content(content, css_class, title)
+    "<span class='#{css_class} badge' title='#{title}'>#{content}</span>"
   end
 
   def write_team_with_flag(team_name, country_code='', spacer=nil)
@@ -62,7 +65,9 @@ module ApplicationHelper
 
   def is_selected_controller?(link_controller_name)
     if link_controller_name.present?
-      link_controller_name.gsub('-', '_').pluralize == controller.controller_name
+      controller_name = link_controller_name.gsub('-', '_')
+      controller_name.pluralize == controller.controller_name ||
+      controller_name == controller.controller_name
     else
       false
     end

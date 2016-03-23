@@ -4,9 +4,7 @@ module NavBarHelper
   # controllername, path, needs_login
   def main_nav_items
     [
-        ['main', root_path, false],
         ['tips', tips_path, true],
-        ['tips_for_phone', tips_path({:for_phone => true}), true], # hat extra Behandlung in def write_main_nav - Extra Link auf dem Phone
         ['ranking', ranking_path, true],
         ['notice', notes_path, true],
         ['compare_tips', compare_tips_path, true],
@@ -19,11 +17,8 @@ module NavBarHelper
   def write_menu_text
     haml_tag :span do
       haml_tag 'a.brand', {:href=> '/'} do
-        haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball')
+        haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball', size: '16x16')
         haml_concat get_title
-        if FEATURE_BETA_TEXT.present?
-          haml_tag 'small.label.warning', 'BETA'
-        end
       end
     end
   end
@@ -35,7 +30,7 @@ module NavBarHelper
     haml_tag :div,
              class: 'title-bar',
              data: {'responsive-toggle': 'widemenu',
-                    'hide-for': 'medium'}  do
+                    'hide-for': 'large'}  do
        haml_tag :div, class: 'title-bar-left' do
          haml_tag :button,
                   class: 'menu-icon dark',
@@ -64,97 +59,21 @@ module NavBarHelper
     haml_tag :nav, class: 'column row' do
       haml_tag :div, id: 'widemenu', class: 'top-bar' do
         haml_tag :div, class: 'top-bar-left' do
-          haml_tag :ul, class: 'dropdown medium-horizontal menu', data: {'dropdown-menu': ''} do
+          haml_tag :ul, class: 'menu' do
             haml_tag :li, class: 'menu-text' do
               write_menu_text
             end
-          end
+            write_main_nav
+           end
         end
         haml_tag :div, class: 'top-bar-right' do
-          haml_tag :ul, class: 'menu' do
-            write_main_nav
+          haml_tag :ul, class: 'dropdown menu', data: {'dropdown-menu': ''} do
             write_auth_nav
           end
         end
       end
     end
-
-
-=begin
-    # 1. Navbar ist hide-for-small-only: Also sichtbar auf Tablett und groesser
-    # 2. Navbar ist show-for-small-only: Off-Canvas Menu
-
-    haml_tag 'div.contain-to-grid' do
-
-      # 1.
-      haml_tag 'nav.top-bar.hide-for-small-only', {data: {topbar: ''}, role: 'navigation'} do
-        haml_tag 'ul.title-area' do
-          haml_tag 'li.name' do
-            haml_tag :h1 do
-              haml_tag 'a.brand', {:href=> '/'} do
-                haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball')
-                haml_concat get_title
-                if FEATURE_BETA_TEXT.present?
-                  haml_tag 'small.label.warning.round', 'BETA'
-                end
-              end
-            end
-          end
-          haml_tag 'li.toggle-topbar.menu-icon' do
-            haml_tag 'a', {href: "#"} do
-              haml_tag :span, ''
-            end
-          end
-        end
-
-        haml_tag 'section.top-bar-section' do
-          haml_tag 'ul.right' do
-            write_main_nav
-            write_auth_nav
-          end
-
-          haml_tag 'ul.left' do
-            # wenn man links auch ein Menue haben will
-          end
-        end
-      end
-
-      # 2.
-      haml_tag 'div.show-for-small-only' do
-        haml_tag 'nav.tab-bar' do
-          haml_tag 'section.left-small' do
-            haml_tag 'a.left-off-canvas-toggle.menu-icon', {href: '#'} do
-              haml_tag :span, ''
-            end
-          end
-
-          haml_tag 'section.middle.tab-bar-section' do
-            haml_tag 'h1.left' do
-              haml_tag 'a.brand', {:href=> '/'} do
-                haml_concat image_tag('soccer_ball.png', :class=>'soccer_ball')
-                haml_concat get_title
-                if FEATURE_BETA_TEXT.present?
-                  haml_tag 'small.label.warning.round', 'BETA'
-                end
-              end
-            end
-          end
-        end
-
-        haml_tag 'nav.left-off-canvas-menu' do
-          haml_tag 'ul.off-canvas-list' do
-            write_main_nav
-            write_auth_nav(true)
-          end
-        end
-
-      end
-
-
-    end
-=end
   end
-
 
   def write_main_nav
     nav_items = main_nav_items
@@ -166,22 +85,11 @@ module NavBarHelper
     if nav_items.present?
       nav_items.each do |key, path, _|
         link_text = t(key)
+        # FIXME soeren 3/13/16 Presenter nutzen um den active Tab zu markieren. see TTBN
         class_name = is_selected_controller?(key) ? 'active' : ''
 
-        # TODO soeren 19.05.14 besser machen mit Rails4 #72 besser machen
-        # Tipp Link wird 2 mal angegeben, einmal fuer Phone und der andere fuer Tablet und Desktop
-        if key == 'tips'
-          haml_tag "li.#{class_name}.hide-for-small-only" do
-            haml_concat link_to(link_text, path)
-          end
-        elsif key == 'tips_for_phone'
-          haml_tag "li.#{class_name}.show-for-small-only" do
-            haml_concat link_to(link_text, path)
-          end
-        else
-          haml_tag "li.#{class_name}" do
-            haml_concat link_to(link_text, path)
-          end
+        haml_tag "li.#{class_name}" do
+          haml_concat link_to(link_text, path)
         end
       end
     end
@@ -189,7 +97,6 @@ module NavBarHelper
 
   def write_auth_nav(for_off_canvas = false)
     if user_signed_in?
-      haml_tag 'li.divider'
       sub_menu_id = MAIN_NAV_USER_SUBMENU_ID
       css_class = (controller_name == 'user')  ? 'active' : ''
       sub_menu = get_main_subnavigation_array
@@ -206,13 +113,15 @@ module NavBarHelper
 
   def write_sub_menu(sub_menu_id, links, main_menu_text, css_class='')
     if sub_menu_id.present? && links.present? && main_menu_text.present?
-      haml_tag "li##{sub_menu_id}.has-dropdown.#{css_class}" do
+      haml_tag "li##{sub_menu_id}.#{css_class}" do
 
-        haml_tag :a,  main_menu_text
-        haml_tag 'ul.dropdown' do
+        haml_tag :a, main_menu_text
+        haml_tag 'ul.menu vertical' do
           links.each do |link|
             if link[:divider].present?
-              haml_tag 'li.divider'
+              haml_tag :li do
+                haml_tag :hr
+              end
             else
               haml_tag :li do
                 haml_concat link_to(link[:text], link[:url])
@@ -228,12 +137,14 @@ module NavBarHelper
   def write_sub_menu_for_off_canvas(links, main_menu_text)
     if links.present? && main_menu_text.present?
       haml_tag :li do
-        haml_tag :label, main_menu_text
+        haml_tag :hr
       end
 
       links.each do |link|
         if link[:divider].present?
-          haml_tag 'li.divider'
+          haml_tag :li do
+            haml_tag :hr
+          end
         else
           haml_tag :li do
             haml_concat link_to(link[:text], link[:url])
@@ -256,6 +167,4 @@ module NavBarHelper
 
     result
   end
-
-
 end

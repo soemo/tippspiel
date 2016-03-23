@@ -15,11 +15,11 @@
                  {:name => 'Chris Zenker',                 :description => 'Sieger EM 2004 Tippspiel', :img => 'em2004sieger.jpg'},
                  {:name => 'Ina Foedisch und Ricardo Mai', :description => 'Sieger WM 2002 Tippspiel', :img => 'pokalsieger.jpg'}]
 
-  %ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+  .row
     - champions.each do |champ|
-      %li
-        %span.th.text-center
-          = image_tag(champ[:img], :alt=>champ[:name])
+      .small-12.medium-6.large-4.columns
+        %span.text-center
+          = image_tag(champ[:img], alt: champ[:name], class: 'thumbnail')
           %div.callout.primary
             %p
               = champ[:name]

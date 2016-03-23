@@ -10,7 +10,7 @@ module RankingHelper
           haml_tag :th, User.human_attribute_name('name')
           haml_tag :th, Game.human_attribute_name('siegertipp') unless short
           haml_tag :th, User.human_attribute_name('points')
-        end
+          haml_tag :th, I18n.t(:points_statistic) unless short
       end
       haml_tag :tbody do
         user_ranking.each do |place, users_on_same_place|
@@ -21,9 +21,10 @@ module RankingHelper
               haml_tag 'td.place', place
               haml_tag :td, user.name
               haml_tag :td, Tournament.not_yet_started? ? '' : user.championtip_team unless short
+              haml_tag :td, user.points.present? ? user.points.to_s : '0'
               haml_tag :td do
-                haml_concat statistic_hover_dropdown_link(user)
-                haml_concat statistic_hover_dropdown_content(user)
+                haml_concat statistic_content(user)
+              end unless short
               end
 
             end
@@ -38,39 +39,24 @@ module RankingHelper
     end
   end
 
-  def statistic_hover_dropdown_link(user)
-    if user.present?
 
-      user_points = user.points.present? ? user.points.to_s : '0'
-
-      link_to(user_points, '#', {data: {dropdown: get_dropdown_id(user.id), options: 'is_hover:true; align:left'}})
-    end
-  end
-
-  def get_dropdown_id(user_id)
-    "statistik_#{user_id}"
-  end
-
-  def statistic_hover_dropdown_content(user)
+  def statistic_content(user)
     result = ''
+
     if user.present?
-      result << "<div id='#{get_dropdown_id(user.id)}' data-dropdown-content class='f-dropdown content' aria-hidden='true' tabindex='-1'>"
-      result << "<div class='text-right'><b>#{user.name}</br>"
-      result << "#{I18n.t('points_statistic')}</b></br>"
-
-      temp   = {'8' => user.count8points,
-                '5' => user.count5points,
-                '4' => user.count4points,
-                '3' => user.count3points,
-                '0' => user.count0points}
-      temp.each do |key, count|
+      POINTS_TO_CSS_CLASS.each do |key, css_class|
+        count = user.send("count#{key}points")
         count = count.present? ? count : 0
-        result << "#{count} x #{key} #{User.human_attribute_name('points')}</br>"
+        result << pointbadge_with_content(count, css_class, "#{key} #{User.human_attribute_name('points')}")
       end
-      result << "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{user.championtippoints}"
 
-      result << '</div></div>'
+      champion_tippoints = user.championtippoints
+      champion_tippoint_title = "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{champion_tippoints}"
+      css_class = POINTS_TO_CSS_CLASS["#{champion_tippoints}"]
+      result << '&nbsp;&nbsp'
+      result << pointbadge_with_content(icon('trophy'), css_class, champion_tippoint_title)
     end
+    # FIXME soeren 3/13/16 spec anpassen
     result
   end
 end

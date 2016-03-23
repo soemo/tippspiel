@@ -1,0 +1,28 @@
+!!! 5
+%head
+  = render partial: 'layouts/header'
+
+%body
+  .off-canvas-wrapper
+    .off-canvas-wrapper-inner{data: {'off-canvas-wrapper': ''}}
+      - write_navbar
+
+      .off-canvas-content{data: {'off-canvas-content': ''}}
+        #hero-div
+          = yield(:hero_image)
+
+        .row
+          .small-12.columns#main-content{role: 'content'}
+            - write_flash_messages
+            = yield
+
+          .row
+            .small-12.columns#bottom-bg-image
+
+          %footer
+            .row
+              .small-11.small-centered.large-uncentered.columns
+                - write_footer_content
+
+      -# Scroll to top
+      %a.scroll-to-top{href: '#'}= 'Scroll'

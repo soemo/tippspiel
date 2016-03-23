@@ -1,0 +1,25 @@
+/* ...
+*= require flags16
+*= require_self
+*/
+
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+@import 'foundation_and_overrides';
+
+$menu-brand-color: $dark-gray;
+
+//# FIXME soeren 3/12/16
+$aluminum    : #999999;
+$gainsboro   : #DDDDDD;
+$iron        : #CCCCCC;
+$snow        : #F9F9F9;
+//# TODO soeren 3/12/16
+// enabling flexbox http://foundation.zurb.com/sites/docs/flexbox.html
+
+// import app styles
+@import 'general';
+@import 'countdown';
+@import 'hero_image';
+@import 'overlay_tip_save_button';

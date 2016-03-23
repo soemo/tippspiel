@@ -47,37 +47,37 @@
   %li
     %p
       - 8.times do
-        = icon('circle-thin', '', class: 'blue-primary-color')
+        = icon('circle-thin', '', class: 'null-point-color')
       %br
       0 Punkte: alles falsch
   %li
     %p
       - 3.times do
-        = icon('circle', '', class: 'blue-primary-color')
+        = icon('circle', '', class: 'three-point-color')
       - 5.times do
-        = icon('circle-thin', '', class: 'blue-primary-color')
+        = icon('circle-thin', '', class: 'null-point-color')
       %br
       #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte: Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams
   %li
     %p
       - 4.times do
-        = icon('circle', '', class: 'blue-primary-color')
+        = icon('circle', '', class: 'four-point-color')
       - 4.times do
-        = icon('circle-thin', '', class: 'blue-primary-color')
+        = icon('circle-thin', '', class: 'null-point-color')
       %br
       #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte: Spieltendenz richtig und die Tordifferenz
   %li
     %p
       - 5.times do
-        = icon('circle', '', class: 'blue-primary-color')
+        = icon('circle', '', class: 'five-point-color')
       - 3.times do
-        = icon('circle-thin', '', class: 'blue-primary-color')
+        = icon('circle-thin', '', class: 'null-point-color')
       %br
       #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
   %li
     %p
       - 8.times do
-        = icon('circle', '', class: 'blue-primary-color')
+        = icon('circle', '', class: 'eight-point-color')
       %br
       #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
 

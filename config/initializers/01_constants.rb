@@ -1,5 +1,3 @@
-# -*- encoding : utf-8 -*-
-
 # Anpassen fuer jeweiliges Tunier
 IS_WM = true
 TOURNAMENT_NAME = 'WM 2014'
@@ -56,3 +54,11 @@ if IS_WM
 
   GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F, GROUP_G, GROUP_H]
 end
+
+
+POINTS_TO_CSS_CLASS =
+    {'8' => 'eight-point-background-color',
+     '5' => 'five-point-background-color',
+     '4' => 'four-point-background-color',
+     '3' => 'three-point-background-color',
+     '0' => 'null-point-background-color'}

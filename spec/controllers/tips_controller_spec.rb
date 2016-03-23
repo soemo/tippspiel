@@ -39,7 +39,7 @@ describe TipsController, :type => :controller do
 
       # update erlaubt
       post 'save_tips', {:tips=>{"#{tip.id}"=>{"team2_goals"=>"9", "team1_goals"=>"9"}}}
-      expect(response).to redirect_to tips_path({:for_phone=>false})
+      expect(response).to redirect_to tips_path
 
       t = Tip.find(tip.id)
       expect(t.team1_goals).to eq(9)
@@ -49,7 +49,7 @@ describe TipsController, :type => :controller do
 
       # update NICHT erlaubt
       post 'save_tips', {:tips=>{"#{tip.id}"=>{"team2_goals"=>"3", "team1_goals"=>"0"}}}
-      expect(response).to redirect_to tips_path({:for_phone=>false})
+      expect(response).to redirect_to tips_path
 
       t = Tip.find(tip.id)
       expect(t.team1_goals).to eq(9) # Wert ist nicht veraendert
