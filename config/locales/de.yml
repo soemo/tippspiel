@@ -91,15 +91,7 @@ de:
   characters_remaining: "Verbleibende Zeichen: "
 
   round:
-    group: Gruppenspiele
-    group_a: Spiele Gruppe A
-    group_b: Spiele Gruppe B
-    group_c: Spiele Gruppe C
-    group_d: Spiele Gruppe D
-    group_e: Spiele Gruppe E
-    group_f: Spiele Gruppe F
-    group_g: Spiele Gruppe G
-    group_h: Spiele Gruppe H
+    group: Gruppe
     roundof16: Achtelfinale
     quarterfinal: Viertelfinale
     semifinal: Halbfinale

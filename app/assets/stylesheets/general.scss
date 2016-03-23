@@ -3,10 +3,6 @@
 // http://foundation.zurb.com/sites/docs/media-queries.html
 // new way to set media queries in scss, with breakpoint mixins
 
-#main-content {
-  padding-bottom: 2rem;
-}
-
 footer {
   padding-top: 15px;
 
@@ -32,6 +28,10 @@ h3 {
 }
 h3 {
   margin-bottom: 12px;
+}
+
+.small-text {
+  font-size: rem-calc(12);
 }
 
 table {

@@ -1,23 +1,21 @@
-- unless user_signed_in?
-  - content_for :hero_image do
-    = render :partial => 'hero_image'
-
-- else
+- if user_signed_in?
   .row
     .small-12.columns
-      = render :partial => 'welcome_text_infos'
+      = render partial: 'welcome_text_infos'
   .row
     .small-12.large-5.large-push-7.columns
-      = render :partial => 'user_infos', :locals => {:presenter => @presenter}
+      = render partial: 'user_infos', locals: {presenter: @presenter}
     .small-12.large-7.large-pull-5.columns
-      = render :partial => 'tournament_infos', :locals => {today_games: @presenter.today_games,
-                                                           tournament_finished: @presenter.tournament_finished?}
+      = render partial: 'tournament_infos', locals: {today_games: @presenter.today_games,
+                                                     tournament_finished: @presenter.tournament_finished?}
+- else
+  - content_for :hero_image do
+    = render partial: 'hero_image'
 
 .row
   .small-12.columns
     - unless @presenter.tournament_started?
-      = render :partial => 'countdown'
+      = render partial: 'countdown'
 
-    %h3=I18n.t('games_of', :tournament_name => TOURNAMENT_NAME)
-
-    = render_cell(:game_list, :show, :last_updated_at => [GameQueries.last_updated_at, TeamQueries.last_updated_at].max )
+    %h3=I18n.t('games_of', tournament_name: TOURNAMENT_NAME)
+    = render_cell(:game_list, :show, last_updated_at: [GameQueries.last_updated_at, TeamQueries.last_updated_at].max )

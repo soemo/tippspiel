@@ -15,6 +15,19 @@ describe GameQueries do
     end
   end
 
+  describe '::all_ordered_by_start_at' do
+
+    it 'returns games ordered by start_at asc' do
+      Timecop.freeze(Time.now)
+      game1 = create(:game, start_at: Time.now + 1.minute)
+      game2 = create(:game, start_at: Time.now - 1.minute)
+      game3 = create(:game, start_at: Time.now + 1.day)
+
+      expect(subject.all_ordered_by_start_at).to eq([game2, game1, game3])
+    end
+
+  end
+
   describe '::all_game_ids' do
 
     it 'returns ids of all games' do
@@ -23,17 +36,6 @@ describe GameQueries do
       game3 = create(:game)
 
       expect(subject.all_game_ids).to eq([game1.id, game2.id, game3.id])
-    end
-  end
-
-  describe '::all_by_round' do
-
-    it 'returns all games for round' do
-      game1 = create(:game, round: GROUP)
-      game2 = create(:game, round: GROUP)
-      game3 = create(:game, round: FINAL)
-
-      expect(subject.all_by_round(GROUP)).to eq([game1, game2])
     end
   end
 
@@ -69,17 +71,6 @@ describe GameQueries do
 
       game = subject.first_game_in_tournament
       expect(game).to eq(game2)
-    end
-  end
-
-  describe '::group_games_ordered_by_start_at' do
-
-    it 'returns only group games ordered by start_at' do
-      game1 = create(:game, start_at: '19.06.2012 20:45', round: GROUP)
-      game2 = create(:game, start_at: '17.06.2012 20:45', round: GROUP)
-      game3 = create(:game, start_at: '19.06.2012 20:45', round: SEMIFINAL)
-
-      expect(GameQueries.group_games_ordered_by_start_at).to eq([game2, game1])
     end
   end
 

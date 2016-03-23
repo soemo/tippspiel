@@ -7,14 +7,12 @@
     .off-canvas-wrapper-inner{data: {'off-canvas-wrapper': ''}}
       - write_navbar
 
-      .off-canvas-content{data: {'off-canvas-content': ''}}
+      .off-canvas-content.main-content{data: {'off-canvas-content': ''}}
         #hero-div
           = yield(:hero_image)
 
-        .row
-          .small-12.columns#main-content
-            - write_flash_messages
-            = yield
+        - write_flash_messages
+        = yield
 
         .row
           .small-12.columns

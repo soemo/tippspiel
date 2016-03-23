@@ -7,7 +7,7 @@ class GameListCell < Cell::Rails
   end
 
   def show(args)
-    @games_round_hash = Games::SeparatedByRounds.call
+    @games = GameQueries.all_ordered_by_start_at
 
     render
   end
