@@ -12,21 +12,21 @@
           = yield(:hero_image)
 
         .row
-          .small-12.large-9.columns#main-content{role: 'content'}
+          .small-12.columns#main-content
             - write_flash_messages
             = yield
 
-          %aside.sidebar.small-12.large-3.columns
-            = yield(:sidebar)
-            - default_sidebar_content
+        .row
+          .small-12.columns
+            = render_cell(:rss_feed, :show, :item_count => 5)
 
+        .row
+          .small-12.columns#bottom-bg-image
+
+        %footer
           .row
-            .small-12.columns#bottom-bg-image
-
-          %footer
-            .row
-              .small-11.small-centered.large-uncentered.columns
-                - write_footer_content
+            .small-11.small-centered.large-uncentered.columns
+              - write_footer_content
 
       -# Scroll to top
       %a.scroll-to-top{href: '#'}= 'Scroll'

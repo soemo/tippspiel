@@ -17,8 +17,8 @@
 
 * Check des Passengers
 ** in current App Verzeichnis wechseln und in cmd folgendes nutzen:
-bundle exec passenger-status
-bundle exec passenger-memory-stats
+bin/bundle exec passenger-status
+bin/bundle exec passenger-memory-stats
 
 
 ####### Neu Aufsetzen fuer ein Tunier

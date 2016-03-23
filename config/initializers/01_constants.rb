@@ -3,14 +3,6 @@ IS_WM = true
 TOURNAMENT_NAME = 'WM 2014'
 IS_EM = !IS_WM
 
-SIDEBAR_EXTERN_LINKS = [
-    {:title => 'sportschau.de', :url => 'http://www.sportschau.de/fifawm2014/index.html'},
-    {:title => 'FIFA', :url => 'http://de.fifa.com/worldcup/index.html'},
-    {:title => 'Wikipedia', :url => 'http://de.wikipedia.org/wiki/Fu%C3%9Fball-Weltmeisterschaft_2014'},
-    {:title => 'Interaktiver Spielplan (ZDF)', :url => 'http://spielplan-wm2014.zdf.de/'},
-]
-
-
 
 # Wird im FootieFoxUpdateGames benutzt
 RESULT_URL = 'http://api.footiefox.com/leagues/101/base.json'

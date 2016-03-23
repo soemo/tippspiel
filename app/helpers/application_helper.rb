@@ -18,22 +18,6 @@ module ApplicationHelper
     haml_concat team_name
   end
 
-  def default_sidebar_content
-    # im Fehlerfall wird keine Sidebar angezeigt
-    unless controller.controller_name == 'main' && controller.action_name == 'error'
-      if current_user.present?
-        unless controller.controller_name == 'notice'
-          haml_concat render_cell(:sidebar_notes,
-                                  :show,
-                                  :item_count => 5,
-                                  :last_updated_at => NoticeQueries.last_updated_at)
-        end
-      end
-      haml_concat render_cell(:extern_links, :show)
-      haml_concat render_cell(:rss_feed, :show, :item_count => 5)
-    end
-  end
-
   def write_flash_messages
     haml_tag 'div#flash_messages' do
       write_flash(flash[:error], 'alert')
