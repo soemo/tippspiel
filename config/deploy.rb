@@ -6,7 +6,7 @@ set :cap_tournament_name, TOURNAMENT_NAME
 # your Uberspace username
 set :user, 'soemo'
 
-server 'taurus.uberspace.de', user: fetch(:user), roles: %w{app db web}
+server 'sabic.uberspace.de', user: fetch(:user), roles: %w{app db web}
 
 set :repo_url, "file:///home/#{fetch(:user)}/git/tippspiel.git"
 
