@@ -15,7 +15,6 @@ gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-
 
 gem 'paranoia',                '~> 2.0.2'      # acts_as_paranoid fuer Rails4
 gem 'sass-rails'
-gem 'coffee-rails'
 gem 'uglifier'
 # FIXME soeren update
 gem 'jquery-rails',            '~> 3.1.2'      # mit jQuery 1.11.1 und jquery-ujs 1.0.1
