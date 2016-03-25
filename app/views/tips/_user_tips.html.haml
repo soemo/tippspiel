@@ -1,88 +1,84 @@
-- if tips_round_hash.present?
+- if tips.present?
+  %p
+  =  I18n.t('random_tips_description')
+  = link_to(t('random_tips'), '#', {id: 'js_fill_random_tips', remote: true})
 
-  = render :partial => 'random_tip_link'
-  %br
-  = form_tag '/save-tips', :id => 'js_save_tips' do
-    = render partial: 'only_today_games_link'
+  = form_tag '/save-tips', id: 'js_save_tips' do
+    %table.tips.hover
+      %thead.hide-for-small-only
+        %tr.white-bg
+          %th= ''
+          %th= ''
+          %th= ''
+          %th= ''
+          %th= ''
+          %th= ''
+          %th= Tip.model_name.human
+          %th= Tip.human_attribute_name('tip_points')
+      %tbody
+        - tips.each do |tip|
+          - edit_allowed = tip.edit_allowed?
+          - game = tip.game
+          - start_date = l(game.start_at, :format => :default)
+          - round_or_group_name = game.round == GROUP ? "#{t('round.group')} #{game.group}" : t(game.round, :scope => 'round')
+          - place = game.place
+          - result = "#{game.team1_goals} : #{game.team2_goals}"
 
-    - # FIXME soeren 3/13/16 Daten nur ienaml im Loop holen und eine Tbelle aufbauen
-    - # mit unterschiedlichen Daten Anordnungen fuer Small - Large
-    .hide-for-small-only
-      %table.tips.hover
-        - tips_round_hash.each do |index, round_with_tips|
-          - round_with_tips.each_pair do |round_name, tips|
-            %thead
-              %tr
-                %th.round_name{:colspan => 7}= t(round_name, :scope => 'round')
-              %tr.white-bg
-                %th= Game.human_attribute_name('start_at')
-                %th= Game.human_attribute_name('place')
-                %th= Game.human_attribute_name('team1')
-                %th= Game.human_attribute_name('team2')
-                %th= Game.human_attribute_name('result')
-                %th= Tip.model_name.human
-                %th= Tip.human_attribute_name('tip_points')
-            %tbody
-              - tips.each do |tip|
-                - game                 = tip.game
-                - edit_allowed         = tip.edit_allowed?
-                - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
-                %tr{:class => "#{today_game_css_class}"}
-                  %td= l(game.start_at, :format => :default)
-                  %td= game.place
-                  %td
-                    - write_team_with_flag(game.team1_view_name, game.team1_country_code)
-                  %td
-                    - write_team_with_flag(game.team2_view_name, game.team2_country_code)
-                  %td= game.team1_goals.to_s + ' : ' + game.team2_goals.to_s
-                  - if edit_allowed
-                    %td.tip_input_td
-                      - write_tip_input(tip.id, 'team1_goals', tip.team1_goals)
-                      =':'
-                      - write_tip_input(tip.id, 'team2_goals', tip.team2_goals)
+          %tr
+            %td.show-for-small-only
+              .row.small-game-infos
+                .small-12.columns.text-center
+                  = "#{start_date} - #{round_or_group_name} - #{place}"
+              .row
+                .small-5.columns.text-right
+                  = team_with_flag(team_name: game.team1_view_name,
+                                  country_code: game.team1_country_code,
+                                  flag_position: 'right')
+                .small-2.columns.text-center
+                  = result
+                .small-5.columns.text-left
+                  = team_with_flag(team_name: game.team2_view_name,
+                                  country_code: game.team2_country_code)
+              .row
+                .small-5.columns.text-right
+                  = "#{Tip.model_name.human}:"
 
-                  - else
-                    %td= "#{tip.team1_goals} : #{tip.team2_goals}"
+                - if edit_allowed
+                  .small-3.columns.text-center.tip_input_td
+                    = tip_input(tip.id, 'team1_goals', tip.team1_goals)
+                    = ':'
+                    = tip_input(tip.id, 'team2_goals', tip.team2_goals)
+                - else
+                  .small-2.columns.text-center
+                    = "#{tip.team1_goals} : #{tip.team2_goals}"
+                .small-4.columns.text-right
                   - tip_points = tip.tip_points
                   - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
-                  %td= raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
+                  = raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
 
-    .show-for-small-only
-      %table.tips.hover
-        - tips_round_hash.each do |index, round_with_tips|
-          - round_with_tips.each_pair do |round_name, tips|
-            %thead
-              %tr.without_border_top.white-bg
-                %th.round_name{:colspan => 4}= t(round_name, :scope => 'round')
-            %tbody
-              - tips.each do |tip|
-                - game                 = tip.game
-                - edit_allowed         = tip.edit_allowed?
-                - today_game_css_class = get_today_game_css_class(today_game_ids, game.id)
 
-                -# for phone
-                %tr{:class => "#{today_game_css_class}"}
-                  %td
-                    = l(game.start_at, :format => :default)
-                    %br
-                    = game.place
-                  %td
-                    - write_team_with_flag(game.team1_view_name, game.team1_country_code, "#{game.team1_goals}<br/>".html_safe )
-                    %br
-                    - if edit_allowed
-                      - write_tip_input(tip.id, 'team1_goals', tip.team1_goals)
-                    - else
-                      = "#{tip.team1_goals}"
-                  %td
-                    - write_team_with_flag(game.team2_view_name, game.team2_country_code, "#{game.team2_goals}<br/>".html_safe)
-                    %br
-                    - if edit_allowed
-                      - write_tip_input(tip.id, 'team2_goals', tip.team2_goals)
-                    - else
-                      =  "#{tip.team2_goals} (#{tip.tip_points})"
-                  - tip_points = tip.tip_points
-                  - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
-                  %td= raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
+            %td.hide-for-small-only= start_date
+            %td.hide-for-small-only= round_or_group_name
+            %td.hide-for-small-only= place
+            %td.hide-for-small-only.text-right
+              = team_with_flag(team_name: game.team1_view_name,
+                                   country_code: game.team1_country_code,
+                                   flag_position: 'right')
+            %td.hide-for-small-only.text-center
+              = result
+            %td.hide-for-small-only.text-left
+              = team_with_flag(team_name: game.team2_view_name,
+                                 country_code: game.team2_country_code)
+            - if edit_allowed
+              %td.tip_input_td.hide-for-small-only
+                = tip_input(tip.id, 'team1_goals', tip.team1_goals)
+                = ':'
+                = tip_input(tip.id, 'team2_goals', tip.team2_goals)
+            - else
+              %td.hide-for-small-only= "#{tip.team1_goals} : #{tip.team2_goals}"
+            - tip_points = tip.tip_points
+            - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
+            %td.hide-for-small-only= raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
 
     .row
       .small-12.columns

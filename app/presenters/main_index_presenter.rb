@@ -6,10 +6,6 @@ class MainIndexPresenter
     @current_user = current_user
   end
 
-  def today_games
-    Games::PlayToday.call
-  end
-
   def tournament_started?
     Tournament.started?
   end

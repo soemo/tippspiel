@@ -18,7 +18,6 @@ $(function(){
   check_user_tip();
   init_random_user_tips();
   init_countdown('counter_desktop');
-  init_show_only_today_games();
   init_save_tips_from_overlay_button();
 });
 
@@ -168,16 +167,6 @@ function check_user_tip() {
 
     $(this).val(cur_val);
   });
-}
-
-
-function init_show_only_today_games (){
-  if($('#js_only_today_games').length > 0) {
-    $('#js_only_today_games').change(function() {
-      // die tr Zeilen, die nicht ein Spiel von heute sind, werden ein oder ausblenden
-      $("#js_save_tips tr:not(.today_game)").toggle();
-    });
-  }
 }
 
 function init_random_user_tips(){

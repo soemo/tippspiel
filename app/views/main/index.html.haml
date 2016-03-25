@@ -1,16 +1,9 @@
 - if user_signed_in?
-  .row
-    .small-12.columns
-      = render partial: 'welcome_text_infos'
-  .row
-    .small-12.large-5.large-push-7.columns
-      = render partial: 'user_infos', locals: {presenter: @presenter}
-    .small-12.large-7.large-pull-5.columns
-      = render partial: 'tournament_infos', locals: {today_games: @presenter.today_games,
-                                                     tournament_finished: @presenter.tournament_finished?}
+  - content_for :hero_image do
+    = render partial: 'hero_image_for_logged_in_user'
 - else
   - content_for :hero_image do
-    = render partial: 'hero_image'
+    = render partial: 'hero_image_with_login_form'
 
 .row
   .small-12.columns

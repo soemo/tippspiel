@@ -8,22 +8,14 @@ module Tips
       result = []
 
       if user_id.present?
-        result = tips_with_games
-        unless result.present?
-          create_user_tips
-          result = tips_with_games
-        end
+        create_user_tips unless ::TipQueries.exists_for_user_id(user_id)
+        result = ::TipQueries.all_by_user_id_ordered_games_start_at(user_id)
       end
 
       result
     end
 
-
     private
-
-    def tips_with_games
-      ::TipQueries.all_by_user_id_with_preloaded_games(user_id)
-    end
 
     def create_user_tips
       game_ids = ::GameQueries.all_game_ids

@@ -11,24 +11,6 @@ describe MainIndexPresenter do
     @presenter = subject.new(user)
   end
 
-  describe '#today_games' do
-
-    it 'returns no games if no game available' do
-      expect(@presenter.today_games).to eq([])
-    end
-
-    it 'returns today game' do
-      game1 = create(:game, start_at: Date.today.midnight - 1.second)
-      game2 = create(:game, start_at: Date.today.midnight)
-      game3 = create(:game, start_at: Time.now)
-      game4 = create(:game, start_at: Date.tomorrow.midnight - 1.second)
-      game5 = create(:game, start_at: Date.tomorrow.midnight)
-      game6 = create(:game, start_at: Date.tomorrow.midnight + 1.second)
-
-      expect(@presenter.today_games.to_a).to eq([game2, game3, game4, game5])
-    end
-  end
-
   describe '#tournament_started?' do
 
     it 'calls Tournament.started?' do

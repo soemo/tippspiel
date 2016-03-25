@@ -7,10 +7,11 @@ describe TipQueries do
   let!(:user1) {create(:user, firstname: 'ZZZ')}
   let!(:user2) {create(:user, firstname: 'AAA')}
   let!(:user3) {create(:user, firstname: 'BBB')}
+  let!(:user_with_no_tips) {create(:user)}
 
-  let!(:game1) { create(:game)}
-  let!(:game2) { create(:game)}
-  let!(:game3) { create(:game)}
+  let!(:game1) { create(:game, start_at: Time.now + 10.days)}
+  let!(:game2) { create(:game, start_at: Time.now + 8.days)}
+  let!(:game3) { create(:game, start_at: Time.now + 6.days)}
 
   let!(:tip_g1_u1) {create :tip, game: game1, user: user1 }
   let!(:tip_g1_u2) {create :tip, game: game1, user: user2 }
@@ -24,7 +25,7 @@ describe TipQueries do
 
   before :each do
     expect(Game.count).to eq(3)
-    expect(User.count).to eq(3)
+    expect(User.count).to eq(4)
     expect(Tip.count).to eq(9)
   end
 
@@ -82,14 +83,14 @@ describe TipQueries do
     end
   end
 
-  describe '::all_by_user_id_with_preloaded_games' do
+  describe '::all_by_user_id_ordered_games_start_at_with_preloaded_games' do
 
     it 'returns tips for user' do
-      expect(subject.all_by_user_id_with_preloaded_games(user2.id)).to eq([
-                                                                              tip_g1_u2,
-                                                                              tip_g2_u2,
-                                                                              tip_g3_u2
-                                                                          ])
+      expect(subject.all_by_user_id_ordered_games_start_at(user2.id)).to eq([
+                                                                                tip_g3_u2,
+                                                                                tip_g2_u2,
+                                                                                tip_g1_u2
+                                                                            ])
     end
   end
 
@@ -106,6 +107,21 @@ describe TipQueries do
 
     it 'returns tips for user and game ids' do
       expect(subject.all_by_user_id_and_game_ids(user2.id, [game1.id, game2.id])).to eq([tip_g1_u2, tip_g2_u2])
+    end
+  end
+
+  describe '::exists_for_user_id' do
+
+    context 'if tips exist for user_id' do
+      it 'returns true' do
+        expect(subject.exists_for_user_id(user2.id)).to be true
+      end
+    end
+
+    context 'if no tips exist for user_id' do
+      it 'returns true' do
+        expect(subject.exists_for_user_id(user_with_no_tips.id)).to be false
+      end
     end
   end
 

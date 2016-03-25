@@ -12,11 +12,11 @@
 
   .space-medium {
     display: block;
-    height: 7rem;
+    height: 3rem;
   }
   .space-small {
     display: block;
-    height: 2rem;
+    height: 1rem;
   }
 
   h2 {
@@ -46,6 +46,10 @@
 
   .pokal-img {
     background: url(image_path('pokalsieger.jpg')) no-repeat center center;
+  }
+
+  .pokal-img,
+  .short-ranking {
     background-size: cover;
     height: 11rem;
     width: 11rem;
@@ -55,10 +59,11 @@
   }
   // Only affects medium screens and larger
   @include breakpoint(medium) {
-    .pokal-img {
+    .pokal-img, .short-ranking {
       height: 20rem;
       width: 20rem;
     }
+
     h2 {
       text-align: right;
       font-size: 2.1rem;

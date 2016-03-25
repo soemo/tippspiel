@@ -2,8 +2,9 @@
   - result                 = presenter.get_user_top3_and_own_position
   - own_position           = result.own_position
   - user_top3_ranking_hash = result.user_top3_ranking_hash
-  %p
-    - if own_position.present?
+
+  - if own_position.present?
+    %h2
       Du bist auf dem #{own_position}. Platz!
-    = render :partial => "ranking/user_ranking",
-             :locals => {:user_ranking => user_top3_ranking_hash, :short_version => true}
+    = render partial: 'ranking/user_ranking',
+             locals: {user_ranking: user_top3_ranking_hash, short_version: true}

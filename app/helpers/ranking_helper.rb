@@ -47,7 +47,7 @@ module RankingHelper
       POINTS_TO_CSS_CLASS.each do |key, css_class|
         count = user.send("count#{key}points")
         count = count.present? ? count : 0
-        result << pointbadge_with_content(count, css_class, "#{key} #{User.human_attribute_name('points')}")
+        result << pointbadge_with_content(count, css_class, "x #{key} #{User.human_attribute_name('points')}")
       end
 
       champion_tippoints = user.championtippoints

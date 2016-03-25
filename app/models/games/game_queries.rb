@@ -6,7 +6,7 @@ module GameQueries
     end
 
     def all_ordered_by_start_at
-      Game.order('start_at asc')
+      Game.order(start_at: :asc)
     end
 
     def all_game_ids

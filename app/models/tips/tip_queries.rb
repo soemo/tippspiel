@@ -21,8 +21,8 @@ module TipQueries
       Tip.where({game_id: game_ids, tip_points: tip_points}).select('id, user_id, game_id, tip_points')
     end
 
-    def all_by_user_id_with_preloaded_games(user_id)
-      Tip.preload(:game).where(user_id: user_id)
+    def all_by_user_id_ordered_games_start_at(user_id)
+      Tip.joins(:game).where(user_id: user_id).order('games.start_at asc')
     end
 
     def all_by_user_id_and_tip_points(user_id, tip_points)
@@ -31,6 +31,10 @@ module TipQueries
 
     def all_by_user_id_and_game_ids(user_id, game_ids)
       Tip.where({user_id: user_id, game_id: game_ids})
+    end
+
+    def exists_for_user_id(user_id)
+      Tip.exists?(user_id: user_id)
     end
 
     def sum_tip_points_by_user_id(user_id)

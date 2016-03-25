@@ -1,13 +1,5 @@
 - if @games.present?
   %table.hover
-    %thead.hide-for-small-only
-      %tr.white-bg
-        %th= Game.human_attribute_name('start_at')
-        %th= Game.human_attribute_name('round')
-        %th= Game.human_attribute_name('place')
-        %th= Game.human_attribute_name('team1')
-        %th= Game.human_attribute_name('team2')
-        %th= Game.human_attribute_name('result')
     %tbody
       - @games.each do |game|
         - start_date = l(game.start_at, :format => :default)
@@ -17,22 +9,32 @@
 
         %tr
           %td.show-for-small-only
+            .row.small-game-infos
+              .small-4.columns.text-left
+                = start_date
+              .small-4.columns.text-center
+                = round_or_group_name
+              .small-4.columns.text-right
+                = place
             .row
-              .small-12.columns.small-text
-                = "#{start_date} | #{round_or_group_name} | #{place}"
-            .row
-              .small-10.columns
-                - write_team_with_flag(game.team1_view_name, game.team1_country_code)
-                = ' : '
-                - write_team_with_flag(game.team2_view_name, game.team2_country_code)
-              .small-2.columns
+              .small-12.columns.text-center
+                = team_with_flag(team_name: game.team1_view_name,
+                                 country_code: game.team1_country_code,
+                                 flag_position: 'right')
                 = result
+                = team_with_flag(team_name: game.team2_view_name,
+                                 country_code: game.team2_country_code)
+
 
           %td.hide-for-small-only= start_date
           %td.hide-for-small-only= round_or_group_name
           %td.hide-for-small-only= place
-          %td.hide-for-small-only
-            - write_team_with_flag(game.team1_view_name, game.team1_country_code)
-          %td.hide-for-small-only
-            - write_team_with_flag(game.team2_view_name, game.team2_country_code)
-          %td.hide-for-small-only= result
+          %td.hide-for-small-only.text-right
+            = team_with_flag(team_name: game.team1_view_name,
+                                 country_code: game.team1_country_code,
+                                 flag_position: 'right')
+          %td.hide-for-small-only.text-center
+            = result
+          %td.hide-for-small-only.text-left
+            = team_with_flag(team_name: game.team2_view_name,
+                                 country_code: game.team2_country_code)

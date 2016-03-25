@@ -1,10 +1,9 @@
 class TipsController < ApplicationController
 
   def index
-    @today_game_ids   = Games::PlayToday.call.pluck(:id)  # FIXME soeren 3/24/16 Auslagern in GaneQueries und Service Games::PlayToday loeschen
-    user_tips        = Tips::FromUser.call(:user_id => current_user.id)
-    @tips_round_hash = Tips::SeparatedByRounds.call(tips: user_tips)
-
+    # TODO soeren 3/25/16 tipps sortiert wie die spiele nach start_at
+    @tips = Tips::FromUser.call(:user_id => current_user.id)
+    # FIXME soeren 3/25/16 needs presenter
     respond_to do |format|
       format.html { render 'index' }
     end

@@ -18,7 +18,7 @@ describe Tip, :type => :model do
       user = create(:user)
       games_size = games.size
 
-      user_tip_count = Tip.where("user_id" => user.id).count
+      user_tip_count = Tip.where(user_id: user.id).count
       expect(user_tip_count).to eq(0)
 
       user_tips = Tips::FromUser.call(:user_id => user.id)
