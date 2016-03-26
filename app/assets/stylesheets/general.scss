@@ -55,12 +55,13 @@ table thead tr.white-bg td {
 
 input.tip_input {
   display: inline-block;
+  margin: 0;
   padding: 4px;
   width: 30px;
   text-align: center;
 }
 
-.tip_input_td {
+.white-space-nowrap {
   white-space: nowrap;
 }
 
@@ -178,22 +179,30 @@ a.brand {
   padding-right: 5px;
 }
 
+.no-padding-right {
+  padding-right: 0;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
 div.input-group-label {
   width: 15%;
 }
 
 .large-point-badge {
-  @include breakpoint(medium) {
-    font-size: 1.2em;
-  }
-  @include breakpoint(small) {
-    font-size: 0.8em;
-  }
+  font-size: 1.2em;
 }
 
 
 .small-game-infos {
   font-size: rem-calc(12);
   color: lighten($body-font-color, 20%);
+  padding-bottom: 10px;
+}
+
+.game-result,
+.small-game-infos {
   padding-bottom: 10px;
 }

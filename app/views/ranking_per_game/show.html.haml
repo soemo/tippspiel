@@ -1,15 +1,17 @@
-%h3=t(:your_ranking_per_game)
+.row
+  .small-12.columns
+    %h3=t(:your_ranking_per_game)
 
-- if @presenter.has_chart_data_to_show?
-  .row.padding-left-right-5
-    .small-12
-      %canvas#my-ranking-chart{:height => "400", :width => "400"}
+    - if @presenter.has_chart_data_to_show?
+      .row
+        .small-12.padding-left-right-5
+          %canvas#my-ranking-chart{:height => "400", :width => "400"}
 
-  :javascript
-    $(document).ready( function() {
-      var ctx = document.getElementById("my-ranking-chart").getContext("2d");
-      new Chart(ctx).Line(#{@presenter.chart_data.to_json}, #{@presenter.chart_options.to_json});
+      :javascript
+        $(document).ready( function() {
+          var ctx = document.getElementById("my-ranking-chart").getContext("2d");
+          new Chart(ctx).Line(#{@presenter.chart_data.to_json}, #{@presenter.chart_options.to_json});
 
-    });
-- else
-  %p= t(:ranking_per_game_nothing_to_show)
+        });
+    - else
+      %p= t(:ranking_per_game_nothing_to_show)

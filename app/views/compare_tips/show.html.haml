@@ -1,41 +1,43 @@
-%h3= t("compare_tips")
+.row
+  .small-12.columns
+    %h3= t("compare_tips")
 
-%p
-  Was haben die anderen getippt? Sobald ein Spiel begonnen hat, kannst du es hier erfahren.
-
-- game_to_compare = @presenter.game_to_compare
-- possible_games  = @presenter.possible_games
-- tips           = @presenter.tips
-
-= form_tag compare_tips_path, :class => 'form-inline' do
-  -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
-  - selected = game_to_compare.present? ? game_to_compare.id : ''
-  - options  = options_from_collection_for_select(possible_games, 'id', 'to_s', selected)
-  = render partial: 'widgets/selectbox_with_postifx_button',
-           locals: {select_id: 'game_id',
-                    select_options: options,
-                    button_text: t('compare') }
-
-- if game_to_compare.present? && tips.present?
-  .callout.primary
     %p
-      = game_to_compare.to_s
-      %br
-      %b
-        = Game.human_attribute_name('result')
-        = game_to_compare.team1_goals.to_s + ' - ' + game_to_compare.team2_goals.to_s
+      Was haben die anderen getippt? Sobald ein Spiel begonnen hat, kannst du es hier erfahren.
 
-  %table.tips
-    %thead
-      %tr
-        %th= User.human_attribute_name('name')
-        %th= Tip.model_name.human
-        %th= Tip.human_attribute_name('tip_points')
-    %tbody
-    - tips.each do |tip|
-      - if tip.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
-        - allowed_to_show = @presenter.allowed_to_show?(tip)
-        %tr
-          %td= tip.user.name
-          %td= allowed_to_show ? "#{tip.team1_goals} : #{tip.team2_goals}" : ''
-          %td= allowed_to_show ? tip.tip_points : ''
+    - game_to_compare = @presenter.game_to_compare
+    - possible_games  = @presenter.possible_games
+    - tips           = @presenter.tips
+
+    = form_tag compare_tips_path, :class => 'form-inline' do
+      -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
+      - selected = game_to_compare.present? ? game_to_compare.id : ''
+      - options  = options_from_collection_for_select(possible_games, 'id', 'to_s', selected)
+      = render partial: 'widgets/selectbox_with_postifx_button',
+               locals: {select_id: 'game_id',
+                        select_options: options,
+                        button_text: t('compare') }
+
+    - if game_to_compare.present? && tips.present?
+      .callout.primary
+        %p
+          = game_to_compare.to_s
+          %br
+          %b
+            = Game.human_attribute_name('result')
+            = game_to_compare.team1_goals.to_s + ' - ' + game_to_compare.team2_goals.to_s
+
+      %table.tips
+        %thead
+          %tr
+            %th= User.human_attribute_name('name')
+            %th= Tip.model_name.human
+            %th= Tip.human_attribute_name('tip_points')
+        %tbody
+        - tips.each do |tip|
+          - if tip.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
+            - allowed_to_show = @presenter.allowed_to_show?(tip)
+            %tr
+              %td= tip.user.name
+              %td= allowed_to_show ? "#{tip.team1_goals} : #{tip.team2_goals}" : ''
+              %td= allowed_to_show ? tip.tip_points : ''

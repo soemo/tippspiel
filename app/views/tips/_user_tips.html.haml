@@ -23,6 +23,8 @@
           - round_or_group_name = game.round == GROUP ? "#{t('round.group')} #{game.group}" : t(game.round, :scope => 'round')
           - place = game.place
           - result = "#{game.team1_goals} : #{game.team2_goals}"
+          - tip_points = tip.tip_points
+          - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
 
           %tr
             %td.show-for-small-only
@@ -30,31 +32,28 @@
                 .small-12.columns.text-center
                   = "#{start_date} - #{round_or_group_name} - #{place}"
               .row
-                .small-5.columns.text-right
+                .small-5.columns.text-right.no-padding-right
                   = team_with_flag(team_name: game.team1_view_name,
                                   country_code: game.team1_country_code,
+                                  flag_size: '16',
                                   flag_position: 'right')
-                .small-2.columns.text-center
+                .small-2.columns.game-result.text-center.white-space-nowrap
                   = result
-                .small-5.columns.text-left
+                .small-5.columns.text-left.no-padding-left
                   = team_with_flag(team_name: game.team2_view_name,
-                                  country_code: game.team2_country_code)
+                                  country_code: game.team2_country_code,
+                                  flag_size: '16')
               .row
-                .small-5.columns.text-right
-                  = "#{Tip.model_name.human}:"
-
-                - if edit_allowed
-                  .small-3.columns.text-center.tip_input_td
-                    = tip_input(tip.id, 'team1_goals', tip.team1_goals)
-                    = ':'
-                    = tip_input(tip.id, 'team2_goals', tip.team2_goals)
-                - else
-                  .small-2.columns.text-center
-                    = "#{tip.team1_goals} : #{tip.team2_goals}"
                 .small-4.columns.text-right
-                  - tip_points = tip.tip_points
-                  - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
-                  = raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
+                  = "#{Tip.model_name.human}:"
+                .small-4.columns.text-center.white-space-nowrap
+                  - disabled = edit_allowed ? false : true
+                  = tip_input(tip.id, 'team1_goals', tip.team1_goals, disabled)
+                  = ':'
+                  = tip_input(tip.id, 'team2_goals', tip.team2_goals, disabled)
+                .small-4.columns.text-right
+                  - unless edit_allowed
+                    = raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
 
 
             %td.hide-for-small-only= start_date
@@ -64,21 +63,20 @@
               = team_with_flag(team_name: game.team1_view_name,
                                    country_code: game.team1_country_code,
                                    flag_position: 'right')
-            %td.hide-for-small-only.text-center
+            %td.hide-for-small-only.text-center.white-space-nowrap
               = result
             %td.hide-for-small-only.text-left
               = team_with_flag(team_name: game.team2_view_name,
                                  country_code: game.team2_country_code)
-            - if edit_allowed
-              %td.tip_input_td.hide-for-small-only
-                = tip_input(tip.id, 'team1_goals', tip.team1_goals)
-                = ':'
-                = tip_input(tip.id, 'team2_goals', tip.team2_goals)
-            - else
-              %td.hide-for-small-only= "#{tip.team1_goals} : #{tip.team2_goals}"
-            - tip_points = tip.tip_points
-            - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
-            %td.hide-for-small-only= raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
+            %td.white-space-nowrap.hide-for-small-only
+              - disabled = edit_allowed ? false : true
+              = tip_input(tip.id, 'team1_goals', tip.team1_goals, disabled)
+              = ':'
+              = tip_input(tip.id, 'team2_goals', tip.team2_goals, disabled)
+
+            %td.hide-for-small-only
+              - unless edit_allowed
+                = raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
 
     .row
       .small-12.columns
