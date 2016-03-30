@@ -7,20 +7,21 @@
     .medium-12.columns.space-medium
 
   .row
-    .small-centered.medium-uncentered.medium-6.large-7.columns
-      %h2= "Hallo, Sport frei zur #{TOURNAMENT_NAME}!"
-      %p
-        Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal
-        verbunden mit unbeschreiblichem Ruhm und uneingeschränktem
-        Prahlrecht mit nach Hause nehmen?
-        Um zu dieser Ehre zu gelangen, einfach
-        - unless user_signed_in?
-          = link_to('anmelden', new_registration_path(resource_name))
-          und
-        die Spiele tippen!
+    .medium-6.large-7.columns
+      .callout
+        %h2= "Hallo, Sport frei zur #{TOURNAMENT_NAME}!"
+        %p
+          Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal
+          verbunden mit unbeschreiblichem Ruhm und uneingeschränktem
+          Prahlrecht mit nach Hause nehmen?
+          Um zu dieser Ehre zu gelangen, einfach
+          - unless user_signed_in?
+            = link_to('anmelden', new_registration_path(resource_name))
+            und
+          die Spiele tippen!
 
-      = render :partial => 'login_form'
-    .small-centered.medium-uncentered.medium-6.large-5.columns
+        = render :partial => 'login_form'
+    .small-centered.medium-6.large-5.columns
       .pokal-img
 
   -# Space placeholder

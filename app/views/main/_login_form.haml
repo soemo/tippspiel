@@ -2,7 +2,7 @@
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class=>""}) do |f|
     = custom_devise_error_messages!
     .row
-      .small-12.large-7.columns.float-right
+      .small-12.large-7.columns
         .input-group
           .input-group-label
             = icon('envelope-o')
@@ -10,7 +10,7 @@
                           class: 'input-group-field',
                           placeholder: User.human_attribute_name(:email)
     .row
-      .small-12.large-7.columns.float-right
+      .small-12.large-7.columns
         .input-group
           .input-group-label
             = icon('lock')
@@ -18,20 +18,20 @@
                              class: 'input-group-field',
                              placeholder: User.human_attribute_name(:password)
     .row
-      .small-12.large-7.columns.float-right
+      .small-12.large-7.columns
         - if devise_mapping.rememberable?
           %label
             = f.check_box :remember_me
             = f.label :remember_me
     .row
-      .small-12.large-7.columns.float-right
+      .small-12.large-7.columns
         .row
           .small-6.large-6.columns
             = f.submit t('devise.sign_in'), class: 'large button'
           .small-6.large-6.columns
             = link_to(t('devise.sign_up'),
                       new_registration_path(resource_name),
-                      class: 'large button secondary float-right')
+                      class: 'large button secondary')
 
     .row
       .small-12.columns

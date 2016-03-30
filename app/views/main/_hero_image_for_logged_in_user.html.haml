@@ -1,4 +1,4 @@
-%section.hero{'data-interchange' => "[#{asset_path('hero-image-green-gras.jpg')}, (small)], [#{asset_path('hero-image-green-gras.jpg')}, (medium)], [#{asset_path('hero-image-green-gras.jpg')}, (large)]"}
+%section.hero{'data-interchange' => "[#{asset_path('em2004sieger.jpg')}, (small)], [#{asset_path('hero-image-green-gras.jpg')}, (medium)], [#{asset_path('hero-image-green-gras.jpg')}, (large)]"}
 
   -# Space placeholder
   .row.show-for-small-only
@@ -7,21 +7,22 @@
     .medium-12.columns.space-medium
 
   .row
-    .small-centered.medium-uncentered.medium-6.large-7.columns
-      - result = @presenter.get_user_top3_and_own_position
-      - own_position = result.own_position
-      %h2= "#{hello_user_name}, Du bist auf dem #{own_position}. Platz!"
-      %p
-        = link_to(t('full_ranking_list'), ranking_path)
+    .medium-6.large-7.columns
+      .callout
+        - result = @presenter.get_user_top3_and_own_position
+        - own_position = result.own_position
+        %h2= "#{hello_user_name}, Du bist auf dem #{own_position}. Platz!"
+        %p
+          = link_to(t('full_ranking_list'), ranking_path)
 
 
-      - unless @presenter.tournament_finished?
-        %p
-          %b
-            AUUUSSS AUUUSSS - das Spiel ist aus!
-        %p
-          Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die Teilnahme,
-          hoffe es hat Spaß gemacht und bis zum nächsten Mal in 2 Jahren.
+        - unless @presenter.tournament_finished?
+          %p
+            %b
+              AUUUSSS AUUUSSS - das Spiel ist aus!
+          %p
+            Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die Teilnahme,
+            hoffe es hat Spaß gemacht und bis zum nächsten Mal in 2 Jahren.
 
     .small-centered.medium-uncentered.medium-6.large-5.columns
       .pokal-img-small
