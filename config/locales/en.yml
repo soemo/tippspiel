@@ -47,7 +47,7 @@ en:
 
   to_tip_page: 'tip'
 
-  signed_in_hello: "Hello "
+  signed_in_hello: "Hi "
   sign_in: "Login"
   sign_out: "Logout"
   sign_up: "Sign up"
@@ -83,11 +83,13 @@ en:
   time:
     formats:
       only_date: "%Y-%m-%d"
+      short: "%m-%d, %H:%M"
   datetime:
     formats:
       default: "%Y-%m-%d, %H:%M"
       only_date: "%Y-%m-%d"
       time: "%H:%M"
+      short: "%m-%d, %H:%M"
 
   activerecord:
     models:

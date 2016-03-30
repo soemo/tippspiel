@@ -44,12 +44,11 @@
     text-decoration: underline;
   }
 
-  .pokal-img {
+  .pokal-img, .pokal-img-small {
     background: url(image_path('pokalsieger.jpg')) no-repeat center center;
   }
 
-  .pokal-img,
-  .short-ranking {
+  .pokal-img, .pokal-img-small {
     background-size: cover;
     height: 11rem;
     width: 11rem;
@@ -59,9 +58,14 @@
   }
   // Only affects medium screens and larger
   @include breakpoint(medium) {
-    .pokal-img, .short-ranking {
+    .pokal-img {
       height: 20rem;
       width: 20rem;
+    }
+
+    .pokal-img-small {
+      height: 14rem;
+      width: 14rem;
     }
 
     h2 {

@@ -4,10 +4,6 @@ module ApplicationHelper
     "#{TOURNAMENT_NAME} #{t('app_name')}"
   end
 
-  def pointbadge_with_content(content, css_class, title)
-    "<span class='#{css_class} badge' title='#{title}'>#{content}</span>"
-  end
-
   # flag_suze: 16 or 32
   # flag_position: left or right
   def team_with_flag(team_name:, country_code: , flag_size: 32, flag_position: 'left')
@@ -55,9 +51,9 @@ module ApplicationHelper
 
   def is_selected_controller?(link_controller_name)
     if link_controller_name.present?
-      controller_name = link_controller_name.gsub('-', '_')
-      controller_name.pluralize == controller.controller_name ||
-      controller_name == controller.controller_name
+      link_controller_name = link_controller_name.gsub('-', '_')
+      controller_name = controller.controller_name
+      link_controller_name.pluralize == controller_name || link_controller_name == controller_name
     else
       false
     end

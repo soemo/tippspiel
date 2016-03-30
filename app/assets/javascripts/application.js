@@ -171,7 +171,7 @@ function check_user_tip() {
 
 function init_random_user_tips(){
   $('#js_fill_random_tips').click(function() {
-    var inputs =  $(".tip_input:visible");
+    var inputs =  $(".tip_input:visible:not(:disabled)");
     if(inputs.length) {
       $.each(inputs, function() {
         $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen

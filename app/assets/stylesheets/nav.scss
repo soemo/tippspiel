@@ -11,3 +11,12 @@
 .top-bar {
   padding-left: 0;
 }
+
+.menu > li > a {
+  @include breakpoint(medium only) {
+    color: red;    //# FIXME soeren 3/28/16 wider raus
+  }
+  @include breakpoint(small only) {
+    color: green;  //# FIXME soeren 3/28/16 wider raus
+  }
+}

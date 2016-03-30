@@ -48,7 +48,7 @@ de:
 
   to_tip_page: 'zum Tippen'
 
-  signed_in_hello: "Hallo "
+  signed_in_hello: "Hi "
   sign_in: "Login"
   sign_out: "Abmelden"
   sign_up: "Registrieren"
@@ -66,8 +66,8 @@ de:
   send_pw: "Neues Passwort schicken"
   save_tip: "Tipps speichern"
   random_tips: "Zufall-Tipps erstellen"
-  random_tips_description: "Wenn du zu faul zum Tippen bist, kannst du deine Tipps per Zufall ausfüllen lassen (Tore von 0 bis 5).
-  <b>Achtung:</b> Die Tipps werden nur in das Formular eingetragen und müssen noch gespeichert werden."
+  random_tips_description1: "Wenn du zu faul zum Tippen bist, kannst du "
+  random_tips_description2: "lassen (Tore von 0 bis 5).</br> <span class='alert label'>Achtung</span> Die Tipps werden nur in das Formular eingetragen und müssen noch gespeichert werden."
   compare_tips: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
   points_statistic: Punkteverteilung
@@ -158,7 +158,7 @@ de:
   time:
     formats:
       default: "%d.%m.%Y, %H:%M Uhr"
-      short: "%d. %B, %H:%M Uhr"
+      short: "%d. %B, %H:%M"
       long: "%A, %d. %B %Y, %H:%M Uhr"
       time: "%H:%M"
       only_date: "%d.%m.%Y"
@@ -171,6 +171,7 @@ de:
       default: "%d.%m.%Y, %H:%M Uhr"
       only_date: "%d.%m.%Y"
       time: "%H:%M"
+      short: "%d.%m, %H:%M"
     distance_in_words:
       half_a_minute: 'eine halbe Minute'
       less_than_x_seconds:

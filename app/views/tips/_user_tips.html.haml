@@ -1,7 +1,8 @@
 - if tips.present?
   %p
-  =  I18n.t('random_tips_description')
-  = link_to(t('random_tips'), '#', {id: 'js_fill_random_tips', remote: true})
+    =  I18n.t('random_tips_description1')
+    = link_to(t('random_tips'), '#', {id: 'js_fill_random_tips', remote: true})
+    = raw I18n.t('random_tips_description2')
 
   = form_tag '/save-tips', id: 'js_save_tips' do
     %table.tips.hover
@@ -19,18 +20,28 @@
         - tips.each do |tip|
           - edit_allowed = tip.edit_allowed?
           - game = tip.game
-          - start_date = l(game.start_at, :format => :default)
+          - start_date = l(game.start_at, format: :short)
           - round_or_group_name = game.round == GROUP ? "#{t('round.group')} #{game.group}" : t(game.round, :scope => 'round')
           - place = game.place
           - result = "#{game.team1_goals} : #{game.team2_goals}"
           - tip_points = tip.tip_points
           - css_classes = "#{POINTS_TO_CSS_CLASS[tip_points.to_s]} large-point-badge"
-
+          - pointbadge = "<span class='#{css_classes} badge' title='#{tip_points} #{User.human_attribute_name('points')}'>#{tip_points}</span>"
+          - if edit_allowed
+            - tip1_input = tip_input(tip.id, 'team1_goals', tip.team1_goals)
+            - tip2_input = tip_input(tip.id, 'team2_goals', tip.team2_goals)
+          - else
+            - tip1_input = tip.team1_goals
+            - tip2_input = tip.team2_goals
           %tr
             %td.show-for-small-only
               .row.small-game-infos
-                .small-12.columns.text-center
-                  = "#{start_date} - #{round_or_group_name} - #{place}"
+                .small-4.columns.text-left
+                  = start_date
+                .small-4.columns.text-center
+                  = round_or_group_name
+                .small-4.columns.text-right
+                  = place
               .row
                 .small-5.columns.text-right.no-padding-right
                   = team_with_flag(team_name: game.team1_view_name,
@@ -44,16 +55,13 @@
                                   country_code: game.team2_country_code,
                                   flag_size: '16')
               .row
-                .small-4.columns.text-right
+                .small-5.columns.text-right.no-padding-right
                   = "#{Tip.model_name.human}:"
-                .small-4.columns.text-center.white-space-nowrap
-                  - disabled = edit_allowed ? false : true
-                  = tip_input(tip.id, 'team1_goals', tip.team1_goals, disabled)
-                  = ':'
-                  = tip_input(tip.id, 'team2_goals', tip.team2_goals, disabled)
-                .small-4.columns.text-right
+                .small-2.columns.text-center.white-space-nowrap.no-padding-right.no-padding-left
+                  = raw "#{tip1_input} : #{tip2_input}"
+                .small-5.columns.text-right
                   - unless edit_allowed
-                    = raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
+                    = raw pointbadge
 
 
             %td.hide-for-small-only= start_date
@@ -69,14 +77,11 @@
               = team_with_flag(team_name: game.team2_view_name,
                                  country_code: game.team2_country_code)
             %td.white-space-nowrap.hide-for-small-only
-              - disabled = edit_allowed ? false : true
-              = tip_input(tip.id, 'team1_goals', tip.team1_goals, disabled)
-              = ':'
-              = tip_input(tip.id, 'team2_goals', tip.team2_goals, disabled)
+              = raw "#{tip1_input} : #{tip2_input}"
 
             %td.hide-for-small-only
               - unless edit_allowed
-                = raw pointbadge_with_content(tip_points, css_classes, "#{tip_points} #{User.human_attribute_name('points')}")
+                = raw pointbadge
 
     .row
       .small-12.columns

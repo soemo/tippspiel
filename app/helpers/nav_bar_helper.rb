@@ -8,7 +8,6 @@ module NavBarHelper
         ['ranking', ranking_path, true],
         ['notice', notes_path, true],
         ['compare_tips', compare_tips_path, true],
-        ['hall_of_fame', hall_of_fame_path, true],
         ['help', help_path, false]
   ]
 
@@ -30,7 +29,7 @@ module NavBarHelper
     haml_tag :div,
              class: 'title-bar',
              data: {'responsive-toggle': 'widemenu',
-                    'hide-for': 'large'}  do
+                    'hide-for': 'medium'}  do
        haml_tag :div, class: 'title-bar-left' do
          haml_tag :button,
                   class: 'menu-icon dark',
@@ -59,15 +58,11 @@ module NavBarHelper
     haml_tag :nav, class: 'column row' do
       haml_tag :div, id: 'widemenu', class: 'top-bar' do
         haml_tag :div, class: 'top-bar-left' do
-          haml_tag :ul, class: 'menu' do
+          haml_tag :ul, class: 'dropdown menu', data: {'dropdown-menu': ''} do
             haml_tag :li, class: 'menu-text' do
               write_menu_text
             end
             write_main_nav
-           end
-        end
-        haml_tag :div, class: 'top-bar-right' do
-          haml_tag :ul, class: 'dropdown menu', data: {'dropdown-menu': ''} do
             write_auth_nav
           end
         end
@@ -158,11 +153,13 @@ module NavBarHelper
   def get_main_subnavigation_array
     result = {}
     result[MAIN_NAV_USER_SUBMENU_ID] =
-        {:links => [
-            {:text => t(:your_ranking_per_game), :url => user_ranking_per_game_path},
-            {:text => t(:password_change), :url => user_edit_password_path},
-            {:divider => true},
-            {:text => t(:sign_out), :url => logout_path}
+        {links: [
+            {text: t(:your_ranking_per_game), url: user_ranking_per_game_path},
+            {text: t(:password_change), url: user_edit_password_path},
+            {divider: true},
+            {text: t(:hall_of_fame), url: hall_of_fame_path},
+            {divider: true},
+            {text: t(:sign_out), url: logout_path}
         ]}
 
     result

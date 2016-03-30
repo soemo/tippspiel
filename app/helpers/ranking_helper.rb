@@ -32,11 +32,6 @@ module RankingHelper
         end
       end
     end
-    if short.present?
-      haml_tag :p do
-        haml_concat link_to(t('full_ranking_list'), ranking_path)
-      end
-    end
   end
 
 
@@ -58,5 +53,9 @@ module RankingHelper
     end
     # FIXME soeren 3/13/16 spec anpassen
     result
+  end
+
+  def pointbadge_with_content(content, css_class, title)
+    "<span class='#{css_class} badge' title='#{title}'>#{content}</span>"
   end
 end

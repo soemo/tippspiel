@@ -30,7 +30,7 @@ module GameQueries
     end
 
     def started_games
-      Game.where('start_at < ?', Time.now)
+      Game.where('start_at <= ?', Time.now)
     end
 
     def ordered_started_at_for(round)
