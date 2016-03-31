@@ -1,5 +1,51 @@
-- if user_ranking.present?
-  - user_ranking = user_ranking.sort
-  - write_ranking_table(user_ranking, short_version)
+- user_ranking_hash = presenter.user_ranking_hash
+- if user_ranking_hash.present?
+
+  %table.ranking.hover
+    %thead.hide-for-small-only
+      %tr.white-bg
+        %th= t('standings')
+        %th= User.human_attribute_name('name')
+        %th= Game.human_attribute_name('siegertipp')
+        %th= User.human_attribute_name('points')
+    %tbody
+      - user_ranking_hash.each do |place, users_on_same_place|
+        - users_on_same_place.each do |user|
+          - champ_team_info = '-'
+          - champ_team_info_small = '-'
+          - if Tournament.started? && user.championtip_team_id.present?
+            - champteam = user.championtip_team
+            - champ_team_info= team_with_flag(team_name: champteam.name, country_code: champteam.country_code)
+            - champ_team_info_small= team_with_flag(team_name: champteam.name,
+                                              country_code: champteam.country_code, flag_size: '16')
+
+          - user_name = user.name
+          - user_points = user.points.present? ? user.points.to_s : '0'
+          %tr
+            %td.show-for-small-only
+              .row
+                .small-2.columns.text-left
+                  .place= place
+                .small-10.columns
+                  .row
+                    .small-12.columns.text-left
+                      = user_name
+                  .row
+                    .small-12.columns.text-left
+                      %span.user-points
+                        = user_points
+                      = statistic_content(user).html_safe
+                  .row
+                    .small-12.columns.small-infos
+                      = champ_team_info_small
+
+            %td.hide-for-small-only.place= place
+            %td.hide-for-small-only= user_name
+            %td.hide-for-small-only= champ_team_info
+            %td.hide-for-small-only
+              .user-points
+                = user_points
+              = statistic_content(user).html_safe
+
 - else
   %p= t('no_user')

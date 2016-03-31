@@ -4,28 +4,23 @@
     %p
       Die Regeln sind einfach erklärt. Jeder der sich anmeldet, kann die Spiele und den Tuniersieger tippen.
       Wer die meisten Punkte hat gewinnt. Ein Tipp für ein Spiel kann bis zur angegebenen Spiel-Startzeit abgegeben werden.
-      %br
-      .callout.primary
+      %blockquote
         Pro Spiel gibt es maximal #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte!
-
-    %ul.hilfe
-      %li
+        %br
         #{Tips::UpdatePoints::POINTS_CORRECT_TREND}
         Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage (Spieltendenz).
-      %li
+        %br
         Je
         #{Tips::UpdatePoints::EXTRA_POINT_GOALS}
         weitere Punkte gibt es bei Übereinstimmung der getippten und der tatsächlich erzielten Tore
         einer Mannschaft. Allerdings gibt es diese Punkte
         %b
           nur, wenn auch die Spieltendenz stimmt.
-      %li
+        %br
         Den letzten Extrapunkt gibt es bei richtiger Tordifferenz.
-
-    .callout.primary
-      %span.warning.label
-        Achtung
-      Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
+        %br
+        %br
+        Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
 
     %p
       %b
@@ -76,27 +71,26 @@
       die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punktetipps".
       Liegt auch hier Gleichheit vor dann die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND  + Tips::UpdatePoints::EXTRA_POINT} Punktetipps" usw.
 
-    .callout.secondary
-      %span.label
+    %blockquote
+      .label
         Beispiele
-      %p
-        Frankreich - Schweiz spielt 3:0 und Du hast 3:1 getippt.
-        Dann bekommst Du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
-        #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
-        und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
-        %br
-        %br
-        Deutschland - Italien spielt 1:0 und du hast 2:1 getippt.
-        Dann bekommst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte auf das Spiel.
-        #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
-        und #{Tips::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
+      %br
+      Frankreich - Schweiz spielt 3:0 und Du hast 3:1 getippt.
+      Dann bekommst Du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
+      und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
+      %br
+      Deutschland - Italien spielt 1:0 und du hast 2:1 getippt.
+      Dann bekommst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte auf das Spiel.
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
+      und #{Tips::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
 
-    .callout.primary
-      %span.label.warning
+    %blockquote
+      .label
         Tuniersieger-Tipp:
-      %p
-        Bei richtigem Tipp auf den Tuniersieger gibt es #{Users::UpdatePoints::CHAMPION_TIP_POINTS} Zusatzpunkte.
-        Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
+      %br
+      Bei richtigem Tipp auf den Tuniersieger gibt es #{Users::UpdatePoints::CHAMPION_TIP_POINTS} Zusatzpunkte.
+      Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
 
     %p
       %b

@@ -2,8 +2,9 @@
   .small-12.columns
     %h3= t('ranking')
     %p
-      = t('x_user_bet', user_count: @user_count)
-      = t('result_after_game_count', finshed_games_count: GameQueries.finished.count, all_games_count: Game.count)
+      = t('x_user_bet', user_count: @presenter.user_count)
+      = t('result_after_game_count', finshed_games_count: @presenter.finshed_games_count,
+                                     all_games_count: @presenter.all_games_count)
       %br
       %small
         %span.point-explaning
@@ -22,4 +23,4 @@
           = icon('circle', '', class: 'null-point-color')
           = 'x 0 Punkte'
 
-    = render partial: 'user_ranking', locals: {user_ranking: @user_ranking_hash, short_version: false}
+    = render partial: 'user_ranking', locals: {presenter: @presenter}

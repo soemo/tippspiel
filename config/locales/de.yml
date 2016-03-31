@@ -67,10 +67,9 @@ de:
   save_tip: "Tipps speichern"
   random_tips: "Zufall-Tipps erstellen"
   random_tips_description1: "Wenn du zu faul zum Tippen bist, kannst du "
-  random_tips_description2: "lassen (Tore von 0 bis 5).</br> <span class='alert label'>Achtung</span> Die Tipps werden nur in das Formular eingetragen und müssen noch gespeichert werden."
+  random_tips_description2: "lassen (Tore von 0 bis 5).</br> <span class='primary label'>Achtung</span> Die Tipps werden nur in das Formular eingetragen und müssen noch gespeichert werden."
   compare_tips: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
-  points_statistic: Punkteverteilung
 
   no_user: Keine Nutzer
   or: oder

@@ -30,6 +30,14 @@ h3 {
   margin-bottom: 12px;
 }
 
+blockquote {
+  border-left: 4px solid $primary-color;
+  color: $font-color;
+  //font-style: italic;
+  margin: 20px 0 20px 0;
+  padding-left: 15px;
+}
+
 table {
   width: 100%;
   border-spacing: 0;
@@ -149,13 +157,30 @@ div.input-group-label {
 }
 
 
-.small-game-infos {
+.small-infos {
   font-size: rem-calc(12);
   color: lighten($body-font-color, 20%);
-  padding-bottom: 10px;
 }
 
 .game-result,
-.small-game-infos {
-  padding-bottom: 10px;
+.small-infos {
+  padding-bottom: 5px;
 }
+
+table.ranking {
+
+  .user-points, .place {
+    font-size: 2rem;
+
+    @include breakpoint(medium down) {
+      font-size: 1.5rem;
+    }
+
+  }
+
+  .badge {
+    vertical-align: text-bottom;
+  }
+}
+
+

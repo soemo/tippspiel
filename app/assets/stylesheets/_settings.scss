@@ -60,7 +60,7 @@ $foundation-palette: (
 */
 // https://designschool.canva.com/blog/100-color-combinations/
 
-// Test 90. Golden Afternoon
+// Start 90. Golden Afternoon
 $foundation-palette: (
   primary: #AF1C1C,   // burgundy,
   secondary: #CDBEA7, //sidewalk
@@ -69,13 +69,23 @@ $foundation-palette: (
   alert: #ec5840,
 );
 $font-color: #2F2F28;  // cinder
-//ENDE TESt 90. Golden Afternoon
+//ENDE 90. Golden Afternoon
+
+
 
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: $font-color; // orig #0a0a0a;
 $white: #fefefe;
+
+$null-point-color: $medium-gray;
+$three-point-color: #F5BE41;
+$four-point-color: #CF3721;
+$five-point-color: #31A9B8;
+$eight-point-color: #258039;
+
+
 $body-background: $white;
 $body-font-color: $black;
 $body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;

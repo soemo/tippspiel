@@ -7,9 +7,7 @@ module ApplicationHelper
   # flag_suze: 16 or 32
   # flag_position: left or right
   def team_with_flag(team_name:, country_code: , flag_size: 32, flag_position: 'left')
-    flag_span_css_class = "f#{flag_size}"
-    flag = "<span class='#{flag_span_css_class}'><i class='flag #{country_code}'</i></span>"
-
+    flag = teamflag(country_code, flag_size)
     case flag_position
       when 'left'
         raw "#{flag} #{team_name}"
@@ -18,6 +16,11 @@ module ApplicationHelper
       else
         raise "Wrong flag_position #{flag_position}"
     end
+  end
+
+  def teamflag(country_code, flag_size)
+    flag_span_css_class = "f#{flag_size}"
+    "<span class='#{flag_span_css_class}'><i class='flag #{country_code}'</i></span>"
   end
 
   def write_flash_messages

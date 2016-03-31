@@ -1,25 +1,26 @@
 - championtip_team = current_user.present? ? current_user.championtip_team : nil
-.callout.primary
-  - if Tournament.not_yet_started?
-    %p
-      - if championtip_team.present?
-        = I18n.t('current_champion_tip', :championtip_name => championtip_team.to_s)
-      - else
-        %b
-          = I18n.t('need_champion_tip')
-        %br
-        = I18n.t('need_champion_tip_info', :points => Users::UpdatePoints::CHAMPION_TIP_POINTS)
 
-    = form_tag '/save-champion-tip', :class => 'form-horizontal' do
-      -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
-      - selected = championtip_team.present? ? championtip_team.id : ''
-      - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
-      = render partial: 'widgets/selectbox_with_postifx_button',
-               locals: {select_id: 'champion_team_id',
-                        select_options: options,
-                        button_text: t('save') }
+- if Tournament.not_yet_started?
+  %p
+    - if championtip_team.present?
+      = I18n.t('current_champion_tip', :championtip_name => championtip_team.to_s)
+    - else
+      %b
+        = I18n.t('need_champion_tip')
+      %br
+      = I18n.t('need_champion_tip_info', :points => Users::UpdatePoints::CHAMPION_TIP_POINTS)
 
-  - else
+  = form_tag '/save-champion-tip', :class => 'form-horizontal' do
+    -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
+    - selected = championtip_team.present? ? championtip_team.id : ''
+    - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
+    = render partial: 'widgets/selectbox_with_postifx_button',
+             locals: {select_id: 'champion_team_id',
+                      select_options: options,
+                      button_text: t('save') }
+
+- else
+  %blockquote
     - if championtip_team.present?
       = I18n.t('champion_tip', :championtip_name => championtip_team.to_s)
     - else
