@@ -27,11 +27,11 @@
       .small-12.large-7.columns
         .row
           .small-6.large-6.columns
-            = f.submit t('devise.sign_in'), class: 'large button'
-          .small-6.large-6.columns
+            = f.submit t('devise.sign_in'), class: 'button'
+          .small-6.large-6.columns.text-right
             = link_to(t('devise.sign_up'),
                       new_registration_path(resource_name),
-                      class: 'large button secondary')
+                      class: 'button secondary')
 
     .row
       .small-12.columns

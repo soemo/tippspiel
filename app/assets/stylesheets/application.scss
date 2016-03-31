@@ -9,14 +9,6 @@
 
 @import 'foundation_and_overrides';
 
-$menu-brand-color: $dark-gray;
-
-//# FIXME soeren 3/12/16
-$aluminum    : #999999;
-$gainsboro   : #DDDDDD;
-$iron        : #CCCCCC;
-$snow        : #F9F9F9;
-//# TODO soeren 3/12/16
 // enabling flexbox http://foundation.zurb.com/sites/docs/flexbox.html
 
 // import app styles
@@ -25,3 +17,4 @@ $snow        : #F9F9F9;
 @import 'hero_image';
 @import 'nav';
 @import 'overlay_tip_save_button';
+@import 'points';

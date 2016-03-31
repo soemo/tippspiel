@@ -48,6 +48,8 @@
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
+
+/* orig
 $foundation-palette: (
   primary: #2199e8,
   secondary: #777,
@@ -55,10 +57,24 @@ $foundation-palette: (
   warning: #ffae00,
   alert: #ec5840,
 );
+*/
+// https://designschool.canva.com/blog/100-color-combinations/
+
+// Test 90. Golden Afternoon
+$foundation-palette: (
+  primary: #AF1C1C,   // burgundy,
+  secondary: #CDBEA7, //sidewalk
+  success: #3adb76,
+  warning: #C29545, // #ffae00,
+  alert: #ec5840,
+);
+$font-color: #2F2F28;  // cinder
+//ENDE TESt 90. Golden Afternoon
+
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
-$black: #0a0a0a;
+$black: $font-color; // orig #0a0a0a;
 $white: #fefefe;
 $body-background: $white;
 $body-font-color: $black;
@@ -124,7 +140,8 @@ $header-sizes: (
     'h6': 16,
   ),
 );
-$header-color: inherit;
+// orig $header-color: inherit;
+$header-color: $primary-color;
 $header-lineheight: 1.4;
 $header-margin-bottom: 0.5rem;
 $header-text-rendering: optimizeLegibility;
@@ -375,6 +392,8 @@ $mediaobject-image-width-stacked: 100%;
 
 // 22. Menu
 // --------
+
+$menu-brand-color: $font-color;
 
 $menu-margin: 0;
 $menu-margin-nested: 1rem;

@@ -15,7 +15,7 @@ footer {
 #bottom-bg-image {
   height: 80px;
   background: url(image_path('pokalsieger.jpg')) no-repeat center 0;
-  border-bottom: 1px solid $iron;
+  border-bottom: 1px solid $medium-gray;
 }
 
 h1 {
@@ -35,7 +35,7 @@ table {
   border-spacing: 0;
 
   td {
-    border-top: 1px solid $gainsboro;
+    border-top: 1px solid $light-gray;
   }
 }
 
@@ -75,50 +75,6 @@ a.brand {
 .notice_user {
   font-style: italic;
   font-size: 10px;
-}
-
-.muted {
-  color: $aluminum;
-}
-
-.null-point-color {
-  color: $secondary-color;
-}
-.null-point-background-color {
-  background-color: $secondary-color;
-}
-
-.three-point-color {
-  color: $alert-color;
-}
-.three-point-background-color {
-  background-color: $alert-color;
-}
-
-.four-point-color {
-  color: $warning-color;
-}
-.four-point-background-color {
-  background-color: $warning-color;
-}
-
-.five-point-color {
-  color: $primary-color;
-}
-.five-point-background-color {
-  background-color: $primary-color;
-}
-
-.eight-point-color {
-  color: $success-color;
-}
-.eight-point-background-color {
-  background-color: $success-color;
-}
-
-.point-explaning
-{
-  padding-right: 10px;
 }
 
 .wrap_text {
@@ -190,10 +146,6 @@ a.brand {
 
 div.input-group-label {
   width: 15%;
-}
-
-.large-point-badge {
-  font-size: 1.0em;
 }
 
 
