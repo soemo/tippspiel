@@ -1,6 +1,8 @@
 class RemoveSchedulerRuns < ActiveRecord::Migration
   def up
-    drop_table :scheduler_runs
+    if ActiveRecord::Base.connection.table_exists? 'scheduler_runs'
+      drop_table :scheduler_runs
+    end
   end
 
   def down
