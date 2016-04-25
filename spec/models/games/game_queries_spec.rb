@@ -4,17 +4,6 @@ describe GameQueries do
 
   subject { GameQueries }
 
-  describe '::all_by_api_match_id' do
-
-    it 'returns all games for round' do
-      game1 = create(:game, api_match_id: 1)
-      game2 = create(:game, api_match_id: 2)
-      game3 = create(:game, api_match_id: 3)
-
-      expect(subject.all_by_api_match_id(3)).to eq([game3])
-    end
-  end
-
   describe '::all_ordered_by_start_at' do
 
     it 'returns games ordered by start_at asc' do

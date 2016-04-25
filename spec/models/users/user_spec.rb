@@ -15,7 +15,7 @@ describe User, :type => :model do
       expect(User.inactive.to_a).to include(user)
     end
 
-  it "should check of admin?" do
+  it 'admin?' do
     user = FactoryGirl.create(:user)
     expect(user.admin?).to be false
     user.update_attribute(:email, ADMIN_EMAIL)

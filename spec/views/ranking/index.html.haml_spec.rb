@@ -3,12 +3,15 @@ require 'rails_helper'
 
 describe 'ranking/index', :type => :view do
 
+  let(:presenter) {RankingPresenter.new}
+
   before :each do
     allow(Tournament).to receive(:started?).and_return(true)
   end
 
   it 'should show no user ranking if no user' do
-    assign(:user_count, 0)
+    assign(:presenter, presenter)
+    expect(presenter).to receive(:user_count).and_return(0)
 
     render
 
@@ -19,8 +22,10 @@ describe 'ranking/index', :type => :view do
 
   it 'should show correct user ranking - all user on place 1' do
     User.delete_all # fixture users delete
+
+    assign(:presenter, presenter)
     user_size  = 10
-    user_count = assign(:user_count, user_size)
+    expect(presenter).to receive(:user_count).and_return(user_size)
 
     # 10 User anlegen
     users = []
@@ -31,15 +36,14 @@ describe 'ranking/index', :type => :view do
                                  :points => points,
                                  :confirmed_at => Time.now - 5.minutes)
     end
-
-    assign(:user_ranking_hash, Users::PrepareRanking.call(:users_for_ranking => users))
+    expect(presenter).to receive(:user_ranking_hash).and_return(Users::PrepareRanking.call(:users_for_ranking => users))
 
     render
 
     expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
-    expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_count))
+    expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_size))
 
-    expect(rendered).to have_selector('table.ranking') do |table|
+    expect(rendered).to have_selector('table.ranking.hover') do |table|
       expect(table).to have_selector('thead') do |thead|
         expect(thead).to have_selector('th', :text => I18n.t('standings'))
         expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))
@@ -62,6 +66,8 @@ describe 'ranking/index', :type => :view do
   it 'should show correct user ranking - different points' do
      User.delete_all # fixture users delete
 
+     assign(:presenter, presenter)
+
      user_poins = {
          0 => {:points => 11, :place => 1},
          1 => {:points => 10, :place => 2},
@@ -76,7 +82,7 @@ describe 'ranking/index', :type => :view do
      }
 
      user_size  = user_poins.count
-     user_count = assign(:user_count, user_size)
+     expect(presenter).to receive(:user_count).and_return(user_size)
 
      # User anlegen
      users = []
@@ -86,13 +92,12 @@ describe 'ranking/index', :type => :view do
                                   :points => data[:points],
                                   :confirmed_at => Time.now - 5.minutes)
      end
-
-     assign(:user_ranking_hash, Users::PrepareRanking.call(:users_for_ranking => users))
+     expect(presenter).to receive(:user_ranking_hash).and_return(Users::PrepareRanking.call(:users_for_ranking => users))
 
      render
 
      expect(rendered).to have_selector('h3', :text => I18n.t('ranking'))
-     expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_count))
+     expect(rendered).to have_selector('p', :text => I18n.t('x_user_bet', :user_count => user_size))
 
      expect(rendered).to have_selector('table.ranking') do |table|
        expect(table).to have_selector('thead') do |thead|

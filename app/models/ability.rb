@@ -31,6 +31,10 @@ class Ability
 
     if user.present?
       can :manage, Tip, :user_id => user.id
+
+      if user.admin?
+        can :manage, Game
+      end
     end
   end
 end

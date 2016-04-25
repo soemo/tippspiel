@@ -84,7 +84,3 @@ end
 def create_params_hash(hash)
   ActionController::Parameters.new(hash)
 end
-
-def test_scheduler_actions
-  ['hourly', 'admin']
-end

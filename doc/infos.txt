@@ -26,16 +26,7 @@ A) Lokal
 1. DB neu anlegen
 2. DB Migrieren
 3. Konfiguration (URLS, Tuniername, EM oder WM)
-4. in den Seeds die Spiele anlegen, samt api_key zu Footifox
-5. FootieFox::UpdateGames::TEAMS erweitern um noch nicht vorhandene Teams
-6. Mapping API-ID und Teamnamen
-uri               = URI.parse(RESULT_URL)
-http              = Net::HTTP.new(uri.host, uri.port)
-response          = http.start { http.request(Net::HTTP::Get.new("#{uri.path}")) }
-result = JSON.parse(response.body)
-games = result['matches'].map{|i| {:api_match_id => i['matchID'], :start_at => I18n.l(DateTime.parse(i['startTime']).in_time_zone(Time.zone)), :team1 => FootieFox::UpdateGames::TEAMS[i['team1Id']], :team2 => FootieFox::UpdateGames::TEAMS[i['team2Id']]}}
-# Teamids
-teamids = games.map{|i| [i[:team1], i[:team2]]}.flatten.uniq.sort
+4. in den Seeds die Spiele anlegen
 
 B) Beta und Prod Stage
 1. set :cap_tournament_name   # wird fuer die DB-Namen genutzt
@@ -43,41 +34,11 @@ B) Beta und Prod Stage
    bundle exec cap [beta-tippspiel|tippspiel] setup
    bundle exec cap [beta-tippspiel|tippspiel] deploy
    bundle exec cap [beta-tippspiel|tippspiel] db:run_seed
-3. Cronjob:
-   mittels svc -d ~/service/tippspiel_scheduler_hourly gestoppt
-   wieder starten mit svc -u ~/service/tippspiel_scheduler_hourly
 
 ########################
 https://wiki.uberspace.de/system:daemontools
-
-
-########################
--- footiefox ---
-
-# "requestLeagueBase: "+this.apiURL + "leagues/"+id+"/base.json "
--->   http://api.footiefox.com/leagues/1/base.json
-* z.B. 1. ist Bundesliga 2010
-# footiefox_d_message("requestLeagueUpdate: "+ this.apiURL + "leagues/"+id+"/update.json");
-# http://api.footiefox.com/teams.dat
-# http://api.footiefox.com/leagues.dat
-### EM http://api.footiefox.com/leagues/107/base.json !!!!
-### WM http://api.footiefox.com/leagues/101/base.json !!!!
-
-{"leagueID"=>107,
- "is_tournament"=>true,
- "timestamp"=>"2008-06-29 22:37:10",
- "matches"=>
-  [{"tournament_group"=>"Gruppe A",
-    "matchID"=>747128,
-    "team1Id"=>1303,
-    "team2Score"=>1,
-    "team2Id"=>1333,
-    "startTime"=>"2008-06-07 16:00:00",
-    "team1Score"=>0,
-    "phase"=>2,
-    "status"=>"finished"
-   }] ...
-}
+  mittels svc -d ~/service/XYZ stoppen
+  wieder starten mit svc -u ~/service/XYZ
 
 ####################################
 Flaggen von https://github.com/lafeber/world-flags-sprite

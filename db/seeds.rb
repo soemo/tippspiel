@@ -65,94 +65,94 @@ end
 def game_data
   [
       # Gruppe A
-      {:start_at => '12.06.2014 22:00', :api_match_id => 1417819, :place => 'São Paulo', :team1_name => 'Brasilien', :team2_name => 'Kroatien', :group=> GROUP_A, :round => GROUP},
-      {:start_at => '13.06.2014 18:00', :api_match_id => 1417820, :place => 'Natal', :team1_name => 'Mexiko', :team2_name => 'Kamerun', :group=> GROUP_A, :round => GROUP},
-      {:start_at => '17.06.2014 21:00', :api_match_id => 1417821, :place => 'Fortaleza', :team1_name => 'Brasilien', :team2_name => 'Mexiko', :group=> GROUP_A, :round => GROUP},
-      {:start_at => '19.06.2014 00:00', :api_match_id => 1417822, :place => 'Manaus', :team1_name => 'Kamerun', :team2_name => 'Kroatien', :group=> GROUP_A, :round => GROUP},
-      {:start_at => '23.06.2014 22:00', :api_match_id => 1417823, :place => 'Brasília', :team1_name => 'Kamerun', :team2_name => 'Brasilien', :group=> GROUP_A, :round => GROUP},
-      {:start_at => '23.06.2014 22:00', :api_match_id => 1417824, :place => 'Recife', :team1_name => 'Kroatien', :team2_name => 'Mexiko', :group=> GROUP_A, :round => GROUP},
+      {:start_at => '12.06.2014 22:00', :place => 'São Paulo', :team1_name => 'Brasilien', :team2_name => 'Kroatien', :group=> GROUP_A, :round => GROUP},
+      {:start_at => '13.06.2014 18:00', :place => 'Natal', :team1_name => 'Mexiko', :team2_name => 'Kamerun', :group=> GROUP_A, :round => GROUP},
+      {:start_at => '17.06.2014 21:00', :place => 'Fortaleza', :team1_name => 'Brasilien', :team2_name => 'Mexiko', :group=> GROUP_A, :round => GROUP},
+      {:start_at => '19.06.2014 00:00', :place => 'Manaus', :team1_name => 'Kamerun', :team2_name => 'Kroatien', :group=> GROUP_A, :round => GROUP},
+      {:start_at => '23.06.2014 22:00', :place => 'Brasília', :team1_name => 'Kamerun', :team2_name => 'Brasilien', :group=> GROUP_A, :round => GROUP},
+      {:start_at => '23.06.2014 22:00', :place => 'Recife', :team1_name => 'Kroatien', :team2_name => 'Mexiko', :group=> GROUP_A, :round => GROUP},
 
       # Gruppe B
-      {:start_at => '13.06.2014 21:00', :api_match_id => 1417825, :place => 'Salvador', :team1_name => 'Spanien', :team2_name => 'Niederlande', :group=> GROUP_B, :round => GROUP},
-      {:start_at => '14.06.2014 00:00', :api_match_id => 1417826, :place => 'Cuiabá', :team1_name => 'Chile', :team2_name => 'Australien', :group=> GROUP_B, :round => GROUP},
-      {:start_at => '18.06.2014 18:00', :api_match_id => 1417828, :place => 'Porto Alegre', :team1_name => 'Australien', :team2_name => 'Niederlande', :group=> GROUP_B, :round => GROUP},
-      {:start_at => '18.06.2014 21:00', :api_match_id => 1417827, :place => 'Rio de Janeiro', :team1_name => 'Spanien', :team2_name => 'Chile', :group=> GROUP_B, :round => GROUP},
-      {:start_at => '23.06.2014 18:00', :api_match_id => 1417829, :place => 'Curitiba', :team1_name => 'Australien', :team2_name => 'Spanien', :group=> GROUP_B, :round => GROUP},
-      {:start_at => '23.06.2014 18:00', :api_match_id => 1417830, :place => 'São Paulo', :team1_name => 'Niederlande', :team2_name => 'Chile', :group=> GROUP_B, :round => GROUP},
+      {:start_at => '13.06.2014 21:00', :place => 'Salvador', :team1_name => 'Spanien', :team2_name => 'Niederlande', :group=> GROUP_B, :round => GROUP},
+      {:start_at => '14.06.2014 00:00', :place => 'Cuiabá', :team1_name => 'Chile', :team2_name => 'Australien', :group=> GROUP_B, :round => GROUP},
+      {:start_at => '18.06.2014 18:00', :place => 'Porto Alegre', :team1_name => 'Australien', :team2_name => 'Niederlande', :group=> GROUP_B, :round => GROUP},
+      {:start_at => '18.06.2014 21:00', :place => 'Rio de Janeiro', :team1_name => 'Spanien', :team2_name => 'Chile', :group=> GROUP_B, :round => GROUP},
+      {:start_at => '23.06.2014 18:00', :place => 'Curitiba', :team1_name => 'Australien', :team2_name => 'Spanien', :group=> GROUP_B, :round => GROUP},
+      {:start_at => '23.06.2014 18:00', :place => 'São Paulo', :team1_name => 'Niederlande', :team2_name => 'Chile', :group=> GROUP_B, :round => GROUP},
 
       #Gruppe C
-      {:start_at => '14.06.2014 18:00', :api_match_id => 1417831, :place => 'Belo Horizonte', :team1_name => 'Kolumbien', :team2_name => 'Griechenland', :group=> GROUP_C, :round => GROUP},
-      {:start_at => '15.06.2014 03:00', :api_match_id => 1417832, :place => 'Recife', :team1_name => 'Elfenbeinküste', :team2_name => 'Japan', :group=> GROUP_C, :round => GROUP},
-      {:start_at => '19.06.2014 18:00', :api_match_id => 1417833, :place => 'Brasília', :team1_name => 'Kolumbien', :team2_name => 'Elfenbeinküste', :group=> GROUP_C, :round => GROUP},
-      {:start_at => '20.06.2014 00:00', :api_match_id => 1417834, :place => 'Natal', :team1_name => 'Japan', :team2_name => 'Griechenland', :group=> GROUP_C, :round => GROUP},
-      {:start_at => '24.06.2014 22:00', :api_match_id => 1417835, :place => 'Cuiabá', :team1_name => 'Japan', :team2_name => 'Kolumbien', :group=> GROUP_C, :round => GROUP},
-      {:start_at => '24.06.2014 22:00', :api_match_id => 1417836, :place => 'Fortaleza', :team1_name => 'Griechenland', :team2_name => 'Elfenbeinküste', :group=> GROUP_C, :round => GROUP},
+      {:start_at => '14.06.2014 18:00', :place => 'Belo Horizonte', :team1_name => 'Kolumbien', :team2_name => 'Griechenland', :group=> GROUP_C, :round => GROUP},
+      {:start_at => '15.06.2014 03:00', :place => 'Recife', :team1_name => 'Elfenbeinküste', :team2_name => 'Japan', :group=> GROUP_C, :round => GROUP},
+      {:start_at => '19.06.2014 18:00', :place => 'Brasília', :team1_name => 'Kolumbien', :team2_name => 'Elfenbeinküste', :group=> GROUP_C, :round => GROUP},
+      {:start_at => '20.06.2014 00:00', :place => 'Natal', :team1_name => 'Japan', :team2_name => 'Griechenland', :group=> GROUP_C, :round => GROUP},
+      {:start_at => '24.06.2014 22:00', :place => 'Cuiabá', :team1_name => 'Japan', :team2_name => 'Kolumbien', :group=> GROUP_C, :round => GROUP},
+      {:start_at => '24.06.2014 22:00', :place => 'Fortaleza', :team1_name => 'Griechenland', :team2_name => 'Elfenbeinküste', :group=> GROUP_C, :round => GROUP},
 
       # Gruppe D
-      {:start_at => '14.06.2014 21:00', :api_match_id => 1417837, :place => 'Fortaleza', :team1_name => 'Uruguay', :team2_name => 'Costa Rica', :group=> GROUP_D, :round => GROUP},
-      {:start_at => '15.06.2014 00:00', :api_match_id => 1417838, :place => 'Manaus', :team1_name => 'England', :team2_name => 'Italien', :group=> GROUP_D, :round => GROUP},
-      {:start_at => '19.06.2014 21:00', :api_match_id => 1417839, :place => 'São Paulo', :team1_name => 'Uruguay', :team2_name => 'England', :group=> GROUP_D, :round => GROUP},
-      {:start_at => '20.06.2014 18:00', :api_match_id => 1417840, :place => 'Recife', :team1_name => 'Italien', :team2_name => 'Costa Rica', :group=> GROUP_D, :round => GROUP},
-      {:start_at => '24.06.2014 18:00', :api_match_id => 1417842, :place => 'Natal', :team1_name => 'Costa Rica', :team2_name => 'England', :group=> GROUP_D, :round => GROUP},
-      {:start_at => '24.06.2014 18:00', :api_match_id => 1417841, :place => 'Belo Horizonte', :team1_name => 'Italien', :team2_name => 'Uruguay', :group=> GROUP_D, :round => GROUP},
+      {:start_at => '14.06.2014 21:00', :place => 'Fortaleza', :team1_name => 'Uruguay', :team2_name => 'Costa Rica', :group=> GROUP_D, :round => GROUP},
+      {:start_at => '15.06.2014 00:00', :place => 'Manaus', :team1_name => 'England', :team2_name => 'Italien', :group=> GROUP_D, :round => GROUP},
+      {:start_at => '19.06.2014 21:00', :place => 'São Paulo', :team1_name => 'Uruguay', :team2_name => 'England', :group=> GROUP_D, :round => GROUP},
+      {:start_at => '20.06.2014 18:00', :place => 'Recife', :team1_name => 'Italien', :team2_name => 'Costa Rica', :group=> GROUP_D, :round => GROUP},
+      {:start_at => '24.06.2014 18:00', :place => 'Natal', :team1_name => 'Costa Rica', :team2_name => 'England', :group=> GROUP_D, :round => GROUP},
+      {:start_at => '24.06.2014 18:00', :place => 'Belo Horizonte', :team1_name => 'Italien', :team2_name => 'Uruguay', :group=> GROUP_D, :round => GROUP},
 
       # Gruppe E
-      {:start_at => '15.06.2014 18:00', :api_match_id => 1417843, :place => 'Brasília', :team1_name => 'Schweiz', :team2_name => 'Ecuador', :group=> GROUP_E, :round => GROUP},
-      {:start_at => '15.06.2014 21:00', :api_match_id => 1417844, :place => 'Porto Alegre', :team1_name => 'Frankreich', :team2_name => 'Honduras', :group=> GROUP_E, :round => GROUP},
-      {:start_at => '20.06.2014 21:00', :api_match_id => 1417845, :place => 'Salvador', :team1_name => 'Schweiz', :team2_name => 'Frankreich', :group=> GROUP_E, :round => GROUP},
-      {:start_at => '21.06.2014 00:00', :api_match_id => 1417846, :place => 'Curitiba', :team1_name => 'Honduras', :team2_name => 'Ecuador', :group=> GROUP_E, :round => GROUP},
-      {:start_at => '25.06.2014 22:00', :api_match_id => 1417847, :place => 'Manaus', :team1_name => 'Honduras', :team2_name => 'Schweiz', :group=> GROUP_E, :round => GROUP},
-      {:start_at => '25.06.2014 22:00', :api_match_id => 1417848, :place => 'Rio de Janeiro', :team1_name => 'Ecuador', :team2_name => 'Frankreich', :group=> GROUP_E, :round => GROUP},
+      {:start_at => '15.06.2014 18:00', :place => 'Brasília', :team1_name => 'Schweiz', :team2_name => 'Ecuador', :group=> GROUP_E, :round => GROUP},
+      {:start_at => '15.06.2014 21:00', :place => 'Porto Alegre', :team1_name => 'Frankreich', :team2_name => 'Honduras', :group=> GROUP_E, :round => GROUP},
+      {:start_at => '20.06.2014 21:00', :place => 'Salvador', :team1_name => 'Schweiz', :team2_name => 'Frankreich', :group=> GROUP_E, :round => GROUP},
+      {:start_at => '21.06.2014 00:00', :place => 'Curitiba', :team1_name => 'Honduras', :team2_name => 'Ecuador', :group=> GROUP_E, :round => GROUP},
+      {:start_at => '25.06.2014 22:00', :place => 'Manaus', :team1_name => 'Honduras', :team2_name => 'Schweiz', :group=> GROUP_E, :round => GROUP},
+      {:start_at => '25.06.2014 22:00', :place => 'Rio de Janeiro', :team1_name => 'Ecuador', :team2_name => 'Frankreich', :group=> GROUP_E, :round => GROUP},
 
       # Gruppe F
-      {:start_at => '16.06.2014 00:00', :api_match_id => 1417849, :place => 'Rio de Janeiro', :team1_name => 'Argentinien', :team2_name => 'Bosnien-Herzegowina', :group=> GROUP_F, :round => GROUP},
-      {:start_at => '16.06.2014 21:00', :api_match_id => 1417850, :place => 'Curitiba', :team1_name => 'Iran', :team2_name => 'Nigeria', :group=> GROUP_F, :round => GROUP},
-      {:start_at => '21.06.2014 18:00', :api_match_id => 1417851, :place => 'Belo Horizonte', :team1_name => 'Argentinien', :team2_name => 'Iran', :group=> GROUP_F, :round => GROUP},
-      {:start_at => '22.06.2014 00:00', :api_match_id => 1417852, :place => 'Cuiabá', :team1_name => 'Nigeria', :team2_name => 'Bosnien-Herzegowina', :group=> GROUP_F, :round => GROUP},
-      {:start_at => '25.06.2014 18:00', :api_match_id => 1417853, :place => 'Porto Alegre', :team1_name => 'Nigeria', :team2_name => 'Argentinien', :group=> GROUP_F, :round => GROUP},
-      {:start_at => '25.06.2014 18:00', :api_match_id => 1417854, :place => 'Salvador', :team1_name => 'Bosnien-Herzegowina', :team2_name => 'Iran', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '16.06.2014 00:00', :place => 'Rio de Janeiro', :team1_name => 'Argentinien', :team2_name => 'Bosnien-Herzegowina', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '16.06.2014 21:00', :place => 'Curitiba', :team1_name => 'Iran', :team2_name => 'Nigeria', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '21.06.2014 18:00', :place => 'Belo Horizonte', :team1_name => 'Argentinien', :team2_name => 'Iran', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '22.06.2014 00:00', :place => 'Cuiabá', :team1_name => 'Nigeria', :team2_name => 'Bosnien-Herzegowina', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '25.06.2014 18:00', :place => 'Porto Alegre', :team1_name => 'Nigeria', :team2_name => 'Argentinien', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '25.06.2014 18:00', :place => 'Salvador', :team1_name => 'Bosnien-Herzegowina', :team2_name => 'Iran', :group=> GROUP_F, :round => GROUP},
 
       # Gruppe G
-      {:start_at => '16.06.2014 18:00', :api_match_id => 1417855, :place => 'Salvador', :team1_name => 'Deutschland', :team2_name => 'Portugal', :group=> GROUP_G, :round => GROUP},
-      {:start_at => '17.06.2014 00:00', :api_match_id => 1417856, :place => 'Natal', :team1_name => 'Ghana', :team2_name => 'USA', :group=> GROUP_G, :round => GROUP},
-      {:start_at => '21.06.2014 21:00', :api_match_id => 1417857, :place => 'Fortaleza', :team1_name => 'Deutschland', :team2_name => 'Ghana', :group=> GROUP_G, :round => GROUP},
-      {:start_at => '23.06.2014 00:00', :api_match_id => 1417858, :place => 'Manaus', :team1_name => 'USA', :team2_name => 'Portugal', :group=> GROUP_G, :round => GROUP},
-      {:start_at => '26.06.2014 18:00', :api_match_id => 1417859, :place => 'Brasília', :team1_name => 'Portugal', :team2_name => 'Ghana', :group=> GROUP_G, :round => GROUP},
-      {:start_at => '26.06.2014 18:00', :api_match_id => 1417860, :place => 'Recife', :team1_name => 'USA', :team2_name => 'Deutschland', :group=> GROUP_G, :round => GROUP},
+      {:start_at => '16.06.2014 18:00', :place => 'Salvador', :team1_name => 'Deutschland', :team2_name => 'Portugal', :group=> GROUP_G, :round => GROUP},
+      {:start_at => '17.06.2014 00:00', :place => 'Natal', :team1_name => 'Ghana', :team2_name => 'USA', :group=> GROUP_G, :round => GROUP},
+      {:start_at => '21.06.2014 21:00', :place => 'Fortaleza', :team1_name => 'Deutschland', :team2_name => 'Ghana', :group=> GROUP_G, :round => GROUP},
+      {:start_at => '23.06.2014 00:00', :place => 'Manaus', :team1_name => 'USA', :team2_name => 'Portugal', :group=> GROUP_G, :round => GROUP},
+      {:start_at => '26.06.2014 18:00', :place => 'Brasília', :team1_name => 'Portugal', :team2_name => 'Ghana', :group=> GROUP_G, :round => GROUP},
+      {:start_at => '26.06.2014 18:00', :place => 'Recife', :team1_name => 'USA', :team2_name => 'Deutschland', :group=> GROUP_G, :round => GROUP},
 
       # Gruppe H
-      {:start_at => '17.06.2014 18:00', :api_match_id => 1417861, :place => 'Belo Horizonte', :team1_name => 'Belgien', :team2_name => 'Algerien', :group=> GROUP_H, :round => GROUP},
-      {:start_at => '18.06.2014 00:00', :api_match_id => 1417862, :place => 'Cuiabá', :team1_name => 'Russland', :team2_name => 'Südkorea', :group=> GROUP_H, :round => GROUP},
-      {:start_at => '22.06.2014 18:00', :api_match_id => 1417864, :place => 'Porto Alegre', :team1_name => 'Belgien', :team2_name => 'Russland', :group=> GROUP_H, :round => GROUP},
-      {:start_at => '22.06.2014 21:00', :api_match_id => 1417863, :place => 'Rio de Janeiro', :team1_name => 'Südkorea', :team2_name => 'Algerien', :group=> GROUP_H, :round => GROUP},
-      {:start_at => '26.06.2014 22:00', :api_match_id => 1417866, :place => 'São Paulo', :team1_name => 'Algerien', :team2_name => 'Russland', :group=> GROUP_H, :round => GROUP},
-      {:start_at => '26.06.2014 22:00', :api_match_id => 1417865, :place => 'Curitiba', :team1_name => 'Südkorea', :team2_name => 'Belgien', :group=> GROUP_H, :round => GROUP},
+      {:start_at => '17.06.2014 18:00', :place => 'Belo Horizonte', :team1_name => 'Belgien', :team2_name => 'Algerien', :group=> GROUP_H, :round => GROUP},
+      {:start_at => '18.06.2014 00:00', :place => 'Cuiabá', :team1_name => 'Russland', :team2_name => 'Südkorea', :group=> GROUP_H, :round => GROUP},
+      {:start_at => '22.06.2014 18:00', :place => 'Porto Alegre', :team1_name => 'Belgien', :team2_name => 'Russland', :group=> GROUP_H, :round => GROUP},
+      {:start_at => '22.06.2014 21:00', :place => 'Rio de Janeiro', :team1_name => 'Südkorea', :team2_name => 'Algerien', :group=> GROUP_H, :round => GROUP},
+      {:start_at => '26.06.2014 22:00', :place => 'São Paulo', :team1_name => 'Algerien', :team2_name => 'Russland', :group=> GROUP_H, :round => GROUP},
+      {:start_at => '26.06.2014 22:00', :place => 'Curitiba', :team1_name => 'Südkorea', :team2_name => 'Belgien', :group=> GROUP_H, :round => GROUP},
 
       # Achtelfinale
-      {:start_at => '28.06.2014 18:00', :api_match_id => 1417867, :place => 'Belo Horizonte', :team1_placeholder_name => 'Sieger Gruppe A', :team2_placeholder_name => 'Zweiter Gruppe B', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '28.06.2014 22:00', :api_match_id => 1417868, :place => 'Rio de Janeiro', :team1_placeholder_name => 'Sieger Gruppe C', :team2_placeholder_name => 'Zweiter Gruppe D', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '29.06.2014 18:00', :api_match_id => 1417869, :place => 'Fortaleza', :team1_placeholder_name => 'Sieger Gruppe B', :team2_placeholder_name => 'Zweiter Gruppe A', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '29.06.2014 22:00', :api_match_id => 1417870, :place => 'Recife', :team1_placeholder_name => 'Sieger Gruppe D', :team2_placeholder_name => 'Zweiter Gruppe C', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '30.06.2014 18:00', :api_match_id => 1417871, :place => 'Brasília', :team1_placeholder_name => 'Sieger Gruppe E', :team2_placeholder_name => 'Zweiter Gruppe F', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '30.06.2014 22:00', :api_match_id => 1417872, :place => 'Porto Alegre', :team1_placeholder_name => 'Sieger Gruppe G', :team2_placeholder_name => 'Zweiter Gruppe H', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '01.07.2014 18:00', :api_match_id => 1417873, :place => 'São Paulo', :team1_placeholder_name => 'Sieger Gruppe F', :team2_placeholder_name => 'Zweiter Gruppe E', :group=> nil, :round => ROUND_OF_16},
-      {:start_at => '01.07.2014 22:00', :api_match_id => 1417874, :place => 'Salvador', :team1_placeholder_name => 'Sieger Gruppe H', :team2_placeholder_name => 'Zweiter Gruppe G', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '28.06.2014 18:00', :place => 'Belo Horizonte', :team1_placeholder_name => 'Sieger Gruppe A', :team2_placeholder_name => 'Zweiter Gruppe B', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '28.06.2014 22:00', :place => 'Rio de Janeiro', :team1_placeholder_name => 'Sieger Gruppe C', :team2_placeholder_name => 'Zweiter Gruppe D', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '29.06.2014 18:00', :place => 'Fortaleza', :team1_placeholder_name => 'Sieger Gruppe B', :team2_placeholder_name => 'Zweiter Gruppe A', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '29.06.2014 22:00', :place => 'Recife', :team1_placeholder_name => 'Sieger Gruppe D', :team2_placeholder_name => 'Zweiter Gruppe C', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '30.06.2014 18:00', :place => 'Brasília', :team1_placeholder_name => 'Sieger Gruppe E', :team2_placeholder_name => 'Zweiter Gruppe F', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '30.06.2014 22:00', :place => 'Porto Alegre', :team1_placeholder_name => 'Sieger Gruppe G', :team2_placeholder_name => 'Zweiter Gruppe H', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '01.07.2014 18:00', :place => 'São Paulo', :team1_placeholder_name => 'Sieger Gruppe F', :team2_placeholder_name => 'Zweiter Gruppe E', :group=> nil, :round => ROUND_OF_16},
+      {:start_at => '01.07.2014 22:00', :place => 'Salvador', :team1_placeholder_name => 'Sieger Gruppe H', :team2_placeholder_name => 'Zweiter Gruppe G', :group=> nil, :round => ROUND_OF_16},
 
       # Viertelfinale
-      {:start_at => '04.07.2014 18:00', :api_match_id => 1417876, :place => 'Rio de Janeiro', :team1_placeholder_name => 'Sieger AF 5', :team2_placeholder_name => 'Sieger AF 6', :group=> nil, :round => QUARTERFINAL},
-      {:start_at => '04.07.2014 22:00', :api_match_id => 1417875, :place => 'Fortaleza', :team1_placeholder_name => 'Sieger AF 1', :team2_placeholder_name => 'Sieger AF 2', :group=> nil, :round => QUARTERFINAL},
-      {:start_at => '05.07.2014 18:00', :api_match_id => 1417878, :place => 'Brasília', :team1_placeholder_name => 'Sieger AF 7', :team2_placeholder_name => 'Sieger AF 8', :group=> nil, :round => QUARTERFINAL},
-      {:start_at => '05.07.2014 22:00', :api_match_id => 1417877, :place => 'Salvador', :team1_placeholder_name => 'Sieger AF 3', :team2_placeholder_name => 'Sieger AF 4', :group=> nil, :round => QUARTERFINAL},
+      {:start_at => '04.07.2014 18:00', :place => 'Rio de Janeiro', :team1_placeholder_name => 'Sieger AF 5', :team2_placeholder_name => 'Sieger AF 6', :group=> nil, :round => QUARTERFINAL},
+      {:start_at => '04.07.2014 22:00', :place => 'Fortaleza', :team1_placeholder_name => 'Sieger AF 1', :team2_placeholder_name => 'Sieger AF 2', :group=> nil, :round => QUARTERFINAL},
+      {:start_at => '05.07.2014 18:00', :place => 'Brasília', :team1_placeholder_name => 'Sieger AF 7', :team2_placeholder_name => 'Sieger AF 8', :group=> nil, :round => QUARTERFINAL},
+      {:start_at => '05.07.2014 22:00', :place => 'Salvador', :team1_placeholder_name => 'Sieger AF 3', :team2_placeholder_name => 'Sieger AF 4', :group=> nil, :round => QUARTERFINAL},
 
       # Halbfinale
-      {:start_at => '08.07.2014 22:00', :api_match_id => 1417879, :place => 'Belo Horizonte', :team1_placeholder_name => 'Sieger VF 1', :team2_placeholder_name => 'Sieger VF 2', :group=> nil, :round => SEMIFINAL},
-      {:start_at => '09.07.2014 22:00', :api_match_id => 1417880, :place => 'São Paulo', :team1_placeholder_name => 'Sieger VF 4', :team2_placeholder_name => 'Sieger VF 3', :group=> nil, :round => SEMIFINAL},
+      {:start_at => '08.07.2014 22:00', :place => 'Belo Horizonte', :team1_placeholder_name => 'Sieger VF 1', :team2_placeholder_name => 'Sieger VF 2', :group=> nil, :round => SEMIFINAL},
+      {:start_at => '09.07.2014 22:00', :place => 'São Paulo', :team1_placeholder_name => 'Sieger VF 4', :team2_placeholder_name => 'Sieger VF 3', :group=> nil, :round => SEMIFINAL},
 
       # Spiel um Platz 3
-      {:start_at => '12.07.2014 22:00', :api_match_id => 1417881, :place => 'Brasília', :team1_placeholder_name => 'Verlierer HF 1', :team2_placeholder_name => 'Verlierer HF 2', :group=> nil, :round => PLACE_3},
+      {:start_at => '12.07.2014 22:00', :place => 'Brasília', :team1_placeholder_name => 'Verlierer HF 1', :team2_placeholder_name => 'Verlierer HF 2', :group=> nil, :round => PLACE_3},
 
       # Finale
-      {:start_at => '13.07.2014 21:00', :api_match_id => 1417882, :place => 'Rio de Janeiro', :team1_placeholder_name => 'Sieger HF 1', :team2_placeholder_name => 'Sieger HF 2', :group=> nil, :round => FINAL},
+      {:start_at => '13.07.2014 21:00', :place => 'Rio de Janeiro', :team1_placeholder_name => 'Sieger HF 1', :team2_placeholder_name => 'Sieger HF 2', :group=> nil, :round => FINAL},
   ]
 end
 

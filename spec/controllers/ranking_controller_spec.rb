@@ -9,12 +9,10 @@ describe RankingController, :type => :controller do
     it 'should be successful with login' do
       get 'index'
       expect(response).to be_success
-      user_count = assigns(:user_count)
-      user_ranking_hash = assigns(:user_ranking_hash)
-
+      presenter = assigns(:presenter)
+      expect(presenter).to be_a(RankingPresenter)
+      user_count = presenter.user_count
       expect(user_count).to eq(1)
-      expect(user_ranking_hash.has_key?(1)).to be_present
-      expect(user_ranking_hash.has_key?(2)).not_to be_present
     end
 
   end

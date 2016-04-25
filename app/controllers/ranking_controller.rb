@@ -2,6 +2,6 @@
 class RankingController < ApplicationController
 
   def index
-    @presenter = RankingPresenter.new(current_user: current_user,)
+    @presenter = RankingPresenter.new
   end
 end

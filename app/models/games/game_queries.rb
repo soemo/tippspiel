@@ -1,10 +1,6 @@
 module GameQueries
   class << self
 
-    def all_by_api_match_id(api_match_id)
-      Game.where(api_match_id: api_match_id)
-    end
-
     def all_ordered_by_start_at
       Game.order(start_at: :asc)
     end

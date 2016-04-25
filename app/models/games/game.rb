@@ -9,8 +9,6 @@ class Game < ActiveRecord::Base
   validates_presence_of :place
   validates_presence_of :round
   validates_presence_of :start_at
-  validates_presence_of :api_match_id
-  validates_uniqueness_of :api_match_id
   validate :presence_of_teams
 
   def to_s

@@ -3,10 +3,6 @@ IS_WM = true
 TOURNAMENT_NAME = 'WM 2014'
 IS_EM = !IS_WM
 
-
-# Wird im FootieFoxUpdateGames benutzt
-RESULT_URL = 'http://api.footiefox.com/leagues/101/base.json'
-
 MAIL        = 'tippspiel@soemo.org'
 ADMIN_EMAIL = 'soeren@mothes.org'
 

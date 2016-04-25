@@ -6,13 +6,12 @@ Tippspiel::Application.routes.draw do
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  namespace :admin do
+    resource :games, except: [:show, :create]
+  end
 
   # Eigener Controller noetig, damit eigene Attribute den strong_params von devise bekannt gemacht werden koennen
   devise_for :users, :controllers => { :registrations => 'registrations' }
-
-  get 'scheduler/hourly'
-  get 'scheduler/admin'
 
   get 'tips' => 'tips#index'
   post 'save-tips' => 'tips#save_tips'

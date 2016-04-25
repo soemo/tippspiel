@@ -7,8 +7,6 @@ describe Game, :type => :model do
     it { is_expected.to validate_presence_of(:place) }
     it { is_expected.to validate_presence_of(:round) }
     it { is_expected.to validate_presence_of(:start_at) }
-    it { is_expected.to validate_presence_of(:api_match_id) }
-    it { is_expected.to validate_uniqueness_of(:api_match_id) }
 
     describe 'presence_of_teams' do
 
@@ -17,7 +15,6 @@ describe Game, :type => :model do
                       place: 'Ort',
                       group: GROUP_D,
                       round: GROUP,
-                      api_match_id: 1,
                       team1_id: 1,
                       team2_id: 2}
 
@@ -37,7 +34,6 @@ describe Game, :type => :model do
                       place: 'Ort',
                       group: GROUP_D,
                       round: GROUP,
-                      api_match_id: 1,
                       team1_id: 1,
                       team2_id: 2}
 

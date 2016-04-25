@@ -11,13 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919150614) do
-
-  create_table "events", force: :cascade do |t|
-    t.string   "event_type", limit: 30, default: "", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20160425195844) do
 
   create_table "games", force: :cascade do |t|
     t.integer  "team1_id",               limit: 4
@@ -35,10 +29,8 @@ ActiveRecord::Schema.define(version: 20150919150614) do
     t.string   "team1_placeholder_name", limit: 255
     t.string   "team2_placeholder_name", limit: 255
     t.boolean  "finished",                           default: false
-    t.integer  "api_match_id",           limit: 4,                   null: false
   end
 
-  add_index "games", ["api_match_id"], name: "index_games_on_api_match_id", using: :btree
   add_index "games", ["team1_id"], name: "index_games_on_team1_id", using: :btree
   add_index "games", ["team2_id"], name: "index_games_on_team2_id", using: :btree
 
@@ -52,25 +44,6 @@ ActiveRecord::Schema.define(version: 20150919150614) do
   end
 
   add_index "notices", ["user_id"], name: "index_notices_on_user_id", using: :btree
-
-  create_table "rails_admin_histories", force: :cascade do |t|
-    t.text     "message",    limit: 65535
-    t.string   "username",   limit: 255
-    t.integer  "item",       limit: 4
-    t.string   "table",      limit: 255
-    t.integer  "month",      limit: 2
-    t.integer  "year",       limit: 8
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
-
-  create_table "scheduler_runs", force: :cascade do |t|
-    t.string   "schedule",   limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",         limit: 30

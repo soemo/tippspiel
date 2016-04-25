@@ -2,10 +2,8 @@ class RankingPresenter
 
   # TODO soeren 3/31/16 specs
 
-  attr_reader :current_user
+  def initialize
 
-  def initialize(current_user)
-    @current_user = current_user
   end
 
   def finshed_games_count
