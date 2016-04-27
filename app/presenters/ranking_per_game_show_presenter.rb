@@ -7,20 +7,19 @@ class RankingPerGameShowPresenter
     @chart_x_labels = chart_x_labels
   end
 
-  # use http://www.chartjs.org/  Version: 1.0.2
+  # use http://www.chartjs.org/docs/#line-chart-introduction  Version: 2.0.2
   def chart_data
     {
         labels: @chart_x_labels,
         datasets: [
-
             {
                 label: I18n.t(:your_ranking_per_game),
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
+                fill: false,
+                borderColor: "rgba(75,192,192,1)",
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
                 data: @user_rankings
             }
         ]
@@ -29,15 +28,24 @@ class RankingPerGameShowPresenter
 
   def chart_options
     {
+        legend: {
+            position: 'bottom'
+        },
         responsive: true,
-        bezierCurve: true,
-        # Hack to get 1 at top, try Charts Version 2.0
-        scaleOverride: true,
-        scaleSteps: @user_rankings.max - 1,
-        scaleStepWidth: -1,
-        scaleStartValue: @user_rankings.max,
-
-        showTooltips: false
+        scales: {
+            xAxes: [
+                {
+                    display: false
+                }
+            ],
+            yAxes: [
+                {
+                    ticks: {
+                        reverse: true
+                    }
+                }
+            ]
+        },
     }
   end
 

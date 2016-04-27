@@ -10,7 +10,11 @@
       :javascript
         $(document).ready( function() {
           var ctx = document.getElementById("my-ranking-chart").getContext("2d");
-          new Chart(ctx).Line(#{@presenter.chart_data.to_json}, #{@presenter.chart_options.to_json});
+          new Chart(ctx, {
+            type: 'line',
+            data: #{@presenter.chart_data.to_json},
+            options: #{@presenter.chart_options.to_json}
+          });
 
         });
     - else
