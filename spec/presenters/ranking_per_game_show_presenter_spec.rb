@@ -18,15 +18,14 @@ describe RankingPerGameShowPresenter do
                                           {
                                               labels: ['Label1', 'Label2', 'Label3'],
                                               datasets: [
-
                                                   {
                                                       label: I18n.t(:your_ranking_per_game),
-                                                      fillColor: "rgba(151,187,205,0.2)",
-                                                      strokeColor: "rgba(151,187,205,1)",
-                                                      pointColor: "rgba(151,187,205,1)",
-                                                      pointStrokeColor: "#fff",
-                                                      pointHighlightFill: "#fff",
-                                                      pointHighlightStroke: "rgba(151,187,205,1)",
+                                                      fill: false,
+                                                      borderColor: "rgba(75,192,192,1)",
+                                                      pointBorderColor: "rgba(75,192,192,1)",
+                                                      pointBackgroundColor: "#fff",
+                                                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                                      pointHoverBorderColor: "rgba(220,220,220,1)",
                                                       data: [4,2,1]
                                                   }
                                               ]
@@ -42,13 +41,24 @@ describe RankingPerGameShowPresenter do
 
       expect(presenter.chart_options).to eq(
                                              {
+                                                 legend: {
+                                                     position: 'bottom'
+                                                 },
                                                  responsive: true,
-                                                 bezierCurve: true,
-                                                 scaleOverride: true,
-                                                 scaleSteps: 3,
-                                                 scaleStepWidth: -1,
-                                                 scaleStartValue: 4,
-                                                 showTooltips: false
+                                                 scales: {
+                                                     xAxes: [
+                                                         {
+                                                             display: false
+                                                         }
+                                                     ],
+                                                     yAxes: [
+                                                         {
+                                                             ticks: {
+                                                                 reverse: true
+                                                             }
+                                                         }
+                                                     ]
+                                                 },
                                              }
                                          )
     end
