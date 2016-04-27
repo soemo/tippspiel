@@ -113,32 +113,6 @@ a.brand {
 /* ##### End Scroll to top ##### */
 
 
-/*### Start Alert Messages als PopUp ###*/
-// wird per JS repositionOfFlashMessages neu positioniert und angezeigt
-.alert-box {
-  position: fixed;
-  //right: 20px;
-  top: 80px;
-  //width: 300px;
-  z-index: 200;
-  display: none;
-  border-width: 3px;
-  //center
-  margin: auto;
-  left: 0;
-  right: 0;
-
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    text-align: center;
-  }
-}
-.alert-box ul {
-  margin-bottom: 0;
-}
-/*### End Alert Messages als PopUp ###*/
-
 .padding-left-right-5 {
   padding-left: 5px;
   padding-right: 5px;

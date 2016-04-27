@@ -96,8 +96,7 @@ jQuery.fn.limitMaxlength = function (options) {
 }
 
 
-// die Flash-Popup Meldungen werden anhand der Brand_bar (Logo und simple-time Text) ausgerichtet
-// die Brandbar ist auf jeder Seite vorhanden
+// die Flash-Popup Meldungen werden anhand der Navbar ausgerichtet
 // die erste Meldung ist rechtsbuendig auf Hoehe der Brandbar ausgerichtet
 // alle Weiteren werden direkt unter der Vorherigen angezeigt
 function repositionOfFlashMessages(){
@@ -122,7 +121,7 @@ function repositionOfFlashMessages(){
 
 // wenn eine Flash-Meldung verschwindet, sollten die Meldungen darunter hochrutschen
 function repositionOfFlashMessagesIfOneIsClosed(){
-  var dom_flash_messages_close = "div.alert-box a.close";
+  var dom_flash_messages_close = "div.alert-box button.close";
   var dom_flash_messages_name  = "div.alert-box";
 
   $(dom_flash_messages_close).click(function() {
@@ -147,7 +146,7 @@ function autoCloseSuccessMessage(){
   return elem.livequery(function() {
     return setTimeout((function() {
       return elem.fadeOut("slow", function() {
-        $(this).children("a.close").first().trigger("click");
+        $(this).children("button.close").first().trigger("click");
         return $(this).remove();
       });
     }), 4000);

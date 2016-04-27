@@ -7,8 +7,9 @@ module DeviceHelper
 
     messages = resource.errors.full_messages.join('<br/>')
     html = <<-HTML
-      <div data-alert id='error_explanation' class='alert-box alert'>
+      <div data-closable class='alert-box alert'>
         #{messages}
+        <button class="close-button" data-close>&times;</button>
       </div>
     HTML
 

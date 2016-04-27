@@ -11,7 +11,8 @@ class TipsController < ApplicationController
           # TODO soeren 30.04.15  maybe own Controller
   def save_tips
     Tips::Save.call(tips_params: params[:tips], current_user: current_user)
-    redirect_to({action: :index}, {notice: t('succesfully_saved_tips')})
+    msg =  params[:tips].present? ? t('succesfully_saved_tips') : ''
+    redirect_to({action: :index}, {notice: msg})
   end
 
   # TODO soeren 30.04.15 Use Service and Controller with Specs!!!

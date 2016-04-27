@@ -1,14 +1,18 @@
-%h3= t("devise.resend_confirmation_instruction")
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  = custom_devise_error_messages!
+.row
+  .small-12.columns
+    %h3= t("devise.resend_confirmation_instruction")
+    = custom_devise_error_messages!
+    = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
 
-  .row
-    .small-12.large-7.columns
-      = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'envelope-o'} do
-        = f.email_field :email, placeholder: User.human_attribute_name(:email)
+      .row
+        .small-12.large-7.columns
+          = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'envelope-o'} do
+            = f.email_field :email,
+                            class: 'input-group-field',
+                            placeholder: User.human_attribute_name(:email)
 
-  .row
-    .small-12.large-7.columns
-      = f.submit t("devise.resend_confirmation_instruction_btn"), :class=>"button"
+      .row
+        .small-12.large-7.columns
+          = f.submit t("devise.resend_confirmation_instruction_btn"), :class=>"button"
 
-= render :partial => "devise/shared/links"
+    = render :partial => "devise/shared/links"

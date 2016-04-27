@@ -43,11 +43,12 @@ module ApplicationHelper
     end
 
     if msg.present?
-      haml_tag "div.alert-box.#{div_alert_css_class}", {'data-alert' => ''} do
-        haml_tag 'a.close', {'data-dismiss' => 'alert'} do
+      haml_tag "div.alert-box.#{div_alert_css_class}", data: {closable: ''} do
+        haml_concat msg
+        haml_tag 'button.close-button', {data: {close: ''}} do
           haml_concat '&times;'
         end
-        haml_tag :p, msg
+
       end
     end
   end
