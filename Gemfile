@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '= 4.2.6'
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'mysql2'
 gem 'cancancan',               '~> 1.13.1'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
