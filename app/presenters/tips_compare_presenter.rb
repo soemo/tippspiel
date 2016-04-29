@@ -10,6 +10,9 @@ class TipsComparePresenter
     @tips           = tips
   end
 
+  def game_to_compare_presenter
+     GamePresenter.new(@game_to_compare)
+  end
 
   def allowed_to_show?(tip)
     !tip.edit_allowed?

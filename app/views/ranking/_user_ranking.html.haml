@@ -14,10 +14,9 @@
           - champ_team_info = '-'
           - champ_team_info_small = '-'
           - if Tournament.started? && user.championtip_team_id.present?
-            - champteam = user.championtip_team
-            - champ_team_info= team_with_flag(team_name: champteam.name, country_code: champteam.country_code)
-            - champ_team_info_small= team_with_flag(team_name: champteam.name,
-                                              country_code: champteam.country_code, flag_size: '16')
+            - champteam_presenter = TeamPresenter.new(user.championtip_team)
+            - champ_team_info= champteam_presenter.team_name_with_flag
+            - champ_team_info_small= champteam_presenter.team_name_with_flag(flag_size: 16)
 
           - user_name = user.name
           - user_points = user.points.present? ? user.points.to_s : '0'
@@ -37,11 +36,11 @@
                       = statistic_content(user).html_safe
                   .row
                     .small-12.columns.small-infos
-                      = champ_team_info_small
+                      = raw champ_team_info_small
 
             %td.hide-for-small-only.place= place
             %td.hide-for-small-only= user_name
-            %td.hide-for-small-only= champ_team_info
+            %td.hide-for-small-only= raw champ_team_info
             %td.hide-for-small-only
               .user-points
                 = user_points

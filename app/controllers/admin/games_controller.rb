@@ -17,10 +17,10 @@ module Admin
 end
 
 
-#begin
+=begin
 # FIXME soeren 4/25/16 implement
 # start_calculating
 Tips::UpdatePoints.call
 Users::UpdatePoints.call
 Users::UpdateRankingPerGame.call
-#end
+=end

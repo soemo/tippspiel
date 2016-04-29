@@ -13,10 +13,10 @@
               %span.js_chars_remaining
       .row
         .small-12.columns
-          = button_tag(type: 'submit') do
+          = button_tag(type: 'submit', class: 'button') do
             = icon("comment", t(:save))
           = '&nbsp;&nbsp;'.html_safe
-          = link_to t(:delete_link), notes_path
+          = link_to t(:delete_link), notes_path, class: 'button secondary'
 
     - if @notes.present?
       - @notes.each do |notice|
