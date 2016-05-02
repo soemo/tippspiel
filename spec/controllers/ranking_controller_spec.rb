@@ -4,7 +4,9 @@ require 'rails_helper'
 describe RankingController, :type => :controller do
 
   describe 'GET "index" with login' do
-     spec_login_user
+    before :each do
+      login(create :active_user)
+    end
 
     it 'should be successful with login' do
       get 'index'

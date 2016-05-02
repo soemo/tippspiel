@@ -4,7 +4,9 @@ require 'rails_helper'
 describe TipsController, :type => :controller do
 
   describe "GET 'index' with login" do
-     spec_login_user
+    before :each do
+      login(create :active_user)
+    end
 
     it "should be successful with login" do
       get 'index'
@@ -22,10 +24,12 @@ describe TipsController, :type => :controller do
   end
 
   describe "save_tips" do
-    spec_login_user
+    before :each do
+      login(create :active_user)
+    end
 
     it "should only save tips for games start in the future" do
-      user = User.find_by_email("user@test.de") #email des eingeloggten Nutzers
+      user = User.last
       FactoryGirl.create(:game)
 
       tips = Tips::FromUser.call(:user_id => user.id)

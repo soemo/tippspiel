@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe RankingPerGameController do
-  spec_login_user
+  before :each do
+    login(create :active_user)
+  end
 
   let(:games) {[Game.new(id:120, start_at: Time.now),
                 Game.new(id: 121,  start_at: Time.now)]}

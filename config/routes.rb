@@ -7,7 +7,8 @@ Tippspiel::Application.routes.draw do
   end
 
   namespace :admin do
-    resource :games, except: [:show, :create]
+    resources :games, except: [:show, :create, :new]
+    resource :start_calculating, only: :new
   end
 
   # Eigener Controller noetig, damit eigene Attribute den strong_params von devise bekannt gemacht werden koennen

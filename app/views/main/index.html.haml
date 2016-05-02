@@ -10,5 +10,4 @@
     - unless @presenter.tournament_started?
       = render partial: 'countdown'
 
-    %h3=I18n.t('games_of', tournament_name: TOURNAMENT_NAME)
-    = render_cell(:game_list, :show, last_updated_at: [GameQueries.last_updated_at, TeamQueries.last_updated_at].max )
+    = render partial: 'widgets/games_index', locals: {presenter: @presenter.games_presenter}

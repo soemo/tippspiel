@@ -1,9 +1,8 @@
 module TeamQueries
   class << self
-
-    def last_updated_at
-      Team.maximum('updated_at')
+        # FIXME soeren 5/1/16 spec
+    def all_ordered_by_name
+      Team.order('name')
     end
-
   end
 end

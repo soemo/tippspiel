@@ -11,7 +11,7 @@
       = I18n.t('need_champion_tip_info', :points => Users::UpdatePoints::CHAMPION_TIP_POINTS)
 
   = form_tag '/save-champion-tip', :class => 'form-horizontal' do
-    -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
+    -# FIXME soeren 29.04.15 TeamQueries nutzen
     - selected = championtip_team.present? ? championtip_team.id : ''
     - options =  options_from_collection_for_select(Team.order('name').select('id, name').to_a, 'id', 'to_s', selected)
     = render partial: 'widgets/selectbox_with_postifx_button',

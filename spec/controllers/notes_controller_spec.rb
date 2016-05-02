@@ -6,9 +6,9 @@ describe NotesController, :type => :controller do
   let(:max_long_word) { 'a' * Notice::MAX_SIZE_WITHOUT_SPACES }
 
   context '#index with login' do
-    spec_login_user
 
     it 'be successful' do
+      login(create :active_user)
       get :index
       expect(response).to be_success
     end
@@ -23,7 +23,10 @@ describe NotesController, :type => :controller do
   end
 
   context '#create with login' do
-    spec_login_user
+
+    before :each do
+      login(create :active_user)
+    end
 
     it 'be successful' do
       post :create

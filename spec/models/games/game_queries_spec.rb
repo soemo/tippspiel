@@ -63,20 +63,6 @@ describe GameQueries do
     end
   end
 
-  describe '::last_updated_at' do
-
-    it 'returns max updated_at' do
-      Timecop.freeze(Time.now)
-      game1 = create(:game)
-      game2 = create(:game)
-      game1.update_column(:updated_at, Time.now + 5.minutes)
-      expect(subject.last_updated_at).to be_equal_to_time(game1.updated_at)
-
-      game2.update_column(:updated_at, Time.now + 10.minutes)
-      expect(subject.last_updated_at).to be_equal_to_time(game2.updated_at)
-    end
-  end
-
   describe '::started_games' do
 
     it 'returns games where start_date <= Time.now' do

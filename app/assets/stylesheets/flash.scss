@@ -18,6 +18,12 @@
   left: 0;
   right: 0;
   text-align: center;
+
+  // for error_messages_helper
+  ul {
+    margin-bottom: 0;
+    list-style-type: none;
+  }
 }
 
 .success {

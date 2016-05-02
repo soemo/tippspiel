@@ -53,4 +53,13 @@ describe MainIndexPresenter do
     end
   end
 
+  describe '#games_presenter' do
+
+    it 'returns GamesPresenter' do
+      games_presenter = @presenter.games_presenter
+      expect(games_presenter).to be_instance_of GamesPresenter
+      expect(games_presenter.current_user).to be(@presenter.current_user)
+    end
+  end
+
 end

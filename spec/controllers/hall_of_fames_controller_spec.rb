@@ -4,9 +4,9 @@ require 'rails_helper'
 describe HallOfFamesController, :type => :controller do
 
   context  '#show with login' do
-    spec_login_user
 
     it 'be successful' do
+      login(create :active_user)
       get :show
       expect(response).to be_success
     end

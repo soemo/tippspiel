@@ -1,0 +1,6 @@
+.row
+  .small-12.columns
+    %p
+      Erneute Berechnung aller Tips aller beendeten Spiele, aller Nutzerpunkte und der Statistik.
+    = link_to(I18n.t(:start_calculating), new_admin_start_calculating_path, class: 'button')
+    = render partial: 'widgets/games_index', locals: {presenter: @presenter}

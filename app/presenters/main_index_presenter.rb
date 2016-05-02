@@ -18,4 +18,8 @@ class MainIndexPresenter
     Users::Top3AndOwnPosition.call(:user_id => current_user.id)
   end
 
+  def games_presenter
+    GamesPresenter.new(current_user)
+  end
+
 end

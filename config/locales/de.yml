@@ -22,6 +22,8 @@ de:
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
 
+  update_successful: "%{object_name} wurde aktualisiert."
+
   change_password_save_success: 'Das Passwort wurde erfolgreich gespeichert.'
   change_password_wrong_pw_confirmation: 'Die Passwort Bestätigung stimmt nicht mit dem neuen Passwort überein!'
   change_password_need_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
@@ -52,6 +54,7 @@ de:
   sign_in: "Login"
   sign_out: "Abmelden"
   sign_up: "Registrieren"
+  start_calculating: Start Berechnung
   save:    Speichern
   compare: Vergleichen
   edit:    Bearbeiten

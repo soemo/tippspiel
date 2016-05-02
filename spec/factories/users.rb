@@ -12,6 +12,10 @@ FactoryGirl.define do
   end
 
   factory :active_user, :parent => :user do
-     confirmed_at Time.now
-   end
+     confirmed_at Time.now - 1.minute
+  end
+
+  factory :active_admin, :parent => :active_user do
+    email ADMIN_EMAIL
+  end
 end

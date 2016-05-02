@@ -20,12 +20,12 @@ describe Game, :type => :model do
 
         game = Game.new(valid_attr.merge({team1_id: nil}))
         game.valid?
-        expect(game.errors.messages).to eq({team1:
+        expect(game.errors.messages).to eq({team1_id:
                                                 [I18n.t('activerecord.errors.messages.blank')]})
 
         game = Game.new(valid_attr.merge({team2_id: nil}))
         game.valid?
-        expect(game.errors.messages).to eq({team2:
+        expect(game.errors.messages).to eq({team2_id:
                                                 [I18n.t('activerecord.errors.messages.blank')]})
       end
 
@@ -51,101 +51,4 @@ describe Game, :type => :model do
       end
     end
   end
-
-  describe '#to_s' do
-
-    it 'shows startdate with the two team names' do
-      team1 = Team.new(name: 'Holzbein Kiel')
-      team2 = Team.new(name: 'Dynamo Dresden')
-      start_time = Time.now
-      game = Game.new({team1: team1, team2:team2, start_at: start_time})
-
-      expect(game.to_s).to eq("#{I18n.l(start_time, :format => :default)}:  #{team1.name} - #{team2.name}")
-    end
-  end
-
-  describe '#team1_view_name' do
-    let(:team) {Team.new(name: 'Dynamo Dresden')}
-    let(:game) {Game.new({team1_placeholder_name: 'blah'})}
-
-    context 'if no team1 present' do
-
-      it 'shows team1_placeholder_name' do
-        expect(game.team1_view_name).to eq('blah')
-      end
-
-      context 'if team present' do
-
-        it 'shows team1 name' do
-          game.team1 = team
-
-          expect(game.team1_view_name).to eq('Dynamo Dresden')
-        end
-      end
-    end
-  end
-
-  describe '#team2_view_name' do
-    let(:team) {Team.new(name: 'Dynamo Dresden')}
-    let(:game) {Game.new({team2_placeholder_name: 'blub'})}
-
-    context 'if no team2 present' do
-
-      it 'shows team2_placeholder_name' do
-        expect(game.team2_view_name).to eq('blub')
-      end
-
-      context 'if team present' do
-
-        it 'shows team2 name' do
-          game.team2 = team
-
-          expect(game.team2_view_name).to eq('Dynamo Dresden')
-        end
-      end
-    end
-  end
-
-  describe '#team1_country_code' do
-    let(:team) {Team.new(country_code: :de)}
-    let(:game) {Game.new}
-
-    context 'if no team1 present' do
-
-      it 'shows empty string' do
-        expect(game.team1_country_code).to eq('')
-      end
-
-      context 'if team1 present' do
-
-        it 'shows team1 country_code' do
-          game.team1 = team
-
-          expect(game.team1_country_code).to eq('de')
-        end
-      end
-    end
-  end
-
-  describe '#team2_country_code' do
-    let(:team) {Team.new(country_code: :de)}
-    let(:game) {Game.new}
-
-    context 'if no team2 present' do
-
-      it 'shows empty string' do
-        expect(game.team2_country_code).to eq('')
-      end
-
-      context 'if team2 present' do
-
-        it 'shows team2 country_code' do
-          game.team2 = team
-
-          expect(game.team2_country_code).to eq('de')
-        end
-      end
-    end
-  end
-
 end

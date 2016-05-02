@@ -1,0 +1,60 @@
+.row
+  .small-12.columns
+    %h3=I18n.t(:edit)
+
+    = error_messages_for @presenter
+
+    #admin-game-form
+      = form_for([:admin, @presenter]) do |f|
+        = f.hidden_field :lock_version
+        .row
+          - options = @presenter.teams_ordered_by_name.map{|t| [t.name, t.id]}
+          .small-12.medium-6.columns
+            = f.label :team1
+            = f.select(:team1_id, options, {include_blank: true})
+          .small-12.medium-6.columns
+            = f.label :team2
+            = f.select(:team2_id, options, {include_blank: true})
+
+        .row
+          .small-12.medium-6.columns
+            = f.label :team1_placeholder_name
+            = f.text_field :team1_placeholder_name
+          .small-12.medium-6.columns
+            = f.label :team2_placeholder_name
+            = f.text_field :team2_placeholder_name
+
+        .row
+          .small-3.columns
+            = f.label :team1_goals
+            = f.number_field :team1_goals
+          .small-3.end.columns
+            = f.label :team2_goals
+            = f.number_field :team2_goals
+
+        .row
+          .small-12.medium-6.columns
+            = f.check_box :finished
+            = f.label :finished
+        .row
+          .small-12.medium-4.columns
+            = f.label :start_at
+            = f.datetime_local_field(:start_at)
+          .small-12.medium-4.columns
+            = f.label :round
+            = f.select(:round, ROUNDS.map{|r| [I18n.t(r, :scope => 'round'), r]})
+          .small-12.medium-4.columns
+            = f.label :group
+            = f.select(:group, GROUPS.map{|g| ["#{I18n.t('round.group')} #{g}", g]}, {include_blank: true})
+
+        .row
+          .small-12.medium-4.columns
+            = f.label :place
+            = f.text_field :place
+
+        .row
+          .small-12.columns
+            %span.float-right.text-right
+              = submit_tag t('save'), class: 'button'
+              %br
+              = link_to t(:back), admin_games_path

@@ -1,8 +1,8 @@
-- if @games.present?
+%h3=I18n.t('games_of', tournament_name: TOURNAMENT_NAME)
+- if presenter.games.present?
   %table.hover
     %tbody
-      - @games.each do |game|
-        - game_presenter = GamePresenter.new(game)
+      - presenter.game_presenters.each do |game_presenter|
 
         %tr
           %td.show-for-small-only
@@ -20,7 +20,10 @@
                 = game_presenter.result
               .small-5.columns.text-left.no-padding-left
                 = game_presenter.team2_with_flags(flag_size: 16, flag_position: 'left')
-
+            - if presenter.show_edit_link?
+              .row
+                .small-12.columns.text-right
+                  = link_to(icon('pencil'), edit_admin_game_path(game_presenter))
 
           %td.hide-for-small-only= game_presenter.formatted_start_at_short
           %td.hide-for-small-only= game_presenter.round_or_group_name
@@ -31,3 +34,5 @@
             = game_presenter.result
           %td.hide-for-small-only.text-left
             = game_presenter.team2_with_flags(flag_size: 32, flag_position: 'left')
+          - if presenter.show_edit_link?
+            %td.hide-for-small-only= link_to(icon('pencil'), edit_admin_game_path(game_presenter))

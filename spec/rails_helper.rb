@@ -59,8 +59,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Devise::TestHelpers, :type => :controller
-  config.extend ControllerMacros, :type => :controller
-
   config.include FactoryGirl::Syntax::Methods
 
   # Mock des RSS-Feeds
@@ -69,10 +67,6 @@ RSpec.configure do |config|
         with(:headers => {'Accept' => '*/*'}).
         to_return(:status => 200, :body => "", :headers => {})
   end
-end
-
-def login user
-  post 'user/sign_in', :user=>{ :email=>user.email, :password=>user.lastname }
 end
 
 def create_active_user(u = create(:user))

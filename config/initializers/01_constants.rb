@@ -1,6 +1,6 @@
 # Anpassen fuer jeweiliges Tunier
-IS_WM = true
 TOURNAMENT_NAME = 'WM 2014'
+IS_WM = true
 IS_EM = !IS_WM
 
 MAIL        = 'tippspiel@soemo.org'
@@ -17,6 +17,10 @@ GROUP_A      = 'A'
 GROUP_B      = 'B'
 GROUP_C      = 'C'
 GROUP_D      = 'D'
+GROUP_E      = 'E'
+GROUP_F      = 'F'
+GROUP_G      = 'G'
+GROUP_H      = 'H'
 
 if IS_EM
   RSS_FEED_MAIN_URL = 'http://de.uefa.com'
@@ -34,12 +38,6 @@ if IS_WM
   PLACE_3      = 'place3'
 
   ROUNDS = [GROUP, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, PLACE_3, FINAL]
-
-  GROUP_E      = 'E'
-  GROUP_F      = 'F'
-  GROUP_G      = 'G'
-  GROUP_H      = 'H'
-
   GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F, GROUP_G, GROUP_H]
 end
 

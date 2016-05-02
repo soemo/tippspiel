@@ -2,7 +2,7 @@ module GameQueries
   class << self
 
     def all_ordered_by_start_at
-      Game.order(start_at: :asc)
+      Game.preload(:team1, :team2).order(start_at: :asc)
     end
 
     def all_game_ids
@@ -19,10 +19,6 @@ module GameQueries
 
     def first_game_in_tournament
       GameQueries.all_ordered_by_start_at.first
-    end
-
-    def last_updated_at
-      Game.maximum('updated_at')
     end
 
     def started_games
