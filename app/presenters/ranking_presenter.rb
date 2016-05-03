@@ -1,7 +1,5 @@
 class RankingPresenter
 
-  # TODO soeren 3/31/16 specs
-
   def initialize
 
   end

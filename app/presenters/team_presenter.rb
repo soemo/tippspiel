@@ -8,7 +8,6 @@ class TeamPresenter < DelegateClass(Team)
     @team = team
   end
 
-  # FIXME soeren 4/29/16 spec
   # flag_size: 16 or 32
   # flag_position: left or right
   def team_name_with_flag(flag_size: 32, flag_position: 'left')

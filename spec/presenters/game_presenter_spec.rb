@@ -78,4 +78,61 @@ describe GamePresenter do
       end
     end
   end
+
+  describe '#team2_with_flags' do
+
+    context 'if team2_id present' do
+
+      it 'returns team2 name with flag' do
+        flag_size = 16
+        flag_position = 'right'
+        game.team2_id = 2
+        team_presenter = TeamPresenter.new(game.team2)
+        expect(TeamPresenter).to receive(:new).with(game.team2).and_return(team_presenter)
+        expect(team_presenter).to receive(:team_name_with_flag).with(flag_size: flag_size,
+                                                                     flag_position: flag_position).
+            and_return('team2 name with flag')
+
+        expect(subject.team2_with_flags(flag_size: flag_size,
+                                        flag_position: flag_position)).to eq 'team2 name with flag'
+      end
+    end
+
+    context 'if team2_id not present' do
+
+      it 'returns team2_placeholder_name' do
+        game.team2_placeholder_name = 'Sieger Gruppe B'
+        expect(subject.team2_with_flags).to eq 'Sieger Gruppe B'
+      end
+    end
+  end
+
+  describe '#teams_with_flags' do
+
+    it 'returns team1 name and team2 name with flag' do
+      flag_size = 16
+      flag_position = 'right'
+      expect(subject).to receive(:team1_with_flags).
+          with(flag_size: flag_size,
+               flag_position: flag_position).and_return('team 1 name with flag')
+      expect(subject).to receive(:team2_with_flags).
+          with(flag_size: flag_size,
+               flag_position: flag_position).and_return('team 2 name with flag')
+
+      expect(subject.teams_with_flags(flag_size: flag_size,
+                                      team1_flag_position: flag_position,
+                                      team2_flag_position: flag_position)).to eq('team 1 name with flag - team 2 name with flag')
+
+    end
+  end
+
+  describe '#teams_ordered_by_name' do
+
+    it 'calls TeamQueries all_ordered_by_name' do
+      expected = [Team.new(name: 'A'), Team.new(name: 'B'), Team.new(name: 'Z')]
+      expect(TeamQueries).to receive(:all_ordered_by_name).and_return(expected)
+
+      expect(subject.teams_ordered_by_name).to eq(expected)
+    end
+  end
 end

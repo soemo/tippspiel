@@ -32,7 +32,7 @@ class GamePresenter < DelegateClass(Game)
       @game.team1_placeholder_name
     end
   end
-  # FIXME soeren 4/29/16 spec  WEITER HIER
+
   def team2_with_flags(flag_size: 32, flag_position: 'left')
     if @game.team2_id.present?
       team2_presenter = ::TeamPresenter.new(@game.team2)
