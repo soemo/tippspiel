@@ -2,10 +2,9 @@
 require 'rails_helper'
 
 describe 'tips/index.html.haml', :type => :view do
-  before :each do
-    @user = create(:user)
-    allow(view).to receive(:current_user).and_return(@user)
-  end
+
+  let(:user) {User.new}
+  let(:presenter) {TipsIndexPresenter.new([], user)}
 
 
   context 'when tournament is not started' do
@@ -14,6 +13,7 @@ describe 'tips/index.html.haml', :type => :view do
     end
 
     it 'shows info to select champion' do
+      assign(:presenter, presenter)
 
       render
 
@@ -34,6 +34,8 @@ describe 'tips/index.html.haml', :type => :view do
     end
 
     it 'should say no champion tip' do
+      assign(:presenter, presenter)
+
       render
 
       expect(rendered).to have_selector('h3', :text => I18n.t('tips'))

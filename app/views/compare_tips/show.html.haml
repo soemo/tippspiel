@@ -10,9 +10,8 @@
     - tips           = @presenter.tips
 
     = form_tag compare_tips_path, :class => 'form-inline' do
-      -# FIXME soeren 29.04.15 GUI an Foundation anpassen, mit Flaggen?
       - selected = game_to_compare_presenter.present? ? game_to_compare_presenter.id : ''
-      - options  = options_from_collection_for_select(possible_games, 'id', 'to_s', selected)
+      - options  = options_for_select(@presenter.options_for_select, selected)
       = render partial: 'widgets/selectbox_with_postifx_button',
                locals: {select_id: 'game_id',
                         select_options: options,
@@ -23,7 +22,7 @@
         %blockquote
           = game_to_compare_presenter.formatted_start_at
           %br.show-for-small-only
-          = raw game_to_compare_presenter.teams_with_flags
+          = raw game_to_compare_presenter.team_names_with_flags
           %br
           %b
             = Game.human_attribute_name('result')

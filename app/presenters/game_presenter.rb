@@ -8,7 +8,7 @@ class GamePresenter < DelegateClass(Game)
   end
 
   def formatted_start_at
-    I18n.l(@game.start_at, :format => :default)
+    I18n.l(@game.start_at, format: :default)
   end
 
   def formatted_start_at_short
@@ -44,10 +44,26 @@ class GamePresenter < DelegateClass(Game)
   end
 
 
-  def teams_with_flags(flag_size: 32, team1_flag_position: 'right', team2_flag_position: 'left')
+  def team_names_with_flags(flag_size: 32, team1_flag_position: 'right', team2_flag_position: 'left')
     team1_name_with_flag = team1_with_flags(flag_size: flag_size, flag_position: team1_flag_position)
     team2_name_with_flag = team2_with_flags(flag_size: flag_size, flag_position: team2_flag_position)
     "#{team1_name_with_flag} - #{team2_name_with_flag}"
+  end
+
+  def team_names_without_flags
+    if @game.team1_id.present?
+      team1_name = @game.team1.name
+    else
+      team1_name = @game.team1_placeholder_name
+    end
+
+    if @game.team2_id.present?
+      team2_name = @game.team2.name
+    else
+      team2_name = @game.team2_placeholder_name
+    end
+
+    "#{team1_name} - #{team2_name}"
   end
 
   def teams_ordered_by_name

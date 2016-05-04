@@ -4,7 +4,18 @@ describe GamePresenter do
 
   subject { GamePresenter.new(game) }
 
-  let(:game) { build(:game) }
+  let(:team_de) {Team.new(id: 40, country_code: :de, name: 'Germany')}
+  let(:team_cz) {Team.new(id: 50, country_code: :cz, name: 'Czech Republic')}
+  let(:game) {
+    g = build(:game)
+    g.team1_id = 40
+    g.team1 = team_de
+    g.team1_placeholder_name = 'team1 placholder'
+    g.team2_id = 50
+    g.team2 = team_cz
+    g.team2_placeholder_name = 'team2 placholder'
+    g
+  }
 
   it { is_expected.to respond_to(:game) }
 
@@ -73,6 +84,7 @@ describe GamePresenter do
     context 'if team1_id not present' do
 
       it 'returns team1_placeholder_name' do
+        game.team1_id = nil
         game.team1_placeholder_name = 'Sieger Gruppe A'
         expect(subject.team1_with_flags).to eq 'Sieger Gruppe A'
       end
@@ -101,13 +113,14 @@ describe GamePresenter do
     context 'if team2_id not present' do
 
       it 'returns team2_placeholder_name' do
+        game.team2_id = nil
         game.team2_placeholder_name = 'Sieger Gruppe B'
         expect(subject.team2_with_flags).to eq 'Sieger Gruppe B'
       end
     end
   end
 
-  describe '#teams_with_flags' do
+  describe '#team_names_with_flags' do
 
     it 'returns team1 name and team2 name with flag' do
       flag_size = 16
@@ -119,10 +132,45 @@ describe GamePresenter do
           with(flag_size: flag_size,
                flag_position: flag_position).and_return('team 2 name with flag')
 
-      expect(subject.teams_with_flags(flag_size: flag_size,
-                                      team1_flag_position: flag_position,
-                                      team2_flag_position: flag_position)).to eq('team 1 name with flag - team 2 name with flag')
+      expect(subject.team_names_with_flags(flag_size: flag_size,
+                                           team1_flag_position: flag_position,
+                                           team2_flag_position: flag_position)).to eq('team 1 name with flag - team 2 name with flag')
 
+    end
+  end
+
+  describe '#team_names_without_flags' do
+
+    context 'if team1_id present and team2 id present' do
+
+      it 'returns team1 name and team2 name' do
+        expect(subject.team_names_without_flags).to eq("#{game.team1.name} - #{game.team2.name}")
+      end
+    end
+
+    context 'if team1_id not present and team2_id present' do
+
+      it 'returns team1_placeholder_name and team2 name' do
+        game.team1_id = nil
+        expect(subject.team_names_without_flags).to eq("#{game.team1_placeholder_name} - #{game.team2.name}")
+      end
+    end
+
+    context 'if team1_id present and team2_id not present' do
+
+      it 'returns team1 name and team2_placeholder_name' do
+        game.team2_id = nil
+        expect(subject.team_names_without_flags).to eq("#{game.team1.name} - #{game.team2_placeholder_name}")
+      end
+    end
+
+    context 'if team1_id and team2_id not present' do
+
+      it 'returns team1_placeholder_name and team2_placeholder_name' do
+        game.team1_id = nil
+        game.team2_id = nil
+        expect(subject.team_names_without_flags).to eq("#{game.team1_placeholder_name} - #{game.team2_placeholder_name}")
+      end
     end
   end
 

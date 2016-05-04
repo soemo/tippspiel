@@ -2,8 +2,9 @@ class TipsController < ApplicationController
 
   def index
     # TODO soeren 3/25/16 tipps sortiert wie die spiele nach start_at
-    @tips = Tips::FromUser.call(user_id: current_user.id)
-    # FIXME soeren 3/25/16 needs presenter
+    tips = Tips::FromUser.call(user_id: current_user.id)
+    @presenter = TipsIndexPresenter.new(tips, current_user)
+
     respond_to do |format|
       format.html { render 'index' }
     end

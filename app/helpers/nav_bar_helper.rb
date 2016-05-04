@@ -80,7 +80,7 @@ module NavBarHelper
     if nav_items.present?
       nav_items.each do |key, path, _|
         link_text = t(key)
-        # FIXME soeren 3/13/16 Presenter nutzen um den active Tab zu markieren. see TTBN
+        # FIXME soeren 3/13/16 #118 Presenter nutzen um den active Tab zu markieren. see TTBN
         class_name = is_selected_controller?(key) ? 'active' : ''
 
         haml_tag "li.#{class_name}" do

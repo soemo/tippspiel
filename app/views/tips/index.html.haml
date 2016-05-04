@@ -2,5 +2,5 @@
   .small-12.columns
     %h3= t('tips')
 
-    = render partial: 'champion_tip'
-    = render partial: 'user_tips', locals: {tips: @tips}
+    = render partial: 'champion_tip', locals: {presenter: @presenter}
+    = render partial: 'user_tips', locals: {presenter: @presenter}
