@@ -3,11 +3,14 @@ require 'rails_helper'
 
 describe 'tips/index.html.haml', :type => :view do
 
-  let(:user) {User.new}
-  let(:presenter) {TipsIndexPresenter.new([], user)}
+  let(:user) {create(:active_user)}
 
+  let(:presenter) {TipsIndexPresenter.new([Tip.new(game: Game.new(start_at: Time.now - 1.minute)),
+                                           Tip.new(game: Game.new(start_at: Time.now - 1.minute))],
+                                          user)}
 
   context 'when tournament is not started' do
+
     before :each do
       allow(Tournament).to receive(:started?).and_return(false)
     end
