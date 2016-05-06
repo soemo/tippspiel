@@ -1,24 +1,14 @@
-%meta{"http-equiv"=>"X-UA-Compatible", :content=>"IE=edge,chrome=1"}
-  %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
-  %meta{:charset => 'utf-8'}
-  = csrf_meta_tag
+%meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, user-scalable=no'}
+%meta{:charset => 'utf-8'}
+= csrf_meta_tag
 
-  %title= get_title
-  %meta{:name => 'author', :content => 'Soeren Mothes'}
-  - url = "#{request.protocol}#{request.host_with_port}"
-  %meta{:property=>"og:url", :content=>url}
-  %meta{:property=>"og:type", :content=>"website"}
-  %meta{:property=>"og:site_name", :content=>"#{t('app_name')}"}
-  %meta{:name=>"title", :content=>get_title}
-  %meta{:property=>"og:title", :content=>get_title}
-  - description = 'Fu&#223;ball-Tippspiel auf soemo.org. Dem Sieger winkt ein Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschr&#228;nktem Prahlrecht.'
-  %meta{:name => 'description', :content => description}
-  %meta{:property=>"og:description", :content=>description}
-  %meta{:name => 'keywords', :content => "fussball tippspiel soemo, soeren mothes"}
-  - img_url = url + image_path("pokal.jpg")
-  %link{:rel=>"image_src", :href=>img_url}
-  %meta{:property=>"og:image", :content=>img_url}
-  %link{:rel => "shortcut icon", :href => "/favicon.ico"}
+%title= get_title
+%meta{:name => 'author', :content => 'Soeren Mothes'}
+%meta{:name=>"title", :content=>get_title}
+- description = 'Fu&#223;ball-Tippspiel auf soemo.org. Dem Sieger winkt ein Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschr&#228;nktem Prahlrecht.'
+%meta{:name => 'description', :content => description}
+%meta{:name => 'keywords', :content => 'fussball tippspiel soemo, soeren mothes'}
+= render partial: 'layouts/favicons'
 
-  = stylesheet_link_tag 'application', :media=>:all
-  = javascript_include_tag 'application'
+= stylesheet_link_tag 'application', :media=>:all
+= javascript_include_tag 'application'
