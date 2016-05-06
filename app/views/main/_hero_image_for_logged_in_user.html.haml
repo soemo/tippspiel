@@ -11,9 +11,9 @@
       .callout
         - result = @presenter.get_user_top3_and_own_position
         - own_position = result.own_position
-        %h2= "#{hello_user_name}, Du bist auf dem #{own_position}. Platz!"
+        %h2= "#{I18n.t(:signed_in_hello)} #{current_user.firstname}, Du bist auf dem #{own_position}. Platz!"
         %p
-          = link_to(t('full_ranking_list'), ranking_path)
+          = link_to(I18n.t('full_ranking_list'), ranking_path)
 
 
         - unless @presenter.tournament_finished?

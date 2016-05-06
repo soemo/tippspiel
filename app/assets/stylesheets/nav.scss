@@ -7,11 +7,25 @@
 }
 .menu-text {
   padding-left: 0;
-
-  img {
-    vertical-align: text-top;
-  }
 }
+
+.menu > li > a img,
+a.brand img {
+  vertical-align: text-top;
+}
+
 .top-bar {
   padding-left: 0;
+}
+
+// Only affects medium screens and larger
+@include breakpoint(medium) {
+  .title-bar {
+    display: none;
+  }
+}
+@include breakpoint(small only) {
+  nav {
+    display: none;
+  }
 }

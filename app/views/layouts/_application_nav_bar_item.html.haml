@@ -1,0 +1,25 @@
+- if presenter.has_sub_menu?
+  - if for_off_canvas
+    %li
+      %hr
+    - presenter.sub_menu_links.each do |link_data|
+      - if link_data[:divider].present?
+        %li
+          %hr
+      - else
+        %li= link_to(link_data[:link_text], link_data[:link_url], data: link_data[:data])
+
+  -else
+    %li{id: presenter.sub_menu_id, class: "#{presenter.css_class}"}
+      %a= presenter.link_text
+      %ul.menu.vertical
+        - presenter.sub_menu_links.each do |link_data|
+          - if link_data[:divider].present?
+            %li
+              %hr
+          - else
+            %li= link_to(link_data[:link_text], link_data[:link_url], data: link_data[:data])
+
+- else
+  %li{class: presenter.css_class}
+    = link_to(presenter.link_text, presenter.link_url)

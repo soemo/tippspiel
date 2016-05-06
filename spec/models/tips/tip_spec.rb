@@ -23,7 +23,7 @@ describe Tip, :type => :model do
 
       user_tips = Tips::FromUser.call(:user_id => user.id)
       expect(user_tips.size).to eq(games_size)
-      expect(user_tips.pluck(:game_id)).to eq(games.pluck(:id))
+      expect(user_tips.pluck(:game_id).sort).to eq(games.pluck(:id).sort)
     end
 
   end

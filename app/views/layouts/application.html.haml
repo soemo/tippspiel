@@ -5,7 +5,7 @@
 %body
   .off-canvas-wrapper
     .off-canvas-wrapper-inner{data: {'off-canvas-wrapper': ''}}
-      - write_navbar
+      = render partial: 'layouts/application_nav_bar', locals: {presenter: nav_bar_presenter}
 
       .off-canvas-content#main-content{data: {'off-canvas-content': ''}}
         #hero-div

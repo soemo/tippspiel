@@ -6,8 +6,6 @@ IS_EM = !IS_WM
 MAIL        = 'tippspiel@soemo.org'
 ADMIN_EMAIL = 'soeren@mothes.org'
 
-MAIN_NAV_USER_SUBMENU_ID = 'current_user_sub_menu'
-
 GROUP        = 'group'
 QUARTERFINAL = 'quarterfinal'
 SEMIFINAL    = 'semifinal'
@@ -48,3 +46,14 @@ POINTS_TO_CSS_CLASS =
      '4' => 'four-point-background-color',
      '3' => 'three-point-background-color',
      '0' => 'null-point-background-color'}
+
+
+URL_SCOPES = {
+    admin: 'admin'.freeze,
+    'comparetips': 'comparetips'.freeze,
+    help: 'help'.freeze,
+    notes: 'notes'.freeze,
+    ranking: 'ranking'.freeze,
+    tips: 'tips'.freeze,
+    user: 'user'.freeze,
+}.freeze

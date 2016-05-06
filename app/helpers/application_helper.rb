@@ -34,29 +34,6 @@ module ApplicationHelper
     end
   end
 
-  def is_selected_controller?(link_controller_name)
-    if link_controller_name.present?
-      link_controller_name = link_controller_name.gsub('-', '_')
-      controller_name = controller.controller_name
-      link_controller_name.pluralize == controller_name || link_controller_name == controller_name
-    else
-      false
-    end
-  end
-
-  def get_user_name_or_sign_in_link
-    if user_signed_in?
-      hello_user_name
-    else
-      link_to(t(:sign_up), new_user_registration_path)
-    end
-  end
-
-  def hello_user_name
-    "#{t(:signed_in_hello)} #{current_user.firstname}"
-  end
-
-
   def write_footer_content
      haml_tag 'p.text-center' do
        haml_concat "© " + Time.now.strftime("%Y")

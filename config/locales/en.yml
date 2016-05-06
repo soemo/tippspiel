@@ -1,4 +1,4 @@
-# soeren 21.04.12 #21 nicht uebersetzt und unvollständig
+# to do 21.04.12 #21 nicht uebersetzt und unvollständig
 
 en:
   app_name: "Tippspiel"
@@ -54,7 +54,7 @@ en:
   imprint: Imprint
   save:    Save
   compare: Compare
-  compare_tips: "Compare tips"
+  comparetips: "Compare tips"
   hall_of_fame: "Hall of Fame"
 
   no_user: No user

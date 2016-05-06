@@ -9,13 +9,12 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!, :unless => :error_handling_method?
   before_filter :set_host_to_mailers
 
-  helper_method :current_user
+  helper_method :current_user, :nav_bar_presenter
 
     # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  protected
 
   def set_locale
     I18n.locale = I18n.default_locale
@@ -25,10 +24,24 @@ class ApplicationController < ActionController::Base
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 
-  private
-
-  def extract_locale_from_accept_language_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+  def nav_bar_presenter
+    NavBarPresenter.new(url_scope, current_user)
   end
 
+  def url_scope
+    @url_scope ||= begin
+      url_scope = ''
+      path = request.path
+
+      URL_SCOPES.each_value do |value|
+
+        if path.starts_with?("/#{value}")
+          url_scope = value
+          break
+        end
+      end
+
+      url_scope.inquiry
+    end
+  end
 end
