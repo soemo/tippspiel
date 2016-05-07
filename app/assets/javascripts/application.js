@@ -149,7 +149,7 @@ function autoCloseSuccessMessage(){
         $(this).children("button.close").first().trigger("click");
         return $(this).remove();
       });
-    }), 4000);
+    }), 10000);
   });
 }
 
