@@ -57,3 +57,8 @@ URL_SCOPES = {
     tips: 'tips'.freeze,
     user: 'user'.freeze,
 }.freeze
+
+FILTER_DEFAULT = 'all'.freeze
+FILTER_TODAY = 'today'.freeze
+FILTER_FUTURE = 'future'.freeze
+FILTER_CATEGORIES = [FILTER_DEFAULT, FILTER_TODAY, FILTER_FUTURE]

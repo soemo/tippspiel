@@ -125,7 +125,7 @@ GEM
       loofah (~> 2.0)
       sax-machine (~> 1.0)
     ffi (1.9.10)
-    font-awesome-sass (4.5.0)
+    font-awesome-sass (4.6.2)
       sass (>= 3.2)
     formatador (0.2.5)
     foundation-rails (6.2.1.0)

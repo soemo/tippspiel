@@ -11,6 +11,14 @@ class Game < ActiveRecord::Base
   validates_presence_of :start_at
   validate :presence_of_teams
 
+  def started?
+    start_at <= DateTime.now
+  end
+
+  def today?
+    start_at.to_date == Date.today
+  end
+
   private
 
   def presence_of_teams

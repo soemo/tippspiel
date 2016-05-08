@@ -8,6 +8,58 @@ describe Game, :type => :model do
     it { is_expected.to validate_presence_of(:round) }
     it { is_expected.to validate_presence_of(:start_at) }
 
+    describe '#started?' do
+
+      context 'if start_at > Time.now' do
+
+        before :each do
+          Timecop.freeze
+        end
+
+        it 'returns false' do
+          game = Game.new(start_at: DateTime.now + 1.second)
+          expect(game.started?).to eq(false)
+        end
+      end
+
+      context 'if start_at <= Time.now' do
+
+        it 'returns true' do
+          game = Game.new(start_at: DateTime.now)
+          expect(game.started?).to eq(true)
+
+          game = Game.new(start_at: DateTime.now - 1.second)
+          expect(game.started?).to eq(true)
+        end
+      end
+    end
+
+    describe '#today?' do
+
+      before :each do
+        Timecop.freeze
+      end
+
+      context 'if game starts today' do
+
+        it 'returns true' do
+          game = Game.new(start_at: Time.now)
+          expect(game.today?).to be true
+        end
+      end
+
+      context 'if game starts not today' do
+
+        it 'returns false' do
+          game = Game.new(start_at: Time.now - 1.day)
+          expect(game.today?).to be false
+
+          game = Game.new(start_at: Time.now + 1.day)
+          expect(game.today?).to be false
+        end
+      end
+    end
+
     describe 'presence_of_teams' do
 
       it 'returns valid false' do

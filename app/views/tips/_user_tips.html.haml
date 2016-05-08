@@ -5,8 +5,10 @@
     = link_to(t('random_tips'), '#', {id: 'js_fill_random_tips', remote: true})
     = raw I18n.t('random_tips_description2')
 
+  = render partial: 'widgets/mixitup_control_bar'
+
   = form_tag '/save-tips', id: 'js_save_tips' do
-    %table.tips.hover
+    %table.tips.hover#mixitup-table
       %thead.hide-for-small-only
         %tr.white-bg
           %th= ''
@@ -20,6 +22,7 @@
       %tbody
         - presenter.tip_presenters.each do |tip_presenter|
           - game_presenter = GamePresenter.new(tip_presenter.game)
+          - filter_css_classes = game_presenter.filter_categories_css_classes
 
           - edit_allowed = tip_presenter.edit_allowed?
           - place = game_presenter.place
@@ -31,7 +34,7 @@
           - else
             - tip1_input = tip_presenter.team1_goals
             - tip2_input = tip_presenter.team2_goals
-          %tr
+          %tr{class: filter_css_classes}
             %td.show-for-small-only
               .row.small-infos
                 .small-4.columns.text-left

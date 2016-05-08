@@ -13,7 +13,7 @@ class Tip < ActiveRecord::Base
   validates_numericality_of :team2_goals, allow_nil: true, on: :update, greater_than_or_equal_to: 0
 
   def edit_allowed?
-    game.start_at > Time.now
+    !game.started?
   end
 
   def remove_leading_zero

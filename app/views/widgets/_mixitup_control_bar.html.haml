@@ -1,0 +1,3 @@
+.button-group.small#mixitup-control-bar
+  - filter_categories_options.each do |options|
+    = button_tag(options[:label], class: options[:class], data: {filter: options[:data_filter]})

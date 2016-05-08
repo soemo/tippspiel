@@ -4,6 +4,24 @@ module ApplicationHelper
     "#{TOURNAMENT_NAME} #{t('app_name')}"
   end
 
+  # used with mixitup
+  def filter_categories_options
+    FILTER_CATEGORIES.map do |filter_category|
+      css_classes = 'filter button'
+      data_filter = ".category-#{filter_category}"
+      if filter_category == FILTER_DEFAULT
+        css_classes << ' active'
+        data_filter = 'all'
+      end
+
+      {
+          label: I18n.t("filter.#{filter_category}"),
+          class: css_classes,
+          data_filter: data_filter
+      }
+    end
+  end
+
   def write_flash_messages
     haml_tag 'div#flash_messages' do
       write_flash(flash[:error], 'alert')

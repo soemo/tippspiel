@@ -1,6 +1,6 @@
 describe GamesPresenter do
 
-  subject { GamesPresenter.new(current_user) }
+  subject { GamesPresenter.new(current_user, false) }
 
   let(:current_user) { User.new }
   let(:games) { [Game.new(id:2), Game.new(id: 1), Game.new(id:3)] }
@@ -37,19 +37,29 @@ describe GamesPresenter do
 
   describe '#show_edit_link?' do
 
-    context 'if current_user is an admin' do
+    context 'if current_user is an admin and for_admin is true' do
 
       it 'returns true' do
+        presenter = GamesPresenter.new(current_user, true)
         expect(current_user).to receive(:admin?).and_return(true)
-        expect(subject.show_edit_link?).to be true
+        expect(presenter.show_edit_link?).to be true
       end
     end
 
-    context 'if current_user is not an admin' do
+    context 'if current_user is an admin and for_admin is false' do
+
+      it 'returns true' do
+        expect(current_user).to receive(:admin?).and_return(true)
+        expect(subject.show_edit_link?).to be false
+      end
+    end
+
+    context 'if current_user is not an admin and for_admin == true' do
 
       it 'returns false' do
+        presenter = GamesPresenter.new(current_user, true)
         expect(current_user).to receive(:admin?).and_return(false)
-        expect(subject.show_edit_link?).to be false
+        expect(presenter.show_edit_link?).to be false
       end
     end
   end

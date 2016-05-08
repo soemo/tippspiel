@@ -24,6 +24,35 @@ describe GamePresenter do
     expect(subject.team1_placeholder_name).to eq 'Sieger Gruppe A'
   end
 
+  describe '#filter_categories_css_classes' do
+
+    context 'if game is today' do
+
+      it 'returns mix and category-today' do
+        expect(game).to receive(:today?).and_return(true)
+        expect(subject.filter_categories_css_classes).to eq('mix category-today')
+      end
+    end
+
+    context 'if game is in the future and today' do
+
+      it 'returns mix, category-today and category-future' do
+        expect(game).to receive(:today?).and_return(true)
+        expect(game).to receive(:started?).and_return(false)
+        expect(subject.filter_categories_css_classes).to eq('mix category-today category-future')
+      end
+    end
+
+    context 'if game is not in the future and not today' do
+
+      it 'returns mix' do
+        expect(game).to receive(:today?).and_return(false)
+        expect(game).to receive(:started?).and_return(true)
+        expect(subject.filter_categories_css_classes).to eq('mix')
+      end
+    end
+  end
+
   describe '#formatted_start_at' do
 
     it 'returns formatted_start_at updated_at' do

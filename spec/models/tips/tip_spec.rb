@@ -28,27 +28,26 @@ describe Tip, :type => :model do
 
   end
 
-  describe "tip edit allowed" do
-    before do
-      user = create(:user)
-      FactoryGirl.create(:game)
-      @user_tips = Tips::FromUser.call(:user_id => user.id)
+  describe '#edit allowed' do
+
+    let!(:game) {Game.new}
+    let!(:tip) {Tip.new(game: game)}
+
+    context 'if game is started' do
+
+      it 'returns false' do
+        expect(game).to receive(:started?).and_return(true)
+        expect(tip.edit_allowed?).to be false
+      end
     end
 
-    it "should allowed" do
-      first_tip = @user_tips.first
-      game = first_tip.game
-      game.update_column(:start_at, Time.now + 1.minute)
-      expect(first_tip.edit_allowed?).to be true
-    end
+    context 'if game is not started' do
 
-    it "should not allowed" do
-      first_tip = @user_tips.first
-      game = first_tip.game
-      game.update_column(:start_at, Time.now)
-      expect(first_tip.edit_allowed?).to be false
+      it 'returns true' do
+        expect(game).to receive(:started?).and_return(false)
+        expect(tip.edit_allowed?).to be true
+      end
     end
-
   end
 
   describe "tip remove leading zero" do

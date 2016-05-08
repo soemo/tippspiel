@@ -4,6 +4,7 @@
 //= require jquery.countdown
 //= require foundation
 //= require chart.min
+//= require jquery.mixitup.min
 
 
 $(function(){
@@ -19,6 +20,13 @@ $(function(){
   init_random_user_tips();
   init_countdown('counter_desktop');
   init_save_tips_from_overlay_button();
+
+  // https://github.com/patrickkunka/mixitup/blob/master/docs/configuration-object.md
+  $('#mixitup-table').mixItUp({
+    layout: {
+      display: 'table-row'
+    }
+  });
 });
 
 

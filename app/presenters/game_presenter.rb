@@ -7,6 +7,15 @@ class GamePresenter < DelegateClass(Game)
     @game = game
   end
 
+  # used with mixitup
+  def filter_categories_css_classes
+    css_classes = ['mix']
+    css_classes << "category-#{FILTER_TODAY}" if @game.today?
+    css_classes << "category-#{FILTER_FUTURE}" if !@game.started?
+
+    css_classes.join(' ')
+  end
+
   def formatted_start_at
     I18n.l(@game.start_at, format: :default)
   end
