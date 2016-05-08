@@ -16,7 +16,6 @@ gem 'foundation-rails'
 gem 'font-awesome-sass'
 gem 'newrelic_rpm'
 gem 'feedjira',                '~> 1.6.0'      # RSS parsers
-gem 'cells',                   '~> 3.11.3'     # Cells are view components for Rails.
 gem 'lograge',                 '~> 0.3.1'
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 4.1.0'
@@ -48,6 +47,5 @@ group :test do
   gem 'webmock'
   gem 'factory_girl_rails'
   gem 'timecop'
-  gem 'rspec-cells'
   gem 'simplecov'
 end

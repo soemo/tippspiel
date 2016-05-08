@@ -25,6 +25,14 @@ describe ApplicationController do
     end
   end
 
+  describe '#rss_feed_presenter' do
+
+    it 'returns instance of RssFeedPresenter' do
+      nav_bar_presenter = subject.rss_feed_presenter
+      expect(nav_bar_presenter).to be_instance_of RssFeedPresenter
+    end
+  end
+
   describe '#url_scope' do
 
     before :each do

@@ -17,7 +17,7 @@
 
           .row
             .small-12.columns
-              = render_cell(:rss_feed, :show, item_count: 5)
+              = render partial: 'widgets/show_rss_feed', locals: {presenter: rss_feed_presenter}
 
           .row
             .small-12.columns#bottom-bg-image

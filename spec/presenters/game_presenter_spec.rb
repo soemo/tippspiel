@@ -30,6 +30,7 @@ describe GamePresenter do
 
       it 'returns mix and category-today' do
         expect(game).to receive(:today?).and_return(true)
+        expect(game).to receive(:started?).and_return(true)
         expect(subject.filter_categories_css_classes).to eq('mix category-today')
       end
     end

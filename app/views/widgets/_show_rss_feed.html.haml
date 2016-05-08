@@ -1,9 +1,9 @@
-- if rss_title.present?
+- if presenter.rss_title.present?
   %br
   %br
-  %h3.wrap_text= rss_title
-- if rss_entries.present?
-  - rss_entries.each do |e|
+  %h3.wrap_text= presenter.rss_title
+- if presenter.rss_entries.present?
+  - presenter.rss_entries.each do |e|
     %p
       %span.rss_date= I18n.l(e['published'].to_date)
       %br
