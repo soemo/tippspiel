@@ -17,7 +17,7 @@ class TipsController < ApplicationController
 
   # TODO soeren 30.04.15 Use Service and Controller with Specs!!!
   def save_champion_tip
-    if Tournament.before?
+    if Tournament.before?  # FIXME soeren 5/9/16
       if params[:champion_team_id].present?
         current_user.championtip_team_id = params[:champion_team_id]
         if current_user.save

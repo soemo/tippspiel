@@ -19,7 +19,7 @@ login_test: &login_test
 development:
   adapter: mysql2
   encoding: utf8
-  database: tippspiel_development_wm2014
+  database: tippspiel_development_em2016 #tippspiel_development_wm2014
   pool: 5
   <<: *login_dev
 
@@ -37,6 +37,6 @@ test:
 production:
   adapter: mysql2
   encoding: utf8
-  database: tippspiel_development_wm2014 # hier nutzen wir auch lokal unser dev DB
+  database: tippspiel_development_em2016 # hier nutzen wir auch lokal unser dev DB
   pool: 5
   <<: *login_dev

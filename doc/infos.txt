@@ -21,7 +21,7 @@ bin/bundle exec passenger-status
 bin/bundle exec passenger-memory-stats
 
 
-####### Neu Aufsetzen fuer ein Tunier
+####### Neu Aufsetzen fuer ein Tunier ###########
 A) Lokal
 1. DB neu anlegen
 2. DB Migrieren

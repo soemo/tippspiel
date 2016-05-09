@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20160425195844) do
     t.integer  "team2_id",               limit: 4
     t.integer  "team2_goals",            limit: 4
     t.datetime "deleted_at"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",           limit: 4,   default: 0
     t.string   "round",                  limit: 30
     t.string   "group",                  limit: 30
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160425195844) do
     t.integer  "user_id",      limit: 4
     t.string   "text",         limit: 200
     t.datetime "deleted_at"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", limit: 4,   default: 0
   end
 
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20160425195844) do
   create_table "teams", force: :cascade do |t|
     t.string   "name",         limit: 30
     t.datetime "deleted_at"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", limit: 4,   default: 0
     t.string   "country_code", limit: 255
   end
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160425195844) do
     t.integer  "team1_goals",   limit: 4
     t.integer  "team2_goals",   limit: 4
     t.datetime "deleted_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",  limit: 4, default: 0
     t.integer  "ranking_place", limit: 4
   end
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20160425195844) do
     t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "firstname",              limit: 255
     t.string   "lastname",               limit: 255
     t.integer  "points",                 limit: 4
