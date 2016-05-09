@@ -126,8 +126,8 @@ def game_data
       {:start_at => '03.07.2016 21:00', :place => 'Saint-Denis', :team1_placeholder_name => '1. Achtelfinale 4', :team2_placeholder_name => '1. Achtelfinale 8', :group=> nil, :round => QUARTERFINAL},
 
       # Halbfinale
-      {:start_at => '06.07.2016 21:00', :place => 'Lyon', :team1_placeholder_name => '. Viertelfinale 1', :team2_placeholder_name => '. Viertelfinale 2', :group=> nil, :round => SEMIFINAL},
-      {:start_at => '07.07.2016 21:00', :place => 'Marseille', :team1_placeholder_name => '. Viertelfinale 3', :team2_placeholder_name => '. Viertelfinale 4', :group=> nil, :round => SEMIFINAL},
+      {:start_at => '06.07.2016 21:00', :place => 'Lyon', :team1_placeholder_name => '1. Viertelfinale 1', :team2_placeholder_name => '1. Viertelfinale 2', :group=> nil, :round => SEMIFINAL},
+      {:start_at => '07.07.2016 21:00', :place => 'Marseille', :team1_placeholder_name => '1. Viertelfinale 3', :team2_placeholder_name => '1. Viertelfinale 4', :group=> nil, :round => SEMIFINAL},
 
       # Finale
       {:start_at => '10.07.2016 21:00', :place => 'Saint-Denis', :team1_placeholder_name => '1. Halbfinale 1', :team2_placeholder_name => '1. Halbfinale 2', :group=> nil, :round => FINAL},

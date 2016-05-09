@@ -11,18 +11,21 @@
       .callout
         - result = @presenter.get_user_top3_and_own_position
         - own_position = result.own_position
-        %h2= "#{I18n.t(:signed_in_hello)} #{current_user.firstname}, Du bist auf dem #{own_position}. Platz!"
+        %h2
+          = "#{I18n.t(:signed_in_hello)} #{current_user.firstname},"
+          %br
+          = " Du bist auf dem #{own_position}. Platz!"
         %p
           = link_to(I18n.t('full_ranking_list'), ranking_path)
 
 
-        - unless @presenter.tournament_finished?
+        - if @presenter.tournament_finished?
           %p
             %b
               AUUUSSS AUUUSSS - das Spiel ist aus!
           %p
-            Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die Teilnahme,
-            hoffe es hat Spaß gemacht und bis zum nächsten Mal in 2 Jahren.
+            Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die Teilnahme und
+            hoffe es hat Spaß gemacht. Bis zum nächsten Mal in 2 Jahren.
 
     .small-centered.medium-uncentered.medium-6.large-5.columns
       .pokal-img-small
