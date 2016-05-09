@@ -2,5 +2,6 @@
 -# plus der extra Text in @error_msg kann entsprechend definiert werden
 
 - if @error_msg.present?
-  .error-text.callout.alert
-    %p= @error_msg[:text].html_safe
+  .row
+    .small-12.column.error-text
+      %p= @error_msg[:text].html_safe

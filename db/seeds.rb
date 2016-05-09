@@ -104,7 +104,7 @@ def game_data
       # Gruppe F
       {:start_at => '14.06.2016 18:00', :place => 'Bordeaux', :team1_name => 'Österreich', :team2_name => 'Ungarn', :group=> GROUP_F, :round => GROUP},
       {:start_at => '24.06.2016 21:00', :place => 'Saint-Étienne', :team1_name => 'Portugal', :team2_name => 'Island', :group=> GROUP_F, :round => GROUP},
-      {:start_at => '28.06.2016 18:00', :place => 'Marseille', :team1_name => 'Island', :team2_name => 'Ungarn', :group=> GROUP_F, :round => GROUP},
+      {:start_at => '18.06.2016 18:00', :place => 'Marseille', :team1_name => 'Island', :team2_name => 'Ungarn', :group=> GROUP_F, :round => GROUP},
       {:start_at => '18.06.2016 21:00', :place => 'Paris', :team1_name => 'Portugal', :team2_name => 'Österreich', :group=> GROUP_F, :round => GROUP},
       {:start_at => '22.06.2016 18:00', :place => 'Lyon', :team1_name => 'Ungarn', :team2_name => 'Portugal', :group=> GROUP_F, :round => GROUP},
       {:start_at => '22.06.2016 18:00', :place => 'Saint-Denis', :team1_name => 'Island', :team2_name => 'Österreich', :group=> GROUP_F, :round => GROUP},
