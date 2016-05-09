@@ -213,7 +213,7 @@ load_demo_data = ENV['load_demo_data']
 puts 'Spiele neu aufsetzen...'
 # TO DO zur Sicherheit auskommentiert
 #clear_games
-create_team_and_game_data
+#create_team_and_game_data
 
 if load_demo_data == 'true'
   puts ' load_demo_data !!!'

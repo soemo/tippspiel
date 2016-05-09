@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.livequery
-//= require jquery.countdown
 //= require foundation
 //= require chart.min
 //= require jquery.mixitup.min
@@ -18,7 +17,6 @@ $(function(){
 
   check_user_tip();
   init_random_user_tips();
-  init_countdown('counter_desktop');
   init_save_tips_from_overlay_button();
 
   // https://github.com/patrickkunka/mixitup/blob/master/docs/configuration-object.md
@@ -210,17 +208,3 @@ function init_save_tips_from_overlay_button(){
   return false; // damit danach kein GET ausgeloest wird
 }
 
-
-function init_countdown(element_id_string){
-  if($('#'+element_id_string).length > 0) {
-    //Countdown - DATUM des ersten Spiels
-    var first_game_date_timestamp = $('#'+element_id_string).data('countdowntimestamp');
-    var date = new Date(first_game_date_timestamp * 1000);
-
-    $('#'+element_id_string).countdown({
-      startTime: date,
-      stepTime: 1,
-      image: "assets/countdown_digits_blue.png"
-    });
-  }
-}

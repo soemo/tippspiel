@@ -36,10 +36,6 @@ de:
   no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
-  tournament_starts_in: "Der Spaß beginnt in:"
-  counter_desc_desktop: '(Tage : Stunden : Minuten : Sekunden)'
-  counter_desc_tablet: '(Tage : Stunden : Minuten)'
-
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
   result_after_game_count: "Folgende Punkte wurden nach %{finshed_games_count} von %{all_games_count} Spielen erzielt."
 

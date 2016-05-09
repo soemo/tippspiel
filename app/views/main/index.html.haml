@@ -7,7 +7,4 @@
 
 .row
   .small-12.columns
-    - unless @presenter.tournament_started?
-      = render partial: 'countdown'
-
     = render partial: 'widgets/games_index', locals: {presenter: @presenter.games_presenter}
