@@ -92,7 +92,7 @@ describe GamePresenter do
     end
   end
 
-  describe '#team1_with_flags' do
+  describe '#team1_with_flag' do
 
     context 'if team1_id present' do
 
@@ -106,7 +106,7 @@ describe GamePresenter do
                                                                      flag_position: flag_position).
             and_return('team name with flag')
 
-        expect(subject.team1_with_flags(flag_size: flag_size,
+        expect(subject.team1_with_flag(flag_size: flag_size,
                                         flag_position: flag_position)).to eq 'team name with flag'
       end
     end
@@ -116,12 +116,12 @@ describe GamePresenter do
       it 'returns team1_placeholder_name' do
         game.team1_id = nil
         game.team1_placeholder_name = 'Sieger Gruppe A'
-        expect(subject.team1_with_flags).to eq 'Sieger Gruppe A'
+        expect(subject.team1_with_flag).to eq 'Sieger Gruppe A'
       end
     end
   end
 
-  describe '#team2_with_flags' do
+  describe '#team2_with_flag' do
 
     context 'if team2_id present' do
 
@@ -135,7 +135,7 @@ describe GamePresenter do
                                                                      flag_position: flag_position).
             and_return('team2 name with flag')
 
-        expect(subject.team2_with_flags(flag_size: flag_size,
+        expect(subject.team2_with_flag(flag_size: flag_size,
                                         flag_position: flag_position)).to eq 'team2 name with flag'
       end
     end
@@ -145,7 +145,7 @@ describe GamePresenter do
       it 'returns team2_placeholder_name' do
         game.team2_id = nil
         game.team2_placeholder_name = 'Sieger Gruppe B'
-        expect(subject.team2_with_flags).to eq 'Sieger Gruppe B'
+        expect(subject.team2_with_flag).to eq 'Sieger Gruppe B'
       end
     end
   end
@@ -155,10 +155,10 @@ describe GamePresenter do
     it 'returns team1 name and team2 name with flag' do
       flag_size = 16
       flag_position = 'right'
-      expect(subject).to receive(:team1_with_flags).
+      expect(subject).to receive(:team1_with_flag).
           with(flag_size: flag_size,
                flag_position: flag_position).and_return('team 1 name with flag')
-      expect(subject).to receive(:team2_with_flags).
+      expect(subject).to receive(:team2_with_flag).
           with(flag_size: flag_size,
                flag_position: flag_position).and_return('team 2 name with flag')
 

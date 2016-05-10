@@ -18,11 +18,11 @@
                 = game_presenter.place
             .row
               .small-5.columns.text-right.no-padding-right
-                = game_presenter.team1_with_flags(flag_size: 16, flag_position: 'right')
-              .small-2.columns.game-result.text-center.white-space-nowrap
+                = game_presenter.team1_with_flag(flag_size: 16, flag_position: 'right')
+              .small-2.columns.text-center.white-space-nowrap
                 = game_presenter.result
               .small-5.columns.text-left.no-padding-left
-                = game_presenter.team2_with_flags(flag_size: 16, flag_position: 'left')
+                = game_presenter.team2_with_flag(flag_size: 16, flag_position: 'left')
             - if presenter.show_edit_link?
               .row
                 .small-12.columns.text-right
@@ -32,10 +32,10 @@
           %td.hide-for-small-only= game_presenter.round_or_group_name
           %td.hide-for-small-only= game_presenter.place
           %td.hide-for-small-only.text-right
-            = game_presenter.team1_with_flags(flag_size: 32, flag_position: 'right')
+            = game_presenter.team1_with_flag(flag_size: 32, flag_position: 'right')
           %td.hide-for-small-only.text-center
             = game_presenter.result
           %td.hide-for-small-only.text-left
-            = game_presenter.team2_with_flags(flag_size: 32, flag_position: 'left')
+            = game_presenter.team2_with_flag(flag_size: 32, flag_position: 'left')
           - if presenter.show_edit_link?
             %td.hide-for-small-only= link_to(icon('pencil'), edit_admin_game_path(game_presenter))

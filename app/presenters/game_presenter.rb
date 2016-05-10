@@ -32,9 +32,9 @@ class GamePresenter < DelegateClass(Game)
     "#{@game.team1_goals} : #{@game.team2_goals}"
   end
 
-  def team1_with_flags(flag_size: 32, flag_position: 'right')
+  def team1_with_flag(flag_size: 32, flag_position: 'right')
     if @game.team1_id.present?
-      team1_presenter = ::TeamPresenter.new(@game.team1)
+      team1_presenter = team_presenter(@game.team1)
       team1_presenter.team_name_with_flag(flag_size: flag_size,
                                           flag_position: flag_position)
     else
@@ -42,9 +42,9 @@ class GamePresenter < DelegateClass(Game)
     end
   end
 
-  def team2_with_flags(flag_size: 32, flag_position: 'left')
+  def team2_with_flag(flag_size: 32, flag_position: 'left')
     if @game.team2_id.present?
-      team2_presenter = ::TeamPresenter.new(@game.team2)
+      team2_presenter = team_presenter(@game.team2)
       team2_presenter.team_name_with_flag(flag_size: flag_size,
                                           flag_position: flag_position)
     else
@@ -54,8 +54,8 @@ class GamePresenter < DelegateClass(Game)
 
 
   def team_names_with_flags(flag_size: 32, team1_flag_position: 'right', team2_flag_position: 'left')
-    team1_name_with_flag = team1_with_flags(flag_size: flag_size, flag_position: team1_flag_position)
-    team2_name_with_flag = team2_with_flags(flag_size: flag_size, flag_position: team2_flag_position)
+    team1_name_with_flag = team1_with_flag(flag_size: flag_size, flag_position: team1_flag_position)
+    team2_name_with_flag = team2_with_flag(flag_size: flag_size, flag_position: team2_flag_position)
     "#{team1_name_with_flag} - #{team2_name_with_flag}"
   end
 
@@ -77,5 +77,11 @@ class GamePresenter < DelegateClass(Game)
 
   def teams_ordered_by_name
     TeamQueries.all_ordered_by_name
+  end
+
+  private
+
+  def team_presenter(team)
+    ::TeamPresenter.new(team)
   end
 end

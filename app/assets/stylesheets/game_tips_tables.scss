@@ -1,0 +1,33 @@
+.place-info {
+  color: lighten($body-font-color, 30%);
+}
+
+
+@include breakpoint(small only) {
+
+  .date-round-place-infos {
+    font-size: rem-calc(12);
+    color: lighten($body-font-color, 20%);
+    padding-bottom: 10px;
+  }
+
+  .small-align-top {
+    vertical-align: top;
+  }
+  .small-align-bottom-and_float-right {
+    vertical-align: bottom;
+    float: right;
+  }
+  .tip-and-points {
+    text-align: right;
+  }
+
+  .team-infos {
+    font-size: rem-calc(16);
+  }
+
+  .tip-label {
+    font-size: rem-calc(12);
+    color: lighten($body-font-color, 50%);
+  }
+}

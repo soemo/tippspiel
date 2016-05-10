@@ -16,7 +16,6 @@
           %th= ''
           %th= ''
           %th= ''
-          %th= ''
           %th= Tip.model_name.human
           %th= Tip.human_attribute_name('tip_points')
       %tbody
@@ -35,41 +34,47 @@
             - tip1_input = tip_presenter.team1_goals
             - tip2_input = tip_presenter.team2_goals
           %tr{class: filter_css_classes}
-            %td.show-for-small-only
-              .row.small-infos
-                .small-4.columns.text-left
+            %td.show-for-small-only.small-align-top
+              .row
+                .small-12.columns.date-round-place-infos
                   = game_presenter.formatted_start_at_short
-                .small-4.columns.text-center
-                  = game_presenter.round_or_group_name
-                .small-4.columns.text-right
                   = place
-              .row
-                .small-5.columns.text-right.no-padding-right
-                  = game_presenter.team1_with_flags(flag_size: 16, flag_position: 'right')
-                .small-2.columns.game-result.text-center.white-space-nowrap
-                  = game_presenter.result
-                .small-5.columns.text-left.no-padding-left
-                  = game_presenter.team2_with_flags(flag_size: 16, flag_position: 'left')
-              .row
-                .small-5.columns.text-right.no-padding-right
-                  = "#{Tip.model_name.human}:"
-                .small-2.columns.text-center.white-space-nowrap.no-padding-right.no-padding-left
-                  = raw "#{tip1_input} : #{tip2_input}"
-                .small-5.columns.text-right
-                  - unless edit_allowed
-                    = raw pointbadge
+                  = '-'
+                  = game_presenter.round_or_group_name
+              .row.team-infos
+                .small-7.columns
+                  = game_presenter.team1_with_flag(flag_size: 16, flag_position: 'left')
+                .small-2.columns.end
+                  = game_presenter.team1_goals
+                .small-7.columns
+                  = game_presenter.team2_with_flag(flag_size: 16, flag_position: 'left')
+                .small-2.columns.end
+                  = game_presenter.team2_goals
 
 
-            %td.hide-for-small-only= game_presenter.formatted_start_at_short
-            %td.hide-for-small-only= game_presenter.round_or_group_name
-            %td.hide-for-small-only= place
+            %td.hide-for-small-only
+              = game_presenter.formatted_start_at
+              %span.place-info
+                = 'in'
+                = place
+            %td.hide-for-small-only
+              = game_presenter.round_or_group_name
             %td.hide-for-small-only.text-right
-              = game_presenter.team1_with_flags(flag_size: 32, flag_position: 'right')
+              = game_presenter.team1_with_flag(flag_size: 32, flag_position: 'right')
             %td.hide-for-small-only.text-center.white-space-nowrap
               = game_presenter.result
             %td.hide-for-small-only.text-left
-              = game_presenter.team2_with_flags(flag_size: 32, flag_position: 'left')
-            %td.white-space-nowrap.hide-for-small-only
+              = game_presenter.team2_with_flag(flag_size: 32, flag_position: 'left')
+
+            -# wird in allen Aufloesungen angezeigt
+            %td.white-space-nowrap.small-align-bottom-and_float-right
+              %span.show-for-small-only
+                - unless edit_allowed
+                  = raw pointbadge
+                  %br
+                  %span.tip-label
+                    = Tip.model_name.human
+                %br
               = raw "#{tip1_input} : #{tip2_input}"
 
             %td.hide-for-small-only
