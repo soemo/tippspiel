@@ -18,14 +18,15 @@
 -# off-canvas title bar for 'small' screen
 .title-bar{data: {'responsive-toggle': 'widemenu', 'hide-for': 'medium'}}
   .title-bar-left
-    =  button_tag('sm', class: 'menu-icon dark', data: {open: 'offCanvasLeft'} )
     %span.title-bar-title
       %a.brand{href: presenter.nav_bar_brand_url}
         = img
         = get_title
+  .title-bar-right
+    = button_tag('sm', class: 'menu-icon dark', data: {open: 'offCanvasRight'} )
 
--# off-canvas left menu
-.off-canvas.position-left#offCanvasLeft{data: {'off-canvas': ''}}
+-# off-canvas right menu
+.off-canvas.position-right#offCanvasRight{data: {'off-canvas': '', position: 'right'}}
   %ul.vertical.dropdown.menu{data: {'dropdown-menu': ''}}
     - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
       = render partial: 'layouts/application_nav_bar_item', locals: {presenter: nav_bar_item_presenter}

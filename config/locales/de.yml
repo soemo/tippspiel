@@ -29,12 +29,15 @@ de:
   change_password_need_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
   change_password_wrong_old_pw: 'Das alte Passwort stimmt nicht!'
 
+  who_will_be_champion: 'Wer wird Tuniersieger?'
   need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
   need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
   current_champion_tip: 'Du hast aktuell auf %{championtip_name} als Tuniersieger getippt.'
   champion_tip: 'Du hast auf %{championtip_name} als Tuniersieger getippt.'
   no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
-  who_will_be_champion: 'Wer wird Tuniersieger?'
+  ranking_champion_tip_currently_not_visible: 'Siegertipp noch nicht sichtbar'
+  ranking_no_champion_tip: 'Keinen Siegertipp abgegeben'
+  small_ranking_champion_tip: 'Siegertipp: '
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
   result_after_game_count: "Folgende Punkte wurden nach %{finshed_games_count} von %{all_games_count} Spielen erzielt."

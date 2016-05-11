@@ -11,12 +11,17 @@
     %tbody
       - user_ranking_hash.each do |place, users_on_same_place|
         - users_on_same_place.each do |user|
-          - champ_team_info = '-'
-          - champ_team_info_small = '-'
-          - if Tournament.started? && user.championtip_team_id.present?
-            - champteam_presenter = TeamPresenter.new(user.championtip_team)
-            - champ_team_info= champteam_presenter.team_name_with_flag
-            - champ_team_info_small= champteam_presenter.team_name_with_flag(flag_size: 16)
+
+          -# FIXME soeren 5/11/16 in presenter auslagern
+          - if Tournament.started?
+            - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
+            - if user.championtip_team_id.present?
+              - champ_team_info_small = I18n.t('small_ranking_champion_tip')
+              - champteam_presenter = TeamPresenter.new(user.championtip_team)
+              - champ_team_info = champteam_presenter.team_name_with_flag
+              - champ_team_info_small << champteam_presenter.team_name_with_flag(flag_size: 16)
+          - else
+            - champ_team_info = champ_team_info_small = I18n.t('ranking_champion_tip_currently_not_visible')
 
           - user_name = user.name
           - user_points = user.points.present? ? user.points.to_s : '0'

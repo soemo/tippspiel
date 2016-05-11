@@ -71,9 +71,9 @@
               %span.show-for-small-only
                 - unless edit_allowed
                   = raw pointbadge
+                %span.tip-label
                   %br
-                  %span.tip-label
-                    = Tip.model_name.human
+                  = Tip.model_name.human
                 %br
               = raw "#{tip1_input} : #{tip2_input}"
 
