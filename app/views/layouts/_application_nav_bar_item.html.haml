@@ -13,7 +13,7 @@
     -else
       %li{id: presenter.sub_menu_id, class: "#{presenter.css_class}"}
         %a= presenter.link_text
-        %ul.menu.vertical
+        %ul.menu.vertical.is-dropdown-submenu
           - presenter.sub_menu_links.each do |link_data|
             - if link_data[:divider].present?
               %li
