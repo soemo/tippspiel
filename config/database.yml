@@ -12,10 +12,6 @@ login_test: &login_test
   password:
   host: localhost
 
-<%= file = File.join(Rails.root, "config", "dblogin.yml")
-    IO.read(file) if File.exist?(file) %>
-
-
 development:
   adapter: mysql2
   encoding: utf8
