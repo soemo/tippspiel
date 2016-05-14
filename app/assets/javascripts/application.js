@@ -23,6 +23,9 @@ $(function(){
   $('#mixitup-table').mixItUp({
     layout: {
       display: 'table-row'
+    },
+    animation: {
+      enable: false
     }
   });
 });

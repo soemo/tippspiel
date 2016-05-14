@@ -11,19 +11,22 @@ describe MainIndexPresenter do
     @presenter = subject.new(user)
   end
 
-  describe '#tournament_started?' do
-
-    it 'calls Tournament.started?' do
-      expect(Tournament).to receive(:started?)
-      @presenter.tournament_started?
-    end
-  end
-
   describe '#tournament_finished?' do
 
-    it 'calls Tournament.finished?' do
-      expect(Tournament).to receive(:finished?)
-      @presenter.tournament_finished?
+    context 'if Tournament.finished? == true' do
+
+      it 'returns true' do
+        expect(Tournament).to receive(:finished?).and_return(true)
+        expect(@presenter.tournament_finished?).to be true
+      end
+    end
+
+    context 'if Tournament.finished? == false' do
+
+      it 'returns false' do
+        expect(Tournament).to receive(:finished?).and_return(false)
+        expect(@presenter.tournament_finished?).to be false
+      end
     end
   end
 

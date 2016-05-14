@@ -4,7 +4,7 @@ describe Tournament, :type => :model do
 
   subject { Tournament }
 
-  context '#started?' do
+  describe '#started?' do
 
     context 'if first game is in the future' do
       it 'returns false' do
@@ -26,7 +26,7 @@ describe Tournament, :type => :model do
 
   end
 
-  context '#not_yet_started?' do
+  describe '#not_yet_started?' do
 
     context 'if first game is in the future' do
       it 'returns true' do
@@ -48,26 +48,27 @@ describe Tournament, :type => :model do
 
   end
 
-  context '.finished?' do
+  describe '#finished?' do
     let!(:game1) {create :game}
-    let!(:game2) {create :game}
-    let!(:game3) {create :game}
     let!(:final) {create :final}
 
-    context 'when final not finished' do
+    context 'if final not finished' do
+
       it 'returns false' do
         expect(subject.finished?).to be false
       end
     end
 
-    context 'when final exists' do
+    context 'if final not exists' do
+
       it 'returns false' do
         final.destroy
         expect(subject.finished?).to be false
       end
     end
 
-    context 'when final is finished' do
+    context 'if final is finished' do
+
       it 'returns true' do
         final.update_column(:finished, true)
         expect(subject.finished?).to be true
@@ -76,7 +77,7 @@ describe Tournament, :type => :model do
 
   end
 
-  context '.round_start_end_date_time' do
+  describe '#round_start_end_date_time' do
 
     let!(:game1) { create(:game, round: GROUP,
                           group: GROUP_A, start_at: Time.now + 1.day)}

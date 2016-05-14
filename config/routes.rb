@@ -2,12 +2,23 @@
 Tippspiel::Application.routes.draw do
 
   devise_scope :user do
-    get '/login'  => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  # Eigener Controller noetig, damit eigene Attribute den strong_params von devise bekannt gemacht werden koennen
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :users,
+             controllers: {
+                 registrations: 'adapted_devise/registrations' }
+
+  authenticated :user do
+    root to: 'main#index', as: 'root'
+  end
+  unauthenticated do
+    as :user do
+      root to: 'devise/sessions#new', as: 'unauthenticated_root'
+    end
+  end
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   namespace :admin do
     resources :games, except: [:show, :create, :new]
@@ -30,7 +41,4 @@ Tippspiel::Application.routes.draw do
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
 
   get 'main/error' => 'main#error', :as => :error
-
-  root :to => 'main#index'
-
 end

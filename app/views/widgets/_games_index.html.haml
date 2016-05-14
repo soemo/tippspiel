@@ -28,7 +28,7 @@
                 .small-12.columns.text-right
                   = link_to(icon('pencil'), edit_admin_game_path(game_presenter))
 
-          %td.hide-for-small-only= game_presenter.formatted_start_at_short
+          %td.hide-for-small-only= game_presenter.formatted_start_at
           %td.hide-for-small-only= game_presenter.round_or_group_name
           %td.hide-for-small-only= game_presenter.place
           %td.hide-for-small-only.text-right

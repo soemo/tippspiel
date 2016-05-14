@@ -6,10 +6,6 @@ class MainIndexPresenter
     @current_user = current_user
   end
 
-  def tournament_started?
-    Tournament.started?
-  end
-
   def tournament_finished?
     Tournament.finished?
   end

@@ -4,8 +4,7 @@ class MainController < ApplicationController
   skip_before_filter :authenticate_user!
 
   def index
-    user = user_signed_in? ? current_user : nil
-    @presenter = MainIndexPresenter.new(user)
+    @presenter = MainIndexPresenter.new(current_user)
   end
 
   def error

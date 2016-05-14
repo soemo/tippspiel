@@ -1,9 +1,41 @@
-- if user_signed_in?
-  - content_for :hero_image do
-    = render partial: 'hero_image_for_logged_in_user'
-- else
-  - content_for :hero_image do
-    = render partial: 'hero_image_with_login_form'
+- content_for :hero_image do
+  %section.hero
+
+    -# Space placeholder
+    .row.show-for-small-only
+      .medium-12.columns.space-small
+    .row.show-for-medium
+      .medium-12.columns.space-medium
+
+    .row
+      .medium-offset-3.medium-9.large-offset-5.large-7.columns
+        .callout
+          - result = @presenter.get_user_top3_and_own_position
+          - own_position = result.own_position
+          %h2
+            = "#{I18n.t(:signed_in_hello)} #{current_user.firstname},"
+            %br.show-for-small-only
+            = " Du bist auf dem #{own_position}. Platz!"
+          %p
+            = link_to(I18n.t('full_ranking_list'), ranking_path)
+
+          %p
+            = link_to(I18n.t('to_tip_page'), tips_path)
+
+
+          - if @presenter.tournament_finished?
+            %p
+              %b
+                AUUUSSS AUUUSSS - das Spiel ist aus!
+            %p
+              Der Pokal wird schnellstmöglich den Weg zum Gewinner finden. Allen Anderen danke ich für die Teilnahme und
+              hoffe es hat Spaß gemacht. Bis zum nächsten Mal in 2 Jahren.
+
+    -# Space placeholder
+    .row.show-for-small-only
+      .medium-12.columns.space-small
+    .row.show-for-medium
+      .medium-12.columns.space-medium
 
 .row
   .small-12.columns

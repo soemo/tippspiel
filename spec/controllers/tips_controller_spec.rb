@@ -30,7 +30,7 @@ describe TipsController, :type => :controller do
 
     it 'be redirected to root' do
       get 'index'
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to new_user_session_path
     end
   end
 

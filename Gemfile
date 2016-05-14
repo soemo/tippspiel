@@ -30,6 +30,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'rack-livereload'
   gem 'guard-livereload', require: false
+  gem 'letter_opener_web'
 end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
