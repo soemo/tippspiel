@@ -1,16 +1,14 @@
 #js_overlay_tip_save {
-  background-color: whitesmoke; //rgba(130, 130, 130, 0.5);
+  background-color: rgba(255,255,255,0.8);
   border: 1px solid #e3e3e3;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 12px 0;
   font-weight: bold;
   text-align: center;
   color: #000;
   z-index: 4;
-  opacity: 0.9;
 
   .button {
     margin: 0;
@@ -19,7 +17,6 @@
 
 #js_overlay_tip_save span {
   display: block;
-  margin: 0 12px;
-  padding: .5em 0;
-  border: 0 solid #8a8d7f;
+  padding: .2em 0;
+  border: 0 solid $light-gray;
 }

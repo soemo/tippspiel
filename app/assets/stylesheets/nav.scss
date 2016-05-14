@@ -3,7 +3,6 @@
     padding: 0;
     margin: 5px;
   }
-
 }
 .menu-text {
   padding-left: 0;
@@ -16,6 +15,10 @@ a.brand img {
 
 .top-bar {
   padding-left: 0;
+
+  a:hover {
+    color: darken($primary-color, 10%);
+  }
 }
 
 // Only affects medium screens and larger
@@ -28,4 +31,9 @@ a.brand img {
   nav {
     display: none;
   }
+}
+
+// submenu Arrow white on active Menu point
+.dropdown.menu > li.active.is-dropdown-submenu-parent > a::after {
+  border-color: white transparent transparent;
 }
