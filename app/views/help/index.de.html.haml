@@ -92,20 +92,21 @@
       Bei richtigem Tipp auf den Tuniersieger gibt es #{Users::UpdatePoints::CHAMPION_TIP_POINTS} Zusatzpunkte.
       Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
 
-    %p
-      %b
-        Es gibt #{ROUNDS.size} Runden:
-
-    - write_round_infos
-
-    %p
-      Dem Gewinner winkt ein schöner Tippspiel-Wanderpokal, der nach 3 Siegen behalten werden kann.
-      %br
-      %br
-      In diesem Sinne viel Spaß beim Tippen!
-      %br
-      Sören "Harry" Mothes
-
+    .row
+      .small-12.medium-7.columns
+        %p
+          %b
+            Es gibt #{ROUNDS.size} Runden:
+        - write_round_infos
+        %p
+          Dem Gewinner winkt ein schöner Tippspiel-Wanderpokal, der nach 3 Siegen behalten werden kann.
+          %br
+          %br
+          In diesem Sinne viel Spaß beim Tippen!
+          %br
+          Sören "Harry" Mothes
+      .small-12.medium-5.columns
+        =image_tag('pokalsieger.jpg')
     %br
     %br
     %br

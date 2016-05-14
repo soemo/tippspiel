@@ -26,58 +26,25 @@
 
   h2 {
     border-bottom: solid 0 $primary-color;
-    //color: $white;
     font-size: 1.5rem;
     line-height: 1.5em;
     letter-spacing: -0.025em;
     font-weight: 300;
-   // text-align: center;
   }
   p {
     line-height: 1.5em;
     font-weight: 100;
-   // text-align: center;
     margin-bottom: 1rem;
   }
-  p,
-  label,
-  a {
-    //color: $white;
-  }
+
   a:hover {
     text-decoration: underline;
   }
 
-  .pokal-img, .pokal-img-small {
-    background: url(image_path('pokalsieger.jpg')) no-repeat center center;
-  }
-
-  .pokal-img, .pokal-img-small {
-    background-size: cover;
-    height: 11rem;
-    width: 11rem;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
-  }
   // Only affects medium screens and larger
   @include breakpoint(medium) {
-    .pokal-img {
-      height: 20rem;
-      width: 20rem;
-    }
-
-    .pokal-img-small {
-      height: 14rem;
-      width: 14rem;
-    }
-
     h2 {
-     // text-align: right;
       font-size: 2.1rem;
-    }
-    p {
-      //text-align: right;
     }
   }
 }
