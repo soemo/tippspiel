@@ -8,5 +8,9 @@ module AdaptedDevise
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up).push(:firstname, :lastname)
     end
+
+    def after_inactive_sign_up_path_for(_)
+      root_path(signed_up_message: 1)
+    end
   end
 end

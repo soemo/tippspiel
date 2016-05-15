@@ -158,7 +158,7 @@ function autoCloseSuccessMessage(){
         $(this).children("button.close").first().trigger("click");
         return $(this).remove();
       });
-    }), 10000);
+    }), 5000);
   });
 }
 

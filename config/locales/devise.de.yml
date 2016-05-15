@@ -52,7 +52,7 @@ de:
       signed_up: "Du hast dich erfolgreich registriert."
       signed_up_but_inactive: "Du hast dich erfolgreich registriert. Ich konnte dich noch nicht anmelden, da dein Account noch inaktiv ist."
       signed_up_but_locked: "Du hast dich erfolgreich registriert. Ich konnte dich noch nicht anmelden, da dein Account gesperrt ist."
-      signed_up_but_unconfirmed: "Du hast dich erfolgreich registriert. Es wurde ein E-Mail mit der Anleitung, wie Du deinen Account freischalten kannst, an deine angegebene E-Mail Adresse verschickt. Solltest du diese E-Mail nicht in deinem Postfach finden, prüfe bitte deinen Spam-Ordner. Hast du die E-Mail nicht erhalten? Dann kontaktiere mich bitte per E-Mail."
+      signed_up_but_unconfirmed: ''
       update_needs_confirmation: "Deine Daten wurden aktualisiert, aber Du musst deine neue E-Mail-Adresse bestätigen. Du erhälst in wenigen Minuten eine E-Mail, mit der du die Änderung deiner E-Mail-Adresse abschliessen kannst."
       updated: "Deine Daten wurden aktualisiert."
     sessions:
