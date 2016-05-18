@@ -8,9 +8,9 @@
       %span.rss_date= I18n.l(e['published'].to_date)
       %br
       - link = e.url
-      - if link.starts_with?("#{RSS_FEED_MAIN_URL}")
-        = link_to(e.title, "#{link}", :target => '_blank')
-      - else
-        = link_to(e.title, "#{RSS_FEED_MAIN_URL}#{link}", :target => '_blank')
+      -# if link.starts_with?("#{RSS_FEED_MAIN_URL}")
+      = link_to(e.title, "#{link}", :target => '_blank')
+      -# else
+        =# link_to(e.title, "#{RSS_FEED_MAIN_URL}#{link}", :target => '_blank')
       %br
       %span.wrap_text= raw(e.summary)

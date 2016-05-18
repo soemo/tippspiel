@@ -31,6 +31,7 @@ group :development do
   gem 'rack-livereload'
   gem 'guard-livereload', require: false
   gem 'letter_opener_web'
+  gem 'rack-mini-profiler'
 end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind

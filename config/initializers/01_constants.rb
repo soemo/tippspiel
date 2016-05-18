@@ -23,8 +23,11 @@ GROUP_G      = 'G'
 GROUP_H      = 'H'
 
 if IS_EM
-  RSS_FEED_MAIN_URL = 'http://de.uefa.com'
-  RSS_FEED_URL      = "#{RSS_FEED_MAIN_URL}/rssfeed/uefaeuro/rss.xml"
+  # bei der EM 2916 war hier eine veraltete Uberschrift und die Tage der Post stimmten nicht, daher wurde ein andererRSS Feed genutzt
+  #RSS_FEED_MAIN_URL = 'http://de.uefa.com'
+  #RSS_FEED_URL      = "#{RSS_FEED_MAIN_URL}/rssfeed/uefaeuro/rss.xml"
+  RSS_FEED_MAIN_URL = 'http://rss.kicker.de'
+  RSS_FEED_URL      = "#{RSS_FEED_MAIN_URL}/news/em"
 
   ROUNDS = [GROUP, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, FINAL]
   GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F]
