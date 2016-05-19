@@ -25,6 +25,7 @@ de:
   create_successful: "%{object_name} wurde erfolgreich angelegt"
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
+  notice_to_long_with_emojis: "Mit den eingegebenen Emojis ist der Text zu lang."
 
   update_successful: "%{object_name} wurde aktualisiert."
 

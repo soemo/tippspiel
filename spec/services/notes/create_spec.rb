@@ -37,6 +37,16 @@ describe Notes::Create do
     expect(Notice.count).to eq(0)
   end
 
+  it 'does not save notice, if text with emoji is longer then 200' do
+    longer_then_max = ('w' * 100) + ' ' + ('b' * 98) + "😁"
+    expect(Emojimmy.emoji_to_token(longer_then_max).end_with?(':grin:')).to be true
+
+    error_msg = subject.call(notice_text: longer_then_max, current_user_id: user.id)
+
+    expect(error_msg).to eq(I18n.t(:notice_to_long_with_emojis))
+    expect(Notice.count).to eq(0)
+  end
+
   context '#correct_spaces?' do
     it 'has correct spaces string 100' do
       str_size_100 = 'a' * Notice::MAX_SIZE_WITHOUT_SPACES
