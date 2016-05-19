@@ -107,6 +107,9 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
+    emojimmy (0.2.2)
+      activerecord (>= 3.0.0)
+      rumoji (>= 0.3.1)
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
@@ -284,6 +287,7 @@ GEM
     rspec-support (3.2.2)
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
+    rumoji (0.5.0)
     safe_yaml (1.0.4)
     sass (3.4.22)
     sass-rails (5.0.4)
@@ -353,6 +357,7 @@ DEPENDENCIES
   capybara
   devise (~> 3.4.1)
   devise-encryptable (~> 0.2.0)
+  emojimmy
   factory_girl_rails
   feedjira (~> 1.6.0)
   font-awesome-sass

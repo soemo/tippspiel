@@ -21,6 +21,11 @@ gem 'lograge',                 '~> 0.3.1'
 gem 'airbrake',                '~> 4.1.0'
 gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain Old Ruby Objects
 
+# Emojimmy makes it possible to store emoji characters in ActiveRecord datastores
+# that don’t support 4-Byte UTF-8 Unicode (utf8mb4) encoding
+gem 'emojimmy'
+
+
 group :development, :production do
   gem 'passenger'
 end

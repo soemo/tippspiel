@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Notice < ActiveRecord::Base
   acts_as_paranoid
+  stores_emoji_characters :text
 
   MAX_SIZE = 200
   MAX_SIZE_WITHOUT_SPACES = 100

@@ -3,7 +3,7 @@ de:
   games_of: "Spielplan der %{tournament_name}"
 
   error_500_text: "<b>Ups, da ist was schiefgegangen.</b></br></br>
-                  Ich wurde informiert und arbeitet an einer Lösung. Entschuldige die Unannehmlichkeit."
+                  Ich wurde informiert und arbeite an einer Lösung. Entschuldige die Unannehmlichkeit."
   error_404_text: "<b>Die Seite '%{requested_page}' wurde leider nicht gefunden.</b></br></br>
                   Stimmt da vielleicht ein Lesezeichen nicht mehr?"
 
