@@ -425,10 +425,10 @@ $meter-fill-bad: $alert-color;
 // 24. Off-canvas
 // --------------
 
-$offcanvas-size: 250px;
+$offcanvas-size: 240px;
 $offcanvas-background: $white; //$light-gray;
 $offcanvas-zindex: -1;
-$offcanvas-transition-length: 0.5s;
+$offcanvas-transition-length: 0.2s;
 $offcanvas-transition-timing: ease;
 $offcanvas-fixed-reveal: true;
 $offcanvas-exit-background: rgba($white, 0.25);

@@ -10,6 +10,10 @@ footer {
 
 }
 
+a, button {
+  outline: 0;
+}
+
 #bottom-bg-image {
   height: 80px;
   background: url(image_path('pokalsieger.jpg')) no-repeat center 0;
