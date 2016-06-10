@@ -9,11 +9,12 @@
         %th= Game.human_attribute_name('siegertipp')
         %th= User.human_attribute_name('points')
     %tbody
+      - tournament_started = Tournament.started?
       - user_ranking_hash.each do |place, users_on_same_place|
         - users_on_same_place.each do |user|
 
           -# FIXME soeren 5/11/16 in presenter auslagern
-          - if Tournament.started?
+          - if tournament_started
             - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
             - if user.championtip_team_id.present?
               - champ_team_info_small = I18n.t('small_ranking_champion_tip')
