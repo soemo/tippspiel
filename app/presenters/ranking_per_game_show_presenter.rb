@@ -2,15 +2,19 @@ class RankingPerGameShowPresenter
 
   attr_reader :user_rankings
 
-  def initialize(user_rankings, chart_x_labels)
+  def initialize(user_rankings, games)
     @user_rankings = user_rankings
-    @chart_x_labels = chart_x_labels
+    @games = games
+  end
+
+  def chart_x_labels
+     @games.map{ |game| GamePresenter.new(game) }.map{|gp| "#{gp.formatted_start_at_short}: #{gp.team_names_without_flags}"}
   end
 
   # use http://www.chartjs.org/docs/#line-chart-introduction  Version: 2.0.2
   def chart_data
     {
-        labels: @chart_x_labels,
+        labels: chart_x_labels,
         datasets: [
             {
                 label: I18n.t(:your_ranking_per_game),

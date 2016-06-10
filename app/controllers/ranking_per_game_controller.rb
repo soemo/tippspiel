@@ -5,6 +5,6 @@ class RankingPerGameController < ApplicationController
     user_rankings = TipQueries.all_by_user_id_and_game_ids(current_user.id,
                                                            games.map(&:id)).pluck(:ranking_place)
 
-    @presenter = RankingPerGameShowPresenter.new(user_rankings, games.map(&:to_s))
+    @presenter = RankingPerGameShowPresenter.new(user_rankings, games)
   end
 end

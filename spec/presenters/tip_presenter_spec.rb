@@ -27,5 +27,9 @@ describe TipPresenter do
       expected =  "<span class='extra_css_class eight-point-background-color badge' title='8 Punkte'>8</span>"
       expect(subject.pointbadge(8, 'extra_css_class')).to eq(expected)
     end
+
+    it 'returns no pointbadge html, if no tip_points' do
+      expect(subject.pointbadge(nil, 'extra_css_class')).to eq('')
+    end
   end
 end
