@@ -37,19 +37,18 @@ de:
   who_will_be_champion: 'Wer wird Tuniersieger?'
   need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
   need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
-  current_champion_tip: 'Du hast aktuell auf %{championtip_name} als Tuniersieger getippt.'
-  champion_tip: 'Du hast auf %{championtip_name} als Tuniersieger getippt.'
+  current_champion_tip: 'Dein aktueller Tuniersieger-Tipp:'
+  champion_tip: 'Dein Tuniersieger-Tipp:'
   no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
   ranking_champion_tip_currently_not_visible: 'Siegertipp noch nicht sichtbar'
-  ranking_no_champion_tip: 'Keinen Siegertipp abgegeben'
-  small_ranking_champion_tip: 'Siegertipp: '
+  ranking_no_champion_tip: 'Kein Siegertipp'
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
   result_after_game_count: "Folgende Punkte wurden nach %{finshed_games_count} von %{all_games_count} Spielen erzielt."
 
   show_only_today_games: Nur Spiele von heute anzeigen.
 
-  your_ranking_per_game: Deine Platzierung nach diesem Spiel
+  your_ranking_per_game: Deine Platzierung pro Spiel
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
   to_tip_page: 'Zum Tippen'

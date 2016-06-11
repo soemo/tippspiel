@@ -17,10 +17,9 @@
           - if tournament_started
             - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
             - if user.championtip_team_id.present?
-              - champ_team_info_small = I18n.t('small_ranking_champion_tip')
               - champteam_presenter = TeamPresenter.new(user.championtip_team)
               - champ_team_info = champteam_presenter.team_name_with_flag
-              - champ_team_info_small << champteam_presenter.team_name_with_flag(flag_size: 16)
+              - champ_team_info_small = champteam_presenter.team_name_with_flag(flag_size: 16)
           - else
             - champ_team_info = champ_team_info_small = I18n.t('ranking_champion_tip_currently_not_visible')
 
@@ -33,16 +32,16 @@
                   .place= place
                 .small-10.columns
                   .row
-                    .small-12.columns.text-left
+                    .small-9.columns.text-left
                       = user_name
-                  .row
-                    .small-12.columns.text-left
+                    .small-3.columns.text-right
                       %span.user-points
                         = user_points
-                      = statistic_content(user).html_safe
                   .row
-                    .small-12.columns.small-infos
+                    .small-5.columns.small-infos
                       = raw champ_team_info_small
+                    .small-7.columns.text-right
+                      = statistic_content(user).html_safe
 
             %td.hide-for-small-only.place= place
             %td.hide-for-small-only= user_name

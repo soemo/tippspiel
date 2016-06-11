@@ -21,7 +21,7 @@ describe RankingPerGameShowPresenter do
                                               labels: ['Label1', 'Label2', 'Label3'],
                                               datasets: [
                                                   {
-                                                      label: I18n.t(:your_ranking_per_game),
+                                                      label: I18n.t(:standings),
                                                       fill: false,
                                                       borderColor: "rgba(75,192,192,1)",
                                                       pointBorderColor: "rgba(75,192,192,1)",

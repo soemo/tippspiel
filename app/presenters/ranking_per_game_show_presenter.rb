@@ -17,7 +17,7 @@ class RankingPerGameShowPresenter
         labels: chart_x_labels,
         datasets: [
             {
-                label: I18n.t(:your_ranking_per_game),
+                label: I18n.t(:standings),
                 fill: false,
                 borderColor: "rgba(75,192,192,1)",
                 pointBorderColor: "rgba(75,192,192,1)",

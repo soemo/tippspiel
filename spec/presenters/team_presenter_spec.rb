@@ -51,7 +51,7 @@ describe TeamPresenter do
   describe '#teamflag' do
 
     it 'returns teamflag html' do
-      expect(subject.teamflag(16)).to eq("<span class='f16'><i class='flag #{team.country_code}'</i></span>")
+      expect(subject.teamflag(16)).to eq("<span class='f16'><i class='flag #{team.country_code}'></i></span>")
     end
   end
 end

@@ -3,7 +3,8 @@
 - if Tournament.not_yet_started?
   %p
     - if championtip_team.present?
-      = I18n.t('current_champion_tip', championtip_name: championtip_team)
+      = I18n.t('current_champion_tip')
+      = presenter.championtip_team_with_flag
     - else
       %b
         = I18n.t('need_champion_tip')
@@ -21,6 +22,7 @@
 - else
   %blockquote
     - if championtip_team.present?
-      = I18n.t('champion_tip', championtip_name: championtip_team)
+      = I18n.t('champion_tip')
+      = presenter.championtip_team_with_flag
     - else
       = I18n.t('no_champion_tip')

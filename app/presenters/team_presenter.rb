@@ -24,6 +24,6 @@ class TeamPresenter < DelegateClass(Team)
 
   def teamflag(flag_size)
     flag_span_css_class = "f#{flag_size}"
-    "<span class='#{flag_span_css_class}'><i class='flag #{@team.country_code}'</i></span>"
+    "<span class='#{flag_span_css_class}'><i class='flag #{@team.country_code}'></i></span>"
   end
 end
