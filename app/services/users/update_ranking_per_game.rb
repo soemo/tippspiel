@@ -1,5 +1,5 @@
 module Users
-  class UpdateRankingPerGame < BaseService
+  class UpdateRankingPerGame < UserBaseService
 
     def call
       finished_game_ids = ::GameQueries.all_finished_ordered_by_start_at.pluck(:id)
@@ -61,13 +61,7 @@ module Users
         count_4points = all_4point_tips.select { |tip| used_game_ids.include?(tip.game_id) && tip.user_id == user_id }.size
         count_3points = all_3point_tips.select { |tip| used_game_ids.include?(tip.game_id) && tip.user_id == user_id }.size
 
-        str_points = sum_tip_points.to_s.rjust(2, "0")
-        str_count8points = count_8points.to_s.rjust(2, "0")
-        str_count5points = count_5points.to_s.rjust(2, "0")
-        str_count4points = count_4points.to_s.rjust(2, "0")
-        str_count3points = count_3points.to_s.rjust(2, "0")
-
-        [user_id, "#{str_points}#{str_count8points}#{str_count5points}#{str_count4points}#{str_count3points}".to_i]
+        [user_id, ranking_comparison_value(sum_tip_points, count_8points, count_5points, count_4points, count_3points).to_i]
       }
 
       ordered_user_id_and_ranking_comparison_value = user_id_and_ranking_comparison_value.sort_by { |_, tip_points| tip_points }.reverse

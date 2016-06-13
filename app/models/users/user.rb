@@ -27,15 +27,6 @@ class User < ActiveRecord::Base
   scope :active,   -> { where('confirmed_at is not null') }
   scope :inactive, -> { where('confirmed_at is null') }
 
-  def ranking_comparison_value
-    str_points       = points.to_s.rjust(2,"0")
-    str_count8points = count8points.to_s.rjust(2,"0")
-    str_count5points = count5points.to_s.rjust(2,"0")
-    str_count4points = count4points.to_s.rjust(2,"0")
-    str_count3points = count3points.to_s.rjust(2,"0")
-    "#{str_points}#{str_count8points}#{str_count5points}#{str_count4points}#{str_count3points}".to_i
-  end
-
   def confirm_with_maximum_time!
     if self.confirmation_sent_at.present? && (self.confirmation_sent_at < CONFIRMATION_MAX_TIME.ago)
       self.errors.add(:base, :too_late)
@@ -44,10 +35,6 @@ class User < ActiveRecord::Base
     end
   end
   alias_method_chain(:confirm!, :maximum_time)
-
-  def to_s
-    name
-  end
 
   def name
     (firstname + ' ' + lastname) rescue email

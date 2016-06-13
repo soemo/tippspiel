@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 module Users
-  class PrepareRanking < BaseService
+  class PrepareRanking < UserBaseService
 
     attribute :users_for_ranking, Array[User]
 
@@ -22,11 +22,21 @@ module Users
             # erste User
             result[place] = [u]
           else
-            if last_used_user.ranking_comparison_value > u.ranking_comparison_value
+            user_ranking_comparison_value = ranking_comparison_value(u.points,
+                                                                     u.count8points,
+                                                                     u.count5points,
+                                                                     u.count4points,
+                                                                     u.count3points)
+            last_used_user_ranking_comparison_value = ranking_comparison_value(last_used_user.points,
+                                                                               last_used_user.count8points,
+                                                                               last_used_user.count5points,
+                                                                               last_used_user.count4points,
+                                                                               last_used_user.count3points)
+            if last_used_user_ranking_comparison_value > user_ranking_comparison_value
               place = place + user_count_on_same_place
               result[place] = [u]
               user_count_on_same_place = 1
-            elsif last_used_user.ranking_comparison_value == u.ranking_comparison_value
+            elsif last_used_user_ranking_comparison_value == user_ranking_comparison_value
               same_place_users = result[place]
               result[place] = same_place_users + [u]
               user_count_on_same_place = user_count_on_same_place + 1

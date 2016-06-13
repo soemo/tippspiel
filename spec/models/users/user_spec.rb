@@ -39,26 +39,6 @@ describe User, :type => :model do
     end
   end
 
-  it "should get correct ranking_comparison_value" do
-    user1 = FactoryGirl.create(:user,
-                    :points=> 46,
-                    :count8points=> 3,
-                    :count5points=> 4,
-                    :count4points=> 7,
-                    :count3points=> 0,
-                    :count0points=> 10)
-    user2 = FactoryGirl.create(:user,
-                    :points => 46,
-                    :count8points => 1,
-                    :count5points => 1,
-                    :count4points => 10,
-                    :count3points => 0,
-                    :count0points=> 9)
-    expect(user1.ranking_comparison_value > user2.ranking_comparison_value).to be true
-    expect(user1.ranking_comparison_value).to eq(4603040700)
-    expect(user2.ranking_comparison_value).to eq(4601011000)
-  end
-
   it 'should delete tips if user delete' do
     user = FactoryGirl.create(:user)
     5.times{ FactoryGirl.create(:tip, :user => user) }
