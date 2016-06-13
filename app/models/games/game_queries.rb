@@ -21,8 +21,8 @@ module GameQueries
       GameQueries.all_ordered_by_start_at.first
     end
 
-    def started_games
-      Game.where('start_at <= ?', Time.now)
+    def started_games_ordered_by_start_at
+      Game.preload(:team1, :team2).where('start_at <= ?', Time.now).order(start_at: :asc)
     end
 
     def ordered_started_at_for(round)

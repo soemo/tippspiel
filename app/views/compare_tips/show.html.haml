@@ -6,8 +6,7 @@
       Was haben die anderen getippt? Sobald ein Spiel begonnen hat, kannst du es hier erfahren.
 
     - game_to_compare_presenter = @presenter.game_to_compare_presenter
-    - possible_games  = @presenter.possible_games
-    - tips           = @presenter.tips
+    - tips = @presenter.tips
 
     = form_tag compare_tips_path, :class => 'form-inline' do
       - selected = game_to_compare_presenter.present? ? game_to_compare_presenter.id : ''

@@ -103,13 +103,6 @@ describe TipQueries do
     end
   end
 
-  describe '::all_by_user_id_and_game_ids' do
-
-    it 'returns tips for user and game ids' do
-      expect(subject.all_by_user_id_and_game_ids(user2.id, [game1.id, game2.id])).to eq([tip_g1_u2, tip_g2_u2])
-    end
-  end
-
   describe '::exists_for_user_id' do
 
     context 'if tips exist for user_id' do

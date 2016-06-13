@@ -63,20 +63,21 @@ describe GameQueries do
     end
   end
 
-  describe '::started_games' do
+  describe '::started_games_ordered_by_start_at' do
 
     it 'returns games where start_date <= Time.now' do
       Timecop.freeze(Time.now)
 
       game1 = create(:game, start_at: Time.now - 1.second)
-      game2 = create(:game, start_at: Time.now + 1.second)
+      game2 = create(:game, start_at: Time.now - 1.hour)
+      game3 = create(:game, start_at: Time.now + 1.second)
 
-      games = subject.started_games
-      expect(games.to_a).to eq([game1])
+      games = subject.started_games_ordered_by_start_at
+      expect(games.to_a).to eq([game2, game1])
 
-      game2.update_column(:start_at, Time.now)
-      games = subject.started_games
-      expect(games.to_a).to eq([game1, game2])
+      game3.update_column(:start_at, Time.now)
+      games = subject.started_games_ordered_by_start_at
+      expect(games.to_a).to eq([game2, game1, game3])
     end
   end
 

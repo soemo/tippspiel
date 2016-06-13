@@ -7,14 +7,7 @@ module Tips
     Result = Struct.new(:possible_games, :game_to_compare, :tips)
 
     def call
-      compare
-    end
-
-
-    private
-
-    def compare
-      possible_games = GameQueries.started_games
+      possible_games = GameQueries.started_games_ordered_by_start_at
       game_to_compare = nil
       tips           = nil
 
