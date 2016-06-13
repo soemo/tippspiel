@@ -17,5 +17,9 @@ class MainIndexPresenter
   def games_presenter
     GamesPresenter.new(current_user, false)
   end
+  
+  def user_points
+    current_user.points
+  end
 
 end

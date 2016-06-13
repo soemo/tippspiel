@@ -65,4 +65,12 @@ describe MainIndexPresenter do
     end
   end
 
+  describe '#user_points' do
+
+    it 'returns user points' do
+      user.points = 99
+      expect(@presenter.user_points).to eq(99)
+    end
+  end
+
 end

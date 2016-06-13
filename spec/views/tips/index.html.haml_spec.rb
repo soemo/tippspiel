@@ -20,7 +20,7 @@ describe 'tips/index.html.haml', :type => :view do
 
       render
 
-      expect(rendered).to have_selector('h3', :text => I18n.t('tips'))
+      expect(rendered).to have_selector('h3', :text => I18n.t('your_tips'))
       expect(rendered).to have_selector('b', :text => I18n.t('need_champion_tip'))
       expect(rendered).to have_content(I18n.t('need_champion_tip_info', :points => Users::UpdatePoints::CHAMPION_TIP_POINTS))
 
@@ -41,7 +41,7 @@ describe 'tips/index.html.haml', :type => :view do
 
       render
 
-      expect(rendered).to have_selector('h3', :text => I18n.t('tips'))
+      expect(rendered).to have_selector('h3', :text => I18n.t('your_tips'))
       expect(rendered).to have_content(I18n.t('no_champion_tip'))
 
     end

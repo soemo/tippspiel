@@ -51,7 +51,7 @@ de:
   your_ranking_per_game: Deine Platzierung pro Spiel
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
-  to_tip_page: 'Zum Tippen'
+  to_tip_page: 'Deine Tipps ansehen'
 
   signed_in_hello: "Hi "
   sign_in: "Login"
@@ -86,12 +86,13 @@ de:
   notice: Fachsimpeleien
   tournament: "Turnier"
   tips: "Tipps"
+  your_tips: "Deine Tipps"
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
   please_select: "Bitte auswählen"
   standings: Platz
-  full_ranking_list: Komplette Rangliste
+  full_ranking_list: Komplette Rangliste ansehen
 
   characters_remaining: "Verbleibende Zeichen: "
 

@@ -62,7 +62,8 @@ en:
   notice: Shoptalk
   tournament: "Tournament"
   tips: "Hints"
-  full_ranking_list: Full ranking list
+  your_tips: "your hints"
+  full_ranking_list: Show full ranking list
 
   back_link: "back"
   edit_link: "edit"

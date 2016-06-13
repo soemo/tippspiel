@@ -44,7 +44,7 @@ class NavBarPresenter
     result = []
     if user_logged_in?
       result += [
-          {link_text: I18n.t('tips'),
+          {link_text: I18n.t('your_tips'),
            link_url: tips_path,
            css_class: active_css_class(URL_SCOPES[:tips])}
       ]

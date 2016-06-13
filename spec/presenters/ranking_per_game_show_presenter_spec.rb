@@ -23,6 +23,7 @@ describe RankingPerGameShowPresenter do
                                                   {
                                                       label: I18n.t(:standings),
                                                       fill: false,
+                                                      lineTension: 0.2,
                                                       borderColor: "rgba(75,192,192,1)",
                                                       pointBorderColor: "rgba(75,192,192,1)",
                                                       pointBackgroundColor: "#fff",

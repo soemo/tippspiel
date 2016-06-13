@@ -13,14 +13,14 @@
           - result = @presenter.get_user_top3_and_own_position
           - own_position = result.own_position
           %h2
-            = "#{I18n.t(:signed_in_hello)} #{current_user.firstname},"
-            %br.show-for-small-only
-            = " Du bist auf dem #{own_position}. Platz!"
+            = "#{I18n.t(:signed_in_hello)} #{current_user.name}"
           %p
-            = link_to(I18n.t('full_ranking_list'), ranking_path)
-
-          %p
-            = link_to(I18n.t('to_tip_page'), tips_path)
+            = "Du bist mit #{@presenter.user_points} Punkten auf dem #{own_position}. Platz!"
+          .row
+            .small-12.columns
+              = link_to(icon('list-ol', I18n.t('full_ranking_list'), {class: 'fa-fw'}), ranking_path)
+            .small-12.columns
+              = link_to(icon('pencil-square-o',I18n.t('to_tip_page'), {class: 'fa-fw'}), tips_path)
 
 
           - if @presenter.tournament_finished?
