@@ -47,9 +47,8 @@
             %td.hide-for-small-only= user_name
             %td.hide-for-small-only= raw champ_team_info
             %td.hide-for-small-only
-              .user-points
-                = user_points
-              = statistic_content(user).html_safe
+              %span.user-points= user_points
+              %span.user-statistic= statistic_content(user).html_safe
 
 - else
   %p= t('no_user')

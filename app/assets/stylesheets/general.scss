@@ -139,21 +139,3 @@ div.input-group-label {
 .small-infos {
   padding-bottom: 5px;
 }
-
-table.ranking {
-
-  .user-points, .place {
-    font-size: 2rem;
-
-    @include breakpoint(medium down) {
-      font-size: 1.5rem;
-    }
-
-  }
-
-  .badge {
-    vertical-align: text-bottom;
-  }
-}
-
-

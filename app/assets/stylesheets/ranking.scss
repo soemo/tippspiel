@@ -1,0 +1,19 @@
+table.ranking {
+
+  .user-points, .place {
+    font-size: 2rem;
+
+    @include breakpoint(medium down) {
+      font-size: 1.5rem;
+    }
+
+  }
+
+  .user-statistic {
+    vertical-align: text-bottom;
+  }
+
+  .badge {
+    vertical-align: text-bottom;
+  }
+}
