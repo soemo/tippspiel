@@ -14,7 +14,7 @@
           - own_position = result.own_position
           %h2
             = "#{I18n.t(:signed_in_hello)} #{current_user.name}"
-          %p
+          %p.ranking-info
             = "Du bist mit #{@presenter.user_points} Punkten auf dem #{own_position}. Platz!"
           .row
             .small-12.columns
