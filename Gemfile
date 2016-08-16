@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '= 4.2.6'
+gem 'rails', '= 4.2.7'
 ruby '2.3.0'
 
 gem 'mysql2'
@@ -47,6 +47,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'     # rspec-rails braucht das um in den Views have_selector zu nutzen
   gem 'guard-rspec', require: false
+  gem 'fuubar'
 end
 
 group :test do
