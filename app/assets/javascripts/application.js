@@ -4,6 +4,8 @@
 //= require foundation
 //= require chart.min
 //= require jquery.mixitup.min
+//= require are-you-sure.jquery
+//= require ays-beforeunload-shim
 
 
 $(function(){
@@ -17,7 +19,9 @@ $(function(){
 
   check_user_tip();
   init_random_user_tips();
-  init_save_tips_from_overlay_button();
+
+  // https://github.com/codedance/jquery.AreYouSure - alerts users to unsaved changes
+  $('form#js_save_tips').areYouSure();
 
   // https://github.com/patrickkunka/mixitup/blob/master/docs/configuration-object.md
   $('#mixitup-table').mixItUp({
@@ -184,30 +188,8 @@ function init_random_user_tips(){
       $.each(inputs, function() {
         $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen
       });
-      show_overlay_tip_save();
     }
     return false; // damit danach kein GET ausgeloest wird
   });
-
-  // Anzeige des Save Button Overlays
-  $(".tip_input").bind('change keyup', function() {
-    show_overlay_tip_save();
-  });
-}
-
-function show_overlay_tip_save(){
-  $('#js_overlay_tip_save').removeClass('hide');
-}
-
-function init_save_tips_from_overlay_button(){
-  var e = $('#js_tips_overlay_button');
-  if(e.length > 0) {
-    e.click(function() {
-      // Formular abschicken
-      $('#js_save_tips').submit();
-    });
-  }
-
-  return false; // damit danach kein GET ausgeloest wird
 }
 
