@@ -4,7 +4,7 @@ gem 'rails', '= 4.2.7'
 ruby '2.3.0'
 
 gem 'mysql2'
-gem 'cancancan',               '~> 1.13.1'      # Authorization System    # FIXME soeren 30.12.2014 pundit???
+gem 'cancancan'    # FIXME soeren 30.12.2014 pundit???
 gem 'haml-rails'
 gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
@@ -15,7 +15,7 @@ gem 'jquery-rails',            '~> 4.1.1'     # mit jQuery 1.12.1 /2.2.1 und jqu
 gem 'foundation-rails'
 gem 'font-awesome-sass'
 gem 'newrelic_rpm'
-gem 'lograge',                 '~> 0.3.1'
+gem 'lograge'
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 4.1.0'
 gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain Old Ruby Objects
@@ -51,7 +51,6 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
-  gem 'webmock'
   gem 'factory_girl_rails'
   gem 'timecop'
   gem 'simplecov'
