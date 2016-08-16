@@ -33,8 +33,3 @@ a.brand img {
     }
   }
 }
-
-// submenu Arrow white on active Menu point
-.dropdown.menu > li.active.is-dropdown-submenu-parent > a::after {
-  border-color: white transparent transparent;
-}
