@@ -64,12 +64,6 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include ActionView::Helpers::TranslationHelper
 
-  # Mock des RSS-Feeds
-  config.before(:each) do
-    WebMock.stub_http_request(:get, RSS_FEED_URL).
-        with(:headers => {'Accept' => '*/*'}).
-        to_return(:status => 200, :body => "", :headers => {})
-  end
 end
 
 def create_active_user(u = create(:user))

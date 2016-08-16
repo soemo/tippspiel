@@ -15,7 +15,6 @@ gem 'jquery-rails',            '~> 4.1.1'     # mit jQuery 1.12.1 /2.2.1 und jqu
 gem 'foundation-rails'
 gem 'font-awesome-sass'
 gem 'newrelic_rpm'
-gem 'feedjira',                '~> 1.6.0'      # RSS parsers
 gem 'lograge',                 '~> 0.3.1'
 # Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
 gem 'airbrake',                '~> 4.1.0'

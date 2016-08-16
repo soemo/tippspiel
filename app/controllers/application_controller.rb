@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!, :unless => :error_handling_method?
   before_filter :set_host_to_mailers
 
-  helper_method :current_user, :nav_bar_presenter, :rss_feed_presenter
+  helper_method :current_user, :nav_bar_presenter
 
     # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
 
   def nav_bar_presenter
     NavBarPresenter.new(url_scope, current_user)
-  end
-
-  def rss_feed_presenter
-    RssFeedPresenter.new
   end
 
   def url_scope
