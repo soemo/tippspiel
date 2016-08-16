@@ -33,8 +33,6 @@ Tippspiel::Application.routes.draw do
   post 'save-notice' => 'notes#create'
   get 'help' => 'help#index'
 
-  get 'user/edit_password'
-  post 'user/change_password'
   get 'user/ranking-per-game' => 'ranking_per_game#show'
   get 'user/hall-of-fame' => 'hall_of_fames#show'
 

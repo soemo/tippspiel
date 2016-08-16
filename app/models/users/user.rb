@@ -2,7 +2,7 @@
 class User < ActiveRecord::Base
   acts_as_paranoid
 
-  belongs_to :championtip_team, :class_name => "Team"
+  belongs_to :championtip_team, :class_name => 'Team'
   has_many   :tips, :dependent => :destroy
 
   validates               :email, :presence => true
@@ -42,24 +42,6 @@ class User < ActiveRecord::Base
 
   def admin?
     self.email == ADMIN_EMAIL
-  end
-
-  # TODO soeren 30.04.15 move to new service
-  # liefert im Fehlerfall ein Array von Error-Meldungen zurueck
-  def valid_password_change_params(old_password, password, password_confirmation)
-    error_messages = []
-
-    unless self.valid_password?(old_password)
-      error_messages << I18n.t(:change_password_wrong_old_pw)
-    end
-    if password.blank? || password_confirmation.blank? || old_password.blank?
-      error_messages << I18n.t(:change_password_need_all_input_fields)
-    end
-    if password.present? && password_confirmation.present? && password != password_confirmation
-      error_messages << I18n.t(:change_password_wrong_pw_confirmation)
-    end
-
-    error_messages
   end
 
   protected

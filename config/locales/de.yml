@@ -29,11 +29,6 @@ de:
 
   update_successful: "%{object_name} wurde aktualisiert."
 
-  change_password_save_success: 'Das Passwort wurde erfolgreich gespeichert.'
-  change_password_wrong_pw_confirmation: 'Die Passwort Bestätigung stimmt nicht mit dem neuen Passwort überein!'
-  change_password_need_all_input_fields: 'Bitte alle 3 Passwortfelder ausfüllen!'
-  change_password_wrong_old_pw: 'Das alte Passwort stimmt nicht!'
-
   who_will_be_champion: 'Wer wird Tuniersieger?'
   need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
   need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'

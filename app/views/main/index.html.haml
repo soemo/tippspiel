@@ -21,6 +21,10 @@
               = link_to(icon('list-ol', I18n.t('full_ranking_list'), {class: 'fa-fw'}), ranking_path)
             .small-12.columns
               = link_to(icon('pencil-square-o',I18n.t('to_tip_page'), {class: 'fa-fw'}), tips_path)
+            .small-12.columns
+              = link_to(icon('pencil-square-o',I18n.t(:your_ranking_per_game), {class: 'fa-fw'}), user_ranking_per_game_path)
+            .small-12.columns
+              = link_to(icon('pencil-square-o',I18n.t(:hall_of_fame), {class: 'fa-fw'}), user_hall_of_fame_path)
 
 
           - if @presenter.tournament_finished?

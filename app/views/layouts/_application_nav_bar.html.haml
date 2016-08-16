@@ -10,25 +10,7 @@
             = img
             = get_title
         - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
-          = render partial: 'layouts/application_nav_bar_item', locals: {presenter: nav_bar_item_presenter}
-        = render partial: 'layouts/application_nav_bar_item',
-                 locals: {presenter: presenter.nav_bar_item_user_presenter, for_off_canvas: false}
-
-
--# off-canvas title bar for 'small' screen
-.title-bar{data: {'responsive-toggle': 'widemenu', 'hide-for': 'medium'}}
-  .title-bar-left
-    %span.title-bar-title
-      %a.brand{href: presenter.nav_bar_brand_url}
-        = img
-        = get_title
-  .title-bar-right
-    = button_tag('sm', class: 'menu-icon dark', data: {open: 'offCanvasRight'} )
-
--# off-canvas right menu
-.off-canvas.position-right#offCanvasRight{data: {'off-canvas': '', position: 'right'}}
-  %ul.vertical.dropdown.menu{data: {'dropdown-menu': ''}}
-    - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
-      = render partial: 'layouts/application_nav_bar_item', locals: {presenter: nav_bar_item_presenter}
-    = render partial: 'layouts/application_nav_bar_item',
-                   locals: {presenter: presenter.nav_bar_item_user_presenter, for_off_canvas: true}
+          %li{class: nav_bar_item_presenter.css_class}
+            - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon)}"
+            - icon_and_text << "<span>#{nav_bar_item_presenter.link_text}</span>" if nav_bar_item_presenter.link_text.present?
+            = link_to(icon_and_text.html_safe, nav_bar_item_presenter.link_url)

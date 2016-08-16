@@ -33,10 +33,9 @@ class NavBarPresenter
   private
 
   def nav_bar_item_presenter(config)
-    NavBarItemPresenter.new(config[:link_text],
+    NavBarItemPresenter.new(config[:link_icon],
+                            config[:link_text],
                             config[:link_url],
-                            config[:sub_menu_id],
-                            config[:sub_menu_links],
                             config[:css_class])
   end
 
@@ -44,52 +43,44 @@ class NavBarPresenter
     result = []
     if user_logged_in?
       result += [
-          {link_text: I18n.t('your_tips'),
+          {link_icon: 'pencil-square-o',
+           link_text: I18n.t('your_tips'),
            link_url: tips_path,
            css_class: active_css_class(URL_SCOPES[:tips])}
       ]
       result += [
-          {link_text: I18n.t('ranking'),
+          {link_icon: 'list-ol',
+           link_text: I18n.t('ranking'),
            link_url: ranking_path,
            css_class: active_css_class(URL_SCOPES[:ranking])}
       ]
       result += [
-          {link_text: I18n.t('notice'),
+          {link_icon: 'comment',
+           link_text: I18n.t('notice'),
            link_url: notes_path,
            css_class: active_css_class(URL_SCOPES[:notes])}
       ]
       result += [
-          {link_text: I18n.t('comparetips'),
+          {link_icon: 'angle-double-right',
+           link_text: I18n.t('comparetips'),
            link_url: compare_tips_path,
            css_class: active_css_class(URL_SCOPES[:comparetips])}
       ]
     end
 
-    result + [{link_text: I18n.t('.help'),
-               link_url: help_path,
-               css_class: active_css_class(URL_SCOPES[:help])}]
+    result += [{link_icon: 'question',
+                link_text: nil,
+                link_url: help_path,
+                css_class: active_css_class(URL_SCOPES[:help])}]
 
-  end
-
-  def nav_bar_item_user_configuration
-    result = {}
     if user_logged_in?
-      result =  {link_text: "#{I18n.t(:signed_in_hello)} #{user.firstname}",
-                 link_url: nil,
-                 sub_menu_id: :current_user_sub_menu,
-                 sub_menu_links: [
-                     {link_text: I18n.t(:your_ranking_per_game), link_url: user_ranking_per_game_path},
-                     {link_text: I18n.t(:password_change), link_url: user_edit_password_path},
-                     {divider: true},
-                     {link_text: I18n.t(:hall_of_fame), link_url: user_hall_of_fame_path},
-                     {divider: true},
-                     {link_text: I18n.t(:sign_out), link_url: logout_path}
-                 ],
-                 css_class: active_css_class(URL_SCOPES[:user])
-      }
+      result +=  [{link_icon: 'sign-out',
+                  link_text: I18n.t(:sign_out),
+                  link_url: logout_path,
+                  css_class: active_css_class(URL_SCOPES[:user])
+      }]
     end
 
     result
   end
-
 end

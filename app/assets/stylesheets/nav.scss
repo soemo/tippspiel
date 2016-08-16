@@ -21,15 +21,16 @@ a.brand img {
   }
 }
 
-// Only affects medium screens and larger
-@include breakpoint(medium) {
-  .title-bar {
-    display: none;
-  }
-}
+// on small show only icons
 @include breakpoint(small only) {
   nav {
-    display: none;
+    li {
+      a {
+        span {
+          display: none;
+        }
+      }
+    }
   }
 }
 
