@@ -28,8 +28,8 @@ en:
   no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
-  x_user_bet: "%{user_count} 'football-experts' fight in the competition."
-  result_after_game_count: "Following points are taken after %{finshed_games_count} / %{all_games_count} games."
+  x_user_bet: "%{user_count} 'football-experts' fight in the competition and a place in the "
+  result_after_game_count: "after %{finshed_games_count} / %{all_games_count} games"
 
   show_only_today_games: Show only today games.
 

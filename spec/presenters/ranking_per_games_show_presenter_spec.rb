@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe RankingPerGameShowPresenter do
+describe RankingPerGamesShowPresenter do
 
-  subject { RankingPerGameShowPresenter }
+  subject { RankingPerGamesShowPresenter }
 
   let(:chart_x_labels) {['Label1', 'Label2', 'Label3']}
 

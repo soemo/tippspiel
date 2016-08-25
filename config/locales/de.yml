@@ -38,8 +38,8 @@ de:
   ranking_champion_tip_currently_not_visible: 'Siegertipp noch nicht sichtbar'
   ranking_no_champion_tip: 'Kein Siegertipp'
 
-  x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg."
-  result_after_game_count: "Folgende Punkte wurden nach %{finshed_games_count} von %{all_games_count} Spielen erzielt."
+  x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg und eine Platz in der "
+  result_after_game_count: "nach %{finshed_games_count} von %{all_games_count} Spielen"
 
   show_only_today_games: Nur Spiele von heute anzeigen.
 

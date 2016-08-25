@@ -18,7 +18,7 @@ class NavBarPresenter
 
   def nav_ranking_info
     result = Users::Top3AndOwnPosition.call(user_id: user.id)
-    "Du bist mit #{user.points} Punkten auf dem #{result.own_position}. Platz!"
+    "Platz #{result.own_position} mit #{user.points} Punkten"
   end
 
   def nav_bar_item_presenters

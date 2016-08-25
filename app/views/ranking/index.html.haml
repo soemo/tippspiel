@@ -1,10 +1,13 @@
 .row
   .small-12.columns
-    %h3= t('ranking')
+    %h3
+      = t('ranking')
+      %small=t('result_after_game_count', finshed_games_count: @presenter.finshed_games_count,
+                                          all_games_count: @presenter.all_games_count)
     %p
       = t('x_user_bet', user_count: @presenter.user_count)
-      = t('result_after_game_count', finshed_games_count: @presenter.finshed_games_count,
-                                     all_games_count: @presenter.all_games_count)
+      = hall_of_fame_link
+      = '.'
       %br
       %small
         %span.point-explaning

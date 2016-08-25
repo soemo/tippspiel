@@ -4,6 +4,10 @@ module ApplicationHelper
     "#{TOURNAMENT_NAME} #{t('app_name')}"
   end
 
+  def hall_of_fame_link
+    link_to(icon('trophy',I18n.t(:hall_of_fame), {class: 'fa-fw'}), hall_of_fame_path)
+  end
+
   # used with mixitup
   def filter_categories_options
     FILTER_CATEGORIES.map do |filter_category|

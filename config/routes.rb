@@ -25,6 +25,9 @@ Tippspiel::Application.routes.draw do
     resource :start_calculating, only: :new
   end
 
+  resource :ranking_per_game, only: :show
+  resource :hall_of_fame, only: :show
+
   # FIXME soeren 8/25/16 die 2 als recources umschreiben
   post 'save-tips' => 'tips#save_tips'
   post 'save-champion-tip' => 'tips#save_champion_tip'
@@ -33,9 +36,6 @@ Tippspiel::Application.routes.draw do
   get 'notes' => 'notes#index'
   post 'save-notice' => 'notes#create' # FIXME soeren 8/25/16 als recources
   get 'help' => 'help#index'  # FIXME soeren 8/25/16 resource :help, only: :show
-
-  get 'user/ranking-per-game' => 'ranking_per_game#show'
-  get 'user/hall-of-fame' => 'hall_of_fames#show'
 
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
 

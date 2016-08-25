@@ -1,4 +1,4 @@
-class RankingPerGameShowPresenter
+class RankingPerGamesShowPresenter
 
   attr_reader :user_rankings
 

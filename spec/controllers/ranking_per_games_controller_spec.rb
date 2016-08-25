@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RankingPerGameController do
+RSpec.describe RankingPerGamesController do
   before :each do
     login(create :active_user)
   end
@@ -19,7 +19,7 @@ RSpec.describe RankingPerGameController do
 
       expect(TipQueries).to receive_message_chain(:all_by_user_id_ordered_games_start_at, :pluck).
                                 and_return(usr_ranking)
-      expect(RankingPerGameShowPresenter).to receive(:new).with(usr_ranking, games)
+      expect(RankingPerGamesShowPresenter).to receive(:new).with(usr_ranking, games)
 
       get :show
 

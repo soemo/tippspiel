@@ -93,7 +93,7 @@ describe NavBarPresenter do
       user.points = 111
       expect(Users::Top3AndOwnPosition).to receive(:call).with(user_id: user.id).and_return(object)
 
-      expect(presenter.nav_ranking_info).to eq('Du bist mit 111 Punkten auf dem 42. Platz!')
+      expect(presenter.nav_ranking_info).to eq('Platz 42 mit 111 Punkten')
     end
   end
 end
