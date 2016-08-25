@@ -49,42 +49,37 @@ describe NavBarPresenter do
 
     context 'if user present' do
 
-      let(:presenter) { subject.new(:tips, user) }
+      let(:presenter) { subject.new(:main, user) }
 
       it 'returns all NavBarItemPresenters' do
         nav_bar_item_presenters = presenter.nav_bar_item_presenters
 
-        expect(nav_bar_item_presenters.size).to eq(6)
+        expect(nav_bar_item_presenters.size).to eq(5)
 
         expect(nav_bar_item_presenters[0]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[0].link_url).to eq(tips_path)
-        expect(nav_bar_item_presenters[0].link_text).to eq(I18n.t('your_tips'))
-        expect(nav_bar_item_presenters[0].link_icon).to eq('pencil-square-o')
+        expect(nav_bar_item_presenters[0].link_url).to eq(ranking_path)
+        expect(nav_bar_item_presenters[0].link_text).to eq(I18n.t('ranking'))
+        expect(nav_bar_item_presenters[0].link_icon).to eq('list-ol')
 
         expect(nav_bar_item_presenters[1]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[1].link_url).to eq(ranking_path)
-        expect(nav_bar_item_presenters[1].link_text).to eq(I18n.t('ranking'))
-        expect(nav_bar_item_presenters[1].link_icon).to eq('list-ol')
+        expect(nav_bar_item_presenters[1].link_url).to eq(notes_path)
+        expect(nav_bar_item_presenters[1].link_text).to eq(I18n.t('notice'))
+        expect(nav_bar_item_presenters[1].link_icon).to eq('comment')
 
         expect(nav_bar_item_presenters[2]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[2].link_url).to eq(notes_path)
-        expect(nav_bar_item_presenters[2].link_text).to eq(I18n.t('notice'))
-        expect(nav_bar_item_presenters[2].link_icon).to eq('comment')
+        expect(nav_bar_item_presenters[2].link_url).to eq(compare_tips_path)
+        expect(nav_bar_item_presenters[2].link_text).to eq(I18n.t('comparetips'))
+        expect(nav_bar_item_presenters[2].link_icon).to eq('angle-double-right')
 
         expect(nav_bar_item_presenters[3]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[3].link_url).to eq(compare_tips_path)
-        expect(nav_bar_item_presenters[3].link_text).to eq(I18n.t('comparetips'))
-        expect(nav_bar_item_presenters[3].link_icon).to eq('angle-double-right')
+        expect(nav_bar_item_presenters[3].link_url).to eq(help_path)
+        expect(nav_bar_item_presenters[3].link_text).to be_nil
+        expect(nav_bar_item_presenters[3].link_icon).to eq('question')
 
         expect(nav_bar_item_presenters[4]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[4].link_url).to eq(help_path)
-        expect(nav_bar_item_presenters[4].link_text).to be_nil
-        expect(nav_bar_item_presenters[4].link_icon).to eq('question')
-
-        expect(nav_bar_item_presenters[5]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[5].link_url).to eq(logout_path)
-        expect(nav_bar_item_presenters[5].link_text).to eq(I18n.t('sign_out'))
-        expect(nav_bar_item_presenters[5].link_icon).to eq('sign-out')
+        expect(nav_bar_item_presenters[4].link_url).to eq(logout_path)
+        expect(nav_bar_item_presenters[4].link_text).to eq(I18n.t('sign_out'))
+        expect(nav_bar_item_presenters[4].link_icon).to eq('sign-out')
       end
     end
   end

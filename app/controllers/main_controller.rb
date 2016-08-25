@@ -1,10 +1,10 @@
-# -*- encoding : utf-8 -*-
 class MainController < ApplicationController
 
-  skip_before_filter :authenticate_user!
+  skip_before_action :authenticate_user!, only: :error
 
   def index
-    @presenter = MainIndexPresenter.new(current_user)
+    tips = Tips::FromUser.call(user_id: current_user.id)
+    @presenter = MainIndexPresenter.new(tips, current_user)
   end
 
   def error

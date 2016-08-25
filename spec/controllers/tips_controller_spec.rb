@@ -1,38 +1,9 @@
-# -*- encoding : utf-8 -*-
 require 'rails_helper'
 
 describe TipsController, :type => :controller do
 
   let!(:user) {create :active_user}
   let(:tips) {[Tip.new, Tip.new]}
-
-  describe '#index with login' do
-
-    before :each do
-      login(user)
-    end
-
-    it 'be successful with login' do
-      expect(Tips::FromUser).to receive(:call).with(user_id: user.id).
-          and_return(tips)
-      get 'index'
-
-      expect(assigns(:presenter)).to be_instance_of TipsIndexPresenter
-      expect(assigns(:presenter).current_user).to eq user
-      expect(assigns(:presenter).tips).to eq tips
-      expect(response).to have_http_status(:success)
-      expect(response).to render_template :index
-    end
-
-  end
-
-  describe '#index without login' do
-
-    it 'be redirected to root' do
-      get 'index'
-      expect(response).to redirect_to new_user_session_path
-    end
-  end
 
   describe '#save_tips' do
     before :each do

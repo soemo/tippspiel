@@ -1,13 +1,5 @@
 class TipsController < ApplicationController
 
-  def index
-    tips = Tips::FromUser.call(user_id: current_user.id)
-    @presenter = TipsIndexPresenter.new(tips, current_user)
-
-    respond_to do |format|
-      format.html { render 'index' }
-    end
-  end
           # TODO soeren 30.04.15  maybe own Controller
   def save_tips
     Tips::Save.call(tips_params: params[:tips], current_user: current_user)

@@ -2,7 +2,7 @@ module Admin
   class GamesController < Admin::BaseController
 
     def index
-      @presenter = GamesPresenter.new(current_user, true)
+      @presenter = GamesPresenter.new(current_user)
     end
 
     def edit

@@ -81,18 +81,6 @@ describe ApplicationController do
       end
     end
 
-
-    context 'if request path starts with /tips' do
-
-      let(:request) { double('request', path: '/tips') }
-
-      it 'returns tips' do
-        expect(subject.url_scope).to eq(URL_SCOPES[:tips])
-        expect(subject.url_scope.tips?).to be true
-      end
-    end
-
-
     context 'if request path starts with /user' do
 
       let(:request) { double('request', path: '/user/some-path') }

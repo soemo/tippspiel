@@ -46,7 +46,6 @@ URL_SCOPES = {
     help: 'help'.freeze,
     notes: 'notes'.freeze,
     ranking: 'ranking'.freeze,
-    tips: 'tips'.freeze,
     user: 'user'.freeze,
 }.freeze
 
