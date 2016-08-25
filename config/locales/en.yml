@@ -36,8 +36,6 @@ en:
   your_ranking_per_game: Your ranking per game
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
-  to_tip_page: 'tip'
-
   signed_in_hello: "Hi "
   sign_in: "Login"
   sign_out: "Logout"

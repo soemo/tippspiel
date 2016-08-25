@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module Users
   class Top3AndOwnPosition < BaseService
 
@@ -31,7 +30,5 @@ module Users
 
       Result.new(user_top3_ranking_hash, own_position)
     end
-
-
   end
 end

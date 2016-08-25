@@ -1,15 +1,16 @@
-.menu li {
-  hr {
-    padding: 0;
-    margin: 5px;
+.menu > li {
+  a.brand {
+    padding-left: 0;
+    font-weight: bold;
+  }
+
+  a.ranking-info {
+    padding-left: 0;
+    color: $dark-gray;
   }
 }
-.menu-text {
-  padding-left: 0;
-}
 
-.menu > li > a img,
-a.brand img {
+.menu > li > a img {
   vertical-align: text-top;
 }
 
@@ -21,7 +22,9 @@ a.brand img {
   }
 }
 
-// on small show only icons
+// on small
+//   show only icons
+//   and ranking-info smaller
 @include breakpoint(small only) {
   nav {
     li {
@@ -30,6 +33,13 @@ a.brand img {
           display: none;
         }
       }
+    }
+  }
+
+  .menu > li {
+    a.ranking-info {
+      padding: 0 0;
+      font-size: 0.9em;
     }
   }
 }

@@ -46,44 +46,6 @@ describe MainIndexPresenter do
     end
   end
 
-  describe '#get_user_top3_and_own_position' do
-
-    it 'returns both one if only one user is available' do
-      presenter = subject.new([tip_g1, tip_g2], user)
-      result = presenter.get_user_top3_and_own_position
-      expect(result.own_position).to eq(1)
-      expect(result.user_top3_ranking_hash).to eq({1 => [user]})
-    end
-
-    it 'returns position 3 for user' do
-      presenter = subject.new([tip_g1, tip_g2], user)
-
-      u1 = create_active_user
-      u1.update_column(:points, 10)
-
-      u2 = create_active_user
-      u2.update_column(:points, 8)
-
-      # eigener nutzer
-      user.update_column(:points, 2)
-
-      result = presenter.get_user_top3_and_own_position
-      expect(result.own_position).to eq(3)
-      expect(result.user_top3_ranking_hash).to eq({1 => [u1],
-                                                   2 => [u2],
-                                                   3 => [user]})
-    end
-  end
-
-  describe '#user_points' do
-
-    it 'returns user points' do
-      presenter = subject.new([tip_g1, tip_g2], user)
-      user.points = 99
-      expect(presenter.user_points).to eq(99)
-    end
-  end
-
   describe '#user_name' do
 
     it 'returns user name' do

@@ -4,7 +4,7 @@ class TipsController < ApplicationController
   def save_tips
     Tips::Save.call(tips_params: params[:tips], current_user: current_user)
     msg =  params[:tips].present? ? t('succesfully_saved_tips') : ''
-    redirect_to({action: :index}, {notice: msg})
+    redirect_to(root_path, {notice: msg})
   end
 
   # TODO soeren 30.04.15 Use Service and Controller with Specs!!!
@@ -19,7 +19,7 @@ class TipsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to action: :index }
+      format.html { redirect_to root_path }
     end
   end
 

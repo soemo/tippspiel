@@ -10,17 +10,11 @@
     .row
       .medium-offset-3.medium-9.large-offset-5.large-7.columns
         .callout
-          - result = @presenter.get_user_top3_and_own_position
-          - own_position = result.own_position
           %h2
             = "#{I18n.t(:signed_in_hello)} #{@presenter.user_name}"
-          %p.ranking-info
-            = "Du bist mit #{@presenter.user_points} Punkten auf dem #{own_position}. Platz!"
           .row
             .small-12.columns
               = link_to(icon('list-ol', I18n.t('full_ranking_list'), {class: 'fa-fw'}), ranking_path)
-            .small-12.columns
-              = link_to(icon('pencil-square-o',I18n.t('to_tip_page'), {class: 'fa-fw'}), tips_path)
             .small-12.columns
               = link_to(icon('pencil-square-o',I18n.t(:your_ranking_per_game), {class: 'fa-fw'}), user_ranking_per_game_path)
             .small-12.columns

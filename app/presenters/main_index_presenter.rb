@@ -29,14 +29,6 @@ class MainIndexPresenter
     Tournament.finished?
   end
 
-  def get_user_top3_and_own_position
-    Users::Top3AndOwnPosition.call(:user_id => current_user.id)
-  end
-
-  def user_points
-    current_user.points
-  end
-
   def user_name
     current_user.name
   end

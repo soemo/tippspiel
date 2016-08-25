@@ -83,4 +83,17 @@ describe NavBarPresenter do
       end
     end
   end
+
+  describe '#nav_ranking_info' do
+
+    let(:presenter) { subject.new(:main, user) }
+
+    it 'returns nav_ranking_info' do
+      object = double('Top3AndOwnPosition', user_top3_ranking_hash: {}, own_position: 42)
+      user.points = 111
+      expect(Users::Top3AndOwnPosition).to receive(:call).with(user_id: user.id).and_return(object)
+
+      expect(presenter.nav_ranking_info).to eq('Du bist mit 111 Punkten auf dem 42. Platz!')
+    end
+  end
 end

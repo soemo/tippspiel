@@ -16,6 +16,11 @@ class NavBarPresenter
     root_path
   end
 
+  def nav_ranking_info
+    result = Users::Top3AndOwnPosition.call(user_id: user.id)
+    "Du bist mit #{user.points} Punkten auf dem #{result.own_position}. Platz!"
+  end
+
   def nav_bar_item_presenters
     nav_bar_item_configurations.map{ |item_config|
       nav_bar_item_presenter(item_config)
