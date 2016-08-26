@@ -28,7 +28,7 @@
           - place = game_presenter.place
           - tip_points = tip_presenter.tip_points
           - pointbadge = tip_presenter.pointbadge_large(tip_points)
-          - if edit_allowed
+          - if true # FIXME soeren 8/26/16 nach nächstem Deployment wiedr raus
             - link_to_compare_tips = ''
             - tip1_input = tip_input(tip_presenter.id, 'team1_goals', tip_presenter.team1_goals)
             - tip2_input = tip_input(tip_presenter.id, 'team2_goals', tip_presenter.team2_goals)
