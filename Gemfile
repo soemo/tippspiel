@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '= 4.2.7'
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'mysql2'
 gem 'cancancan'    # FIXME soeren 30.12.2014 pundit???
