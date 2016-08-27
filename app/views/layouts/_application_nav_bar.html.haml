@@ -14,4 +14,4 @@
       .top-bar-right
         %ul.menu
           %li
-            = link_to(presenter.nav_ranking_info, ranking_path, {class: 'ranking-info'})
+            = link_to(presenter.nav_ranking_info, rankings_path(anchor: "place_#{presenter.user_position}"), {class: 'ranking-info'})

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe 'ranking/index', :type => :view do
+describe 'rankings/index', :type => :view do
 
   let(:presenter) {RankingPresenter.new}
 
@@ -32,6 +32,7 @@ describe 'ranking/index', :type => :view do
     points = 13
     user_size.times do |index|
       users << FactoryGirl.build(:user,
+                                 id: index+1,
                                  :lastname => "user#{index}",
                                  :points => points,
                                  :confirmed_at => Time.now - 5.minutes)
@@ -88,6 +89,7 @@ describe 'ranking/index', :type => :view do
      users = []
      user_poins.each do |key, data|
        users << FactoryGirl.build(:user,
+                                  id: key + 1,
                                   :lastname => "user_key_#{key}",
                                   :points => data[:points],
                                   :confirmed_at => Time.now - 5.minutes)

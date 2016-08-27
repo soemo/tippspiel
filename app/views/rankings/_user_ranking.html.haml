@@ -1,0 +1,55 @@
+- user_ranking_hash = presenter.user_ranking_hash
+- if user_ranking_hash.present?
+
+  %table.ranking.hover
+    %thead.hide-for-small-only
+      %tr.white-bg
+        %th= t('standings')
+        %th= User.human_attribute_name('name')
+        %th= Game.human_attribute_name('siegertipp')
+        %th= User.human_attribute_name('points')
+    %tbody
+      - tournament_started = Tournament.started?
+      - user_ranking_hash.each do |place, users_on_same_place|
+        - users_on_same_place.each do |user|
+
+          -# FIXME soeren 5/11/16 in presenter auslagern
+          - if tournament_started
+            - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
+            - if user.championtip_team_id.present?
+              - champteam_presenter = TeamPresenter.new(user.championtip_team)
+              - champ_team_info = champteam_presenter.team_name_with_flag
+              - champ_team_info_small = champteam_presenter.team_name_with_flag(flag_size: 16)
+          - else
+            - champ_team_info = champ_team_info_small = I18n.t('ranking_champion_tip_currently_not_visible')
+
+          - place_with_ranking_per_game_link = link_to(place, ranking_per_game_path(user))
+          - user_name = user.name
+          - user_points = user.points.present? ? user.points.to_s : '0'
+          %tr{id: "place_#{place}"}
+            %td.show-for-small-only
+              .row
+                .small-2.columns.text-left
+                  %span.place= place_with_ranking_per_game_link
+                .small-10.columns
+                  .row
+                    .small-9.columns.text-left
+                      = user_name
+                    .small-3.columns.text-right
+                      %span.user-points
+                        = user_points
+                  .row
+                    .small-5.columns.small-infos
+                      = raw champ_team_info_small
+                    .small-7.columns.text-right
+                      = statistic_content(user).html_safe
+
+            %td.hide-for-small-only.place= place_with_ranking_per_game_link
+            %td.hide-for-small-only= user_name
+            %td.hide-for-small-only= raw champ_team_info
+            %td.hide-for-small-only
+              %span.user-points= user_points
+              %span.user-statistic= statistic_content(user).html_safe
+
+- else
+  %p= t('no_user')

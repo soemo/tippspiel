@@ -34,6 +34,7 @@ en:
   show_only_today_games: Show only today games.
 
   your_ranking_per_game: Your ranking per game
+  ranking_per_game_for: Ranking per game for %{name}
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
   signed_in_hello: "Hi "

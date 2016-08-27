@@ -16,9 +16,15 @@ class NavBarPresenter
     root_path
   end
 
+  def user_position
+    @position ||= begin
+      result = Users::Top3AndOwnPosition.call(user_id: user.id)
+      result.own_position
+    end
+  end
+
   def nav_ranking_info
-    result = Users::Top3AndOwnPosition.call(user_id: user.id)
-    "Platz #{result.own_position} mit #{user.points} Punkten"
+    "Platz #{user_position} mit #{user.points} Punkten"
   end
 
   def nav_bar_item_presenters
@@ -50,7 +56,7 @@ class NavBarPresenter
       result += [
           {link_icon: 'list-ol',
            link_text: I18n.t('ranking'),
-           link_url: ranking_path,
+           link_url: rankings_path,
            css_class: active_css_class(URL_SCOPES[:ranking])}
       ]
       result += [

@@ -8,6 +8,10 @@ describe 'main/index.html.haml', :type => :view do
                                            Tip.new(game: Game.new(start_at: Time.now - 1.minute))],
                                           user)}
 
+  before :each do
+    allow(view).to receive(:current_user).and_return(user)
+  end
+
   context 'when tournament is not started' do
 
     before :each do

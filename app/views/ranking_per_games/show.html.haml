@@ -1,6 +1,6 @@
 .row
   .small-12.columns
-    %h3=t(:your_ranking_per_game)
+    %h3=@presenter.header_text
 
     - if @presenter.has_chart_data_to_show?
       .row

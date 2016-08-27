@@ -14,9 +14,9 @@
             = "#{I18n.t(:signed_in_hello)} #{@presenter.user_name}"
           .row
             .small-12.columns
-              = link_to(icon('list-ol', I18n.t('full_ranking_list'), {class: 'fa-fw'}), ranking_path)
+              = link_to(icon('list-ol', I18n.t('full_ranking_list'), {class: 'fa-fw'}), rankings_path)
             .small-12.columns
-              = link_to(icon('pencil-square-o',I18n.t(:your_ranking_per_game), {class: 'fa-fw'}), ranking_per_game_path)
+              = link_to(icon('line-chart',I18n.t(:your_ranking_per_game), {class: 'fa-fw'}), ranking_per_game_path(current_user))
 
           - if @presenter.tournament_finished?
             %br

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   acts_as_paranoid
 
@@ -6,6 +5,7 @@ class User < ActiveRecord::Base
   has_many   :tips, :dependent => :destroy
 
   validates               :email, :presence => true
+  # FIXME soeren 8/27/16 warun allow_blank
   validates_uniqueness_of :email, :allow_blank => true, :scope => :deleted_at, :case_sensitive => false, :if => :email_changed?
   validates_format_of     :email, :with  => Devise.email_regexp, :allow_blank => true
   validates               :firstname, :presence => true

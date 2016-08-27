@@ -57,7 +57,7 @@ describe NavBarPresenter do
         expect(nav_bar_item_presenters.size).to eq(5)
 
         expect(nav_bar_item_presenters[0]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[0].link_url).to eq(ranking_path)
+        expect(nav_bar_item_presenters[0].link_url).to eq(rankings_path)
         expect(nav_bar_item_presenters[0].link_text).to eq(I18n.t('ranking'))
         expect(nav_bar_item_presenters[0].link_icon).to eq('list-ol')
 
@@ -81,6 +81,17 @@ describe NavBarPresenter do
         expect(nav_bar_item_presenters[4].link_text).to eq(I18n.t('sign_out'))
         expect(nav_bar_item_presenters[4].link_icon).to eq('sign-out')
       end
+    end
+  end
+
+  describe '#user_position' do
+    let(:presenter) { subject.new(:main, user) }
+
+    it 'returns nav_ranking_info' do
+      object = double('Top3AndOwnPosition', user_top3_ranking_hash: {}, own_position: 42)
+      expect(Users::Top3AndOwnPosition).to receive(:call).with(user_id: user.id).and_return(object)
+
+      expect(presenter.user_position).to eq(42)
     end
   end
 

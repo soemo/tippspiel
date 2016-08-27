@@ -6,15 +6,70 @@ describe RankingPerGamesShowPresenter do
 
   let(:chart_x_labels) {['Label1', 'Label2', 'Label3']}
 
+  let(:current_user) {create(:user, firstname: 'active', lastname: 'user')}
+  let(:user) {create(:user, firstname: 'test', lastname: 'user')}
+
   let(:user_rankings) {[4,2,1]}
   let(:games) {[Game.new, Game.new, Game.new]}
 
+  describe '#shows_current_user_rankings?' do
 
-  context '#chart_data' do
+    context 'if user_id is the current_user.id' do
+
+      it 'returns true' do
+        presenter = subject.new(current_user, current_user.id, games)
+        expect(presenter.shows_current_user_rankings?).to be true
+      end
+    end
+
+    context 'if user_id isnot  the current_user.id' do
+
+      it 'returns false' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter.shows_current_user_rankings?).to be false
+      end
+    end
+  end
+
+  describe '#user_ranking' do
+
+    it 'calls TipQueries' do
+      presenter = subject.new(current_user, user.id, games)
+
+      tipp_query = double
+      expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at).
+          with(user.id).and_return(tipp_query)
+      expect(tipp_query).to receive(:pluck).with(:ranking_place).and_return(user_rankings)
+
+      expect(presenter.user_rankings).to eq(user_rankings)
+    end
+  end
+
+  describe '#header_text' do
+
+    context 'if ranking for current_user' do
+
+      it 'returns text for current_user' do
+        presenter = subject.new(current_user, current_user.id, games)
+        expect(presenter.header_text).to eq(I18n.t(:your_ranking_per_game))
+      end
+    end
+
+    context 'if ranking for other user' do
+
+      it 'returns text with other users name' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter.header_text).to eq(I18n.t(:ranking_per_game_for, name: user.name))
+      end
+    end
+  end
+
+  describe '#chart_data' do
 
     it 'returns chart_data' do
-      presenter = subject.new(user_rankings, games)
+      presenter = subject.new(current_user, user.id, games)
       expect(presenter).to receive(:chart_x_labels).and_return(chart_x_labels)
+      expect(presenter).to receive(:user_rankings).and_return(user_rankings)
 
       expect(presenter.chart_data).to eq(
                                           {
@@ -37,10 +92,10 @@ describe RankingPerGamesShowPresenter do
     end
   end
 
-  context '#chart_options' do
+  describe '#chart_options' do
 
     it 'returns chart_options' do
-      presenter = subject.new(user_rankings, games)
+      presenter = subject.new(current_user, user.id, games)
 
       expect(presenter.chart_options).to eq(
                                              {
@@ -67,27 +122,20 @@ describe RankingPerGamesShowPresenter do
     end
   end
 
-  context '#has_chart_data_to_show?' do
+  describe '#has_chart_data_to_show?' do
 
-    context 'if user_rankings present?' do
+    context 'if user present and user_rankings present?' do
       it 'returns true' do
-        presenter = subject.new(user_rankings, games)
-        expect(presenter.has_chart_data_to_show?).to be true
-
-        presenter = subject.new([nil, 1], games)
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).twice.and_return(user_rankings)
         expect(presenter.has_chart_data_to_show?).to be true
       end
     end
 
-    context 'if user_rankings not present?' do
+    context 'if user present and user_rankings not present?' do
       it 'returns false' do
-        presenter = subject.new([], games)
-        expect(presenter.has_chart_data_to_show?).to be false
-
-        presenter = subject.new(nil, games)
-        expect(presenter.has_chart_data_to_show?).to be false
-
-        presenter = subject.new([nil, '', nil], chart_x_labels)
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([])
         expect(presenter.has_chart_data_to_show?).to be false
       end
     end
