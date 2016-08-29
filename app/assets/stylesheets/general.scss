@@ -26,7 +26,7 @@ h1 {
 
 h2,
 h3 {
-  border-bottom: solid 1px $primary-color;
+  @include underline(white, $primary-color, $primary-color, 86%);
 }
 h3 {
   margin-bottom: 12px;

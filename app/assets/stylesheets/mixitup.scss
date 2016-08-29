@@ -2,6 +2,14 @@
   display: none;
 }
 
+#mixitup-control-bar .button {
+  @include auto-width(3, 'button');
+  margin-right: 0;
+  margin-bottom: 0;
+  border: $body-background solid 1px;
+
+}
+
 #mixitup-control-bar .button.active {
   background: $dark-gray;
   color: white;

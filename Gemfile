@@ -10,6 +10,7 @@ gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
 gem 'paranoia'      # acts_as_paranoid fuer Rails4
 gem 'sass-rails'
+gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'uglifier'
 gem 'jquery-rails',            '~> 4.1.1'     # mit jQuery 1.12.1 /2.2.1 und jquery-ujs 1.2.1
 gem 'foundation-rails'
