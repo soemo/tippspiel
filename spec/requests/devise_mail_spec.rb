@@ -35,7 +35,7 @@ describe "devise mail", :type => :request do
     mail = mails[0]
     expect(I18n::l(mail.date)).to eq(I18n::l(DateTime.now))
     expect(mail.subject).to match(/#{I18n.t('app_name')} - #{I18n.t("devise.mailer.confirmation_instructions.subject")}/)
-    expect(mail.from).to eq(["tippspiel@soemo.org"])
+    expect(mail.from).to eq([MAIL])
     expect(mail.to).to eq([email])
     expect(mail.body).to match(/#{user.firstname}/u)
     expect(mail.body).to include("#{user_confirmation_path}?confirmation_token=")

@@ -58,10 +58,10 @@ module ApplicationHelper
 
   def write_footer_content
      haml_tag 'p.text-center' do
-       haml_concat "© " + Time.now.strftime("%Y")
-       haml_concat link_to("Sören Mothes", "http://www.soemo.org/")
+       haml_concat '© ' + Time.now.strftime('%Y')
+       haml_concat link_to('Sören Mothes', 'https://www.soemo.org/')
        haml_concat " | "
-       haml_concat link_to(t(:imprint), help_path + "#imprint")
+       haml_concat link_to(t(:imprint), help_path + '#imprint')
        haml_concat " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
      end
   end
