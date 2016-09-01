@@ -1,7 +1,30 @@
-languages:
-  Ruby: true
-  JavaScript: true
-exclude_paths:
-- "app/assets/javascripts/chart.min.js"
-- "app/assets/javascripts/jquery.livequery.js"
-- "app/assets/javascripts/jquery.mixitup.min.js"
+---
+engines:
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+  eslint:
+    enabled: false
+  fixme:
+    enabled: true
+  rubocop:
+    enabled: true
+ratings:
+  paths:
+  - Gemfile.lock
+  - "**.erb"
+  - "**.haml"
+  - "**.rb"
+  - "**.rhtml"
+  - "**.slim"
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
