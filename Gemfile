@@ -26,7 +26,9 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 # that don’t support 4-Byte UTF-8 Unicode (utf8mb4) encoding
 gem 'emojimmy'
 
-gem 'passenger'
+group :development, :production do
+  gem 'passenger'
+end
 
 group :development do
   gem 'spring'
