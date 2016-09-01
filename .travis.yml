@@ -17,3 +17,10 @@ script:
   - bundle exec rake
 
 bundler_args: "--without development production"
+
+env:
+  - WEBSITE_URL='http://localhost:3000'
+  - ADMIN_EMAIL='test-tippspiel@test.com'
+  - MAIL='tippspiel@test.com'
+  - SECRET_BASE_KEY='r90435943jv90t960dc87966cdfe8a6b730c1ecbee871d6a4b92e4687b34cb29d99f67981a8ca5522671db884aec9d1d0c296f1660bce_travis'
+  - COOKIE_STORE_KEY='_tavis_tippspiel_session'
