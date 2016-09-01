@@ -9,31 +9,21 @@ require 'fileutils'
 Tippspiel::Application.load_tasks
 
 namespace :tippspiel do
-  today_date             = Date.today.strftime("%d.%m.%Y")
-  placeholder_build_date = "###PLACEHOLDER_BUILD_DATE###"
+  today_date             = Date.today.strftime('%d.%m.%Y')
+  placeholder_build_date = '###PLACEHOLDER_BUILD_DATE###'
 
-  desc "Init Tippspiel"
-  task :init do
-    puts today_date + " init Zeiterfassung Build"
-    FileUtils.mkdir_p(File.join(Rails.root, "tmp"))
-    ENV["RAILS_ENV"] = "test" # damit RSpec mitgeladen wird
-  end
-
-  desc "Build Tippspiel with Tests, Specs, and Doc"
-  task :build => [:init, 'db:migrate', :spec, 'doc:app']
-
-  desc "set Versionnumber and Build-Date in normal App-Dir-Structure"
+  desc 'set Versionnumber and Build-Date in normal App-Dir-Structure'
   task :set_version do
     set_version_from_file(version_file, placeholder_build_date, today_date)
   end
 
   def version_file
-    File.join(Rails.root, "config/version.rb")
+    File.join(Rails.root, 'config/version.rb')
   end
 
   def set_version_from_file(version_file, placeholder_build_date, today_date)
     old_file = version_file
-    new_file    = old_file+".new"
+    new_file    = old_file + '.new'
     if File.exists?(old_file)
       copy_and_replace(old_file, new_file, { placeholder_build_date => today_date })
       File.delete(old_file)
@@ -45,7 +35,7 @@ namespace :tippspiel do
     if File.exists? from_file
       # check if target exists
       if File.exists? to_file
-        backup_file = to_file + ".bak"
+        backup_file = to_file + '.bak'
         puts "Target file #{to_file} already exists, creating backup to #{backup_file}"
         #File.rename to_file, backup_file
         mv to_file, backup_file

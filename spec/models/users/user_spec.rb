@@ -1,14 +1,8 @@
-# -*- encoding : utf-8 -*-
 require 'rails_helper'
 
 describe User, :type => :model do
 
-  it "should use Factory" do
-    user = FactoryGirl.create(:user)
-    expect(user.firstname).to eq("test")
-  end
-
-  it "should not found if inactive" do
+  it 'does not found if inactive' do
       user = FactoryGirl.create(:user)
       expect(User.active.to_a).not_to include(user)
 

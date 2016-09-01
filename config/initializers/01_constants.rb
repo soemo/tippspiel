@@ -3,8 +3,9 @@ TOURNAMENT_NAME = 'EM 2016'
 IS_WM = false
 IS_EM = !IS_WM
 
-MAIL        = 'tippspiel@soemo.org'
-ADMIN_EMAIL = 'soeren@mothes.org'
+MAIL        = ENV['MAIL']
+ADMIN_EMAIL = ENV['ADMIN_EMAIL']
+WEBSITE_URL = ENV['WEBSITE_URL']
 
 GROUP        = 'group'
 ROUND_OF_16  = 'roundof16'

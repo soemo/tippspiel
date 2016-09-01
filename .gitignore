@@ -16,3 +16,4 @@
 /spec/examples.txt
 /config/initializers/rubymine_passenger_debug.rb
 passenger.3000.pid.lock
+.env

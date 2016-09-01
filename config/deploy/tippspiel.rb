@@ -17,6 +17,3 @@ set :deploy_to, "/var/www/virtual/#{fetch(:user)}/#{fetch(:application)}"
 # be available on port 80 and 443 from the outside. However, if you'd like to
 # set this yourself, go ahead.
 set :passenger_port, 26101
-
-set :customizing_dir, 'prod'
-

@@ -4,6 +4,7 @@ gem 'rails', '= 4.2.7'
 ruby '2.3.1'
 
 gem 'mysql2'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'cancancan'    # FIXME soeren 30.12.2014 pundit???
 gem 'haml-rails'
 gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
@@ -25,10 +26,7 @@ gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain
 # that don’t support 4-Byte UTF-8 Unicode (utf8mb4) encoding
 gem 'emojimmy'
 
-
-group :development, :production do
-  gem 'passenger'
-end
+gem 'passenger'
 
 group :development do
   gem 'spring'

@@ -2,7 +2,8 @@
 require 'simplecov'
 SimpleCov.start 'rails'
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
+ENV['ADMIN_EMAIL'] ||= 'test@test.de'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'spec_helper'
