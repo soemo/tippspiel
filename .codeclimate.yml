@@ -1,0 +1,7 @@
+languages:
+  Ruby: true
+  JavaScript: true
+exclude_paths:
+- "app/assets/javascripts/chart.min.js"
+- "app/assets/javascripts/jquery.livequery.js"
+- "app/assets/javascripts/jquery.mixitup.min.js"
