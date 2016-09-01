@@ -28,3 +28,11 @@ ratings:
   - "**.js"
   - "**.jsx"
   - "**.module"
+exclude_paths:
+- app/assets/javascripts/chart.min.js
+- app/assets/javascripts/jquery.livequery.js
+- app/assets/javascripts/jquery.mixitup.min.js
+- "db/"
+- "tests/"
+- "spec/"
+- "**/vendor/"
