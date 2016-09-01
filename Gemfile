@@ -7,7 +7,7 @@ gem 'mysql2'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'cancancan'    # FIXME soeren 30.12.2014 pundit???
 gem 'haml-rails'
-gem 'devise',                  '~> 3.4.1'      # Authentifizierungssystem
+gem 'devise',                  '~> 3.5.10'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
 gem 'paranoia'      # acts_as_paranoid fuer Rails4
 gem 'sass-rails'
