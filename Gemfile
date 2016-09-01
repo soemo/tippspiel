@@ -53,4 +53,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'timecop'
   gem 'simplecov'
+  gem 'codeclimate-test-reporter', require: nil
 end
