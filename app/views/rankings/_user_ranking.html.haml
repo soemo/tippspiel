@@ -23,7 +23,7 @@
           - else
             - champ_team_info = champ_team_info_small = I18n.t('ranking_champion_tip_currently_not_visible')
 
-          - place_with_ranking_per_game_link = link_to(place, ranking_per_game_path(user))
+          - place_with_ranking_per_game_link = link_to(place, ranking_per_game_path(user), {title: I18n.t(:ranking_per_game_show)})
           - user_name = user.name
           - user_points = user.points.present? ? user.points.to_s : '0'
           %tr{id: "place_#{place}"}
