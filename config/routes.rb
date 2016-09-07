@@ -25,13 +25,15 @@ Tippspiel::Application.routes.draw do
     resource :start_calculating, only: :new
   end
 
+  resource :champion_tips, only: [:update]
   resource :hall_of_fame, only: :show
   resources :rankings, only: :index
   resources :ranking_per_games, only: :show
-
-  # FIXME soeren 8/25/16 die 2 als recources umschreiben
-  post 'save-tips' => 'tips#save_tips'
-  post 'save-champion-tip' => 'tips#save_champion_tip'
+  resources :tips, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    collection do
+      post :save_tips
+    end
+  end
 
   get 'notes' => 'notes#index'
   post 'save-notice' => 'notes#create' # FIXME soeren 8/25/16 als recources

@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe TipsController, :type => :controller do
+describe TipsController, type: :controller do
 
   let!(:user) {create :active_user}
   let(:tips) {[Tip.new, Tip.new]}
 
   describe '#save_tips' do
     before :each do
-      login(create :active_user)
+      login(user)
     end
 
-    it "should only save tips for games start in the future" do
+    it 'saves only tips for games start in the future' do
       user = User.last
       FactoryGirl.create(:game)
 
@@ -24,7 +24,7 @@ describe TipsController, :type => :controller do
       game.update_column(:start_at, Time.now+1.second) #Spielstart in der Zukunft
 
       # update erlaubt
-      post 'save_tips', {:tips=>{"#{tip.id}"=>{"team2_goals"=>"9", "team1_goals"=>"9"}}}
+      post :save_tips, {:tips=>{"#{tip.id}"=>{'team1_goals' => '9', 'team2_goals' => '9'}}}
       expect(response).to redirect_to root_path
 
       t = Tip.find(tip.id)
@@ -34,7 +34,7 @@ describe TipsController, :type => :controller do
       game.update_attribute(:start_at, Time.now) #Spiel startet genau jetzt
 
       # update NICHT erlaubt
-      post 'save_tips', {:tips=>{"#{tip.id}"=>{"team2_goals"=>"3", "team1_goals"=>"0"}}}
+      post :save_tips, {:tips=>{"#{tip.id}"=>{'team1_goals' => '0', 'team2_goals' => '3'}}}
       expect(response).to redirect_to root_path
 
       t = Tip.find(tip.id)

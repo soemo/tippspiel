@@ -30,10 +30,10 @@ module Users
 
           champion_tip_points = 0
           tournament_champion_team = get_tournament_champion_team
-          champion_team_id     = tournament_champion_team.present? ? tournament_champion_team.id : nil
+          championtip_team_id = tournament_champion_team.present? ? tournament_champion_team.id : nil
           if Tournament.finished? &&
               user.championtip_team_id.present? &&
-              user.championtip_team_id == champion_team_id
+              user.championtip_team_id == championtip_team_id
             champion_tip_points = CHAMPION_TIP_POINTS
             total_points = total_points + champion_tip_points
           end

@@ -11,11 +11,11 @@
       %br
       = I18n.t('need_champion_tip_info', points: Users::UpdatePoints::CHAMPION_TIP_POINTS)
 
-  = form_tag '/save-champion-tip', class: 'form-horizontal' do
+  = form_tag '/champion_tips', method: :put, class: 'form-horizontal' do
     - selected = championtip_team.present? ? championtip_team.id : ''
     - options =  options_for_select(presenter.options_for_champion_tip_select, selected)
     = render partial: 'widgets/selectbox_with_postifx_button',
-             locals: {select_id: 'champion_team_id',
+             locals: {select_id: 'championtip_team_id',
                       select_options: options,
                       button_text: t('save') }
 

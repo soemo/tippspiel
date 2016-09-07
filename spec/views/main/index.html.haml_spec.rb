@@ -28,7 +28,7 @@ describe 'main/index.html.haml', :type => :view do
       expect(rendered).to have_selector('b', :text => I18n.t('need_champion_tip'))
       expect(rendered).to have_content(I18n.t('need_champion_tip_info', :points => Users::UpdatePoints::CHAMPION_TIP_POINTS))
 
-      expect(rendered).to have_xpath("//form[@action='/save-champion-tip']") do |form|
+      expect(rendered).to have_xpath("//form[@action='/champion_tips']") do |form|
         expect(form).to have_selector('label', :text => I18n.t('who_will_be_champion'))
       end
     end
