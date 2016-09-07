@@ -27,6 +27,7 @@ Tippspiel::Application.routes.draw do
 
   resource :champion_tips, only: [:update]
   resource :hall_of_fame, only: :show
+  resource :help, only: :show
   resources :rankings, only: :index
   resources :ranking_per_games, only: :show
   resources :tips, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
@@ -37,7 +38,6 @@ Tippspiel::Application.routes.draw do
 
   get 'notes' => 'notes#index'
   post 'save-notice' => 'notes#create' # FIXME soeren 8/25/16 als recources
-  get 'help' => 'help#index'  # FIXME soeren 8/25/16 resource :help, only: :show
 
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
 
