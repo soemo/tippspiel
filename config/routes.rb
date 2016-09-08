@@ -36,10 +36,12 @@ Tippspiel::Application.routes.draw do
     end
   end
 
-  get 'notes' => 'notes#index'
+  get 'notes' => 'notes#index'   # FIXME soeren 8/25/16 als recources
   post 'save-notice' => 'notes#create' # FIXME soeren 8/25/16 als recources
 
+  # FIXME soeren 8/25/16 als recources
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
 
+  # FIXME soeren 8/25/16 anpassen wie in ttbn
   get 'main/error' => 'main#error', :as => :error
 end

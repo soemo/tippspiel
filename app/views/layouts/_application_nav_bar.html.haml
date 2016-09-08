@@ -1,17 +1,19 @@
-%nav.column.row
-  .top-bar.stacked-for-large
-    .top-bar-left
-      %ul.menu
-        %li
-          %a.brand{href: presenter.nav_bar_brand_url}
-            = get_title
-        - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
-          %li{class: nav_bar_item_presenter.css_class}
-            - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon)}"
-            - icon_and_text << "<span>#{nav_bar_item_presenter.link_text}</span>" if nav_bar_item_presenter.link_text.present?
-            = link_to(icon_and_text.html_safe, nav_bar_item_presenter.link_url)
-    - if presenter.user_logged_in?
-      .top-bar-right
-        %ul.menu
-          %li
-            = link_to(presenter.nav_ranking_info, rankings_path(anchor: "place_#{presenter.user_position}"), {class: 'ranking-info'})
+.top-bar-container{data: {'sticky-container' => ''}}
+  .sticky{data: {sticky: '', options: "anchor: 1; marginTop: 0; stickyOn: small;"}}
+    %nav.column.row
+      .top-bar.stacked-for-large
+        .top-bar-left
+          %ul.menu
+            %li
+              %a.brand{href: presenter.nav_bar_brand_url}
+                = get_title
+            - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
+              %li{class: nav_bar_item_presenter.css_class}
+                - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon)}"
+                - icon_and_text << "<span>#{nav_bar_item_presenter.link_text}</span>" if nav_bar_item_presenter.link_text.present?
+                = link_to(icon_and_text.html_safe, nav_bar_item_presenter.link_url)
+        - if presenter.user_logged_in?
+          .top-bar-right
+            %ul.menu
+              %li
+                = link_to(presenter.nav_ranking_info, rankings_path(anchor: "place_#{presenter.user_position}"), {class: 'ranking-info'})
