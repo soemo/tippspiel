@@ -43,6 +43,7 @@ end
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
+  gem 'capistrano-maintenance', require: false
   gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'capybara'     # rspec-rails braucht das um in den Views have_selector zu nutzen

@@ -8,11 +8,11 @@ set :user, 'soemo'
 
 set :scm, :git
 
-set :repository, 'git@github.com:soemo/tippspiel.git'
+set :repo_url, 'git@github.com:soemo/tippspiel.git'
 
 server 'sabic.uberspace.de', user: fetch(:user), roles: %w{app db web}
 
-set :ssh_options, { :forward_agent => true }
+set :ssh_options, { :forward_agent => true}
 
 SSHKit.config.command_map[:rake]  = "bundle exec rake"
 
@@ -46,3 +46,9 @@ after 'deploy:finished', 'deploy:restart'
 
 # Laden der Rezepte
 Dir['config/deploy/recipes/*.rb'].each { |r| load(r) }
+
+namespace :deploy do
+
+  before :starting, 'maintenance:enable'
+  after :finished, 'maintenance:disable'
+end
