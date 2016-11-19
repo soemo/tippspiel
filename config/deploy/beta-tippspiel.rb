@@ -2,6 +2,8 @@
 # databases, directories, etc.
 set :application, 'beta-tippspiel.soemo.org'
 
+set :branch, 'development'
+
 # By default, your app will be available in the root of your Uberspace. If you
 # have your own domain set up, you can configure it here
 set :domain, 'beta-tippspiel.soemo.org'

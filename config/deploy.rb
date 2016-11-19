@@ -6,9 +6,13 @@ set :cap_tournament_name, TOURNAMENT_NAME
 # your Uberspace username
 set :user, 'soemo'
 
+set :scm, :git
+
+set :repository, 'git@github.com:soemo/tippspiel.git'
+
 server 'sabic.uberspace.de', user: fetch(:user), roles: %w{app db web}
 
-set :repo_url, "file:///home/#{fetch(:user)}/git/tippspiel.git"
+set :ssh_options, { :forward_agent => true }
 
 SSHKit.config.command_map[:rake]  = "bundle exec rake"
 

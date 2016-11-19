@@ -5,7 +5,7 @@ ruby '2.3.1'
 
 gem 'mysql2'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
-gem 'cancancan'    # FIXME soeren 30.12.2014 pundit???
+gem 'cancancan'
 gem 'haml-rails'
 gem 'devise',                  '~> 3.5.10'      # Authentifizierungssystem
 gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
