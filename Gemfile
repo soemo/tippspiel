@@ -1,26 +1,25 @@
 source 'https://rubygems.org'
 
-gem 'rails', '= 4.2.7.1'
+gem 'rails', '= 5.0.0.1'
 ruby '2.3.1'
 
 gem 'mysql2'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'cancancan'
 gem 'haml-rails'
-gem 'devise',                  '~> 3.5.10'      # Authentifizierungssystem
-gem 'devise-encryptable',      '~> 0.2.0'      # Encryption solution for salted-encryptors on Devise
-gem 'paranoia'      # acts_as_paranoid fuer Rails4
+gem 'devise'
+gem 'devise-encryptable'
+gem 'paranoia'
 gem 'sass-rails'
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'uglifier'
-gem 'jquery-rails',            '~> 4.1.1'     # mit jQuery 1.12.1 /2.2.1 und jquery-ujs 1.2.1
+gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'font-awesome-sass'
 gem 'newrelic_rpm'
 gem 'lograge'
-# Wird genutzt um per https://github.com/yeah/redmine_hoptoad_server die ErrorNotifications ins Redmine zu bekommen
-gem 'airbrake',                '~> 4.1.0'
-gem 'virtus',                  '~> 1.0.5'     # Attributes on Steroids for Plain Old Ruby Objects
+gem 'virtus'
+gem 'exception_notification'
 
 # Emojimmy makes it possible to store emoji characters in ActiveRecord datastores
 # that don’t support 4-Byte UTF-8 Unicode (utf8mb4) encoding
@@ -44,7 +43,6 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capistrano-maintenance', require: false
-  gem 'quiet_assets'
   gem 'rspec-rails'
   gem 'capybara'     # rspec-rails braucht das um in den Views have_selector zu nutzen
   gem 'guard-rspec', require: false
@@ -57,4 +55,5 @@ group :test do
   gem 'timecop'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'rails-controller-testing'
 end

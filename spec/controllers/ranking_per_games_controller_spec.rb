@@ -21,7 +21,7 @@ describe RankingPerGamesController do
     it 'calls RankingPerGamesShowPresenter with current_user, params[:id] and return http success' do
       expect(RankingPerGamesShowPresenter).to receive(:new).with(current_user, user.id.to_s, games)
 
-      get :show, id: user.id
+      get :show, params: { id: user.id }
 
       expect(response).to have_http_status(:success)
     end

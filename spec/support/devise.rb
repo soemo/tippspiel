@@ -20,7 +20,7 @@ module LoginUserRequestHelper
 end
 
 RSpec.configure do |config|
-  config.include LoginUserHelper,        :type => :controller
-  config.include LoginUserRequestHelper, :type => :request
-  config.include Devise::TestHelpers,    :type => :controller # fuer sign_in und sign_out Helper
+  config.include LoginUserHelper,        type: :controller
+  config.include LoginUserRequestHelper, type: :request
+  config.include Devise::Test::ControllerHelpers,  type: :controller # fuer sign_in und sign_out Helper
 end

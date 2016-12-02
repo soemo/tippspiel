@@ -1,5 +1,5 @@
 class SquasherClean < ActiveRecord::Migration
-  class SchemaMigration < ActiveRecord::Base
+  class SchemaMigration < ApplicationRecord
   end
 
   def up

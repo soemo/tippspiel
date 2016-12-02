@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
 
   include ExceptionHandling
 
-  before_filter :set_locale
-  before_filter :authenticate_user!, :unless => :error_handling_method?
-  before_filter :set_host_to_mailers
+  before_action :set_locale
+  before_action :authenticate_user!, :unless => :error_handling_method?
+  before_action :set_host_to_mailers
 
   helper_method :current_user, :nav_bar_presenter
 

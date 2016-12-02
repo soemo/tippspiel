@@ -1,5 +1,4 @@
-# -*- encoding : utf-8 -*-
-class Tip < ActiveRecord::Base
+class Tip < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :game

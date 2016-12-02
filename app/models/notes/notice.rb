@@ -1,5 +1,4 @@
-# -*- encoding : utf-8 -*-
-class Notice < ActiveRecord::Base
+class Notice < ApplicationRecord
   acts_as_paranoid
   stores_emoji_characters :text
 

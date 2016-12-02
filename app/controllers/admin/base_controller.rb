@@ -9,7 +9,7 @@ module Admin
       if current_user.admin?
         yield
       else
-        render text:  '403 forbidden', status: :forbidden
+        render plain:  '403 forbidden', status: :forbidden
       end
     end
 

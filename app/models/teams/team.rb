@@ -1,5 +1,4 @@
-# -*- encoding : utf-8 -*-
-class Team < ActiveRecord::Base
+class Team < ApplicationRecord
   acts_as_paranoid
 
   validates_presence_of :name

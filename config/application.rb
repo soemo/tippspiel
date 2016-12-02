@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
@@ -47,6 +47,7 @@ module Tippspiel
       g.fixture_replacement :factory_girl, :dir=> 'spec/factories'
     end
 
+    # TODO soeren 11/25/16 kann das raus?
     config.after_initialize do |app|
       # 404 catch all route, hier definiert, damit sie immer die letzte Route ist
 

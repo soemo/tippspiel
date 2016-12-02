@@ -1,8 +1,6 @@
-# -*- encoding : utf-8 -*-
-
 require 'rails_helper'
 
-describe "devise mail", :type => :request do
+describe 'devise mail', :type => :request do
 
   before :each do
     ActionMailer::Base.deliveries = [] # reset list of mails
@@ -10,18 +8,20 @@ describe "devise mail", :type => :request do
   end
 
 
-  it "should send a mail to new registered user added by company-admin" do
+  it 'sends a mail to new registered user' do
 
-    email = "new.registered-user@email.de"
-    pw = "unknackbar123"
+    email = 'new.registered-user@email.de'
+    pw = 'unknackbar123'
 
     expect {
-      post "/users", {:user => {:firstname => "firstname", :lastname => "lastname",
-                               :email => email, :password => pw,
-                               :password_confirmation => pw}}
+      post '/users', params: {:user => {firstname: 'firstname',
+                                        lastname: 'lastname',
+                                        email: email,
+                                        password: pw,
+                                        password_confirmation: pw}}
     }.to change(User, :count).by(1)
 
-    expect(response).to redirect_to root_path
+    expect(response).to redirect_to root_path(signed_up_message: 1)
 
     user = User.where(:email => email).first
     expect(user).not_to be_nil
@@ -49,35 +49,35 @@ describe "devise mail", :type => :request do
 
     # no email
     expect {
-      post "/users", {:user => {:firstname => "firstname", :lastname => "lastname",
+      post "/users", params: {:user => {:firstname => "firstname", :lastname => "lastname",
                                :email => nil, :password => pw,
                                :password_confirmation => pw}}
     }.not_to change(User, :count)
 
     # no firstname
     expect {
-      post "/users", {:user => {:firstname => "", :lastname => "lastname",
+      post "/users", params: {:user => {:firstname => "", :lastname => "lastname",
                                :email => email, :password => pw,
                                :password_confirmation => pw}}
     }.not_to change(User, :count)
 
     # no lastname
     expect {
-      post "/users", {:user => {:firstname => "firstname", :lastname => "",
+      post "/users", params: {:user => {:firstname => "firstname", :lastname => "",
                                :email => email, :password => pw,
                                :password_confirmation => pw}}
     }.not_to change(User, :count)
 
     # no pw
     expect {
-      post "/users", {:user => {:firstname => "firstname", :lastname => "",
+      post "/users", params: {:user => {:firstname => "firstname", :lastname => "",
                                :email => email, :password => nil,
                                :password_confirmation => pw}}
     }.not_to change(User, :count)
 
     # no pw check
     expect {
-      post "/users", {:user => {:firstname => "firstname", :lastname => "",
+      post "/users", params: {:user => {:firstname => "firstname", :lastname => "",
                                :email => email, :password => pw,
                                :password_confirmation => nil}}
     }.not_to change(User, :count)

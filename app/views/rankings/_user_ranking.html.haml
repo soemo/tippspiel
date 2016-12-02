@@ -13,7 +13,7 @@
       - user_ranking_hash.each do |place, users_on_same_place|
         - users_on_same_place.each do |user|
 
-          -# FIXME soeren 5/11/16 in presenter auslagern
+          -# todo soeren 5/11/16 in presenter auslagern
           - if tournament_started
             - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
             - if user.championtip_team_id.present?

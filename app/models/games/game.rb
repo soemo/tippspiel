@@ -1,5 +1,4 @@
-# -*- encoding : utf-8 -*-
-class Game < ActiveRecord::Base
+class Game < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :team1, :class_name => 'Team'
@@ -23,10 +22,10 @@ class Game < ActiveRecord::Base
 
   def presence_of_teams
     unless team1_id.present? || team1_placeholder_name.present?
-      errors.add_on_blank(:team1_id)
+      errors.add(:team1_id, :blank)
     end
     unless team2_id.present? || team2_placeholder_name.present?
-      errors.add_on_blank(:team2_id)
+      errors.add(:team2_id, :blank)
     end
   end
 

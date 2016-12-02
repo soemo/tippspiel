@@ -35,7 +35,7 @@ describe NotesController, :type => :controller do
 
     it 'add notice' do
       expect(Notice.count).to eq(0)
-      post :create, {text: max_long_word}
+      post :create, params: {text: max_long_word}
       expect(response).to redirect_to notes_path
       expect(flash[:notice]).to eq(I18n.t(:create_successful, :object_name => Notice.model_name.human))
       expect(Notice.count).to eq(1)
@@ -43,7 +43,7 @@ describe NotesController, :type => :controller do
 
     it 'does not save notice, if no text present' do
       expect(Notice.count).to eq(0)
-      post :create, {text: ''}
+      post :create, params: {text: ''}
       expect(response).to redirect_to notes_path
       expect(flash[:error]).to eq(I18n.t(:notice_needs_a_comment))
       expect(Notice.count).to eq(0)
@@ -52,7 +52,7 @@ describe NotesController, :type => :controller do
     it 'does not save notice, if to long word without spaces' do
       too_long_word_without_spaces = max_long_word + 'b'
       expect(Notice.count).to eq(0)
-      post :create, {text: too_long_word_without_spaces}
+      post :create, params: {text: too_long_word_without_spaces}
       expect(response).to redirect_to notes_path
       expect(flash[:error]).to eq(I18n.t(:notice_needs_spaces))
       expect(Notice.count).to eq(0)

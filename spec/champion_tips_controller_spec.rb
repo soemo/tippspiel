@@ -17,7 +17,7 @@ describe ChampionTipsController, type: :controller do
             with(championtip_team_id: championtip_team_id.to_s, current_user: user).
             and_return(true)
 
-        patch :update, {championtip_team_id: championtip_team_id.to_s}
+        patch :update, params: {championtip_team_id: championtip_team_id.to_s}
 
         expect(flash[:notice]).to eq(t(:succesfully_saved_championtip))
         expect(response).to redirect_to root_path
@@ -31,7 +31,7 @@ describe ChampionTipsController, type: :controller do
             with(championtip_team_id: championtip_team_id.to_s, current_user: user).
             and_return(false)
 
-        patch :update, {championtip_team_id: championtip_team_id.to_s}
+        patch :update, params: {championtip_team_id: championtip_team_id.to_s}
 
         expect(flash[:notice]).to be nil
         expect(response).to redirect_to root_path

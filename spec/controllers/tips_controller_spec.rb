@@ -24,7 +24,7 @@ describe TipsController, type: :controller do
       game.update_column(:start_at, Time.now+1.second) #Spielstart in der Zukunft
 
       # update erlaubt
-      post :save_tips, {:tips=>{"#{tip.id}"=>{'team1_goals' => '9', 'team2_goals' => '9'}}}
+      post :save_tips, params: {:tips=>{"#{tip.id}"=>{'team1_goals' => '9', 'team2_goals' => '9'}}}
       expect(response).to redirect_to root_path
 
       t = Tip.find(tip.id)
@@ -34,7 +34,7 @@ describe TipsController, type: :controller do
       game.update_attribute(:start_at, Time.now) #Spiel startet genau jetzt
 
       # update NICHT erlaubt
-      post :save_tips, {:tips=>{"#{tip.id}"=>{'team1_goals' => '0', 'team2_goals' => '3'}}}
+      post :save_tips, params: {:tips=>{"#{tip.id}"=>{'team1_goals' => '0', 'team2_goals' => '3'}}}
       expect(response).to redirect_to root_path
 
       t = Tip.find(tip.id)

@@ -1,39 +1,54 @@
 require 'rails_helper'
 
-describe User, :type => :model do
+describe User, type: :model do
 
   it 'does not found if inactive' do
       user = FactoryGirl.create(:user)
       expect(User.active.to_a).not_to include(user)
 
       expect(User.inactive.to_a).to include(user)
-    end
-
-  it 'admin?' do
-    user = FactoryGirl.create(:user)
-    expect(user.admin?).to be false
-    user.update_attribute(:email, ADMIN_EMAIL)
-    expect(user.admin?).to be true
   end
 
-  describe 'confirm_with_max_time!' do
-    it 'should call normal confirmation routine, if confirmation is in time' do
-      u = User.new
-      u.confirmation_sent_at = 1.hour.ago
-      expect(u).to receive(:confirm_without_maximum_time!).and_return(true)
-      u.confirm!
-    end
+  describe '#name' do
 
-    it 'should add an error, if confirmation is too old' do
-      u = User.new
-      u.confirmation_sent_at = (User::CONFIRMATION_MAX_TIME + 1.hour).ago
-      expect(u).not_to receive(:confirm_without_maximum_time!)
-      u.confirm!
-      expect(u.errors[:base]).not_to be_empty
+    it 'returns firstname + lastname' do
+      user = User.new(firstname: 'Firstname', lastname: 'Lastname')
+      expect(user.name).to eq('Firstname Lastname')
     end
   end
 
-  it 'should delete tips if user delete' do
+  describe '#admin?' do
+
+    context 'if email == ADMIN_EMAIL' do
+
+      it 'returns true' do
+        user = User.new(email: ADMIN_EMAIL)
+        expect(user.admin?).to be true
+      end
+    end
+
+
+    context  'if email != ADMIN_EMAIL' do
+
+      it 'returns true' do
+        user = User.new(email: 'bla@blub.de')
+        expect(user.admin?).to be false
+      end
+    end
+  end
+
+  describe 'confirm' do
+
+    it 'adds an error, if confirmation is too old' do
+      u = create(:user)
+      u.update_column(:confirmation_sent_at, (7.days + 1.hour).ago)
+      u.confirm
+
+      expect(u.errors[:email]).to eq([I18n.t('errors.messages.confirmation_period_expired', period: '7 Tage')])
+    end
+  end
+
+  it 'deletes tips if user delete' do
     user = FactoryGirl.create(:user)
     5.times{ FactoryGirl.create(:tip, :user => user) }
 

@@ -1,4 +1,9 @@
-guard :rspec, cmd: 'bundle exec spring rspec --tag ~slow', failed_mode: :none do
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
+#notification :notifysend, t: 1000
+
+guard :rspec, cmd: 'spring rspec --format progress', failed_mode: :none, notification: true do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -20,7 +25,7 @@ guard :rspec, cmd: 'bundle exec spring rspec --tag ~slow', failed_mode: :none do
   end
 end
 
-guard :livereload do
+guard :livereload, port: 33443 do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})

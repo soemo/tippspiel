@@ -1,5 +1,4 @@
-# -*- encoding : utf-8 -*-
-Tippspiel::Application.routes.draw do
+Rails.application.routes.draw do
 
   devise_scope :user do
     get '/logout' => 'devise/sessions#destroy'
@@ -36,12 +35,12 @@ Tippspiel::Application.routes.draw do
     end
   end
 
-  get 'notes' => 'notes#index'   # FIXME soeren 8/25/16 als recources
-  post 'save-notice' => 'notes#create' # FIXME soeren 8/25/16 als recources
+  get 'notes' => 'notes#index'   # todo soeren 8/25/16 als recources
+  post 'save-notice' => 'notes#create' # todo soeren 8/25/16 als recources
 
-  # FIXME soeren 8/25/16 als recources
+  # todo soeren 8/25/16 als recources
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
 
-  # FIXME soeren 8/25/16 anpassen wie in ttbn
+  # todo soeren 8/25/16 anpassen wie in ttbn
   get 'main/error' => 'main#error', :as => :error
 end

@@ -59,7 +59,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
 
   config.include Rails.application.routes.url_helpers
@@ -69,7 +69,7 @@ end
 
 def create_active_user(u = create(:user))
   u.confirmation_sent_at = 1.hour.ago
-  u.confirm!
+  u.confirm
   u
 end
 

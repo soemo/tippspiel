@@ -50,7 +50,7 @@ describe Admin::GamesController do
       it 'creates GamePresenter and renders edit' do
         game = Game.new(id:100)
         expect(Game).to receive(:find).with(game.id.to_s).and_return(game)
-        get :edit, id: game.id
+        get :edit, params: { id: game.id }
 
         expect(response).to have_http_status(:success)
         expect(response).to render_template :edit
@@ -66,7 +66,7 @@ describe Admin::GamesController do
       end
 
       it 'does not create GamesPresenter and returns forbidden' do
-        get :edit, id: 1
+        get :edit, params: { id: 1 }
 
         expect(response).to have_http_status(:forbidden)
         expect(assigns(:presenter)).not_to be_present
@@ -89,7 +89,7 @@ describe Admin::GamesController do
         it 'updates game and redirects to admin_game_path' do
           expect(game.team1_goals).to eq (0)
 
-          get :update, id: game.id, game: {team1_goals: 2}
+          get :update, params: { id: game.id, game: {team1_goals: 2} }
 
           expect(flash[:notice]).to eq(I18n.t(:update_successful, object_name: Game.model_name.human))
           expect(response).to redirect_to admin_games_path
@@ -101,7 +101,7 @@ describe Admin::GamesController do
 
         it 'does not update game if no game_params' do
           expect{
-            get :update, id: game.id
+            get :update, params: { id: game.id }
           }.to raise_error(ActionController::ParameterMissing)
         end
 
@@ -110,7 +110,7 @@ describe Admin::GamesController do
           old_team_id = game.team1_id
           expect(old_team_id).to be_present
 
-          get :update, id: game.id, game: {team1_id: nil}
+          get :update, params: { id: game.id, game: {team1_id: nil} }
 
           expect(flash[:notice]).not_to be_present
           expect(response).to render_template :edit
@@ -129,7 +129,7 @@ describe Admin::GamesController do
       end
 
       it 'returns forbidden' do
-        get :update, id: 1, game: {}
+        get :update, params: { id: 1, game: {} }
 
         expect(response).to have_http_status(:forbidden)
         expect(assigns(:presenter)).not_to be_present

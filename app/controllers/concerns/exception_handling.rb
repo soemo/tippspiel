@@ -78,12 +78,14 @@ module ExceptionHandling
 
   def redirect_all_formats exception, message, reraise_error = false, controller_or_url_hash = get_redirect_controller
     flash[:error] = (message.is_a?(Symbol)) ? t(message) : message
-    Rails.logger.error exception.message
-    Rails.logger.error exception.backtrace.inspect
     if (Rails.env == 'test' || Rails.env == 'development') && reraise_error
       # Im Test wollen wir Fehler direkt mitbekommen
       raise exception
     else
+      if Rails.logger.present?
+        Rails.logger.error(exception)
+        Rails.logger.error(exception.backtrace.inspect)
+      end
       respond_to do |format|
         if controller_or_url_hash.is_a?(Hash)
           redirect_target = controller_or_url_hash
@@ -117,31 +119,32 @@ module ExceptionHandling
   # Behandelt alle Fehler, falls ein Javascript-Request vorliegt
   def show_javascript_errors(exception)
     std_error_msg = I18n.t(:error_internal)
+
+    if Rails.logger.present?
+      Rails.logger.error(exception)
+      Rails.logger.error(exception.backtrace.inspect)
+    end
+
     if request.format == :js
       # JS-Requests werden behandelt:
       # Development => Wird auf get_redirect_action weitergeleitet und Exception-Text angezeigt (Exception wird geloggt)
       # Production  => Wird auf get_redirect_action weitergeleitet und "Es ist ein unbekannter Fehler aufgetreten!" (Exception wird geloggt)
-      if Rails.logger.present?
-        Rails.logger.error(exception)
-        Rails.logger.error(exception.backtrace.inspect)
-      end
-
-      if (Rails.env == 'development')
+      if Rails.env == 'development'
         flash[:error] = exception.message
-      elsif (Rails.env == 'test')
+      elsif Rails.env == 'test'
         raise exception
       else
         flash[:error] = std_error_msg
 
         request.format = :html
-        notify_airbrake(exception)
+        ExceptionNotifier.notify_exception(exception, env: request.env)
         request.format = :js
       end
       controller = get_redirect_controller
       redirect_target = {:controller => controller, :action => get_redirect_action, :params => {}}
       render :template => '/unknown_error', :locals => {:redirect_target => redirect_target}
     else
-      notify_airbrake(exception)
+      ExceptionNotifier.notify_exception(exception, env: request.env)
       redirect_all_formats exception, std_error_msg, true
     end
   end

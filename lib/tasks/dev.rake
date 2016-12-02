@@ -35,7 +35,7 @@ if Rails.env.development? || Rails.env.test?
                            firstname: firstname, lastname: lastname})
           user.confirmed_at = Time.now.utc
           user.confirmation_sent_at = 1.hour.ago
-          user.confirm!
+          user.confirm
           puts "Nutzer #{user.name} angelegt"
           if user.present?
             games = Game.all

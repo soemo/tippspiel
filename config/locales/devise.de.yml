@@ -65,7 +65,7 @@ de:
   errors:
     messages:
       already_confirmed: "wurde bereits bestätigt. Bitte melde dich an."
-      confirmation_period_expired: "muss innerhalb %{period} bestätigt werden. Bitte fordere einen neuen Link an"
+      confirmation_period_expired: "muss innerhalb von %{period} bestätigt werden. Bitte fordere einen neuen Link an"
       expired: "ist abgelaufen, bitte neu anfordern"
       not_found: "nicht gefunden"
       not_locked: "ist nicht gesperrt"
