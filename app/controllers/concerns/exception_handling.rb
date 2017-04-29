@@ -54,7 +54,7 @@ module ExceptionHandling
   # Da dieser auch ab und an in Templates/Partials geworfen wird, kann hier auch ein TemplateError reingegeben werden
   def redirect_after_tippspiel_error exception
     if exception.is_a?(ActionView::TemplateError)
-      exception = exception.original_exception
+      exception = exception.cause
     end
     redirect_all_formats exception, exception.message, false, get_redirect_controller
   end
