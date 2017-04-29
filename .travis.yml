@@ -3,7 +3,6 @@ cache: bundler
 
 rvm:
   - 2.3.1
-  - 2.4.1
 
 branches:
   only:
