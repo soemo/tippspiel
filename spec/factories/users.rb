@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-# Read about factories at https://github.com/thoughtbot/factory_girl/wiki/Usage
+# Read about factories at https://github.com/thoughtbot/factory_bot/wiki/Usage
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     firstname 'test'
     sequence(:lastname){|n| "user#{n}" }

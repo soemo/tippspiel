@@ -12,7 +12,7 @@ describe TipsController, type: :controller do
 
     it 'saves only tips for games start in the future' do
       user = User.last
-      FactoryGirl.create(:game)
+      FactoryBot.create(:game)
 
       tips = Tips::FromUser.call(:user_id => user.id)
       expect(tips.size).to be > 0

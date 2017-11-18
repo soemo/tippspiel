@@ -4,7 +4,7 @@ require 'rails_helper'
 describe Tip, :type => :model do
 
   it "should use Factory" do
-      tip = FactoryGirl.build(:tip)
+      tip = FactoryBot.build(:tip)
       expect(tip.game).to be_present
       expect(tip.user).to be_present
   end

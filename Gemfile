@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '= 5.0.0.1'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
+gem 'rails', '~> 5.1.4'
 ruby '2.3.1'
 
 gem 'mysql2'
@@ -43,7 +48,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capistrano-maintenance', require: false
-  gem 'rspec-rails'
+  gem 'rspec-rails', '= 3.5.2'
   gem 'capybara'     # rspec-rails braucht das um in den Views have_selector zu nutzen
   gem 'guard-rspec', require: false
   gem 'fuubar'
@@ -51,7 +56,7 @@ end
 
 group :test do
   gem 'shoulda-matchers', require: false
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'timecop'
   gem 'simplecov'
   gem 'codeclimate-test-reporter', require: nil

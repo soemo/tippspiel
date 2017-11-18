@@ -1,18 +1,18 @@
 # -*- encoding : utf-8 -*-
-FactoryGirl.define do
+FactoryBot.define do
   factory :game do
     team1 do
       case @build_strategy
-        when FactoryGirl::Strategy::Create then FactoryGirl.create(:team)
-        when FactoryGirl::Strategy::Build then FactoryGirl.build(:team)
-        when FactoryGirl::Strategy::Stub then FactoryGirl.build_stubbed(:team)
+        when FactoryBot::Strategy::Create then FactoryBot.create(:team)
+        when FactoryBot::Strategy::Build then FactoryBot.build(:team)
+        when FactoryBot::Strategy::Stub then FactoryBot.build_stubbed(:team)
       end
     end
     team2 do
       case @build_strategy
-        when FactoryGirl::Strategy::Create then FactoryGirl.create(:team)
-        when FactoryGirl::Strategy::Build then FactoryGirl.build(:team)
-        when FactoryGirl::Strategy::Stub then FactoryGirl.build_stubbed(:team)
+        when FactoryBot::Strategy::Create then FactoryBot.create(:team)
+        when FactoryBot::Strategy::Build then FactoryBot.build(:team)
+        when FactoryBot::Strategy::Stub then FactoryBot.build_stubbed(:team)
       end
     end
     team1_goals 0

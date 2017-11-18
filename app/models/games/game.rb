@@ -1,8 +1,8 @@
 class Game < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :team1, :class_name => 'Team'
-  belongs_to :team2, :class_name => 'Team'
+  belongs_to :team1, class_name: 'Team', optional: true
+  belongs_to :team2, class_name: 'Team', optional: true
   has_many   :tips
 
   validates_presence_of :place
