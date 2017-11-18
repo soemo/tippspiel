@@ -1,4 +1,4 @@
-class InitSchema < ActiveRecord::Migration
+class InitSchema < ActiveRecord::Migration[5.0]
   def up
     
     create_table "games", force: :cascade do |t|

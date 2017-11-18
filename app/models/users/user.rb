@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :championtip_team, :class_name => 'Team'
-  has_many   :tips, :dependent => :destroy
+  belongs_to :championtip_team, class_name: 'Team', optional: true
+  has_many   :tips, dependent: :destroy
 
   validates               :email, :presence => true
   # todo soeren 8/27/16 warum allow_blank

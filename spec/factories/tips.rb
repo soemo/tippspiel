@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-FactoryGirl.define do
+FactoryBot.define do
   factory :tip do
     user { association :user, strategy: @build_strategy.class }
     game { association :game, strategy: @build_strategy.class }

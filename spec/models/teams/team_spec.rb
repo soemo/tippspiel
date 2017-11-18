@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe Team, :type => :model do
   it "should use Factory" do
-      team = FactoryGirl.create(:team)
+      team = FactoryBot.create(:team)
       expect(team.name).to be_present
   end
 end

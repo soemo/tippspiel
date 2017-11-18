@@ -4,9 +4,9 @@ SimpleCov.start 'rails'
 
 ENV['RAILS_ENV'] ||= 'test'
 ENV['ADMIN_EMAIL'] ||= 'test@test.de'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
+require File.expand_path('../../config/environment', __FILE__)
 require 'spec_helper'
+require 'rspec/rails'
 require 'shoulda/matchers'
 require 'devise'
 
@@ -60,7 +60,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   config.include Rails.application.routes.url_helpers
   config.include ActionView::Helpers::TranslationHelper

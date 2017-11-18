@@ -1,4 +1,4 @@
-class SquasherClean < ActiveRecord::Migration
+class SquasherClean < ActiveRecord::Migration[5.0]
   class SchemaMigration < ApplicationRecord
   end
 

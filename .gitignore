@@ -17,3 +17,6 @@
 /config/initializers/rubymine_passenger_debug.rb
 passenger.3000.pid.lock
 .env
+
+/node_modules
+/yarn-error.log

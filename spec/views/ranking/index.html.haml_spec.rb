@@ -31,7 +31,7 @@ describe 'rankings/index', :type => :view do
     users = []
     points = 13
     user_size.times do |index|
-      users << FactoryGirl.build(:user,
+      users << FactoryBot.build(:user,
                                  id: index+1,
                                  :lastname => "user#{index}",
                                  :points => points,
@@ -88,7 +88,7 @@ describe 'rankings/index', :type => :view do
      # User anlegen
      users = []
      user_poins.each do |key, data|
-       users << FactoryGirl.build(:user,
+       users << FactoryBot.build(:user,
                                   id: key + 1,
                                   :lastname => "user_key_#{key}",
                                   :points => data[:points],

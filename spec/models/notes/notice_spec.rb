@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe Notice, :type => :model do
   it 'uses Factory' do
-      notice = FactoryGirl.create(:notice)
+      notice = FactoryBot.create(:notice)
       expect(notice.text).to be_present
       expect(notice.user).to be_present
   end

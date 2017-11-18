@@ -3,7 +3,7 @@ require 'rails_helper'
 describe User, type: :model do
 
   it 'does not found if inactive' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       expect(User.active.to_a).not_to include(user)
 
       expect(User.inactive.to_a).to include(user)
@@ -49,8 +49,8 @@ describe User, type: :model do
   end
 
   it 'deletes tips if user delete' do
-    user = FactoryGirl.create(:user)
-    5.times{ FactoryGirl.create(:tip, :user => user) }
+    user = FactoryBot.create(:user)
+    5.times{ FactoryBot.create(:tip, :user => user) }
 
     tip_ids = Tip.where(:user_id => user.id).pluck(:id)
     expect(tip_ids.count).to eq(5)
