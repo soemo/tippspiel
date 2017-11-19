@@ -1,6 +1,3 @@
-require 'simplecov'
-SimpleCov.start
-
 require 'pp'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

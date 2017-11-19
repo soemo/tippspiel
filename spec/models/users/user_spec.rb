@@ -2,10 +2,24 @@ require 'rails_helper'
 
 describe User, type: :model do
 
+  describe 'association' do
+
+    it { is_expected.to belong_to(:championtip_team).class_name('Team') }
+    it { is_expected.to have_many(:tips).dependent(:destroy) }
+  end
+
+  context 'validation' do
+
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_uniqueness_of(:email).scoped_to([:deleted_at]).ignoring_case_sensitivity }
+    it { is_expected.to validate_presence_of(:firstname) }
+    it { is_expected.to validate_presence_of(:lastname) }
+  end
+
+
   it 'does not found if inactive' do
       user = FactoryBot.create(:user)
       expect(User.active.to_a).not_to include(user)
-
       expect(User.inactive.to_a).to include(user)
   end
 

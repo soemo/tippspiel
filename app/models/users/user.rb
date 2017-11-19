@@ -5,7 +5,6 @@ class User < ApplicationRecord
   has_many   :tips, dependent: :destroy
 
   validates               :email, :presence => true
-  # todo soeren 8/27/16 warum allow_blank
   validates_uniqueness_of :email, :allow_blank => true, :scope => :deleted_at, :case_sensitive => false, :if => :email_changed?
   validates_format_of     :email, :with  => Devise.email_regexp, :allow_blank => true
   validates               :firstname, :presence => true
@@ -39,6 +38,4 @@ class User < ApplicationRecord
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
-
-
 end
