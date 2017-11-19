@@ -1,7 +1,13 @@
-# -*- encoding : utf-8 -*-
 require 'rails_helper'
 
-describe ApplicationHelper, :type => :helper do
+describe ApplicationHelper, type: :helper do
+
+  describe '#get_title' do
+
+    it 'return Name + Tippspiel' do
+      expect(helper.get_title).to eq("#{TOURNAMENT_NAME} #{t('app_name')}")
+    end
+  end
 
   describe '#filter_categories_options' do
 
