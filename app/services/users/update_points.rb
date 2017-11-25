@@ -52,7 +52,7 @@ module Users
                                :count3points => count_3points,
                                :count0points => count_0points,
                               })
-          Rails.logger.info("CALCULATE_USER_POINTS: #{user.name} - totalpoints: #{total_points}") if Rails.logger.present?
+          Rails.logger.debug("CALCULATE_USER_POINTS: #{user.name} - totalpoints: #{total_points}") if Rails.logger.present?
         end
       end
     end

@@ -2,16 +2,16 @@ module Users
   class UpdateRankingPerGame < UserBaseService
 
     def call
-      finished_game_ids = ::GameQueries.all_finished_ordered_by_start_at.pluck(:id)
-      all_8point_tips = ::TipQueries.all_by_game_ids_and_tip_points(finished_game_ids, 8)
-      all_5point_tips = ::TipQueries.all_by_game_ids_and_tip_points(finished_game_ids, 5)
-      all_4point_tips = ::TipQueries.all_by_game_ids_and_tip_points(finished_game_ids, 4)
-      all_3point_tips = ::TipQueries.all_by_game_ids_and_tip_points(finished_game_ids, 3)
+      finished_games = ::GameQueries.all_finished_ordered_by_start_at_with_preload_tips
+      all_8point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 8)
+      all_5point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 5)
+      all_4point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 4)
+      all_3point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 3)
       used_game_ids = []
 
-      finished_game_ids.each do |game_id|
-        tips_for_game = TipQueries.all_by_game_id(game_id).select('id, user_id')
-        used_game_ids << game_id
+      finished_games.each do |game|
+        tips_for_game = game.tips
+        used_game_ids << game.id
 
         ordered_user_id_and_ranking_comparison_value = get_ordered_user_id_and_ranking_comparison_value(all_8point_tips,
                                                                                                         all_5point_tips,

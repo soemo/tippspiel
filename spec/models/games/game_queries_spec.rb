@@ -127,11 +127,53 @@ describe GameQueries do
                           start_at: Time.now - 1.day)}
 
     it 'returns finished games ordered by start_at' do
-      expect(subject.all_finished_ordered_by_start_at.to_a).to eq([
-                                                              game3,
-                                                              game1,
-                                                              game2
-                                                            ])
+      games = subject.all_finished_ordered_by_start_at
+      expect(games).to eq([
+                            game3,
+                            game1,
+                            game2
+                          ])
+      expect(games[0].association(:tips)).not_to be_loaded
+      expect(games[1].association(:tips)).not_to be_loaded
+      expect(games[2].association(:tips)).not_to be_loaded
+    end
+
+  end
+
+  describe '::all_finished_ordered_by_start_at_with_preload_tips' do
+
+    let!(:game1) { create(:game,
+                          finished: true,
+                          round: GROUP,
+                          group: GROUP_A,
+                          start_at: Time.now + 1.day)}
+    let!(:game2) { create(:game,
+                          finished: true,
+                          round: GROUP,
+                          group: GROUP_A,
+                          start_at: Time.now + 2.day)}
+    let!(:game3) { create(:game,
+                          finished: true,
+                          round: GROUP,
+                          group: GROUP_B,
+                          start_at: Time.now - 2.day)}
+    let!(:game4) { create(:game,
+                          finished: false,
+                          round: GROUP,
+                          group: GROUP_C,
+                          start_at: Time.now - 1.day)}
+
+    it 'returns finished games ordered by start_at with preloading tips' do
+      games = subject.all_finished_ordered_by_start_at_with_preload_tips
+      expect(games).to eq([
+                            game3,
+                            game1,
+                            game2
+                          ])
+
+      expect(games[0].association(:tips)).to be_loaded
+      expect(games[1].association(:tips)).to be_loaded
+      expect(games[2].association(:tips)).to be_loaded
     end
 
   end
