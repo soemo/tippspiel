@@ -83,7 +83,7 @@ describe 'devise mail', :type => :request do
     }.not_to change(User, :count)
 
     expect(response).to be_success
-    expect(response).to render_template('new')
+    expect(response).to render_template :new
 
     user = User.where(:email => email).first
     expect(user).to be_nil

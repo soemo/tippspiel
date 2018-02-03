@@ -10,7 +10,28 @@ describe RankingPerGamesShowPresenter do
   let(:user) {create(:user, firstname: 'test', lastname: 'user')}
 
   let(:user_rankings) {[4,2,1]}
-  let(:games) {[Game.new, Game.new, Game.new]}
+  let(:games) {[Game.new(start_at: DateTime.now),
+                Game.new(start_at: DateTime.now + 1.day),
+                Game.new(start_at: DateTime.now + 2.day)]}
+
+  describe '#user_to_show' do
+
+    context 'if user to show == current_user' do
+
+      it 'returns current_user' do
+        presenter = subject.new(current_user, current_user.id, games)
+        expect(presenter.user_to_show).to eq(current_user)
+      end
+    end
+
+    context 'if user to show <> current_user' do
+
+      it 'returns other user' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter.user_to_show).to eq(user)
+      end
+    end
+  end
 
   describe '#shows_current_user_rankings?' do
 
@@ -61,6 +82,25 @@ describe RankingPerGamesShowPresenter do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter.header_text).to eq(I18n.t(:ranking_per_game_for, name: user.name))
       end
+    end
+  end
+
+  describe '#chart_x_labels' do
+
+    it 'calls GamePresenter' do
+      presenter = subject.new(current_user, current_user.id, games)
+      expect(games).to receive(:map).and_return([
+                                                  GamePresenter.new(games[0]),
+                                                  GamePresenter.new(games[1]),
+                                                  GamePresenter.new(games[2])])
+
+      # no teams definied on the games
+      expected = [
+        "#{ I18n.l(games[0].start_at, format: :short)}:  - ",
+        "#{ I18n.l(games[1].start_at, format: :short)}:  - ",
+        "#{ I18n.l(games[2].start_at, format: :short)}:  - ",
+      ]
+      expect(presenter.chart_x_labels).to eq(expected)
     end
   end
 

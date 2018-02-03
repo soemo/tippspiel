@@ -33,10 +33,6 @@ class NavBarPresenter
     }
   end
 
-  def nav_bar_item_user_presenter
-    nav_bar_item_presenter(nav_bar_item_user_configuration)
-  end
-
   def user_logged_in?
     user.present?
   end

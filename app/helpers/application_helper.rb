@@ -49,7 +49,7 @@ module ApplicationHelper
       haml_tag "div.alert-box.#{div_alert_css_class}", data: {closable: ''} do
         haml_concat msg
         haml_tag 'button.close-button', {data: {close: ''}} do
-          haml_concat '&times;'
+          haml_concat '&times;'.html_safe
         end
 
       end

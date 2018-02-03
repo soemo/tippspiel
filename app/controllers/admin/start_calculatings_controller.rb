@@ -14,8 +14,6 @@ module Admin
         Rails.logger.info msg
         flash[:notice] =  msg
         redirect_to admin_games_path
-      else
-        render text:  '403 forbidden', status: :forbidden
       end
     end
   end

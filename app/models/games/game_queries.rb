@@ -33,5 +33,9 @@ module GameQueries
       Game.where(finished: true).order(start_at: :asc)
     end
 
+    def all_finished_ordered_by_start_at_with_preload_tips
+      Game.preload(:tips).where(finished: true).order(start_at: :asc)
+    end
+
   end
 end

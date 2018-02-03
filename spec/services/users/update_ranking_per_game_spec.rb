@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 require 'rails_helper'
 
 describe Users::UpdateRankingPerGame do
@@ -31,21 +30,21 @@ describe Users::UpdateRankingPerGame do
   let!(:tip_g3_u4) {create(:tip, user: user4, game: game3, tip_points: 8)}
 
   it 'writes ranking_places to tips (per mass update)' do
-    finished_game_ids = [game1.id, game2.id, game3.id]
+    finished_games = [game1, game2, game3]
     all_8point_tips = [tip_g1_u1, tip_g2_u4, tip_g3_u4]
     all_5point_tips = []
     all_4point_tips = [tip_g2_u2, tip_g2_u3]
     all_3point_tips = [tip_g3_u1, tip_g1_u2, tip_g3_u2, tip_g1_u3, tip_g3_u3]
 
-    expect(GameQueries).to receive_message_chain(:all_finished_ordered_by_start_at, :pluck).
-                               and_return(finished_game_ids)
-    expect(TipQueries).to receive(:all_by_game_ids_and_tip_points).with(finished_game_ids, 8).
+    expect(GameQueries).to receive(:all_finished_ordered_by_start_at_with_preload_tips).
+                               and_return(finished_games)
+    expect(TipQueries).to receive(:all_by_games_and_tip_points).with(finished_games, 8).
                               and_return(all_8point_tips)
-    expect(TipQueries).to receive(:all_by_game_ids_and_tip_points).with(finished_game_ids, 5).
+    expect(TipQueries).to receive(:all_by_games_and_tip_points).with(finished_games, 5).
                               and_return(all_5point_tips)
-    expect(TipQueries).to receive(:all_by_game_ids_and_tip_points).with(finished_game_ids, 4).
+    expect(TipQueries).to receive(:all_by_games_and_tip_points).with(finished_games, 4).
                               and_return(all_4point_tips)
-    expect(TipQueries).to receive(:all_by_game_ids_and_tip_points).with(finished_game_ids, 3).
+    expect(TipQueries).to receive(:all_by_games_and_tip_points).with(finished_games, 3).
                               and_return(all_3point_tips)
 
 

@@ -75,11 +75,11 @@ describe TipQueries do
     end
   end
 
-  describe '::all_by_game_ids_and_tip_points' do
+  describe '::all_by_games_and_tip_points' do
 
     it 'returns tips for game and given tip points' do
       tip_g1_u2.update_column(:tip_points,  8)
-      expect(subject.all_by_game_ids_and_tip_points(game1.id, 8)).to eq([tip_g1_u2])
+      expect(subject.all_by_games_and_tip_points(game1, 8)).to eq([tip_g1_u2])
     end
   end
 
