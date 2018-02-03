@@ -1,8 +1,3 @@
-# Default-Logindaten. Wenn andere Daten lokal
-# genutzt werden sollen, dann bitte diese 8 Zeilen
-# in eine Datei dblogin.yml kopieren und dort die
-# eigenen Daten angeben.
-# Bitte die dblogin.yml NICHT in dei Versionskontrolle einchecken!
 default: &default
   adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -14,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: tippspiel_development_em2016 #tippspiel_development_wm2014
+  database: tippspiel_development_wm2018
 
 test:
   <<: *default
@@ -23,4 +18,4 @@ test:
 # prod db == dev db
 production:
   <<: *default
-  database: tippspiel_development_em2016 # hier nutzen wir auch lokal unser dev DB
+  database: tippspiel_development_wm2018 # hier nutzen wir auch lokal unser dev DB
