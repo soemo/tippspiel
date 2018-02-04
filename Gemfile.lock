@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/soemo/capistrano-uberspace.git
-  revision: 184109aa1c50768275da1ba987ec450cb3298c9c
+  revision: c34a5b68c9c6f063e1ed2025ee04099d06ea4bd1
   branch: master
   specs:
     capistrano-uberspace (0.0.1)
@@ -341,7 +341,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.15.1)
+    sshkit (1.16.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.8.0)
