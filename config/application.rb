@@ -50,11 +50,5 @@ module Tippspiel
       g.fixture_replacement :factory_bot, :dir=> 'spec/factories'
     end
 
-    # TODO soeren 11/25/16 kann das raus?
-    config.after_initialize do |app|
-      # 404 catch all route, hier definiert, damit sie immer die letzte Route ist
-
-      app.routes.append{ get '*a', :to => 'application#rescue_404' } unless config.consider_all_requests_local
-    end
   end
 end

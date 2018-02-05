@@ -2,17 +2,10 @@ de:
   app_name: "Tippspiel"
   games_of: "Spielplan der %{tournament_name}"
 
-  error_500_text: "<b>Ups, da ist was schiefgegangen.</b></br></br>
-                  Ich wurde informiert und arbeite an einer Lösung. Entschuldige die Unannehmlichkeit."
-  error_404_text: "<b>Die Seite '%{requested_page}' wurde leider nicht gefunden.</b></br></br>
-                  Stimmt da vielleicht ein Lesezeichen nicht mehr?"
-
   text_maintenance: "Die Seite wird aktuell gewartet. Bitte probiere es später wieder."
   error_stale_object: Das Objekt wurde von einem anderen Nutzer bearbeitet. Bitte öffne es erneut und prüfe die Daten
   error_record_not_found: Das zu bearbeitende Objekt wurde nicht gefunden!
   error_auth_token: Ihre Session ist abgelaufen. Bitte melde dich erneut an (indem du den Browser schließst und neu öffnest).
-  error_internal: Es ist ein interner Fehler aufgetreten!
-  error_access_denied: Du hast keine Berechtigung für diese Aktion!
 
   delete_secure_question: "Bist du dir sicher?"
 

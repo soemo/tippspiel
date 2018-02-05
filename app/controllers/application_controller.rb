@@ -1,12 +1,12 @@
-# -*- encoding : utf-8 -*-
 require 'pp'
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
-  include ExceptionHandling
+  include ErrorHandling
+  include HttpStatusCodeRenderers
 
   before_action :set_locale
-  before_action :authenticate_user!, :unless => :error_handling_method?
+  before_action :authenticate_user!
   before_action :set_host_to_mailers
 
   helper_method :current_user, :nav_bar_presenter

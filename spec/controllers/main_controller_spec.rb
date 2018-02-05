@@ -29,22 +29,4 @@ describe MainController, :type => :controller do
       expect(response).to redirect_to new_user_session_path
     end
   end
-
-  context "#error" do
-    it "shows extra text, if 500 error" do
-      expect(controller).to receive(:flash) { {error: I18n.t(:error_internal) }}
-      get :error
-      expect(response).to be_success
-      expect(assigns[:error_msg]).to eq({text: I18n.t(:error_500_text)})
-    end
-
-    it "shows no extra text" do
-      expect(controller).to receive(:flash) { {error: 'other_error_text' }}
-      get :error
-      expect(response).to be_success
-      expect(assigns[:error_msg]).to eq(nil)
-    end
-  end
-
-
 end

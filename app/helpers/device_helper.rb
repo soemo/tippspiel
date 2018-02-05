@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module DeviceHelper
 
   # angepasste devise Methode
