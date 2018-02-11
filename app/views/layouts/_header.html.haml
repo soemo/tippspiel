@@ -1,14 +1,27 @@
 %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, user-scalable=no'}
-%meta{:charset => 'utf-8'}
+%meta{charset: 'utf-8'}
 = csrf_meta_tag
+- image = "#{WEBSITE_URL}/images/pokalsieger.jpg"
 
 %title= get_title
-%meta{:name => 'author', :content => 'Soeren Mothes'}
-%meta{:name=>"title", :content=>get_title}
-- description = 'Fu&#223;ball-Tippspiel auf soemo.org. Dem Sieger winkt ein Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschr&#228;nktem Prahlrecht.'
-%meta{:name => 'description', :content => description}
-%meta{:name => 'keywords', :content => 'fussball tippspiel soemo, soeren mothes'}
+%meta{name: 'author', content: 'Soeren Mothes'}
+%meta{name: 'title', content: get_title}
+- description = 'Fußball-Tippspiel auf soemo.org. Dem Sieger winkt ein Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschränktem Prahlrecht.'
+%meta{name: 'description', content: description}
+%meta{name: 'keywords', content: 'fussball tippspiel soemo, soeren mothes'}
+
+%meta{property: 'og:title', content: get_title}
+%meta{property: 'og:description', content: description}
+%meta{property: 'og:image', content: image}
+%meta{property: 'og:url', content: WEBSITE_URL}
+%meta{property: 'og:type', content: 'website'}
+
+%meta{name: 'twitter:title', content: get_title}
+%meta{name: 'twitter:description', content: description}
+%meta{name: 'twitter:image', content: image}
+%meta{name: 'twitter:card', content: 'summary'}
+
 = render partial: 'layouts/favicons'
 
-= stylesheet_link_tag 'application', :media=>:all
+= stylesheet_link_tag 'application', media: :all
 = javascript_include_tag 'application'

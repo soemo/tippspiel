@@ -11,7 +11,9 @@ de:
 
   signed_up_message:
     header: Du hast dich erfolgreich registriert.
-    content: "Es wurde ein E-Mail mit der Anleitung, wie Du deinen Account freischalten kannst, an deine angegebene E-Mail Adresse verschickt. Solltest du diese E-Mail nicht in deinem Postfach finden, prüfe bitte deinen Spam-Ordner. Hast du die E-Mail nicht erhalten? Dann kontaktiere mich bitte per E-Mail."
+    content: "An deine angegebene E-Mail Adresse wurde eine E-Mail, mit der Anleitung zum Account freischalten, verschickt.
+        Wenn Du keine E-Mail von mir erhalten hast, so schau bitte auch in deinen Spam-Filter, dort geschehen manchmal seltsame Dinge!
+        Hast du die E-Mail nicht erhalten? Dann kontaktiere mich bitte."
 
   succesfully_saved_tips: "Deine Tipps wurden gespeichert!"
   succesfully_saved_championtip: "Dein Tuniersieger-Tipp wurden gespeichert!"

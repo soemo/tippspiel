@@ -221,7 +221,6 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
-    newrelic_rpm (4.8.0.341)
     nio4r (2.1.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -393,7 +392,6 @@ DEPENDENCIES
   letter_opener_web
   lograge
   mysql2
-  newrelic_rpm
   paranoia
   passenger
   rack-livereload
