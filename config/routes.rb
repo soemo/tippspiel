@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   # todo soeren 8/25/16 als recources
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
 
-  # todo soeren 8/25/16 anpassen wie in ttbn
-  get 'main/error' => 'main#error', :as => :error
+  # This route must be the last route in this file.
+  # It's used when no other routes matches and calls RoutingErrorsController#show with param unknown_route where the
+  # specified path is stored.
+  # Read comment in RoutingErrorsController#show why we use this workaround.
+  match '*unknown_route', to: 'routing_errors#show', via: :all
 end
