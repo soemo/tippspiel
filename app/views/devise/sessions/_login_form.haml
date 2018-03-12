@@ -5,7 +5,7 @@
       .small-12.large-7.columns
         .input-group
           .input-group-label
-            = icon('envelope-o', nil, {class: 'fa-fw'})
+            = icon('far', 'envelope', nil, {class: 'fa-fw'})
           = f.email_field :email,
                           class: 'input-group-field',
                           placeholder: User.human_attribute_name(:email)
@@ -13,7 +13,7 @@
       .small-12.large-7.columns
         .input-group
           .input-group-label
-            = icon('lock', nil, {class: 'fa-fw'})
+            = icon('fas', 'lock', nil, {class: 'fa-fw'})
           = f.password_field :password,
                              class: 'input-group-field',
                              placeholder: User.human_attribute_name(:password)

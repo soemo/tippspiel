@@ -31,7 +31,7 @@
                     = game_presenter.team2_with_flag(flag_size: 16, flag_position: 'left')
                 .row
                   .small-12.columns.text-right
-                    = link_to(icon('pencil'), edit_admin_game_path(game_presenter))
+                    = link_to(icon('far', 'edit'), edit_admin_game_path(game_presenter))
 
               %td.hide-for-small-only= game_presenter.formatted_start_at
               %td.hide-for-small-only= game_presenter.round_or_group_name
@@ -42,4 +42,4 @@
                 = game_presenter.result
               %td.hide-for-small-only.text-left
                 = game_presenter.team2_with_flag(flag_size: 32, flag_position: 'left')
-              %td.hide-for-small-only= link_to(icon('pencil'), edit_admin_game_path(game_presenter))
+              %td.hide-for-small-only= link_to(icon('far', 'edit'), edit_admin_game_path(game_presenter))
