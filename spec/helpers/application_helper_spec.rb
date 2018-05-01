@@ -25,7 +25,7 @@ describe ApplicationHelper, type: :helper do
                                                        {:label=>"Heutige Spiele",
                                                         :class=>"filter button",
                                                         :data_filter=>".category-today"},
-                                                       {:label=>"Ausstehende Spiele",
+                                                       {:label=>"Offene Spiele",
                                                         :class=>"filter button",
                                                         :data_filter=>".category-future"}]
                                                   )

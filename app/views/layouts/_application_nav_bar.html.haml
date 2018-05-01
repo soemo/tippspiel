@@ -9,7 +9,7 @@
                 = get_title
             - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
               %li{class: nav_bar_item_presenter.css_class}
-                - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon)}"
+                - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon_prefix, nav_bar_item_presenter.link_icon)}"
                 - icon_and_text << "<span>#{nav_bar_item_presenter.link_text}</span>" if nav_bar_item_presenter.link_text.present?
                 = link_to(icon_and_text.html_safe, nav_bar_item_presenter.link_url)
         - if presenter.user_logged_in?

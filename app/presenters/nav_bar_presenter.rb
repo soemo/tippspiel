@@ -40,7 +40,8 @@ class NavBarPresenter
   private
 
   def nav_bar_item_presenter(config)
-    NavBarItemPresenter.new(config[:link_icon],
+    NavBarItemPresenter.new(config[:link_icon_prefix],
+                            config[:link_icon],
                             config[:link_text],
                             config[:link_url],
                             config[:css_class])
@@ -50,36 +51,41 @@ class NavBarPresenter
     result = []
     if user_logged_in?
       result += [
-          {link_icon: 'list-ol',
-           link_text: I18n.t('ranking'),
-           link_url: rankings_path,
-           css_class: active_css_class(URL_SCOPES[:ranking])}
+        {link_icon_prefix: 'fas',
+         link_icon: 'list-ol',
+         link_text: I18n.t('ranking'),
+         link_url: rankings_path,
+         css_class: active_css_class(URL_SCOPES[:ranking])}
       ]
       result += [
-          {link_icon: 'comment',
-           link_text: I18n.t('notice'),
-           link_url: notes_path,
-           css_class: active_css_class(URL_SCOPES[:notes])}
+        {link_icon_prefix: 'far',
+         link_icon: 'comments',
+         link_text: I18n.t('notice'),
+         link_url: notes_path,
+         css_class: active_css_class(URL_SCOPES[:notes])}
       ]
       result += [
-          {link_icon: 'angle-double-right',
-           link_text: I18n.t('comparetips'),
-           link_url: compare_tips_path,
-           css_class: active_css_class(URL_SCOPES[:comparetips])}
+        {link_icon_prefix: 'fas',
+         link_icon: 'angle-double-right',
+         link_text: I18n.t('comparetips'),
+         link_url: compare_tips_path,
+         css_class: active_css_class(URL_SCOPES[:comparetips])}
       ]
     end
 
-    result += [{link_icon: 'question',
+    result += [{link_icon_prefix: 'far',
+                link_icon: 'question-circle',
                 link_text: nil,
                 link_url: help_path,
                 css_class: active_css_class(URL_SCOPES[:help])}]
 
     if user_logged_in?
-      result +=  [{link_icon: 'sign-out',
-                  link_text: I18n.t(:sign_out),
-                  link_url: logout_path,
-                  css_class: active_css_class(URL_SCOPES[:user])
-      }]
+      result +=  [{link_icon_prefix: 'fas',
+                   link_icon: 'sign-out-alt',
+                   link_text: I18n.t(:sign_out),
+                   link_url: logout_path,
+                   css_class: active_css_class(URL_SCOPES[:user])
+                  }]
     end
 
     result

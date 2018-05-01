@@ -6,7 +6,8 @@ describe NavBarItemPresenter do
 
   describe '#init' do
     it 'returns true' do
-      presenter = subject.new('lock', 'text', '/',  'css_class')
+      presenter = subject.new('fas', 'lock', 'text', '/',  'css_class')
+      expect(presenter.link_icon_prefix).to eq('fas')
       expect(presenter.link_icon).to eq('lock')
       expect(presenter.link_text).to eq('text')
       expect(presenter.link_url).to eq('/')

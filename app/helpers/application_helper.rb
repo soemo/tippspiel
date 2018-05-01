@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def hall_of_fame_link
-    link_to(icon('trophy',I18n.t(:hall_of_fame), {class: 'fa-fw'}), hall_of_fame_path)
+    link_to(icon('fas', 'trophy', I18n.t(:hall_of_fame), {class: 'fa-fw'}), hall_of_fame_path)
   end
 
   # used with mixitup

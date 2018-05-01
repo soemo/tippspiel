@@ -33,7 +33,7 @@
             - tip1_input = tip_input(tip_presenter.id, 'team1_goals', tip_presenter.team1_goals)
             - tip2_input = tip_input(tip_presenter.id, 'team2_goals', tip_presenter.team2_goals)
           - else
-            - link_to_compare_tips = link_to(icon('angle-double-right', nil, {class: 'fa-fw'}),
+            - link_to_compare_tips = link_to(icon('fas', 'angle-double-right', nil, {class: 'fa-fw'}),
                                              compare_tips_path(game_id: game_presenter.id),
                                              title: I18n.t(:comparetips))
             - tip1_input = tip_presenter.team1_goals

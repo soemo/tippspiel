@@ -6,7 +6,9 @@
 
       .row
         .small-12.large-7.columns
-          = render layout: 'widgets/input_with_prefix_icon', locals: {icon_class: 'envelope-o'} do
+          .input-group
+            .input-group-label
+              = icon('far', 'envelope', nil, {class: 'fa-fw'})
             = f.email_field :email,
                             class: 'input-group-field',
                             placeholder: User.human_attribute_name(:email)

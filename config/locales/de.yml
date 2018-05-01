@@ -97,7 +97,7 @@ de:
   filter:
     all: 'Alle Spiele'
     today: 'Heutige Spiele'
-    future:  'Ausstehende Spiele'
+    future:  'Offene Spiele'
 
   date:
     formats:
