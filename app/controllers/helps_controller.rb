@@ -5,5 +5,4 @@ class HelpsController < ApplicationController
   def show
     @presenter = HelpPresenter.new
   end
-
 end

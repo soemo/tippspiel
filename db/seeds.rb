@@ -118,20 +118,20 @@ def game_data
       {start_at: '27.06.2018 16:00', place: 'Kasan', team1_name: 'Südkorea', team2_name: 'Deutschland', group: GROUP_F, round: GROUP},
 
       # Gruppe G
-      {start_at: '18.06.2018 17:00', place: 'Sotschi', team1_name: 'Belgien', team2_name: 'Panama', group: GROUP_F, round: GROUP},
-      {start_at: '18.06.2018 20:00', place: 'Wolgograd', team1_name: 'Tunesien', team2_name: 'England', group: GROUP_F, round: GROUP},
-      {start_at: '23.06.2018 14:00', place: 'Moskau', team1_name: 'Belgien', team2_name: 'Tunesien', group: GROUP_F, round: GROUP},
-      {start_at: '24.06.2018 14:00', place: 'Nischni Nowgorod', team1_name: 'England', team2_name: 'Panama', group: GROUP_F, round: GROUP},
-      {start_at: '28.06.2018 20:00', place: 'Kaliningrad', team1_name: 'England', team2_name: 'Belgien', group: GROUP_F, round: GROUP},
-      {start_at: '28.06.2018 20:00', place: 'Saransk', team1_name: 'Panama', team2_name: 'Tunesien', group: GROUP_F, round: GROUP},
+      {start_at: '18.06.2018 17:00', place: 'Sotschi', team1_name: 'Belgien', team2_name: 'Panama', group: GROUP_G, round: GROUP},
+      {start_at: '18.06.2018 20:00', place: 'Wolgograd', team1_name: 'Tunesien', team2_name: 'England', group: GROUP_G, round: GROUP},
+      {start_at: '23.06.2018 14:00', place: 'Moskau', team1_name: 'Belgien', team2_name: 'Tunesien', group: GROUP_G, round: GROUP},
+      {start_at: '24.06.2018 14:00', place: 'Nischni Nowgorod', team1_name: 'England', team2_name: 'Panama', group: GROUP_G, round: GROUP},
+      {start_at: '28.06.2018 20:00', place: 'Kaliningrad', team1_name: 'England', team2_name: 'Belgien', group: GROUP_G, round: GROUP},
+      {start_at: '28.06.2018 20:00', place: 'Saransk', team1_name: 'Panama', team2_name: 'Tunesien', group: GROUP_G, round: GROUP},
 
       # Gruppe H
-      {start_at: '19.06.2018 17:00', place: 'Moskau', team1_name: 'Polen', team2_name: 'Senegal', group: GROUP_F, round: GROUP},
-      {start_at: '19.06.2018 14:00', place: 'Saransk', team1_name: 'Kolumbien', team2_name: 'Japan', group: GROUP_F, round: GROUP},
-      {start_at: '24.06.2018 17:00', place: 'Jekaterinburg', team1_name: 'Japan', team2_name: 'Senegal', group: GROUP_F, round: GROUP},
-      {start_at: '24.06.2018 20:00', place: 'Kasan', team1_name: 'Polen', team2_name: 'Kolumbien', group: GROUP_F, round: GROUP},
-      {start_at: '28.06.2018 16:00', place: 'Samara', team1_name: 'Senegal', team2_name: 'Kolumbien', group: GROUP_F, round: GROUP},
-      {start_at: '28.06.2018 16:00', place: 'Wolgograd', team1_name: 'Japan', team2_name: 'Polen', group: GROUP_F, round: GROUP},
+      {start_at: '19.06.2018 17:00', place: 'Moskau', team1_name: 'Polen', team2_name: 'Senegal', group: GROUP_H, round: GROUP},
+      {start_at: '19.06.2018 14:00', place: 'Saransk', team1_name: 'Kolumbien', team2_name: 'Japan', group: GROUP_H, round: GROUP},
+      {start_at: '24.06.2018 17:00', place: 'Jekaterinburg', team1_name: 'Japan', team2_name: 'Senegal', group: GROUP_H, round: GROUP},
+      {start_at: '24.06.2018 20:00', place: 'Kasan', team1_name: 'Polen', team2_name: 'Kolumbien', group: GROUP_H, round: GROUP},
+      {start_at: '28.06.2018 16:00', place: 'Samara', team1_name: 'Senegal', team2_name: 'Kolumbien', group: GROUP_H, round: GROUP},
+      {start_at: '28.06.2018 16:00', place: 'Wolgograd', team1_name: 'Japan', team2_name: 'Polen', group: GROUP_H, round: GROUP},
 
       # Achtelfinale
       {start_at: '30.06.2018 16:00', place: 'Kasan', team1_placeholder_name: '1. Gruppe C', team2_placeholder_name: '2. Gruppe D', group: nil, round: ROUND_OF_16},

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HelpsController, :type => :controller do
+describe ImprintsController, type: :controller do
 
   describe '#show' do
     render_views

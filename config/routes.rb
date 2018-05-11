@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resource :champion_tips, only: [:update]
   resource :hall_of_fame, only: :show
   resource :help, only: :show
+  resource :imprint, only: :show
   resources :rankings, only: :index
   resources :ranking_per_games, only: :show
   resources :tips, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
