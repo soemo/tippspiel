@@ -92,7 +92,7 @@ a.brand {
 }
 
 /* ##### Start Scroll to top ##### */
-.scroll-to-top {
+#scroll-to-top {
   width: 37px;
   height: 18px;
   position: fixed;
@@ -104,6 +104,20 @@ a.brand {
   background: transparent url(image_path('scroll-to-top.png')) no-repeat;
 }
 /* ##### End Scroll to top ##### */
+
+/* ##### Start scroll to tipp save button ##### */
+#scroll-to-tipp-save-button {
+  width: 100px;
+  height: 78px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+  text-indent: -9999px;
+  z-index: 5;
+  background: transparent url(image_path('scroll-to-tipp-save-button.png')) right top;
+}
+/* ##### End scroll to tipp save button ##### */
 
 
 .padding-left-right-5 {

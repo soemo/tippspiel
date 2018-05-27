@@ -92,7 +92,7 @@
     .row
       .small-12.columns
         %span.float-right
-          = submit_tag t('save_tip'), :class => 'button'
+          = submit_tag t('save_tip'), class: 'button', id: 'tipp-save-button'
 
 - else
   %p= 'No Tips'
