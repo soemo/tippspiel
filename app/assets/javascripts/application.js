@@ -12,6 +12,7 @@ $(function(){
   $(document).foundation();
 
   initScrollToTop();
+  initCheckTippChanges();
   updateTextareaMaxlength();
   repositionOfFlashMessages();
   repositionOfFlashMessagesIfOneIsClosed();
@@ -19,9 +20,6 @@ $(function(){
 
   check_user_tip();
   init_random_user_tips();
-
-  // https://github.com/codedance/jquery.AreYouSure - alerts users to unsaved changes
-  $('form#js_save_tips').areYouSure();
 
   // https://github.com/patrickkunka/mixitup/blob/master/docs/configuration-object.md
   $('#mixitup-table').mixItUp({
@@ -34,24 +32,35 @@ $(function(){
   });
 });
 
+function initCheckTippChanges(){
+  // https://github.com/codedance/jquery.AreYouSure - alerts users to unsaved changes
+  $('form#js_save_tips').areYouSure();
+
+  $('form#js_save_tips').on('dirty.areYouSure', function() {
+    $('#scroll-to-tipp-save-button').fadeIn();
+  });
+  $('form#js_save_tips').on('clean.areYouSure', function() {
+    $('#scroll-to-tipp-save-button').fadeOut();
+  });
+}
+
 
 function initScrollToTop(){
 
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
-      $('.scroll-to-top').fadeIn();
+      $('#scroll-to-top').fadeIn();
     } else {
-      $('.scroll-to-top').fadeOut();
+      $('#scroll-to-top').fadeOut();
     }
   });
 
-  $('.scroll-to-top').click(function () {
+  $('#scroll-to-top').click(function () {
     $("html, body").animate({
       scrollTop: 0
     }, 200);
     return false;
   });
-
 }
 
 function updateTextareaMaxlength(){
