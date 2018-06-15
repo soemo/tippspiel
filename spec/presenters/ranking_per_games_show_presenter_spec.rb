@@ -59,7 +59,7 @@ describe RankingPerGamesShowPresenter do
 
       tipp_query = double
       expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at).
-          with(user.id).and_return(tipp_query)
+        with(user.id).and_return(tipp_query)
       expect(tipp_query).to receive(:pluck).with(:ranking_place).and_return(user_rankings)
 
       expect(presenter.user_rankings).to eq(user_rankings)
@@ -104,6 +104,80 @@ describe RankingPerGamesShowPresenter do
     end
   end
 
+  describe '#chart_max_ticks' do
+
+    context 'if user data present' do
+
+      it 'returns max user data' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return(user_rankings + [6])
+
+        expect(presenter.chart_max_ticks).to eq(6)
+      end
+
+      it 'returns 5 if max user data < 5' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return(user_rankings)
+
+        expect(presenter.chart_max_ticks).to eq(5)
+      end
+    end
+
+    context 'if user data not present' do
+
+      it 'returns 5' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([nil, nil, nil])
+
+        expect(presenter.chart_max_ticks).to eq(5)
+      end
+    end
+  end
+
+  describe '#chart_step_size' do
+
+    context 'if user data present' do
+
+      it 'returns max user data with diff 20' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 21])
+
+        expect(presenter.chart_step_size).to eq(1)
+      end
+
+      it 'returns max user data with diff 21' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 22])
+
+        expect(presenter.chart_step_size).to eq(5)
+      end
+
+      it 'returns max user data with diff 80' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 81])
+
+        expect(presenter.chart_step_size).to eq(5)
+      end
+
+      it 'returns max user data with diff 80' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 82])
+
+        expect(presenter.chart_step_size).to eq(10)
+      end
+    end
+
+    context 'if user data not present' do
+
+      it 'returns 1' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter).to receive(:user_rankings).and_return([nil, nil, nil])
+
+        expect(presenter.chart_step_size).to eq(1)
+      end
+    end
+  end
+
   describe '#chart_data' do
 
     it 'returns chart_data' do
@@ -112,22 +186,22 @@ describe RankingPerGamesShowPresenter do
       expect(presenter).to receive(:user_rankings).and_return(user_rankings)
 
       expect(presenter.chart_data).to eq(
-                                          {
-                                              labels: ['Label1', 'Label2', 'Label3'],
-                                              datasets: [
-                                                  {
-                                                      label: I18n.t(:standings),
-                                                      fill: false,
-                                                      lineTension: 0.2,
-                                                      borderColor: "rgba(75,192,192,1)",
-                                                      pointBorderColor: "rgba(75,192,192,1)",
-                                                      pointBackgroundColor: "#fff",
-                                                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                                                      pointHoverBorderColor: "rgba(220,220,220,1)",
-                                                      data: [4,2,1]
-                                                  }
-                                              ]
-                                          }
+                                        {
+                                          labels: ['Label1', 'Label2', 'Label3'],
+                                          datasets: [
+                                            {
+                                              label: I18n.t(:standings),
+                                              fill: false,
+                                              lineTension: 0.2,
+                                              borderColor: "rgba(75,192,192,1)",
+                                              pointBorderColor: "rgba(75,192,192,1)",
+                                              pointBackgroundColor: "#fff",
+                                              pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                              pointHoverBorderColor: "rgba(220,220,220,1)",
+                                              data: [4,2,1]
+                                            }
+                                          ]
+                                        }
                                       )
     end
   end
@@ -136,28 +210,33 @@ describe RankingPerGamesShowPresenter do
 
     it 'returns chart_options' do
       presenter = subject.new(current_user, user.id, games)
+      expect(presenter).to receive(:chart_max_ticks).and_return(23)
+      expect(presenter).to receive(:chart_step_size).and_return(5)
 
       expect(presenter.chart_options).to eq(
-                                             {
-                                                 legend: {
-                                                     position: 'bottom'
-                                                 },
-                                                 responsive: true,
-                                                 scales: {
-                                                     xAxes: [
-                                                         {
-                                                             display: false
-                                                         }
-                                                     ],
-                                                     yAxes: [
-                                                         {
-                                                             ticks: {
-                                                                 reverse: true
-                                                             }
-                                                         }
-                                                     ]
-                                                 },
-                                             }
+                                           {
+                                             legend: {
+                                               position: 'bottom'
+                                             },
+                                             responsive: true,
+                                             scales: {
+                                               xAxes: [
+                                                 {
+                                                   display: false
+                                                 }
+                                               ],
+                                               yAxes: [
+                                                 {
+                                                   ticks: {
+                                                     reverse: true,
+                                                     min: 1,
+                                                     max: 23,
+                                                     stepSize: 5
+                                                   }
+                                                 }
+                                               ]
+                                             },
+                                           }
                                          )
     end
   end

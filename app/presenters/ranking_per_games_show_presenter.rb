@@ -25,7 +25,7 @@ class RankingPerGamesShowPresenter
 
   def user_rankings
     @ranking ||= begin
-      TipQueries.all_by_user_id_ordered_games_start_at(user_to_show.id).pluck(:ranking_place)
+      TipQueries.all_by_user_id_ordered_games_start_at(user_to_show.id).pluck(:ranking_place).compact
     end
   end
 
@@ -41,7 +41,27 @@ class RankingPerGamesShowPresenter
     @games.map{ |game| GamePresenter.new(game) }.map{|gp| "#{gp.formatted_start_at_short}: #{gp.team_names_without_flags}"}
   end
 
-  # use http://www.chartjs.org/docs/#line-chart-introduction  Version: 2.0.2
+  def chart_max_ticks
+    data = user_rankings.compact
+    if data.present?
+      [data.max, 5].max
+    else
+      5 # randomly chosen
+    end
+  end
+
+  def chart_step_size
+    result = 1
+    data = user_rankings.compact
+    if data.present?
+      diff = data.max - data.min
+      result = 5 if diff > 20
+      result =10 if diff > 80
+    end
+
+    result
+  end
+
   def chart_data
     {
         labels: chart_x_labels,
@@ -63,24 +83,27 @@ class RankingPerGamesShowPresenter
 
   def chart_options
     {
-        legend: {
-            position: 'bottom'
-        },
-        responsive: true,
-        scales: {
-            xAxes: [
-                {
-                    display: false
-                }
-            ],
-            yAxes: [
-                {
-                    ticks: {
-                        reverse: true
-                    }
-                }
-            ]
-        },
+      legend: {
+        position: 'bottom'
+      },
+      responsive: true,
+      scales: {
+        xAxes: [
+          {
+            display: false
+          }
+        ],
+        yAxes: [
+          {
+            ticks: {
+              reverse: true,
+              min: 1,
+              max: chart_max_ticks,
+              stepSize: chart_step_size 
+            }
+          }
+        ]
+      },
     }
   end
 

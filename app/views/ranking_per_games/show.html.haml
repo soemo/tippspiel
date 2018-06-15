@@ -12,8 +12,8 @@
           var ctx = document.getElementById('my-ranking-chart').getContext('2d');
           new Chart(ctx, {
             type: 'line',
-            data: #{@presenter.chart_data.to_json},
-            options: #{@presenter.chart_options.to_json}
+            data: #{@presenter.chart_data.to_json.html_safe},
+            options: #{@presenter.chart_options.to_json.html_safe}
           });
 
         });
