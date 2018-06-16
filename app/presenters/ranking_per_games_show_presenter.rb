@@ -51,12 +51,12 @@ class RankingPerGamesShowPresenter
   end
 
   def chart_step_size
-    result = 1
+    result = 5
     data = user_rankings.compact
     if data.present?
       diff = data.max - data.min
-      result = 5 if diff > 20
-      result =10 if diff > 80
+      result = 1 if diff < 20
+      result = 10 if diff > 50
     end
 
     result

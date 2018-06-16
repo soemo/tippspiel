@@ -140,28 +140,28 @@ describe RankingPerGamesShowPresenter do
 
       it 'returns max user data with diff 20' do
         presenter = subject.new(current_user, user.id, games)
-        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 21])
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 20])
 
         expect(presenter.chart_step_size).to eq(1)
       end
 
       it 'returns max user data with diff 21' do
         presenter = subject.new(current_user, user.id, games)
-        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 22])
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 21])
 
         expect(presenter.chart_step_size).to eq(5)
       end
 
       it 'returns max user data with diff 80' do
         presenter = subject.new(current_user, user.id, games)
-        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 81])
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 51])
 
         expect(presenter.chart_step_size).to eq(5)
       end
 
       it 'returns max user data with diff 80' do
         presenter = subject.new(current_user, user.id, games)
-        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 82])
+        expect(presenter).to receive(:user_rankings).and_return([nil, 1, 52])
 
         expect(presenter.chart_step_size).to eq(10)
       end
@@ -173,7 +173,7 @@ describe RankingPerGamesShowPresenter do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, nil, nil])
 
-        expect(presenter.chart_step_size).to eq(1)
+        expect(presenter.chart_step_size).to eq(5)
       end
     end
   end
