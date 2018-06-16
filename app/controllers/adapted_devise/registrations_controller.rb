@@ -2,8 +2,13 @@
 module AdaptedDevise
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_permitted_parameters
+    before_action :check_permission
 
     protected
+
+    def check_permission
+      render_forbidden if Tournament.started?
+    end
 
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname])
