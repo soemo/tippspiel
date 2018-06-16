@@ -1,5 +1,5 @@
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' && Tournament.not_yet_started? %>
   <%= link_to t("devise.sign_up"), new_registration_path(resource_name) %><br />
 <% end -%>
 
