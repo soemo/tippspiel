@@ -12,18 +12,18 @@
       %small
         %span.point-explaning
           = icon('fas', 'circle', '', class: 'eight-point-color')
-          = "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte"
+          = "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Pkt."
         %span.point-explaning
           = icon('fas', 'circle', '', class: 'five-point-color')
-          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte"
+          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Pkt."
         %span.point-explaning
           = icon('fas', 'circle', '', class: 'four-point-color')
-          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte"
+          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Pkt."
         %span.point-explaning
           = icon('fas', 'circle', '', class: 'three-point-color')
-          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte"
+          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND} Pkt."
         %span.point-explaning
           = icon('fas', 'circle', '', class: 'null-point-color')
-          = '0 Punkte'
+          = '0 Pkt.'
 
     = render partial: 'user_ranking', locals: {presenter: @presenter}

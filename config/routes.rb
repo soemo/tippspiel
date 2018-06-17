@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resource :help, only: :show
   resource :imprint, only: :show
   resources :rankings, only: :index
-  resources :ranking_per_games, only: :show
+  resources :statistics, only: :show
   resources :tips, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
     collection do
       post :save_tips

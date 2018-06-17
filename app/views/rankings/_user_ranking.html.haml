@@ -23,18 +23,17 @@
           - else
             - champ_team_info = champ_team_info_small = I18n.t('ranking_champion_tip_currently_not_visible')
 
-          - place_with_ranking_per_game_link = link_to(place, ranking_per_game_path(user), {title: I18n.t(:ranking_per_game_show)})
-          - user_name = user.name
+          - user_name_with_statistic_link = link_to(user.name, statistic_path(user), {title: I18n.t(:show_statistic_for, name: user.name)})
           - user_points = user.points.present? ? user.points.to_s : '0'
           %tr{id: "place_#{place}"}
             %td.show-for-small-only
               .row
                 .small-2.columns.text-left
-                  %span.place= place_with_ranking_per_game_link
+                  %span.place= place
                 .small-10.columns
                   .row
                     .small-9.columns.text-left
-                      = user_name
+                      = user_name_with_statistic_link
                     .small-3.columns.text-right
                       %span.user-points
                         = user_points
@@ -44,8 +43,8 @@
                     .small-7.columns.text-right
                       = statistic_content(user).html_safe
 
-            %td.hide-for-small-only.place= place_with_ranking_per_game_link
-            %td.hide-for-small-only= user_name
+            %td.hide-for-small-only.place= place
+            %td.hide-for-small-only= user_name_with_statistic_link
             %td.hide-for-small-only= raw champ_team_info
             %td.hide-for-small-only
               %span.user-points= user_points

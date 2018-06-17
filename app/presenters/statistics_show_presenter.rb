@@ -1,12 +1,12 @@
-class RankingPerGamesShowPresenter
+class StatisticsShowPresenter
 
   attr_reader :current_user
   attr_reader :user_id
 
-  def initialize(current_user, user_id, games)
+  def initialize(current_user, user_id, finished_games)
     @current_user = current_user
     @user_id = user_id
-    @games = games
+    @finished_games = finished_games
   end
 
   def user_to_show
@@ -23,25 +23,37 @@ class RankingPerGamesShowPresenter
     user_id.present? && user_id.to_i == current_user.id
   end
 
+  def finished_tips
+    TipQueries.all_by_user_id_and_game_ids_ordered_games_start_at(user_to_show.id, @finished_games.map(&:id))
+  end
+
   def user_rankings
     @ranking ||= begin
-      TipQueries.all_by_user_id_ordered_games_start_at(user_to_show.id).pluck(:ranking_place).compact
+      finished_tips.pluck(:ranking_place).compact
     end
   end
 
   def header_text
     if shows_current_user_rankings?
-      I18n.t(:your_ranking_per_game)
+      I18n.t(:your_statistic)
     else
-      I18n.t(:ranking_per_game_for, name: user_to_show.name)
+      I18n.t(:statistic_for, name: user_to_show.name)
     end
   end
 
-  def chart_x_labels
-    @games.map{ |game| GamePresenter.new(game) }.map{|gp| "#{gp.formatted_start_at_short}: #{gp.team_names_without_flags}"}
+  def line_chart_header_text
+    I18n.t(:ranking_per_game)
   end
 
-  def chart_max_ticks
+  def tips_header_text
+    I18n.t(:tips)
+  end
+
+  def line_chart_x_labels
+    @finished_games.map{ |game| GamePresenter.new(game) }.map{|gp| "#{gp.formatted_start_at_short}: #{gp.team_names_without_flags}"}
+  end
+
+  def line_chart_max_ticks
     data = user_rankings.compact
     if data.present?
       [data.max, 5].max
@@ -50,7 +62,7 @@ class RankingPerGamesShowPresenter
     end
   end
 
-  def chart_step_size
+  def line_chart_step_size
     result = 5
     data = user_rankings.compact
     if data.present?
@@ -62,9 +74,9 @@ class RankingPerGamesShowPresenter
     result
   end
 
-  def chart_data
+  def line_chart_data
     {
-        labels: chart_x_labels,
+        labels: line_chart_x_labels,
         datasets: [
             {
                 label: I18n.t(:standings),
@@ -81,7 +93,7 @@ class RankingPerGamesShowPresenter
     }
   end
 
-  def chart_options
+  def line_chart_options
     {
       legend: {
         position: 'bottom'
@@ -98,8 +110,8 @@ class RankingPerGamesShowPresenter
             ticks: {
               reverse: true,
               min: 1,
-              max: chart_max_ticks,
-              stepSize: chart_step_size 
+              max: line_chart_max_ticks,
+              stepSize: line_chart_step_size
             }
           }
         ]
@@ -107,7 +119,7 @@ class RankingPerGamesShowPresenter
     }
   end
 
-  def has_chart_data_to_show?
+  def has_data_to_show?
     user_rankings.present? && user_rankings.reject(&:blank?).present?
   end
 end

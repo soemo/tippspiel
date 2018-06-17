@@ -27,6 +27,12 @@ module TipQueries
         where(user_id: user_id).order('games.start_at asc')
     end
 
+    def all_by_user_id_and_game_ids_ordered_games_start_at(user_id, game_ids)
+      Tip.preload(game: [:team1, :team2]).joins(:game).
+        where(user_id: user_id).where(game_id: game_ids).
+        order('games.start_at asc')
+    end
+
     def all_by_user_id_and_tip_points(user_id, tip_points)
       Tip.where({user_id: user_id, tip_points: tip_points})
     end

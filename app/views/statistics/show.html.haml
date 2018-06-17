@@ -1,0 +1,71 @@
+.row
+  .small-12.columns
+    %h3=@presenter.header_text
+
+    - if @presenter.has_data_to_show?
+      %h4=@presenter.line_chart_header_text
+      .row
+        .small-12.padding-left-right-5
+          %canvas#my-ranking-chart{:height => '400', :width => '400'}
+
+      %h4=@presenter.tips_header_text
+      .row
+        .small-12.padding-left-right-5
+          %table.hover
+            %thead
+              %tr.white-bg
+                %th.hide-for-small-only= ''
+                %th.hide-for-small-only= ''
+                %th.hide-for-small-only= ''
+                %th= ''
+                %th= Tip.model_name.human
+                %th= Tip.human_attribute_name('tip_points')
+            %tbody
+            - @presenter.finished_tips.each do |tip|
+              - game_presenter = GamePresenter.new(tip.game)
+              - tip_presenter = TipPresenter.new(tip)
+              - place = game_presenter.place
+              %tr
+                %td.show-for-small-only.small-align-top
+                  .row
+                    .small-12.columns.date-round-place-infos
+                      = game_presenter.formatted_start_at_short
+                      = place
+                      = '-'
+                      = game_presenter.round_or_group_name
+                  .row.team-infos
+                    .small-7.columns
+                      = game_presenter.team1_with_flag(flag_size: 16, flag_position: 'left')
+                    .small-2.columns.end
+                      = game_presenter.team1_goals
+                    .small-7.columns
+                      = game_presenter.team2_with_flag(flag_size: 16, flag_position: 'left')
+                    .small-2.columns.end
+                      = game_presenter.team2_goals
+
+                %td.hide-for-small-only
+                  = game_presenter.formatted_start_at
+                  %span.place-info
+                    = 'in'
+                    = place
+                %td.hide-for-small-only.text-right
+                  = game_presenter.team1_with_flag(flag_size: 32, flag_position: 'right')
+                %td.hide-for-small-only.text-center.white-space-nowrap
+                  = game_presenter.result
+                %td.hide-for-small-only.text-left
+                  = game_presenter.team2_with_flag(flag_size: 32, flag_position: 'left')
+                %td= "#{tip.team1_goals} : #{tip.team2_goals}"
+                %td= raw tip_presenter.pointbadge_large(tip_presenter.tip_points)
+
+      :javascript
+        $(document).ready( function() {
+          var ctx = document.getElementById('my-ranking-chart').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: #{@presenter.line_chart_data.to_json.html_safe},
+            options: #{@presenter.line_chart_options.to_json.html_safe}
+          });
+
+        });
+    - else
+      %p= t(:ranking_per_game_nothing_to_show)

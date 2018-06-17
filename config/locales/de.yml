@@ -38,9 +38,10 @@ de:
 
   show_only_today_games: Nur Spiele von heute anzeigen.
 
-  your_ranking_per_game: Deine Platzierung pro Spiel
-  ranking_per_game_show: Platzierung pro Spiel anzeigen
-  ranking_per_game_for: Platzierung pro Spiel für %{name}
+  your_statistic: Deine Statistik
+  statistic_for: Statistik für %{name}
+  show_statistic_for: Statistik für %{name} anzeigen
+  ranking_per_game: Platzierung pro Spiel
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
   signed_in_hello: "Hi "
@@ -82,7 +83,7 @@ de:
   delete_link: "Löschen"
   please_select: "Bitte auswählen"
   standings: Platz
-  full_ranking_list: Komplette Rangliste ansehen
+  full_ranking_list: Rangliste ansehen
 
   characters_remaining: "Verbleibende Zeichen: "
 
@@ -159,7 +160,7 @@ de:
   time:
     formats:
       default: "%d. %B %Y, %H:%M Uhr"
-      short: "%d.%m, %H:%M"
+      short: "%d.%m. %H:%M"
       long: "%A, %d. %B %Y, %H:%M Uhr"
       time: "%H:%M"
       only_date: "%d.%m.%Y"

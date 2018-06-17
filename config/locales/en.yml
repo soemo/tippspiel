@@ -27,9 +27,10 @@ en:
 
   show_only_today_games: Show only today games.
 
-  your_ranking_per_game: Your ranking per game
-  ranking_per_game_show: Show ranking per game
-  ranking_per_game_for: Ranking per game for %{name}
+  your_statistic: Your statistic
+  statistic_for: Statistic for %{name}
+  show_statistic_for: Show statistic for %{name}
+  ranking_per_game: Ranking per game
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
 
   signed_in_hello: "Hi "
@@ -52,7 +53,7 @@ en:
   tournament: "Tournament"
   tips: "Hints"
   your_tips: "your hints"
-  full_ranking_list: Show full ranking list
+  full_ranking_list: Show ranking list
 
   back_link: "back"
   edit_link: "edit"
@@ -68,7 +69,7 @@ en:
   time:
     formats:
       only_date: "%Y-%m-%d"
-      short: "%m-%d, %H:%M"
+      short: "%m-%d. %H:%M"
   datetime:
     formats:
       default: "%Y-%m-%d, %H:%M"

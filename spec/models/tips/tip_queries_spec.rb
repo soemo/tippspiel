@@ -83,7 +83,7 @@ describe TipQueries do
     end
   end
 
-  describe '::all_by_user_id_ordered_games_start_at_with_preloaded_games' do
+  describe '::all_by_user_id_ordered_games_start_at' do
 
     it 'returns tips for user' do
       expect(subject.all_by_user_id_ordered_games_start_at(user2.id)).to eq([
@@ -91,6 +91,19 @@ describe TipQueries do
                                                                                 tip_g2_u2,
                                                                                 tip_g1_u2
                                                                             ])
+    end
+  end
+
+  describe '::all_by_user_id_and_game_ids_ordered_games_start_at' do
+
+    it 'returns tips for user' do
+      expected_result = [
+        tip_g2_u2,
+        tip_g1_u2
+      ]
+      result = subject.all_by_user_id_and_game_ids_ordered_games_start_at(user2.id,
+                                                                         [game1.id, game2.id])
+      expect(result).to eq(expected_result)
     end
   end
 
