@@ -23,6 +23,7 @@ de:
   notice_to_long_with_emojis: "Mit den eingegebenen Emojis ist der Text zu lang."
 
   update_successful: "%{object_name} wurde aktualisiert."
+  type_to_filter: Tippen um zu Filtern
 
   who_will_be_champion: 'Wer wird Tuniersieger?'
   need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'

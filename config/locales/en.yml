@@ -26,6 +26,7 @@ en:
   result_after_game_count: "after %{finshed_games_count} / %{all_games_count} games"
 
   show_only_today_games: Show only today games.
+  type_to_filter: Tap to filter
 
   your_statistic: Your statistic
   statistic_for: Statistic for %{name}

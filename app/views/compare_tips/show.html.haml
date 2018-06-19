@@ -27,7 +27,11 @@
             = Game.human_attribute_name('result')
             = game_to_compare_presenter.result
 
-      %table.hover
+      = text_field_tag('search', nil,  {id: 'table-filter-input',
+                        class: 'js-table-filter-input',
+                        data: {table: 'js-filter-table'},
+                        placeholder: I18n.t(:type_to_filter)})
+      %table.hover.js-filter-table
         %thead
           %tr.white-bg
             %th= User.human_attribute_name('name')
