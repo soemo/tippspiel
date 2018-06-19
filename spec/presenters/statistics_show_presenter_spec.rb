@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe RankingPerGamesShowPresenter do
+describe StatisticsShowPresenter do
 
-  subject { RankingPerGamesShowPresenter }
+  subject { StatisticsShowPresenter }
 
-  let(:chart_x_labels) {['Label1', 'Label2', 'Label3']}
+  let(:line_chart_x_labels) {['Label1', 'Label2', 'Label3']}
 
   let(:current_user) {create(:user, firstname: 'active', lastname: 'user')}
   let(:user) {create(:user, firstname: 'test', lastname: 'user')}
@@ -52,14 +52,24 @@ describe RankingPerGamesShowPresenter do
     end
   end
 
+  describe 'finished_tips' do
+
+    it 'calls TipQueries.all_by_user_id_and_game_ids_ordered_games_start_at' do
+      expect(TipQueries).to receive(:all_by_user_id_and_game_ids_ordered_games_start_at).
+        with(user.id, games.map(&:id))
+
+      presenter = subject.new(current_user, user.id, games)
+      presenter.finished_tips
+    end
+  end
+
   describe '#user_ranking' do
 
     it 'calls TipQueries' do
       presenter = subject.new(current_user, user.id, games)
 
       tipp_query = double
-      expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at).
-        with(user.id).and_return(tipp_query)
+      expect(presenter).to receive(:finished_tips).and_return(tipp_query)
       expect(tipp_query).to receive(:pluck).with(:ranking_place).and_return(user_rankings)
 
       expect(presenter.user_rankings).to eq(user_rankings)
@@ -72,7 +82,7 @@ describe RankingPerGamesShowPresenter do
 
       it 'returns text for current_user' do
         presenter = subject.new(current_user, current_user.id, games)
-        expect(presenter.header_text).to eq(I18n.t(:your_ranking_per_game))
+        expect(presenter.header_text).to eq(I18n.t(:your_statistic))
       end
     end
 
@@ -80,12 +90,20 @@ describe RankingPerGamesShowPresenter do
 
       it 'returns text with other users name' do
         presenter = subject.new(current_user, user.id, games)
-        expect(presenter.header_text).to eq(I18n.t(:ranking_per_game_for, name: user.name))
+        expect(presenter.header_text).to eq(I18n.t(:statistic_for, name: user.name))
       end
     end
   end
 
-  describe '#chart_x_labels' do
+  describe '#line_chart_header_text' do
+
+    it 'returns correct text' do
+      presenter = subject.new(current_user, current_user.id, games)
+      expect(presenter.line_chart_header_text).to eq(I18n.t(:ranking_per_game))
+    end
+  end
+
+  describe '#line_chart_x_labels' do
 
     it 'calls GamePresenter' do
       presenter = subject.new(current_user, current_user.id, games)
@@ -100,11 +118,11 @@ describe RankingPerGamesShowPresenter do
         "#{ I18n.l(games[1].start_at, format: :short)}:  - ",
         "#{ I18n.l(games[2].start_at, format: :short)}:  - ",
       ]
-      expect(presenter.chart_x_labels).to eq(expected)
+      expect(presenter.line_chart_x_labels).to eq(expected)
     end
   end
 
-  describe '#chart_max_ticks' do
+  describe '#line_chart_max_ticks' do
 
     context 'if user data present' do
 
@@ -112,14 +130,14 @@ describe RankingPerGamesShowPresenter do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return(user_rankings + [6])
 
-        expect(presenter.chart_max_ticks).to eq(6)
+        expect(presenter.line_chart_max_ticks).to eq(6)
       end
 
       it 'returns 5 if max user data < 5' do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return(user_rankings)
 
-        expect(presenter.chart_max_ticks).to eq(5)
+        expect(presenter.line_chart_max_ticks).to eq(5)
       end
     end
 
@@ -129,12 +147,12 @@ describe RankingPerGamesShowPresenter do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, nil, nil])
 
-        expect(presenter.chart_max_ticks).to eq(5)
+        expect(presenter.line_chart_max_ticks).to eq(5)
       end
     end
   end
 
-  describe '#chart_step_size' do
+  describe '#line_chart_step_size' do
 
     context 'if user data present' do
 
@@ -142,28 +160,28 @@ describe RankingPerGamesShowPresenter do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, 1, 20])
 
-        expect(presenter.chart_step_size).to eq(1)
+        expect(presenter.line_chart_step_size).to eq(1)
       end
 
       it 'returns max user data with diff 21' do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, 1, 21])
 
-        expect(presenter.chart_step_size).to eq(5)
+        expect(presenter.line_chart_step_size).to eq(5)
       end
 
       it 'returns max user data with diff 80' do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, 1, 51])
 
-        expect(presenter.chart_step_size).to eq(5)
+        expect(presenter.line_chart_step_size).to eq(5)
       end
 
       it 'returns max user data with diff 80' do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, 1, 52])
 
-        expect(presenter.chart_step_size).to eq(10)
+        expect(presenter.line_chart_step_size).to eq(10)
       end
     end
 
@@ -173,19 +191,19 @@ describe RankingPerGamesShowPresenter do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([nil, nil, nil])
 
-        expect(presenter.chart_step_size).to eq(5)
+        expect(presenter.line_chart_step_size).to eq(5)
       end
     end
   end
 
-  describe '#chart_data' do
+  describe '#line_chart_data' do
 
-    it 'returns chart_data' do
+    it 'returns line_chart_data' do
       presenter = subject.new(current_user, user.id, games)
-      expect(presenter).to receive(:chart_x_labels).and_return(chart_x_labels)
+      expect(presenter).to receive(:line_chart_x_labels).and_return(line_chart_x_labels)
       expect(presenter).to receive(:user_rankings).and_return(user_rankings)
 
-      expect(presenter.chart_data).to eq(
+      expect(presenter.line_chart_data).to eq(
                                         {
                                           labels: ['Label1', 'Label2', 'Label3'],
                                           datasets: [
@@ -206,14 +224,14 @@ describe RankingPerGamesShowPresenter do
     end
   end
 
-  describe '#chart_options' do
+  describe '#line_chart_options' do
 
-    it 'returns chart_options' do
+    it 'returns line_chart_options' do
       presenter = subject.new(current_user, user.id, games)
-      expect(presenter).to receive(:chart_max_ticks).and_return(23)
-      expect(presenter).to receive(:chart_step_size).and_return(5)
+      expect(presenter).to receive(:line_chart_max_ticks).and_return(23)
+      expect(presenter).to receive(:line_chart_step_size).and_return(5)
 
-      expect(presenter.chart_options).to eq(
+      expect(presenter.line_chart_options).to eq(
                                            {
                                              legend: {
                                                position: 'bottom'
@@ -241,13 +259,13 @@ describe RankingPerGamesShowPresenter do
     end
   end
 
-  describe '#has_chart_data_to_show?' do
+  describe '#has_data_to_show?' do
 
     context 'if user present and user_rankings present?' do
       it 'returns true' do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).twice.and_return(user_rankings)
-        expect(presenter.has_chart_data_to_show?).to be true
+        expect(presenter.has_data_to_show?).to be true
       end
     end
 
@@ -255,7 +273,7 @@ describe RankingPerGamesShowPresenter do
       it 'returns false' do
         presenter = subject.new(current_user, user.id, games)
         expect(presenter).to receive(:user_rankings).and_return([])
-        expect(presenter.has_chart_data_to_show?).to be false
+        expect(presenter.has_data_to_show?).to be false
       end
     end
   end

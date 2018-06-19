@@ -16,7 +16,7 @@
             .small-12.columns
               = link_to(icon('fas', 'list-ol', I18n.t('full_ranking_list'), {class: 'fa-fw'}), rankings_path)
             .small-12.columns
-              = link_to(icon('fas', 'chart-line', I18n.t(:your_ranking_per_game), {class: 'fa-fw'}), ranking_per_game_path(current_user))
+              = link_to(icon('fas', 'chart-line', I18n.t(:your_statistic), {class: 'fa-fw'}), statistic_path(current_user))
 
           - if @presenter.tournament_finished?
             %br

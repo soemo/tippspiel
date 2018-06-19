@@ -29,6 +29,10 @@ class MainIndexPresenter
     Tournament.finished?
   end
 
+  def tournament_started?
+    Tournament.started?
+  end
+
   def user_name
     current_user.name
   end

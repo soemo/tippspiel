@@ -6,6 +6,7 @@
 //= require jquery.mixitup.min
 //= require are-you-sure.jquery
 //= require ays-beforeunload-shim
+//= require table_filter
 
 
 $(function(){
@@ -20,6 +21,7 @@ $(function(){
 
   check_user_tip();
   init_random_user_tips();
+  initTableFilter();
 
   // https://github.com/patrickkunka/mixitup/blob/master/docs/configuration-object.md
   $('#mixitup-table').mixItUp({

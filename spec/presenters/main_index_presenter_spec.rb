@@ -46,6 +46,27 @@ describe MainIndexPresenter do
     end
   end
 
+  describe '#tournament_started?' do
+
+    context 'if Tournament.started? == true' do
+
+      it 'returns true' do
+        presenter = subject.new([tip_g1, tip_g2], user)
+        expect(Tournament).to receive(:started?).and_return(true)
+        expect(presenter.tournament_started?).to be true
+      end
+    end
+
+    context 'if Tournament.started? == false' do
+
+      it 'returns false' do
+        presenter = subject.new([tip_g1, tip_g2], user)
+        expect(Tournament).to receive(:started?).and_return(false)
+        expect(presenter.tournament_started?).to be false
+      end
+    end
+  end
+
   describe '#user_name' do
 
     it 'returns user name' do

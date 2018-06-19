@@ -27,7 +27,11 @@
             = Game.human_attribute_name('result')
             = game_to_compare_presenter.result
 
-      %table.hover
+      = text_field_tag('search', nil,  {id: 'table-filter-input',
+                        class: 'js-table-filter-input',
+                        data: {table: 'js-filter-table'},
+                        placeholder: I18n.t(:type_to_filter)})
+      %table.hover.js-filter-table
         %thead
           %tr.white-bg
             %th= User.human_attribute_name('name')
@@ -38,7 +42,8 @@
           - tip_presenter = TipPresenter.new(tip)
           - if tip_presenter.user.present?  # es kann geloeschte Nutzer geben, aber die Tipps zeigen noch auf den Nutzer :-(
             - allowed_to_show = @presenter.allowed_to_show?(tip)
+            - user_name = tip_presenter.user.name
             %tr
-              %td= tip_presenter.user.name
+              %td= link_to(user_name, statistic_path(tip_presenter.user), {title: I18n.t(:show_statistic_for, name: user_name)})
               %td= allowed_to_show ? "#{tip.team1_goals} : #{tip.team2_goals}" : ''
               %td= raw allowed_to_show ? tip_presenter.pointbadge_large(tip_presenter.tip_points) : ''
