@@ -1,0 +1,62 @@
+name: Continuous Deployment
+
+on: [push]
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+
+    # If you need DB like MySQL then define service below.
+    services:
+      # How to use MySQL
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+        - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby 2.4.9
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.4.9
+
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Verify MySQL connection from host
+      run: |
+        sudo apt-get install -y mysql-client libmysqlclient-dev
+        mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -uroot -proot -e "SHOW GRANTS FOR 'root'@'localhost'"
+        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -uroot -proot mysql
+    
+    - name: Bundle install, create DB and run rspec tests
+      env:
+        RAILS_ENV: test
+        DB_PASSWORD: root
+        # tell Rails to use proper port for MySQL
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        WEBSITE_URL: http://localhost:3000
+        ADMIN_EMAIL: test-tippspiel@test.com
+        MAIL: tippspiel@test.com
+        SECRET_BASE_KEY: r90435943jv90t960dc87966cdfe8a6b730c1ecbee871d6a4b92e4687b34cb29d99f67981a8ca5522671db884aec9d1d0c296f1660bce_gha
+        COOKIE_STORE_KEY: _gha_tippspiel_session
+      run: |
+        cp config/database.yml.gha-ci config/database.yml
+        gem install bundler --no-ri --no-rdoc
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3 --path vendor/bundle
+        # create DB for Rails 5.x
+        bin/rails db:setup
+        # create DB for Rails 6.x
+        #bin/rails db:prepare
+        bundle exec rake 
