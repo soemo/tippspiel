@@ -9,10 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 2.4.1
+    - name: Set up Ruby 2.4.1p111
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.4.1
+        ruby-version: 2.4.1p111
     - name: Build and test with Rake
       run: |
         gem install bundler
