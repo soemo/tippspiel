@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.5'
-ruby '2.4.9'
+ruby '2.5.7'
 
 gem 'mysql2'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
