@@ -63,7 +63,7 @@ jobs:
         bundle exec rake 
 
   coverage:
-    needs: [ test ]
+    needs: [ ci ]
     name: codeclimate coverage
     runs-on: ubuntu-latest
     steps:
