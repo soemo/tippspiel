@@ -59,5 +59,6 @@ jobs:
         gem install bundler --no-ri --no-rdoc
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
-        bin/rails db:setup
+        bundle exec rake db:migrate --trace
+        bundle exec rake db:test:prepare
         bundle exec rake 
