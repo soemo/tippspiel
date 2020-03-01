@@ -53,10 +53,11 @@ jobs:
       run: |
         cp config/database.yml.gha-ci config/database.yml
         gem install bundler --no-ri --no-rdoc
-        bundle config path vendor/bundle
+        bundle config set path 'vendor/bundle'
         bundle install --jobs 4 --retry 3 --path vendor/bundle
         # create DB for Rails 5.x
-        bin/rails db:setup
+        #bin/rails db:setup
+        bundle exec rake db:setup
         # create DB for Rails 6.x
         #bin/rails db:prepare
         bundle exec rake 
