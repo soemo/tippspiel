@@ -59,9 +59,6 @@ jobs:
         gem install bundler --no-ri --no-rdoc
         bundle config set path 'vendor/bundle'
         bundle install --jobs 4 --retry 3
-        # create DB for Rails 5.x
-        bin/rails db:setup
-        # create DB for Rails 6.x
-        #bin/rails db:prepare
-        # run rspec tests
+        bundle exec rake db:migrate --trace
+        bundle exec rake db:test:prepare
         bundle exec rake 
