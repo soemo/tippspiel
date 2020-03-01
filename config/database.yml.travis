@@ -1,5 +1,0 @@
-test:
-  adapter: mysql2
-  encoding: utf8
-  database: tippspiel_test
-  username: travis

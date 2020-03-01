@@ -65,7 +65,8 @@ jobs:
     - name: codeclimate coverage
       uses: paambaati/codeclimate-action@v2.5.3
       env:
-        CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+        CC_TEST_REPORTER_ID: 5d39b53f326f9338702e692265bc1e56a350fde3f866f05a37db78c49789aceb
+        #CODECLIMATE_REPO_TOKEN: 5d39b53f326f9338702e692265bc1e56a350fde3f866f05a37db78c49789aceb
       with:
         coverageCommand: bundle exec codeclimate-test-reporter
         debug: true
