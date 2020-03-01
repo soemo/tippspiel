@@ -80,8 +80,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: capistrano deployment to beta-tippspiel
-      run: |
-        bundle exec cap beta-tippspiel deploy 
+        run: |
+          bundle exec cap beta-tippspiel deploy 
  
   cd-tags:
     if: startsWith(github.ref, 'refs/tags/v')
