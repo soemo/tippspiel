@@ -1,6 +1,5 @@
 .bundle
 .idea
-.ruby-version
 .ruby-gemset
 *.swp
 *.swo
