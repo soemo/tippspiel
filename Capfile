@@ -1,6 +1,8 @@
 require 'dotenv'
 Dotenv.load
 
+require 'capistrano/bundler'
+
 # Load DSL and set up stages
 require 'capistrano/setup'
 
