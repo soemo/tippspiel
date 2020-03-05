@@ -37,6 +37,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'public/system
 # Default value for :log_level is :debug
 set :log_level, :debug
 
+set :bundle_flags, ''
+
 # By default, Capistrano::Uberspace uses the ruby versions installed on your uberspace that matches your `.ruby-version` file.
 
 # As of Capistrano 3.x, the `deploy:restart` task is not called automatically.
