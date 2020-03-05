@@ -12,6 +12,7 @@ set :scm, :git
 
 set :repo_url, 'git@github.com:soemo/tippspiel.git'
 
+ask(:password, nil, echo: false)
 server 'sabic.uberspace.de', user: fetch(:user), roles: %w{app db web}, password: fetch(:password)
 
 set :ssh_options, { :forward_agent => true}
