@@ -35,7 +35,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', '.env')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'public/system')
 
 # Default value for :log_level is :debug
-set :log_level, :info
+set :log_level, :debug
 
 set :bundle_flags, '--deployment --quiet'
 
