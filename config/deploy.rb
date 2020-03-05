@@ -5,15 +5,12 @@ set :cap_tournament_name, TOURNAMENT_NAME
 
 # your Uberspace username
 set :user, 'soemo'
-# pw as secret ENV
-set :password, ENV['CAPISTRANO_PW']
 
 set :scm, :git
 
 set :repo_url, 'git@github.com:soemo/tippspiel.git'
 
-ask(:password, nil, echo: false)
-server 'sabic.uberspace.de', user: fetch(:user), roles: %w{app db web}, password: fetch(:password)
+server 'sabic.uberspace.de', user: fetch(:user), roles: %w{app db web}
 
 set :ssh_options, { :forward_agent => true}
 
