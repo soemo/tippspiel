@@ -77,5 +77,7 @@ jobs:
  
     - name: capistrano deployment to tippspiel (prod on tag)
       if: startsWith(github.ref, 'refs/tags/v')
+      env: 
+        CAPISTRANO_PW: ${{ secrets.CAPISTRANO_PW }}
       run: |
         bundle exec cap tippspiel deploy 
