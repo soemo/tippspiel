@@ -5,17 +5,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2.4.1'
 ruby '2.5.7'
 
+gem 'bootsnap', require: false
 gem 'mysql2'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
-gem 'cancancan'
+gem 'cancancan', '= 2.3.0' #todo upgrade later
 gem 'haml-rails'
 gem 'devise'
 gem 'devise-encryptable'
-gem 'paranoia'
-gem 'sass-rails'
+gem 'acts_as_paranoid'
+gem 'sass-rails', '= 5.1.0' #todo upgrade later to sassc-rails
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'uglifier'
 gem 'jquery-rails'
@@ -30,7 +31,7 @@ gem 'exception_notification'
 gem 'emojimmy'
 
 group :development, :production do
-  gem 'passenger'
+  gem 'passenger', '= 5.2.1' # todo upgrade later
 end
 
 group :development do
