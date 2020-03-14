@@ -31,7 +31,7 @@ gem 'exception_notification'
 gem 'emojimmy'
 
 group :development, :production do
-  gem 'passenger', '= 5.2.1' # todo upgrade later
+  gem 'passenger', '= 6.0.4' 
 end
 
 group :development do

@@ -132,7 +132,7 @@ GEM
     equalizer (0.0.11)
     erubi (1.9.0)
     erubis (2.7.0)
-    eventmachine (1.2.5)
+    eventmachine (1.2.7)
     exception_notification (4.4.0)
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
@@ -239,7 +239,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    passenger (5.2.1)
+    passenger (6.0.4)
       rack
       rake (>= 0.8.1)
     passenger-rails (0.0.2)
@@ -402,7 +402,7 @@ DEPENDENCIES
   letter_opener_web
   lograge
   mysql2 (= 0.5.2)
-  passenger (= 5.2.1)
+  passenger (= 6.0.4)
   rack-livereload
   rack-mini-profiler
   rails (~> 5.2.4.1)
