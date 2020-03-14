@@ -401,7 +401,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener_web
   lograge
-  mysql2
+  mysql2 (~> 0.5.2)
   passenger (= 5.2.1)
   rack-livereload
   rack-mini-profiler
