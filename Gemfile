@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.4.1'
 ruby '2.5.7'
 
 gem 'bootsnap', require: false
-gem 'mysql2', '~> 0.5.2'
+gem 'mysql2', '= 0.5.2'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'cancancan', '= 2.3.0' #todo upgrade later
 gem 'haml-rails'
