@@ -13,7 +13,8 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: tippspiel_test
         ports:
         - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -35,13 +36,14 @@ jobs:
 
     - name: Verify MySQL connection from host
       run: |
-        sudo apt-get install -y mysql-client libmysqlclient-dev
-        mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -uroot -e "SHOW GRANTS FOR 'root'@'localhost'"
-        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -uroot mysql
+        sudo /etc/init.d/mysql start
+        mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -proot -e "CREATE DATABASE IF NOT EXISTS tippspiel_test;"
 
     - name: Bundle install, create DB and run rspec tests
       env:
         RAILS_ENV: test
+        DB_PASSWORD: ""
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
         # tell Rails to use proper port for MySQL
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
         WEBSITE_URL: http://localhost:3000
