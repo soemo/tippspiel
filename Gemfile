@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.2.4.1'
-ruby '2.5.7'
+ruby '2.5.8'
 
 gem 'bootsnap', require: false
 gem 'mysql2', '= 0.5.2'
