@@ -43,7 +43,6 @@ jobs:
       env:
         RAILS_ENV: test
         DB_PASSWORD: ""
-        DB_PORT: ${{ job.services.mysql.ports[3306] }}
         # tell Rails to use proper port for MySQL
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
         WEBSITE_URL: http://localhost:3000
