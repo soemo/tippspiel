@@ -3,4 +3,4 @@ test:
   encoding: utf8
   database: tippspiel_test
   username: root
-  password: root
+  password: 
