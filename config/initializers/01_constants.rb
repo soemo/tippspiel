@@ -1,5 +1,5 @@
 # Anpassen fuer jeweiliges Tunier
-TOURNAMENT_NAME = 'EM 2020'
+TOURNAMENT_NAME = 'EM 2021'
 IS_WM = true
 IS_EM = !IS_WM
 
