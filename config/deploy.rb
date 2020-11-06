@@ -20,7 +20,7 @@ SSHKit.config.command_map[:rails] = "bundle exec rails"
 
 set :rails_env, 'production'
 
-set :default_env, { path: "/opt/ruby25/bin}:$PATH" }
+#set :default_env, { path: "/opt/ruby25/bin}:$PATH" }
 
 set :passenger_max_pool_size, 2
 

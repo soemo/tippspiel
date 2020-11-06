@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/soemo/capistrano-uberspace.git
-  revision: c34a5b68c9c6f063e1ed2025ee04099d06ea4bd1
+  revision: 878fb95825ba4a76ee61b3b3c4c0981851b3356d
   branch: master
   specs:
     capistrano-uberspace (0.0.1)
@@ -77,7 +77,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     cancancan (2.3.0)
-    capistrano (3.12.0)
+    capistrano (3.14.1)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -105,7 +105,7 @@ GEM
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -189,7 +189,7 @@ GEM
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
     http_parser.rb (0.6.0)
-    i18n (1.8.2)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jquery-rails (4.3.5)
@@ -229,9 +229,9 @@ GEM
     multi_json (1.13.1)
     mysql2 (0.5.3)
     nenv (0.3.0)
-    net-scp (2.0.0)
-      net-ssh (>= 2.6.5, < 6.0.0)
-    net-ssh (5.2.0)
+    net-scp (3.0.0)
+      net-ssh (>= 2.6.5, < 7.0.0)
+    net-ssh (6.1.0)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
@@ -249,7 +249,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.3)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-livereload (0.3.17)
       rack
     rack-mini-profiler (1.1.6)
