@@ -7,7 +7,7 @@ describe HelpsController, :type => :controller do
     
     it 'renders successful' do
       get :show
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

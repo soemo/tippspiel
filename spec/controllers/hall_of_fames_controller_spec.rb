@@ -8,7 +8,7 @@ describe HallOfFamesController, :type => :controller do
     it 'be successful' do
       login(create :active_user)
       get :show
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

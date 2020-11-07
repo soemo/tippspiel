@@ -16,9 +16,9 @@ describe MainController, :type => :controller do
       expect(assigns(:presenter)).to be_instance_of MainIndexPresenter
       expect(assigns(:presenter).current_user).to eq user
       expect(assigns(:presenter).tips).to eq tips
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
       expect(response).to render_template :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

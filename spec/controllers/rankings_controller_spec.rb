@@ -9,7 +9,7 @@ describe RankingsController, :type => :controller do
 
     it 'should be successful with login' do
       get 'index'
-      expect(response).to be_success
+      expect(response).to be_successful
       presenter = assigns(:presenter)
       expect(presenter).to be_a(RankingPresenter)
       user_count = presenter.user_count

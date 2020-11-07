@@ -16,7 +16,7 @@ describe Admin::GamesController do
       it 'creates GamesPresenter and renders index' do
         get :index
 
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
         expect(response).to render_template :index
         expect(assigns(:presenter)).to be_instance_of GamesPresenter
         expect(assigns(:presenter).current_user).to eq admin_user
@@ -52,7 +52,7 @@ describe Admin::GamesController do
         expect(Game).to receive(:find).with(game.id.to_s).and_return(game)
         get :edit, params: { id: game.id }
 
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(200)
         expect(response).to render_template :edit
         expect(assigns(:presenter)).to be_instance_of GamePresenter
         expect(assigns(:presenter).game).to eq game

@@ -23,7 +23,7 @@ describe StatisticsController do
 
       get :show, params: { id: user.id }
 
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 end
