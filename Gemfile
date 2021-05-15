@@ -31,7 +31,7 @@ gem 'exception_notification'
 gem 'emojimmy'
 
 group :development, :production do
-  gem 'passenger', '= 6.0.6'
+  gem 'passenger', '= 6.0.8'
 end
 
 group :development do
