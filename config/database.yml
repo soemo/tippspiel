@@ -1,7 +1,6 @@
 default: &default
   adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  adapter: mysql2
   encoding: utf8
   username: root
   password:
@@ -9,7 +8,7 @@ default: &default
 
 development:
   <<: *default
-  database: tippspiel_development_wm2018
+  database: tippspiel_development_em2020
 
 test:
   <<: *default
@@ -18,4 +17,4 @@ test:
 # prod db == dev db
 production:
   <<: *default
-  database: tippspiel_development_wm2018 # hier nutzen wir auch lokal unser dev DB
+  database: tippspiel_development_em2020 # hier nutzen wir auch lokal unser dev DB

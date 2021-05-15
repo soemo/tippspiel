@@ -1,6 +1,6 @@
 # Anpassen fuer jeweiliges Tunier
-TOURNAMENT_NAME = 'EM 2021'
-IS_WM = true
+TOURNAMENT_NAME = 'EM 2020'
+IS_WM = false
 IS_EM = !IS_WM
 
 MAIL        = ENV['MAIL']
