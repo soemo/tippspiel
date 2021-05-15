@@ -33,7 +33,7 @@ jobs:
         sudo /etc/init.d/mysql start
         mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -proot -e "CREATE DATABASE IF NOT EXISTS tippspiel_test;"
 
-    - name: Bundle install, create DB and run rspec tests
+    - name: create DB and run rspec tests
       env:
         RAILS_ENV: test
         DB_PASSWORD: ""
@@ -46,9 +46,9 @@ jobs:
         COOKIE_STORE_KEY: _gha_tippspiel_session
       run: |
         cp config/database.yml.gha-ci config/database.yml
-        gem install bundler --no-ri --no-rdoc
+        # gem install bundler --no-ri --no-rdoc
         bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        # bundle install --jobs 4 --retry 3
 
         bundle exec rake db:create
         bundle exec rake db:migrate --trace
