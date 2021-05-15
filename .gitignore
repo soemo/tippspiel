@@ -20,3 +20,4 @@ passenger.3000.pid.lock
 /node_modules
 /yarn-error.log
 .rake_tasks~
+*.iml
