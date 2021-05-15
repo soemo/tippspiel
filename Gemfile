@@ -45,7 +45,7 @@ end
 
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
-  gem 'capistrano-rails', '= 1.4.0'
+  gem 'capistrano-rails'
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capistrano-maintenance', require: false
   gem 'rspec-rails', '= 3.7.2'

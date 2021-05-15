@@ -1,11 +1,11 @@
 GIT
   remote: https://github.com/soemo/capistrano-uberspace.git
-  revision: a0514a54586b3c080d3f73afcaa41e5c6d887af3
+  revision: 21cfa8119d2ecd18e505a309e520d706a4dd89b8
   branch: master
   specs:
     capistrano-uberspace (0.0.1)
       capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
+      capistrano-bundler (>= 1.1, < 3)
       capistrano-secrets-yml (~> 1.0.0)
       mysql2 (>= 0.3.11)
       passenger-rails
@@ -82,13 +82,13 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.6.0)
+    capistrano-bundler (2.0.1)
       capistrano (~> 3.1)
     capistrano-maintenance (1.2.1)
       capistrano (>= 3.0)
-    capistrano-rails (1.4.0)
+    capistrano-rails (1.6.1)
       capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
+      capistrano-bundler (>= 1.1, < 3)
     capistrano-secrets-yml (1.0.0)
       capistrano (>= 3.1)
       sshkit (>= 1.2.0)
@@ -384,7 +384,7 @@ DEPENDENCIES
   bootsnap
   cancancan (= 2.3.0)
   capistrano-maintenance
-  capistrano-rails (= 1.4.0)
+  capistrano-rails
   capistrano-uberspace!
   capybara
   devise (= 4.7.1)
