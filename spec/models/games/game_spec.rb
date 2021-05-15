@@ -2,6 +2,13 @@ require 'rails_helper'
 
 describe Game, :type => :model do
 
+  describe 'association' do
+
+    it { is_expected.to belong_to(:team1).class_name('Team').optional }
+    it { is_expected.to belong_to(:team2).class_name('Team').optional }
+    it { is_expected.to have_many(:tips) }
+  end
+
   describe 'validations' do
 
     it { is_expected.to validate_presence_of(:place) }
