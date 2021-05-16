@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513220230) do
+ActiveRecord::Schema.define(version: 2021_05_15_224238) do
 
-  create_table "games", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "games", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "team1_id"
     t.integer "team1_goals"
     t.integer "team2_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160513220230) do
     t.index ["team2_id"], name: "index_games_on_team2_id"
   end
 
-  create_table "notices", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "notices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "user_id"
     t.string "text", limit: 200
     t.datetime "deleted_at"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160513220230) do
     t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
-  create_table "teams", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "teams", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "name", limit: 30
     t.datetime "deleted_at"
     t.datetime "created_at"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160513220230) do
     t.string "country_code"
   end
 
-  create_table "tips", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tips", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
     t.integer "tip_points"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20160513220230) do
     t.index ["user_id"], name: "index_tips_on_user_id"
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160513220230) do
     t.integer "lock_version", default: 0
     t.integer "count5points"
     t.integer "count8points"
+    t.boolean "create_initial_random_tips", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

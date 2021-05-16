@@ -1,10 +1,5 @@
 - tips = presenter.tips
 - if tips.present?
-  - unless presenter.tournament_started?
-    %p
-      =  I18n.t('random_tips_description1')
-      = link_to(t('random_tips'), '#', {id: 'js_fill_random_tips', remote: true})
-      = raw I18n.t('random_tips_description2')
 
   = render partial: 'widgets/mixitup_control_bar'
 

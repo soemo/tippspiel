@@ -3,7 +3,7 @@ if Rails.env.development? || Rails.env.test?
   namespace :dev do
     desc 'Sample data for local development environment'
     task prime: 'db:setup' do
-      load_demo_user_and_random_tips
+      load_demo_user_with_random_tips
       set_random_game_goals
     end
 
@@ -22,7 +22,7 @@ if Rails.env.development? || Rails.env.test?
       rand(5)
     end
 
-    def load_demo_user_and_random_tips
+    def load_demo_user_with_random_tips
       100.times.each do |i|
         firstname = "test#{i+1}"
         lastname = 'user'
@@ -30,21 +30,15 @@ if Rails.env.development? || Rails.env.test?
         # Wenn der Nutzer nicht schon existiert, wird er samt Zufallstipps angelegt
         unless User.exists?(firstname: firstname)
           # gleich als angemeldeter Nutzer anlegen - confirmed_at
-          user = User.new({email: "#{firstname}@soemo.org",
-                           password: 'testtest',
-                           firstname: firstname, lastname: lastname})
-          user.confirmed_at = Time.now.utc
-          user.confirmation_sent_at = 1.hour.ago
+          user = User.create({email: "#{firstname}@soemo.org",
+                              password: 'testtest',
+                              create_initial_random_tips: true,
+                              firstname: firstname,
+                              lastname: lastname,
+                              confirmed_at: Time.now.utc,
+                              confirmation_sent_at: 1.hour.ago})
           user.confirm
-          puts "Nutzer #{user.name} angelegt"
-          if user.present?
-            games = Game.all
-            if games.present?
-              games.each do |game|
-                Tip.create!(user: user, game: game, team1_goals: get_random_goal, team2_goals: get_random_goal)
-              end
-            end
-          end
+          puts "Nutzer #{user.name} angelegt - gets randoms tips on first login"
         end
       end
     end

@@ -23,11 +23,23 @@ module Tips
         # https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
         values = []
         time = Time.current.to_s(:db)
+        needs_random_tips = ::UserQueries.needs_random_tips_for_user_id?(user_id)
 
         game_ids.each do |game_id|
-          values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
+          if needs_random_tips
+            values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', #{rand(5)}, #{rand(5)})")
+          else
+            values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
+          end
+
         end
-        sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
+
+        if needs_random_tips
+          sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at, team1_goals, team2_goals) VALUES #{values.join(', ')}"
+        else
+          sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
+        end
+
         ::Tip.connection.execute(sql)
       end
     end

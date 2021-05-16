@@ -40,6 +40,16 @@
 
       .row
         .small-12.large-7.columns
+          = I18n.t('create_initial_random_tips_description')
+      .row
+        .small-12.large-7.columns
+          .field
+            = f.check_box :create_initial_random_tips
+            = f.label :create_initial_random_tips, I18n.t('create_initial_random_tips')
+
+      %br
+      .row
+        .small-12.large-7.columns
           = f.submit t('devise.sign_up'), :class=>'button'
 
     = render :partial => 'devise/shared/links'

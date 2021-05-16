@@ -23,6 +23,11 @@ describe User, type: :model do
       expect(User.inactive.to_a).to include(user)
   end
 
+  it 'create_initial_random_tips is default false' do
+    user = FactoryBot.create(:user)
+    expect(user.create_initial_random_tips?).to eq(false)
+  end
+
   describe '#name' do
 
     it 'returns firstname + lastname' do

@@ -20,7 +20,6 @@ $(function(){
   autoCloseSuccessMessage();
 
   check_user_tip();
-  init_random_user_tips();
   initTableFilter();
 
   // https://github.com/patrickkunka/mixitup/blob/master/docs/configuration-object.md
@@ -189,18 +188,6 @@ function check_user_tip() {
     }
 
     $(this).val(cur_val);
-  });
-}
-
-function init_random_user_tips(){
-  $('#js_fill_random_tips').click(function() {
-    var inputs =  $(".tip_input:visible:not(:disabled)");
-    if(inputs.length) {
-      $.each(inputs, function() {
-        $(this).val(Math.floor((Math.random() * 6))); // von 0 - 5 per Zufall eintragen
-      });
-    }
-    return false; // damit danach kein GET ausgeloest wird
   });
 }
 

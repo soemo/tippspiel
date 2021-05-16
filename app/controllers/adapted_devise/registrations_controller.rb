@@ -11,7 +11,7 @@ module AdaptedDevise
     end
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :create_initial_random_tips])
     end
 
     def after_inactive_sign_up_path_for(_)

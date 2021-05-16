@@ -42,4 +42,21 @@ describe UserQueries do
     end
   end
 
+  describe '::needs_random_tips_for_user_id?' do
+    let(:user1) {create(:active_user)}
+    let(:user2) {create(:active_user,create_initial_random_tips: true)}
+
+    context 'if user wants random tips' do
+      it 'returns true' do
+        expect(subject.needs_random_tips_for_user_id?(user2.id)).to be true
+      end
+    end
+
+    context 'if user does not wants random tips' do
+      it 'returns true' do
+        expect(subject.needs_random_tips_for_user_id?(user1.id)).to be false
+      end
+    end
+  end
+
 end
