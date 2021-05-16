@@ -6,7 +6,8 @@ set :cap_tournament_name, TOURNAMENT_NAME
 # your Uberspace username
 set :user, 'soemo'
 
-set :scm, :git
+set :stage, 'production'
+#set :scm, :git
 
 set :repo_url, 'git@github.com:soemo/tippspiel.git'
 

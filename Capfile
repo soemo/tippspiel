@@ -10,6 +10,9 @@ require 'capistrano/deploy'
 # include rails tasks
 require 'capistrano/rails'
 
+require "capistrano/scm/git"
+install_plugin Capistrano::SCM::Git
+
 # include uberspace tasks
 require 'capistrano/uberspace'
 
