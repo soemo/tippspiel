@@ -63,9 +63,9 @@ de:
   set_pw: "Passwort vergeben"
   send_pw: "Neues Passwort schicken"
   save_tip: "Tipps speichern"
-  create_initial_random_tips: 'Bitte aktivieren, um Zufall-Tipps initial erstellen zu lassen.'
-  create_initial_random_tips_description: "Wenn du zu faul zum selber Tippen bist, kannst du dir gleich beim Registrieren Zufall-Tipps erstellen lassen.
-  Es werden zufällig Tore von 0 bis 5 vergeben. Natürlich kannst du die Zufallstore später auch selbst noch editieren."
+  create_initial_random_tips: 'Bitte aktivieren, um Zufall-Tipps erstellen zu lassen.'
+  create_initial_random_tips_description: "Wenn du selber zu faul zum Tippen bist, kannst du dir gleich beim Registrieren Zufall-Tipps erstellen lassen.
+  Es werden zufällig Tore von 0 bis 5 vergeben. Natürlich kannst du die Zufallstore später auch selbst noch anpassen."
   comparetips: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
 

@@ -42,9 +42,10 @@
         .small-12.large-7.columns
           = I18n.t('create_initial_random_tips_description')
       .row
-        .small-12.large-7.columns
-          .field
+        %label
+          .small-1.large-1.columns.create_initial_random_tips
             = f.check_box :create_initial_random_tips
+          .small-11.large-6.columns.end
             = f.label :create_initial_random_tips, I18n.t('create_initial_random_tips')
 
       %br
