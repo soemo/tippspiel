@@ -5,6 +5,6 @@ module TipsHelper
     name = "tips[#{tip_id}][#{attr_name}]"
     text_field_tag(name,
                    attr_value,
-                   {maxlength: 2, size: 2, class: 'tip_input', pattern: '[0-9]{1,2}'})
+                   {maxlength: 2, size: 2, class: 'tip_input', inputmode: 'numeric', pattern: '[0-9]*'})
   end
 end
