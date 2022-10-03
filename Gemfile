@@ -48,6 +48,8 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capistrano-maintenance', require: false
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'rspec-rails', '= 3.7.2'
   gem 'capybara'     # rspec-rails braucht das um in den Views have_selector zu nutzen
   gem 'guard-rspec', require: false
