@@ -30,7 +30,7 @@ de:
   need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
   current_champion_tip: 'Dein aktueller Tuniersieger-Tipp:'
   champion_tip: 'Dein Tuniersieger-Tipp:'
-  no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
+  no_champion_tip: 'Du hast leider keinen Tipp für einen Turniersieger abgegeben!'
   ranking_champion_tip_currently_not_visible: 'Siegertipp noch nicht sichtbar'
   ranking_no_champion_tip: 'Kein Siegertipp'
 

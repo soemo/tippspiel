@@ -19,7 +19,7 @@ en:
   need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
   current_champion_tip: 'Dein aktueller Tuniersieger-Tipp:'
   champion_tip: 'Dein Tuniersieger-Tipp:'
-  no_champion_tip: 'Leider hast du keinen Tuniersieger-Tipp abgegeben!'
+  no_champion_tip: "Sorry, you didn't submit a tip for a tournament winner!"
   who_will_be_champion: 'Wer wird Tuniersieger?'
 
   x_user_bet: "%{user_count} 'football-experts' fight in the competition and a place in the "
