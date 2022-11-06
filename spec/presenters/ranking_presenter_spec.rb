@@ -2,16 +2,42 @@ require 'rails_helper'
 
 describe RankingPresenter do
 
-  subject { RankingPresenter.new() }
+  subject { RankingPresenter.new }
 
-  describe '#finshed_games_count' do
+  describe '#bonus_answers_visible?' do
+    context 'if Tournament.round_of_16_started? == true' do
+      it 'returns true' do
+        expect(Tournament).to receive(:round_of_16_started?).and_return(true)
+        expect(subject.bonus_answers_visible?).to be true
+      end
+    end
+
+    context 'if Tournament.round_of_16_started? == false' do
+      it 'returns false' do
+        expect(Tournament).to receive(:round_of_16_started?).and_return(false)
+        expect(subject.bonus_answers_visible?).to be false
+      end
+    end
+  end
+
+  describe '#bonus_answers_visible?' do
+    it 'calls GameQueries finished' do
+      expected = [Game.new, Game.new]
+      expect(GameQueries).to receive(:finished).and_return(expected)
+      expect(expected).to receive(:count).and_return(2)
+
+      expect(subject.finished_games_count).to eq(2)
+    end
+  end
+
+  describe '#finished_games_count' do
 
     it 'calls GameQueries finished' do
       expected = [Game.new, Game.new]
       expect(GameQueries).to receive(:finished).and_return(expected)
       expect(expected).to receive(:count).and_return(2)
 
-      expect(subject.finshed_games_count).to eq(2)
+      expect(subject.finished_games_count).to eq(2)
     end
   end
 

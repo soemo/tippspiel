@@ -4,7 +4,7 @@ describe User, type: :model do
 
   describe 'association' do
 
-    it { is_expected.to belong_to(:championtip_team).class_name('Team').optional }
+    it { is_expected.to belong_to(:bonus_champion_team).class_name('Team').optional }
     it { is_expected.to have_many(:tips).dependent(:destroy) }
   end
 

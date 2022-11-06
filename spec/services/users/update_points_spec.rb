@@ -29,7 +29,7 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user1, :game => @game5, :team1_goals => 0, :team2_goals => 0)
 
       # erwartet 20 Punkte (8, 4, 0, 0, 0) + SIegertipp richtig (8 Punkte)
-      @user2 = create_active_user(create(:user, :championtip_team_id => winner_team.id))
+      @user2 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
       create(:tip, :user => @user2, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user2, :game => @game2, :team1_goals => 3, :team2_goals => 2)
       create(:tip, :user => @user2, :game => @game3, :team1_goals => 0, :team2_goals => 0)
@@ -45,7 +45,7 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user3, :game => @game5, :team1_goals => 0, :team2_goals => 1)
 
       # erwartet 21 Punkte (8, 0, 0, 0, 5) + richtigen Siegertip (8)
-      @user4 = create_active_user(create(:user, :championtip_team_id => winner_team.id))
+      @user4 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
       create(:tip, :user => @user4, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user4, :game => @game2, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user4, :game => @game3, :team1_goals => 0, :team2_goals => 0)
@@ -53,7 +53,7 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user4, :game => @game5, :team1_goals => 0, :team2_goals => 2)
 
       # Alles richtig getipt + richtigen Siegertip  (48 Punkte)
-      @user5 = create_active_user(create(:user, :championtip_team_id => winner_team.id))
+      @user5 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
       create(:tip, :user => @user5, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user5, :game => @game2, :team1_goals => 1, :team2_goals => 0)
       create(:tip, :user => @user5, :game => @game3, :team1_goals => 0, :team2_goals => 1)
@@ -61,7 +61,7 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
 
       # hat keinen Tipp abgegeben - 0 Punkte
-      @user6 = create_active_user(create(:user, :championtip_team_id => nil))
+      @user6 = create_active_user(create(:user, :bonus_champion_team_id => nil))
       create(:tip, :user => @user6, :game => @game1, :team1_goals => nil, :team2_goals => nil)
       create(:tip, :user => @user6, :game => @game2, :team1_goals => nil, :team2_goals => nil)
       create(:tip, :user => @user6, :game => @game3, :team1_goals => nil, :team2_goals => nil)

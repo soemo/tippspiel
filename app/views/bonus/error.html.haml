@@ -1,0 +1,7 @@
+-# Es wird ein flash Error angezeigt.
+-# plus der extra Text in @error_msg kann entsprechend definiert werden
+
+- if @error_msg.present?
+  .row
+    .small-12.column.error-text
+      %p= @error_msg[:text].html_safe

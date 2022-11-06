@@ -9,12 +9,12 @@ module RankingsHelper
         count = count.present? ? count : 0
         result << pointbadge_with_content(count, css_class, "x #{key} #{User.human_attribute_name('points')}")
       end
-
+      # todo soeren refactoring - sum of all bonus points
       champion_tippoints = user.championtippoints
-      champion_tippoint_title = "#{User.human_attribute_name('points')} #{User.human_attribute_name('siegertipp')}: #{champion_tippoints}"
+      champion_tippoint_title = "#{User.human_attribute_name('bonuspoints')}: #{champion_tippoints}"
       css_class = POINTS_TO_CSS_CLASS["#{champion_tippoints}"]
       result << '&nbsp;&nbsp'
-      result << pointbadge_with_content(icon('fas', 'trophy'), css_class, champion_tippoint_title)
+      result << pointbadge_with_content('B', css_class, champion_tippoint_title)
     end
 
     result

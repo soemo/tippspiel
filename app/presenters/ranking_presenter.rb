@@ -4,7 +4,11 @@ class RankingPresenter
 
   end
 
-  def finshed_games_count
+  def bonus_answers_visible?
+    Tournament.round_of_16_started?
+  end
+
+  def finished_games_count
     GameQueries.finished.count
   end
 

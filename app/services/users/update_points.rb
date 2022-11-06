@@ -11,7 +11,7 @@
 module Users
   class UpdatePoints < BaseService
 
-    CHAMPION_TIP_POINTS = 8
+    CHAMPION_TIP_POINTS = 8 #todo rename BONUS_POINTS
 
     def call
       update_user_points
@@ -30,11 +30,12 @@ module Users
 
           champion_tip_points = 0
           tournament_champion_team = get_tournament_champion_team
-          championtip_team_id = tournament_champion_team.present? ? tournament_champion_team.id : nil
+          bonus_champion_team_id = tournament_champion_team.present? ? tournament_champion_team.id : nil
           if Tournament.finished? &&
-              user.championtip_team_id.present? &&
-              user.championtip_team_id == championtip_team_id
+              user.bonus_champion_team_id.present? &&
+              user.bonus_champion_team_id == bonus_champion_team_id
             champion_tip_points = CHAMPION_TIP_POINTS
+            # todo soeren calculate bonus points
             total_points = total_points + champion_tip_points
           end
 

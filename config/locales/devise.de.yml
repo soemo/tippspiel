@@ -70,5 +70,5 @@ de:
       not_found: "nicht gefunden"
       not_locked: "ist nicht gesperrt"
       not_saved:
-        one: "%{resource} konnte wegen eines Fehlers nicht gespeichert werden: "
-        other: "%{resource} konnte wegen %{count} Fehlern nicht gespeichert werden: "
+        one: "%{bonus_tips} konnte wegen eines Fehlers nicht gespeichert werden: "
+        other: "%{bonus_tips} konnte wegen %{count} Fehlern nicht gespeichert werden: "

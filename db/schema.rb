@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_224238) do
+ActiveRecord::Schema.define(version: 2022_11_06_214431) do
 
   create_table "games", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "team1_id"
@@ -89,12 +89,15 @@ ActiveRecord::Schema.define(version: 2021_05_15_224238) do
     t.integer "count3points"
     t.integer "count0points"
     t.integer "championtippoints"
-    t.integer "championtip_team_id"
+    t.integer "bonus_champion_team_id"
     t.datetime "deleted_at"
     t.integer "lock_version", default: 0
     t.integer "count5points"
     t.integer "count8points"
     t.boolean "create_initial_random_tips", default: false
+    t.integer "bonus_second_team_id"
+    t.integer "bonus_how_many_goals"
+    t.integer "bonus_when_final_first_goal"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

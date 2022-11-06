@@ -16,7 +16,7 @@ de:
         Hast du die E-Mail nicht erhalten? Dann kontaktiere mich bitte."
 
   succesfully_saved_tips: "Deine Tipps wurden gespeichert!"
-  succesfully_saved_championtip: "Dein Tuniersieger-Tipp wurden gespeichert!"
+  succesfully_saved_bonustip: "Deine Bonustipps wurden erfolgreich gespeichert."
   create_successful: "%{object_name} wurde erfolgreich angelegt"
   notice_needs_a_comment: "Bitte keine Null Nummer angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
@@ -25,17 +25,21 @@ de:
   update_successful: "%{object_name} wurde aktualisiert."
   type_to_filter: Tippen um zu Filtern
 
-  who_will_be_champion: 'Wer wird Tuniersieger?'
-  need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
-  need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
-  current_champion_tip: 'Dein aktueller Tuniersieger-Tipp:'
+  bonus_questions:
+    which_team_is_champion: 'Welche Mannschaft wird das Turnier gewinnen?'
+    which_team_is_second: 'Welche Mannschaft wird Zweiter?'
+    how_many_goals: 'Wie viele Tore schießt der Torschützenkönig?'
+    when_final_first_goal: 'Wann wird das erste Tor im Endspiel fallen?'
+
+  bonus_question_help: "Die 4 Bonusfragen können bis zum Start des %{round_name}s ausgefüllt werden. Je korrekte Antwort gibt es %{extra_points} Zusatzpunkte."
   champion_tip: 'Dein Tuniersieger-Tipp:'
   no_champion_tip: 'Du hast leider keinen Tipp für einen Turniersieger abgegeben!'
-  ranking_champion_tip_currently_not_visible: 'Siegertipp noch nicht sichtbar'
+  no_second_tip: 'Du hast leider keinen Tipp für den zweiten Platz abgegeben!'
+  ranking_bonus_answers_currently_not_visible: 'Noch nicht sichtbar'
   ranking_no_champion_tip: 'Kein Siegertipp'
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg und einen Platz in der "
-  result_after_game_count: "nach %{finshed_games_count} von %{all_games_count} Spielen"
+  result_after_game_count: "nach %{finished_games_count} von %{all_games_count} Spielen"
 
   show_only_today_games: Nur Spiele von heute anzeigen.
 
@@ -72,6 +76,7 @@ de:
   no_user: Keine Nutzer
   or: oder
 
+  bonus: "Bonus"
   main: "Home"
   help: "Hilfe"
   ranking: "Rangliste"
@@ -79,6 +84,7 @@ de:
   tournament: "Turnier"
   tips: "Tipps"
   your_tips: "Deine Tipps"
+  your_bonustips: "Deine Bonustipps"
   back_link: "Zurück"
   edit_link: "Editieren"
   delete_link: "Löschen"
@@ -250,8 +256,8 @@ de:
         other: Tipps
     attributes:
       user:
-        siegertipp: Siegertipp
         points: Punkte
+        bonuspoints: Gesamt Bonus Zusatzpunkte
         name: Name
         email: "E-Mail"
         firstname: "Vorname"
@@ -263,6 +269,7 @@ de:
         remember_me: Angemeldet bleiben
 
       game:
+        bonus: "Bonus-Antworten"
         place: Spielort
         round: Runde
         start_at: Anstoß

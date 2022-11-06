@@ -23,29 +23,27 @@ describe Tournament, :type => :model do
         expect(subject.started?).to be true
       end
     end
-
   end
 
-  describe '#not_yet_started?' do
+  describe '#round_of_16_not_yet_started?' do
 
     context 'if first game is in the future' do
       it 'returns true' do
         Timecop.freeze(Time.now)
-        create(:game, :start_at => Time.now + 1.second)
+        create(:game, :start_at => Time.now + 1.second, round: ROUND_OF_16)
 
-        expect(subject.not_yet_started?).to be true
+        expect(subject.round_of_16_not_yet_started?).to be true
       end
     end
 
     context 'if first game is not in the future' do
       it 'returns false' do
         Timecop.freeze(Time.now)
-        create(:game, :start_at => Time.now - 1.second)
+        create(:game, :start_at => Time.now - 1.second, round: ROUND_OF_16)
 
-        expect(subject.not_yet_started?).to be false
+        expect(subject.round_of_16_not_yet_started?).to be false
       end
     end
-
   end
 
   describe '#finished?' do
@@ -74,6 +72,27 @@ describe Tournament, :type => :model do
         expect(subject.finished?).to be true
       end
     end
+  end
+
+  describe '#round_of_16_started?' do
+
+    context 'if first game of "Round of 16" is in the future' do
+      it 'returns false' do
+        Timecop.freeze(Time.now)
+        create(:game, :start_at => Time.now + 1.second, round: ROUND_OF_16)
+
+        expect(subject.round_of_16_started?).to be false
+      end
+    end
+
+    context 'if first game of "Round of 16"" is not in the future' do
+      it 'returns true' do
+        Timecop.freeze(Time.now)
+        create(:game, :start_at => Time.now - 1.second, round: ROUND_OF_16)
+
+        expect(subject.round_of_16_started?).to be true
+      end
+    end
 
   end
 
@@ -100,8 +119,6 @@ describe Tournament, :type => :model do
       expect(start_date_time).to be nil
       expect(end_date_time).to be nil
     end
-
-
   end
 
 end

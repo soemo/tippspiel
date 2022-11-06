@@ -32,6 +32,21 @@ describe NavBarPresenter do
     end
   end
 
+  describe '#nav_bar_title' do
+
+    context 'if user is logged in' do
+      it 'returns "#{TOURNAMENT_NAME} #{I18n.t(your_tips)}"' do
+        expect(subject.new(:admin, user).nav_bar_title).to eq("#{TOURNAMENT_NAME} #{t('your_tips')}")
+      end
+    end
+
+    context 'if user is not logged in' do
+      it 'returns "#{TOURNAMENT_NAME} #{I18n.t(app_name)}"' do
+        expect(subject.new(:admin, nil).nav_bar_title).to eq("#{TOURNAMENT_NAME} #{t('app_name')}")
+      end
+    end
+  end
+
   describe '#nav_bar_item_presenters?' do
 
     context 'if user not present' do
@@ -54,37 +69,43 @@ describe NavBarPresenter do
       it 'returns all NavBarItemPresenters' do
         nav_bar_item_presenters = presenter.nav_bar_item_presenters
 
-        expect(nav_bar_item_presenters.size).to eq(5)
+        expect(nav_bar_item_presenters.size).to eq(6)
 
         expect(nav_bar_item_presenters[0]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[0].link_url).to eq(rankings_path)
-        expect(nav_bar_item_presenters[0].link_text).to eq(I18n.t('ranking'))
+        expect(nav_bar_item_presenters[0].link_url).to eq(edit_bonus_path)
+        expect(nav_bar_item_presenters[0].link_text).to eq(I18n.t('bonus'))
         expect(nav_bar_item_presenters[0].link_icon_prefix).to eq('fas')
-        expect(nav_bar_item_presenters[0].link_icon).to eq('list-ol')
+        expect(nav_bar_item_presenters[0].link_icon).to eq('rocket')
 
         expect(nav_bar_item_presenters[1]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[1].link_url).to eq(notes_path)
-        expect(nav_bar_item_presenters[1].link_text).to eq(I18n.t('notice'))
-        expect(nav_bar_item_presenters[1].link_icon_prefix).to eq('far')
-        expect(nav_bar_item_presenters[1].link_icon).to eq('comments')
+        expect(nav_bar_item_presenters[1].link_url).to eq(rankings_path)
+        expect(nav_bar_item_presenters[1].link_text).to eq(I18n.t('ranking'))
+        expect(nav_bar_item_presenters[1].link_icon_prefix).to eq('fas')
+        expect(nav_bar_item_presenters[1].link_icon).to eq('list-ol')
 
         expect(nav_bar_item_presenters[2]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[2].link_url).to eq(compare_tips_path)
-        expect(nav_bar_item_presenters[2].link_text).to eq(I18n.t('comparetips'))
-        expect(nav_bar_item_presenters[2].link_icon_prefix).to eq('fas')
-        expect(nav_bar_item_presenters[2].link_icon).to eq('angle-double-right')
+        expect(nav_bar_item_presenters[2].link_url).to eq(notes_path)
+        expect(nav_bar_item_presenters[2].link_text).to eq(I18n.t('notice'))
+        expect(nav_bar_item_presenters[2].link_icon_prefix).to eq('far')
+        expect(nav_bar_item_presenters[2].link_icon).to eq('comments')
 
         expect(nav_bar_item_presenters[3]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[3].link_url).to eq(help_path)
-        expect(nav_bar_item_presenters[3].link_text).to be_nil
-        expect(nav_bar_item_presenters[3].link_icon_prefix).to eq('far')
-        expect(nav_bar_item_presenters[3].link_icon).to eq('question-circle')
+        expect(nav_bar_item_presenters[3].link_url).to eq(compare_tips_path)
+        expect(nav_bar_item_presenters[3].link_text).to eq(I18n.t('comparetips'))
+        expect(nav_bar_item_presenters[3].link_icon_prefix).to eq('fas')
+        expect(nav_bar_item_presenters[3].link_icon).to eq('angle-double-right')
 
         expect(nav_bar_item_presenters[4]).to be_a(NavBarItemPresenter)
-        expect(nav_bar_item_presenters[4].link_url).to eq(logout_path)
-        expect(nav_bar_item_presenters[4].link_text).to eq(I18n.t('sign_out'))
-        expect(nav_bar_item_presenters[4].link_icon_prefix).to eq('fas')
-        expect(nav_bar_item_presenters[4].link_icon).to eq('sign-out-alt')
+        expect(nav_bar_item_presenters[4].link_url).to eq(help_path)
+        expect(nav_bar_item_presenters[4].link_text).to be_nil
+        expect(nav_bar_item_presenters[4].link_icon_prefix).to eq('far')
+        expect(nav_bar_item_presenters[4].link_icon).to eq('question-circle')
+
+        expect(nav_bar_item_presenters[5]).to be_a(NavBarItemPresenter)
+        expect(nav_bar_item_presenters[5].link_url).to eq(logout_path)
+        expect(nav_bar_item_presenters[5].link_text).to eq(I18n.t('sign_out'))
+        expect(nav_bar_item_presenters[5].link_icon_prefix).to eq('fas')
+        expect(nav_bar_item_presenters[5].link_icon).to eq('sign-out-alt')
       end
     end
   end

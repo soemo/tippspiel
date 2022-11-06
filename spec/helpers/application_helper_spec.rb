@@ -10,7 +10,7 @@ describe ApplicationHelper, type: :helper do
 
   describe '#get_title' do
 
-    it 'return Name + Tippspiel' do
+    it 'return Tournament Name + Tippspiel' do
       expect(helper.get_title).to eq("#{TOURNAMENT_NAME} #{t('app_name')}")
     end
   end

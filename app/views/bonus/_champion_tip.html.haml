@@ -1,0 +1,36 @@
+= I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::CHAMPION_TIP_POINTS)
+%br
+%br
+- if Tournament.round_of_16_not_yet_started?
+
+  = form_tag bonus_tips_path, method: :put, class: 'form-horizontal' do
+    .row
+      .small-12.large-6.columns
+        %b= I18n.t('bonus_questions.which_team_is_champion')
+        - options = options_for_select(presenter.options_for_team_tip_select, presenter.bonus_champion_team_id)
+        = select_tag('bonus_champion_team_id', options, prompt: I18n.t('please_select'))
+
+    .row
+      .small-12.large-6.columns
+        %b= I18n.t('bonus_questions.which_team_is_second')
+        - options = options_for_select(presenter.options_for_team_tip_select, presenter.bonus_second_team_id)
+        = select_tag('bonus_second_team_id', options, prompt: I18n.t('please_select'))
+
+    .row
+      .small-12.large-6.columns
+        %span.float-right
+          = submit_tag(I18n.t('save'), class: 'button')
+    -#todo soeren move on here
+
+- else
+  .row
+    .small-12.large-6.columns
+      %b= I18n.t('bonus_questions.which_team_is_champion')
+      %br
+        = presenter.champion_team_with_flag
+  %br
+  .row
+    .small-12.large-6.columns
+      %b= I18n.t('bonus_questions.which_team_is_second')
+      %br
+        = presenter.second_team_with_flag

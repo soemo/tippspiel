@@ -43,6 +43,7 @@ POINTS_TO_CSS_CLASS =
 
 URL_SCOPES = {
     admin: 'admin'.freeze,
+    bonus: 'bonus'.freeze,
     'comparetips': 'comparetips'.freeze,
     help: 'help'.freeze,
     notes: 'notes'.freeze,

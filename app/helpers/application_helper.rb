@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def get_title
-    "#{TOURNAMENT_NAME} #{t('app_name')}"
+    "#{TOURNAMENT_NAME} #{I18n.t('app_name')}"
   end
 
   def hall_of_fame_link
@@ -66,6 +66,10 @@ module ApplicationHelper
        haml_concat link_to(t(:imprint), imprint_path )
        haml_concat " |  version #{$TIPPSPIEL_VERSION} - #{$TIPPSPIEL_BUILD_DATE}"
      end
+  end
+
+  def your_tips_link
+    link_to(icon('fas', 'edit', I18n.t(:your_tips), {class: 'fa-fw'}), root_path)
   end
 
 end

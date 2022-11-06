@@ -6,22 +6,21 @@
       %tr.white-bg
         %th= t('standings')
         %th= User.human_attribute_name('name')
-        %th= Game.human_attribute_name('siegertipp')
+        %th= Game.human_attribute_name('bonus')
         %th= User.human_attribute_name('points')
     %tbody
-      - tournament_started = Tournament.started?
       - user_ranking_hash.each do |place, users_on_same_place|
         - users_on_same_place.each do |user|
 
-          -# todo soeren 5/11/16 in presenter auslagern
-          - if tournament_started
+          -# todo soeren in presenter auslagern refactoring for bonus questions
+          - if presenter.bonus_answers_visible?
             - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
-            - if user.championtip_team_id.present?
-              - champteam_presenter = TeamPresenter.new(user.championtip_team)
+            - if user.bonus_champion_team_id.present?
+              - champteam_presenter = TeamPresenter.new(user.bonus_champion_team)
               - champ_team_info = champteam_presenter.team_name_with_flag
               - champ_team_info_small = champteam_presenter.team_name_with_flag(flag_size: 16)
           - else
-            - champ_team_info = champ_team_info_small = I18n.t('ranking_champion_tip_currently_not_visible')
+            - champ_team_info = champ_team_info_small = I18n.t('ranking_bonus_answers_currently_not_visible')
 
           - user_name_with_statistic_link = link_to(user.name, statistic_path(user), {title: I18n.t(:show_statistic_for, name: user.name)})
           - user_points = user.points.present? ? user.points.to_s : '0'

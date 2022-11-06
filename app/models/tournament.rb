@@ -10,8 +10,8 @@ class Tournament
     result
   end
 
-  def self.not_yet_started?
-    !Tournament.started?
+  def self.round_of_16_not_yet_started?
+    !Tournament.round_of_16_started?
   end
 
 
@@ -24,6 +24,11 @@ class Tournament
     end
 
     result
+  end
+
+  def self.round_of_16_started?
+    start_date_time, end_date_time = Tournament.round_start_end_date_time(ROUND_OF_16)
+    start_date_time < Time.now
   end
 
   def self.round_start_end_date_time(round)

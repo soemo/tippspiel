@@ -6,7 +6,7 @@
           %ul.menu
             %li
               %a.brand{href: presenter.nav_bar_brand_url}
-                = get_title
+                = presenter.nav_bar_title
             - presenter.nav_bar_item_presenters.each do |nav_bar_item_presenter|
               %li{class: nav_bar_item_presenter.css_class}
                 - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon_prefix, nav_bar_item_presenter.link_icon)}"

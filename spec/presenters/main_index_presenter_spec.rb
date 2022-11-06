@@ -13,7 +13,7 @@ describe MainIndexPresenter do
 
   let(:user) {
     u = create_active_user
-    u.championtip_team = team_de
+    u.bonus_champion_team = team_de
     u
   }
 
@@ -74,66 +74,6 @@ describe MainIndexPresenter do
       user.firstname = 'Test'
       user.lastname = 'User'
       expect(presenter.user_name).to eq('Test User')
-    end
-  end
-
-  describe '#championtip_team' do
-
-    context 'if user present' do
-
-      it 'returns user championtip_team' do
-        presenter = subject.new([tip_g1, tip_g2], user)
-        expect(presenter.championtip_team).to eq(team_de)
-      end
-    end
-
-    context 'if user not present' do
-
-      it 'returns nil' do
-        presenter = subject.new([tip_g1, tip_g2], nil)
-        expect(presenter.championtip_team).to eq(nil)
-      end
-    end
-  end
-
-  describe '#championtip_team_with_flag' do
-
-    context 'if championtip_team present' do
-
-      it 'calls TeamPresenter method team_name_with_flag' do
-        team_presenter = TeamPresenter.new(team_de)
-
-        presenter = subject.new([tip_g1, tip_g2], user)
-        expect(presenter).to receive(:championtip_team).and_return(team_de)
-        expect(TeamPresenter).to receive(:new).with(team_de).and_return(team_presenter)
-
-        presenter.championtip_team_with_flag
-      end
-    end
-
-    context 'if championtip_team not present' do
-
-      it 'returns does not call TeamPresenter' do
-        presenter = subject.new([tip_g1, tip_g2], user)
-        expect(presenter).to receive(:championtip_team).and_return(nil)
-        expect(TeamPresenter).not_to receive(:new)
-
-        expect(presenter.championtip_team_with_flag).to be nil
-      end
-    end
-  end
-
-  describe '#options_for_champion_tip_select' do
-
-    it 'returns options for select' do
-      expect(TeamQueries).to receive(:all_ordered_by_name).and_return([team_cz, team_de])
-
-      presenter = subject.new([tip_g1, tip_g2], user)
-      expect(presenter.options_for_champion_tip_select).to eq([
-                                                                  [team_cz.name, team_cz.id],
-                                                                  [team_de.name, team_de.id]
-                                                              ])
-
     end
   end
 
