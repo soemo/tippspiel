@@ -7,8 +7,8 @@ class HelpPresenter
     [
       I18n.t('bonus_questions.which_team_is_champion'),
       I18n.t('bonus_questions.which_team_is_second'),
-      I18n.t('bonus_questions.how_many_goals'),
       I18n.t('bonus_questions.when_final_first_goal'),
+      I18n.t('bonus_questions.how_many_goals'),
     ]
   end
 

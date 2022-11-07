@@ -77,7 +77,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user1.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -86,7 +86,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user2.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -95,7 +95,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user3.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -104,7 +104,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user4.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -113,7 +113,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user5.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -122,7 +122,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user6.id)
       expect(user.points).to eq(0)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(0)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -140,7 +140,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user1.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -149,7 +149,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user2.id)
       expect(user.points).to eq(12)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(1)
@@ -158,7 +158,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user3.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -167,7 +167,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user4.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -176,7 +176,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user5.id)
       expect(user.points).to eq(16)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(2)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -185,7 +185,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user6.id)
       expect(user.points).to eq(0)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(0)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -205,7 +205,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user1.id)
       expect(user.points).to eq(8)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -214,7 +214,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user2.id)
       expect(user.points).to eq(20)
-      expect(user.championtippoints).to eq(8)
+      expect(user.bonus_points).to eq(8)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(1)
@@ -223,7 +223,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user3.id)
       expect(user.points).to eq(13)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(1)
       expect(user.count4points).to eq(0)
@@ -232,7 +232,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user4.id)
       expect(user.points).to eq(21)
-      expect(user.championtippoints).to eq(8)
+      expect(user.bonus_points).to eq(8)
       expect(user.count8points).to eq(1)
       expect(user.count5points).to eq(1)
       expect(user.count4points).to eq(0)
@@ -241,7 +241,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user5.id)
       expect(user.points).to eq(48)
-      expect(user.championtippoints).to eq(8)
+      expect(user.bonus_points).to eq(8)
       expect(user.count8points).to eq(5)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)
@@ -250,7 +250,7 @@ describe Users::UpdatePoints do
 
       user = User.find(@user6.id)
       expect(user.points).to eq(0)
-      expect(user.championtippoints).to eq(0)
+      expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(0)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)

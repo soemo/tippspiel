@@ -22,9 +22,16 @@ describe 'bonus/edit.html.haml', :type => :view do
 
       expect(rendered).to have_selector('h3', :text => I18n.t('your_bonustips'))
 
-      expect(rendered).to have_xpath("//form[@action='/bonus_tips']") do |form|
-        #todo soeren expect(form).to have_selector('label', :text => I18n.t('who_will_be_champion'))
-      end
+      expect(rendered).to have_xpath("//form[@action='/bonus_tips']")
+      expect(rendered).to have_xpath("//select[@id='bonus_champion_team_id']")
+      expect(rendered).to have_xpath("//select[@id='bonus_second_team_id']")
+      expect(rendered).to have_xpath("//select[@id='bonus_when_final_first_goal']")
+      expect(rendered).to have_xpath("//input[@id='bonus_how_many_goals']")
+
+      expect(rendered).not_to have_content(I18n.t('no_champion_tip'))
+      expect(rendered).not_to have_content(I18n.t('no_second_tip'))
+      expect(rendered).not_to have_content(I18n.t('no_when_first_goal_tip'))
+      expect(rendered).not_to have_content(I18n.t('no_how_many_goals_tip'))
     end
 
   end
@@ -34,13 +41,23 @@ describe 'bonus/edit.html.haml', :type => :view do
       allow(Tournament).to receive(:round_of_16_not_yet_started?).and_return(false)
     end
 
-    it 'should say no champion tip' do
+    it 'and no bonus tip was made' do
       assign(:presenter, presenter)
 
       render
 
       expect(rendered).to have_selector('h3', :text => I18n.t('your_bonustips'))
+
+      expect(rendered).not_to have_xpath("//form[@action='/bonus_tips']")
+      expect(rendered).not_to have_xpath("//select[@id='bonus_champion_team_id']")
+      expect(rendered).not_to have_xpath("//select[@id='bonus_second_team_id']")
+      expect(rendered).not_to have_xpath("//select[@id='bonus_when_final_first_goal']")
+      expect(rendered).not_to have_xpath("//input[@id='bonus_how_many_goals']")
+
       expect(rendered).to have_content(I18n.t('no_champion_tip'))
+      expect(rendered).to have_content(I18n.t('no_second_tip'))
+      expect(rendered).to have_content(I18n.t('no_when_first_goal_tip'))
+      expect(rendered).to have_content(I18n.t('no_how_many_goals_tip'))
 
     end
   end

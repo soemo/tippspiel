@@ -18,6 +18,8 @@ en:
   champion_tip: 'Dein Tuniersieger-Tipp:'
   no_champion_tip: "Sorry, you didn't submit a tip for a tournament winner!"
   no_second_tip: "Sorry, you didn't submit a tip for the second!"
+  no_when_first_goal_tip: "Sorry, you didn't submit a tip, when the first goal will be scored in the final!"
+  no_how_many_goals_tip: "Sorry, you didn't submit a tip, how many goals does the top scorer score!"
 
   x_user_bet: "%{user_count} 'football-experts' fight in the competition and a place in the "
   result_after_game_count: "after %{finished_games_count} / %{all_games_count} games"
@@ -36,6 +38,12 @@ en:
     which_team_is_second: 'Which team will be second?'
     how_many_goals: 'How many goals does the top scorer score?'
     when_final_first_goal: 'When will the first goal be scored in the final?'
+    how_many_goals_options:
+      in_the_first_half: 'In the first half'
+      in_the_second_half: 'In the second half'
+      in_the_extra_time: 'In the extra time'
+      in_the_penalty: 'In the penalty'
+
 
   bonus_question_help: "Die 4 Bonusfragen können bis zum Start des %{round_name}s ausgefüllt werden. Je korrekte Antwort gibt es %{extra_points} Zusatzpunkte."
 

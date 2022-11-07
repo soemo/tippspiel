@@ -11,17 +11,6 @@
     %tbody
       - user_ranking_hash.each do |place, users_on_same_place|
         - users_on_same_place.each do |user|
-
-          -# todo soeren in presenter auslagern refactoring for bonus questions
-          - if presenter.bonus_answers_visible?
-            - champ_team_info = champ_team_info_small = I18n.t('ranking_no_champion_tip')
-            - if user.bonus_champion_team_id.present?
-              - champteam_presenter = TeamPresenter.new(user.bonus_champion_team)
-              - champ_team_info = champteam_presenter.team_name_with_flag
-              - champ_team_info_small = champteam_presenter.team_name_with_flag(flag_size: 16)
-          - else
-            - champ_team_info = champ_team_info_small = I18n.t('ranking_bonus_answers_currently_not_visible')
-
           - user_name_with_statistic_link = link_to(user.name, statistic_path(user), {title: I18n.t(:show_statistic_for, name: user.name)})
           - user_points = user.points.present? ? user.points.to_s : '0'
           %tr{id: "place_#{place}"}
@@ -38,13 +27,13 @@
                         = user_points
                   .row
                     .small-5.columns.small-infos
-                      = raw champ_team_info_small
+                      = raw presenter.bonus_ranking_info(user, true)
                     .small-7.columns.text-right
                       = statistic_content(user).html_safe
 
             %td.hide-for-small-only.place= place
             %td.hide-for-small-only= user_name_with_statistic_link
-            %td.hide-for-small-only= raw champ_team_info
+            %td.hide-for-small-only= raw presenter.bonus_ranking_info(user)
             %td.hide-for-small-only
               %span.user-points= user_points
               %span.user-statistic= statistic_content(user).html_safe

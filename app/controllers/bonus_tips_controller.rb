@@ -1,10 +1,11 @@
 class BonusTipsController < ApplicationController
 
   def update
-    # todo soeren set all bonus values
     result = BonusTips::SaveAnswers.call(
       bonus_champion_team_id: params[:bonus_champion_team_id],
       bonus_second_team_id: params[:bonus_second_team_id],
+      bonus_when_final_first_goal: params[:bonus_when_final_first_goal],
+      bonus_how_many_goals: params[:bonus_how_many_goals],
       current_user: current_user
     )
 

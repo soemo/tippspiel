@@ -11,7 +11,7 @@
 module Users
   class UpdatePoints < BaseService
 
-    CHAMPION_TIP_POINTS = 8 #todo rename BONUS_POINTS
+    BONUS_TIP_POINTS = 8
 
     def call
       update_user_points
@@ -28,15 +28,15 @@ module Users
           total_points  = ::TipQueries.sum_tip_points_by_user_id(user.id)
           total_points  = 0 unless total_points.present?
 
-          champion_tip_points = 0
+          bonus_tips_points = 0
           tournament_champion_team = get_tournament_champion_team
           bonus_champion_team_id = tournament_champion_team.present? ? tournament_champion_team.id : nil
           if Tournament.finished? &&
               user.bonus_champion_team_id.present? &&
               user.bonus_champion_team_id == bonus_champion_team_id
-            champion_tip_points = CHAMPION_TIP_POINTS
+            bonus_tips_points = BONUS_TIP_POINTS
             # todo soeren calculate bonus points
-            total_points = total_points + champion_tip_points
+            total_points = total_points + bonus_tips_points
           end
 
           count_8points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 8).count
@@ -46,7 +46,7 @@ module Users
           count_0points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 0).count
 
           user.update_columns({:points => total_points,
-                               :championtippoints => champion_tip_points,
+                               :bonus_points => bonus_tips_points,
                                :count8points => count_8points,
                                :count5points => count_5points,
                                :count4points => count_4points,

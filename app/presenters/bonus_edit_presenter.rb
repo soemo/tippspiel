@@ -24,17 +24,14 @@ class BonusEditPresenter
   end
 
   def bonus_second_team
-    #todo test soeren
     current_user.present? ? current_user.bonus_second_team : nil
   end
 
   def bonus_second_team_id
-    #todo test soeren
     bonus_second_team.present? ? bonus_second_team.id : ''
   end
 
   def second_team_with_flag
-    #todo test soeren
     team = bonus_second_team
     if team.present?
       TeamPresenter.new(team).team_name_with_flag
@@ -43,8 +40,40 @@ class BonusEditPresenter
     end
   end
 
+  def bonus_when_final_first_goal
+    current_user.present? ? current_user.bonus_when_final_first_goal : nil
+  end
+
+  def bonus_when_final_first_goal_answer
+    selection = bonus_when_final_first_goal
+    if selection.present?
+      I18n.t("bonus_questions.how_many_goals_options.#{BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL[selection]}")
+    else
+      I18n.t('no_when_first_goal_tip')
+    end
+  end
+
+  def bonus_how_many_goals
+    current_user.present? ? current_user.bonus_how_many_goals : nil
+  end
+
+  def bonus_how_many_goals_answer
+    selection = bonus_how_many_goals
+    if selection.present?
+      bonus_how_many_goals
+    else
+      I18n.t('no_how_many_goals_tip')
+    end
+  end
+
   def options_for_team_tip_select
     TeamQueries.all_ordered_by_name.map{|t| [t.name, t.id]}
+  end
+
+  def options_for_when_final_first_goal_select
+    BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL.map do |v|
+      [I18n.t("bonus_questions.how_many_goals_options.#{v[1]}"), v[0]]
+    end
   end
 
   def round_of_16_name

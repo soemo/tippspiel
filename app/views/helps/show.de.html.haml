@@ -74,7 +74,7 @@
 
     %h4 Bonusfragen beantworten
     %p
-      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::CHAMPION_TIP_POINTS)
+      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::BONUS_TIP_POINTS)
 
     %blockquote
       - @presenter.bonus_questions.each do |question|

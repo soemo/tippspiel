@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_06_214431) do
+ActiveRecord::Schema.define(version: 2022_11_07_204345) do
 
   create_table "games", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "team1_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2022_11_06_214431) do
     t.integer "count4points"
     t.integer "count3points"
     t.integer "count0points"
-    t.integer "championtippoints"
+    t.integer "bonus_points"
     t.integer "bonus_champion_team_id"
     t.datetime "deleted_at"
     t.integer "lock_version", default: 0

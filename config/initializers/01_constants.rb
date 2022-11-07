@@ -40,6 +40,12 @@ POINTS_TO_CSS_CLASS =
      '3' => 'three-point-background-color',
      '0' => 'null-point-background-color'}
 
+BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL = {
+    1 => 'in_the_first_half',
+    2 => 'in_the_second_half',
+    3 => 'in_the_extra_time',
+    4 => 'in_the_penalty',
+}.freeze
 
 URL_SCOPES = {
     admin: 'admin'.freeze,

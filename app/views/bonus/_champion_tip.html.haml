@@ -1,4 +1,4 @@
-= I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::CHAMPION_TIP_POINTS)
+= I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::BONUS_TIP_POINTS)
 %br
 %br
 - if Tournament.round_of_16_not_yet_started?
@@ -18,9 +18,20 @@
 
     .row
       .small-12.large-6.columns
+        %b= I18n.t('bonus_questions.when_final_first_goal')
+        - options = options_for_select(presenter.options_for_when_final_first_goal_select, presenter.bonus_when_final_first_goal)
+        = select_tag('bonus_when_final_first_goal', options, prompt: I18n.t('please_select'))
+
+    .row
+      .small-12.large-6.columns
+        %b= I18n.t('bonus_questions.how_many_goals')
+        = text_field_tag('bonus_how_many_goals', presenter.bonus_how_many_goals,
+                   {maxlength: 2, size: 2, inputmode: 'numeric', pattern: '[1-9]*'})
+
+    .row
+      .small-12.large-6.columns
         %span.float-right
           = submit_tag(I18n.t('save'), class: 'button')
-    -#todo soeren move on here
 
 - else
   .row
@@ -34,3 +45,15 @@
       %b= I18n.t('bonus_questions.which_team_is_second')
       %br
         = presenter.second_team_with_flag
+  %br
+  .row
+    .small-12.large-6.columns
+      %b= I18n.t('bonus_questions.when_final_first_goal')
+      %br
+        = presenter.bonus_when_final_first_goal_answer
+  %br
+  .row
+    .small-12.large-6.columns
+      %b= I18n.t('bonus_questions.how_many_goals')
+      %br
+        = presenter.bonus_how_many_goals_answer
