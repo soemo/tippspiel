@@ -26,7 +26,7 @@ describe 'rankings/index', :type => :view do
     assign(:presenter, presenter)
     user_size  = 10
     expect(presenter).to receive(:user_count).and_return(user_size)
-    expect(presenter).to receive(:bonus_answers_visible?).exactly(10).times.and_return(false)
+    expect(presenter).to receive(:bonus_answers_visible?).exactly(20).times.and_return(false)
 
     # 10 User anlegen
     users = []
@@ -85,7 +85,7 @@ describe 'rankings/index', :type => :view do
 
      user_size  = user_poins.count
      expect(presenter).to receive(:user_count).and_return(user_size)
-     expect(presenter).to receive(:bonus_answers_visible?).exactly(10).times.and_return(false)
+     expect(presenter).to receive(:bonus_answers_visible?).exactly(20).times.and_return(false)
 
      # User anlegen
      users = []

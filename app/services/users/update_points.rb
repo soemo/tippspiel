@@ -18,7 +18,6 @@ module Users
     end
 
 
-
     private
 
     def update_user_points
