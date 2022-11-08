@@ -3,6 +3,18 @@ class HelpPresenter
   def initialize
 
   end
+  def bonus_questions
+    [
+      I18n.t('bonus_questions.which_team_is_champion'),
+      I18n.t('bonus_questions.which_team_is_second'),
+      I18n.t('bonus_questions.when_final_first_goal'),
+      I18n.t('bonus_questions.how_many_goals'),
+    ]
+  end
+
+  def round_of_16_name
+    I18n.t('round.roundof16')
+  end
 
   def round_infos
     result = []

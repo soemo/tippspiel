@@ -2,7 +2,7 @@
   .small-12.columns
     %h3
       = t('ranking')
-      %small=t('result_after_game_count', finshed_games_count: @presenter.finshed_games_count,
+      %small=t('result_after_game_count', finished_games_count: @presenter.finished_games_count,
                                           all_games_count: @presenter.all_games_count)
     %p
       = t('x_user_bet', user_count: @presenter.user_count)
@@ -10,20 +10,28 @@
       = '.'
       %br
       %small
-        %span.point-explaning
+        %span.point-explaining
           = icon('fas', 'circle', '', class: 'eight-point-color')
           = "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Pkt."
-        %span.point-explaning
+        %span.point-explaining
           = icon('fas', 'circle', '', class: 'five-point-color')
           = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Pkt."
-        %span.point-explaning
+        %span.point-explaining
           = icon('fas', 'circle', '', class: 'four-point-color')
           = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Pkt."
-        %span.point-explaning
+        %span.point-explaining
           = icon('fas', 'circle', '', class: 'three-point-color')
           = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND} Pkt."
-        %span.point-explaning
+        %span.point-explaining
           = icon('fas', 'circle', '', class: 'null-point-color')
           = '0 Pkt.'
 
+
+
     = render partial: 'user_ranking', locals: {presenter: @presenter}
+
+    - if @presenter.bonus_answers_visible?
+      %p
+        %small
+          = Game.human_attribute_name('bonus') + ':'
+          = I18n.t('ranking_bonus_answers_help')

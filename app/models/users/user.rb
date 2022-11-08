@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :championtip_team, class_name: 'Team', optional: true
+  belongs_to :bonus_champion_team, class_name: 'Team', optional: true
+  belongs_to :bonus_second_team, class_name: 'Team', optional: true
   has_many   :tips, dependent: :destroy
 
   validates               :email, :presence => true

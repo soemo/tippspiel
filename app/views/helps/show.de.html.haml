@@ -1,30 +1,20 @@
 .row
   .small-12.columns
-    %h3= t('app_name') + " - " + t('help')
+    %h3= "#{TOURNAMENT_NAME} "+ t('app_name') + " - " + t('help')
     %p
-      Die Regeln sind einfach erklärt. Jeder der sich anmeldet, kann die Spiele und den Tuniersieger tippen.
-      Wer die meisten Punkte hat gewinnt. Ein Tipp für ein Spiel kann bis zur angegebenen Spiel-Startzeit abgegeben werden.
-      %blockquote
-        Pro Spiel gibt es maximal #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte!
-        %br
-        #{Tips::UpdatePoints::POINTS_CORRECT_TREND}
-        Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage (Spieltendenz).
-        %br
-        Je
-        #{Tips::UpdatePoints::EXTRA_POINT_GOALS}
-        weitere Punkte gibt es bei Übereinstimmung der getippten und der tatsächlich erzielten Tore
-        einer Mannschaft. Allerdings gibt es diese Punkte
-        %b
-          nur, wenn auch die Spieltendenz stimmt.
-        %br
-        Den letzten Extrapunkt gibt es bei richtiger Tordifferenz.
-        %br
-        %br
-        Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
+      Die Regeln sind einfach erklärt. Jeder der sich anmeldet, kann die Spielergebnisse tippen
+      und die Bonusfragen beantworten. Für jeden richtigen Spieltipp und richtige Bonsufrage gibt es Punkte.
+      Wer die meisten Punkte hat gewinnt und ist stolzer Besitzer des ruhmreichen Wanderpokals.
 
+    %h4 Spiele tippen
+    %p
+      Ein Tipp für ein Spiel kann bis zum Spielanpfiff abgegeben werden.
     %p
       %b
         Mögliche Punkte pro Tipp
+      %br
+      Pro Spiel gibt es maximal #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte!
+      Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
     %ul.hilfe.no-bullet
       %li
         %p
@@ -39,7 +29,9 @@
           - 5.times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte: Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams
+          #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage
+          %br
+            (Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams)
       %li
         %p
           - 4.times do
@@ -47,7 +39,9 @@
           - 4.times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte: Spieltendenz richtig und die Tordifferenz
+          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte:
+          %br
+            (Spieltendenz richtig und die Tordifferenz)
       %li
         %p
           - 5.times do
@@ -63,6 +57,30 @@
           %br
           #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
 
+    %blockquote
+      .label
+        Beispiele
+      %br
+      Frankreich - Schweiz spielt 3:0 und du hast 3:1 getippt.
+      Dann bekommst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
+      und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
+      %br
+      %br
+      Deutschland - Italien spielt 1:0 und du hast 2:1 getippt.
+      Dann bekommst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte auf das Spiel.
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
+      und #{Tips::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
+
+    %h4 Bonusfragen beantworten
+    %p
+      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::BONUS_TIP_POINTS)
+
+    %blockquote
+      - @presenter.bonus_questions.each do |question|
+        = question
+        %br
+
     %p
       Bei Punktgleichheit wird die Platzierung über die Anzahl der erreichten Tipppunkte entschieden.
       %br
@@ -71,32 +89,13 @@
       die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punktetipps".
       Liegt auch hier Gleichheit vor dann die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND  + Tips::UpdatePoints::EXTRA_POINT} Punktetipps" usw.
 
-    %blockquote
-      .label
-        Beispiele
-      %br
-      Frankreich - Schweiz spielt 3:0 und Du hast 3:1 getippt.
-      Dann bekommst Du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte auf das Spiel.
-      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
-      und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} für die richtige Anzahl der französischen Tore.
-      %br
-      Deutschland - Italien spielt 1:0 und du hast 2:1 getippt.
-      Dann bekommst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte auf das Spiel.
-      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} da du die Spieltendenz richtig hast
-      und #{Tips::UpdatePoints::EXTRA_POINT} für die richtige Tordifferenz.
-
-    %blockquote
-      .label
-        Tuniersieger-Tipp:
-      %br
-      Bei richtigem Tipp auf den Tuniersieger gibt es #{Users::UpdatePoints::CHAMPION_TIP_POINTS} Zusatzpunkte.
-      Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!
-
     .row
       .small-12.medium-7.columns
         %p
           %b
-            Es gibt #{ROUNDS.size} Runden:
+            Die
+            = TOURNAMENT_NAME
+            wird in #{ROUNDS.size} Runden ausgespielt:
         - if @presenter.round_infos.present?
           %ul.hilfe
             - @presenter.round_infos.each do |info|
@@ -112,6 +111,6 @@
         %p
           %br
           %br
-          In diesem Sinne viel Spaß beim Tippen!
+          Ich wünsche euch viel Spaß beim Tippen!
           %br
           Sören "Harry" Mothes

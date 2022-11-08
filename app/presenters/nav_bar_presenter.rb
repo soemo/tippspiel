@@ -1,5 +1,6 @@
 class NavBarPresenter
   include Rails.application.routes.url_helpers
+  include ApplicationHelper
 
   attr_reader :url_scope, :user
 
@@ -14,6 +15,14 @@ class NavBarPresenter
 
   def nav_bar_brand_url
     root_path
+  end
+
+  def nav_bar_title
+    if user_logged_in?
+      "#{TOURNAMENT_NAME} #{I18n.t('your_tips')}"
+    else
+      get_title
+    end
   end
 
   def user_position
@@ -50,6 +59,13 @@ class NavBarPresenter
   def nav_bar_item_configurations
     result = []
     if user_logged_in?
+      result += [
+        {link_icon_prefix: 'fas',
+         link_icon: 'rocket',
+         link_text: I18n.t('bonus'),
+         link_url: edit_bonus_path,
+         css_class: active_css_class(URL_SCOPES[:bonus])}
+      ]
       result += [
         {link_icon_prefix: 'fas',
          link_icon: 'list-ol',

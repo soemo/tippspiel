@@ -40,7 +40,6 @@
       .small-12.columns
         %p
           = link_to t('devise.forgot_pw'), new_password_path(resource_name)
-          - if Tournament.not_yet_started?
             %br
             = link_to t('devise.not_receive_confirmation_info'), new_confirmation_path(resource_name)
 

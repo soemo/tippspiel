@@ -6,12 +6,13 @@ describe 'rankings/index', :type => :view do
   let(:presenter) {RankingPresenter.new}
 
   before :each do
-    allow(Tournament).to receive(:started?).and_return(true)
+    allow(Tournament).to receive(:round_of_16_not_yet_started?).and_return(true)
   end
 
   it 'should show no user ranking if no user' do
     assign(:presenter, presenter)
     expect(presenter).to receive(:user_count).and_return(0)
+    expect(presenter).to receive(:bonus_answers_visible?).and_return(false)
 
     render
 
@@ -26,6 +27,8 @@ describe 'rankings/index', :type => :view do
     assign(:presenter, presenter)
     user_size  = 10
     expect(presenter).to receive(:user_count).and_return(user_size)
+    # 2x10 + one time in the index
+    expect(presenter).to receive(:bonus_answers_visible?).exactly(21).times.and_return(false)
 
     # 10 User anlegen
     users = []
@@ -48,7 +51,7 @@ describe 'rankings/index', :type => :view do
       expect(table).to have_selector('thead') do |thead|
         expect(thead).to have_selector('th', :text => I18n.t('standings'))
         expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))
-        expect(thead).to have_selector('th', :text => Game.human_attribute_name('siegertipp'))
+        expect(thead).to have_selector('th', :text => Game.human_attribute_name('bonus'))
         expect(thead).to have_selector('th', :text => User.human_attribute_name('points'))
       end
       expect(table).to have_selector('tbody') do |tbody|
@@ -84,6 +87,8 @@ describe 'rankings/index', :type => :view do
 
      user_size  = user_poins.count
      expect(presenter).to receive(:user_count).and_return(user_size)
+     # 2x10 + one time in the index
+     expect(presenter).to receive(:bonus_answers_visible?).exactly(21).times.and_return(false)
 
      # User anlegen
      users = []
@@ -105,7 +110,7 @@ describe 'rankings/index', :type => :view do
        expect(table).to have_selector('thead') do |thead|
          expect(thead).to have_selector('th', :text => I18n.t('standings'))
          expect(thead).to have_selector('th', :text => User.human_attribute_name('name'))
-         expect(thead).to have_selector('th', :text => Game.human_attribute_name('siegertipp'))
+         expect(thead).to have_selector('th', :text => Game.human_attribute_name('bonus'))
          expect(thead).to have_selector('th', :text => User.human_attribute_name('points'))
        end
        expect(table).to have_selector('tbody') do |tbody|

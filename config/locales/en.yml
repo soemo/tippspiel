@@ -13,17 +13,15 @@ en:
   create_successful: "%{object_name} was successfully created"
   notice_needs_a_comment: "Bitte keine null Nummern angeben."
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
-  succesfully_saved_championtip: "Dein Tuniersieger-Tip wurden gespeichert!"
+  succesfully_saved_bonustip: "Deine Bonustipps wurden erfolgreich gespeichert."
 
-  need_champion_tip: 'Du hast noch keinen Tuniersieger-Tipp abgegeben!'
-  need_champion_tip_info: 'Bei richtigem Tipp auf den Tuniersieger gibt es %{points} Zusatzpunkte. Du kannst Dir die Zusatzpunkte nur vor dem Tunierstart sichern!'
-  current_champion_tip: 'Dein aktueller Tuniersieger-Tipp:'
-  champion_tip: 'Dein Tuniersieger-Tipp:'
   no_champion_tip: "Sorry, you didn't submit a tip for a tournament winner!"
-  who_will_be_champion: 'Wer wird Tuniersieger?'
+  no_second_tip: "Sorry, you didn't submit a tip for the second!"
+  no_when_first_goal_tip: "Sorry, you didn't submit a tip, when the first goal will be scored in the final!"
+  no_how_many_goals_tip: "Sorry, you didn't submit a tip, how many goals does the top scorer score!"
 
   x_user_bet: "%{user_count} 'football-experts' fight in the competition and a place in the "
-  result_after_game_count: "after %{finshed_games_count} / %{all_games_count} games"
+  result_after_game_count: "after %{finished_games_count} / %{all_games_count} games"
 
   show_only_today_games: Show only today games.
   type_to_filter: Tap to filter
@@ -33,6 +31,24 @@ en:
   show_statistic_for: Show statistic for %{name}
   ranking_per_game: Ranking per game
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
+
+  bonus_questions:
+    which_team_is_champion: 'Which team will be the winner of the tournament?'
+    which_team_is_second: 'Which team will be second?'
+    how_many_goals: 'How many goals does the top scorer score?'
+    when_final_first_goal: 'When will the first goal be scored in the final?'
+    when_final_first_goal_options:
+      in_the_first_half: 'In the first half'
+      in_the_first_half_short: '1.H'
+      in_the_second_half: 'In the second half'
+      in_the_second_half_short: '2.H'
+      in_the_extra_time: 'In the extra time'
+      in_the_extra_time_short: 'ET'
+      in_the_penalty: 'In the penalty'
+      in_the_penalty_short: 'P'
+
+
+  bonus_question_help: "Die 4 Bonusfragen können bis zum Start des %{round_name}s ausgefüllt werden. Je korrekte Antwort gibt es %{extra_points} Zusatzpunkte."
 
   signed_in_hello: "Hi "
   sign_in: "Login"
@@ -47,13 +63,15 @@ en:
   no_user: No user
   or: or
 
+  bonus: "Bonus"
   main: "Home"
   help: "Help"
   ranking: "Ranking"
   notice: Shoptalk
   tournament: "Tournament"
   tips: "Hints"
-  your_tips: "your hints"
+  your_tips: "your tips"
+  your_bonustips: "your bonus tips"
   full_ranking_list: Show ranking list
 
   back_link: "back"
@@ -84,8 +102,8 @@ en:
       user: User
     attributes:
       user:
-        siegertipp: Championtip
         points: Points
+        bonuspoints: Overall bonus points
         name: Name
         email: "E-Mail"
         firstname: "Firstname"

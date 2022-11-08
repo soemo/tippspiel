@@ -25,8 +25,9 @@ Rails.application.routes.draw do
     resource :start_calculating, only: :new
   end
 
-  resource :champion_tips, only: [:update]
+  resource :bonus_tips, only: [:update]
   resource :hall_of_fame, only: :show
+  resource :bonus, only: :edit
   resource :help, only: :show
   resource :imprint, only: :show
   resources :rankings, only: :index

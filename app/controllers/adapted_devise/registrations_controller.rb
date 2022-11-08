@@ -7,7 +7,7 @@ module AdaptedDevise
     protected
 
     def check_permission
-      render_forbidden if Tournament.started?
+      render_forbidden if Tournament.finished? # registration is allowed before and on every tournament day
     end
 
     def configure_permitted_parameters
