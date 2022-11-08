@@ -9,7 +9,7 @@ class MainIndexPresenter
   end
 
   def bonus_question_link_text
-     if current_user.all_bonus_questions_filled_out?
+     if current_user.present? && current_user.all_bonus_questions_filled_out?
       I18n.t('go_to_bonus_question_page_check')
     else
       I18n.t('go_to_bonus_question_page_fill_out')
@@ -31,5 +31,4 @@ class MainIndexPresenter
   def user_name
     current_user.name
   end
-
 end

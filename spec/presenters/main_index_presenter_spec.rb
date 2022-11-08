@@ -58,6 +58,13 @@ describe MainIndexPresenter do
         expect(presenter.bonus_question_link_text).to eq(I18n.t('go_to_bonus_question_page_fill_out'))
       end
     end
+
+    context 'if user not present' do
+      it 'returns go_to_bonus_question_page_fill_out' do
+        presenter = subject.new([], nil)
+        expect(presenter.bonus_question_link_text).to eq(I18n.t('go_to_bonus_question_page_fill_out'))
+      end
+    end
   end
 
   describe '#tournament_started?' do

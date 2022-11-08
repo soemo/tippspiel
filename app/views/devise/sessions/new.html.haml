@@ -19,9 +19,7 @@
               Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal
               mit nach Hause nehmen - verbunden mit unbeschreiblichem Ruhm und uneingeschränktem Prahlrecht?
               Um zu dieser Ehre zu gelangen, einfach
-              - unless Tournament.started?
-                = link_to('registrieren', new_registration_path(resource_name))
-                und
+              = link_to('registrieren', new_registration_path(resource_name)) + ', '
               die Spiele tippen und Bonusfragen beantworten!
 
           = render :partial => 'login_form'
