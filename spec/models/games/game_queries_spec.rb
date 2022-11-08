@@ -81,6 +81,24 @@ describe GameQueries do
     end
   end
 
+  describe '::started_game_ids' do
+
+    it 'returns game ids where start_date <= Time.now' do
+      Timecop.freeze(Time.now)
+
+      game1 = create(:game, start_at: Time.now - 1.second)
+      game2 = create(:game, start_at: Time.now - 1.hour)
+      game3 = create(:game, start_at: Time.now + 1.second)
+
+      game_ids = subject.started_game_ids
+      expect(game_ids).to eq([game1.id, game2.id])
+
+      game3.update_column(:start_at, Time.now)
+      game_ids = subject.started_game_ids
+      expect(game_ids).to eq([game1.id, game2.id, game3.id])
+    end
+  end
+
   describe '::ordered_started_at_for' do
 
     let!(:game1) { create(:game, round: GROUP,
