@@ -23,12 +23,19 @@ class User < ApplicationRecord
   scope :active,   -> { where('confirmed_at is not null') }
   scope :inactive, -> { where('confirmed_at is null') }
 
-  def name
-    "#{firstname} #{lastname}"
-  end
-
   def admin?
     self.email == ADMIN_EMAIL
+  end
+
+  def all_bonus_questions_filled_out?
+    bonus_champion_team_id.present? &&
+      bonus_second_team_id.present? &&
+      bonus_when_final_first_goal.present? &&
+      bonus_how_many_goals.present?
+  end
+
+  def name
+    "#{firstname} #{lastname}"
   end
 
   protected

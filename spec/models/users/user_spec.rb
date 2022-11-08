@@ -29,7 +29,6 @@ describe User, type: :model do
   end
 
   describe '#name' do
-
     it 'returns firstname + lastname' do
       user = User.new(firstname: 'Firstname', lastname: 'Lastname')
       expect(user.name).to eq('Firstname Lastname')
@@ -37,7 +36,6 @@ describe User, type: :model do
   end
 
   describe '#admin?' do
-
     context 'if email == ADMIN_EMAIL' do
 
       it 'returns true' do
@@ -46,9 +44,7 @@ describe User, type: :model do
       end
     end
 
-
-    context  'if email != ADMIN_EMAIL' do
-
+    context 'if email != ADMIN_EMAIL' do
       it 'returns true' do
         user = User.new(email: 'bla@blub.de')
         expect(user.admin?).to be false
@@ -56,8 +52,39 @@ describe User, type: :model do
     end
   end
 
-  describe 'confirm' do
+  describe '#all_bonus_questions_filled_out?' do
+    context 'if all question filled out' do
+      it 'returns true' do
+        user = User.new(
+          bonus_champion_team_id: 1,
+          bonus_second_team_id: 2,
+          bonus_when_final_first_goal: 4,
+          bonus_how_many_goals: 9
+        )
+        expect(user.all_bonus_questions_filled_out?).to be true
+      end
+    end
 
+    context 'if not all question filled out' do
+      it 'returns false' do
+        user = User.new(
+          bonus_champion_team_id: nil,
+          bonus_second_team_id: nil,
+          bonus_when_final_first_goal: nil,
+          bonus_how_many_goals: nil
+        )
+        expect(user.all_bonus_questions_filled_out?).to be false
+        user.bonus_champion_team_id = 1
+        expect(user.all_bonus_questions_filled_out?).to be false
+        user.bonus_second_team_id = 2
+        expect(user.all_bonus_questions_filled_out?).to be false
+        user.bonus_when_final_first_goal = 4
+        expect(user.all_bonus_questions_filled_out?).to be false
+      end
+    end
+  end
+
+  describe 'confirm' do
     it 'adds an error, if confirmation is too old' do
       u = create(:user)
       u.update_column(:confirmation_sent_at, (7.days + 1.hour).ago)
@@ -77,5 +104,4 @@ describe User, type: :model do
     user.destroy
     expect(Tip.only_deleted.where(:user_id => user.id).pluck(:id)).to eq(tip_ids)
   end
-
 end

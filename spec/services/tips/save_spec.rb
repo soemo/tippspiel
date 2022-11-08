@@ -32,9 +32,7 @@ describe Tips::Save do
   }
 
   context 'if tip_params and user present?' do
-
     it 'save tips' do
-
       subject.call(current_user: user, tips_params: tip_params)
 
       tip1= Tip.find(tip_g1.id)
@@ -46,16 +44,13 @@ describe Tips::Save do
       expect(tip2.team2_goals).to eq(3)
       expect(tip3.team1_goals).to eq(nil) # dieser Tipp durfte nicht mehr abgegeben werden
       expect(tip3.team2_goals).to eq(nil) # dieser Tipp durfte nicht mehr abgegeben werden
-
     end
   end
 
   context 'if tip_params and user not present?' do
-
     it 'saves no tips' do
       expect(Tips::FromUser).to_not receive(:call)
       subject.call(current_user: nil, tips_params: nil)
     end
   end
-
 end
