@@ -30,20 +30,24 @@ de:
     which_team_is_second: 'Welche Mannschaft wird Zweiter?'
     how_many_goals: 'Wie viele Tore erzielt der Torschützenkönig?'
     when_final_first_goal: 'Wann wird das erste Tor im Finale fallen?'
-    how_many_goals_options:
+    when_final_first_goal_options:
       in_the_first_half: 'In der ersten Halbzeit'
+      in_the_first_half_short: '1.HZ'
       in_the_second_half: 'In der zweiten Halbzeit'
+      in_the_second_half_short: '2.HZ'
       in_the_extra_time: 'In der Verlängerung'
+      in_the_extra_time_short: 'V'
       in_the_penalty: 'Im Elfmeterschießen'
+      in_the_penalty_short: '11m'
 
 
   bonus_question_help: "Die 4 Bonusfragen können bis zum Start des %{round_name}s ausgefüllt werden. Je korrekte Antwort gibt es %{extra_points} Zusatzpunkte."
-  champion_tip: 'Dein Tuniersieger-Tipp:'
   no_champion_tip: 'Du hast leider keinen Tipp für einen Turniersieger abgegeben!'
   no_second_tip: 'Du hast leider keinen Tipp für den zweiten Platz abgegeben!'
   no_when_first_goal_tip: 'Du hast leider keinen Tipp abgegeben, wann im Finale das erste Tor fällt!'
   no_how_many_goals_tip: 'Du hast leider keinen Tipp abgegeben, wieviele Tore der Torschützenkönig erzielt!'
   ranking_bonus_answers_currently_not_visible: 'Noch nicht sichtbar'
+  ranking_bonus_answers_help: "Sieger Flagge | Flagge zweiter Platz | Wann fällt das erste Tor | Anzahl Tore"
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg und einen Platz in der "
   result_after_game_count: "nach %{finished_games_count} von %{all_games_count} Spielen"

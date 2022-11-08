@@ -28,7 +28,7 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user1, :game => @game4, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user1, :game => @game5, :team1_goals => 0, :team2_goals => 0)
 
-      # erwartet 20 Punkte (8, 4, 0, 0, 0) + SIegertipp richtig (8 Punkte)
+      # erwartet 20 Punkte (8, 4, 0, 0, 0) + Siegertipp richtig (8 Punkte)
       @user2 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
       create(:tip, :user => @user2, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user2, :game => @game2, :team1_goals => 3, :team2_goals => 2)
@@ -60,13 +60,37 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user5, :game => @game4, :team1_goals => 2, :team2_goals => 1)
       create(:tip, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
 
+      # Alles richtig getipt + richtigen Siegertip & second tip  (56 Punkte)
+      @user6 = create_active_user(create(:user,
+                                         :bonus_champion_team_id => winner_team.id,
+                                         :bonus_second_team_id => no_winner_team.id
+                                  ))
+      create(:tip, :user => @user6, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      create(:tip, :user => @user6, :game => @game2, :team1_goals => 1, :team2_goals => 0)
+      create(:tip, :user => @user6, :game => @game3, :team1_goals => 0, :team2_goals => 1)
+      create(:tip, :user => @user6, :game => @game4, :team1_goals => 2, :team2_goals => 1)
+      create(:tip, :user => @user6, :game => @game5, :team1_goals => 0, :team2_goals => 3)
+
       # hat keinen Tipp abgegeben - 0 Punkte
-      @user6 = create_active_user(create(:user, :bonus_champion_team_id => nil))
-      create(:tip, :user => @user6, :game => @game1, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user6, :game => @game2, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user6, :game => @game3, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user6, :game => @game4, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user6, :game => @game5, :team1_goals => nil, :team2_goals => nil)
+      @user7 = create_active_user(create(:user, :bonus_champion_team_id => nil))
+      create(:tip, :user => @user7, :game => @game1, :team1_goals => nil, :team2_goals => nil)
+      create(:tip, :user => @user7, :game => @game2, :team1_goals => nil, :team2_goals => nil)
+      create(:tip, :user => @user7, :game => @game3, :team1_goals => nil, :team2_goals => nil)
+      create(:tip, :user => @user7, :game => @game4, :team1_goals => nil, :team2_goals => nil)
+      create(:tip, :user => @user7, :game => @game5, :team1_goals => nil, :team2_goals => nil)
+
+      # Alles richtig getipt + 4 x richtige Bonusantwort (56 Punkte)
+      @user8 = create_active_user(create(:user,
+                                         :bonus_champion_team_id => winner_team.id,
+                                         :bonus_second_team_id => no_winner_team.id,
+                                         :bonus_when_final_first_goal => 4,
+                                         :bonus_how_many_goals => 9,
+                                  ))
+      create(:tip, :user => @user8, :game => @game1, :team1_goals => 0, :team2_goals => 0)
+      create(:tip, :user => @user8, :game => @game2, :team1_goals => 1, :team2_goals => 0)
+      create(:tip, :user => @user8, :game => @game3, :team1_goals => 0, :team2_goals => 1)
+      create(:tip, :user => @user8, :game => @game4, :team1_goals => 2, :team2_goals => 1)
+      create(:tip, :user => @user8, :game => @game5, :team1_goals => 0, :team2_goals => 3)
     end
 
     it 'after first game finished' do
@@ -121,6 +145,15 @@ describe Users::UpdatePoints do
       expect(user.count0points).to eq(0)
 
       user = User.find(@user6.id)
+      expect(user.points).to eq(8)
+      expect(user.bonus_points).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
+
+      user = User.find(@user7.id)
       expect(user.points).to eq(0)
       expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(0)
@@ -128,6 +161,15 @@ describe Users::UpdatePoints do
       expect(user.count4points).to eq(0)
       expect(user.count3points).to eq(0)
       expect(user.count0points).to eq(1)
+
+      user = User.find(@user8.id)
+      expect(user.points).to eq(8)
+      expect(user.bonus_points).to eq(0)
+      expect(user.count8points).to eq(1)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
 
     end
 
@@ -184,6 +226,15 @@ describe Users::UpdatePoints do
       expect(user.count0points).to eq(0)
 
       user = User.find(@user6.id)
+      expect(user.points).to eq(16)
+      expect(user.bonus_points).to eq(0)
+      expect(user.count8points).to eq(2)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
+
+      user = User.find(@user7.id)
       expect(user.points).to eq(0)
       expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(0)
@@ -191,6 +242,15 @@ describe Users::UpdatePoints do
       expect(user.count4points).to eq(0)
       expect(user.count3points).to eq(0)
       expect(user.count0points).to eq(2)
+
+      user = User.find(@user8.id)
+      expect(user.points).to eq(16)
+      expect(user.bonus_points).to eq(0)
+      expect(user.count8points).to eq(2)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
     end
 
     it 'after tournament is finished' do
@@ -249,6 +309,15 @@ describe Users::UpdatePoints do
       expect(user.count0points).to eq(0)
 
       user = User.find(@user6.id)
+      expect(user.points).to eq(56)
+      expect(user.bonus_points).to eq(16)
+      expect(user.count8points).to eq(5)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
+
+      user = User.find(@user7.id)
       expect(user.points).to eq(0)
       expect(user.bonus_points).to eq(0)
       expect(user.count8points).to eq(0)
@@ -256,6 +325,15 @@ describe Users::UpdatePoints do
       expect(user.count4points).to eq(0)
       expect(user.count3points).to eq(0)
       expect(user.count0points).to eq(5)
+
+      user = User.find(@user8.id)
+      expect(user.points).to eq(56)
+      expect(user.bonus_points).to eq(16)
+      expect(user.count8points).to eq(5)
+      expect(user.count5points).to eq(0)
+      expect(user.count4points).to eq(0)
+      expect(user.count3points).to eq(0)
+      expect(user.count0points).to eq(0)
     end
 
   end

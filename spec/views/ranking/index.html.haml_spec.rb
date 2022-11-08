@@ -12,6 +12,7 @@ describe 'rankings/index', :type => :view do
   it 'should show no user ranking if no user' do
     assign(:presenter, presenter)
     expect(presenter).to receive(:user_count).and_return(0)
+    expect(presenter).to receive(:bonus_answers_visible?).and_return(false)
 
     render
 
@@ -26,7 +27,8 @@ describe 'rankings/index', :type => :view do
     assign(:presenter, presenter)
     user_size  = 10
     expect(presenter).to receive(:user_count).and_return(user_size)
-    expect(presenter).to receive(:bonus_answers_visible?).exactly(20).times.and_return(false)
+    # 2x10 + one time in the index
+    expect(presenter).to receive(:bonus_answers_visible?).exactly(21).times.and_return(false)
 
     # 10 User anlegen
     users = []
@@ -85,7 +87,8 @@ describe 'rankings/index', :type => :view do
 
      user_size  = user_poins.count
      expect(presenter).to receive(:user_count).and_return(user_size)
-     expect(presenter).to receive(:bonus_answers_visible?).exactly(20).times.and_return(false)
+     # 2x10 + one time in the index
+     expect(presenter).to receive(:bonus_answers_visible?).exactly(21).times.and_return(false)
 
      # User anlegen
      users = []

@@ -47,7 +47,7 @@ class BonusEditPresenter
   def bonus_when_final_first_goal_answer
     selection = bonus_when_final_first_goal
     if selection.present?
-      I18n.t("bonus_questions.how_many_goals_options.#{BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL[selection]}")
+      I18n.t("bonus_questions.when_final_first_goal_options.#{BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL[selection]}")
     else
       I18n.t('no_when_first_goal_tip')
     end
@@ -72,7 +72,7 @@ class BonusEditPresenter
 
   def options_for_when_final_first_goal_select
     BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL.map do |v|
-      [I18n.t("bonus_questions.how_many_goals_options.#{v[1]}"), v[0]]
+      [I18n.t("bonus_questions.when_final_first_goal_options.#{v[1]}"), v[0]]
     end
   end
 

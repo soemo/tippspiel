@@ -26,4 +26,12 @@
           = icon('fas', 'circle', '', class: 'null-point-color')
           = '0 Pkt.'
 
+
+
     = render partial: 'user_ranking', locals: {presenter: @presenter}
+
+    - if @presenter.bonus_answers_visible?
+      %p
+        %small
+          = Game.human_attribute_name('bonus') + ':'
+          = I18n.t('ranking_bonus_answers_help')

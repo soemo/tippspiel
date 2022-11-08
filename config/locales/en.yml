@@ -15,7 +15,6 @@ en:
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
   succesfully_saved_bonustip: "Deine Bonustipps wurden erfolgreich gespeichert."
 
-  champion_tip: 'Dein Tuniersieger-Tipp:'
   no_champion_tip: "Sorry, you didn't submit a tip for a tournament winner!"
   no_second_tip: "Sorry, you didn't submit a tip for the second!"
   no_when_first_goal_tip: "Sorry, you didn't submit a tip, when the first goal will be scored in the final!"
@@ -38,11 +37,15 @@ en:
     which_team_is_second: 'Which team will be second?'
     how_many_goals: 'How many goals does the top scorer score?'
     when_final_first_goal: 'When will the first goal be scored in the final?'
-    how_many_goals_options:
+    when_final_first_goal_options:
       in_the_first_half: 'In the first half'
+      in_the_first_half_short: '1.H'
       in_the_second_half: 'In the second half'
+      in_the_second_half_short: '2.H'
       in_the_extra_time: 'In the extra time'
+      in_the_extra_time_short: 'ET'
       in_the_penalty: 'In the penalty'
+      in_the_penalty_short: 'P'
 
 
   bonus_question_help: "Die 4 Bonusfragen können bis zum Start des %{round_name}s ausgefüllt werden. Je korrekte Antwort gibt es %{extra_points} Zusatzpunkte."

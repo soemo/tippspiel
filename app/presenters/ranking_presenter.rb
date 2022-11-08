@@ -9,7 +9,6 @@ class RankingPresenter
   end
 
   def bonus_ranking_info(user, for_small_screen = false)
-    # todo test it
     result = []
 
     if bonus_answers_visible?
@@ -30,7 +29,8 @@ class RankingPresenter
       end
 
       if user.bonus_when_final_first_goal.present?
-        result << user.bonus_when_final_first_goal
+        option = BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL[user.bonus_when_final_first_goal]
+        result << I18n.t("bonus_questions.when_final_first_goal_options.#{option}_short")
       else
         result << '-'
       end
