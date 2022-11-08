@@ -25,6 +25,10 @@ module GameQueries
       Game.preload(:team1, :team2).where('start_at <= ?', Time.now).order(start_at: :asc)
     end
 
+    def started_game_ids
+      Game.where('start_at <= ?', Time.now).pluck(:id)
+    end
+
     def ordered_started_at_for(round)
       Game.where(:round => round).order(start_at: :asc).pluck('start_at')
     end

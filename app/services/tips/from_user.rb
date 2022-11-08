@@ -18,6 +18,7 @@ module Tips
 
     def create_user_tips
       game_ids = ::GameQueries.all_game_ids
+      started_game_ids = GameQueries.started_game_ids
       if game_ids.present?
 
         # https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
@@ -26,12 +27,17 @@ module Tips
         needs_random_tips = ::UserQueries.needs_random_tips_for_user_id?(user_id)
 
         game_ids.each do |game_id|
+
           if needs_random_tips
-            values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', #{rand(5)}, #{rand(5)})")
+            # only add random tips for game in the future
+            if started_game_ids.include?(game_id)
+              values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', null, null)")
+            else
+              values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', #{rand(5)}, #{rand(5)})")
+            end
           else
             values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
           end
-
         end
 
         if needs_random_tips

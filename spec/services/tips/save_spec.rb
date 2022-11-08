@@ -8,7 +8,7 @@ describe Tips::Save do
 
   let!(:game1) {create :game, start_at: Time.now + 1.day, finished: true}
   let!(:game2) {create :game, start_at: Time.now + 1.day, finished: true}
-  let!(:game3) {create :game, start_at: Time.now - 1.day, finished: true}
+  let!(:game3) {create :game, start_at: Time.now - 1.second, finished: true}
 
   let!(:tip_g1) {create(:tip, user: user, game: game1, team1_goals: nil, team2_goals: nil)}
   let!(:tip_g2) {create(:tip, user: user, game: game2, team1_goals: nil, team2_goals: nil)}
@@ -33,7 +33,7 @@ describe Tips::Save do
 
   context 'if tip_params and user present?' do
 
-    it 'saves tips' do
+    it 'save tips' do
 
       subject.call(current_user: user, tips_params: tip_params)
 
@@ -44,8 +44,8 @@ describe Tips::Save do
       expect(tip1.team2_goals).to eq(1)
       expect(tip2.team1_goals).to eq(2)
       expect(tip2.team2_goals).to eq(3)
-      expect(tip3.team1_goals).to eq(nil) # dieser Tipp duerfte nicht mehr abgegeben werden
-      expect(tip3.team2_goals).to eq(nil) # dieser Tipp duerfte nicht mehr abgegeben werden
+      expect(tip3.team1_goals).to eq(nil) # dieser Tipp durfte nicht mehr abgegeben werden
+      expect(tip3.team2_goals).to eq(nil) # dieser Tipp durfte nicht mehr abgegeben werden
 
     end
   end
