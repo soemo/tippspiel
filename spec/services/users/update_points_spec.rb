@@ -11,6 +11,9 @@ describe Users::UpdatePoints do
       Tip.destroy_all
       User.destroy_all
 
+      stub_const('BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL', 4)
+      stub_const('BONUS_ANSWER_HOW_MANY_GOALS', 9)
+
       winner_team    = create(:team, :name => 'winner')
       no_winner_team = create(:team, :name => 'no winner')
 
@@ -52,7 +55,7 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user4, :game => @game4, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user4, :game => @game5, :team1_goals => 0, :team2_goals => 2)
 
-      # Alles richtig getipt + richtigen Siegertip  (48 Punkte)
+      # Alles richtig getippt + richtigen Siegertip  (48 Punkte)
       @user5 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
       create(:tip, :user => @user5, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user5, :game => @game2, :team1_goals => 1, :team2_goals => 0)
@@ -60,10 +63,12 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user5, :game => @game4, :team1_goals => 2, :team2_goals => 1)
       create(:tip, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
 
-      # Alles richtig getipt + richtigen Siegertip & second tip  (56 Punkte)
+      # Alles richtig getippt + richtigen Siegertip & second tip  (56 Punkte)
       @user6 = create_active_user(create(:user,
                                          :bonus_champion_team_id => winner_team.id,
-                                         :bonus_second_team_id => no_winner_team.id
+                                         :bonus_second_team_id => no_winner_team.id,
+                                         :bonus_when_final_first_goal => 1, # 4 is correct
+                                         :bonus_how_many_goals => 6, # 9 is correct
                                   ))
       create(:tip, :user => @user6, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user6, :game => @game2, :team1_goals => 1, :team2_goals => 0)
@@ -79,12 +84,12 @@ describe Users::UpdatePoints do
       create(:tip, :user => @user7, :game => @game4, :team1_goals => nil, :team2_goals => nil)
       create(:tip, :user => @user7, :game => @game5, :team1_goals => nil, :team2_goals => nil)
 
-      # Alles richtig getipt + 4 x richtige Bonusantwort (56 Punkte)
+      # Alles richtig getippt + 4 x richtige Bonusantwort (72 Punkte)
       @user8 = create_active_user(create(:user,
                                          :bonus_champion_team_id => winner_team.id,
                                          :bonus_second_team_id => no_winner_team.id,
                                          :bonus_when_final_first_goal => 4,
-                                         :bonus_how_many_goals => 9,
+                                         :bonus_how_many_goals => 9
                                   ))
       create(:tip, :user => @user8, :game => @game1, :team1_goals => 0, :team2_goals => 0)
       create(:tip, :user => @user8, :game => @game2, :team1_goals => 1, :team2_goals => 0)
@@ -327,8 +332,8 @@ describe Users::UpdatePoints do
       expect(user.count0points).to eq(5)
 
       user = User.find(@user8.id)
-      expect(user.points).to eq(56)
-      expect(user.bonus_points).to eq(16)
+      expect(user.points).to eq(72)
+      expect(user.bonus_points).to eq(32)
       expect(user.count8points).to eq(5)
       expect(user.count5points).to eq(0)
       expect(user.count4points).to eq(0)

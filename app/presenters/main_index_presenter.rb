@@ -9,7 +9,8 @@ class MainIndexPresenter
   end
 
   def bonus_question_link_text
-     if current_user.present? && current_user.all_bonus_questions_filled_out?
+     if current_user.present? &&
+       (current_user.all_bonus_questions_filled_out? || tournament_finished?)
       I18n.t('go_to_bonus_question_page_check')
     else
       I18n.t('go_to_bonus_question_page_fill_out')

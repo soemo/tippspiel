@@ -51,6 +51,15 @@ describe MainIndexPresenter do
       end
     end
 
+    context 'if tournament_finished? == true' do
+      it 'returns go_to_bonus_question_page_check' do
+        presenter = subject.new([], user)
+        expect(user).to receive(:all_bonus_questions_filled_out?).and_return(false)
+        expect(presenter).to receive(:tournament_finished?).and_return(true)
+        expect(presenter.bonus_question_link_text).to eq(I18n.t('go_to_bonus_question_page_check'))
+      end
+    end
+
     context 'if all_bonus_questions_filled_out? == false' do
       it 'returns go_to_bonus_question_page_fill_out' do
         presenter = subject.new([], user)

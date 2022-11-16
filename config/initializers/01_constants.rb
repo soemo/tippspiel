@@ -38,7 +38,8 @@ POINTS_TO_CSS_CLASS =
      '5' => 'five-point-background-color',
      '4' => 'four-point-background-color',
      '3' => 'three-point-background-color',
-     '0' => 'null-point-background-color'}
+     '0' => 'null-point-background-color'
+}.freeze
 
 BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL = {
     1 => 'in_the_first_half',
@@ -46,6 +47,11 @@ BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL = {
     3 => 'in_the_extra_time',
     4 => 'in_the_penalty',
 }.freeze
+
+### set this values for the bonus questions
+### maybe later I use a database setting model
+BONUS_ANSWER_HOW_MANY_GOALS=nil
+BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL=nil # add key from BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL
 
 URL_SCOPES = {
     admin: 'admin'.freeze,

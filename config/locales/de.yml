@@ -26,10 +26,10 @@ de:
   type_to_filter: Tippen um zu Filtern
 
   bonus_questions:
-    which_team_is_champion: 'Welche Mannschaft wird das Turnier gewinnen?'
-    which_team_is_second: 'Welche Mannschaft wird Zweiter?'
-    how_many_goals: 'Wie viele Tore erzielt der Torschützenkönig?'
-    when_final_first_goal: 'Wann wird das erste Tor im Finale fallen?'
+    which_team_is_champion: '1. Welche Mannschaft wird das Turnier gewinnen?'
+    which_team_is_second: '2. Welche Mannschaft wird Zweiter?'
+    how_many_goals: '3. Wie viele Tore erzielt der Torschützenkönig?'
+    when_final_first_goal: '4. Wann wird das erste Tor im Finale fallen?'
     when_final_first_goal_options:
       in_the_first_half: 'In der ersten Halbzeit'
       in_the_first_half_short: '1.HZ'
@@ -271,6 +271,7 @@ de:
       user:
         points: Punkte
         bonuspoints: Gesamt Bonus Zusatzpunkte
+        bonuspoints_small: Bonus
         name: Name
         email: "E-Mail"
         firstname: "Vorname"

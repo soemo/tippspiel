@@ -25,6 +25,9 @@
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'null-point-color')
           = '0 Pkt.'
+        %span.point-explaining
+          = icon('fas', 'circle', '', class: 'badge-bonus bonus-point-color')
+          = User.human_attribute_name('bonuspoints_small')
 
 
 

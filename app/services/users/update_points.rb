@@ -21,7 +21,6 @@ module Users
     private
 
     def calculate_bonus_points(user)
-      # todo test it
       result = 0
       if Tournament.finished?
         if user.bonus_champion_team_id.present?
@@ -36,12 +35,12 @@ module Users
           result += BONUS_TIP_POINTS if user.bonus_second_team_id == bonus_second_team_id
         end
 
-        if user.bonus_when_final_first_goal.present?
-          # todo #212 how to store in the admin when the first final goal was scored
+        if user.bonus_when_final_first_goal.present? && BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL.present?
+          result += BONUS_TIP_POINTS if user.bonus_when_final_first_goal == BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL
         end
 
-        if user.bonus_how_many_goals.present?
-          # todo #212 how to store max goals in the admin - new DB table
+        if user.bonus_how_many_goals.present? && BONUS_ANSWER_HOW_MANY_GOALS.present?
+          result += BONUS_TIP_POINTS if user.bonus_how_many_goals == BONUS_ANSWER_HOW_MANY_GOALS
         end
       end
 
