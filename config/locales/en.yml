@@ -35,8 +35,8 @@ en:
   bonus_questions:
     which_team_is_champion: '1. Which team will be the winner of the tournament?'
     which_team_is_second: '2. Which team will be second?'
-    how_many_goals: '3. How many goals does the top scorer score?'
-    when_final_first_goal: '4. When will the first goal be scored in the final?'
+    when_final_first_goal: '3. When will the first goal be scored in the final?'
+    how_many_goals: '4. How many goals does the top scorer score?'
     when_final_first_goal_options:
       in_the_first_half: 'In the first half'
       in_the_first_half_short: '1.H'

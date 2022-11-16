@@ -28,8 +28,8 @@ de:
   bonus_questions:
     which_team_is_champion: '1. Welche Mannschaft wird das Turnier gewinnen?'
     which_team_is_second: '2. Welche Mannschaft wird Zweiter?'
-    how_many_goals: '3. Wie viele Tore erzielt der Torschützenkönig?'
-    when_final_first_goal: '4. Wann wird das erste Tor im Finale fallen?'
+    when_final_first_goal: '3. Wann wird das erste Tor im Finale fallen?'
+    how_many_goals: '4. Wie viele Tore erzielt der Torschützenkönig?'
     when_final_first_goal_options:
       in_the_first_half: 'In der ersten Halbzeit'
       in_the_first_half_short: '1.HZ'
