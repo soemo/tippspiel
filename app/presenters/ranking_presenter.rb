@@ -16,14 +16,14 @@ class RankingPresenter
 
       if user.bonus_champion_team_id.present?
         champteam_presenter = TeamPresenter.new(user.bonus_champion_team)
-        result << champteam_presenter.teamflag(flag_size: flag_size)
+        result << champteam_presenter.teamflag(flag_size)
       else
         result << '-'
       end
 
       if user.bonus_second_team_id.present?
         secondteam_presenter = TeamPresenter.new(user.bonus_second_team)
-        result << secondteam_presenter.teamflag(flag_size: flag_size)
+        result << secondteam_presenter.teamflag(flag_size)
       else
         result << '-'
       end

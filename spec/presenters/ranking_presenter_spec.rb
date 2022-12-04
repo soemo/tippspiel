@@ -114,10 +114,10 @@ describe RankingPresenter do
 
 
           expect(subject.bonus_ranking_info(user)).to eq(
-             "<span class='f{:flag_size=>32}'><i class='flag de'></i></span> | <span class='f{:flag_size=>32}'><i class='flag cz'></i></span> | 11m | 9"
+             "<span class='f32'><i class='flag de'></i></span> | <span class='f32'><i class='flag cz'></i></span> | 11m | 9"
                                                       )
           expect(subject.bonus_ranking_info(user, true)).to eq(
-             "<span class='f{:flag_size=>16}'><i class='flag de'></i></span> | <span class='f{:flag_size=>16}'><i class='flag cz'></i></span> | 11m | 9"
+             "<span class='f16'><i class='flag de'></i></span> | <span class='f16'><i class='flag cz'></i></span> | 11m | 9"
                                                       )
         end
       end
