@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe TipsComparePresenter do
 
   let(:team_de) {Team.new(id: 40, country_code: :de, name: 'Germany')}

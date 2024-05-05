@@ -5,23 +5,25 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.2.6'
-ruby '2.7.7'
+gem 'rails', '~> 6.1.7'
+ruby '3.2.4'
 
-gem 'bootsnap', require: false
-gem 'mysql2', '= 0.5.3'
-gem 'dotenv-rails', require: 'dotenv/rails-now'
-gem 'cancancan', '= 2.3.0' #todo upgrade later
+#gem 'psych', '< 4' # https://stackoverflow.com/a/71192990
+
+gem 'mysql2', '= 0.5.6'
+gem 'dotenv-rails', require: 'dotenv/load'
+gem 'cancancan'
+gem 'haml', '= 5.2.2'
 gem 'haml-rails'
 gem 'devise', '= 4.7.1'
 gem 'devise-encryptable'
-gem 'acts_as_paranoid', '= 0.6.3' # todo upgrade >= 0.7.0 needs Rails 5.2+
+gem 'acts_as_paranoid'
 gem 'sass-rails', '= 5.1.0' #todo upgrade later to sassc-rails
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'uglifier'
-gem 'jquery-rails', '= 4.3.5'
+gem 'jquery-rails', '= 4.6.0'
 gem 'foundation-rails', '= 6.2.4.0'
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '= 5.15.1'
 gem 'lograge'
 gem 'virtus'
 gem 'exception_notification'
@@ -31,14 +33,11 @@ gem 'exception_notification'
 gem 'emojimmy'
 
 group :development, :production do
-  gem 'passenger', '= 6.0.8'
+  gem 'passenger'
 end
 
 group :development do
-  gem 'spring'
-  gem 'spring-commands-rspec'
   gem 'rack-livereload'
-  gem 'guard-livereload', require: false
   gem 'letter_opener_web'
   gem 'rack-mini-profiler'
 end
@@ -50,17 +49,15 @@ group :development, :test do
   gem 'capistrano-maintenance', require: false
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-  gem 'rspec-rails', '= 3.7.2'
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'capybara'     # rspec-rails braucht das um in den Views have_selector zu nutzen
-  gem 'guard-rspec', require: false
-  gem 'guard', '= 2.16.1', require: false
-  gem 'fuubar'
+  gem 'webrick'
 end
 
 group :test do
   gem 'shoulda-matchers', require: false
-  gem 'factory_bot_rails', '= 4.8.2'
+  gem 'factory_bot_rails'
   gem 'timecop'
   gem 'simplecov'
-  gem 'rails-controller-testing'
 end

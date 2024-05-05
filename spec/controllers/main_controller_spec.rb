@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe MainController, :type => :controller do
+describe MainController, type: :controller do
 
   let!(:user) {create :active_user}
   let(:tips) {[Tip.new, Tip.new]}
