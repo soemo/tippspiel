@@ -20,7 +20,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -55,6 +55,7 @@ jobs:
     - name: capistrano deployment to beta-tippspiel
       if: github.ref == 'refs/heads/master'
       uses: miloserdow/capistrano-deploy@v2.2
+      # https://github.com/miloserdow/capistrano-deploy/releases update to 3
       with:
         target: beta-tippspiel
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
