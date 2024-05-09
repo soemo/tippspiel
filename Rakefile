@@ -24,7 +24,7 @@ namespace :tippspiel do
   def set_version_from_file(version_file, placeholder_build_date, today_date)
     old_file = version_file
     new_file    = old_file + '.new'
-    if File.exists?(old_file)
+    if File.exist?(old_file)
       copy_and_replace(old_file, new_file, { placeholder_build_date => today_date })
       File.delete(old_file)
       File.rename(new_file, old_file)
@@ -32,9 +32,9 @@ namespace :tippspiel do
   end
 
   def copy_and_replace(from_file, to_file, replacements)
-    if File.exists? from_file
+    if File.exist? from_file
       # check if target exists
-      if File.exists? to_file
+      if File.exist? to_file
         backup_file = to_file + '.bak'
         puts "Target file #{to_file} already exists, creating backup to #{backup_file}"
         #File.rename to_file, backup_file
