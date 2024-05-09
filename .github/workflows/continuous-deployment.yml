@@ -59,6 +59,7 @@ jobs:
       with:
         target: beta-tippspiel
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
+        enc_rsa_key_pth: config/deploy_id_ed25519_enc
 
     - name: capistrano deployment to tippspiel (prod on tag)
       if: startsWith(github.ref, 'refs/tags/v')
@@ -66,3 +67,4 @@ jobs:
       with:
         target: tippspiel
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
+        enc_rsa_key_pth: config/deploy_id_ed25519_enc
