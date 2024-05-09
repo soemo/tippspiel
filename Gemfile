@@ -22,7 +22,7 @@ gem 'sass-rails', '= 5.1.0' #todo upgrade later to sassc-rails
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'uglifier'
 gem 'jquery-rails', '= 4.6.0'
-gem 'foundation-rails', '= 6.2.4.0'
+gem 'foundation-rails', '6.6.2.0'
 gem 'font-awesome-sass', '= 5.15.1'
 gem 'lograge'
 gem 'virtus'
