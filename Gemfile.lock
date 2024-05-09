@@ -226,7 +226,7 @@ GEM
     nokogiri (1.16.4-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    passenger (6.0.8)
+    passenger (6.0.20)
       rack
       rake (>= 0.8.1)
     passenger-rails (0.0.2)
@@ -390,7 +390,7 @@ DEPENDENCIES
   letter_opener_web
   lograge
   mysql2 (= 0.5.6)
-  passenger (= 6.0.8)
+  passenger (= 6.0.20)
   rack-livereload
   rack-mini-profiler
   rails (~> 6.1.7)
