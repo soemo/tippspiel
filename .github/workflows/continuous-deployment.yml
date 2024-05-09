@@ -54,7 +54,7 @@ jobs:
 
     - name: capistrano deployment to beta-tippspiel
       if: github.ref == 'refs/heads/master'
-      uses: miloserdow/capistrano-deploy@v2.2
+      uses: miloserdow/capistrano-deploy@v3
       # https://github.com/miloserdow/capistrano-deploy/releases update to 3
       with:
         target: beta-tippspiel
@@ -62,7 +62,7 @@ jobs:
 
     - name: capistrano deployment to tippspiel (prod on tag)
       if: startsWith(github.ref, 'refs/tags/v')
-      uses: miloserdow/capistrano-deploy@v2.2
+      uses: miloserdow/capistrano-deploy@v3
       with:
         target: tippspiel
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
