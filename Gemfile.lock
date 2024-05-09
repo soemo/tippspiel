@@ -126,7 +126,7 @@ GEM
     date (3.3.4)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.7.1)
+    devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -136,9 +136,9 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.5.1)
     docile (1.4.0)
-    dotenv (3.1.1)
-    dotenv-rails (3.1.1)
-      dotenv (= 3.1.1)
+    dotenv (3.1.2)
+    dotenv-rails (3.1.2)
+      dotenv (= 3.1.2)
       railties (>= 6.1)
     ed25519 (1.3.0)
     emojimmy (0.3)
@@ -171,7 +171,7 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
-    i18n (1.14.4)
+    i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jquery-rails (4.6.0)
@@ -208,7 +208,7 @@ GEM
     minitest (5.22.3)
     mutex_m (0.2.0)
     mysql2 (0.5.6)
-    net-imap (0.4.10)
+    net-imap (0.4.11)
       date
       net-protocol
     net-pop (0.1.2)
@@ -222,7 +222,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     net-ssh (7.2.3)
-    nio4r (2.7.1)
+    nio4r (2.7.3)
     nokogiri (1.16.4-arm64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -256,6 +256,10 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.7.7)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -286,7 +290,7 @@ GEM
     rspec-expectations (3.13.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-mocks (3.13.0)
+    rspec-mocks (3.13.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-rails (6.1.2)
@@ -359,7 +363,6 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  ruby
   arm64-darwin-23
 
 DEPENDENCIES
@@ -371,7 +374,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-uberspace!
   capybara
-  devise (= 4.7.1)
+  devise
   devise-encryptable
   dotenv-rails
   ed25519 (>= 1.2, < 2.0)
@@ -390,6 +393,7 @@ DEPENDENCIES
   rack-livereload
   rack-mini-profiler
   rails (~> 6.1.7)
+  rails-controller-testing
   rspec
   rspec-rails
   sass-rails (= 5.1.0)

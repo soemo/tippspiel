@@ -15,7 +15,7 @@ gem 'dotenv-rails', require: 'dotenv/load'
 gem 'cancancan'
 gem 'haml', '= 5.2.2'
 gem 'haml-rails'
-gem 'devise', '= 4.7.1'
+gem 'devise'
 gem 'devise-encryptable'
 gem 'acts_as_paranoid'
 gem 'sass-rails', '= 5.1.0' #todo upgrade later to sassc-rails
@@ -60,4 +60,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'timecop'
   gem 'simplecov'
+  gem 'rails-controller-testing'
 end
