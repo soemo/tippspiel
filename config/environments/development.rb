@@ -75,7 +75,7 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   # Add Rack::LiveReload to the bottom of the middleware stack with the default options.
-  config.middleware.use Rack::LiveReload
+  #config.middleware.use Rack::LiveReload
 
   $TIPPSPIEL_VERSION    = "development (#{$TIPPSPIEL_VERSION})"
   $TIPPSPIEL_BUILD_DATE = "server start #{Time.now.strftime("%d.%m.%Y %H:%M:%S")}"
