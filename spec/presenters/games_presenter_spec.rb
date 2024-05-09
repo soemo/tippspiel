@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe GamesPresenter do
 
   subject { GamesPresenter.new(current_user) }

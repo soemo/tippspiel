@@ -13,7 +13,7 @@ module Admin
     def update
       game = ::Game.find(params[:id])
 
-      if game.update_attributes(game_params)
+      if game.update(game_params)
         redirect_to admin_games_path, notice: t(:update_successful, object_name: Game.model_name.human)
       else
         @presenter = GamePresenter.new(game)

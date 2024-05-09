@@ -1,5 +1,5 @@
 module LoginUserHelper
-  # Loggt den angegebenen User ein (wenn kein User angegeben wird, erfolgt der Login als Default User)
+  # logged in the given user
   def login(user=create(:user))
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in user
@@ -15,12 +15,12 @@ end
 # module for helping request specs
 module LoginUserRequestHelper
   def login(user)
-    post_via_redirect user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
+    redirect_to post user_session_path, 'user[email]' => user.email, 'user[password]' => user.password
   end
 end
 
 RSpec.configure do |config|
   config.include LoginUserHelper,        type: :controller
   config.include LoginUserRequestHelper, type: :request
-  config.include Devise::Test::ControllerHelpers,  type: :controller # fuer sign_in und sign_out Helper
+  config.include Devise::Test::ControllerHelpers,  type: :controller # for sign_in and sign_out helper
 end

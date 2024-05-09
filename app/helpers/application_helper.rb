@@ -59,7 +59,7 @@ module ApplicationHelper
   def write_footer_content
      haml_tag 'p.text-center' do
        haml_concat '© ' + Time.now.strftime('%Y')
-       haml_concat link_to('Sören Mothes', 'https://www.soemo.org/')
+       haml_concat 'Sören Mothes'
        haml_concat " | "
        haml_concat link_to(t(:help), help_path)
        haml_concat " | "

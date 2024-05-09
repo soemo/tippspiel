@@ -11,9 +11,9 @@ if Rails.env.development? || Rails.env.test?
       games = Game.all
       if games.present?
         games.each do |game|
-          game.update_attributes({team1_goals: get_random_goal,
-                                  team2_goals: get_random_goal,
-                                  finished: true})
+          game.update({team1_goals: get_random_goal,
+                                team2_goals: get_random_goal,
+                                finished: true})
         end
       end
     end

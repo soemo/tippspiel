@@ -1,6 +1,6 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,11 +11,10 @@ require File.join(File.dirname(__FILE__), 'version')
 module Tippspiel
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 6.0
+    config.autoloader = :classic # activate with rails 7 the new :zeitwerk
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # config.eager_load_paths << Rails.root.join("extras")
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths << Rails.root.join('lib')

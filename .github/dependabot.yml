@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "08:30"
+      timezone: "Europe/Berlin"
+    reviewers:
+      - "soemo"
+
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "08:30"
+      timezone: "Europe/Berlin"
+    reviewers:
+      - "soemo"

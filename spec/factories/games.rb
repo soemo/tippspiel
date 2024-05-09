@@ -15,15 +15,15 @@ FactoryBot.define do
         when FactoryBot::Strategy::Stub then FactoryBot.build_stubbed(:team)
       end
     end
-    team1_goals 0
-    team2_goals 0
-    place "place"
-    round "round"
-    start_at DateTime.now
-    finished false
+    team1_goals { 0 }
+    team2_goals { 0 }
+    place { "place" }
+    round { "round" }
+    start_at { DateTime.now }
+    finished { false }
   end
 
   factory :final, :parent => :game do
-    round "final"
+    round { "final" }
   end
 end
