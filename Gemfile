@@ -18,7 +18,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'devise-encryptable'
 gem 'acts_as_paranoid'
-gem 'sass-rails', '= 5.1.0' #todo upgrade later to sassc-rails
+gem 'sass-rails', '6.0.0' #todo upgrade later to sassc-rails
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'uglifier'
 gem 'jquery-rails', '= 4.6.0'
