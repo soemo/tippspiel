@@ -1,0 +1,8 @@
+categories:
+  - title: 'Dependencies'
+    labels:
+      - 'dependencies'
+template: |
+  ## Changes
+
+  $CHANGES
