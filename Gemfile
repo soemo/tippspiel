@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 6.1.7'
+gem 'rails', '~> 7.1.3'
 ruby '3.2.4'
 
 #gem 'psych', '< 4' # https://stackoverflow.com/a/71192990
