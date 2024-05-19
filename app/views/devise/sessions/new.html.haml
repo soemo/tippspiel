@@ -14,13 +14,15 @@
             %p
               = I18n.t('signed_up_message.content')
           -else
-            %h2= "Hallo, Sport frei zur #{TOURNAMENT_NAME}!"
+            %h2= "Sport frei zum #{TOURNAMENT_NAME} Tippspiel"
             %p
-              Wer wird wohl dieses Jahr den umwerfenden Tippspiel-Wanderpokal
-              mit nach Hause nehmen - verbunden mit unbeschreiblichem Ruhm und uneingeschränktem Prahlrecht?
-              Um zu dieser Ehre zu gelangen, einfach
-              = link_to('registrieren', new_registration_path(resource_name)) + ', '
-              die Spiele tippen und Bonusfragen beantworten!
+              Wer holt sich dieses Jahr den begehrten Tippspiel-Wanderpokal, Ruhm und grenzenloses Prahlrecht?
+              = link_to('Registriere dich neu', new_registration_path(resource_name)) + ' und'
+              melde dich an, tippe die Spiele und beantworte Bonusfragen,
+              um diese Ehre zu erlangen!
+              %br
+              %br
+              Schon registriert, dann einfach anmelden.
 
           = render :partial => 'login_form'
 

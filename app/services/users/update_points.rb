@@ -54,8 +54,9 @@ module Users
           total_points  = ::TipQueries.sum_tip_points_by_user_id(user.id)
           total_points  = 0 unless total_points.present?
 
-          bonus_tips_points = calculate_bonus_points(user)
+          bonus_tips_points = 0
           if Tournament.finished?
+            bonus_tips_points = calculate_bonus_points(user)
             total_points = total_points + bonus_tips_points
           end
 
