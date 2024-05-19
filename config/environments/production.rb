@@ -81,6 +81,16 @@ Rails.application.configure do
   config.action_mailer.sendmail_settings = {
     :arguments => "-i"
   }
+  # https://manual.uberspace.de/mail-access/?highlight=smtp#smtp
+  config.action_mailer.delivery_method = :sendmail
+  # config.action_mailer.smtp_settings = {
+  #   address: ‘farbauti.uberspace.de’,
+  #   port: 587,
+  #   user_name: Rails.application.credentials.smtp[:SMTP_USERNAME],
+  #   password: Rails.application.credentials.smtp[:SMTP_PASSWORD],
+  #   authentication: :plain,
+  #   enable_starttls_auto: true
+  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
