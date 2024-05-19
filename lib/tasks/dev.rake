@@ -13,7 +13,7 @@ if Rails.env.development? || Rails.env.test?
         games.each do |game|
           game.update({team1_goals: get_random_goal,
                                 team2_goals: get_random_goal,
-                                finished: true})
+                                finished: false})
         end
       end
     end
@@ -31,7 +31,7 @@ if Rails.env.development? || Rails.env.test?
         unless User.exists?(firstname: firstname)
           # gleich als angemeldeter Nutzer anlegen - confirmed_at
           user = User.create({email: "#{firstname}@soemo.org",
-                              password: 'testtest',
+                              password: 'testtesttippspiel',
                               create_initial_random_tips: true,
                               firstname: firstname,
                               lastname: lastname,
