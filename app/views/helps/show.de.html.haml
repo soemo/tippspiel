@@ -2,9 +2,9 @@
   .small-12.columns
     %h3= "#{TOURNAMENT_NAME} "+ t('app_name') + " - " + t('help')
     %p
-      Die Regeln sind simpel: Jeder Angemeldete kann Spielergebnisse tippen und Bonusfragen beantworten.
+      Die Regeln sind simpel: Jede(r) Angemeldete kann Spielergebnisse tippen und Bonusfragen beantworten.
       Für jeden richtigen Tipp und jede richtige Bonusfrage gibt es Punkte. Wer die meisten Punkte sammelt,
-      gewinnt und wird stolzer Besitzer des prestigeträchtigen Wanderpokals.
+      gewinnt und wird stolzer Besitzer(in) des prestigeträchtigen Wanderpokals.
 
     %h4 Spiele tippen
     %p
@@ -12,7 +12,7 @@
       %br
       Tipps können jederzeit geändert werden, solange das Spiel noch nicht begonnen hat.
       %br
-      Tipps der anderen Mitspieler sind erst nach Spielbeginn sichtbar.
+      Tipps der anderen Mitspieler(innen) sind erst nach Spielbeginn sichtbar.
     %p
       %b
         Mögliche Punkte pro Tipp
@@ -102,7 +102,7 @@
             - @presenter.round_infos.each do |info|
               %li= info
         %p
-          Der Gewinner erhält einen schönen Tippspiel-Wanderpokal, den man nach drei Siegen dauerhaft behalten darf.
+          Der/die Gewinner(in) erhält einen schönen Tippspiel-Wanderpokal, den man nach drei Siegen dauerhaft behalten darf.
           = hall_of_fame_link
       .small-12.medium-5.columns
         =image_tag('pokalsieger.jpg')
