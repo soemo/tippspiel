@@ -56,13 +56,14 @@ describe 'rankings/index', :type => :view do
       end
       expect(table).to have_selector('tbody') do |tbody|
         expect(tbody).to have_selector('tr', :count => user_size)
+        expect(tbody).to have_selector('tr#place_1', :count => user_size)
+        expect(tbody).to have_selector('tr#place_1 > td.show-for-small-only > div.row > div > span.place', :count => user_size, :text => '1')
+        expect(tbody).to have_selector('tr#place_1 > td.hide-for-small-only.place', :count => user_size, :text => '1')
         user_size.times do |index|
-          # todo fix spec
-          # expect(tbody).to have_selector('tr') do |tr|
-          #   expect(tr).to have_selector('td.place', :text => '1')
-          #   expect(tr).to have_selector('td', :text => "test user#{index}")
-          #   expect(tr).to have_selector('a.statistic_popover', :text => "#{points}")
-          # end
+          expect(tbody).to have_selector('tr#place_1 > td.show-for-small-only', :text => "test user#{index}")
+          expect(tbody).to have_selector('tr#place_1 > td.show-for-small-only > div > div > div > div > span', :text => "#{points}")
+          expect(tbody).to have_selector('tr#place_1 > td.hide-for-small-only', :text => "test user#{index}")
+          expect(tbody).to have_selector('tr#place_1 > td.hide-for-small-only > span', :text => "#{points}")
         end
       end
     end
@@ -114,20 +115,58 @@ describe 'rankings/index', :type => :view do
          expect(thead).to have_selector('th', :text => Game.human_attribute_name('bonus'))
          expect(thead).to have_selector('th', :text => User.human_attribute_name('points'))
        end
+
        expect(table).to have_selector('tbody') do |tbody|
          expect(tbody).to have_selector('tr', :count => user_size)
+         expect(tbody).to have_selector('tr#place_1', :count => 1)
+         expect(tbody).to have_selector('tr#place_2', :count => 3)
+         expect(tbody).to have_selector('tr#place_3', :count => 0)
+         expect(tbody).to have_selector('tr#place_4', :count => 0)
+         expect(tbody).to have_selector('tr#place_5', :count => 1)
+         expect(tbody).to have_selector('tr#place_6', :count => 2)
+         expect(tbody).to have_selector('tr#place_7', :count => 0)
+         expect(tbody).to have_selector('tr#place_8', :count => 1)
+         expect(tbody).to have_selector('tr#place_9', :count => 2)
 
-         user_points.each do |key, data|
-           # todo fix spec
-           # expect(tbody).to have_selector('tr') do |tr|
-           #   expect(tr).to have_selector('td.place', :text => data[:place].to_s)
-           #   expect(tr).to have_selector('td', :text => "test user_key_#{key}")
-           #   expect(tr).to have_selector('a.statistic_popover', :text => data[:points].to_s)
-           # end
-         end
-
+         #place 1
+         expect(tbody).to have_selector('tr#place_1 > td.show-for-small-only', :text => "test user_key_0")
+         expect(tbody).to have_selector('tr#place_1 > td.show-for-small-only > div > div > div > div > span', :text => "11", :count => 1)
+         expect(tbody).to have_selector('tr#place_1 > td.hide-for-small-only', :text => "test user_key_0")
+         expect(tbody).to have_selector('tr#place_1 > td.hide-for-small-only > span', :text => "11", :count => 1)
+         #place 2
+         expect(tbody).to have_selector('tr#place_2 > td.show-for-small-only', :text => "test user_key_1")
+         expect(tbody).to have_selector('tr#place_2 > td.show-for-small-only', :text => "test user_key_2")
+         expect(tbody).to have_selector('tr#place_2 > td.show-for-small-only', :text => "test user_key_3")
+         expect(tbody).to have_selector('tr#place_2 > td.show-for-small-only > div > div > div > div > span', :text => "10", :count => 3)
+         expect(tbody).to have_selector('tr#place_2 > td.hide-for-small-only', :text => "test user_key_1")
+         expect(tbody).to have_selector('tr#place_2 > td.hide-for-small-only', :text => "test user_key_2")
+         expect(tbody).to have_selector('tr#place_2 > td.hide-for-small-only', :text => "test user_key_3")
+         expect(tbody).to have_selector('tr#place_2 > td.hide-for-small-only > span', :text => "10", :count => 3)
+         #place 5
+         expect(tbody).to have_selector('tr#place_5 > td.show-for-small-only', :text => "test user_key_4")
+         expect(tbody).to have_selector('tr#place_5 > td.show-for-small-only > div > div > div > div > span', :text => "8", :count => 1)
+         expect(tbody).to have_selector('tr#place_5 > td.hide-for-small-only', :text => "test user_key_4")
+         expect(tbody).to have_selector('tr#place_5 > td.hide-for-small-only > span', :text => "8", :count => 1)
+         # place 6
+         expect(tbody).to have_selector('tr#place_6 > td.show-for-small-only', :text => "test user_key_5")
+         expect(tbody).to have_selector('tr#place_6 > td.show-for-small-only', :text => "test user_key_6")
+         expect(tbody).to have_selector('tr#place_6 > td.show-for-small-only > div > div > div > div > span', :text => "7", :count => 2)
+         expect(tbody).to have_selector('tr#place_6 > td.hide-for-small-only', :text => "test user_key_5")
+         expect(tbody).to have_selector('tr#place_6 > td.hide-for-small-only', :text => "test user_key_6")
+         expect(tbody).to have_selector('tr#place_6 > td.hide-for-small-only > span', :text => "7", :count => 2)
+         # place 8
+         expect(tbody).to have_selector('tr#place_8 > td.show-for-small-only', :text => "test user_key_7")
+         expect(tbody).to have_selector('tr#place_8 > td.show-for-small-only > div > div > div > div > span', :text => "6", :count => 1)
+         expect(tbody).to have_selector('tr#place_8 > td.hide-for-small-only', :text => "test user_key_7")
+         expect(tbody).to have_selector('tr#place_8 > td.hide-for-small-only > span', :text => "6", :count => 1)
+         # place 9
+         expect(tbody).to have_selector('tr#place_9 > td.show-for-small-only', :text => "test user_key_8")
+         expect(tbody).to have_selector('tr#place_9 > td.show-for-small-only', :text => "test user_key_9")
+         expect(tbody).to have_selector('tr#place_9 > td.show-for-small-only > div > div > div > div > span', :text => "2", :count => 2)
+         expect(tbody).to have_selector('tr#place_9 > td.hide-for-small-only', :text => "test user_key_8")
+         expect(tbody).to have_selector('tr#place_9 > td.hide-for-small-only', :text => "test user_key_9")
+         expect(tbody).to have_selector('tr#place_9 > td.hide-for-small-only > span', :text => "2", :count => 2)
        end
      end
-
    end
 end
