@@ -68,6 +68,20 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+  # 10.05.20102 SM: Es wurden doppelte Mails verschickt, Das liegt an einem Zusammenspiel von Qmail und einen Bug in der ActionMailer-Komponente:
+  # ActionMailer adds recipient to command line for sendmail
+  # https://github.com/rails/rails/issues/1755
+  #
+  # Das Problem ist, dass der ActionMailer *sowohl* sendmail mit dem
+  # Parameter "-t" aufruft, was sendmail anweist, die To:-, Cc:- und Bcc:-
+  # Header der Mail nach Empfängern zu scannen, *als auch* die Empfänger als
+  # Argumente auf der Kommandozeile angibt.
+  #  Hier gefunden:
+  #  https://github.com/mikel/mail/issues/70#issuecomment-2639987
+  config.action_mailer.sendmail_settings = {
+    :arguments => "-i"
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
