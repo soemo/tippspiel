@@ -125,12 +125,20 @@ describe NavBarPresenter do
 
     let(:presenter) { subject.new(:main, user) }
 
-    it 'returns nav_ranking_info' do
+    it 'returns nav_ranking_info if Tournament has started' do
+      expect(Tournament).to receive(:started?).and_return(true)
       object = double('Top3AndOwnPosition', user_top3_ranking_hash: {}, own_position: 42)
       user.points = 111
       expect(Users::Top3AndOwnPosition).to receive(:call).with(user_id: user.id).and_return(object)
 
       expect(presenter.nav_ranking_info).to eq('Platz 42 mit 111 Punkten')
+    end
+
+    it 'returns empty nav_ranking_info if Tournament has not started' do
+      expect(Tournament).to receive(:started?).and_return(false)
+      expect(Users::Top3AndOwnPosition).not_to receive(:call).with(user_id: user.id)
+
+      expect(presenter.nav_ranking_info).to eq('')
     end
   end
 end
