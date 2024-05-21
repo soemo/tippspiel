@@ -33,7 +33,11 @@ class NavBarPresenter
   end
 
   def nav_ranking_info
+    if Tournament.started?
     "Platz #{user_position} mit #{user.points} Punkten"
+    else
+      ""
+    end
   end
 
   def nav_bar_item_presenters
