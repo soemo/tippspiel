@@ -51,7 +51,7 @@ BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL = {
 ### set this values for the bonus questions
 ### maybe later I use a database setting model
 BONUS_ANSWER_HOW_MANY_GOALS=3
-BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL=1 # add key from BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL
+BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL=2 # add key from BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL
 
 URL_SCOPES = {
     admin: 'admin'.freeze,
