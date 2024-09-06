@@ -23,7 +23,7 @@ gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder 
 gem 'uglifier'
 gem 'jquery-rails', '= 4.6.0'
 gem 'foundation-rails', '= 6.2.4.0'
-gem 'font-awesome-sass', '= 5.15.1'
+gem 'font-awesome-sass', '6.5.2'
 gem 'lograge'
 gem 'virtus'
 gem 'exception_notification'
