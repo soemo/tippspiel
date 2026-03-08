@@ -68,7 +68,7 @@ jobs:
         echo "APP_VERSION=${APP_VERSION}" >> "$GITHUB_ENV"
 
     - name: Deploy to beta
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/main'
       uses: miloserdow/capistrano-deploy@v3
       with:
         target: beta-tippspiel
