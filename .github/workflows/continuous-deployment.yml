@@ -7,9 +7,7 @@ jobs:
     name: Continuous Integration
     runs-on: ubuntu-latest
 
-    # If you need DB like MySQL then define service below.
     services:
-      # How to use MySQL
       mysql:
         image: mysql:8.4
         env:
@@ -52,7 +50,7 @@ jobs:
 
         bundle exec rake
 
-    - name: Resolve APP_VERSION from git tag or release draft
+    - name: Resolve APP_VERSION
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -61,33 +59,23 @@ jobs:
           APP_VERSION="${GITHUB_REF_NAME#v}"
           echo "Tag-based deploy – version: ${APP_VERSION}"
         else
-          # Beta deploy: read the version tag from the current release draft
+          # Beta deploy: read the version tag from the current release draft + add a timestamp to ensure uniqueness
           APP_VERSION=$(gh release list --repo "${{ github.repository }}" --limit 10 \
             --json isDraft,tagName \
-            --jq '[.[] | select(.isDraft == true)] | first | .tagName | ltrimstr("v")' 2>/dev/null || true)
-
-          if [[ -z "${APP_VERSION}" ]]; then
-            echo "No release draft found, APP_VERSION will not be set"
-            exit 0
-          fi
-          echo "Branch-based deploy – version from draft: ${APP_VERSION}"
+            --jq '[.[] | select(.isDraft == true)] | first | .tagName | ltrimstr("v")' || true)
+          APP_VERSION="${APP_VERSION}-$(date +'%H:%M')"
         fi
-
-        # Write to GITHUB_ENV so all subsequent steps (including both capistrano deploy
-        # steps) inherit APP_VERSION automatically. Capistrano then forwards it to the
-        # remote rake call via SSHKit's `with` (see config/deploy/recipes/own_deploy.rb).
         echo "APP_VERSION=${APP_VERSION}" >> "$GITHUB_ENV"
 
-    - name: capistrano deployment to beta-tippspiel
+    - name: Deploy to beta
       if: github.ref == 'refs/heads/master'
       uses: miloserdow/capistrano-deploy@v3
-      # https://github.com/miloserdow/capistrano-deploy/releases update to 3
       with:
         target: beta-tippspiel
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }}
         enc_rsa_key_pth: config/deploy_id_ed25519_enc
 
-    - name: capistrano deployment to tippspiel (prod on tag)
+    - name: Deploy to production
       if: startsWith(github.ref, 'refs/tags/v')
       uses: miloserdow/capistrano-deploy@v3
       with:
