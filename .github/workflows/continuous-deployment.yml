@@ -52,6 +52,34 @@ jobs:
 
         bundle exec rake
 
+    - name: Resolve version and patch config/version.rb
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+          # Production deploy: derive version directly from the git tag (strip leading "v")
+          APP_VERSION="${GITHUB_REF_NAME#v}"
+          echo "Tag-based deploy – version: ${APP_VERSION}"
+        else
+          # Beta deploy: read the version name from the current release draft
+          APP_VERSION=$(gh release list --repo "${{ github.repository }}" --limit 10 \
+            --json isDraft,tagName \
+            --jq '[.[] | select(.isDraft == true)] | first | .tagName | ltrimstr("v")' 2>/dev/null || true)
+
+          if [[ -z "${APP_VERSION}" ]]; then
+            echo "No release draft found, keeping version placeholder"
+            exit 0
+          fi
+          echo "Branch-based deploy – version from draft: ${APP_VERSION}"
+        fi
+
+        # Patch the placeholder directly in the checked-out workspace.
+        # Capistrano will upload this already-resolved file; the Capistrano
+        # set_version_and_date task then only needs to replace ###PLACEHOLDER_BUILD_DATE###.
+        sed -i "s/###PLACEHOLDER_VERSION###/${APP_VERSION}/" config/version.rb
+        echo "config/version.rb after patching:"
+        cat config/version.rb
+
     - name: capistrano deployment to beta-tippspiel
       if: github.ref == 'refs/heads/master'
       uses: miloserdow/capistrano-deploy@v3

@@ -1,0 +1,30 @@
+name: Update Release Draft
+
+on:
+  schedule:
+    # run every Monday at midnight to ensure the draft release has the correct week number
+    - cron: '0 0 * * 1'
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  prepare_version:
+    uses: Staffbase/gha-workflows/.github/workflows/template_release_version.yml@v11.1.0
+
+  update_release_draft:
+    name: Update Release Draft
+    needs: prepare_version
+    uses: Staffbase/gha-workflows/.github/workflows/template_release_drafter.yml@v11.1.0
+    with:
+      name: 'Release ${{ needs.prepare_version.outputs.new_version }} 🚀'
+      tag: ${{ needs.prepare_version.outputs.new_tag }}
+      version: ${{ needs.prepare_version.outputs.new_version }}
+    secrets:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
