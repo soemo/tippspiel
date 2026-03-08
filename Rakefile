@@ -11,21 +11,25 @@ Tippspiel::Application.load_tasks
 namespace :tippspiel do
   today_date             = Date.today.strftime('%d.%m.%Y')
   placeholder_build_date = '###PLACEHOLDER_BUILD_DATE###'
+  placeholder_version    = '###PLACEHOLDER_VERSION###'
 
   desc 'set Versionnumber and Build-Date in normal App-Dir-Structure'
   task :set_version do
-    set_version_from_file(version_file, placeholder_build_date, today_date)
+    app_version  = ENV.fetch('APP_VERSION', placeholder_version)
+    replacements = { placeholder_build_date => today_date }
+    replacements[placeholder_version] = app_version unless app_version == placeholder_version
+    set_version_from_file(version_file, replacements)
   end
 
   def version_file
     File.join(Rails.root, 'config/version.rb')
   end
 
-  def set_version_from_file(version_file, placeholder_build_date, today_date)
+  def set_version_from_file(version_file, replacements)
     old_file = version_file
-    new_file    = old_file + '.new'
+    new_file = old_file + '.new'
     if File.exist?(old_file)
-      copy_and_replace(old_file, new_file, { placeholder_build_date => today_date })
+      copy_and_replace(old_file, new_file, replacements)
       File.delete(old_file)
       File.rename(new_file, old_file)
     end
