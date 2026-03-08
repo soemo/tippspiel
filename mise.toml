@@ -1,0 +1,93 @@
+[tools]
+ruby = "3.2.10"
+
+[env]
+_.file = ".env"
+
+[tasks.dev]
+description = "Start development server"
+run = "bin/rails server"
+
+[tasks.console]
+description = "Start Rails console"
+run = "bin/rails console"
+
+[tasks.test]
+description = "Run test suite"
+run = "bundle exec rspec"
+
+[tasks."test:coverage"]
+description = "Run test suite with coverage report"
+run = "COVERAGE=true bundle exec rspec"
+
+[tasks."db:migrate"]
+description = "Run database migrations"
+run = "bin/rails db:migrate"
+
+[tasks."db:rollback"]
+description = "Rollback last migration"
+run = "bin/rails db:rollback"
+
+[tasks."db:seed"]
+description = "Seed the database"
+run = "bin/rails db:seed"
+
+[tasks."db:reset"]
+description = "Reset the database"
+run = "bin/rails db:reset"
+
+[tasks."db:create"]
+description = "Create the database"
+run = "bin/rails db:create"
+
+[tasks."db:drop"]
+description = "Drop the database"
+run = "bin/rails db:drop"
+
+[tasks."db:schema:load"]
+description = "Load schema into database"
+run = "bin/rails db:schema:load"
+
+[tasks."db:migrate:status"]
+description = "Show migration status"
+run = "bin/rails db:migrate:status"
+
+[tasks.routes]
+description = "Print all routes"
+run = "bin/rails routes"
+
+[tasks.lint]
+description = "Run linters"
+run = "bundle exec rubocop"
+
+[tasks."lint:fix"]
+description = "Run linters and auto-correct"
+run = "bundle exec rubocop --autocorrect"
+
+[tasks.bundle]
+description = "Update Gem file"
+run = "bin/bundle"
+
+[tasks.setup]
+description = "Setup project (install gems, prepare DB)"
+run = "bin/setup"
+
+[tasks.update]
+description = "Update project (install gems, prepare DB)"
+run = "bin/update"
+
+[tasks."assets:precompile"]
+description = "Precompile assets"
+run = "bin/rails assets:precompile"
+
+[tasks."assets:clean"]
+description = "Clean old compiled assets"
+run = "bin/rails assets:clean"
+
+[tasks.credentials]
+description = "Edit Rails credentials"
+run = "bin/rails credentials:edit"
+
+[tasks.log]
+description = "Tail development log"
+run = "tail -f log/development.log"

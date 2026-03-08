@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 6.1.7'
-ruby '3.2.4'
+ruby '3.2.10'
 
 #gem 'psych', '< 4' # https://stackoverflow.com/a/71192990
 
