@@ -19,7 +19,7 @@ jobs:
   update_release_draft:
     name: Update Release Draft
     needs: prepare_version
-    uses: Staffbase/gha-workflows/.github/workflows/template_release_drafter.yml@v11.1.1
+    uses: Staffbase/gha-workflows/.github/workflows/template_release_drafter.yml@v12.0.1
     with:
       name: 'Release ${{ needs.prepare_version.outputs.new_version }} 🚀'
       tag: ${{ needs.prepare_version.outputs.new_tag }}
