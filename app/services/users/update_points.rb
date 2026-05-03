@@ -24,27 +24,39 @@ module Users
       result = 0
       if Tournament.finished?
         if user.bonus_champion_team_id.present?
-          champion = ::GameQueries.tournament_champion_team
-          result += BONUS_TIP_POINTS if champion.present? && user.bonus_champion_team_id == champion.id
+          result += BONUS_TIP_POINTS if tournament_champion&.id == user.bonus_champion_team_id
         end
 
         if user.bonus_second_team_id.present?
-          second = ::GameQueries.tournament_second_team
-          result += BONUS_TIP_POINTS if second.present? && user.bonus_second_team_id == second.id
+          result += BONUS_TIP_POINTS if tournament_second&.id == user.bonus_second_team_id
         end
 
         if user.bonus_when_final_first_goal.present?
-          bonus_answer = AppSetting.bonus_answer_when_will_the_first_goal
-          result += BONUS_TIP_POINTS if bonus_answer.present? && user.bonus_when_final_first_goal == bonus_answer
+          result += BONUS_TIP_POINTS if bonus_when_first_goal_answer.present? && user.bonus_when_final_first_goal == bonus_when_first_goal_answer
         end
 
         if user.bonus_how_many_goals.present?
-          bonus_answer = AppSetting.bonus_answer_how_many_goals
-          result += BONUS_TIP_POINTS if bonus_answer.present? && user.bonus_how_many_goals == bonus_answer
+          result += BONUS_TIP_POINTS if bonus_how_many_goals_answer.present? && user.bonus_how_many_goals == bonus_how_many_goals_answer
         end
       end
 
       result
+    end
+
+    def tournament_champion
+      @tournament_champion ||= ::GameQueries.tournament_champion_team
+    end
+
+    def tournament_second
+      @tournament_second ||= ::GameQueries.tournament_second_team
+    end
+
+    def bonus_when_first_goal_answer
+      @bonus_when_first_goal_answer ||= AppSetting.bonus_answer_when_will_the_first_goal
+    end
+
+    def bonus_how_many_goals_answer
+      @bonus_how_many_goals_answer ||= AppSetting.bonus_answer_how_many_goals
     end
 
     def update_user_points

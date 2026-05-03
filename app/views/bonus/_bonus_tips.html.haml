@@ -59,7 +59,7 @@
       = presenter.bonus_when_final_first_goal_answer
       - if Tournament.finished?
         %br
-        = bonus_result_tag(presenter.when_first_goal_correct?, manual: true)
+        = bonus_result_tag(presenter.when_first_goal_correct?, answer_set: AppSetting.bonus_answer_when_will_the_first_goal.present?)
   %br
   .row
     .small-12.large-6.columns
@@ -68,7 +68,7 @@
       = presenter.bonus_how_many_goals_answer
       - if Tournament.finished?
         %br
-        = bonus_result_tag(presenter.how_many_goals_correct?, manual: true)
+        = bonus_result_tag(presenter.how_many_goals_correct?, answer_set: AppSetting.bonus_answer_how_many_goals.present?)
   %br
   - if Tournament.finished?
     .row

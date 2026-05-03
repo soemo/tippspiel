@@ -32,7 +32,7 @@ describe Admin::BonusSettingsController do
       it 'saves bonus answers and redirects back to the form' do
         login(admin_user)
 
-        post :create, params: { bonus_how_many_goals: '7', bonus_when_first_goal_goal: '2' }
+        post :create, params: { bonus_how_many_goals: '7', bonus_when_final_first_goal: '2' }
 
         expect(AppSetting.bonus_answer_how_many_goals).to eq(7)
         expect(AppSetting.bonus_answer_when_will_the_first_goal).to eq(2)
@@ -45,7 +45,7 @@ describe Admin::BonusSettingsController do
         expect(Users::UpdatePoints).not_to receive(:call)
         expect(Users::UpdateRankingPerGame).not_to receive(:call)
 
-        post :create, params: { bonus_how_many_goals: '7', bonus_when_first_goal_goal: '2' }
+        post :create, params: { bonus_how_many_goals: '7', bonus_when_final_first_goal: '2' }
       end
     end
 
@@ -53,7 +53,7 @@ describe Admin::BonusSettingsController do
       it 'does not save settings' do
         login(no_admin_user)
 
-        post :create, params: { bonus_how_many_goals: '7', bonus_when_first_goal_goal: '2' }
+        post :create, params: { bonus_how_many_goals: '7', bonus_when_final_first_goal: '2' }
 
         expect(AppSetting.bonus_answer_how_many_goals).to be_nil
         expect(response).to have_http_status(:forbidden)

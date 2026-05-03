@@ -23,7 +23,7 @@
           %label
             3. Wann fiel das erste Tor im Finale?
             - options = @when_first_goal_options.map { |k, v| [I18n.t("bonus_questions.when_final_first_goal_options.#{v}"), k] }
-            = select_tag 'bonus_when_first_goal_goal', options_for_select(options, @bonus_when_first_goal), prompt: '– bitte wählen –'
+            = select_tag 'bonus_when_final_first_goal', options_for_select(options, @bonus_when_first_goal), prompt: '– bitte wählen –'
       .row
         .small-12.columns
           %label

@@ -73,13 +73,13 @@ module ApplicationHelper
   end
 
   # Renders a coloured correct/wrong label for a bonus answer.
-  # Pass manual: true for questions 3 & 4 — when the AppSetting answer has not
-  # been stored yet we show a neutral "not yet evaluated" label instead of "wrong".
-  def bonus_result_tag(correct, manual: false)
+  # Pass `answer_set: false` for questions 3 & 4 when the admin has not yet
+  # stored the correct answer — shows a neutral "not yet evaluated" label.
+  def bonus_result_tag(correct, answer_set: true)
     points = Users::UpdatePoints::BONUS_TIP_POINTS
     if correct
       content_tag(:span, I18n.t('bonus_answer_correct', points: points), class: 'label success')
-    elsif manual && AppSetting.bonus_answer_how_many_goals.nil? && AppSetting.bonus_answer_when_will_the_first_goal.nil?
+    elsif !answer_set
       content_tag(:span, I18n.t('bonus_answer_not_set'), class: 'label secondary')
     else
       content_tag(:span, I18n.t('bonus_answer_wrong'), class: 'label alert')
