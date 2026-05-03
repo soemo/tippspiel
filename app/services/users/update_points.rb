@@ -24,15 +24,13 @@ module Users
       result = 0
       if Tournament.finished?
         if user.bonus_champion_team_id.present?
-          tournament_champion_team = get_tournament_champion_team
-          bonus_champion_team_id = tournament_champion_team.present? ? tournament_champion_team.id : nil
-          result += BONUS_TIP_POINTS if user.bonus_champion_team_id == bonus_champion_team_id
+          champion = ::GameQueries.tournament_champion_team
+          result += BONUS_TIP_POINTS if champion.present? && user.bonus_champion_team_id == champion.id
         end
 
         if user.bonus_second_team_id.present?
-          tournament_second_team = get_tournament_second_team
-          bonus_second_team_id = tournament_second_team.present? ? tournament_second_team.id : nil
-          result += BONUS_TIP_POINTS if user.bonus_second_team_id == bonus_second_team_id
+          second = ::GameQueries.tournament_second_team
+          result += BONUS_TIP_POINTS if second.present? && user.bonus_second_team_id == second.id
         end
 
         if user.bonus_when_final_first_goal.present?
@@ -80,48 +78,5 @@ module Users
         end
       end
     end
-
-    def get_tournament_champion_team
-      result = nil
-      final_game = ::GameQueries.final_game
-      if final_game.present?
-        result = winner_team(final_game)
-      end
-
-      result
-    end
-
-    def get_tournament_second_team
-      result = nil
-      final_game = ::GameQueries.final_game
-      if final_game.present?
-        result = looser_team(final_game)
-      end
-
-      result
-    end
-
-    # bei Unentschieden wird nil geliefert ansonsten, das Siegerteam
-    def winner_team(game)
-      result = nil
-      if game.team1_goals.present? && game.team2_goals.present?
-        result = game.team1 if game.team1_goals > game.team2_goals
-        result = game.team2 if game.team1_goals < game.team2_goals
-      end
-
-      result
-    end
-
-    def looser_team(game)
-      result = nil
-      if game.team1_goals.present? && game.team2_goals.present?
-        result = game.team1 if game.team1_goals < game.team2_goals
-        result = game.team2 if game.team1_goals > game.team2_goals
-      end
-
-      result
-    end
-
-
   end
 end

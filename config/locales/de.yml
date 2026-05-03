@@ -48,6 +48,10 @@ de:
 
 
   bonus_question_help: "Die 4 Bonusfragen können bis zum Start des %{round_name}s ausgefüllt werden. Je korrekte Antwort gibt es %{extra_points} Zusatzpunkte."
+  bonus_answer_correct: 'Richtig! +%{points} Punkte'
+  bonus_answer_wrong: 'Leider falsch'
+  bonus_answer_not_set: 'Noch nicht bewertet'
+  bonus_total_points: 'Deine Bonuspunkte gesamt: %{points}'
   no_champion_tip: 'Du hast leider keinen Tipp für einen Turniersieger abgegeben!'
   no_second_tip: 'Du hast leider keinen Tipp für den zweiten Platz abgegeben!'
   no_when_first_goal_tip: 'Du hast leider keinen Tipp abgegeben, wann im Finale das erste Tor fällt!'

@@ -86,7 +86,5 @@ module Tips
 
       result
     end
-
-
   end
 end

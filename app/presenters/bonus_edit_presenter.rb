@@ -80,4 +80,34 @@ class BonusEditPresenter
     I18n.t('round.roundof16')
   end
 
+  # --- bonus result methods (only meaningful after Tournament.finished?) ---
+
+  def bonus_points
+    current_user.present? ? current_user.bonus_points.to_i : 0
+  end
+
+  def champion_correct?
+    return false unless Tournament.finished? && bonus_champion_team.present?
+    champion = GameQueries.tournament_champion_team
+    champion.present? && bonus_champion_team.id == champion.id
+  end
+
+  def second_correct?
+    return false unless Tournament.finished? && bonus_second_team.present?
+    second = GameQueries.tournament_second_team
+    second.present? && bonus_second_team.id == second.id
+  end
+
+  def when_first_goal_correct?
+    return false unless Tournament.finished? && bonus_when_final_first_goal.present?
+    correct = AppSetting.bonus_answer_when_will_the_first_goal
+    correct.present? && bonus_when_final_first_goal == correct
+  end
+
+  def how_many_goals_correct?
+    return false unless Tournament.finished? && bonus_how_many_goals.present?
+    correct = AppSetting.bonus_answer_how_many_goals
+    correct.present? && bonus_how_many_goals == correct
+  end
+
 end

@@ -41,5 +41,34 @@ module GameQueries
       Game.preload(:tips).where(finished: true).order(start_at: :asc)
     end
 
+    # Returns the winning team of the final game, or nil if undecided/draw.
+    def tournament_champion_team
+      game = final_game
+      return nil unless game.present?
+      winner_team(game)
+    end
+
+    # Returns the losing team of the final game, or nil if undecided/draw.
+    def tournament_second_team
+      game = final_game
+      return nil unless game.present?
+      loser_team(game)
+    end
+
+    private
+
+    def winner_team(game)
+      return nil unless game.team1_goals.present? && game.team2_goals.present?
+      return game.team1 if game.team1_goals > game.team2_goals
+      return game.team2 if game.team1_goals < game.team2_goals
+      nil
+    end
+
+    def loser_team(game)
+      return nil unless game.team1_goals.present? && game.team2_goals.present?
+      return game.team1 if game.team1_goals < game.team2_goals
+      return game.team2 if game.team1_goals > game.team2_goals
+      nil
+    end
   end
 end

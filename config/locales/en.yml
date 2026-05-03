@@ -63,6 +63,10 @@ en:
       in_the_penalty_short: 'P'
 
   bonus_question_help: "The 4 bonus questions can be filled in until the start of the %{round_name}. Each correct answer earns %{extra_points} bonus points."
+  bonus_answer_correct: 'Correct! +%{points} points'
+  bonus_answer_wrong: 'Wrong, unfortunately'
+  bonus_answer_not_set: 'Not yet evaluated'
+  bonus_total_points: 'Your total bonus points: %{points}'
 
   signed_in_hello: "Hi "
   sign_in: "Login"

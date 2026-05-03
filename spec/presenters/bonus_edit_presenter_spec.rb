@@ -240,4 +240,101 @@ describe BonusEditPresenter do
       expect(presenter.round_of_16_name).to eq('Achtelfinale')
     end
   end
+
+  describe 'bonus result methods (after final)' do
+    let(:winner_team) { create(:team, name: 'Winner') }
+    let(:loser_team)  { create(:team, name: 'Loser') }
+    let(:final_game) do
+      create(:final, team1: loser_team, team2: winner_team,
+             team1_goals: 0, team2_goals: 2, finished: true)
+    end
+
+    let(:correct_user) do
+      u = create_active_user(create(:user,
+        bonus_champion_team_id: winner_team.id,
+        bonus_second_team_id: loser_team.id,
+        bonus_when_final_first_goal: 2,
+        bonus_how_many_goals: 7
+      ))
+      u
+    end
+
+    let(:wrong_user) do
+      create_active_user(create(:user,
+        bonus_champion_team_id: loser_team.id,
+        bonus_second_team_id: winner_team.id,
+        bonus_when_final_first_goal: 1,
+        bonus_how_many_goals: 3
+      ))
+    end
+
+    before do
+      final_game
+      AppSetting.set_bonus_answer_when_will_the_first_goal(2)
+      AppSetting.set_bonus_answer_how_many_goals(7)
+      allow(Tournament).to receive(:finished?).and_return(true)
+    end
+
+    describe '#champion_correct?' do
+      it 'returns true when user picked the winning team' do
+        expect(BonusEditPresenter.new(correct_user).champion_correct?).to be true
+      end
+
+      it 'returns false when user picked the wrong team' do
+        expect(BonusEditPresenter.new(wrong_user).champion_correct?).to be false
+      end
+    end
+
+    describe '#second_correct?' do
+      it 'returns true when user picked the losing finalist' do
+        expect(BonusEditPresenter.new(correct_user).second_correct?).to be true
+      end
+
+      it 'returns false when user picked the wrong team' do
+        expect(BonusEditPresenter.new(wrong_user).second_correct?).to be false
+      end
+    end
+
+    describe '#when_first_goal_correct?' do
+      it 'returns true when answer matches AppSetting' do
+        expect(BonusEditPresenter.new(correct_user).when_first_goal_correct?).to be true
+      end
+
+      it 'returns false when answer does not match' do
+        expect(BonusEditPresenter.new(wrong_user).when_first_goal_correct?).to be false
+      end
+
+      it 'returns false when AppSetting not set' do
+        AppSetting.find_by(key: AppSetting::BONUS_WHEN_FIRST_GOAL_KEY)&.destroy
+        expect(BonusEditPresenter.new(correct_user).when_first_goal_correct?).to be false
+      end
+    end
+
+    describe '#how_many_goals_correct?' do
+      it 'returns true when answer matches AppSetting' do
+        expect(BonusEditPresenter.new(correct_user).how_many_goals_correct?).to be true
+      end
+
+      it 'returns false when answer does not match' do
+        expect(BonusEditPresenter.new(wrong_user).how_many_goals_correct?).to be false
+      end
+
+      it 'returns false when AppSetting not set' do
+        AppSetting.find_by(key: AppSetting::BONUS_HOW_MANY_GOALS_KEY)&.destroy
+        expect(BonusEditPresenter.new(correct_user).how_many_goals_correct?).to be false
+      end
+    end
+
+    describe '#bonus_points' do
+      it 'returns the stored bonus_points from the user' do
+        correct_user.update_columns(bonus_points: 24)
+        expect(BonusEditPresenter.new(correct_user).bonus_points).to eq(24)
+      end
+
+      it 'returns 0 when bonus_points is nil' do
+        correct_user.update_columns(bonus_points: nil)
+        expect(BonusEditPresenter.new(correct_user).bonus_points).to eq(0)
+      end
+    end
+  end
 end

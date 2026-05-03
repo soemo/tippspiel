@@ -38,22 +38,39 @@
     .small-12.large-6.columns
       %b= I18n.t('bonus_questions.which_team_is_champion')
       %br
-        = presenter.champion_team_with_flag
+      = presenter.champion_team_with_flag
+      - if Tournament.finished?
+        %br
+        = bonus_result_tag(presenter.champion_correct?)
   %br
   .row
     .small-12.large-6.columns
       %b= I18n.t('bonus_questions.which_team_is_second')
       %br
-        = presenter.second_team_with_flag
+      = presenter.second_team_with_flag
+      - if Tournament.finished?
+        %br
+        = bonus_result_tag(presenter.second_correct?)
   %br
   .row
     .small-12.large-6.columns
       %b= I18n.t('bonus_questions.when_final_first_goal')
       %br
-        = presenter.bonus_when_final_first_goal_answer
+      = presenter.bonus_when_final_first_goal_answer
+      - if Tournament.finished?
+        %br
+        = bonus_result_tag(presenter.when_first_goal_correct?, manual: true)
   %br
   .row
     .small-12.large-6.columns
       %b= I18n.t('bonus_questions.how_many_goals')
       %br
-        = presenter.bonus_how_many_goals_answer
+      = presenter.bonus_how_many_goals_answer
+      - if Tournament.finished?
+        %br
+        = bonus_result_tag(presenter.how_many_goals_correct?, manual: true)
+  %br
+  - if Tournament.finished?
+    .row
+      .small-12.large-6.columns
+        %strong= I18n.t('bonus_total_points', points: presenter.bonus_points)
