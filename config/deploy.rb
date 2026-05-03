@@ -1,7 +1,7 @@
-# um z.B. an den TOURNAMENT_NAME zu kommen
+# Load constants (e.g. DEPLOYMENT_NAME) for use in Capistrano config
 load File.expand_path('../initializers/01_constants.rb', __FILE__)
 
-set :cap_tournament_name, TOURNAMENT_NAME
+set :cap_tournament_name, DEPLOYMENT_NAME
 
 # your Uberspace username
 set :user, 'soemo'

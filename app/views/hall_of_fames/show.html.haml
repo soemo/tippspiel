@@ -1,26 +1,24 @@
 - cache('hall_of_fame_caching') do
 
 
-  - champions = [{name: '???',                          description: 'Sieger EM 2024 Tippspiel', :img => 'pokalsieger.jpg'},
-                 {name: 'Jens Witschurke',              description: 'Sieger WM 2022 Tippspiel', :img => 'wm2022sieger.jpg'},
-                 {name: 'Jens Witschurke',              description: 'Sieger EM 2020 Tippspiel', :img => 'em2020sieger.jpg'},
-                 {name: 'Christian Herbst',             description: 'Sieger WM 2018 Tippspiel', :img => 'wm2018sieger.jpg'},
-                 {name: 'Sebastian Nestler',            description: 'Sieger EM 2016 Tippspiel', :img => 'em2016sieger.jpg'},
-                 {name: 'Uwe Scheithauer',              description: 'Sieger WM 2014 Tippspiel', :img => 'wm2014sieger.jpg'},
-                 {name: 'Christian Kurth',              description: 'Sieger EM 2012 Tippspiel', :img => 'em2012sieger.jpg'},
-                 {name: 'Markus Gödke',                 description: 'Sieger WM 2010 Tippspiel', :img => 'wm2010sieger.jpg' },
-                 {name: 'Jens Bruch',                   description: 'Sieger EM 2008 Tippspiel', :img => 'em2008sieger.gif'},
-                 {name: 'Enrico Schwarz',               description: 'Sieger WM 2006 Tippspiel', :img => 'wm2006sieger.jpg'},
-                 {name: 'Chris Zenker',                 description: 'Sieger EM 2004 Tippspiel', :img => 'em2004sieger.jpg'},
-                 {name: 'Ina Foedisch und Ricardo Mai', description: 'Sieger WM 2002 Tippspiel', :img => 'pokalsieger.jpg'}]
+  - champions = [{name: '???',                          tournament: 'EM 2024', :img => 'pokalsieger.jpg'},
+                 {name: 'Jens Witschurke',              tournament: 'WM 2022', :img => 'wm2022sieger.jpg'},
+                 {name: 'Jens Witschurke',              tournament: 'EM 2020', :img => 'em2020sieger.jpg'},
+                 {name: 'Christian Herbst',             tournament: 'WM 2018', :img => 'wm2018sieger.jpg'},
+                 {name: 'Sebastian Nestler',            tournament: 'EM 2016', :img => 'em2016sieger.jpg'},
+                 {name: 'Uwe Scheithauer',              tournament: 'WM 2014', :img => 'wm2014sieger.jpg'},
+                 {name: 'Christian Kurth',              tournament: 'EM 2012', :img => 'em2012sieger.jpg'},
+                 {name: 'Markus Gödke',                 tournament: 'WM 2010', :img => 'wm2010sieger.jpg' },
+                 {name: 'Jens Bruch',                   tournament: 'EM 2008', :img => 'em2008sieger.gif'},
+                 {name: 'Enrico Schwarz',               tournament: 'WM 2006', :img => 'wm2006sieger.jpg'},
+                 {name: 'Chris Zenker',                 tournament: 'EM 2004', :img => 'em2004sieger.jpg'},
+                 {name: 'Ina Foedisch und Ricardo Mai', tournament: 'WM 2002', :img => 'pokalsieger.jpg'}]
 
   .row
     .small-12.columns
       %h3= t('hall_of_fame')
 
-      %p
-        Seit 2002 findet zu den Europa- und Weltmeisterschaften dieses kleine Tippspiel statt.
-        Auch Du kannst in die Geschichte eingehen und einen Platz in der Hall of Fame erringen!
+      %p= t('hall_of_fame_intro')
 
   #hall-of-fame.row
     %ul
@@ -31,5 +29,4 @@
               = image_tag(champ[:img], alt: champ[:name], class: 'thumbnail')
               %figcaption
                 %h5= champ[:name]
-                %span.label= champ[:description]
-
+                %span.label= t('hall_of_fame_winner', tournament: champ[:tournament])

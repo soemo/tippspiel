@@ -19,7 +19,7 @@ class NavBarPresenter
 
   def nav_bar_title
     if user_logged_in?
-      "#{TOURNAMENT_NAME} #{I18n.t('your_tips')}"
+      "#{I18n.t('tournament_name')} #{I18n.t('your_tips')}"
     else
       get_title
     end
@@ -34,7 +34,7 @@ class NavBarPresenter
 
   def nav_ranking_info
     if Tournament.started?
-    "Platz #{user_position} mit #{user.points} Punkten"
+      I18n.t('nav_ranking_info', position: user_position, points: user.points)
     else
       ""
     end

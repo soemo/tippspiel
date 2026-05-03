@@ -11,6 +11,64 @@ describe ApplicationController do
     login current_user
   end
 
+  describe '#set_locale' do
+
+    context 'when locale is stored in session' do
+      it 'uses the session locale' do
+        session[:locale] = 'en'
+        subject.set_locale
+        expect(I18n.locale).to eq(:en)
+      end
+
+      it 'uses de from session' do
+        session[:locale] = 'de'
+        subject.set_locale
+        expect(I18n.locale).to eq(:de)
+      end
+    end
+
+    context 'when no session locale but Accept-Language header is set' do
+      it 'uses en from Accept-Language header' do
+        session.delete(:locale)
+        request.env['HTTP_ACCEPT_LANGUAGE'] = 'en-US,en;q=0.9'
+        subject.set_locale
+        expect(I18n.locale).to eq(:en)
+      end
+
+      it 'uses de from Accept-Language header' do
+        session.delete(:locale)
+        request.env['HTTP_ACCEPT_LANGUAGE'] = 'de-DE,de;q=0.9'
+        subject.set_locale
+        expect(I18n.locale).to eq(:de)
+      end
+
+      it 'falls back to de for unsupported language' do
+        session.delete(:locale)
+        request.env['HTTP_ACCEPT_LANGUAGE'] = 'fr-FR,fr;q=0.9'
+        subject.set_locale
+        expect(I18n.locale).to eq(:de)
+      end
+    end
+
+    context 'when neither session nor Accept-Language is set' do
+      it 'defaults to de' do
+        session.delete(:locale)
+        request.env.delete('HTTP_ACCEPT_LANGUAGE')
+        subject.set_locale
+        expect(I18n.locale).to eq(:de)
+      end
+    end
+
+    context 'when session locale overrides Accept-Language' do
+      it 'prefers session locale over header' do
+        session[:locale] = 'en'
+        request.env['HTTP_ACCEPT_LANGUAGE'] = 'de-DE,de;q=0.9'
+        subject.set_locale
+        expect(I18n.locale).to eq(:en)
+      end
+    end
+  end
+
   describe '#nav_bar_presenter' do
 
     it 'returns instance of NavBarPresenter' do

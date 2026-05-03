@@ -17,11 +17,7 @@ class ApplicationController < ActionController::Base
 
 
   def set_locale
-    I18n.locale = I18n.default_locale
-  end
-
-  def set_host_to_mailers
-    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+    I18n.locale = resolve_locale
   end
 
   def nav_bar_presenter
@@ -43,5 +39,27 @@ class ApplicationController < ActionController::Base
 
       url_scope.inquiry
     end
+  end
+
+  private
+
+  def resolve_locale
+    locale_from_session || locale_from_header || I18n.default_locale
+  end
+
+  def locale_from_session
+    locale = session[:locale]
+    locale if locale.present? && SUPPORTED_LOCALES.include?(locale)
+  end
+
+  def locale_from_header
+    header = request.env['HTTP_ACCEPT_LANGUAGE']
+    return nil if header.blank?
+    preferred = header.split(',').map { |l| l.split(';q=').first.strip[0..1].downcase }.first
+    preferred if SUPPORTED_LOCALES.include?(preferred)
+  end
+
+  def set_host_to_mailers
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 end

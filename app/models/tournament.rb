@@ -14,6 +14,15 @@ class Tournament
     !Tournament.round_of_16_started?
   end
 
+  def self.round_of_32_started?
+    start_date_time, _end_date_time = Tournament.round_start_end_date_time(ROUND_OF_32)
+    start_date_time < Time.now
+  end
+
+  def self.round_of_32_not_yet_started?
+    !Tournament.round_of_32_started?
+  end
+
 
   # is true, if the final game is marked as finished
   def self.finished?

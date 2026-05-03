@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :locale, only: :update
+
   get 'notes' => 'notes#index'
   post 'save-notice' => 'notes#create'
 

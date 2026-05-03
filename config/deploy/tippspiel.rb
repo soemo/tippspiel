@@ -8,7 +8,7 @@ set :branch, 'main'
 # have your own domain set up, you can configure it here
 set :domain, 'tippspiel.soemo.org'
 
-set :database_name_suffix, "#{fetch(:cap_tournament_name).downcase.gsub(' ', '_')}"
+set :database_name_suffix, fetch(:cap_tournament_name)
 
 # You have to set where to store the code
 # the default /var/www/my_app_name won't work on uberspace

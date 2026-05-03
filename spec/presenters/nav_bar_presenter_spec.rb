@@ -35,14 +35,14 @@ describe NavBarPresenter do
   describe '#nav_bar_title' do
 
     context 'if user is logged in' do
-      it 'returns "#{TOURNAMENT_NAME} #{I18n.t(your_tips)}"' do
-        expect(subject.new(:admin, user).nav_bar_title).to eq("#{TOURNAMENT_NAME} #{t('your_tips')}")
+      it 'returns "#{I18n.t(tournament_name)} #{I18n.t(your_tips)}"' do
+        expect(subject.new(:admin, user).nav_bar_title).to eq("#{I18n.t('tournament_name')} #{t('your_tips')}")
       end
     end
 
     context 'if user is not logged in' do
-      it 'returns "#{TOURNAMENT_NAME} #{I18n.t(app_name)}"' do
-        expect(subject.new(:admin, nil).nav_bar_title).to eq("#{TOURNAMENT_NAME} #{t('app_name')}")
+      it 'returns "#{I18n.t(tournament_name)} #{I18n.t(app_name)}"' do
+        expect(subject.new(:admin, nil).nav_bar_title).to eq("#{I18n.t('tournament_name')} #{t('app_name')}")
       end
     end
   end
@@ -131,7 +131,20 @@ describe NavBarPresenter do
       user.points = 111
       expect(Users::Top3AndOwnPosition).to receive(:call).with(user_id: user.id).and_return(object)
 
-      expect(presenter.nav_ranking_info).to eq('Platz 42 mit 111 Punkten')
+      I18n.with_locale(:de) do
+        expect(presenter.nav_ranking_info).to eq('Platz 42 mit 111 Punkten')
+      end
+    end
+
+    it 'returns english nav_ranking_info when locale is en' do
+      expect(Tournament).to receive(:started?).and_return(true)
+      object = double('Top3AndOwnPosition', user_top3_ranking_hash: {}, own_position: 42)
+      user.points = 111
+      expect(Users::Top3AndOwnPosition).to receive(:call).with(user_id: user.id).and_return(object)
+
+      I18n.with_locale(:en) do
+        expect(presenter.nav_ranking_info).to eq('Position 42 with 111 points')
+      end
     end
 
     it 'returns empty nav_ranking_info if Tournament has not started' do

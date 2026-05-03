@@ -95,6 +95,27 @@ describe Admin::GamesController do
           expect(response).to redirect_to admin_games_path
           expect(Game.find(game.id).team1_goals).to eq(2)
         end
+
+        it 'updates game round to roundof32' do
+          get :update, params: { id: game.id, game: { round: ROUND_OF_32 } }
+
+          expect(response).to redirect_to admin_games_path
+          expect(Game.find(game.id).round).to eq(ROUND_OF_32)
+        end
+
+        it 'updates game group to I' do
+          get :update, params: { id: game.id, game: { group: GROUP_I } }
+
+          expect(response).to redirect_to admin_games_path
+          expect(Game.find(game.id).group).to eq(GROUP_I)
+        end
+
+        it 'updates game group to L' do
+          get :update, params: { id: game.id, game: { group: GROUP_L } }
+
+          expect(response).to redirect_to admin_games_path
+          expect(Game.find(game.id).group).to eq(GROUP_L)
+        end
       end
 
       context 'if game_params incorrect' do

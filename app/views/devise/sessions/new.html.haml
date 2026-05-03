@@ -14,15 +14,14 @@
             %p
               = I18n.t('signed_up_message.content')
           -else
-            %h2= "Sport frei zum #{TOURNAMENT_NAME} Tippspiel"
+            %h2= I18n.t('login_callout.header', tournament_name: I18n.t('tournament_name'))
             %p
-              Wer holt sich dieses Jahr den begehrten Tippspiel-Wanderpokal, Ruhm und grenzenloses Prahlrecht?
-              = link_to('Registriere dich neu', new_registration_path(resource_name)) + ' und'
-              melde dich an, tippe die Spiele und beantworte Bonusfragen,
-              um diese Ehre zu erlangen!
+              = I18n.t('login_callout.body',
+                  tournament_name: I18n.t('tournament_name'),
+                  register_link: link_to(I18n.t('login_callout.register_link'), new_registration_path(resource_name))).html_safe
               %br
               %br
-              Schon registriert, dann einfach anmelden.
+              = I18n.t('login_callout.already_registered')
 
           = render :partial => 'login_form'
 

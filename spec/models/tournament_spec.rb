@@ -121,4 +121,48 @@ describe Tournament, :type => :model do
     end
   end
 
+  describe '#round_of_32_started?' do
+
+    context 'if first game of "Round of 32" is in the future' do
+      it 'returns false' do
+        Timecop.freeze(Time.now)
+        create(:game, :start_at => Time.now + 1.second, round: ROUND_OF_32)
+
+        expect(subject.round_of_32_started?).to be false
+      end
+    end
+
+    context 'if first game of "Round of 32" is not in the future' do
+      it 'returns true' do
+        Timecop.freeze(Time.now)
+        create(:game, :start_at => Time.now - 1.second, round: ROUND_OF_32)
+
+        expect(subject.round_of_32_started?).to be true
+      end
+    end
+
+  end
+
+  describe '#round_of_32_not_yet_started?' do
+
+    context 'if first game of "Round of 32" is in the future' do
+      it 'returns true' do
+        Timecop.freeze(Time.now)
+        create(:game, :start_at => Time.now + 1.second, round: ROUND_OF_32)
+
+        expect(subject.round_of_32_not_yet_started?).to be true
+      end
+    end
+
+    context 'if first game of "Round of 32" is not in the future' do
+      it 'returns false' do
+        Timecop.freeze(Time.now)
+        create(:game, :start_at => Time.now - 1.second, round: ROUND_OF_32)
+
+        expect(subject.round_of_32_not_yet_started?).to be false
+      end
+    end
+
+  end
+
 end

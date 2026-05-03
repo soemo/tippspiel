@@ -1,5 +1,11 @@
 de:
   app_name: "Tippspiel"
+  tournament_name: "WM 2026"
+  login_callout:
+    header: "Sport frei zum %{tournament_name} Tippspiel"
+    body: "Wer holt sich dieses Jahr den begehrten Tippspiel-Wanderpokal, Ruhm und grenzenloses Prahlrecht? %{register_link} und melde dich an, tippe die Spiele und beantworte Bonusfragen, um diese Ehre zu erlangen!"
+    register_link: "Registriere dich neu"
+    already_registered: "Schon registriert, dann einfach anmelden."
   games_of: "Spielplan der %{tournament_name}"
 
   text_maintenance: "Die Seite wird aktuell gewartet. Bitte probiere es später wieder."
@@ -83,6 +89,8 @@ de:
   Es werden zufällig Tore von 0 bis 5 vergeben. Natürlich kannst du die Zufallstore später auch selbst noch anpassen."
   comparetips: "Tipps vergleichen"
   hall_of_fame: "Hall of Fame"
+  hall_of_fame_intro: "Seit 2002 findet zu den Europa- und Weltmeisterschaften dieses kleine Tippspiel statt. Auch Du kannst in die Geschichte eingehen und einen Platz in der Hall of Fame erringen!"
+  hall_of_fame_winner: "Sieger %{tournament} Tippspiel"
 
   no_user: Keine Nutzer
   or: oder
@@ -95,6 +103,7 @@ de:
   tournament: "Turnier"
   tips: "Tipps"
   your_tips: "Deine Tipps"
+  nav_ranking_info: "Platz %{position} mit %{points} Punkten"
   your_bonustips: "Deine Bonustipps"
   back_link: "Zurück"
   edit_link: "Editieren"
@@ -109,6 +118,7 @@ de:
 
   round:
     group: Gruppe
+    roundof32: Runde der letzten 32
     roundof16: Achtelfinale
     quarterfinal: Viertelfinale
     semifinal: Halbfinale

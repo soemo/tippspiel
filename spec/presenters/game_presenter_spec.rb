@@ -60,6 +60,22 @@ describe GamePresenter do
       Timecop.freeze
       expect(subject.formatted_start_at).to eq I18n.l(game.start_at, format: :default)
     end
+
+    it 'displays time in Berlin timezone (CEST = UTC+2 in summer)' do
+      # A WM 2026 game at 21:00 UTC is 23:00 CEST in Berlin
+      game.start_at = Time.find_zone('UTC').local(2026, 6, 15, 21, 0, 0)
+      I18n.with_locale(:de) do
+        expect(subject.formatted_start_at).to include('23:00')
+      end
+    end
+
+    it 'displays time in Berlin timezone (CET = UTC+1 in winter)' do
+      # A time at 20:00 UTC in December is 21:00 CET in Berlin
+      game.start_at = Time.find_zone('UTC').local(2026, 12, 1, 20, 0, 0)
+      I18n.with_locale(:de) do
+        expect(subject.formatted_start_at).to include('21:00')
+      end
+    end
   end
 
   describe '#formatted_start_at_short' do
@@ -67,6 +83,13 @@ describe GamePresenter do
     it 'returns formatted_start_at updated_at' do
       Timecop.freeze
       expect(subject.formatted_start_at_short).to eq I18n.l(game.start_at, format: :short)
+    end
+
+    it 'displays short time in Berlin timezone (CEST = UTC+2 in summer)' do
+      game.start_at = Time.find_zone('UTC').local(2026, 6, 15, 21, 0, 0)
+      I18n.with_locale(:de) do
+        expect(subject.formatted_start_at_short).to include('23:00')
+      end
     end
   end
 
@@ -80,6 +103,33 @@ describe GamePresenter do
     it 'returns round name if round is not GROUP' do
       game.round = SEMIFINAL
       expect(subject.round_or_group_name).to eq I18n.t(game.round, scope: 'round')
+    end
+
+    it 'returns correct name for ROUND_OF_32' do
+      game.round = ROUND_OF_32
+      expect(subject.round_or_group_name).to eq I18n.t('round.roundof32')
+    end
+
+    it 'returns correct english name for ROUND_OF_32' do
+      game.round = ROUND_OF_32
+      I18n.with_locale(:en) do
+        expect(subject.round_or_group_name).to eq 'Round of 32'
+      end
+    end
+
+    it 'returns correct german name for ROUND_OF_32' do
+      game.round = ROUND_OF_32
+      I18n.with_locale(:de) do
+        expect(subject.round_or_group_name).to eq 'Runde der letzten 32'
+      end
+    end
+
+    %w[A B C D E F G H I J K L].each do |group_letter|
+      it "returns group name for group #{group_letter}" do
+        game.round = GROUP
+        game.group = group_letter
+        expect(subject.round_or_group_name).to eq "#{I18n.t('round.group')} #{group_letter}"
+      end
     end
   end
 

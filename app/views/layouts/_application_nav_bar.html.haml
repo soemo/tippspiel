@@ -17,3 +17,11 @@
             %ul.menu
               %li
                 = link_to(presenter.nav_ranking_info, rankings_path(anchor: "place_#{presenter.user_position}"), {class: 'ranking-info'})
+              %li.locale-switcher
+                - SUPPORTED_LOCALES.each_with_index do |loc, i|
+                  - if loc == I18n.locale.to_s
+                    %strong= loc.upcase
+                  - else
+                    = button_to loc.upcase, locale_path, method: :patch, params: { locale: loc }, class: 'locale-btn-plain'
+                  - unless i == SUPPORTED_LOCALES.length - 1
+                    %span |
