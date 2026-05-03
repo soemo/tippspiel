@@ -99,11 +99,11 @@ module Seeds
     def self.game_data
       [
         # ── Group A: Mexiko, Südafrika, Südkorea, Tschechien ──────────────────
-        {start_at: '11.06.2026 21:00', place: 'Mexiko-Stadt',    team1_name: 'Mexiko',    team2_name: 'Südafrika',  group: 'A', round: 'group'},
+        {start_at: '11.06.2026 21:00', place: 'Mexico City',    team1_name: 'Mexiko',    team2_name: 'Südafrika',  group: 'A', round: 'group'},
         {start_at: '12.06.2026 05:00', place: 'Guadalajara',     team1_name: 'Südkorea',  team2_name: 'Tschechien', group: 'A', round: 'group'},
         {start_at: '18.06.2026 20:00', place: 'Atlanta',         team1_name: 'Tschechien',team2_name: 'Südafrika',  group: 'A', round: 'group'},
         {start_at: '19.06.2026 03:00', place: 'Guadalajara',     team1_name: 'Mexiko',    team2_name: 'Südkorea',   group: 'A', round: 'group'},
-        {start_at: '25.06.2026 03:00', place: 'Mexiko-Stadt',    team1_name: 'Tschechien',team2_name: 'Mexiko',     group: 'A', round: 'group'},
+        {start_at: '25.06.2026 03:00', place: 'Mexico City',    team1_name: 'Tschechien',team2_name: 'Mexiko',     group: 'A', round: 'group'},
         {start_at: '25.06.2026 03:00', place: 'Monterrey',       team1_name: 'Südafrika', team2_name: 'Südkorea',   group: 'A', round: 'group'},
 
         # ── Group B: Kanada, Bosnien-Herzegowina, Katar, Schweiz ──────────────
@@ -180,7 +180,7 @@ module Seeds
 
         # ── Group K: Portugal, DR Kongo, Usbekistan, Kolumbien ───────────────
         {start_at: '17.06.2026 19:00', place: 'Houston',         team1_name: 'Portugal',  team2_name: 'DR Kongo',  group: 'K', round: 'group'},
-        {start_at: '18.06.2026 02:00', place: 'Mexiko-Stadt',    team1_name: 'Usbekistan',team2_name: 'Kolumbien', group: 'K', round: 'group'},
+        {start_at: '18.06.2026 02:00', place: 'Mexico City',    team1_name: 'Usbekistan',team2_name: 'Kolumbien', group: 'K', round: 'group'},
         {start_at: '23.06.2026 19:00', place: 'Houston',         team1_name: 'Portugal',  team2_name: 'Usbekistan',group: 'K', round: 'group'},
         {start_at: '24.06.2026 02:00', place: 'Guadalajara',     team1_name: 'Kolumbien', team2_name: 'DR Kongo',  group: 'K', round: 'group'},
         {start_at: '28.06.2026 01:30', place: 'Miami',           team1_name: 'Kolumbien', team2_name: 'Portugal',  group: 'K', round: 'group'},
@@ -201,7 +201,7 @@ module Seeds
         {start_at: '29.06.2026 19:00', place: 'Houston',         team1_placeholder_name: '1C',         team2_placeholder_name: '2F',         group: nil, round: 'roundof32'},
         {start_at: '30.06.2026 23:00', place: 'New York',        team1_placeholder_name: '1I',         team2_placeholder_name: '3C/D/F/G/H', group: nil, round: 'roundof32'},
         {start_at: '30.06.2026 19:00', place: 'Dallas',          team1_placeholder_name: '2E',         team2_placeholder_name: '2I',         group: nil, round: 'roundof32'},
-        {start_at: '01.07.2026 01:00', place: 'Mexiko-Stadt',    team1_placeholder_name: '1A',         team2_placeholder_name: '3C/E/F/H/I', group: nil, round: 'roundof32'},
+        {start_at: '01.07.2026 01:00', place: 'Mexico City',    team1_placeholder_name: '1A',         team2_placeholder_name: '3C/E/F/H/I', group: nil, round: 'roundof32'},
         {start_at: '01.07.2026 18:00', place: 'Atlanta',         team1_placeholder_name: '1L',         team2_placeholder_name: '3E/H/I/J/K', group: nil, round: 'roundof32'},
         {start_at: '02.07.2026 02:00', place: 'San Francisco',   team1_placeholder_name: '1D',         team2_placeholder_name: '3B/E/F/I/J', group: nil, round: 'roundof32'},
         {start_at: '01.07.2026 23:00', place: 'Seattle',         team1_placeholder_name: '1G',         team2_placeholder_name: '3A/E/H/I/J', group: nil, round: 'roundof32'},
@@ -216,7 +216,7 @@ module Seeds
         {start_at: '05.07.2026 23:00', place: 'Philadelphia',    team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
         {start_at: '05.07.2026 19:00', place: 'Houston',         team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
         {start_at: '06.07.2026 22:00', place: 'New York',        team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
-        {start_at: '07.07.2026 02:00', place: 'Mexiko-Stadt',    team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
+        {start_at: '07.07.2026 02:00', place: 'Mexico City',    team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
         {start_at: '07.07.2026 21:00', place: 'Dallas',          team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
         {start_at: '07.07.2026 23:00', place: 'Seattle',         team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},
         {start_at: '08.07.2026 18:00', place: 'Atlanta',         team1_placeholder_name: '-', team2_placeholder_name: '-', group: nil, round: 'roundof16'},

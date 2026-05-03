@@ -30,12 +30,24 @@ Edit `db/seeds/wm2026.rb` (or create a new module e.g. `db/seeds/em2028.rb`):
 
 ## 3. Update database.yml
 
-Set the development database name in `config/database.yml`:
+`config/database.yml` contains hardcoded database names that must be updated for each tournament.
+The convention is `tippspiel_development_<deployment_name>`.
 
 ```yaml
 development:
   database: tippspiel_development_wm_2026
+
+test:
+  database: tippspiel_test
+
+# prod db == dev db — keep in sync with development
+production:
+  database: tippspiel_development_wm_2026
 ```
+
+> The `test` database name stays constant — it is reset via schema load, not seeded.
+> The `production` entry is only used when running locally against production data; the actual
+> server has its own `database.yml` in the Capistrano shared directory (see [deployment.md](deployment.md)).
 
 ## 4. Set bonus question answers (after tournament)
 

@@ -224,7 +224,12 @@ describe GamePresenter do
     context 'if team1_id present and team2 id present' do
 
       it 'returns team1 name and team2 name' do
-        expect(subject.team_names_without_flags).to eq("#{game.team1.name} - #{game.team2.name}")
+        I18n.with_locale(:de) do
+          expect(subject.team_names_without_flags).to eq("Deutschland - Tschechien")
+        end
+        I18n.with_locale(:en) do
+          expect(subject.team_names_without_flags).to eq("Germany - Czech Republic")
+        end
       end
     end
 
@@ -232,7 +237,9 @@ describe GamePresenter do
 
       it 'returns team1_placeholder_name and team2 name' do
         game.team1_id = nil
-        expect(subject.team_names_without_flags).to eq("#{game.team1_placeholder_name} - #{game.team2.name}")
+        I18n.with_locale(:de) do
+          expect(subject.team_names_without_flags).to eq("#{game.team1_placeholder_name} - Tschechien")
+        end
       end
     end
 
@@ -240,7 +247,9 @@ describe GamePresenter do
 
       it 'returns team1 name and team2_placeholder_name' do
         game.team2_id = nil
-        expect(subject.team_names_without_flags).to eq("#{game.team1.name} - #{game.team2_placeholder_name}")
+        I18n.with_locale(:de) do
+          expect(subject.team_names_without_flags).to eq("Deutschland - #{game.team2_placeholder_name}")
+        end
       end
     end
 

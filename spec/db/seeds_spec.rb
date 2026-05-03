@@ -20,8 +20,8 @@ describe 'WM 2026 seed data' do
     end
   end
 
-  describe 'group stage' do
-    it 'has 72 group stage games (12 groups × 6 games each)' do
+  describe 'group' do
+    it 'has 72 group games (12 groups × 6 games each)' do
       expect(group_games.length).to eq(72)
     end
 
