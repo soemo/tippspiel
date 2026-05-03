@@ -24,24 +24,6 @@ describe BonusEditPresenter do
     game2.start_at = Time.now + 1.minute
   end
 
-  describe '#round_of_16_started?' do
-    context 'if Tournament.round_of_16_started? == true' do
-      it 'returns true' do
-        presenter = subject.new(user)
-        expect(Tournament).to receive(:round_of_16_started?).and_return(true)
-        expect(presenter.round_of_16_started?).to be true
-      end
-    end
-
-    context 'if Tournament.round_of_16_started? == false' do
-      it 'returns false' do
-        presenter = subject.new(user)
-        expect(Tournament).to receive(:round_of_16_started?).and_return(false)
-        expect(presenter.round_of_16_started?).to be false
-      end
-    end
-  end
-
   describe '#bonus_champion_team' do
     context 'if user present' do
       it 'returns user bonus_champion_team' do
@@ -227,14 +209,16 @@ describe BonusEditPresenter do
   end
 
   describe '#options_for_team_tip_select' do
-    it 'returns options for select' do
+    it 'returns options for select with translated names' do
       expect(TeamQueries).to receive(:all_ordered_by_name).and_return([team_cz, team_de])
 
       presenter = subject.new(user)
-      expect(presenter.options_for_team_tip_select).to eq([
-                                                            [team_cz.name, team_cz.id],
-                                                            [team_de.name, team_de.id]
-                                                          ])
+      I18n.with_locale(:de) do
+        expect(presenter.options_for_team_tip_select).to eq([
+          ['Tschechien', team_cz.id],
+          ['Deutschland', team_de.id]
+        ])
+      end
     end
   end
 
@@ -251,7 +235,7 @@ describe BonusEditPresenter do
   end
 
   describe '#round_of_16_name' do
-    it 'returns I18n value' do
+    it 'returns I18n value for Round of 16' do
       presenter = subject.new(user)
       expect(presenter.round_of_16_name).to eq('Achtelfinale')
     end

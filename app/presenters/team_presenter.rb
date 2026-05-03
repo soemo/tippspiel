@@ -14,12 +14,16 @@ class TeamPresenter < DelegateClass(Team)
     flag = teamflag(flag_size)
     case flag_position
       when 'left'
-        raw "#{flag} #{@team.name}"
+        raw "#{flag} #{translated_name}"
       when 'right'
-        raw "#{@team.name} #{flag}"
+        raw "#{translated_name} #{flag}"
       else
         raise "Wrong flag_position #{flag_position}"
     end
+  end
+
+  def translated_name
+    I18n.t(@team.country_code, scope: :teams, default: @team.name)
   end
 
   def teamflag(flag_size)

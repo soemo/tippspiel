@@ -1,6 +1,8 @@
 # Anpassen fuer jeweiliges Tunier
-TOURNAMENT_NAME = 'EM 2024'
-IS_WM = false
+# Used in config/deploy.rb to derive the database name suffix (e.g. "wm_2026").
+# Not for display — use I18n.t('tournament_name') in views/presenters instead.
+DEPLOYMENT_NAME = 'wm_2026'
+IS_WM = true
 IS_EM = !IS_WM
 
 MAIL        = ENV['MAIL']
@@ -8,6 +10,7 @@ ADMIN_EMAIL = ENV['ADMIN_EMAIL']
 WEBSITE_URL = ENV['WEBSITE_URL']
 
 GROUP        = 'group'
+ROUND_OF_32  = 'roundof32'
 ROUND_OF_16  = 'roundof16'
 QUARTERFINAL = 'quarterfinal'
 SEMIFINAL    = 'semifinal'
@@ -22,6 +25,10 @@ GROUP_E      = 'E'
 GROUP_F      = 'F'
 GROUP_G      = 'G'
 GROUP_H      = 'H'
+GROUP_I      = 'I'
+GROUP_J      = 'J'
+GROUP_K      = 'K'
+GROUP_L      = 'L'
 
 if IS_EM
   ROUNDS = [GROUP, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, FINAL]
@@ -29,8 +36,9 @@ if IS_EM
 end
 
 if IS_WM
-  ROUNDS = [GROUP, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, PLACE_3, FINAL]
-  GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F, GROUP_G, GROUP_H]
+  ROUNDS = [GROUP, ROUND_OF_32, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, PLACE_3, FINAL]
+  GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F, GROUP_G, GROUP_H,
+            GROUP_I, GROUP_J, GROUP_K, GROUP_L]
 end
 
 POINTS_TO_CSS_CLASS =
@@ -67,3 +75,5 @@ FILTER_DEFAULT = 'all'.freeze
 FILTER_TODAY = 'today'.freeze
 FILTER_FUTURE = 'future'.freeze
 FILTER_CATEGORIES = [FILTER_DEFAULT, FILTER_TODAY, FILTER_FUTURE]
+
+SUPPORTED_LOCALES = %w[de en].freeze

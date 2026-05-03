@@ -12,8 +12,16 @@
                 - icon_and_text = "#{icon(nav_bar_item_presenter.link_icon_prefix, nav_bar_item_presenter.link_icon)}"
                 - icon_and_text << "<span>#{nav_bar_item_presenter.link_text}</span>" if nav_bar_item_presenter.link_text.present?
                 = link_to(icon_and_text.html_safe, nav_bar_item_presenter.link_url)
-        - if presenter.user_logged_in?
-          .top-bar-right
-            %ul.menu
+        .top-bar-right
+          %ul.menu
+            - if presenter.user_logged_in?
               %li
                 = link_to(presenter.nav_ranking_info, rankings_path(anchor: "place_#{presenter.user_position}"), {class: 'ranking-info'})
+            %li.locale-switcher
+              - SUPPORTED_LOCALES.each_with_index do |loc, i|
+                - if loc == I18n.locale.to_s
+                  %strong= loc.upcase
+                - else
+                  = button_to loc.upcase, locale_path, method: :patch, params: { locale: loc }, class: 'locale-btn-plain'
+                - unless i == SUPPORTED_LOCALES.length - 1
+                  %span |

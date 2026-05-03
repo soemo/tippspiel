@@ -67,7 +67,7 @@ class BonusEditPresenter
   end
 
   def options_for_team_tip_select
-    TeamQueries.all_ordered_by_name.map{|t| [t.name, t.id]}
+    TeamQueries.all_ordered_by_name.map { |t| [TeamPresenter.new(t).translated_name, t.id] }
   end
 
   def options_for_when_final_first_goal_select
@@ -78,10 +78,6 @@ class BonusEditPresenter
 
   def round_of_16_name
     I18n.t('round.roundof16')
-  end
-
-  def round_of_16_started?
-    Tournament.round_of_16_started?
   end
 
 end

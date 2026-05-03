@@ -61,13 +61,13 @@ class GamePresenter < DelegateClass(Game)
 
   def team_names_without_flags
     if @game.team1_id.present?
-      team1_name = @game.team1.name
+      team1_name = team_presenter(@game.team1).translated_name
     else
       team1_name = @game.team1_placeholder_name
     end
 
     if @game.team2_id.present?
-      team2_name = @game.team2.name
+      team2_name = team_presenter(@game.team2).translated_name
     else
       team2_name = @game.team2_placeholder_name
     end

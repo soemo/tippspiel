@@ -8,7 +8,7 @@ default: &default
 
 development:
   <<: *default
-  database: tippspiel_development_em2024
+  database: tippspiel_development_wm_2026
 
 test:
   <<: *default
@@ -17,4 +17,4 @@ test:
 # prod db == dev db
 production:
   <<: *default
-  database: tippspiel_development_em2024 # hier nutzen wir auch lokal unser dev DB
+  database: tippspiel_development_wm_2026 # keep in sync with development

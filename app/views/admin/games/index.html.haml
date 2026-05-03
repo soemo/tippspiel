@@ -4,7 +4,7 @@
       Erneute Berechnung aller Tips aller beendeten Spiele, aller Nutzerpunkte und der Statistik.
     = link_to(I18n.t(:start_calculating), new_admin_start_calculating_path, class: 'button')
 
-    %h3=I18n.t('games_of', tournament_name: TOURNAMENT_NAME)
+    %h3=I18n.t('games_of', tournament_name: I18n.t('tournament_name'))
 
     = render partial: 'widgets/mixitup_control_bar'
 

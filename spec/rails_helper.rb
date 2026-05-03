@@ -79,6 +79,8 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryBot::Syntax::Methods
 
+  config.after(:each) { I18n.locale = I18n.default_locale }
+
   config.include Rails.application.routes.url_helpers
   config.include ActionView::Helpers::TranslationHelper
 end

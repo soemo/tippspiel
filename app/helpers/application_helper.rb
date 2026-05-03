@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def get_title
-    "#{TOURNAMENT_NAME} #{I18n.t('app_name')}"
+    "#{I18n.t('tournament_name')} #{I18n.t('app_name')}"
   end
 
   def hall_of_fame_link

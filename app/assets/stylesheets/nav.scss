@@ -24,6 +24,47 @@
   }
 }
 
+.locale-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 0.5rem;
+  color: $dark-gray;
+
+  &::before {
+    content: '|';
+    margin-right: 4px;
+    color: $dark-gray;
+  }
+
+  span { color: $dark-gray; }
+
+  strong {
+    color: $primary-color;
+    font-weight: bold;
+  }
+
+  form.locale-btn-plain,
+  form.button_to {
+    display: inline;
+    margin: 0;
+    padding: 0;
+
+    button, input[type="submit"] {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-size: inherit;
+      font-family: inherit;
+      color: $dark-gray;
+      cursor: pointer;
+
+      &:hover { color: darken($primary-color, 10%); }
+    }
+  }
+}
+
 // on small
 //   show only icons
 //   and ranking-info smaller

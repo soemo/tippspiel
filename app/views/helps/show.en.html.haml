@@ -1,4 +1,115 @@
 .row
   .small-12.columns
-    %h3= 'Help#index EN'
-    -# to do english help
+    %h3= "#{I18n.t('tournament_name')} "+ t('app_name') + " - " + t('help')
+    %p
+      The rules are simple: every registered user can predict match results and answer bonus questions.
+      You earn points for every correct prediction and bonus answer. The player with the most points
+      wins and becomes the proud owner of the prestigious trophy.
+
+    %h4 Predicting matches
+    %p
+      Predictions can be submitted until the kick-off of each match.
+      %br
+      Predictions can be changed at any time as long as the match has not yet started.
+      %br
+      Other players' predictions are only visible after kick-off.
+    %p
+      %b
+        Points per prediction
+      %br
+      A maximum of #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} points per match!
+      The officially determined final result applies, including extra time and penalty shoot-outs.
+    %ul.hilfe.no-bullet
+      %li
+        %p
+          - 8.times do
+            = icon('far', 'circle', '', class: 'null-point-color')
+          %br
+          0 points: everything wrong
+      %li
+        %p
+          - 3.times do
+            = icon('fas', 'circle', '', class: 'three-point-color')
+          - 5.times do
+            = icon('far', 'circle', '', class: 'null-point-color')
+          %br
+          #{Tips::UpdatePoints::POINTS_CORRECT_TREND} points for predicting the correct outcome (win, draw, or loss)
+          %br
+            (correct tendency, but wrong goal difference or goal count for one or both teams)
+      %li
+        %p
+          - 4.times do
+            = icon('fas', 'circle', '', class: 'four-point-color')
+          - 4.times do
+            = icon('far', 'circle', '', class: 'null-point-color')
+          %br
+          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} points:
+          %br
+            (correct tendency and correct goal difference)
+      %li
+        %p
+          - 5.times do
+            = icon('fas', 'circle', '', class: 'five-point-color')
+          - 3.times do
+            = icon('far', 'circle', '', class: 'null-point-color')
+          %br
+          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} points: correct tendency and correct goal count for one team
+      %li
+        %p
+          - 8.times do
+            = icon('fas', 'circle', '', class: 'eight-point-color')
+          %br
+          #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} points: correct tendency and correct goal count for both teams (which also means correct goal difference)
+
+    %blockquote
+      .label
+        Examples
+      %br
+      If France beats Switzerland 3:0 and you predicted 3:1, you get #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} points:
+      %br
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} points for the correct tendency and #{Tips::UpdatePoints::EXTRA_POINT_GOALS} points for France's correct goal count.
+      %br
+      %br
+      If Germany beats Italy 1:0 and you predicted 2:1,
+      you get #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} points in total:
+      %br
+      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} points for the correct tendency and #{Tips::UpdatePoints::EXTRA_POINT} point for the correct goal difference.
+
+    %h4 Bonus questions
+    %p
+      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::BONUS_TIP_POINTS)
+
+    %blockquote
+      - @presenter.bonus_questions.each do |question|
+        = question
+        %br
+
+    %p
+      In the event of a tie on points, the number of #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP}-point predictions decides the ranking.
+      If still tied, #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS}-point predictions decide,
+      then #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT}-point predictions, and so on.
+
+    .row
+      .small-12.medium-7.columns
+        %p
+          %b
+            The
+            = I18n.t('tournament_name')
+            is played across #{ROUNDS.size} rounds:
+        - if @presenter.round_infos.present?
+          %ul.hilfe
+            - @presenter.round_infos.each do |info|
+              %li= info
+        %p
+          The winner receives a beautiful trophy, which can be kept permanently after three victories.
+          = hall_of_fame_link
+      .small-12.medium-5.columns
+        =image_tag('pokalsieger.jpg')
+
+    .row
+      .small-12.medium-7.columns
+        %p
+          %br
+          Happy predicting!
+          %br
+          Sören "Harry" Mothes

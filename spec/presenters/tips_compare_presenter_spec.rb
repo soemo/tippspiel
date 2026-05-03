@@ -48,11 +48,12 @@ describe TipsComparePresenter do
   describe 'options_for_select' do
 
     it 'returns options for tip copare select' do
+      I18n.with_locale(:de) do
+        option1 = ["#{I18n.l(game1.start_at, format: :default)} Deutschland - Tschechien", game1.id]
+        option2 = ["#{I18n.l(game2.start_at, format: :default)} Tschechien - Deutschland", game2.id]
 
-      option1 = ["#{I18n.l(game1.start_at, format: :default)} #{game1.team1.name} - #{game1.team2.name}", game1.id]
-      option2 = ["#{I18n.l(game2.start_at, format: :default)} #{game2.team1.name} - #{game2.team2.name}", game2.id]
-
-      expect(@presenter.options_for_select).to eq([option1, option2])
+        expect(@presenter.options_for_select).to eq([option1, option2])
+      end
     end
   end
 end

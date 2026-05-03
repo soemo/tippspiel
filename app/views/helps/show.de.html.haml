@@ -1,6 +1,6 @@
 .row
   .small-12.columns
-    %h3= "#{TOURNAMENT_NAME} "+ t('app_name') + " - " + t('help')
+    %h3= "#{I18n.t('tournament_name')} "+ t('app_name') + " - " + t('help')
     %p
       Die Regeln sind simpel: Jede(r) Angemeldete kann Spielergebnisse tippen und Bonusfragen beantworten.
       Für jeden richtigen Tipp und jede richtige Bonusfrage gibt es Punkte. Wer die meisten Punkte sammelt,
@@ -95,7 +95,7 @@
         %p
           %b
             Die
-            = TOURNAMENT_NAME
+            = I18n.t('tournament_name')
             wird in #{ROUNDS.size} Runden ausgespielt:
         - if @presenter.round_infos.present?
           %ul.hilfe
