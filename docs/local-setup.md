@@ -8,18 +8,22 @@
 ## First-time setup
 
 ```bash
-# Install Ruby (version from .mise.toml / .ruby-version)
+# Install Ruby (version from mise.toml / .ruby-version)
 mise install
 
 # Install gems
 bundle install
 
-# Copy and configure environment variables
-cp .env.example .env
-# Edit .env — set SECRET_BASE_KEY, COOKIE_STORE_KEY, MAIL, ADMIN_EMAIL, WEBSITE_URL
-
-# Update config/database.yml — set the development database name
+# Create config/database.yml — set the development database name
 # convention: tippspiel_development_wm_2026
+# (see docs/new-tournament.md for the full template)
+
+# Create a .env file with the following variables:
+# SECRET_BASE_KEY=<rails secret>
+# COOKIE_STORE_KEY=<random string>
+# MAIL=<smtp config or "letter_opener">
+# ADMIN_EMAIL=<your email>
+# WEBSITE_URL=<e.g. http://localhost:3000>
 ```
 
 ## Create and seed the database

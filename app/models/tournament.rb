@@ -16,7 +16,7 @@ class Tournament
 
   def self.round_of_32_started?
     start_date_time, _end_date_time = Tournament.round_start_end_date_time(ROUND_OF_32)
-    start_date_time < Time.now
+    start_date_time.present? && start_date_time < Time.now
   end
 
   def self.round_of_32_not_yet_started?
@@ -36,8 +36,8 @@ class Tournament
   end
 
   def self.round_of_16_started?
-    start_date_time, end_date_time = Tournament.round_start_end_date_time(ROUND_OF_16)
-    start_date_time < Time.now
+    start_date_time, _end_date_time = Tournament.round_start_end_date_time(ROUND_OF_16)
+    start_date_time.present? && start_date_time < Time.now
   end
 
   def self.round_start_end_date_time(round)

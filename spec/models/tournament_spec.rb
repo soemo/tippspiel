@@ -141,6 +141,12 @@ describe Tournament, :type => :model do
       end
     end
 
+    context 'if no Round of 32 games exist' do
+      it 'returns false without raising' do
+        expect(subject.round_of_32_started?).to be false
+      end
+    end
+
   end
 
   describe '#round_of_32_not_yet_started?' do
@@ -160,6 +166,12 @@ describe Tournament, :type => :model do
         create(:game, :start_at => Time.now - 1.second, round: ROUND_OF_32)
 
         expect(subject.round_of_32_not_yet_started?).to be false
+      end
+    end
+
+    context 'if no Round of 32 games exist' do
+      it 'returns true without raising' do
+        expect(subject.round_of_32_not_yet_started?).to be true
       end
     end
 

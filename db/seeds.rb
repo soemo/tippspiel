@@ -1,7 +1,8 @@
 require_relative 'seeds/wm2026'
 
-def clear_games
+def clear_games_and_teams
   ActiveRecord::Base.connection.execute('TRUNCATE games')
+  Team.with_deleted.delete_all
 end
 
 def country_code_map
@@ -35,6 +36,6 @@ def create_team_and_game_data
 end
 
 puts 'recreate team and game data'
-clear_games
+clear_games_and_teams
 create_team_and_game_data
 puts 'ready!'
