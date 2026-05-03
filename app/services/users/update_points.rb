@@ -35,12 +35,14 @@ module Users
           result += BONUS_TIP_POINTS if user.bonus_second_team_id == bonus_second_team_id
         end
 
-        if user.bonus_when_final_first_goal.present? && BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL.present?
-          result += BONUS_TIP_POINTS if user.bonus_when_final_first_goal == BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL
+        if user.bonus_when_final_first_goal.present?
+          bonus_answer = AppSetting.bonus_answer_when_will_the_first_goal
+          result += BONUS_TIP_POINTS if bonus_answer.present? && user.bonus_when_final_first_goal == bonus_answer
         end
 
-        if user.bonus_how_many_goals.present? && BONUS_ANSWER_HOW_MANY_GOALS.present?
-          result += BONUS_TIP_POINTS if user.bonus_how_many_goals == BONUS_ANSWER_HOW_MANY_GOALS
+        if user.bonus_how_many_goals.present?
+          bonus_answer = AppSetting.bonus_answer_how_many_goals
+          result += BONUS_TIP_POINTS if bonus_answer.present? && user.bonus_how_many_goals == bonus_answer
         end
       end
 

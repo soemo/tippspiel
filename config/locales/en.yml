@@ -1,6 +1,6 @@
 en:
   app_name: "Tippspiel"
-  tournament_name: "World Cup 2026"
+  tournament_name: "WC 2026"
   login_callout:
     header: "Welcome to the %{tournament_name} Tippspiel"
     body: "Who will claim the coveted trophy, glory, and unlimited bragging rights this year? %{register_link} and sign in, predict the games and answer bonus questions to claim this honour!"

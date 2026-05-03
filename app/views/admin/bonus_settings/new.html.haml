@@ -1,0 +1,34 @@
+.row
+  .small-12.large-6.columns
+    %h3 Bonusantworten speichern
+
+    %p
+      Von den 4 Bonusfragen werden
+      %strong 2 automatisch ermittelt
+      (Turniersieger &amp; zweiter Platz) — diese werden direkt aus dem Finalspiel berechnet und müssen hier nicht eingetragen werden.
+    %p
+      Die folgenden
+      %strong 2 Fragen
+      können nicht automatisch ermittelt werden und müssen manuell eingetragen werden:
+
+    %ol
+      %li
+        %strong 3. Wann fiel das erste Tor im Finale?
+      %li
+        %strong 4. Wie viele Tore erzielte der Torschützenkönig?
+
+    = form_tag admin_bonus_settings_path, method: :post do
+      .row
+        .small-12.columns
+          %label
+            3. Wann fiel das erste Tor im Finale?
+            - options = @when_first_goal_options.map { |k, v| [I18n.t("bonus_questions.when_final_first_goal_options.#{v}"), k] }
+            = select_tag 'bonus_when_first_goal_goal', options_for_select(options, @bonus_when_first_goal), prompt: '– bitte wählen –'
+      .row
+        .small-12.columns
+          %label
+            4. Wie viele Tore erzielte der Torschützenkönig?
+            = number_field_tag 'bonus_how_many_goals', @bonus_how_many_goals, min: 1, max: 99, size: 4, inputmode: 'numeric', placeholder: 'z.B. 8'
+      .row
+        .small-12.columns
+          = submit_tag 'Bonusantworten speichern', class: 'button'

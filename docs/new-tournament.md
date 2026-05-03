@@ -18,7 +18,7 @@ Edit `config/locales/de.yml` and `config/locales/en.yml`:
 tournament_name: "WM 2026"
 
 # en.yml
-tournament_name: "World Cup 2026"
+tournament_name: "WC 2026"
 ```
 
 ## 2. Update seed data

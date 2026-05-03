@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_07_204345) do
+ActiveRecord::Schema.define(version: 2026_05_03_171507) do
+
+  create_table "app_settings", charset: "utf8mb3", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_app_settings_on_key", unique: true
+  end
 
   create_table "games", id: :integer, charset: "utf8mb3", force: :cascade do |t|
     t.integer "team1_id"
