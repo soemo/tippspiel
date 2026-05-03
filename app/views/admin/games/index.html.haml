@@ -3,6 +3,7 @@
     %p
       Erneute Berechnung aller Tips aller beendeten Spiele, aller Nutzerpunkte und der Statistik.
     = link_to(I18n.t(:start_calculating), new_admin_start_calculating_path, class: 'button')
+    = link_to('Bonusantworten verwalten', new_admin_bonus_settings_path, class: 'button secondary')
 
     %h3=I18n.t('games_of', tournament_name: I18n.t('tournament_name'))
 

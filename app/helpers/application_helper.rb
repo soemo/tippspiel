@@ -72,4 +72,18 @@ module ApplicationHelper
     link_to(icon('fas', 'edit', I18n.t(:your_tips), {class: 'fa-fw'}), root_path)
   end
 
+  # Renders a coloured correct/wrong label for a bonus answer.
+  # Pass `answer_set: false` for questions 3 & 4 when the admin has not yet
+  # stored the correct answer — shows a neutral "not yet evaluated" label.
+  def bonus_result_tag(correct, answer_set: true)
+    points = Users::UpdatePoints::BONUS_TIP_POINTS
+    if correct
+      content_tag(:span, I18n.t('bonus_answer_correct', points: points), class: 'label success')
+    elsif !answer_set
+      content_tag(:span, I18n.t('bonus_answer_not_set'), class: 'label secondary')
+    else
+      content_tag(:span, I18n.t('bonus_answer_wrong'), class: 'label alert')
+    end
+  end
+
 end

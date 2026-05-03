@@ -24,27 +24,39 @@ module Users
       result = 0
       if Tournament.finished?
         if user.bonus_champion_team_id.present?
-          tournament_champion_team = get_tournament_champion_team
-          bonus_champion_team_id = tournament_champion_team.present? ? tournament_champion_team.id : nil
-          result += BONUS_TIP_POINTS if user.bonus_champion_team_id == bonus_champion_team_id
+          result += BONUS_TIP_POINTS if tournament_champion&.id == user.bonus_champion_team_id
         end
 
         if user.bonus_second_team_id.present?
-          tournament_second_team = get_tournament_second_team
-          bonus_second_team_id = tournament_second_team.present? ? tournament_second_team.id : nil
-          result += BONUS_TIP_POINTS if user.bonus_second_team_id == bonus_second_team_id
+          result += BONUS_TIP_POINTS if tournament_second&.id == user.bonus_second_team_id
         end
 
-        if user.bonus_when_final_first_goal.present? && BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL.present?
-          result += BONUS_TIP_POINTS if user.bonus_when_final_first_goal == BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL
+        if user.bonus_when_final_first_goal.present?
+          result += BONUS_TIP_POINTS if bonus_when_first_goal_answer.present? && user.bonus_when_final_first_goal == bonus_when_first_goal_answer
         end
 
-        if user.bonus_how_many_goals.present? && BONUS_ANSWER_HOW_MANY_GOALS.present?
-          result += BONUS_TIP_POINTS if user.bonus_how_many_goals == BONUS_ANSWER_HOW_MANY_GOALS
+        if user.bonus_how_many_goals.present?
+          result += BONUS_TIP_POINTS if bonus_how_many_goals_answer.present? && user.bonus_how_many_goals == bonus_how_many_goals_answer
         end
       end
 
       result
+    end
+
+    def tournament_champion
+      @tournament_champion ||= ::GameQueries.tournament_champion_team
+    end
+
+    def tournament_second
+      @tournament_second ||= ::GameQueries.tournament_second_team
+    end
+
+    def bonus_when_first_goal_answer
+      @bonus_when_first_goal_answer ||= AppSetting.bonus_answer_when_will_the_first_goal
+    end
+
+    def bonus_how_many_goals_answer
+      @bonus_how_many_goals_answer ||= AppSetting.bonus_answer_how_many_goals
     end
 
     def update_user_points
@@ -78,48 +90,5 @@ module Users
         end
       end
     end
-
-    def get_tournament_champion_team
-      result = nil
-      final_game = ::GameQueries.final_game
-      if final_game.present?
-        result = winner_team(final_game)
-      end
-
-      result
-    end
-
-    def get_tournament_second_team
-      result = nil
-      final_game = ::GameQueries.final_game
-      if final_game.present?
-        result = looser_team(final_game)
-      end
-
-      result
-    end
-
-    # bei Unentschieden wird nil geliefert ansonsten, das Siegerteam
-    def winner_team(game)
-      result = nil
-      if game.team1_goals.present? && game.team2_goals.present?
-        result = game.team1 if game.team1_goals > game.team2_goals
-        result = game.team2 if game.team1_goals < game.team2_goals
-      end
-
-      result
-    end
-
-    def looser_team(game)
-      result = nil
-      if game.team1_goals.present? && game.team2_goals.present?
-        result = game.team1 if game.team1_goals < game.team2_goals
-        result = game.team2 if game.team1_goals > game.team2_goals
-      end
-
-      result
-    end
-
-
   end
 end

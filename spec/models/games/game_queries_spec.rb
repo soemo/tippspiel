@@ -195,4 +195,59 @@ describe GameQueries do
     end
 
   end
+
+  describe '::tournament_champion_team' do
+
+    context 'when the final has a winner' do
+      it 'returns the winning team' do
+        winner = create(:team, name: 'Winner')
+        loser  = create(:team, name: 'Loser')
+        create(:final, team1: loser, team2: winner, team1_goals: 0, team2_goals: 1, finished: true)
+
+        expect(subject.tournament_champion_team).to eq(winner)
+      end
+    end
+
+    context 'when the final ended in a draw' do
+      it 'returns nil' do
+        create(:final, team1_goals: 1, team2_goals: 1, finished: true)
+
+        expect(subject.tournament_champion_team).to be_nil
+      end
+    end
+
+    context 'when there is no final game' do
+      it 'returns nil' do
+        expect(subject.tournament_champion_team).to be_nil
+      end
+    end
+  end
+
+  describe '::tournament_second_team' do
+
+    context 'when the final has a winner' do
+      it 'returns the losing team' do
+        winner = create(:team, name: 'Winner')
+        loser  = create(:team, name: 'Loser')
+        create(:final, team1: loser, team2: winner, team1_goals: 0, team2_goals: 1, finished: true)
+
+        expect(subject.tournament_second_team).to eq(loser)
+      end
+    end
+
+    context 'when the final ended in a draw' do
+      it 'returns nil' do
+        create(:final, team1_goals: 1, team2_goals: 1, finished: true)
+
+        expect(subject.tournament_second_team).to be_nil
+      end
+    end
+
+    context 'when there is no final game' do
+      it 'returns nil' do
+        expect(subject.tournament_second_team).to be_nil
+      end
+    end
+  end
+
 end

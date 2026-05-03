@@ -3,13 +3,11 @@ require 'rails_helper'
 describe Admin::StartCalculatingsController do
 
   let!(:no_admin_user) { create(:active_user) }
-  let!(:admin_user) { create(:active_admin) }
+  let!(:admin_user)    { create(:active_admin) }
 
   describe '#new' do
-
     context 'if current_user is an admin' do
-
-      it 'starts calculations' do
+      it 'runs calculations and redirects to games' do
         login(admin_user)
         expect(Tips::UpdatePoints).to receive(:call)
         expect(Users::UpdatePoints).to receive(:call)
@@ -22,8 +20,7 @@ describe Admin::StartCalculatingsController do
     end
 
     context 'if current_user is not an admin' do
-
-      it 'do not starts calculations' do
+      it 'does not run calculations' do
         login(no_admin_user)
         expect(Tips::UpdatePoints).not_to receive(:call)
         expect(Users::UpdatePoints).not_to receive(:call)
@@ -35,4 +32,5 @@ describe Admin::StartCalculatingsController do
       end
     end
   end
+
 end

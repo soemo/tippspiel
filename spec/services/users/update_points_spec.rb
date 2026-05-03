@@ -11,8 +11,8 @@ describe Users::UpdatePoints do
       Tip.destroy_all
       User.destroy_all
 
-      stub_const('BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL', 4)
-      stub_const('BONUS_ANSWER_HOW_MANY_GOALS', 9)
+      AppSetting.set_bonus_answer_when_will_the_first_goal(4)
+      AppSetting.set_bonus_answer_how_many_goals(9)
 
       winner_team    = create(:team, :name => 'winner')
       no_winner_team = create(:team, :name => 'no winner')
