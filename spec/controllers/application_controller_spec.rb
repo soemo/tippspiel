@@ -48,6 +48,13 @@ describe ApplicationController do
         subject.set_locale
         expect(I18n.locale).to eq(:de)
       end
+
+      it 'uses second preference en when first is unsupported' do
+        session.delete(:locale)
+        request.env['HTTP_ACCEPT_LANGUAGE'] = 'fr-FR,fr;q=0.9,en;q=0.8'
+        subject.set_locale
+        expect(I18n.locale).to eq(:en)
+      end
     end
 
     context 'when neither session nor Accept-Language is set' do

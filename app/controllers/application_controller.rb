@@ -55,8 +55,8 @@ class ApplicationController < ActionController::Base
   def locale_from_header
     header = request.env['HTTP_ACCEPT_LANGUAGE']
     return nil if header.blank?
-    preferred = header.split(',').map { |l| l.split(';q=').first.strip[0..1].downcase }.first
-    preferred if SUPPORTED_LOCALES.include?(preferred)
+    header.split(',').map { |l| l.split(';q=').first.strip[0..1].downcase }
+          .find { |lang| SUPPORTED_LOCALES.include?(lang) }
   end
 
   def set_host_to_mailers

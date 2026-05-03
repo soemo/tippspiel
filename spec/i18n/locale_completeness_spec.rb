@@ -1,190 +1,97 @@
 require 'rails_helper'
 
 # Ensures both locale files are complete and consistent.
-# Tests run against the loaded I18n backend — fast, no DB needed.
+# Driven directly from the YAML files — no manual key lists to maintain.
+# Adding a key to one locale file will automatically fail this spec
+# until the other locale is updated too.
 
 describe 'I18n locale completeness' do
-  # All round keys the app needs — including the new WM 2026 round
-  REQUIRED_ROUND_KEYS = %w[group roundof32 roundof16 quarterfinal semifinal place3 final].freeze
 
-  # Keys that must exist and be translated in both locales
-  REQUIRED_APP_KEYS = %w[
-    app_name
-    games_of
-    text_maintenance
-    error_stale_object
-    error_record_not_found
-    error_auth_token
-    delete_secure_question
-    succesfully_saved_tips
-    succesfully_saved_bonustip
-    create_successful
-    update_successful
-    notice_needs_a_comment
-    notice_needs_spaces
-    bonus_question_help
-    no_champion_tip
-    no_second_tip
-    no_when_first_goal_tip
-    no_how_many_goals_tip
-    ranking_bonus_answers_currently_not_visible
-    ranking_bonus_answers_help
-    x_user_bet
-    result_after_game_count
-    show_only_today_games
-    type_to_filter
-    your_statistic
-    statistic_for
-    show_statistic_for
-    ranking_per_game
-    ranking_per_game_nothing_to_show
-    signed_in_hello
-    sign_in
-    sign_out
-    sign_up
-    start_calculating
-    save
-    compare
-    edit
-    back
-    show
-    imprint
-    sure
-    password_change
-    for_got_pw
-    change_pw
-    set_pw
-    send_pw
-    save_tip
-    create_initial_random_tips
-    create_initial_random_tips_description
-    comparetips
-    hall_of_fame
-    no_user
-    or
-    bonus
-    main
-    help
-    ranking
-    notice
-    tournament
-    tips
-    your_tips
-    your_bonustips
-    back_link
-    edit_link
-    delete_link
-    please_select
-    standings
-    full_ranking_list
-    go_to_bonus_question_page_fill_out
-    go_to_bonus_question_page_check
-    characters_remaining
-  ].freeze
+  # Rails provides these namespaces via its own locale gems — we don't need
+  # to duplicate them in our en.yml.
+  RAILS_OWNED_NAMESPACES = %w[datetime date time number activerecord activemodel errors].freeze
 
-  REQUIRED_BONUS_QUESTION_KEYS = %w[
-    which_team_is_champion
-    which_team_is_second
-    when_final_first_goal
-    how_many_goals
-  ].freeze
+  KNOWN_GERMAN_WORDS = %w[bitte deine danke spielen runde achtelfinale viertelfinale
+                          halbfinale finale punkte mannschaft turnier bonusfragen].freeze
 
-  REQUIRED_FILTER_KEYS = %w[all today future].freeze
+  # Brand name — intentionally identical in both locales.
+  SKIP_GERMAN_CHECK_KEYS = %w[app_name].freeze
 
-  describe 'de locale' do
-    subject { I18n.t('.', locale: :de) }
+  def load_locale(locale)
+    path = Rails.root.join("config/locales/#{locale}.yml")
+    YAML.load_file(path)[locale.to_s]
+  end
 
-    REQUIRED_APP_KEYS.each do |key|
-      it "has key '#{key}'" do
-        value = I18n.t(key, locale: :de)
-        expect(value).not_to match(/translation missing/i), "Missing key: #{key}"
-        expect(value.to_s).not_to be_empty
-      end
-    end
-
-    REQUIRED_ROUND_KEYS.each do |round|
-      it "has round translation for '#{round}'" do
-        value = I18n.t("round.#{round}", locale: :de)
-        expect(value).not_to match(/translation missing/i)
-        expect(value.to_s).not_to be_empty
-      end
-    end
-
-    REQUIRED_BONUS_QUESTION_KEYS.each do |key|
-      it "has bonus_questions.#{key}" do
-        value = I18n.t("bonus_questions.#{key}", locale: :de)
-        expect(value).not_to match(/translation missing/i)
-        expect(value.to_s).not_to be_empty
-      end
-    end
-
-    REQUIRED_FILTER_KEYS.each do |key|
-      it "has filter.#{key}" do
-        value = I18n.t("filter.#{key}", locale: :de)
-        expect(value).not_to match(/translation missing/i)
-        expect(value.to_s).not_to be_empty
+  def flatten_keys(hash, prefix = '')
+    hash.each_with_object([]) do |(k, v), keys|
+      full_key = prefix.empty? ? k.to_s : "#{prefix}.#{k}"
+      if v.is_a?(Hash)
+        keys.concat(flatten_keys(v, full_key))
+      else
+        keys << full_key
       end
     end
   end
 
-  describe 'en locale' do
-    REQUIRED_APP_KEYS.each do |key|
-      it "has key '#{key}'" do
-        value = I18n.t(key, locale: :en)
-        expect(value).not_to match(/translation missing/i), "Missing key: #{key}"
-        expect(value.to_s).not_to be_empty
-      end
+  def app_keys(hash)
+    flatten_keys(hash).reject do |key|
+      RAILS_OWNED_NAMESPACES.any? { |ns| key.start_with?(ns) }
+    end
+  end
+
+  let(:de_keys) { app_keys(load_locale(:de)).sort }
+  let(:en_keys) { app_keys(load_locale(:en)).sort }
+
+  describe 'symmetry' do
+    it 'every de key exists in en' do
+      missing = de_keys - en_keys
+      expect(missing).to be_empty,
+        "Keys in de.yml but missing from en.yml:\n#{missing.join("\n")}"
     end
 
-    REQUIRED_ROUND_KEYS.each do |round|
-      it "has round translation for '#{round}'" do
-        value = I18n.t("round.#{round}", locale: :en)
-        expect(value).not_to match(/translation missing/i)
-        expect(value.to_s).not_to be_empty
-      end
+    it 'every en key exists in de' do
+      missing = en_keys - de_keys
+      expect(missing).to be_empty,
+        "Keys in en.yml but missing from de.yml:\n#{missing.join("\n")}"
+    end
+  end
+
+  describe 'no empty values' do
+    it 'de.yml has no blank values' do
+      blank = de_keys.select { |k| I18n.t(k, locale: :de, default: '').to_s.strip.empty? }
+      expect(blank).to be_empty, "Blank values in de.yml:\n#{blank.join("\n")}"
     end
 
-    REQUIRED_BONUS_QUESTION_KEYS.each do |key|
-      it "has bonus_questions.#{key}" do
-        value = I18n.t("bonus_questions.#{key}", locale: :en)
-        expect(value).not_to match(/translation missing/i)
-        expect(value.to_s).not_to be_empty
-      end
+    it 'en.yml has no blank values' do
+      blank = en_keys.select { |k| I18n.t(k, locale: :en, default: '').to_s.strip.empty? }
+      expect(blank).to be_empty, "Blank values in en.yml:\n#{blank.join("\n")}"
     end
+  end
 
-    REQUIRED_FILTER_KEYS.each do |key|
-      it "has filter.#{key}" do
-        value = I18n.t("filter.#{key}", locale: :en)
-        expect(value).not_to match(/translation missing/i)
-        expect(value.to_s).not_to be_empty
-      end
-    end
-
-    # No German strings should leak into the English locale.
-    # app_name is intentionally "Tippspiel" in both locales (brand name).
-    KNOWN_GERMAN_WORDS = %w[bitte deine danke spielen runde achtelfinale viertelfinale
-                            halbfinale finale punkte mannschaft turnier bonusfragen].freeze
-    SKIP_GERMAN_CHECK_KEYS = %w[app_name].freeze
-
-    it 'contains no untranslated German strings in top-level keys' do
-      (REQUIRED_APP_KEYS - SKIP_GERMAN_CHECK_KEYS).each do |key|
+  describe 'no German leaking into en.yml' do
+    it 'contains no untranslated German strings in en.yml' do
+      offenders = []
+      (en_keys - SKIP_GERMAN_CHECK_KEYS).each do |key|
         value = I18n.t(key, locale: :en, default: '').to_s.downcase
-        KNOWN_GERMAN_WORDS.each do |german_word|
-          expect(value).not_to include(german_word),
-            "Key '#{key}' in en.yml appears to contain untranslated German: '#{german_word}' found in '#{value}'"
+        KNOWN_GERMAN_WORDS.each do |word|
+          offenders << "#{key}: '#{word}' found in '#{value}'" if value.include?(word)
         end
       end
+      expect(offenders).to be_empty, "German words in en.yml:\n#{offenders.join("\n")}"
     end
   end
 
-  describe 'en and de have the same round keys' do
-    it 'both locales cover all required rounds' do
-      REQUIRED_ROUND_KEYS.each do |round|
+  describe 'round keys' do
+    required_rounds = %w[group roundof32 roundof16 quarterfinal semifinal place3 final]
+
+    required_rounds.each do |round|
+      it "round.#{round} is translated differently in de and en" do
         de_val = I18n.t("round.#{round}", locale: :de)
         en_val = I18n.t("round.#{round}", locale: :en)
         expect(de_val).not_to match(/translation missing/)
         expect(en_val).not_to match(/translation missing/)
-        expect(de_val).not_to eq(en_val), "round.#{round} has identical de/en value — likely not translated"
+        expect(de_val).not_to eq(en_val),
+          "round.#{round} is identical in de and en — likely not translated"
       end
     end
   end
