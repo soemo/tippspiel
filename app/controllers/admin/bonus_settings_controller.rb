@@ -11,7 +11,7 @@ module Admin
       AppSetting.set_bonus_answer_how_many_goals(params[:bonus_how_many_goals])
       AppSetting.set_bonus_answer_when_will_the_first_goal(params[:bonus_when_final_first_goal])
 
-      flash[:notice] = 'Bonusantworten gespeichert.'
+      flash[:notice] = I18n.t('bonus_settings_saved')
       redirect_to new_admin_bonus_settings_path
     end
 

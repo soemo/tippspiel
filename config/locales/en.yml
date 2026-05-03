@@ -67,6 +67,7 @@ en:
   bonus_answer_wrong: 'Wrong, unfortunately'
   bonus_answer_not_set: 'Not yet evaluated'
   bonus_total_points: 'Your total bonus points: %{points}'
+  bonus_settings_saved: 'Bonus answers saved. Please run the calculation now.'
 
   signed_in_hello: "Hi "
   sign_in: "Login"
