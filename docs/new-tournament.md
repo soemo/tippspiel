@@ -25,7 +25,7 @@ tournament_name: "World Cup 2026"
 
 Edit `db/seeds/wm2026.rb` (or create a new module e.g. `db/seeds/em2028.rb`):
 - Update `game_data` with all fixtures (date, time in CEST, teams, round, group, place)
-- Update `country_code_map` with all 48 (WM) or 24 (EM) teams and their ISO country codes
+- Update `country_code_map` with all 48 (WM) or 24 (EM) teams using the flag sprite codes expected by the app (mostly ISO 3166-1 alpha-2, but keep custom values such as `_England`, `_Scotland`, `_Wales`, and `_Northern_Ireland` where required)
 - Update `db/seeds.rb` to call the new module
 
 ## 3. Update database.yml
