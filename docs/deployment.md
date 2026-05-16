@@ -71,7 +71,24 @@ The deploy action will:
 5. Precompile assets
 6. Restart Passenger
 
-## 4. Seed data
+## 4. Cron schedule (whenever)
+
+The crontab is installed/updated **automatically on every deploy** by the Capistrano recipe in `config/deploy/recipes/own_deploy.rb`. No manual step needed.
+
+The schedule (`config/schedule.rb`) runs `results:import_finished` every 15 min during 16:00–23:59 and 00:00–06:59 (Europe/Berlin), plus a daily safety run at 08:00. Output is appended to `log/cron.log`.
+
+To inspect the live crontab on the server:
+```bash
+crontab -l
+```
+
+To remove the entries (e.g. end of tournament):
+```bash
+cd /var/www/virtual/soemo/tippspiel.soemo.org/current
+bundle exec whenever --clear-crontab --identifier tippspiel.soemo.org
+```
+
+## 5. Seed data
 
 Run once after the first deploy of a new tournament. **Do not run from your local machine via Capistrano** — run directly on the server:
 
@@ -86,7 +103,7 @@ cd /var/www/virtual/soemo/beta-tippspiel.soemo.org/current   # beta
 RAILS_ENV=production bundle exec rails db:seed
 ```
 
-## 5. Smoke check
+## 6. Smoke check
 
 - Visit the site and confirm the tournament name displays correctly in both DE and EN
 - Log in as admin, verify games are listed at `/admin/games`

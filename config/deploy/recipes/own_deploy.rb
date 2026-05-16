@@ -16,6 +16,23 @@ namespace :deploy do
   end
   after 'deploy:updated', 'deploy:set_build_date'
 
+  desc 'Install/update the whenever crontab on the remote server.'
+  task :update_crontab do
+    on roles(:web) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          # --identifier scopes the crontab block to this app so multiple apps
+          # on the same Uberspace account don't overwrite each other's entries.
+          execute :bundle, :exec, :whenever,
+                  '--update-crontab',
+                  '--set', "environment=#{fetch(:rails_env)}",
+                  '--identifier', fetch(:application)
+        end
+      end
+    end
+  end
+  after 'deploy:updated', 'deploy:update_crontab'
+
 end
 
 namespace :db do
