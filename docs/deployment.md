@@ -11,12 +11,17 @@
 SSH into the server and run once per tournament:
 
 ```bash
-mysql -e "CREATE DATABASE tippspiel_wm_2026 CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-mysql -e "CREATE DATABASE tippspiel_beta_wm_2026 CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -e "CREATE DATABASE soemo_wm_2026_production CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -e "CREATE DATABASE soemo_beta_wm_2026_production CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
-The database name is derived from `DEPLOYMENT_NAME` in `config/initializers/01_constants.rb`
-via `config/deploy/tippspiel.rb` → `database_name_suffix`.
+The database name is derived automatically by `capistrano-uberspace` as:
+`soemo_<database_name_suffix>_production`
+
+- Production (`tippspiel.rb`): `database_name_suffix = DEPLOYMENT_NAME` → `soemo_wm_2026_production`
+- Beta (`beta-tippspiel.rb`): `database_name_suffix = "beta_#{DEPLOYMENT_NAME}"` → `soemo_beta_wm_2026_production`
+
+`DEPLOYMENT_NAME` is set in `config/initializers/01_constants.rb`.
 
 ## 2. Update database.yml on the server
 
@@ -25,6 +30,19 @@ Update it on the server before deploying:
 
 ```bash
 vim <shared_path>/config/database.yml
+```
+
+The production entry should match the DB name above:
+
+```yaml
+production:
+  adapter: mysql2
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+  database: soemo_wm_2026_production
+  username: soemo
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: localhost
 ```
 
 ## 3. Deploy
@@ -57,4 +75,4 @@ bundle exec cap tippspiel db:run_seed
 
 - Visit the site and confirm the tournament name displays correctly in both DE and EN
 - Log in as admin, verify games are listed at `/admin/games`
-- Trigger a test recalculation at `/admin/start_calculating/new`
+- Trigger a test recalculation at `/admin/games` → click **Start Berechnung**

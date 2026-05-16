@@ -51,14 +51,15 @@ production:
 
 ## 4. Set bonus question answers (after tournament)
 
-Set answers in `config/initializers/01_constants.rb`:
+Two of the four bonus questions (champion & second place) are answered automatically
+from the final game result. The other two must be entered manually via the admin UI:
 
-```ruby
-BONUS_ANSWER_HOW_MANY_GOALS = 142
-BONUS_ANSWER_WHEN_WILL_THE_FIRST_GOAL = 1  # key from BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL
-```
-
-Then trigger recalculation at `/admin/start_calculating/new`.
+1. Go to `/admin/bonus_settings/new`
+2. Enter the correct answers for:
+   - **Question 3** — When did the first goal fall in the final?
+   - **Question 4** — How many goals did the top scorer score?
+3. Click **Bonusantworten speichern** — a flash message will confirm and remind you to run the calculation.
+4. Go to `/admin/games` and click **Start Berechnung** to recalculate all user points.
 
 ## 5. Full checklist
 
