@@ -21,15 +21,14 @@ namespace :results do
     with_friendly_errors.call do
       result = Results::ImportFinishedGames.call
 
-      puts "Imported:      #{result.imported.size}"
-      puts "Discrepancies: #{result.discrepancies.size}"
-      puts "Unmatched:     #{result.unmatched.size}"
+      Rails.logger.info(
+        "results:import_finished — imported=#{result.imported.size} " \
+        "discrepancies=#{result.discrepancies.size} unmatched=#{result.unmatched.size}"
+      )
 
       if result.changes?
         ResultsMailer.import_summary(result).deliver_now
-        puts 'Summary email sent.'
-      else
-        puts 'No changes — no email sent.'
+        Rails.logger.info('results:import_finished — summary email sent.')
       end
     end
   end

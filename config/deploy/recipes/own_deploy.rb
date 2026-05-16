@@ -19,7 +19,11 @@ namespace :deploy do
   desc 'Install/update the whenever crontab on the remote server.'
   task :update_crontab do
     on roles(:web) do
-      within release_path do
+      # Run from current_path (the stable symlink) so cron entries never
+      # reference a timestamped release directory that Capistrano will later
+      # prune. Using release_path would cause cron jobs to fail once
+      # keep_releases cleans up that directory.
+      within current_path do
         with rails_env: fetch(:rails_env) do
           # --identifier scopes the crontab block to this app so multiple apps
           # on the same Uberspace account don't overwrite each other's entries.
@@ -31,7 +35,10 @@ namespace :deploy do
       end
     end
   end
-  after 'deploy:updated', 'deploy:update_crontab'
+  # Hook into deploy:finished (not deploy:updated) so a transient whenever
+  # failure does not abort the deploy — Passenger can serve the new release
+  # without an updated crontab.
+  after 'deploy:finished', 'deploy:update_crontab'
 
 end
 

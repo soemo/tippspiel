@@ -2,8 +2,14 @@
 #
 # Cron schedule for automatic result imports (whenever gem).
 #
-# Deploy/update with:
-#   whenever --update-crontab --set environment=production
+# The crontab is installed/updated automatically on every deploy by the
+# Capistrano recipe in config/deploy/recipes/own_deploy.rb — no manual
+# step needed.
+#
+# To inspect or manually update on the server:
+#   bundle exec whenever --update-crontab \
+#     --set environment=production \
+#     --identifier tippspiel.soemo.org   # must match :application in deploy config
 #
 # Verify with:
 #   whenever            # prints the cron table
@@ -19,10 +25,11 @@
 # Strategy: run every 15 min during two windows that together cover 16:00–06:59,
 # plus a daily 08:00 safety run to catch any overnight FD corrections.
 # The 07:00–15:59 window is silent — no WM games are expected there.
-# Runs that find nothing new are silent no-ops (no email, one cheap API call).
-
-set :output, 'log/cron.log'
-set :environment, :production
+# Runs that find nothing new are silent no-ops (no email, no DB writes,
+# one cheap API call — free tier limit is 10 req/min, no daily cap).
+#
+# Logging: the rake task writes to Rails.logger (log/production.log),
+# which is already managed by the app. No separate cron log file needed.
 
 # Safety run: catches overnight FD corrections and any edge cases.
 every 1.day, at: '8:00 am' do
