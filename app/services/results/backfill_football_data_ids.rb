@@ -35,7 +35,10 @@ module Results
     private
 
     def process(fd)
-      existing = Game.find_by(football_data_match_id: fd.fd_id)
+      # Use with_deleted so a soft-deleted game that already holds this FD id
+      # is visible — the plain unique index applies to all rows, so without
+      # with_deleted a subsequent update_column would raise RecordNotUnique.
+      existing = Game.with_deleted.find_by(football_data_match_id: fd.fd_id)
       return Entry.new(status: :already_linked, fd_match: fd, game: existing) if existing
 
       team1 = Team.find_by(football_data_tla: fd.home_tla)

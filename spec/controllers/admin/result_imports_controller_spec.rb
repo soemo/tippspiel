@@ -16,6 +16,17 @@ describe Admin::ResultImportsController do
   end
 
   describe '#create' do
+    render_views
+
+    # The full layout renders stylesheet_link_tag / javascript_include_tag,
+    # which raise "String can't be coerced into Integer" in the CI asset
+    # pipeline (pre-existing environment issue unrelated to this PR).
+    # Stub them at the helper module level so render_views works in CI.
+    before do
+      allow_any_instance_of(ActionView::Base).to receive(:stylesheet_link_tag).and_return(''.html_safe)
+      allow_any_instance_of(ActionView::Base).to receive(:javascript_include_tag).and_return(''.html_safe)
+    end
+
     context 'as non-admin' do
       it 'forbids access' do
         login(no_admin_user)
@@ -69,8 +80,9 @@ describe Admin::ResultImportsController do
         post :create
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:create)
-        expect(assigns(:result).discrepancies).to eq [discrepancy]
-        expect(assigns(:result).unmatched).to eq [unmatched]
+        expect(response.body).to include('1:0')  # db_score
+        expect(response.body).to include('2:0')  # fd_score
+        expect(response.body).to include('GER')  # unmatched tla
       end
 
       it 'still renders the result page when mail delivery fails' do

@@ -88,7 +88,10 @@ module Results
     private
 
     def find_game_for(fd)
-      direct = Game.find_by(football_data_match_id: fd.fd_id)
+      # Use with_deleted so a soft-deleted game that already holds this FD id
+      # is visible — the plain unique index applies to all rows, so without
+      # with_deleted a subsequent update_column would raise RecordNotUnique.
+      direct = Game.with_deleted.find_by(football_data_match_id: fd.fd_id)
       return direct if direct
 
       team1 = Team.find_by(football_data_tla: fd.home_tla)
@@ -103,7 +106,8 @@ module Results
         team1.id, team2.id, team2.id, team1.id
       )
 
-      return nil unless candidates.count == 1
+      # .one? avoids a second COUNT query compared to .count == 1 + .first.
+      return nil unless candidates.one?
 
       game = candidates.first
       # Lock in the link so we never have to fuzzy-match this game again.
