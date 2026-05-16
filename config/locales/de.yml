@@ -289,6 +289,7 @@ de:
         bonuspoints_small: Bonus
         name: Name
         email: "E-Mail"
+        email_confirmation: "E-Mail bestätigen"
         firstname: "Vorname"
         lastname: "Nachname"
         password: "Passwort"
@@ -336,6 +337,7 @@ de:
         even: "muss gerade sein"
         record_invalid: "Validierung fehlgeschlagen: %{errors}"
         url_invalid: "ist nicht gültig (keine Parameterangaben erlaubt)"
+        must_not_contain_email: "darf keine E-Mail-Adresse enthalten"
 
   teams:
     eg: "Ägypten"

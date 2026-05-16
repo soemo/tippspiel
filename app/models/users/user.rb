@@ -8,8 +8,10 @@ class User < ApplicationRecord
   validates               :email, :presence => true
   validates_uniqueness_of :email, :allow_blank => true, :scope => :deleted_at, :case_sensitive => false, :if => :email_changed?
   validates_format_of     :email, :with  => Devise.email_regexp, :allow_blank => true
+  validates_confirmation_of :email, if: :email_confirmation_required?
   validates               :firstname, :presence => true
   validates               :lastname, :presence => true
+  validate :name_fields_must_not_contain_email
 
   validates_presence_of     :password, if: :password_required?
   validates_confirmation_of :password, if: :password_required?
@@ -45,5 +47,20 @@ class User < ApplicationRecord
   # or confirmation are being set somewhere. from Devise
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
+  # Email confirmation is only required on new registrations or when the email is being changed.
+  def email_confirmation_required?
+    !persisted? || email_changed?
+  end
+
+  def name_fields_must_not_contain_email
+    email_pattern = Devise.email_regexp
+    if firstname.present? && firstname.match?(email_pattern)
+      errors.add(:firstname, :must_not_contain_email)
+    end
+    if lastname.present? && lastname.match?(email_pattern)
+      errors.add(:lastname, :must_not_contain_email)
+    end
   end
 end

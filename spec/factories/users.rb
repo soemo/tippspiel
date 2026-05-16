@@ -8,6 +8,7 @@ FactoryBot.define do
     password  { 'secret123' }
     password_confirmation { 'secret123' }
     sequence(:email){|n| "test#{n}@tippspiel.de" }
+    email_confirmation { |u| u.email }
     points  { 0 }
   end
 
