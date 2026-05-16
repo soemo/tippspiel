@@ -17,67 +17,67 @@
       %b
         Mögliche Punkte pro Tipp
       %br
-      Pro Spiel gibt es maximal #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte!
+      Pro Spiel gibt es maximal #{TipPoints::PERFECT} Punkte!
       Es gilt immer das offiziell festgelegte Endergebnis inkl. Verlängerung und Elfmeterschießen.
     %ul.hilfe.no-bullet
       %li
         %p
-          - 8.times do
+          - TipPoints::PERFECT.times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          0 Punkte: alles falsch
+          #{TipPoints::NO_POINTS} Punkte: alles falsch
       %li
         %p
-          - 3.times do
+          - TipPoints::CORRECT_TREND.times do
             = icon('fas', 'circle', '', class: 'three-point-color')
-          - 5.times do
+          - (TipPoints::PERFECT - TipPoints::CORRECT_TREND).times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage
+          #{TipPoints::CORRECT_TREND} Punkte gibt es für den richtigen Tipp auf Sieg, Unentschieden oder Niederlage
           %br
             (Spieltendenz richtig, aber nicht Tordifferenz oder eine Toranzahl der beiden Teams)
       %li
         %p
-          - 4.times do
+          - TipPoints::CORRECT_GOALS.times do
             = icon('fas', 'circle', '', class: 'four-point-color')
-          - 4.times do
+          - (TipPoints::PERFECT - TipPoints::CORRECT_GOALS).times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte:
+          #{TipPoints::CORRECT_GOALS} Punkte:
           %br
             (Spieltendenz richtig und die Tordifferenz)
       %li
         %p
-          - 5.times do
+          - TipPoints::CORRECT_GOALS_ONE_TEAM.times do
             = icon('fas', 'circle', '', class: 'five-point-color')
-          - 3.times do
+          - (TipPoints::PERFECT - TipPoints::CORRECT_GOALS_ONE_TEAM).times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
+          #{TipPoints::CORRECT_GOALS_ONE_TEAM} Punkte: Spieltendenz richtig und eine Toranzahl eines Teams
       %li
         %p
-          - 8.times do
+          - TipPoints::PERFECT.times do
             = icon('fas', 'circle', '', class: 'eight-point-color')
           %br
-          #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
+          #{TipPoints::PERFECT} Punkte: Spieltendenz richtig und bei beiden Teams die korrekte Toranzahl, dadurch auch die Tordifferenz richtig
 
     %blockquote
       .label
         Beispiele
       %br
-      Wenn Frankreich gegen die Schweiz 3:0 spielt und du 3:1 getippt hast, erhältst du #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte:
+      Wenn Frankreich gegen die Schweiz 3:0 spielt und du 3:1 getippt hast, erhältst du #{TipPoints::CORRECT_GOALS_ONE_TEAM} Punkte:
       %br
-      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte für die richtige Tendenz und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte für die korrekte Anzahl der französischen Tore.
+      #{TipPoints::CORRECT_TREND} Punkte für die richtige Tendenz und #{Tips::UpdatePoints::EXTRA_POINT_GOALS} Punkte für die korrekte Anzahl der französischen Tore.
       %br
       %br
       Wenn Deutschland gegen Italien 1:0 spielt und du 2:1 getippt hast,
-      erhältst du insgesamt #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punkte:
+      erhältst du insgesamt #{TipPoints::CORRECT_GOALS} Punkte:
       %br
-      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} Punkte für die richtige Tendenz und #{Tips::UpdatePoints::EXTRA_POINT} Punkt für die korrekte Tordifferenz.
+      #{TipPoints::CORRECT_TREND} Punkte für die richtige Tendenz und #{Tips::UpdatePoints::EXTRA_POINT} Punkt für die korrekte Tordifferenz.
 
     %h4 Bonusfragen beantworten
     %p
-      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::BONUS_TIP_POINTS)
+      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: TipPoints::BONUS)
 
     %blockquote
       - @presenter.bonus_questions.each do |question|
@@ -86,9 +86,9 @@
 
     %p
       Bei Punktgleichheit entscheidet die Anzahl der erreichten Tipppunkte über die Platzierung.
-      Wer mehr "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Punktetipps" hat, liegt vorn.
-      Bei gleicher Anzahl folgen die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Punktetipps".
-      Falls auch hier Gleichstand herrscht, entscheiden die "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Punktetipps" und so weiter.
+      Wer mehr "#{TipPoints::PERFECT} Punktetipps" hat, liegt vorn.
+      Bei gleicher Anzahl folgen die "#{TipPoints::CORRECT_GOALS_ONE_TEAM} Punktetipps".
+      Falls auch hier Gleichstand herrscht, entscheiden die "#{TipPoints::CORRECT_GOALS} Punktetipps" und so weiter.
 
     .row
       .small-12.medium-7.columns

@@ -49,5 +49,20 @@ module TipQueries
       Tip.where(game_id: game_ids).group(:user_id).sum(:tip_points)
     end
 
+    # Returns a hash: { user_id => total_tip_points } for ALL tips (no filter).
+    # Single query replacing N individual sum_tip_points_by_user_id calls.
+    def sum_tip_points_grouped_by_user_id
+      Tip.group(:user_id).sum(:tip_points)
+    end
+
+    # Returns a nested hash: { user_id => { tip_points => count } }
+    # Single query replacing N×5 individual all_by_user_id_and_tip_points count calls.
+    def counts_by_user_id_and_tip_points(point_values)
+      rows = Tip.where(tip_points: point_values).group(:user_id, :tip_points).count
+      result = Hash.new { |h, k| h[k] = Hash.new(0) }
+      rows.each { |(uid, pts), cnt| result[uid][pts] = cnt }
+      result
+    end
+
   end
 end

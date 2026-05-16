@@ -11,7 +11,7 @@
 module Users
   class UpdatePoints < BaseService
 
-    BONUS_TIP_POINTS = 8
+    BONUS_TIP_POINTS = TipPoints::BONUS
 
     def call
       update_user_points
@@ -61,33 +61,33 @@ module Users
 
     def update_user_points
       users = User.active
-      if users.present?
-        users.each do |user|
-          total_points  = ::TipQueries.sum_tip_points_by_user_id(user.id)
-          total_points  = 0 unless total_points.present?
+      return unless users.present?
 
-          bonus_tips_points = 0
-          if Tournament.finished?
-            bonus_tips_points = calculate_bonus_points(user)
-            total_points = total_points + bonus_tips_points
-          end
+      # Two bulk queries replace N×6 individual queries.
+      points_by_user   = ::TipQueries.sum_tip_points_grouped_by_user_id
+      counts_by_user   = ::TipQueries.counts_by_user_id_and_tip_points(TipPoints::ALL_VALUES)
+      tournament_done  = Tournament.finished?
 
-          count_8points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 8).count
-          count_5points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 5).count
-          count_4points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 4).count
-          count_3points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 3).count
-          count_0points = ::TipQueries.all_by_user_id_and_tip_points(user.id, 0).count
+      users.each do |user|
+        tip_points    = points_by_user[user.id] || 0
+        user_counts   = counts_by_user[user.id]
 
-          user.update_columns({:points => total_points,
-                               :bonus_points => bonus_tips_points,
-                               :count8points => count_8points,
-                               :count5points => count_5points,
-                               :count4points => count_4points,
-                               :count3points => count_3points,
-                               :count0points => count_0points,
-                              })
-          Rails.logger.debug("CALCULATE_USER_POINTS: #{user.name} - total points: #{total_points}") if Rails.logger.present?
+        bonus_tips_points = 0
+        if tournament_done
+          bonus_tips_points = calculate_bonus_points(user)
+          tip_points        = tip_points + bonus_tips_points
         end
+
+        user.update_columns({
+          points:       tip_points,
+          bonus_points: bonus_tips_points,
+          count8points: user_counts[TipPoints::PERFECT],
+          count5points: user_counts[TipPoints::CORRECT_GOALS_ONE_TEAM],
+          count4points: user_counts[TipPoints::CORRECT_GOALS],
+          count3points: user_counts[TipPoints::CORRECT_TREND],
+          count0points: user_counts[TipPoints::NO_POINTS],
+        })
+        Rails.logger.debug("CALCULATE_USER_POINTS: #{user.name} - total points: #{tip_points}") if Rails.logger.present?
       end
     end
   end

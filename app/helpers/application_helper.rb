@@ -76,7 +76,7 @@ module ApplicationHelper
   # Pass `answer_set: false` for questions 3 & 4 when the admin has not yet
   # stored the correct answer — shows a neutral "not yet evaluated" label.
   def bonus_result_tag(correct, answer_set: true)
-    points = Users::UpdatePoints::BONUS_TIP_POINTS
+    points = TipPoints::BONUS
     if correct
       content_tag(:span, I18n.t('bonus_answer_correct', points: points), class: 'label success')
     elsif !answer_set

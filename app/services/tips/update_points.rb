@@ -4,8 +4,8 @@
 module Tips
   class UpdatePoints < BaseService
 
-    MAX_POINTS_PRO_TIP   = 8
-    POINTS_CORRECT_TREND = 3
+    MAX_POINTS_PRO_TIP   = TipPoints::PERFECT
+    POINTS_CORRECT_TREND = TipPoints::CORRECT_TREND
     EXTRA_POINT_GOALS    = 2
     EXTRA_POINT          = 1
 

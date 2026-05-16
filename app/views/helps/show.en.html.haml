@@ -17,67 +17,67 @@
       %b
         Points per prediction
       %br
-      A maximum of #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} points per match!
+      A maximum of #{TipPoints::PERFECT} points per match!
       The officially determined final result applies, including extra time and penalty shoot-outs.
     %ul.hilfe.no-bullet
       %li
         %p
-          - 8.times do
+          - TipPoints::PERFECT.times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          0 points: everything wrong
+          #{TipPoints::NO_POINTS} points: everything wrong
       %li
         %p
-          - 3.times do
+          - TipPoints::CORRECT_TREND.times do
             = icon('fas', 'circle', '', class: 'three-point-color')
-          - 5.times do
+          - (TipPoints::PERFECT - TipPoints::CORRECT_TREND).times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND} points for predicting the correct outcome (win, draw, or loss)
+          #{TipPoints::CORRECT_TREND} points for predicting the correct outcome (win, draw, or loss)
           %br
             (correct tendency, but wrong goal difference or goal count for one or both teams)
       %li
         %p
-          - 4.times do
+          - TipPoints::CORRECT_GOALS.times do
             = icon('fas', 'circle', '', class: 'four-point-color')
-          - 4.times do
+          - (TipPoints::PERFECT - TipPoints::CORRECT_GOALS).times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} points:
+          #{TipPoints::CORRECT_GOALS} points:
           %br
             (correct tendency and correct goal difference)
       %li
         %p
-          - 5.times do
+          - TipPoints::CORRECT_GOALS_ONE_TEAM.times do
             = icon('fas', 'circle', '', class: 'five-point-color')
-          - 3.times do
+          - (TipPoints::PERFECT - TipPoints::CORRECT_GOALS_ONE_TEAM).times do
             = icon('far', 'circle', '', class: 'null-point-color')
           %br
-          #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} points: correct tendency and correct goal count for one team
+          #{TipPoints::CORRECT_GOALS_ONE_TEAM} points: correct tendency and correct goal count for one team
       %li
         %p
-          - 8.times do
+          - TipPoints::PERFECT.times do
             = icon('fas', 'circle', '', class: 'eight-point-color')
           %br
-          #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} points: correct tendency and correct goal count for both teams (which also means correct goal difference)
+          #{TipPoints::PERFECT} points: correct tendency and correct goal count for both teams (which also means correct goal difference)
 
     %blockquote
       .label
         Examples
       %br
-      If France beats Switzerland 3:0 and you predicted 3:1, you get #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} points:
+      If France beats Switzerland 3:0 and you predicted 3:1, you get #{TipPoints::CORRECT_GOALS_ONE_TEAM} points:
       %br
-      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} points for the correct tendency and #{Tips::UpdatePoints::EXTRA_POINT_GOALS} points for France's correct goal count.
+      #{TipPoints::CORRECT_TREND} points for the correct tendency and #{Tips::UpdatePoints::EXTRA_POINT_GOALS} points for France's correct goal count.
       %br
       %br
       If Germany beats Italy 1:0 and you predicted 2:1,
-      you get #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} points in total:
+      you get #{TipPoints::CORRECT_GOALS} points in total:
       %br
-      #{Tips::UpdatePoints::POINTS_CORRECT_TREND} points for the correct tendency and #{Tips::UpdatePoints::EXTRA_POINT} point for the correct goal difference.
+      #{TipPoints::CORRECT_TREND} points for the correct tendency and #{Tips::UpdatePoints::EXTRA_POINT} point for the correct goal difference.
 
     %h4 Bonus questions
     %p
-      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: Users::UpdatePoints::BONUS_TIP_POINTS)
+      = I18n.t('bonus_question_help', round_name: @presenter.round_of_16_name, extra_points: TipPoints::BONUS)
 
     %blockquote
       - @presenter.bonus_questions.each do |question|
@@ -85,9 +85,9 @@
         %br
 
     %p
-      In the event of a tie on points, the number of #{Tips::UpdatePoints::MAX_POINTS_PRO_TIP}-point predictions decides the ranking.
-      If still tied, #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS}-point predictions decide,
-      then #{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT}-point predictions, and so on.
+      In the event of a tie on points, the number of #{TipPoints::PERFECT}-point predictions decides the ranking.
+      If still tied, #{TipPoints::CORRECT_GOALS_ONE_TEAM}-point predictions decide,
+      then #{TipPoints::CORRECT_GOALS}-point predictions, and so on.
 
     .row
       .small-12.medium-7.columns

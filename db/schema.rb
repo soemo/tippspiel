@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_05_16_000000) do
+ActiveRecord::Schema.define(version: 2026_05_16_102214) do
 
   create_table "app_settings", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "key", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2026_05_16_000000) do
     t.integer "lock_version", default: 0
     t.integer "ranking_place"
     t.index ["game_id"], name: "index_tips_on_game_id"
+    t.index ["user_id", "tip_points"], name: "index_tips_on_user_id_and_tip_points"
     t.index ["user_id"], name: "index_tips_on_user_id"
   end
 
