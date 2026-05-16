@@ -75,6 +75,17 @@ describe Admin::ResultImportsController do
         expect(response.body).to include('GER')
       end
 
+      it 'still renders the result page when mail delivery fails' do
+        mailer_double = double('mailer')
+        allow(mailer_double).to receive(:deliver_now).and_raise(StandardError, 'SMTP timeout')
+        allow(Results::ImportFinishedGames).to receive(:call).and_return(result_with_imports)
+        allow(ResultsMailer).to receive(:import_summary).and_return(mailer_double)
+        get :new
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:new)
+        expect(flash[:warning]).to be_present
+      end
+
       it 'flashes a friendly error when the token is missing' do
         allow(Results::ImportFinishedGames).to receive(:call)
           .and_raise(Results::FootballDataClient::MissingTokenError.new('no token'))

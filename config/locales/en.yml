@@ -43,6 +43,7 @@ en:
       missing_token: "Import failed: no API token configured (FOOTBALL_DATA_API_TOKEN is missing)."
       api_error: "Import failed: football-data.org returned an error (status %{status})."
       unexpected_error: "Import failed: unexpected error — please check the logs."
+      mail_delivery_failed: "Import succeeded but the summary email could not be sent — please check the logs."
       heading: "Result import"
       completed_in_html: "Import finished in <strong>%{seconds}s</strong>."
       email_sent_to: "A summary email was sent to %{email}."

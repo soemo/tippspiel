@@ -13,8 +13,9 @@
 #     for manual review via the summary email.
 #   - Games with finished == false are silently overwritten even if goals
 #     were set manually — `finished: false` is the unlock signal.
-#   - Unmatched FD matches are only surfaced if our DB has a candidate game
-#     whose start_at is in the past (avoids noise during early group stage).
+  #   - Unmatched FD matches are surfaced when the FD match is FINISHED and
+  #     its utc_date is in the past but no DB game could be linked — avoids
+  #     noise for future matches that simply aren't in our DB yet.
 #   - One transaction per game (failed game ≠ rolled-back batch).
 #   - Ranking pipeline is run inside its own transaction iff at least one
 #     game was imported (mirrors Admin::StartCalculatingsController).

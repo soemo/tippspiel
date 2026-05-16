@@ -6,7 +6,14 @@ module Admin
       @duration = time.round(2)
 
       if @result.changes?
-        ::ResultsMailer.import_summary(@result).deliver_now
+        begin
+          ::ResultsMailer.import_summary(@result).deliver_now
+        rescue StandardError => mail_error
+          # Mail delivery failure must not hide the import result page — the
+          # import itself succeeded. Log and surface a non-fatal warning.
+          Rails.logger.error("ResultImportsController: mail delivery failed — #{mail_error.class}: #{mail_error.message}")
+          flash[:warning] = I18n.t('admin.result_imports.mail_delivery_failed')
+        end
       end
 
       Rails.logger.info(

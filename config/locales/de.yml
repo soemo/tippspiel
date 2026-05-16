@@ -51,6 +51,7 @@ de:
       missing_token: "Import fehlgeschlagen: Kein API-Token konfiguriert (FOOTBALL_DATA_API_TOKEN fehlt)."
       api_error: "Import fehlgeschlagen: Fehler bei football-data.org (Status %{status})."
       unexpected_error: "Import fehlgeschlagen: Unerwarteter Fehler — bitte Logs prüfen."
+      mail_delivery_failed: "Import erfolgreich, aber die Zusammenfassungs-E-Mail konnte nicht gesendet werden — bitte Logs prüfen."
       heading: "Ergebnis-Import"
       completed_in_html: "Import in <strong>%{seconds}s</strong> abgeschlossen."
       email_sent_to: "Eine Zusammenfassung wurde an %{email} gesendet."
