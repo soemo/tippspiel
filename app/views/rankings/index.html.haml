@@ -12,19 +12,19 @@
       %small
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'eight-point-color')
-          = "#{Tips::UpdatePoints::MAX_POINTS_PRO_TIP} Pkt."
+          = "#{TipPoints::PERFECT} Pkt."
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'five-point-color')
-          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT_GOALS} Pkt."
+          = "#{TipPoints::CORRECT_GOALS_ONE_TEAM} Pkt."
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'four-point-color')
-          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND + Tips::UpdatePoints::EXTRA_POINT} Pkt."
+          = "#{TipPoints::CORRECT_GOALS} Pkt."
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'three-point-color')
-          = "#{Tips::UpdatePoints::POINTS_CORRECT_TREND} Pkt."
+          = "#{TipPoints::CORRECT_TREND} Pkt."
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'null-point-color')
-          = '0 Pkt.'
+          = "#{TipPoints::NO_POINTS} Pkt."
         %span.point-explaining
           = icon('fas', 'circle', '', class: 'badge-bonus bonus-point-color')
           = User.human_attribute_name('bonuspoints_small')

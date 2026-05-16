@@ -2,22 +2,38 @@ module Users
   class UpdateRankingPerGame < UserBaseService
 
     def call
-      finished_games = ::GameQueries.all_finished_ordered_by_start_at_with_preload_tips
-      all_8point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 8)
-      all_5point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 5)
-      all_4point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 4)
-      all_3point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, 3)
+      finished_games  = ::GameQueries.all_finished_ordered_by_start_at_with_preload_tips
+      all_8point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, TipPoints::PERFECT)
+      all_5point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, TipPoints::CORRECT_GOALS_ONE_TEAM)
+      all_4point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, TipPoints::CORRECT_GOALS)
+      all_3point_tips = ::TipQueries.all_by_games_and_tip_points(finished_games, TipPoints::CORRECT_TREND)
+
+      # Pre-build lookup hashes: { game_id => Set<user_id> }
+      # O(1) membership check instead of scanning the full array each iteration.
+      index_8 = build_game_user_index(all_8point_tips)
+      index_5 = build_game_user_index(all_5point_tips)
+      index_4 = build_game_user_index(all_4point_tips)
+      index_3 = build_game_user_index(all_3point_tips)
+
+      # Cumulative per-user counts that grow as we walk through games in order.
+      cum_8 = Hash.new(0)
+      cum_5 = Hash.new(0)
+      cum_4 = Hash.new(0)
+      cum_3 = Hash.new(0)
       used_game_ids = []
 
       finished_games.each do |game|
-        tips_for_game = game.tips
+        tips_for_game  = game.tips
         used_game_ids << game.id
 
-        ordered_user_id_and_ranking_comparison_value = get_ordered_user_id_and_ranking_comparison_value(all_8point_tips,
-                                                                                                        all_5point_tips,
-                                                                                                        all_4point_tips,
-                                                                                                        all_3point_tips,
-                                                                                                        used_game_ids)
+        # Increment only the users who scored on this specific game — O(users_in_game).
+        (index_8[game.id] || []).each { |uid| cum_8[uid] += 1 }
+        (index_5[game.id] || []).each { |uid| cum_5[uid] += 1 }
+        (index_4[game.id] || []).each { |uid| cum_4[uid] += 1 }
+        (index_3[game.id] || []).each { |uid| cum_3[uid] += 1 }
+
+        ordered_user_id_and_ranking_comparison_value =
+          get_ordered_user_id_and_ranking_comparison_value(cum_8, cum_5, cum_4, cum_3, used_game_ids)
 
         result_for_this_game     = {}
         place                    = 1
@@ -52,19 +68,21 @@ module Users
 
     private
 
-    def get_ordered_user_id_and_ranking_comparison_value(all_8point_tips, all_5point_tips, all_4point_tips, all_3point_tips, used_game_ids)
+    # Builds { game_id => [user_id, ...] } from a flat tip collection.
+    def build_game_user_index(tips)
+      tips.each_with_object(Hash.new { |h, k| h[k] = [] }) do |tip, idx|
+        idx[tip.game_id] << tip.user_id
+      end
+    end
+
+    def get_ordered_user_id_and_ranking_comparison_value(cum_8, cum_5, cum_4, cum_3, used_game_ids)
       user_id_and_sum_tip_points = TipQueries.sum_tip_points_group_by_user_id_by_game_ids(used_game_ids)
 
       user_id_and_ranking_comparison_value = user_id_and_sum_tip_points.map { |user_id, sum_tip_points|
-        count_8points = all_8point_tips.select { |tip| used_game_ids.include?(tip.game_id) && tip.user_id == user_id }.size
-        count_5points = all_5point_tips.select { |tip| used_game_ids.include?(tip.game_id) && tip.user_id == user_id }.size
-        count_4points = all_4point_tips.select { |tip| used_game_ids.include?(tip.game_id) && tip.user_id == user_id }.size
-        count_3points = all_3point_tips.select { |tip| used_game_ids.include?(tip.game_id) && tip.user_id == user_id }.size
-
-        [user_id, ranking_comparison_value(sum_tip_points, count_8points, count_5points, count_4points, count_3points).to_i]
+        [user_id, ranking_comparison_value(sum_tip_points, cum_8[user_id], cum_5[user_id], cum_4[user_id], cum_3[user_id]).to_i]
       }
 
-      ordered_user_id_and_ranking_comparison_value = user_id_and_ranking_comparison_value.sort_by { |_, tip_points| tip_points }.reverse
+      user_id_and_ranking_comparison_value.sort_by { |_, tip_points| tip_points }.reverse
     end
 
     def mass_updating_tips(result_for_this_game, tips_for_game)
