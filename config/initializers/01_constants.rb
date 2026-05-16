@@ -33,12 +33,18 @@ GROUP_L      = 'L'
 if IS_EM
   ROUNDS = [GROUP, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, FINAL]
   GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F]
+  # football-data.org competition code for the UEFA European Championship.
+  # See https://docs.football-data.org/general/v4/lookup_tables.html
+  FOOTBALL_DATA_COMPETITION_CODE = 'EC'
 end
 
 if IS_WM
   ROUNDS = [GROUP, ROUND_OF_32, ROUND_OF_16, QUARTERFINAL, SEMIFINAL, PLACE_3, FINAL]
   GROUPS = [GROUP_A, GROUP_B, GROUP_C, GROUP_D, GROUP_E, GROUP_F, GROUP_G, GROUP_H,
             GROUP_I, GROUP_J, GROUP_K, GROUP_L]
+  # football-data.org competition code for the FIFA World Cup.
+  # See https://docs.football-data.org/general/v4/lookup_tables.html
+  FOOTBALL_DATA_COMPETITION_CODE = 'WC'
 end
 
 POINTS_TO_CSS_CLASS =

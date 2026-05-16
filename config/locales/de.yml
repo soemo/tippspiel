@@ -42,6 +42,16 @@ de:
   admin_recalculate_description: "Erneute Berechnung aller Tips aller beendeten Spiele, aller Nutzerpunkte und der Statistik."
   admin_manage_bonus_settings: "Bonusantworten verwalten"
 
+  admin:
+    result_imports:
+      button: "Ergebnisse importieren"
+      description: "Holt beendete Spielergebnisse von football-data.org und aktualisiert die Punkteberechnung."
+      confirm: "Ergebnisse jetzt von football-data.org importieren?"
+      success: "Import in %{time}s abgeschlossen — %{imported} importiert, %{discrepancies} Abweichungen, %{unmatched} nicht zugeordnet."
+      missing_token: "Import fehlgeschlagen: Kein API-Token konfiguriert (FOOTBALL_DATA_API_TOKEN fehlt)."
+      api_error: "Import fehlgeschlagen: Fehler bei football-data.org (Status %{status})."
+      unexpected_error: "Import fehlgeschlagen: Unerwarteter Fehler — bitte Logs prüfen."
+
   bonus_settings_heading: "Bonusantworten speichern"
   bonus_settings_auto_calculated_intro: "Von den 4 Bonusfragen werden"
   bonus_settings_auto_calculated_count: "2 automatisch ermittelt"

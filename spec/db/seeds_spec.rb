@@ -111,6 +111,27 @@ describe 'WM 2026 seed data' do
     end
   end
 
+  describe 'all teams have a football-data tla mapping' do
+    let(:tla_map) { Seeds::Wm2026.football_data_tla_map }
+
+    it 'every team in the seed data has a tla' do
+      team_names = group_games.flat_map { |g| [g[:team1_name], g[:team2_name]] }.uniq.compact
+      missing = team_names.reject { |name| tla_map.key?(name) }
+      expect(missing).to be_empty, "Teams missing football_data_tla: #{missing.join(', ')}"
+    end
+
+    it 'all tlas are 3-letter uppercase strings' do
+      tla_map.each_value do |tla|
+        expect(tla).to match(/\A[A-Z]{3}\z/), "Invalid tla: #{tla.inspect}"
+      end
+    end
+
+    it 'tlas are unique across all teams' do
+      duplicates = tla_map.values.tally.select { |_, count| count > 1 }
+      expect(duplicates).to be_empty, "Duplicate tlas: #{duplicates}"
+    end
+  end
+
   describe 'tournament dates' do
     it 'first game is on 11 June 2026' do
       first_date = data.map { |g| Date.strptime(g[:start_at], '%d.%m.%Y') }.min

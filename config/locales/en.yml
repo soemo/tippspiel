@@ -34,6 +34,16 @@ en:
   admin_recalculate_description: "Recalculate all tips for all finished games, all user points and statistics."
   admin_manage_bonus_settings: "Manage bonus answers"
 
+  admin:
+    result_imports:
+      button: "Import results"
+      description: "Fetches finished match results from football-data.org and refreshes the rankings."
+      confirm: "Import results now from football-data.org?"
+      success: "Import finished in %{time}s — %{imported} imported, %{discrepancies} discrepancies, %{unmatched} unmatched."
+      missing_token: "Import failed: no API token configured (FOOTBALL_DATA_API_TOKEN is missing)."
+      api_error: "Import failed: football-data.org returned an error (status %{status})."
+      unexpected_error: "Import failed: unexpected error — please check the logs."
+
   bonus_settings_heading: "Save bonus answers"
   bonus_settings_auto_calculated_intro: "Of the 4 bonus questions,"
   bonus_settings_auto_calculated_count: "2 are determined automatically"

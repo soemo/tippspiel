@@ -9,12 +9,17 @@ def country_code_map
   Seeds::Wm2026.country_code_map
 end
 
+def football_data_tla_map
+  Seeds::Wm2026.football_data_tla_map
+end
+
 def game_data
   Seeds::Wm2026.game_data
 end
 
 def create_team_and_game_data
   country_codes = country_code_map
+  tlas          = football_data_tla_map
 
   game_data.each do |data|
     team1_name = data[:team1_name].present? ? data.delete(:team1_name) : nil
@@ -22,12 +27,12 @@ def create_team_and_game_data
     team_ids = {}
     if team1_name.present?
       team1 = Team.where(name: team1_name).first_or_create
-      team1.update_column(:country_code, country_codes[team1_name])
+      team1.update_columns(country_code: country_codes[team1_name], football_data_tla: tlas[team1_name])
       team_ids = team_ids.merge({team1_id: team1.id})
     end
     if team2_name.present?
       team2 = Team.where(name: team2_name).first_or_create
-      team2.update_column(:country_code, country_codes[team2_name])
+      team2.update_columns(country_code: country_codes[team2_name], football_data_tla: tlas[team2_name])
       team_ids = team_ids.merge({team2_id: team2.id})
     end
 

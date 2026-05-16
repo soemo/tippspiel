@@ -99,3 +99,7 @@ run = "bin/rails dev:prime"
 [tasks."dev:setup"]
 description = "Full local dev setup: prime users + finish first 80 games (run after db:reset + db:seed)"
 run = "bin/rails dev:prime && COUNT=80 bin/rails dev:finish_games"
+
+[tasks."results:backfill_tla"]
+description = "Backfill teams.football_data_tla from the seed map (safe on populated DBs)"
+run = "bin/rails results:backfill_tla"
