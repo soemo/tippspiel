@@ -26,7 +26,7 @@ h1 {
 
 h2,
 h3 {
-  @include underline(white, $primary-color, $primary-color, 86%);
+  @include underline(white, $primary-color, #ffc, 86%);
 }
 h3 {
   margin-bottom: 12px;
@@ -81,14 +81,8 @@ a.brand {
 }
 
 .wrap_text {
-  white-space: pre;           /* CSS 2.0 */
-  white-space: pre-wrap;      /* CSS 2.1 */
-  white-space: pre-line;      /* CSS 3.0 */
-  white-space: -pre-wrap;     /* Opera 4-6 */
-  white-space: -o-pre-wrap;   /* Opera 7 */
-  white-space: -moz-pre-wrap; /* Mozilla */
-  white-space: -hp-pre-wrap;  /* HP Printers */
-  word-wrap: break-word;      /* IE 5+ */
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 /* ##### Start Scroll to top ##### */
@@ -110,8 +104,8 @@ a.brand {
   width: 70px;
   height: 55px;
   position: fixed;
-  bottom: 0px;
-  left: 0px;
+  bottom: 0;
+  left: 0;
   display: none;
   text-indent: -9999px;
   z-index: 5;

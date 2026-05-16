@@ -14,6 +14,13 @@
         .small-12.large-7.columns
           .input-group
             .input-group-label
+              = icon('far', 'envelope', nil, {class: 'fa-fw'})
+            = f.email_field :email_confirmation, class: 'input-group-field', placeholder: User.human_attribute_name(:email_confirmation)
+
+      .row
+        .small-12.large-7.columns
+          .input-group
+            .input-group-label
               = icon('far', 'edit', nil, {class: 'fa-fw'})
             = f.text_field :firstname, class: 'input-group-field', placeholder: User.human_attribute_name(:firstname)
 

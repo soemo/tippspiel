@@ -14,6 +14,47 @@ describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).scoped_to([:deleted_at]).ignoring_case_sensitivity }
     it { is_expected.to validate_presence_of(:firstname) }
     it { is_expected.to validate_presence_of(:lastname) }
+
+    describe 'email confirmation' do
+      it 'is valid when email and email_confirmation match' do
+        user = build(:user, email: 'foo@example.com', email_confirmation: 'foo@example.com')
+        user.valid?
+        expect(user.errors[:email_confirmation]).to be_empty
+      end
+
+      it 'is invalid when email_confirmation does not match email' do
+        user = build(:user, email: 'foo@example.com', email_confirmation: 'bar@example.com')
+        expect(user).not_to be_valid
+        expect(user.errors[:email_confirmation]).not_to be_empty
+      end
+
+      it 'is invalid when email_confirmation is blank on a new record' do
+        user = build(:user, email: 'foo@example.com', email_confirmation: '')
+        expect(user).not_to be_valid
+        expect(user.errors[:email_confirmation]).not_to be_empty
+      end
+    end
+
+    describe 'name fields must not contain email' do
+      it 'is invalid when firstname looks like an email address' do
+        user = build(:user, firstname: 'foo@example.com')
+        expect(user).not_to be_valid
+        expect(user.errors[:firstname]).not_to be_empty
+      end
+
+      it 'is invalid when lastname looks like an email address' do
+        user = build(:user, lastname: 'foo@example.com')
+        expect(user).not_to be_valid
+        expect(user.errors[:lastname]).not_to be_empty
+      end
+
+      it 'is valid when firstname and lastname are plain names' do
+        user = build(:user, firstname: 'Max', lastname: 'Mustermann')
+        user.valid?
+        expect(user.errors[:firstname]).to be_empty
+        expect(user.errors[:lastname]).to be_empty
+      end
+    end
   end
 
 
