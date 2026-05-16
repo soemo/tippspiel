@@ -27,6 +27,7 @@ gem 'font-awesome-sass', '= 5.15.1'
 gem 'lograge'
 gem 'virtus'
 gem 'exception_notification'
+gem 'whenever', require: false  # cron schedule for result imports
 
 
 group :development, :production do
