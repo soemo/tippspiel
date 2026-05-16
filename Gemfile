@@ -28,9 +28,6 @@ gem 'lograge'
 gem 'virtus'
 gem 'exception_notification'
 
-# Emojimmy makes it possible to store emoji characters in ActiveRecord datastores
-# that don’t support 4-Byte UTF-8 Unicode (utf8mb4) encoding
-gem 'emojimmy'
 
 group :development, :production do
   gem 'passenger', '6.0.20'

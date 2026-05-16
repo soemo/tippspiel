@@ -18,7 +18,6 @@ en:
   update_successful: "%{object_name} was updated."
   notice_needs_a_comment: "Please do not enter a zero."
   notice_needs_spaces: "Please enter a reasonable comment."
-  notice_to_long_with_emojis: "The text is too long with the emojis entered."
   succesfully_saved_tips: "Your tips have been saved!"
   succesfully_saved_bonustip: "Your bonus tips have been saved successfully."
 
@@ -102,7 +101,7 @@ en:
   main: "Home"
   help: "Help"
   ranking: "Ranking"
-  notice: Shoptalk
+  notice: "Chat"
   tournament: "Tournament"
   tips: "Tips"
   your_tips: "Your tips"
