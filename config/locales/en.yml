@@ -19,6 +19,33 @@ en:
   notice_needs_a_comment: "Please do not enter a zero."
   notice_needs_spaces: "Please enter a reasonable comment."
   notice_label: "Got something to say?"
+
+  points_abbr: "pts."
+  place_in: "in"
+
+  meta_description: "Football prediction game on soemo.org. The winner takes home a coveted trophy along with boundless glory and unlimited bragging rights."
+  meta_keywords: "football prediction game soemo, soeren mothes"
+
+  tournament_finished_heading: "FULL TIME - the game is over!"
+  tournament_finished_body: "The trophy will be presented to the winner as soon as possible. Thank you for taking part and for the fun we had together. See you next time!"
+
+  compare_tips_intro: "What did the others predict? Once a match has kicked off, you can find out here."
+
+  admin_recalculate_description: "Recalculate all tips for all finished games, all user points and statistics."
+  admin_manage_bonus_settings: "Manage bonus answers"
+
+  bonus_settings_heading: "Save bonus answers"
+  bonus_settings_auto_calculated_intro: "Of the 4 bonus questions,"
+  bonus_settings_auto_calculated_count: "2 are determined automatically"
+  bonus_settings_auto_calculated_detail: "(tournament winner & runner-up) — these are calculated directly from the final match and do not need to be entered here."
+  bonus_settings_manual_intro: "The following"
+  bonus_settings_manual_count: "2 questions"
+  bonus_settings_manual_detail: "cannot be determined automatically and must be entered manually:"
+  bonus_settings_question3_label: "3. When was the first goal scored in the final?"
+  bonus_settings_question4_label: "4. How many goals did the top scorer score?"
+  bonus_settings_select_prompt: "– please select –"
+  bonus_settings_goals_placeholder: "e.g. 8"
+  bonus_settings_submit: "Save bonus answers"
   succesfully_saved_tips: "Your tips have been saved!"
   succesfully_saved_bonustip: "Your bonus tips have been saved successfully."
 

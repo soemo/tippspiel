@@ -1,34 +1,34 @@
 .row
   .small-12.large-6.columns
-    %h3 Bonusantworten speichern
+    %h3= t('bonus_settings_heading')
 
     %p
-      Von den 4 Bonusfragen werden
-      %strong 2 automatisch ermittelt
-      (Turniersieger &amp; zweiter Platz) — diese werden direkt aus dem Finalspiel berechnet und müssen hier nicht eingetragen werden.
+      = t('bonus_settings_auto_calculated_intro')
+      %strong= t('bonus_settings_auto_calculated_count')
+      = t('bonus_settings_auto_calculated_detail')
     %p
-      Die folgenden
-      %strong 2 Fragen
-      können nicht automatisch ermittelt werden und müssen manuell eingetragen werden:
+      = t('bonus_settings_manual_intro')
+      %strong= t('bonus_settings_manual_count')
+      = t('bonus_settings_manual_detail')
 
     %ol
       %li
-        %strong 3. Wann fiel das erste Tor im Finale?
+        %strong= t('bonus_settings_question3_label')
       %li
-        %strong 4. Wie viele Tore erzielte der Torschützenkönig?
+        %strong= t('bonus_settings_question4_label')
 
     = form_tag admin_bonus_settings_path, method: :post do
       .row
         .small-12.columns
           %label
-            3. Wann fiel das erste Tor im Finale?
+            = t('bonus_settings_question3_label')
             - options = @when_first_goal_options.map { |k, v| [I18n.t("bonus_questions.when_final_first_goal_options.#{v}"), k] }
-            = select_tag 'bonus_when_final_first_goal', options_for_select(options, @bonus_when_first_goal), prompt: '– bitte wählen –'
+            = select_tag 'bonus_when_final_first_goal', options_for_select(options, @bonus_when_first_goal), prompt: t('bonus_settings_select_prompt')
       .row
         .small-12.columns
           %label
-            4. Wie viele Tore erzielte der Torschützenkönig?
-            = number_field_tag 'bonus_how_many_goals', @bonus_how_many_goals, min: 1, max: 99, size: 4, inputmode: 'numeric', placeholder: 'z.B. 8'
+            = t('bonus_settings_question4_label')
+            = number_field_tag 'bonus_how_many_goals', @bonus_how_many_goals, min: 1, max: 99, size: 4, inputmode: 'numeric', placeholder: t('bonus_settings_goals_placeholder')
       .row
         .small-12.columns
-          = submit_tag 'Bonusantworten speichern', class: 'button'
+          = submit_tag t('bonus_settings_submit'), class: 'button'

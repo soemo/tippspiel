@@ -28,6 +28,33 @@ de:
   notice_needs_spaces: "Bitte einen vernünftigen Beitrag angeben."
   notice_label: "Na haste was zu melden?"
 
+  points_abbr: "Pkt."
+  place_in: "in"
+
+  meta_description: "Fußball-Tippspiel auf soemo.org. Dem Sieger winkt ein Wanderpokal verbunden mit unbeschreiblichem Ruhm und uneingeschränktem Prahlrecht."
+  meta_keywords: "fussball tippspiel soemo, soeren mothes"
+
+  tournament_finished_heading: "AUUUSSS AUUUSSS - das Spiel ist aus!"
+  tournament_finished_body: "Der Pokal wird schnellstmöglich dem Gewinner überreicht. Vielen Dank für die rege Teilnahme und den gemeinsamen Spaß. Bis bald zum nächsten Mal!"
+
+  compare_tips_intro: "Was haben die anderen getippt? Sobald ein Spiel begonnen hat, kannst du es hier erfahren."
+
+  admin_recalculate_description: "Erneute Berechnung aller Tips aller beendeten Spiele, aller Nutzerpunkte und der Statistik."
+  admin_manage_bonus_settings: "Bonusantworten verwalten"
+
+  bonus_settings_heading: "Bonusantworten speichern"
+  bonus_settings_auto_calculated_intro: "Von den 4 Bonusfragen werden"
+  bonus_settings_auto_calculated_count: "2 automatisch ermittelt"
+  bonus_settings_auto_calculated_detail: "(Turniersieger & zweiter Platz) — diese werden direkt aus dem Finalspiel berechnet und müssen hier nicht eingetragen werden."
+  bonus_settings_manual_intro: "Die folgenden"
+  bonus_settings_manual_count: "2 Fragen"
+  bonus_settings_manual_detail: "können nicht automatisch ermittelt werden und müssen manuell eingetragen werden:"
+  bonus_settings_question3_label: "3. Wann fiel das erste Tor im Finale?"
+  bonus_settings_question4_label: "4. Wie viele Tore erzielte der Torschützenkönig?"
+  bonus_settings_select_prompt: "– bitte wählen –"
+  bonus_settings_goals_placeholder: "z.B. 8"
+  bonus_settings_submit: "Bonusantworten speichern"
+
   update_successful: "%{object_name} wurde aktualisiert."
   type_to_filter: Tippen um zu Filtern
 
