@@ -47,28 +47,43 @@ production:
 
 ## 3. Deploy
 
-```bash
-# production
-bundle exec cap tippspiel deploy
+Deployments are fully automated via GitHub Actions (`.github/workflows/continuous-deployment.yml`):
 
-# beta / staging
-bundle exec cap beta-tippspiel deploy
+| Trigger | Target | Version |
+|---|---|---|
+| Merge to `main` | Beta (`beta-tippspiel.soemo.org`) | `<draft-release-version>-HH:MM` |
+| Push a `v*` tag / publish a GitHub Release | Production (`tippspiel.soemo.org`) | tag name (strip leading `v`) |
+
+**To deploy to production**, create and push a version tag:
+
+```bash
+git tag v1.2.3
+git push origin v1.2.3
 ```
 
-Capistrano will:
-1. Push the code
-2. Run `bundle install`
+Or publish a GitHub Release with a `v*` tag — the workflow triggers on tag push either way.
+
+The deploy action will:
+1. Run the full test suite (must pass before deploy)
+2. Run `bundle install` on the server
 3. Run `db:migrate`
-4. Set the version + build date via `rake tippspiel:set_version`
+4. Set the version + build date
 5. Precompile assets
 6. Restart Passenger
 
-## 4. Seed production data
+## 4. Seed data
 
-Run once after the first deploy of a new tournament:
+Run once after the first deploy of a new tournament. **Do not run from your local machine via Capistrano** — run directly on the server:
 
 ```bash
-bundle exec cap tippspiel db:run_seed
+# SSH into the server first
+ssh soemo@farbauti.uberspace.de
+
+cd /var/www/virtual/soemo/tippspiel.soemo.org/current        # production
+# or
+cd /var/www/virtual/soemo/beta-tippspiel.soemo.org/current   # beta
+
+RAILS_ENV=production bundle exec rails db:seed
 ```
 
 ## 5. Smoke check
