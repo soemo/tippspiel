@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe Admin::ResultImportsController do
 
+  render_views
+
   let!(:no_admin_user) { create(:active_user) }
   let!(:admin_user)    { create(:active_admin) }
 
@@ -28,11 +30,13 @@ describe Admin::ResultImportsController do
     context 'as admin' do
       before { login(admin_user) }
 
-      it 'runs the importer, redirects to admin_games_path, sets notice' do
+      it 'runs the importer and renders the result page' do
         allow(Results::ImportFinishedGames).to receive(:call).and_return(empty_result)
         get :new
-        expect(response).to redirect_to admin_games_path
-        expect(flash[:notice]).to be_present
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:new)
+        expect(assigns(:result)).to eq empty_result
+        expect(assigns(:duration)).to be_a(Numeric)
       end
 
       it 'does not send an email when there are no changes' do
@@ -46,6 +50,29 @@ describe Admin::ResultImportsController do
         allow(Results::ImportFinishedGames).to receive(:call).and_return(result_with_imports)
         expect(ResultsMailer).to receive(:import_summary).with(result_with_imports).and_return(mailer_double)
         get :new
+      end
+
+      it 'renders discrepancies and unmatched sections without error' do
+        g = build_stubbed(:game)
+        discrepancy = Results::ImportFinishedGames::Discrepancy.new(
+          game: g, db_score: [1, 0], fd_score: [2, 0], fd_status: 'FINISHED', duration: 'REGULAR'
+        )
+        fd_match = Results::FootballDataAdapter::Match.new(
+          fd_id: 999, home_tla: 'GER', away_tla: 'FRA',
+          utc_date: Time.zone.now, status: 'FINISHED',
+          home_goals: 3, away_goals: 1, duration: 'REGULAR'
+        )
+        unmatched = Results::ImportFinishedGames::Unmatched.new(fd_match: fd_match, reason: :no_match)
+        result = Results::ImportFinishedGames::Result.new(
+          imported: [], discrepancies: [discrepancy], unmatched: [unmatched]
+        )
+        allow(Results::ImportFinishedGames).to receive(:call).and_return(result)
+        allow(ResultsMailer).to receive(:import_summary).and_return(double(deliver_now: true))
+        get :new
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include('1:0')
+        expect(response.body).to include('2:0')
+        expect(response.body).to include('GER')
       end
 
       it 'flashes a friendly error when the token is missing' do
