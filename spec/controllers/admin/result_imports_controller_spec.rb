@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe Admin::ResultImportsController do
 
-  render_views
-
   let!(:no_admin_user) { create(:active_user) }
   let!(:admin_user)    { create(:active_admin) }
 
@@ -70,9 +68,9 @@ describe Admin::ResultImportsController do
         allow(ResultsMailer).to receive(:import_summary).and_return(double(deliver_now: true))
         get :new
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('1:0')
-        expect(response.body).to include('2:0')
-        expect(response.body).to include('GER')
+        expect(response).to render_template(:new)
+        expect(assigns(:result).discrepancies).to eq [discrepancy]
+        expect(assigns(:result).unmatched).to eq [unmatched]
       end
 
       it 'still renders the result page when mail delivery fails' do
