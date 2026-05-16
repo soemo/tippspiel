@@ -73,7 +73,7 @@ The deploy action will:
 
 ## 4. Cron schedule (whenever)
 
-The crontab is installed/updated **automatically on every deploy** by the Capistrano recipe in `config/deploy/recipes/own_deploy.rb`. No manual step needed.
+The crontab is installed/updated **automatically on production deploys** by the Capistrano recipe in `config/deploy/recipes/own_deploy.rb`. The recipe skips beta deploys. No manual step needed.
 
 The schedule (`config/schedule.rb`) runs `results:import_finished` every 15 min during 16:00–23:59 and 00:00–06:59 (Europe/Berlin), plus a daily safety run at 08:00. Normal output goes through `Rails.logger` to `log/production.log`; unexpected stderr (e.g. bundler errors) is also redirected there.
 
@@ -85,7 +85,7 @@ crontab -l
 To remove the entries (e.g. end of tournament):
 ```bash
 cd /var/www/virtual/soemo/tippspiel.soemo.org/current
-bundle exec whenever --clear-crontab --identifier tippspiel.soemo.org
+bundle exec whenever --clear-crontab tippspiel.soemo.org
 ```
 
 ## 5. Seed data

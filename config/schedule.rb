@@ -2,14 +2,16 @@
 #
 # Cron schedule for automatic result imports (whenever gem).
 #
-# The crontab is installed/updated automatically on every deploy by the
+# The crontab is installed/updated automatically on production deploys by the
 # Capistrano recipe in config/deploy/recipes/own_deploy.rb — no manual
-# step needed.
+# step needed. The recipe skips beta deploys.
 #
 # To inspect or manually update on the server:
-#   bundle exec whenever --update-crontab \
-#     --set environment=production \
-#     --identifier tippspiel.soemo.org   # must match :application in deploy config
+#   bundle exec whenever --update-crontab tippspiel.soemo.org \
+#     --set environment=production
+#
+# To remove entries at end of tournament:
+#   bundle exec whenever --clear-crontab tippspiel.soemo.org
 #
 # Verify with:
 #   whenever            # prints the cron table

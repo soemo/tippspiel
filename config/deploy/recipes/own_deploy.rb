@@ -16,8 +16,12 @@ namespace :deploy do
   end
   after 'deploy:updated', 'deploy:set_build_date'
 
-  desc 'Install/update the whenever crontab on the remote server.'
+  desc 'Install/update the whenever crontab on the remote server (production only).'
   task :update_crontab do
+    # Only install cron jobs for production. Beta runs on the same Uberspace
+    # account and must not install result-import cron entries.
+    next unless fetch(:application) == 'tippspiel.soemo.org'
+
     on roles(:web) do
       # Run from current_path (the stable symlink) so cron entries never
       # reference a timestamped release directory that Capistrano will later
@@ -26,18 +30,19 @@ namespace :deploy do
       within current_path do
         with rails_env: fetch(:rails_env) do
           begin
-            # --identifier scopes the crontab block to this app so multiple apps
-            # on the same Uberspace account don't overwrite each other's entries.
+            # The identifier is passed as an argument to --update-crontab
+            # (whenever 1.1.2 syntax), not as a separate --identifier flag.
+            # It scopes the crontab block so this app's entries can be
+            # updated/removed independently of other apps on the same account.
             execute :bundle, :exec, :whenever,
-                    '--update-crontab',
-                    '--set', "environment=#{fetch(:rails_env)}",
-                    '--identifier', fetch(:application)
+                    "--update-crontab #{fetch(:application)}",
+                    '--set', "environment=#{fetch(:rails_env)}"
           rescue SSHKit::Command::Failed => e
             # A crontab update failure must not abort the deploy — the new
             # release is already live and serving traffic. Log a warning so
             # the operator knows to re-run manually if needed.
             warn "[WARN] deploy:update_crontab failed (#{e.message}). " \
-                 "Run 'bundle exec whenever --update-crontab' manually on the server."
+                 "Run 'bundle exec whenever --update-crontab #{fetch(:application)}' manually on the server."
           end
         end
       end
