@@ -91,3 +91,11 @@ run = "bin/rails credentials:edit"
 [tasks.log]
 description = "Tail development log"
 run = "tail -f log/development.log"
+
+[tasks."dev:prime"]
+description = "Create 100 demo users with random tips and set random game goals"
+run = "bin/rails dev:prime"
+
+[tasks."dev:setup"]
+description = "Full local dev setup: prime users + finish first 80 games (run after db:reset + db:seed)"
+run = "bin/rails dev:prime && COUNT=80 bin/rails dev:finish_games"

@@ -72,7 +72,11 @@ en:
   statistic_for: Statistic for %{name}
   show_statistic_for: Show statistic for %{name}
   ranking_per_game: Ranking per game
+  ranking_summary_header: Your ranking
   ranking_per_game_nothing_to_show: No data available yet. Please check back after the next game.
+  ranking_current: Current
+  ranking_best: Best
+  ranking_worst: Worst
 
   bonus_questions:
     which_team_is_champion: '1. Which team will win the tournament?'

@@ -3,12 +3,32 @@
     %h3=@presenter.header_text
 
     - if @presenter.has_data_to_show?
-      %h4=@presenter.line_chart_header_text
-      .row
-        .small-12.padding-left-right-5
-          %canvas#my-ranking-chart{:height => '400', :width => '400'}
+      -# Mobile: summary stats (small only)
+      .show-for-small-only
+        %h4=@presenter.ranking_summary_header_text
+        .ranking-summary
+          .ranking-summary-item
+            %div.ranking-summary-label= t(:ranking_current)
+            %div.ranking-summary-number= "##{@presenter.ranking_current}"
+            %div.ranking-summary-date= @presenter.ranking_current_date
+          .ranking-summary-item.ranking-summary-item--best
+            %div.ranking-summary-label= t(:ranking_best)
+            %div.ranking-summary-number= "##{@presenter.ranking_best}"
+            %div.ranking-summary-date= @presenter.ranking_best_date
+          .ranking-summary-item.ranking-summary-item--worst
+            %div.ranking-summary-label= t(:ranking_worst)
+            %div.ranking-summary-number= "##{@presenter.ranking_worst}"
+            %div.ranking-summary-date= @presenter.ranking_worst_date
 
-      %h4=@presenter.tips_header_text
+      -# Desktop: full chart (medium and up)
+      .row.hide-for-small-only
+        .small-12.columns
+          %h4=@presenter.line_chart_header_text
+          .ranking-chart-scroll-wrapper
+            .ranking-chart-container
+              %canvas#my-ranking-chart
+
+      %h4.ranking-tips-header=@presenter.tips_header_text
       .row
         .small-12.padding-left-right-5
           %table.hover
@@ -58,14 +78,33 @@
                 %td= raw tip_presenter.pointbadge_large(tip_presenter.tip_points)
 
       :javascript
-        $(document).ready( function() {
+        $(document).ready(function() {
           var ctx = document.getElementById('my-ranking-chart').getContext('2d');
+
+          var gradient = ctx.createLinearGradient(0, 0, 0, 300);
+          gradient.addColorStop(0, 'rgba(99,179,237,0.35)');
+          gradient.addColorStop(1, 'rgba(99,179,237,0.0)');
+
+          var chartData = #{@presenter.line_chart_data.to_json.html_safe};
+          var chartOptions = #{@presenter.line_chart_options.to_json.html_safe};
+          var xLabels = chartData.labels;
+
+          chartData.datasets[0].backgroundColor = gradient;
+
+          chartOptions.plugins.tooltip.callbacks = {
+            title: function(items) {
+              return xLabels[items[0].dataIndex] || '';
+            },
+            label: function(item) {
+              return ' Place #' + item.raw;
+            }
+          };
+
           new Chart(ctx, {
             type: 'line',
-            data: #{@presenter.line_chart_data.to_json.html_safe},
-            options: #{@presenter.line_chart_options.to_json.html_safe}
+            data: chartData,
+            options: chartOptions
           });
-
         });
     - else
       %p= t(:ranking_per_game_nothing_to_show)

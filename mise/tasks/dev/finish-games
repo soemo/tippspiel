@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Mark first N games as finished and recalculate rankings. Usage: mise run dev:finish-games 20"
+set -e
+
+COUNT=${1:-5} bin/rails dev:finish_games
