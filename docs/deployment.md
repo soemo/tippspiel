@@ -38,7 +38,6 @@ The production entry should match the DB name above:
 production:
   adapter: mysql2
   encoding: utf8mb4
-  collation: utf8mb4_unicode_ci
   database: soemo_wm_2026_production
   username: soemo
   password: <%= ENV['DB_PASSWORD'] %>
