@@ -22,8 +22,8 @@ class User < ApplicationRecord
   # :token_authenticatable, :lockable , :reconfirmable and :timeoutable
   devise :database_authenticatable, :confirmable, :registerable, :recoverable, :rememberable, :trackable
 
-  scope :active,   -> { where('confirmed_at is not null') }
-  scope :inactive, -> { where('confirmed_at is null') }
+  scope :active,   -> { where.not(confirmed_at: nil) }
+  scope :inactive, -> { where(confirmed_at: nil) }
 
   def admin?
     self.email == ADMIN_EMAIL
