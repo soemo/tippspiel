@@ -1,7 +1,7 @@
 module Admin
   class ResultImportsController < Admin::BaseController
 
-    def new
+    def create
       time = Benchmark.realtime { @result = ::Results::ImportFinishedGames.call }
       @duration = time.round(2)
 

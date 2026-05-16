@@ -58,9 +58,20 @@ namespace :results do
 
   desc 'Backfill teams.football_data_tla from the seed map without touching games/tips/users. Safe to run on prod.'
   task backfill_tla: :environment do
-    require_relative '../../db/seeds/wm2026'
+    # Resolve the active tournament seed module via IS_WM/IS_EM so this task
+    # works for WM 2026 and future tournaments without code changes.
+    seed_module =
+      if IS_WM
+        require_relative '../../db/seeds/wm2026'
+        Seeds::Wm2026
+      elsif IS_EM
+        # Update when an EM seed module is introduced (e.g. Seeds::Em2028).
+        raise 'No seed module defined for IS_EM — add it here when creating db/seeds/em<year>.rb'
+      else
+        raise 'Neither IS_WM nor IS_EM is true — cannot resolve tournament seed module'
+      end
 
-    map = Seeds::Wm2026.football_data_tla_map
+    map = seed_module.football_data_tla_map
     updated = 0
     missing = []
     skipped_already_set = 0

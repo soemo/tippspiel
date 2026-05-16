@@ -4,7 +4,7 @@
       = t('admin_recalculate_description')
     = link_to(I18n.t(:start_calculating), new_admin_start_calculating_path, class: 'button')
     = link_to(t('admin_manage_bonus_settings'), new_admin_bonus_settings_path, class: 'button secondary')
-    = link_to(t('admin.result_imports.button'), new_admin_result_import_path, class: 'button', data: { confirm: t('admin.result_imports.confirm') })
+    = button_to(t('admin.result_imports.button'), admin_result_import_path, method: :post, class: 'button', data: { confirm: t('admin.result_imports.confirm') })
     %p.small= t('admin.result_imports.description')
 
     %h3=I18n.t('games_of', tournament_name: I18n.t('tournament_name'))

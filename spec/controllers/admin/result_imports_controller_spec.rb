@@ -15,12 +15,12 @@ describe Admin::ResultImportsController do
     Results::ImportFinishedGames::Result.new(imported: [imported], discrepancies: [], unmatched: [])
   end
 
-  describe '#new' do
+  describe '#create' do
     context 'as non-admin' do
       it 'forbids access' do
         login(no_admin_user)
         expect(Results::ImportFinishedGames).not_to receive(:call)
-        get :new
+        post :create
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -30,9 +30,9 @@ describe Admin::ResultImportsController do
 
       it 'runs the importer and renders the result page' do
         allow(Results::ImportFinishedGames).to receive(:call).and_return(empty_result)
-        get :new
+        post :create
         expect(response).to have_http_status(:ok)
-        expect(response).to render_template(:new)
+        expect(response).to render_template(:create)
         expect(assigns(:result)).to eq empty_result
         expect(assigns(:duration)).to be_a(Numeric)
       end
@@ -40,14 +40,14 @@ describe Admin::ResultImportsController do
       it 'does not send an email when there are no changes' do
         allow(Results::ImportFinishedGames).to receive(:call).and_return(empty_result)
         expect(ResultsMailer).not_to receive(:import_summary)
-        get :new
+        post :create
       end
 
       it 'sends a summary email when there are changes' do
         mailer_double = double('mailer', deliver_now: true)
         allow(Results::ImportFinishedGames).to receive(:call).and_return(result_with_imports)
         expect(ResultsMailer).to receive(:import_summary).with(result_with_imports).and_return(mailer_double)
-        get :new
+        post :create
       end
 
       it 'renders discrepancies and unmatched sections without error' do
@@ -66,9 +66,9 @@ describe Admin::ResultImportsController do
         )
         allow(Results::ImportFinishedGames).to receive(:call).and_return(result)
         allow(ResultsMailer).to receive(:import_summary).and_return(double(deliver_now: true))
-        get :new
+        post :create
         expect(response).to have_http_status(:ok)
-        expect(response).to render_template(:new)
+        expect(response).to render_template(:create)
         expect(assigns(:result).discrepancies).to eq [discrepancy]
         expect(assigns(:result).unmatched).to eq [unmatched]
       end
@@ -78,16 +78,16 @@ describe Admin::ResultImportsController do
         allow(mailer_double).to receive(:deliver_now).and_raise(StandardError, 'SMTP timeout')
         allow(Results::ImportFinishedGames).to receive(:call).and_return(result_with_imports)
         allow(ResultsMailer).to receive(:import_summary).and_return(mailer_double)
-        get :new
+        post :create
         expect(response).to have_http_status(:ok)
-        expect(response).to render_template(:new)
+        expect(response).to render_template(:create)
         expect(flash[:warning]).to be_present
       end
 
       it 'flashes a friendly error when the token is missing' do
         allow(Results::ImportFinishedGames).to receive(:call)
           .and_raise(Results::FootballDataClient::MissingTokenError.new('no token'))
-        get :new
+        post :create
         expect(response).to redirect_to admin_games_path
         expect(flash[:error]).to include 'API-Token'
       end
@@ -95,13 +95,13 @@ describe Admin::ResultImportsController do
       it 'flashes a friendly error on ApiError' do
         allow(Results::ImportFinishedGames).to receive(:call)
           .and_raise(Results::FootballDataClient::ApiError.new('500', status: 500, body: 'oops'))
-        get :new
+        post :create
         expect(flash[:error]).to include '500'
       end
 
       it 'flashes an unexpected-error message on any other failure' do
         allow(Results::ImportFinishedGames).to receive(:call).and_raise(StandardError, 'boom')
-        get :new
+        post :create
         expect(flash[:error]).to be_present
         expect(response).to redirect_to admin_games_path
       end

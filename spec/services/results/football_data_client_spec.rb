@@ -18,6 +18,13 @@ describe Results::FootballDataClient do
   end
 
   describe '#fetch_competition_matches' do
+    around do |example|
+      original = ENV['FOOTBALL_DATA_API_TOKEN']
+      example.run
+    ensure
+      ENV['FOOTBALL_DATA_API_TOKEN'] = original
+    end
+
     context 'when the token is missing' do
       before { ENV.delete('FOOTBALL_DATA_API_TOKEN') }
 

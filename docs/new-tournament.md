@@ -28,7 +28,7 @@ tournament_name: "WC 2026"
 Edit `db/seeds/wm2026.rb` (or create a new module e.g. `db/seeds/em2028.rb`):
 - Update `game_data` with all fixtures (date, time in CEST, teams, round, group, place)
 - Update `country_code_map` with all 48 (WM) or 24 (EM) teams using the flag sprite codes expected by the app (mostly ISO 3166-1 alpha-2, but keep custom values such as `_England`, `_Scotland`, `_Wales`, and `_Northern_Ireland` where required)
-- Update `football_data_tla_map` with the three-letter codes (TLAs) used by football-data.org for each team. These power both the manual result importer and the pre-tournament backfill. Verify codes against the FD `/competitions/<CODE>/teams` endpoint (`CODE` is `WC` for the World Cup, `EC` for the European Championship — set automatically via `IS_WM`/`IS_EM` in `config/initializers/01_constants.rb` as `FOOTBALL_DATA_COMPETITION_CODE`), or run `mise run results:backfill_football_data_ids` after seeding and check the `TLA_MISSING` section in the output.
+- Update `football_data_tla_map` with the three-letter codes (TLAs) used by football-data.org for each team. These power both the manual result importer and the pre-tournament backfill. Verify codes against the FD `/competitions/<CODE>/teams` endpoint (`CODE` is `WC` for the World Cup, `EC` for the European Championship — set automatically via `IS_WM`/`IS_EM` in `config/initializers/01_constants.rb` as `FOOTBALL_DATA_COMPETITION_CODE`), or run `bin/rails results:backfill_football_data_ids` after seeding and check the `TLA_MISSING` section in the output.
 - Update `db/seeds.rb` to call the new module
 
 ## 3. Wire up the football-data.org API token
@@ -42,7 +42,7 @@ Edit `db/seeds/wm2026.rb` (or create a new module e.g. `db/seeds/em2028.rb`):
 Once seed data is loaded **and** the WC fixtures are published on football-data.org (usually some weeks before kickoff), link our games to FD match ids in advance. This makes the runtime importer robust against last-minute schedule changes:
 
 ```bash
-mise run results:backfill_football_data_ids
+bin/rails results:backfill_football_data_ids
 ```
 
 Review the output for each section:
@@ -96,7 +96,7 @@ from the final game result. The other two must be entered manually via the admin
 - [ ] `FOOTBALL_DATA_API_TOKEN` set in `.env` (local) and shared `.env` (server)
 - [ ] `database.yml` updated locally
 - [ ] Local DB recreated and seeded (`mise run db:reset`)
-- [ ] `mise run results:backfill_football_data_ids` run, no `TLA_MISSING`/`AMBIGUOUS`/`UNMATCHED` remaining for group-stage games
+- [ ] `bin/rails results:backfill_football_data_ids` run, no `TLA_MISSING`/`AMBIGUOUS`/`UNMATCHED` remaining for group-stage games
 - [ ] Full test suite passing (`mise run test`)
 - [ ] Production DB created on server
 - [ ] Server `database.yml` updated

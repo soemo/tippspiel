@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_05_16_120004) do
+ActiveRecord::Schema.define(version: 2026_05_16_120005) do
 
   create_table "app_settings", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "key", null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2026_05_16_120004) do
     t.string "team2_placeholder_name"
     t.boolean "finished", default: false
     t.bigint "football_data_match_id"
-    t.index ["football_data_match_id"], name: "index_games_on_football_data_match_id_not_deleted", unique: true
+    t.index ["football_data_match_id"], name: "index_games_on_football_data_match_id", unique: true
     t.index ["team1_id"], name: "index_games_on_team1_id"
     t.index ["team2_id"], name: "index_games_on_team2_id"
   end
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2026_05_16_120004) do
     t.integer "lock_version", default: 0
     t.string "country_code"
     t.string "football_data_tla", limit: 3
-    t.index ["football_data_tla"], name: "index_teams_on_football_data_tla_not_deleted", unique: true
+    t.index ["football_data_tla"], name: "index_teams_on_football_data_tla", unique: true
   end
 
   create_table "tips", id: :integer, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|

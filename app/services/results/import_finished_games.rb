@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Imports finished WM 2026 game results from football-data.org.
+# Imports finished game results from football-data.org for the active
+# tournament (competition code driven by FOOTBALL_DATA_COMPETITION_CODE).
 #
 # Behaviour (decisions documented in the planning conversation):
 #   - Only matches with status == FINISHED are touched.
