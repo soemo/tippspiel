@@ -25,19 +25,26 @@ namespace :deploy do
       # keep_releases cleans up that directory.
       within current_path do
         with rails_env: fetch(:rails_env) do
-          # --identifier scopes the crontab block to this app so multiple apps
-          # on the same Uberspace account don't overwrite each other's entries.
-          execute :bundle, :exec, :whenever,
-                  '--update-crontab',
-                  '--set', "environment=#{fetch(:rails_env)}",
-                  '--identifier', fetch(:application)
+          begin
+            # --identifier scopes the crontab block to this app so multiple apps
+            # on the same Uberspace account don't overwrite each other's entries.
+            execute :bundle, :exec, :whenever,
+                    '--update-crontab',
+                    '--set', "environment=#{fetch(:rails_env)}",
+                    '--identifier', fetch(:application)
+          rescue SSHKit::Command::Failed => e
+            # A crontab update failure must not abort the deploy — the new
+            # release is already live and serving traffic. Log a warning so
+            # the operator knows to re-run manually if needed.
+            warn "[WARN] deploy:update_crontab failed (#{e.message}). " \
+                 "Run 'bundle exec whenever --update-crontab' manually on the server."
+          end
         end
       end
     end
   end
-  # Hook into deploy:finished (not deploy:updated) so a transient whenever
-  # failure does not abort the deploy — Passenger can serve the new release
-  # without an updated crontab.
+  # Hook into deploy:finished so the app is fully live before we attempt
+  # the crontab update. Failure is rescued above and will not abort the deploy.
   after 'deploy:finished', 'deploy:update_crontab'
 
 end

@@ -29,7 +29,11 @@
 # one cheap API call — free tier limit is 10 req/min, no daily cap).
 #
 # Logging: the rake task writes to Rails.logger (log/production.log),
-# which is already managed by the app. No separate cron log file needed.
+# which is already managed by the app. Stdout from cron is discarded
+# (/dev/null) since it's redundant; unexpected stderr (e.g. bundler
+# errors) is appended to log/production.log so it doesn't go to the
+# server mail spool.
+set :output, error: 'log/production.log', standard: '/dev/null'
 
 # Safety run: catches overnight FD corrections and any edge cases.
 every 1.day, at: '8:00 am' do
