@@ -1,0 +1,103 @@
+- # Result page rendered by Admin::ResultImportsController#create (POST).
+- # Re-submitting the form re-runs the import (idempotent — silent skip when
+- # no game changed since last run).
+
+.row
+  .small-12.columns
+    %h3= t('admin.result_imports.heading')
+    %p
+      = t('admin.result_imports.completed_in_html', seconds: @duration)
+      - if @result.changes?
+        = t('admin.result_imports.email_sent_to', email: ADMIN_EMAIL)
+
+    = link_to t('admin.back_to_games'), admin_games_path, class: 'button secondary'
+
+.row
+  .small-12.columns
+    %h4= t('admin.result_imports.imported_heading', count: @result.imported.size)
+    - if @result.imported.empty?
+      %p.small= t('admin.result_imports.imported_empty')
+    - else
+      %table.hover
+        %thead
+          %tr
+            %th= t('admin.result_imports.col.kickoff')
+            %th= t('admin.result_imports.col.round')
+            %th.text-right= t('admin.result_imports.col.team1')
+            %th.text-center= t('admin.result_imports.col.score')
+            %th= t('admin.result_imports.col.team2')
+            %th= t('admin.result_imports.col.duration')
+            %th
+        %tbody
+          - @result.imported.each do |entry|
+            - g = entry.game
+            %tr
+              %td= l(g.start_at, format: :short)
+              %td= g.round
+              %td.text-right= g.team1&.name
+              %td.text-center
+                %strong= "#{entry.home_goals}:#{entry.away_goals}"
+              %td= g.team2&.name
+              %td
+                - if entry.duration.present? && entry.duration != 'REGULAR'
+                  %small= entry.duration.downcase.tr('_', ' ')
+              %td= link_to icon('far', 'edit'), edit_admin_game_path(g)
+
+.row
+  .small-12.columns
+    %h4= t('admin.result_imports.discrepancies_heading', count: @result.discrepancies.size)
+    - if @result.discrepancies.empty?
+      %p.small= t('admin.result_imports.discrepancies_empty')
+    - else
+      %p= t('admin.result_imports.discrepancies_intro')
+      %table.hover
+        %thead
+          %tr
+            %th= t('admin.result_imports.col.kickoff')
+            %th= t('admin.result_imports.col.round')
+            %th= t('admin.result_imports.col.matchup')
+            %th.text-center= t('admin.result_imports.col.db_score')
+            %th.text-center= t('admin.result_imports.col.fd_score')
+            %th= t('admin.result_imports.col.fd_status')
+            %th
+        %tbody
+          - @result.discrepancies.each do |d|
+            - g = d.game
+            %tr
+              %td= l(g.start_at, format: :short)
+              %td= g.round
+              %td= "#{g.team1&.name} vs #{g.team2&.name}"
+              %td.text-center= "#{d.db_score[0]}:#{d.db_score[1]}"
+              %td.text-center
+                %strong= "#{d.fd_score[0]}:#{d.fd_score[1]}"
+              %td= d.fd_status
+              %td= link_to icon('far', 'edit'), edit_admin_game_path(g)
+
+.row
+  .small-12.columns
+    %h4= t('admin.result_imports.unmatched_heading', count: @result.unmatched.size)
+    - if @result.unmatched.empty?
+      %p.small= t('admin.result_imports.unmatched_empty')
+    - else
+      %p= t('admin.result_imports.unmatched_intro')
+      %table.hover
+        %thead
+          %tr
+            %th= t('admin.result_imports.col.kickoff')
+            %th= t('admin.result_imports.col.matchup')
+            %th.text-center= t('admin.result_imports.col.fd_score')
+            %th= t('admin.result_imports.col.fd_status')
+            %th= t('admin.result_imports.col.fd_match_id')
+        %tbody
+          - @result.unmatched.each do |u|
+            - fd = u.fd_match
+            %tr
+              %td= l(fd.utc_date, format: :short)
+              %td= "#{fd.home_tla} vs #{fd.away_tla}"
+              %td.text-center= "#{fd.home_goals}:#{fd.away_goals}"
+              %td= fd.status
+              %td= fd.fd_id
+
+.row
+  .small-12.columns
+    = link_to t('admin.back_to_games'), admin_games_path, class: 'button secondary'

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :games, except: [:show, :create, :new]
     resource :start_calculating, only: :new
+    resource :result_import, only: :create
     resource :bonus_settings, only: [:new, :create]
   end
 

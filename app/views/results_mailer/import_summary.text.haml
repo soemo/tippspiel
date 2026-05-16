@@ -1,0 +1,44 @@
+- # English plain-text summary for the admin. Single-recipient admin email,
+- # intentionally not internationalised.
+
+= "Result import summary"
+= "====================="
+\\
+
+= "IMPORTED GAMES (#{@imported.size})"
+- if @imported.empty?
+  = "  (none)"
+- else
+  - @imported.each do |entry|
+    - g = entry.game
+    - group_part = g.group.present? ? " (Group #{g.group})" : ''
+    - duration_part = (entry.duration && entry.duration != 'REGULAR') ? " [#{entry.duration.downcase.gsub('_', ' ')}]" : ''
+    = "  - #{g.round}#{group_part} — #{team_label(g.team1)} vs #{team_label(g.team2)} — #{entry.home_goals}:#{entry.away_goals}#{duration_part}"
+    = "      kickoff: #{format_time(g.start_at)} · venue: #{g.place} · FD match id: #{g.football_data_match_id}"
+\\
+
+= "DISCREPANCIES — needs manual fix (#{@discrepancies.size})"
+- if @discrepancies.empty?
+  = "  (none)"
+- else
+  = "  These games are already marked finished but the football-data.org response now differs."
+  = "  Review and adjust manually via /admin/games if needed."
+  - @discrepancies.each do |d|
+    - g = d.game
+    - duration_part = (d.duration && d.duration != 'REGULAR') ? " · duration: #{d.duration.downcase.gsub('_', ' ')}" : ''
+    = "  - #{g.round} — #{team_label(g.team1)} vs #{team_label(g.team2)}"
+    = "      DB: #{d.db_score[0]}:#{d.db_score[1]} · FD: #{d.fd_score[0]}:#{d.fd_score[1]} · FD status: #{d.fd_status}#{duration_part}"
+    = "      kickoff: #{format_time(g.start_at)} · FD match id: #{g.football_data_match_id}"
+\\
+
+= "UNMATCHED FD MATCHES (#{@unmatched.size})"
+- if @unmatched.empty?
+  = "  (none)"
+- else
+  = "  These finished matches from football-data.org could not be linked to a game in our database."
+  = "  Likely cause: missing tla mapping or unresolved knockout placeholder."
+  - @unmatched.each do |u|
+    - fd = u.fd_match
+    - duration_part = (fd.duration && fd.duration != 'REGULAR') ? " [#{fd.duration.downcase.gsub('_', ' ')}]" : ''
+    = "  - #{fd.home_tla} vs #{fd.away_tla} — #{fd.home_goals}:#{fd.away_goals}#{duration_part}"
+    = "      kickoff: #{format_time(fd.utc_date)} · FD match id: #{fd.fd_id}"

@@ -4,7 +4,8 @@
 
 - SSH access to the Uberspace server configured in `config/deploy.rb`
 - Remote MySQL databases created (see step below)
-- `.env` file present in the shared directory on the server
+- `.env` file present in the shared directory on the server, including:
+  - `FOOTBALL_DATA_API_TOKEN` — token from <https://www.football-data.org/client/register>, used by the admin-triggered result importer (button on `/admin/games`). Without it the import action surfaces a flash error and does nothing else.
 
 ## 1. Create the production databases on the server
 
@@ -90,3 +91,4 @@ RAILS_ENV=production bundle exec rails db:seed
 - Visit the site and confirm the tournament name displays correctly in both DE and EN
 - Log in as admin, verify games are listed at `/admin/games`
 - Trigger a test recalculation at `/admin/games` → click **Start Berechnung**
+- Confirm **Ergebnisse importieren** is visible at `/admin/games` and that `FOOTBALL_DATA_API_TOKEN` is set (clicking the button without a token must show the "Kein API-Token konfiguriert" flash, never crash)
