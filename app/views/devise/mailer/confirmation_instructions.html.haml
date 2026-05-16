@@ -565,3 +565,18 @@
                                       Ich wünsche dir viel Spaß und Erfolg!
                                       %br/
                                       Sören "Harry" Mothes
+                                  %hr{:style => "border:0; border-top:1px solid #dddddd; margin:18px 0;"}/
+                                  %h1
+                                    %span{:style => "color:#AF1C1C"} Hello #{@resource.firstname},
+                                  %p{:style => "text-align: left; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;"}
+                                    %span{:style => "font-family:arial,helvetica neue,helvetica,sans-serif"}
+                                      please confirm your participation in the #{I18n.t(:tournament_name)} #{I18n.t(:app_name)} on soemo.org.
+                                      %br/
+                                      %br/
+                                      %a{:href => "#{confirmation_url(@resource, :confirmation_token => @token)}", :target => "_blank"}>
+                                        %span{:style => "color:#AF1C1C"} Confirm participation
+                                      %br/
+                                      %br/
+                                      I wish you lots of fun and success!
+                                      %br/
+                                      Sören "Harry" Mothes
