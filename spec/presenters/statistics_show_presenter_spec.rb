@@ -72,7 +72,8 @@ describe StatisticsShowPresenter do
       expect(presenter).to receive(:finished_tips).and_return(tipp_query)
       expect(tipp_query).to receive(:pluck).with(:ranking_place).and_return(user_rankings)
 
-      expect(presenter.user_rankings).to eq(user_rankings)
+      # drop(1) skips the first game ranking
+      expect(presenter.user_rankings).to eq(user_rankings.drop(1))
     end
   end
 
@@ -204,23 +205,28 @@ describe StatisticsShowPresenter do
       expect(presenter).to receive(:user_rankings).and_return(user_rankings)
 
       expect(presenter.line_chart_data).to eq(
-                                        {
-                                          labels: ['Label1', 'Label2', 'Label3'],
-                                          datasets: [
-                                            {
-                                              label: I18n.t(:standings),
-                                              fill: false,
-                                              lineTension: 0.2,
-                                              borderColor: "rgba(75,192,192,1)",
-                                              pointBorderColor: "rgba(75,192,192,1)",
-                                              pointBackgroundColor: "#fff",
-                                              pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                                              pointHoverBorderColor: "rgba(220,220,220,1)",
-                                              data: [4,2,1]
-                                            }
-                                          ]
-                                        }
-                                      )
+        {
+          labels: ['Label1', 'Label2', 'Label3'],
+          datasets: [
+            {
+              label: I18n.t(:standings),
+              fill: 'start',
+              tension: 0.3,
+              borderColor: "rgba(99,179,237,1)",
+              backgroundColor: "rgba(99,179,237,0.15)",
+              pointRadius: 4,
+              pointBackgroundColor: "rgba(99,179,237,1)",
+              pointBorderColor: "#fff",
+              pointBorderWidth: 2,
+              pointHoverRadius: 6,
+              pointHoverBackgroundColor: "#fff",
+              pointHoverBorderColor: "rgba(99,179,237,1)",
+              pointHoverBorderWidth: 3,
+              data: [4, 2, 1]
+            }
+          ]
+        }
+      )
     end
   end
 
@@ -232,30 +238,45 @@ describe StatisticsShowPresenter do
       expect(presenter).to receive(:line_chart_step_size).and_return(5)
 
       expect(presenter.line_chart_options).to eq(
-                                           {
-                                             legend: {
-                                               position: 'bottom'
-                                             },
-                                             responsive: true,
-                                             scales: {
-                                               xAxes: [
-                                                 {
-                                                   display: false
-                                                 }
-                                               ],
-                                               yAxes: [
-                                                 {
-                                                   ticks: {
-                                                     reverse: true,
-                                                     min: 1,
-                                                     max: 23,
-                                                     stepSize: 5
-                                                   }
-                                                 }
-                                               ]
-                                             },
-                                           }
-                                         )
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              displayColors: false
+            }
+          },
+          scales: {
+            x: {
+              display: true,
+              ticks: {
+                display: false
+              },
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              reverse: true,
+              min: 1,
+              max: 23,
+              ticks: {
+                stepSize: 5,
+                color: "rgba(160,174,192,1)",
+                font: {
+                  size: 13
+                }
+              },
+              grid: {
+                color: "rgba(226,232,240,0.6)"
+              }
+            }
+          }
+        }
+      )
     end
   end
 

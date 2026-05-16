@@ -28,9 +28,7 @@ class StatisticsShowPresenter
   end
 
   def user_rankings
-    @ranking ||= begin
-      finished_tips.pluck(:ranking_place).compact
-    end
+    @ranking ||= finished_tips.pluck(:ranking_place).compact.drop(1)
   end
 
   def header_text
@@ -43,6 +41,10 @@ class StatisticsShowPresenter
 
   def line_chart_header_text
     I18n.t(:ranking_per_game)
+  end
+
+  def ranking_summary_header_text
+    I18n.t(:ranking_summary_header)
   end
 
   def tips_header_text
@@ -76,50 +78,104 @@ class StatisticsShowPresenter
 
   def line_chart_data
     {
-        labels: line_chart_x_labels,
-        datasets: [
-            {
-                label: I18n.t(:standings),
-                fill: false,
-                lineTension: 0.2,
-                borderColor: "rgba(75,192,192,1)",
-                pointBorderColor: "rgba(75,192,192,1)",
-                pointBackgroundColor: "#fff",
-                pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
-                data: user_rankings
-            }
-        ]
+      labels: line_chart_x_labels,
+      datasets: [
+        {
+          label: I18n.t(:standings),
+          fill: 'start',
+          tension: 0.3,
+          borderColor: "rgba(99,179,237,1)",
+          backgroundColor: "rgba(99,179,237,0.15)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(99,179,237,1)",
+          pointBorderColor: "#fff",
+          pointBorderWidth: 2,
+          pointHoverRadius: 6,
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(99,179,237,1)",
+          pointHoverBorderWidth: 3,
+          data: user_rankings
+        }
+      ]
     }
   end
 
   def line_chart_options
     {
-      legend: {
-        position: 'bottom'
-      },
       responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          displayColors: false
+        }
+      },
       scales: {
-        xAxes: [
-          {
+        x: {
+          display: true,
+          ticks: {
+            display: false
+          },
+          grid: {
             display: false
           }
-        ],
-        yAxes: [
-          {
-            ticks: {
-              reverse: true,
-              min: 1,
-              max: line_chart_max_ticks,
-              stepSize: line_chart_step_size
+        },
+        y: {
+          reverse: true,
+          min: 1,
+          max: line_chart_max_ticks,
+          ticks: {
+            stepSize: line_chart_step_size,
+            color: "rgba(160,174,192,1)",
+            font: {
+              size: 13
             }
+          },
+          grid: {
+            color: "rgba(226,232,240,0.6)"
           }
-        ]
-      },
+        }
+      }
     }
   end
 
   def has_data_to_show?
     user_rankings.present? && user_rankings.reject(&:blank?).present?
+  end
+
+  def ranking_current
+    user_rankings.last
+  end
+
+  def ranking_best
+    user_rankings.min
+  end
+
+  def ranking_worst
+    user_rankings.max
+  end
+
+  def ranking_current_date
+    game_date_for_ranking_index(user_rankings.length - 1)
+  end
+
+  def ranking_best_date
+    game_date_for_ranking_index(user_rankings.index(ranking_best))
+  end
+
+  def ranking_worst_date
+    game_date_for_ranking_index(user_rankings.index(ranking_worst))
+  end
+
+  private
+
+  def game_date_for_ranking_index(index)
+    return nil unless index
+    # user_rankings drops the first game, so offset index by 1
+    game = @finished_games[index + 1]
+    return nil unless game
+    I18n.l(game.start_at, format: :short)
   end
 end

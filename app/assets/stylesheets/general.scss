@@ -145,3 +145,66 @@ div.input-group-label {
   padding-right: 0;
   width: 20px;
 }
+
+.ranking-chart-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  // Compensate for Foundation .columns padding so Y-axis labels are not clipped
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
+}
+
+.ranking-chart-container {
+  position: relative;
+  height: 280px;
+  width: 900px;
+
+  @include breakpoint(medium) {
+    width: 100%;
+    height: 360px;
+  }
+}
+
+.ranking-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 0 24px;
+}
+
+.ranking-summary-item {
+  text-align: center;
+  flex: 1;
+}
+
+.ranking-summary-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: lighten($body-font-color, 30%);
+  margin-bottom: 4px;
+}
+
+.ranking-summary-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: $primary-color;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ranking-summary-item--best .ranking-summary-number {
+  color: #38a169;
+}
+
+.ranking-summary-item--worst .ranking-summary-number {
+  color: #e53e3e;
+}
+
+.ranking-summary-date {
+  font-size: 0.75rem;
+  color: lighten($body-font-color, 40%);
+}
+
+.ranking-tips-header {
+  margin-top: 32px;
+}

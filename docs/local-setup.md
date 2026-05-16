@@ -32,9 +32,36 @@ bundle install
 mise run db:create
 mise run db:schema:load
 mise run db:seed
+```
 
-# Optional: load 100 demo users with random tips (development only)
-mise exec -- rails dev:prime
+## Setting up demo data for local development
+
+`dev:prime` creates 100 demo users (`test1`–`test100`) with random tips on all games
+and sets random goals. Tips are created immediately — no login required.
+
+The simplest full setup after a fresh `db:reset + db:seed`:
+
+```bash
+mise run dev:setup
+```
+
+This runs `dev:prime` (creates users + random tips + random goals) followed by
+`dev:finish-games-80` (marks 80 games finished and calculates rankings).
+
+After running, log in as `test1@soemo.org` / `testtesttippspiel` and visit `/statistics`.
+
+## Simulating finished games locally
+
+The statistics page (ranking chart) only shows data once games are marked as finished
+and rankings have been calculated. Use the `dev:finish-games` task to fake this locally.
+
+```bash
+# Mark the first N games as finished and recalculate rankings
+mise run dev:finish-games 10    # after 10 games
+mise run dev:finish-games 40    # halfway through group stage
+mise run dev:finish-games 80    # 80 games
+
+# Each call resets all games to unfinished first, so you can jump freely between any N.
 ```
 
 ## Common commands
@@ -48,5 +75,7 @@ mise exec -- rails dev:prime
 | `mise run db:reset` | Drop, recreate and seed |
 | `mise run db:migrate` | Run pending migrations |
 | `mise run db:rollback` | Rollback last migration |
-| `mise exec -- rails dev:prime` | Load 100 demo users with random tips |
+| `mise run dev:prime` | Create 100 demo users with random tips and random game goals |
+| `mise run dev:finish-games N` | Mark first N games finished, recalculate rankings (e.g. `mise run dev:finish-games 20`) |
+| `mise run dev:setup` | Full setup: prime users + finish 80 games (after db:reset + db:seed) |
 | `mise exec -- rails db:schema:load RAILS_ENV=test` | Reset test database |

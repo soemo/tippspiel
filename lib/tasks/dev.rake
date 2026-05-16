@@ -7,6 +7,27 @@ if Rails.env.development? || Rails.env.test?
       set_random_game_goals
     end
 
+    desc 'Mark the first N games as finished and recalculate rankings. Usage: rake dev:finish_games[10] or COUNT=10 rake dev:finish_games'
+    task :finish_games, [:count] => :environment do |_t, args|
+      count = (args[:count] || ENV['COUNT'] || 5).to_i
+
+      # Reset all games to unfinished first
+      Game.update_all(finished: false)
+      puts "Reset all games to unfinished."
+
+      # Mark the first N games (ordered by start_at) as finished
+      games_to_finish = Game.order(start_at: :asc).limit(count)
+      games_to_finish.update_all(finished: true)
+      puts "Marked #{games_to_finish.size} games as finished."
+
+      # Run the full ranking pipeline
+      puts "Running ranking calculation..."
+      Tips::UpdatePoints.call
+      Users::UpdatePoints.call
+      Users::UpdateRankingPerGame.call
+      puts "Done. Visit /statistics to see the chart with #{count} games."
+    end
+
     def set_random_game_goals
       games = Game.all
       if games.present?
@@ -38,7 +59,10 @@ if Rails.env.development? || Rails.env.test?
                               confirmed_at: Time.now.utc,
                               confirmation_sent_at: 1.hour.ago})
           user.confirm
-          puts "Nutzer #{user.name} angelegt - gets randoms tips on first login"
+
+          # Tips are normally created on first login — trigger directly here for dev setup
+          Tips::FromUser.call(user_id: user.id)
+          puts "Nutzer #{user.name} angelegt mit Zufallstipps"
         end
       end
     end
