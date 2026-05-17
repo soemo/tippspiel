@@ -132,10 +132,10 @@ describe RankingPresenter do
   end
 
   describe '#bonus_hint_for?' do
+    subject { described_class.new(current_user) }
+
     let(:current_user) { instance_double(User, id: 1) }
     let(:other_user)   { instance_double(User, id: 2) }
-
-    subject { described_class.new(current_user) }
 
     context 'when bonus answers are visible (Round of 16 started)' do
       it 'returns false regardless of user match' do
