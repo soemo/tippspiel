@@ -8,22 +8,43 @@ module ApplicationHelper
     link_to(icon('fas', 'trophy', I18n.t(:hall_of_fame), {class: 'fa-fw'}), hall_of_fame_path)
   end
 
-  # used with mixitup
-  def filter_categories_options
-    FILTER_CATEGORIES.map do |filter_category|
-      css_classes = 'filter button'
-      data_filter = ".category-#{filter_category}"
-      if filter_category == FILTER_DEFAULT
-        css_classes << ' active'
-        data_filter = 'all'
-      end
-
+  # Structured filter sections for the mixitup dropdown filter.
+  # Each section has a translated title and a list of options
+  # ({label, data_filter}). The "all" option in the status section
+  # is the default and uses the literal mixitup "all" selector.
+  def tip_filter_sections
+    [
       {
-          label: I18n.t("filter.#{filter_category}"),
-          class: css_classes,
-          data_filter: data_filter
+        title: I18n.t('filter.section.status'),
+        options: FILTER_CATEGORIES.map do |filter_category|
+          {
+            label: I18n.t("filter.#{filter_category}"),
+            data_filter: filter_category == FILTER_DEFAULT ? 'all' : ".category-#{filter_category}",
+            default: filter_category == FILTER_DEFAULT
+          }
+        end
+      },
+      {
+        title: I18n.t('filter.section.group'),
+        options: GROUPS.map do |group|
+          {
+            label: "#{I18n.t('round.group')} #{group}",
+            data_filter: ".category-#{FILTER_GROUP_PREFIX}#{group}",
+            default: false
+          }
+        end
+      },
+      {
+        title: I18n.t('filter.section.round'),
+        options: ROUNDS.reject { |r| r == GROUP }.map do |round|
+          {
+            label: I18n.t(round, scope: 'round'),
+            data_filter: ".category-#{FILTER_ROUND_PREFIX}#{round}",
+            default: false
+          }
+        end
       }
-    end
+    ]
   end
 
   def write_flash_messages

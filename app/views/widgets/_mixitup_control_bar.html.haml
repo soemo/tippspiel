@@ -1,3 +1,30 @@
-.button-group.small#mixitup-control-bar
-  - filter_categories_options.each do |options|
-    = button_tag(options[:label], class: options[:class], data: {filter: options[:data_filter]})
+-# Foundation 6 dropdown-pane based filter widget for mixitup.
+-# The button shows the current active filter label; the chip with × is
+-# only visible when a non-default filter is active and resets to "Alle".
+.mixitup-filter-wrapper#mixitup-control-bar
+  %button.mixitup-filter-toggle{type: 'button',
+                                 'aria-controls': 'mixitup-filter-pane',
+                                 'aria-haspopup': true,
+                                 'aria-expanded': false}
+    %span.mixitup-filter-toggle-label= I18n.t('filter.label')
+    %span.mixitup-filter-toggle-current= I18n.t('filter.all')
+    %span.mixitup-filter-caret ▾
+
+  %button.mixitup-filter-reset{type: 'button',
+                               hidden: true,
+                               'aria-label': I18n.t('filter.reset')}
+    %span.mixitup-filter-reset-x &times;
+
+  .mixitup-filter-pane#mixitup-filter-pane
+    - tip_filter_sections.each do |section|
+      .mixitup-filter-section
+        %h6.mixitup-filter-section-title= section[:title]
+        %ul.mixitup-filter-list.no-bullet
+          - section[:options].each do |option|
+            %li
+              %a.mixitup-filter-link{href: '#',
+                                     class: (option[:default] ? 'active' : nil),
+                                     data: {filter: option[:data_filter],
+                                            label: option[:label],
+                                            default: option[:default]}}
+                = option[:label]

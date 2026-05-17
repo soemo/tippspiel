@@ -15,20 +15,32 @@ describe ApplicationHelper, type: :helper do
     end
   end
 
-  describe '#filter_categories_options' do
+  describe '#tip_filter_sections' do
 
-    it 'returns mixitup filter buuton options' do
-      expect(helper.filter_categories_options).to eq(
-                                                      [{:label=>"Alle Spiele",
-                                                        :class=>"filter button active",
-                                                        :data_filter=>"all"},
-                                                       {:label=>"Heutige Spiele",
-                                                        :class=>"filter button",
-                                                        :data_filter=>".category-today"},
-                                                       {:label=>"Offene Spiele",
-                                                        :class=>"filter button",
-                                                        :data_filter=>".category-future"}]
-                                                  )
+    it 'returns status, group and round sections with translated labels' do
+      sections = helper.tip_filter_sections
+
+      expect(sections.map { |s| s[:title] }).to eq(['Status', 'Gruppe', 'Runde'])
+
+      status = sections[0]
+      expect(status[:options]).to eq([
+        { label: 'Alle Spiele',    data_filter: 'all',             default: true },
+        { label: 'Heutige Spiele', data_filter: '.category-today', default: false },
+        { label: 'Offene Spiele',  data_filter: '.category-future', default: false },
+      ])
+
+      group = sections[1]
+      expect(group[:options].first).to eq(
+        label: 'Gruppe A', data_filter: '.category-group-A', default: false
+      )
+      expect(group[:options].size).to eq(GROUPS.size)
+
+      round = sections[2]
+      # The group round is excluded — group filter is its own section.
+      expect(round[:options].map { |o| o[:label] }).not_to include('Gruppe')
+      expect(round[:options]).to include(
+        a_hash_including(data_filter: '.category-round-final', default: false)
+      )
     end
   end
 

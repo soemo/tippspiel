@@ -197,6 +197,12 @@ en:
     all: 'All games'
     today: "Today's games"
     future: 'Upcoming games'
+    label: 'Filter:'
+    reset: 'Clear filter'
+    section:
+      status: 'Status'
+      group: 'Group'
+      round: 'Round'
 
   date:
     formats:

@@ -28,27 +28,49 @@ describe GamePresenter do
 
     context 'if game is today' do
 
-      it 'returns mix and category-today' do
+      it 'returns mix, category-today and the category for its round' do
         expect(game).to receive(:today?).and_return(true)
         expect(game).to receive(:started?).and_return(true)
-        expect(subject.filter_categories_css_classes).to eq('mix category-today')
+        expect(subject.filter_categories_css_classes).to eq('mix category-today category-round-round')
       end
     end
 
     context 'if game is in the future and today' do
 
-      it 'returns mix, category-today and category-future' do
+      it 'returns mix, category-today, category-future and the round category' do
         expect(game).to receive(:today?).and_return(true)
         expect(game).to receive(:started?).and_return(false)
-        expect(subject.filter_categories_css_classes).to eq('mix category-today category-future')
+        expect(subject.filter_categories_css_classes).to eq('mix category-today category-future category-round-round')
       end
     end
 
     context 'if game is not in the future and not today' do
 
-      it 'returns mix' do
+      it 'returns mix and the round category' do
         expect(game).to receive(:today?).and_return(false)
         expect(game).to receive(:started?).and_return(true)
+        expect(subject.filter_categories_css_classes).to eq('mix category-round-round')
+      end
+    end
+
+    context 'if game has a group' do
+
+      it 'returns the group category class' do
+        expect(game).to receive(:today?).and_return(false)
+        expect(game).to receive(:started?).and_return(true)
+        game.group = 'A'
+        game.round = GROUP
+        expect(subject.filter_categories_css_classes).to eq('mix category-group-A category-round-group')
+      end
+    end
+
+    context 'if game has no group and no round' do
+
+      it 'returns only mix' do
+        expect(game).to receive(:today?).and_return(false)
+        expect(game).to receive(:started?).and_return(true)
+        game.group = nil
+        game.round = nil
         expect(subject.filter_categories_css_classes).to eq('mix')
       end
     end

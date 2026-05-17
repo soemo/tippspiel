@@ -12,6 +12,8 @@ class GamePresenter < DelegateClass(Game)
     css_classes = ['mix']
     css_classes << "category-#{FILTER_TODAY}" if @game.today?
     css_classes << "category-#{FILTER_FUTURE}" if !@game.started?
+    css_classes << "category-#{FILTER_GROUP_PREFIX}#{@game.group}" if @game.group.present?
+    css_classes << "category-#{FILTER_ROUND_PREFIX}#{@game.round}" if @game.round.present?
 
     css_classes.join(' ')
   end
