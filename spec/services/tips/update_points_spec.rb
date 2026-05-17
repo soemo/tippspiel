@@ -63,17 +63,19 @@ describe Tips::UpdatePoints do
       end
     end
 
-    it 'updates all tip points for a game' do
+    it 'updates all tip points for a single finished game' do
       expect(Tip.where(game_id: @game1.id).size).to eq(5)
       where_sql = ['game_id = ? and tip_points is not null', @game1.id]
       tips = Tip.where(where_sql).to_a
       expect(tips).not_to be_present
 
-      subject.new.send(:update_all_tip_points_for, @game1)
+      @game1.update_column(:finished, true)
+
+      subject.call
 
       tips = Tip.where(where_sql).to_a
       expect(tips).to be_present
-      tips.size == 5
+      expect(tips.size).to eq(5)
     end
 
     it 'updates all tip points for all games' do
@@ -94,6 +96,18 @@ describe Tips::UpdatePoints do
       subject.call
       # alleTipp Punkte vergeben
       expect(Tip.where(tip_points: nil).count).to eq(0)
+    end
+
+    it 'skips finished games with missing result goals instead of crashing' do
+      # Admins can mark a game finished without entering goals — the previous
+      # winner(game) guard returned early; the bulk path must do the same.
+      game_without_goals = create(:game, finished: true,
+                                         team1_goals: nil, team2_goals: nil)
+      tip = create(:tip, user: @user1, game: game_without_goals,
+                         team1_goals: 1, team2_goals: 0)
+
+      expect { subject.call }.not_to raise_error
+      expect(Tip.find(tip.id).tip_points).to be_nil
     end
   end
 end
