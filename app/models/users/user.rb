@@ -8,16 +8,15 @@ class User < ApplicationRecord
   has_many   :tips, dependent: :destroy
 
   validates :email, presence: true
-  validates :email, uniqueness: { allow_blank: true, scope: :deleted_at, case_sensitive: false,
-                                  if: :email_changed? }
+  validates :email, uniqueness: { allow_blank: true, scope: :deleted_at, case_sensitive: false }, if: :email_changed?
   validates :email, format: { with: Devise.email_regexp, allow_blank: true }
-  validates :email, confirmation: { if: :email_confirmation_required? }
+  validates :email, confirmation: true, if: :email_confirmation_required?
   validates               :firstname, presence: true
   validates               :lastname, presence: true
   validate :name_fields_must_not_contain_email
 
-  validates :password, presence: { if: :password_required? }
-  validates :password, confirmation: { if: :password_required? }
+  validates :password, presence: true, if: :password_required?
+  validates :password, confirmation: true, if: :password_required?
   validates :password, length: { within: Devise.password_length, allow_blank: true }
 
   # Include default devise modules. Others available are:

@@ -32,4 +32,5 @@ class AppSetting < ApplicationRecord
     record.save!
     record
   end
+  private_class_method :upsert_value
 end

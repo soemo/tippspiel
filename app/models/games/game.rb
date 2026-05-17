@@ -5,7 +5,7 @@ class Game < ApplicationRecord
 
   belongs_to :team1, class_name: 'Team', optional: true
   belongs_to :team2, class_name: 'Team', optional: true
-  has_many   :tips, dependent: :destroy
+  has_many   :tips # rubocop:disable Rails/HasManyOrHasOneDependent -- games are soft-deleted via acts_as_paranoid; cascade-destroying tips is not intended
 
   validates :place, presence: true
   validates :round, presence: true
