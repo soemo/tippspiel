@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe RankingPresenter do
-  subject { described_class.new }
+  subject { described_class.new(nil) }
 
   describe '#bonus_answers_visible?' do
     context 'if Tournament.round_of_16_started? == true' do
@@ -126,7 +126,55 @@ describe RankingPresenter do
     context 'if bonus_answers_visible? == false' do
       it 'shows info text' do
         expect(subject).to receive(:bonus_answers_visible?).and_return(false)
-        expect(subject.bonus_ranking_info(nil)).to eq(I18n.t('ranking_bonus_answers_currently_not_visible'))
+        expect(subject.bonus_ranking_info(nil)).to eq('')
+      end
+    end
+  end
+
+  describe '#bonus_hint_for?' do
+    subject { described_class.new(current_user) }
+
+    let(:current_user) { instance_double(User, id: 1) }
+    let(:other_user)   { instance_double(User, id: 2) }
+
+    context 'when bonus answers are visible (Round of 16 started)' do
+      it 'returns false regardless of user match' do
+        allow(subject).to receive(:bonus_answers_visible?).and_return(true)
+        expect(subject.bonus_hint_for?(current_user)).to be false
+      end
+    end
+
+    context 'when bonus answers are not yet visible' do
+      before { allow(subject).to receive(:bonus_answers_visible?).and_return(false) }
+
+      context 'when the row user is not the current_user' do
+        it 'returns false' do
+          expect(subject.bonus_hint_for?(other_user)).to be false
+        end
+      end
+
+      context 'when current_user is nil' do
+        subject { described_class.new(nil) }
+
+        it 'returns false' do
+          expect(subject.bonus_hint_for?(other_user)).to be false
+        end
+      end
+
+      context 'when the row user is the current_user' do
+        context 'and all bonus questions are filled out' do
+          it 'returns false' do
+            allow(current_user).to receive(:all_bonus_questions_filled_out?).and_return(true)
+            expect(subject.bonus_hint_for?(current_user)).to be false
+          end
+        end
+
+        context 'and not all bonus questions are filled out' do
+          it 'returns true' do
+            allow(current_user).to receive(:all_bonus_questions_filled_out?).and_return(false)
+            expect(subject.bonus_hint_for?(current_user)).to be true
+          end
+        end
       end
     end
   end

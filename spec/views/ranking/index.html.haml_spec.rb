@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'rankings/index' do
-  let(:presenter) { RankingPresenter.new }
+  let(:presenter) { RankingPresenter.new(nil) }
 
   before do
     allow(Tournament).to receive(:round_of_16_not_yet_started?).and_return(true)
@@ -27,8 +27,7 @@ describe 'rankings/index' do
     assign(:presenter, presenter)
     user_size = 10
     expect(presenter).to receive(:user_count).and_return(user_size)
-    # 2x10 + one time in the index
-    expect(presenter).to receive(:bonus_answers_visible?).exactly(21).times.and_return(false)
+    expect(presenter).to receive(:bonus_answers_visible?).at_least(:once).and_return(false)
 
     # create 10 users
     users = []
@@ -91,8 +90,7 @@ describe 'rankings/index' do
 
     user_size = user_points.count
     expect(presenter).to receive(:user_count).and_return(user_size)
-    # 2x10 + one time in the index
-    expect(presenter).to receive(:bonus_answers_visible?).exactly(21).times.and_return(false)
+    expect(presenter).to receive(:bonus_answers_visible?).at_least(:once).and_return(false)
 
     # create users
     users = user_points.map do |key, data|

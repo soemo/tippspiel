@@ -119,6 +119,7 @@ de:
   no_when_first_goal_tip: 'Du hast leider keinen Tipp abgegeben, wann im Finale das erste Tor fällt!'
   no_how_many_goals_tip: 'Du hast leider keinen Tipp abgegeben, wieviele Tore der Torschützenkönig erzielt!'
   ranking_bonus_answers_currently_not_visible: 'Noch nicht sichtbar'
+  ranking_bonus_hint_link: "Bonusfragen?"
   ranking_bonus_answers_help: "Sieger Flagge | Flagge zweiter Platz | Wann fällt das erste Tor | Anzahl Tore"
 
   x_user_bet: "%{user_count} 'Fußball-Experten' wetteifern um den Sieg und einen Platz in der "
