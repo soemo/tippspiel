@@ -41,6 +41,7 @@ class RankingPresenter
   def bonus_hint_for?(user)
     return false if bonus_answers_visible?
     return false unless @current_user&.id == user.id
+
     !@current_user.all_bonus_questions_filled_out?
   end
 
