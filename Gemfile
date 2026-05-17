@@ -26,7 +26,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'lograge'
 gem 'mysql2', '~> 0.5.6' # keep on 0.5.x; explicit encoding: utf8mb4 in database.yml
-gem 'sass-rails', '= 5.1.0' # TODO: upgrade later to sassc-rails
+gem 'sass-rails', '6.0.0' # TODO: upgrade later to sassc-rails
 gem 'uglifier'
 gem 'whenever', require: false # cron schedule for result imports
 
