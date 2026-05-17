@@ -9,7 +9,7 @@ describe Results::BackfillFootballDataIds do
         @payload = payload
       end
 
-      def fetch_competition_matches(_competition_code: nil, _status: nil)
+      def fetch_competition_matches(competition_code: nil, status: nil) # rubocop:disable Lint/UnusedMethodArgument -- fake ignores args, real client uses them
         @payload
       end
     end

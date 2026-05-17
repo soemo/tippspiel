@@ -17,23 +17,6 @@ class RankingPresenter
     ].join(' | ')
   end
 
-  private
-
-  def team_flag_or_dash(team, flag_size)
-    return '-' unless team
-
-    TeamPresenter.new(team).teamflag(flag_size)
-  end
-
-  def first_goal_label(user)
-    return '-' if user.bonus_when_final_first_goal.blank?
-
-    option = BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL[user.bonus_when_final_first_goal]
-    I18n.t("bonus_questions.when_final_first_goal_options.#{option}_short")
-  end
-
-  public
-
   def finished_games_count
     GameQueries.finished.count
   end
@@ -49,5 +32,20 @@ class RankingPresenter
   def user_ranking_hash
     user_ranking = Users::PrepareRanking.call(users_for_ranking: ::UserQueries.all_ordered_by_points_and_all_countxpoints)
     user_ranking.sort
+  end
+
+  private
+
+  def team_flag_or_dash(team, flag_size)
+    return '-' unless team
+
+    TeamPresenter.new(team).teamflag(flag_size)
+  end
+
+  def first_goal_label(user)
+    return '-' if user.bonus_when_final_first_goal.blank?
+
+    option = BONUS_OPTIONS_WHEN_WILL_THE_FIRST_GOAL[user.bonus_when_final_first_goal]
+    I18n.t("bonus_questions.when_final_first_goal_options.#{option}_short")
   end
 end

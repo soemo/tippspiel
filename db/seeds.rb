@@ -42,7 +42,7 @@ def create_team_and_game_data
   end
 end
 
-Rails.logger.debug 'recreate team and game data'
+puts 'recreate team and game data' # rubocop:disable Rails/Output -- seed scripts print progress to stdout intentionally
 clear_games_and_teams
 create_team_and_game_data
-Rails.logger.debug 'ready!'
+puts 'ready!' # rubocop:disable Rails/Output -- seed scripts print progress to stdout intentionally
