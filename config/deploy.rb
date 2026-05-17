@@ -40,6 +40,13 @@ set :log_level, :debug
 
 set :bundle_flags, ''
 
+# Force Bundler to install gems from source on the server instead of using
+# precompiled native binaries. Required because Uberspace runs CentOS 7
+# (glibc 2.17), and nokogiri's precompiled x86_64-linux-gnu binary needs
+# glibc >= 2.28. Compiling from source uses nokogiri's vendored libxml2/libxslt.
+# Adds ~30-90s to each deploy.
+set :bundle_config, { force_ruby_platform: true }
+
 # By default, Capistrano::Uberspace uses the ruby versions installed on your uberspace that matches your `.ruby-version` file.
 
 # As of Capistrano 3.x, the `deploy:restart` task is not called automatically.
