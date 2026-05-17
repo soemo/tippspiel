@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class RankingPresenter
+  def initialize(current_user)
+    @current_user = current_user
+  end
+
   def bonus_answers_visible?
     Tournament.round_of_16_started?
   end
 
   def bonus_ranking_info(user, for_small_screen: false)
-    return I18n.t('ranking_bonus_answers_currently_not_visible') unless bonus_answers_visible?
+    return '' unless bonus_answers_visible?
 
     flag_size = for_small_screen ? 16 : 32
     [
@@ -32,6 +36,12 @@ class RankingPresenter
   def user_ranking_hash
     user_ranking = Users::PrepareRanking.call(users_for_ranking: ::UserQueries.all_ordered_by_points_and_all_countxpoints)
     user_ranking.sort
+  end
+
+  def bonus_hint_for?(user)
+    return false if bonus_answers_visible?
+    return false unless @current_user&.id == user.id
+    !@current_user.all_bonus_questions_filled_out?
   end
 
   private

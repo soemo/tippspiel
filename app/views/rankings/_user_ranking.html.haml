@@ -27,13 +27,19 @@
                         = user_points
                   .row
                     .small-5.columns.small-infos
-                      = raw presenter.bonus_ranking_info(user, for_small_screen: true)
+                      - if presenter.bonus_hint_for?(user)
+                        = link_to t('ranking_bonus_hint_link'), edit_bonus_path, style: 'white-space: nowrap'
+                      - else
+                        = raw presenter.bonus_ranking_info(user, for_small_screen: true)
                     .small-7.columns.text-right
                       = statistic_content(user).html_safe
 
             %td.hide-for-small-only.place= place
             %td.hide-for-small-only= user_name_with_statistic_link
-            %td.hide-for-small-only= raw presenter.bonus_ranking_info(user)
+            - if presenter.bonus_hint_for?(user)
+              %td.hide-for-small-only= link_to t('ranking_bonus_hint_link'), edit_bonus_path, style: 'white-space: nowrap'
+            - else
+              %td.hide-for-small-only= raw presenter.bonus_ranking_info(user)
             %td.hide-for-small-only
               %span.user-points= user_points
               %span.user-statistic= statistic_content(user).html_safe

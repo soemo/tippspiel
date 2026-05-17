@@ -94,6 +94,7 @@ en:
   no_when_first_goal_tip: "Sorry, you didn't submit a tip for when the first goal will be scored in the final!"
   no_how_many_goals_tip: "Sorry, you didn't submit a tip for how many goals the top scorer will score!"
   ranking_bonus_answers_currently_not_visible: 'Not yet visible'
+  ranking_bonus_hint_link: "Bonus questions?"
   ranking_bonus_answers_help: "Winner flag | Runner-up flag | When first goal | Top scorer goals"
 
   x_user_bet: "%{user_count} 'football-experts' are competing for the win and a place in the "
