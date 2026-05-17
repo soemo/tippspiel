@@ -36,6 +36,7 @@ end
 
 group :development do
   gem 'letter_opener_web'
+  gem 'parallel', '< 2' # 2.x requires Ruby >= 3.3; we're on 3.2.x
   gem 'rack-livereload'
   gem 'rack-mini-profiler'
 
