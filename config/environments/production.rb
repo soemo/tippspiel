@@ -81,7 +81,7 @@ Rails.application.configure do
   #  Hier gefunden:
   #  https://github.com/mikel/mail/issues/70#issuecomment-2639987
   config.action_mailer.sendmail_settings = {
-    arguments: '-i'
+    arguments: %w[-i]
   }
   config.action_mailer.delivery_method = :sendmail
 
