@@ -31,7 +31,99 @@ $(function(){
       enable: false
     }
   });
+
+  initMixitupFilterDropdown();
 });
+
+// Wires the Foundation dropdown-pane filter UI to mixitup.
+// Filters are mutually exclusive: clicking one applies it as the sole filter,
+// updates the toggle label, shows the reset chip, and closes the pane.
+// The reset chip restores the default "all" filter.
+function initMixitupFilterDropdown(){
+  var $wrapper = $('#mixitup-control-bar');
+  if ($wrapper.length === 0) return;
+
+  var $table       = $('#mixitup-table');
+  var $toggleLabel = $wrapper.find('.mixitup-filter-toggle-current');
+  var $toggle      = $wrapper.find('.mixitup-filter-toggle');
+  var $reset       = $wrapper.find('.mixitup-filter-reset');
+  var $pane        = $('#mixitup-filter-pane');
+  var $links       = $wrapper.find('.mixitup-filter-link');
+
+  function openPane(){
+    $pane.addClass('is-open');
+    $toggle.attr('aria-expanded', true);
+  }
+
+  function closePane(){
+    $pane.removeClass('is-open');
+    $toggle.attr('aria-expanded', false);
+  }
+
+  function isDefaultLink($link){
+    return $link.data('default') === true || $link.data('filter') === 'all';
+  }
+
+  function applyFilter($link){
+    var selector  = $link.data('filter');
+    var label     = $link.data('label');
+    var isDefault = isDefaultLink($link);
+
+    $links.removeClass('active');
+    $link.addClass('active');
+    $toggleLabel.text(label);
+
+    if (isDefault) {
+      $reset.prop('hidden', true);
+    } else {
+      $reset.prop('hidden', false);
+    }
+
+    if ($table.length) {
+      $table.mixItUp('filter', selector);
+    }
+
+    closePane();
+  }
+
+  // Toggle pane on button click; stop propagation so the document handler
+  // doesn't immediately close it again.
+  $toggle.on('click', function(e){
+    e.stopPropagation();
+    if ($pane.hasClass('is-open')) {
+      closePane();
+    } else {
+      openPane();
+    }
+  });
+
+  // Close when clicking a filter link (stopPropagation is inside applyFilter via closePane).
+  $links.on('click', function(e){
+    e.preventDefault();
+    applyFilter($(this));
+  });
+
+  // Close when clicking the reset chip.
+  $reset.on('click', function(e){
+    e.preventDefault();
+    var $default = $links.filter(function(){
+      return isDefaultLink($(this));
+    }).first();
+    if ($default.length) applyFilter($default);
+  });
+
+  // Close when clicking anywhere outside the widget.
+  $(document).on('click.mixitup-filter', function(e){
+    if ($pane.hasClass('is-open') && !$wrapper[0].contains(e.target)) {
+      closePane();
+    }
+  });
+
+  // Close on Escape key.
+  $(document).on('keydown.mixitup-filter', function(e){
+    if (e.key === 'Escape') closePane();
+  });
+}
 
 function initCheckTippChanges(){
   // https://github.com/codedance/jquery.AreYouSure - alerts users to unsaved changes

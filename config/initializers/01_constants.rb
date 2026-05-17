@@ -77,4 +77,9 @@ FILTER_TODAY = 'today'.freeze
 FILTER_FUTURE = 'future'.freeze
 FILTER_CATEGORIES = [FILTER_DEFAULT, FILTER_TODAY, FILTER_FUTURE]
 
+# Mixitup filter class prefixes for group / round filters.
+# The actual filter values are derived from tournament data (GROUPS, ROUNDS).
+FILTER_GROUP_PREFIX = 'group-'.freeze
+FILTER_ROUND_PREFIX = 'round-'.freeze
+
 SUPPORTED_LOCALES = %w[de en].freeze

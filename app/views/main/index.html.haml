@@ -36,6 +36,10 @@
 
 .row
   .small-12.columns
-    %h3= t('your_tips')
+    .tips-header
+      %h3.tips-header-title= t('your_tips')
+      - if @presenter.tips.present?
+        .tips-header-filter
+          = render partial: 'widgets/mixitup_control_bar'
 
     = render partial: 'user_tips', locals: {presenter: @presenter}

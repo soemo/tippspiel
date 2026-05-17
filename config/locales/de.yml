@@ -199,6 +199,12 @@ de:
     all: 'Alle Spiele'
     today: 'Heutige Spiele'
     future:  'Offene Spiele'
+    label: 'Filter:'
+    reset: 'Filter zurücksetzen'
+    section:
+      status: 'Status'
+      group: 'Gruppe'
+      round: 'Runde'
 
   date:
     formats:
