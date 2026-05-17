@@ -97,5 +97,17 @@ describe Tips::UpdatePoints do
       # alleTipp Punkte vergeben
       expect(Tip.where(tip_points: nil).count).to eq(0)
     end
+
+    it 'skips finished games with missing result goals instead of crashing' do
+      # Admins can mark a game finished without entering goals — the previous
+      # winner(game) guard returned early; the bulk path must do the same.
+      game_without_goals = create(:game, finished: true,
+                                         team1_goals: nil, team2_goals: nil)
+      tip = create(:tip, user: @user1, game: game_without_goals,
+                         team1_goals: 1, team2_goals: 0)
+
+      expect { subject.call }.not_to raise_error
+      expect(Tip.find(tip.id).tip_points).to be_nil
+    end
   end
 end

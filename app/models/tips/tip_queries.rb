@@ -67,11 +67,18 @@ module TipQueries
 
     # Returns an array of [tip_id, tip_team1_goals, tip_team2_goals,
     #                      game_team1_goals, game_team2_goals] rows for every
-    # tip belonging to a finished game. Single query replacing the
-    # per-finished-game SELECT loop in Tips::UpdatePoints.
+    # tip belonging to a finished game whose result is fully recorded.
+    # Single query replacing the per-finished-game SELECT loop in
+    # Tips::UpdatePoints.
+    #
+    # Games are filtered to those with both team1_goals and team2_goals set,
+    # because admins can mark a game finished without entering goals — those
+    # games must be skipped (matches the legacy `winner(game)` nil-guard).
     def all_tips_with_game_results_for_finished_games
       Tip.joins(:game)
          .where(games: { finished: true })
+         .where.not(games: { team1_goals: nil })
+         .where.not(games: { team2_goals: nil })
          .pluck(:id, :team1_goals, :team2_goals,
                 'games.team1_goals', 'games.team2_goals')
     end

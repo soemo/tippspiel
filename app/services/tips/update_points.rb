@@ -47,6 +47,10 @@ module Tips
     end
 
     def points_for_row(tip_t1, tip_t2, game_t1, game_t2)
+      # Defense in depth: the bulk query already filters games with missing
+      # goals, but a finished game without a recorded result must always be
+      # skipped — matches the legacy winner(game) nil-guard.
+      return 0 if game_t1.blank? || game_t2.blank?
       return 0 if tip_t1.blank? || tip_t2.blank?
 
       calculate_tip_points(winner_from_goals(game_t1, game_t2),
