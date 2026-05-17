@@ -66,7 +66,7 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers', '~> 6.0', require: false # 7.x drops Rails 6.1 support
   gem 'simplecov'
   gem 'timecop'
 end

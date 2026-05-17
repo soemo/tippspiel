@@ -110,16 +110,16 @@ describe TipQueries do
     end
   end
 
-  describe '::exists_for_user_id' do
+  describe '::exists_for_user_id?' do
     context 'if tips exist for user_id' do
       it 'returns true' do
-        expect(subject.exists_for_user_id(user2.id)).to be true
+        expect(subject.exists_for_user_id?(user2.id)).to be true
       end
     end
 
     context 'if no tips exist for user_id' do
-      it 'returns true' do
-        expect(subject.exists_for_user_id(user_with_no_tips.id)).to be false
+      it 'returns false' do
+        expect(subject.exists_for_user_id?(user_with_no_tips.id)).to be false
       end
     end
   end

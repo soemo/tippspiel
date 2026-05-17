@@ -38,7 +38,7 @@ module TipQueries
       Tip.where({ user_id: user_id, tip_points: tip_points })
     end
 
-    def exists_for_user_id(user_id)
+    def exists_for_user_id?(user_id)
       Tip.exists?(user_id: user_id)
     end
 

@@ -28,10 +28,10 @@ describe 'bonus/edit.html.haml' do
       expect(rendered).to have_xpath("//select[@id='bonus_when_final_first_goal']")
       expect(rendered).to have_xpath("//input[@id='bonus_how_many_goals']")
 
-      expect(rendered).to have_no_content(I18n.t('no_champion_tip'))
-      expect(rendered).to have_no_content(I18n.t('no_second_tip'))
-      expect(rendered).to have_no_content(I18n.t('no_when_first_goal_tip'))
-      expect(rendered).to have_no_content(I18n.t('no_how_many_goals_tip'))
+      expect(rendered).to have_no_text(I18n.t('no_champion_tip'))
+      expect(rendered).to have_no_text(I18n.t('no_second_tip'))
+      expect(rendered).to have_no_text(I18n.t('no_when_first_goal_tip'))
+      expect(rendered).to have_no_text(I18n.t('no_how_many_goals_tip'))
     end
   end
 
@@ -53,10 +53,10 @@ describe 'bonus/edit.html.haml' do
       expect(rendered).to have_no_xpath("//select[@id='bonus_when_final_first_goal']")
       expect(rendered).to have_no_xpath("//input[@id='bonus_how_many_goals']")
 
-      expect(rendered).to have_content(I18n.t('no_champion_tip'))
-      expect(rendered).to have_content(I18n.t('no_second_tip'))
-      expect(rendered).to have_content(I18n.t('no_when_first_goal_tip'))
-      expect(rendered).to have_content(I18n.t('no_how_many_goals_tip'))
+      expect(rendered).to have_text(I18n.t('no_champion_tip'))
+      expect(rendered).to have_text(I18n.t('no_second_tip'))
+      expect(rendered).to have_text(I18n.t('no_when_first_goal_tip'))
+      expect(rendered).to have_text(I18n.t('no_how_many_goals_tip'))
     end
   end
 end

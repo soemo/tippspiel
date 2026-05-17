@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
@@ -122,4 +122,8 @@ RSpec/RepeatedExampleGroupDescription:
 RSpec/VoidExpect:
   Enabled: false
 RSpec/LeakyConstantDeclaration:
+  Enabled: false
+
+# Rails/StrongParametersExpect uses params.expect() which is a Rails 8+ API
+Rails/StrongParametersExpect:
   Enabled: false

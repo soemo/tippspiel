@@ -16,7 +16,7 @@ module Tips
       games = Game.all
       games.each do |game|
         if game.finished?
-          Rails.logger.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}") if Rails.logger.present?
+          Rails.logger.presence&.info("UPDATE_ALL_TIPP_POINTS: for game-id #{game.id}")
           update_all_tip_points_for(game)
         end
       end

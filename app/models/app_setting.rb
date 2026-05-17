@@ -9,13 +9,13 @@ class AppSetting < ApplicationRecord
   # Returns Integer or nil
   def self.bonus_answer_how_many_goals
     value = find_by(key: BONUS_HOW_MANY_GOALS_KEY)&.value
-    value.present? ? value.to_i : nil
+    value.presence&.to_i
   end
 
   # Returns Integer or nil
   def self.bonus_answer_when_will_the_first_goal
     value = find_by(key: BONUS_WHEN_FIRST_GOAL_KEY)&.value
-    value.present? ? value.to_i : nil
+    value.presence&.to_i
   end
 
   def self.set_bonus_answer_how_many_goals(val) # rubocop:disable Naming/AccessorMethodName -- intentional key-value store API naming

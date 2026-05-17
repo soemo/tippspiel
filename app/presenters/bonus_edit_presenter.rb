@@ -8,7 +8,7 @@ class BonusEditPresenter
   end
 
   def bonus_champion_team
-    current_user.present? ? current_user.bonus_champion_team : nil
+    current_user.presence&.bonus_champion_team
   end
 
   def bonus_champion_team_id
@@ -25,7 +25,7 @@ class BonusEditPresenter
   end
 
   def bonus_second_team
-    current_user.present? ? current_user.bonus_second_team : nil
+    current_user.presence&.bonus_second_team
   end
 
   def bonus_second_team_id
@@ -42,7 +42,7 @@ class BonusEditPresenter
   end
 
   def bonus_when_final_first_goal
-    current_user.present? ? current_user.bonus_when_final_first_goal : nil
+    current_user.presence&.bonus_when_final_first_goal
   end
 
   def bonus_when_final_first_goal_answer
@@ -55,7 +55,7 @@ class BonusEditPresenter
   end
 
   def bonus_how_many_goals
-    current_user.present? ? current_user.bonus_how_many_goals : nil
+    current_user.presence&.bonus_how_many_goals
   end
 
   def bonus_how_many_goals_answer

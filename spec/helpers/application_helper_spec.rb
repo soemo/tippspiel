@@ -19,7 +19,7 @@ describe ApplicationHelper do
     it 'returns status, group and round sections with translated labels' do
       sections = helper.tip_filter_sections
 
-      expect(sections.map { |s| s[:title] }).to eq(%w[Status Gruppe Runde])
+      expect(sections.pluck(:title)).to eq(%w[Status Gruppe Runde])
 
       status = sections[0]
       expect(status[:options]).to eq([
@@ -36,7 +36,7 @@ describe ApplicationHelper do
 
       round = sections[2]
       # The group round is excluded — group filter is its own section.
-      expect(round[:options].map { |o| o[:label] }).not_to include('Gruppe')
+      expect(round[:options].pluck(:label)).not_to include('Gruppe')
       expect(round[:options]).to include(
         a_hash_including(data_filter: '.category-round-final', default: false)
       )

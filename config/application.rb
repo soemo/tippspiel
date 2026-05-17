@@ -2,7 +2,6 @@
 
 require_relative 'boot'
 
-require 'logger' # concurrent-ruby >= 1.3 lazy-loads logger; Rails 6.1 needs it eager
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
