@@ -19,10 +19,11 @@
         img {
           width: 350px !important;
           height: 350px !important;
-          max-width: 100%;
+          max-width: 350px;
           object-fit: cover;
           display: block;
           position: relative;
+          margin: 0 auto;
         }
 
         figcaption {
