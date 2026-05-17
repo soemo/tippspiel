@@ -63,17 +63,19 @@ describe Tips::UpdatePoints do
       end
     end
 
-    it 'updates all tip points for a game' do
+    it 'updates all tip points for a single finished game' do
       expect(Tip.where(game_id: @game1.id).size).to eq(5)
       where_sql = ['game_id = ? and tip_points is not null', @game1.id]
       tips = Tip.where(where_sql).to_a
       expect(tips).not_to be_present
 
-      subject.new.send(:update_all_tip_points_for, @game1)
+      @game1.update_column(:finished, true)
+
+      subject.call
 
       tips = Tip.where(where_sql).to_a
       expect(tips).to be_present
-      tips.size == 5
+      expect(tips.size).to eq(5)
     end
 
     it 'updates all tip points for all games' do

@@ -64,5 +64,16 @@ module TipQueries
       rows.each { |(uid, pts), cnt| result[uid][pts] = cnt }
       result
     end
+
+    # Returns an array of [tip_id, tip_team1_goals, tip_team2_goals,
+    #                      game_team1_goals, game_team2_goals] rows for every
+    # tip belonging to a finished game. Single query replacing the
+    # per-finished-game SELECT loop in Tips::UpdatePoints.
+    def all_tips_with_game_results_for_finished_games
+      Tip.joins(:game)
+         .where(games: { finished: true })
+         .pluck(:id, :team1_goals, :team2_goals,
+                'games.team1_goals', 'games.team2_goals')
+    end
   end
 end
