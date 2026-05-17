@@ -35,7 +35,8 @@ module Results
     Discrepancy  = Struct.new(:game, :db_score, :fd_score, :fd_status, :duration, keyword_init: true)
     Unmatched    = Struct.new(:fd_match, :reason, keyword_init: true)
 
-    def initialize(client: FootballDataClient.new) # rubocop:disable Lint/MissingSuper -- BaseService uses Virtus.model; this service has no Virtus attributes, super is unnecessary
+    def initialize(client: FootballDataClient.new)
+      super()
       @client = client
     end
 

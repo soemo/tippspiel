@@ -2,7 +2,7 @@
 
 module Tips
   class FromUser < BaseService
-    attribute :user_id, Integer
+    attribute :user_id
 
     def call
       result = []

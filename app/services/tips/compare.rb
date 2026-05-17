@@ -2,7 +2,7 @@
 
 module Tips
   class Compare < BaseService
-    attribute :game_id, Integer
+    attribute :game_id
 
     Result = Struct.new(:possible_games, :game_to_compare, :tips)
 

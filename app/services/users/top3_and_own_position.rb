@@ -2,7 +2,7 @@
 
 module Users
   class Top3AndOwnPosition < BaseService
-    attribute :user_id, Integer
+    attribute :user_id
 
     Result = Struct.new(:user_top3_ranking_hash, :own_position)
 
