@@ -11,13 +11,14 @@ module Users
     # ACHTUNG DER HASH IST NICHT SORTIERT !!!!
     def call # rubocop:disable Metrics/MethodLength -- ranking algorithm, sequential logic that can't be cleanly split
       result = {}
+      users  = Array(users_for_ranking)
 
-      if Array(users_for_ranking).present?
+      if users.present?
         place                    = 1
         user_count_on_same_place = 1
         last_used_user           = nil
 
-        Array(users_for_ranking).each do |u|
+        users.each do |u|
           if last_used_user.nil?
             # erste User
             result[place] = [u]
