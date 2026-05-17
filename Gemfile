@@ -23,7 +23,7 @@ gem 'font-awesome-sass', '= 5.15.1'
 gem 'foundation-rails', '= 6.2.4.0'
 gem 'haml', '= 5.2.2'
 gem 'haml-rails'
-gem 'jquery-rails', '= 4.6.0'
+gem 'jquery-rails'
 gem 'lograge'
 gem 'mysql2', '= 0.5.6'
 gem 'sass-rails', '= 5.1.0' # TODO: upgrade later to sassc-rails
@@ -59,7 +59,8 @@ group :development, :test do
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'webrick'
+  gem 'minitest', '< 6' # minitest 6 drops Logger constant, incompatible with Rails 6.1
+gem 'webrick'
 end
 
 group :test do
