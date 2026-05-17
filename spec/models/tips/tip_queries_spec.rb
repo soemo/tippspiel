@@ -118,7 +118,7 @@ describe TipQueries do
     end
 
     context 'if no tips exist for user_id' do
-      it 'returns true' do
+      it 'returns false' do
         expect(subject.exists_for_user_id?(user_with_no_tips.id)).to be false
       end
     end

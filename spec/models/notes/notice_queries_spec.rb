@@ -5,7 +5,7 @@ require 'rails_helper'
 describe NoticeQueries do
   subject { described_class }
 
-  describe '#order_by_created_at_asc' do
+  describe '#order_by_created_at_desc' do
     it 'returns with correct order' do
       Timecop.freeze(Time.zone.now)
       notice1 = create(:notice)
@@ -15,7 +15,7 @@ describe NoticeQueries do
       notice2.update_column(:created_at, 6.minutes.ago)
       notice3.update_column(:created_at, 1.minute.ago)
 
-      result = subject.order_by_created_at_asc
+      result = subject.order_by_created_at_desc
       expect(result.to_a).to eq([notice3, notice1, notice2])
     end
   end

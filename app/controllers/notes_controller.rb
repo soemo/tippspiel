@@ -3,7 +3,7 @@
 class NotesController < ApplicationController
   def index
     @notice = Notice.new
-    @notes = NoticeQueries.order_by_created_at_asc
+    @notes = NoticeQueries.order_by_created_at_desc
   end
 
   def create
