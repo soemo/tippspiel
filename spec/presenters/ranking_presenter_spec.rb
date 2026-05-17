@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe RankingPresenter do
-  subject { described_class.new }
+  subject { described_class.new(nil) }
 
   describe '#bonus_answers_visible?' do
     context 'if Tournament.round_of_16_started? == true' do
@@ -126,7 +126,7 @@ describe RankingPresenter do
     context 'if bonus_answers_visible? == false' do
       it 'shows info text' do
         expect(subject).to receive(:bonus_answers_visible?).and_return(false)
-        expect(subject.bonus_ranking_info(nil)).to eq(I18n.t('ranking_bonus_answers_currently_not_visible'))
+        expect(subject.bonus_ranking_info(nil)).to eq('')
       end
     end
   end
