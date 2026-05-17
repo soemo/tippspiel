@@ -16,10 +16,18 @@
         margin: 0;
         position: relative;
 
-        img {
-          max-width: 100%;
+        img,
+        img.thumbnail {
+          width: 290px !important;
+          height: 290px !important;
+          min-width: 290px;
+          min-height: 290px;
+          max-width: 290px !important;
+          max-height: 290px !important;
+          object-fit: cover;
           display: block;
           position: relative;
+          margin: 0 auto;
         }
 
         figcaption {
