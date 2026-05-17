@@ -31,7 +31,13 @@ gem 'uglifier'
 gem 'whenever', require: false # cron schedule for result imports
 
 group :development, :production do
-  gem 'passenger', '~> 6.1' # CVE-2025-26803 fixed in 6.1.x
+  # Pinned to 6.0.x: Passenger 6.1.x precompiled agent binaries require glibc >= 2.25,
+  # but our Uberspace host runs CentOS 7 with glibc 2.17. Passenger 6.1 then falls back
+  # to compiling the agent from source, which prompts interactively ("Compile with
+  # optimizations? [y/n]") — that hangs/exits under supervisord and breaks boot.
+  # Accepting CVE-2025-26803 (local-only privilege issue) as low risk on a single-tenant
+  # Uberspace account. Revisit when we move off CentOS 7 / upgrade Ruby post-World Cup.
+  gem 'passenger', '~> 6.0.20'
 end
 
 group :development do
