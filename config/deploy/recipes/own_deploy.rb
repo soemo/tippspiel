@@ -1,5 +1,6 @@
-namespace :deploy do
+# frozen_string_literal: true
 
+namespace :deploy do
   desc 'Set version and build date in version.rb on the remote server.'
   task :set_build_date do
     on roles(:web) do
@@ -8,7 +9,7 @@ namespace :deploy do
         # `bundle exec cap` process on the runner. SSHKit's `with` forwards it as an
         # environment variable to the remote shell, where the Rakefile reads it via
         # ENV.fetch('APP_VERSION', placeholder_version).
-        with app_version: ENV['APP_VERSION'] do
+        with app_version: ENV.fetch('APP_VERSION', nil) do
           execute :rake, 'tippspiel:set_version'
         end
       end
@@ -29,21 +30,19 @@ namespace :deploy do
       # keep_releases cleans up that directory.
       within current_path do
         with rails_env: fetch(:rails_env) do
-          begin
-            # The identifier is passed as an argument to --update-crontab
-            # (whenever 1.1.2 syntax), not as a separate --identifier flag.
-            # It scopes the crontab block so this app's entries can be
-            # updated/removed independently of other apps on the same account.
-            execute :bundle, :exec, :whenever,
-                    "--update-crontab #{fetch(:application)}",
-                    '--set', "environment=#{fetch(:rails_env)}"
-          rescue SSHKit::Command::Failed => e
-            # A crontab update failure must not abort the deploy — the new
-            # release is already live and serving traffic. Log a warning so
-            # the operator knows to re-run manually if needed.
-            warn "[WARN] deploy:update_crontab failed (#{e.message}). " \
-                 "Run 'bundle exec whenever --update-crontab #{fetch(:application)}' manually on the server."
-          end
+          # The identifier is passed as an argument to --update-crontab
+          # (whenever 1.1.2 syntax), not as a separate --identifier flag.
+          # It scopes the crontab block so this app's entries can be
+          # updated/removed independently of other apps on the same account.
+          execute :bundle, :exec, :whenever,
+                  "--update-crontab #{fetch(:application)}",
+                  '--set', "environment=#{fetch(:rails_env)}"
+        rescue SSHKit::Command::Failed => e
+          # A crontab update failure must not abort the deploy — the new
+          # release is already live and serving traffic. Log a warning so
+          # the operator knows to re-run manually if needed.
+          warn "[WARN] deploy:update_crontab failed (#{e.message}). " \
+               "Run 'bundle exec whenever --update-crontab #{fetch(:application)}' manually on the server."
         end
       end
     end
@@ -51,7 +50,6 @@ namespace :deploy do
   # Hook into deploy:finished so the app is fully live before we attempt
   # the crontab update. Failure is rescued above and will not abort the deploy.
   after 'deploy:finished', 'deploy:update_crontab'
-
 end
 
 namespace :db do

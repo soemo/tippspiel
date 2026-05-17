@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Admin::StartCalculatingsController do
-
   let!(:no_admin_user) { create(:active_user) }
   let!(:admin_user)    { create(:active_admin) }
 
@@ -32,5 +33,4 @@ describe Admin::StartCalculatingsController do
       end
     end
   end
-
 end

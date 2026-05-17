@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
 SimpleCov.start 'rails'
@@ -8,12 +10,11 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
 require 'devise'
-
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -79,7 +80,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryBot::Syntax::Methods
 
-  config.after(:each) { I18n.locale = I18n.default_locale }
+  config.after { I18n.locale = I18n.default_locale } # rubocop:disable Rails/I18nLocaleAssignment -- reset hook, with_locale doesn't apply here
 
   config.include Rails.application.routes.url_helpers
   config.include ActionView::Helpers::TranslationHelper

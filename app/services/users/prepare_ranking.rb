@@ -1,15 +1,15 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
+
 module Users
   class PrepareRanking < UserBaseService
-
-    attribute :users_for_ranking, Array[User]
+    attribute :users_for_ranking, [User]
 
     # bekommt eine Liste von Usern
     # sortiert nach Gesamtpunkten, Anzahl6Punkte, Anzahl4Punkte und Anzahl3Punkte geliefert
     # Es wird noch die Platzierung als Key hinzugefuegt
     # (wenn 3 Leute erster sind, ist der nächste dann auf Platz 4)
     # ACHTUNG DER HASH IST NICHT SORTIERT !!!!
-    def call
+    def call # rubocop:disable Metrics/MethodLength -- ranking algorithm, sequential logic that can't be cleanly split
       result = {}
 
       if users_for_ranking.present?
@@ -33,15 +33,13 @@ module Users
                                                                                last_used_user.count4points,
                                                                                last_used_user.count3points)
             if last_used_user_ranking_comparison_value > user_ranking_comparison_value
-              place = place + user_count_on_same_place
+              place += user_count_on_same_place
               result[place] = [u]
               user_count_on_same_place = 1
             elsif last_used_user_ranking_comparison_value == user_ranking_comparison_value
               same_place_users = result[place]
               result[place] = same_place_users + [u]
-              user_count_on_same_place = user_count_on_same_place + 1
-            else
-              # no else
+              user_count_on_same_place += 1
             end
           end
           last_used_user = u
@@ -50,6 +48,5 @@ module Users
 
       result
     end
-
   end
 end

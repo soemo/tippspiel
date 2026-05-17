@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RevertPartialToPlainUniqueIndexesForFootballDataColumns < ActiveRecord::Migration[6.1]
   # MySQL does not support partial (WHERE-clause) indexes.  Migration
   # 20260516120004 attempted to add partial unique indexes but they were
@@ -21,12 +23,12 @@ class RevertPartialToPlainUniqueIndexesForFootballDataColumns < ActiveRecord::Mi
   def down
     remove_index :games, :football_data_match_id
     add_index :games, :football_data_match_id, unique: true,
-              where: 'deleted_at IS NULL',
-              name: 'index_games_on_football_data_match_id_not_deleted'
+                                               where: 'deleted_at IS NULL',
+                                               name: 'index_games_on_football_data_match_id_not_deleted'
 
     remove_index :teams, :football_data_tla
     add_index :teams, :football_data_tla, unique: true,
-              where: 'deleted_at IS NULL',
-              name: 'index_teams_on_football_data_tla_not_deleted'
+                                          where: 'deleted_at IS NULL',
+                                          name: 'index_teams_on_football_data_tla_not_deleted'
   end
 end

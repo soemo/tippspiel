@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class Game < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :team1, class_name: 'Team', optional: true
   belongs_to :team2, class_name: 'Team', optional: true
-  has_many   :tips
+  has_many   :tips # rubocop:disable Rails/HasManyOrHasOneDependent -- games are soft-deleted via acts_as_paranoid; cascade-destroying tips is not intended
 
-  validates_presence_of :place
-  validates_presence_of :round
-  validates_presence_of :start_at
+  validates :place, presence: true
+  validates :round, presence: true
+  validates :start_at, presence: true
   validate :presence_of_teams
 
   def started?
@@ -15,18 +17,15 @@ class Game < ApplicationRecord
   end
 
   def today?
-    start_at.to_date == Date.today
+    start_at.to_date == Time.zone.today
   end
 
   private
 
   def presence_of_teams
-    unless team1_id.present? || team1_placeholder_name.present?
-      errors.add(:team1_id, :blank)
-    end
-    unless team2_id.present? || team2_placeholder_name.present?
-      errors.add(:team2_id, :blank)
-    end
-  end
+    errors.add(:team1_id, :blank) unless team1_id.present? || team1_placeholder_name.present?
+    return if team2_id.present? || team2_placeholder_name.present?
 
+    errors.add(:team2_id, :blank)
+  end
 end

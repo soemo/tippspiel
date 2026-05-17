@@ -1,2 +1,4 @@
+# frozen_string_literal: true
+
 $TIPPSPIEL_VERSION    = '###PLACEHOLDER_VERSION###'
 $TIPPSPIEL_BUILD_DATE = '###PLACEHOLDER_BUILD_DATE###'

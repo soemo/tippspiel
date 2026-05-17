@@ -1,9 +1,8 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
 
 # Berechnet fuer alle beendeten Spiele alle Nutzer-Tipp-Punkte
 module Tips
   class UpdatePoints < BaseService
-
     MAX_POINTS_PRO_TIP   = TipPoints::PERFECT
     POINTS_CORRECT_TREND = TipPoints::CORRECT_TREND
     EXTRA_POINT_GOALS    = 2
@@ -26,53 +25,54 @@ module Tips
     private
 
     def update_all_tip_points_for(game)
-      if game.present?
-        game_winner = winner(game)
+      return if game.blank?
 
-        if game_winner.present?
-          tips = ::Tip.where(game_id: game.id)
-          if tips.present?
+      game_winner = winner(game)
 
-            # mass-updating
-            sql_when_values = []
-            sql_where_all_ids = tips.map(&:id)
+      return if game_winner.blank?
 
-            tips.each do |tip|
-              points = 0
-              if tip.team1_goals.present? && tip.team2_goals.present?
-                points = calculate_tip_points(game_winner,
-                                              game.team1_goals, game.team2_goals,
-                                              tip.team1_goals, tip.team2_goals)
-              end
-              sql_when_values << "WHEN id = #{tip.id} THEN #{points}"
-            end
-            sql = "UPDATE tips SET tip_points = CASE #{sql_when_values.join(' ')} END WHERE id IN (#{sql_where_all_ids.join(',')})"
-            ::Tip.connection.execute(sql)
-          end
+      tips = ::Tip.where(game_id: game.id)
+      return if tips.blank?
+
+      # mass-updating
+      sql_when_values = []
+      sql_where_all_ids = tips.map(&:id)
+
+      tips.each do |tip|
+        points = 0
+        if tip.team1_goals.present? && tip.team2_goals.present?
+          points = calculate_tip_points(game_winner,
+                                        game.team1_goals, game.team2_goals,
+                                        tip.team1_goals, tip.team2_goals)
         end
+        sql_when_values << "WHEN id = #{tip.id} THEN #{points}"
       end
+      sql = "UPDATE tips SET tip_points = CASE #{sql_when_values.join(' ')} END WHERE id IN (#{sql_where_all_ids.join(',')})"
+      ::Tip.connection.execute(sql)
     end
 
     def calculate_tip_points(game_winner, game_team1_goals, game_team2_goals, tip_team1_goals, tip_team2_goals)
       points = 0
-      if (DRAW == game_winner && tip_team1_goals == tip_team2_goals) ||
-          (TEAM1_WIN == game_winner && tip_team1_goals > tip_team2_goals) ||
-          (TEAM2_WIN == game_winner && tip_team1_goals < tip_team2_goals)
-        points = points + POINTS_CORRECT_TREND
-      end
+      points += POINTS_CORRECT_TREND if correct_trend?(game_winner, tip_team1_goals, tip_team2_goals)
 
       # nur wenn die Spieltendenz stimmt, gibt es auch die Punkte auf die richtige Toranzahl pro Team
-      if POINTS_CORRECT_TREND == points
-        points = points + EXTRA_POINT_GOALS if game_team1_goals == tip_team1_goals
-        points = points + EXTRA_POINT_GOALS if game_team2_goals == tip_team2_goals
+      if points == POINTS_CORRECT_TREND
+        points += EXTRA_POINT_GOALS if game_team1_goals == tip_team1_goals
+        points += EXTRA_POINT_GOALS if game_team2_goals == tip_team2_goals
       end
 
       # 1 Punkt fuer richtige Tordifferenz
       goal_diff = tip_team1_goals - tip_team2_goals
       game_diff = game_team1_goals - game_team2_goals
-      points = points + EXTRA_POINT if goal_diff == game_diff
+      points += EXTRA_POINT if goal_diff == game_diff
 
       points
+    end
+
+    def correct_trend?(game_winner, tip_team1_goals, tip_team2_goals)
+      (game_winner == DRAW && tip_team1_goals == tip_team2_goals) ||
+        (game_winner == TEAM1_WIN && tip_team1_goals > tip_team2_goals) ||
+        (game_winner == TEAM2_WIN && tip_team1_goals < tip_team2_goals)
     end
 
     # wer hat gewonnen Team1 oder Team2, unentschieden == 0

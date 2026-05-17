@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if Rails.env.development? || Rails.env.test?
 
   namespace :dev do
@@ -13,7 +15,7 @@ if Rails.env.development? || Rails.env.test?
 
       # Reset all games to unfinished first
       Game.update_all(finished: false)
-      puts "Reset all games to unfinished."
+      puts 'Reset all games to unfinished.'
 
       # Mark the first N games (ordered by start_at) as finished
       games_to_finish = Game.order(start_at: :asc).limit(count)
@@ -21,7 +23,7 @@ if Rails.env.development? || Rails.env.test?
       puts "Marked #{games_to_finish.size} games as finished."
 
       # Run the full ranking pipeline
-      puts "Running ranking calculation..."
+      puts 'Running ranking calculation...'
       Tips::UpdatePoints.call
       Users::UpdatePoints.call
       Users::UpdateRankingPerGame.call
@@ -30,40 +32,40 @@ if Rails.env.development? || Rails.env.test?
 
     def set_random_game_goals
       games = Game.all
-      if games.present?
-        games.each do |game|
-          game.update({team1_goals: get_random_goal,
-                                team2_goals: get_random_goal,
-                                finished: false})
-        end
+      return if games.blank?
+
+      games.each do |game|
+        game.update({ team1_goals: random_goal,
+                      team2_goals: random_goal,
+                      finished: false })
       end
     end
 
-    def get_random_goal
+    def random_goal
       rand(5)
     end
 
     def load_demo_user_with_random_tips
       100.times.each do |i|
-        firstname = "test#{i+1}"
+        firstname = "test#{i + 1}"
         lastname = 'user'
 
         # Wenn der Nutzer nicht schon existiert, wird er samt Zufallstipps angelegt
-        unless User.exists?(firstname: firstname)
-          # gleich als angemeldeter Nutzer anlegen - confirmed_at
-          user = User.create({email: "#{firstname}@soemo.org",
-                              password: 'testtesttippspiel',
-                              create_initial_random_tips: true,
-                              firstname: firstname,
-                              lastname: lastname,
-                              confirmed_at: Time.now.utc,
-                              confirmation_sent_at: 1.hour.ago})
-          user.confirm
+        next if User.exists?(firstname: firstname)
 
-          # Tips are normally created on first login — trigger directly here for dev setup
-          Tips::FromUser.call(user_id: user.id)
-          puts "Nutzer #{user.name} angelegt mit Zufallstipps"
-        end
+        # gleich als angemeldeter Nutzer anlegen - confirmed_at
+        user = User.create({ email: "#{firstname}@soemo.org",
+                             password: 'testtesttippspiel',
+                             create_initial_random_tips: true,
+                             firstname: firstname,
+                             lastname: lastname,
+                             confirmed_at: Time.now.utc,
+                             confirmation_sent_at: 1.hour.ago })
+        user.confirm
+
+        # Tips are normally created on first login — trigger directly here for dev setup
+        Tips::FromUser.call(user_id: user.id)
+        puts "Nutzer #{user.name} angelegt mit Zufallstipps"
       end
     end
   end

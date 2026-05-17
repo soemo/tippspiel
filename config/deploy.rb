@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 # Load constants (e.g. DEPLOYMENT_NAME) for use in Capistrano config
-load File.expand_path('../initializers/01_constants.rb', __FILE__)
+load File.expand_path('initializers/01_constants.rb', __dir__)
 
 set :cap_tournament_name, DEPLOYMENT_NAME
 
@@ -7,17 +9,17 @@ set :cap_tournament_name, DEPLOYMENT_NAME
 set :user, 'soemo'
 
 set :stage, 'production'
-#set :scm, :git
+# set :scm, :git
 
 set :repo_url, 'git@github.com:soemo/tippspiel.git'
 
-server 'farbauti.uberspace.de', user: fetch(:user), roles: %w{app db web}
+server 'farbauti.uberspace.de', user: fetch(:user), roles: %w[app db web]
 
-set :ssh_options, { :forward_agent => true}
+set :ssh_options, { forward_agent: true }
 
-SSHKit.config.command_map[:rake]  = "bundle exec rake"
+SSHKit.config.command_map[:rake]  = 'bundle exec rake'
 
-SSHKit.config.command_map[:rails] = "bundle exec rails"
+SSHKit.config.command_map[:rails] = 'bundle exec rails'
 
 set :rails_env, 'production'
 
@@ -47,7 +49,6 @@ after 'deploy:finished', 'deploy:restart'
 Dir['config/deploy/recipes/*.rb'].each { |r| load(r) }
 
 namespace :deploy do
-
   before :starting, 'maintenance:enable'
   after :finished, 'maintenance:disable'
 end

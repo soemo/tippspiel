@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module GameQueries
   class << self
-
     def all_ordered_by_start_at
       Game.preload(:team1, :team2).order(start_at: :asc)
     end
@@ -22,15 +23,15 @@ module GameQueries
     end
 
     def started_games_ordered_by_start_at
-      Game.preload(:team1, :team2).where('start_at <= ?', Time.now).order(start_at: :asc)
+      Game.preload(:team1, :team2).where(start_at: ..Time.zone.now).order(start_at: :asc)
     end
 
     def started_game_ids
-      Game.where('start_at <= ?', Time.now).pluck(:id)
+      Game.where(start_at: ..Time.zone.now).pluck(:id)
     end
 
     def ordered_started_at_for(round)
-      Game.where(:round => round).order(start_at: :asc).pluck('start_at')
+      Game.where(round: round).order(start_at: :asc).pluck('start_at')
     end
 
     def all_finished_ordered_by_start_at
@@ -44,14 +45,16 @@ module GameQueries
     # Returns the winning team of the final game, or nil if undecided/draw.
     def tournament_champion_team
       game = final_game
-      return nil unless game.present?
+      return nil if game.blank?
+
       winner_team(game)
     end
 
     # Returns the losing team of the final game, or nil if undecided/draw.
     def tournament_second_team
       game = final_game
-      return nil unless game.present?
+      return nil if game.blank?
+
       loser_team(game)
     end
 
@@ -61,6 +64,7 @@ module GameQueries
       return nil unless game.team1_goals.present? && game.team2_goals.present?
       return game.team1 if game.team1_goals > game.team2_goals
       return game.team2 if game.team1_goals < game.team2_goals
+
       nil
     end
 
@@ -68,6 +72,7 @@ module GameQueries
       return nil unless game.team1_goals.present? && game.team2_goals.present?
       return game.team1 if game.team1_goals < game.team2_goals
       return game.team2 if game.team1_goals > game.team2_goals
+
       nil
     end
   end

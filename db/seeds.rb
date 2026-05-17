@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'seeds/wm2026'
 
 def clear_games_and_teams
@@ -28,19 +30,19 @@ def create_team_and_game_data
     if team1_name.present?
       team1 = Team.where(name: team1_name).first_or_create
       team1.update_columns(country_code: country_codes[team1_name], football_data_tla: tlas[team1_name])
-      team_ids = team_ids.merge({team1_id: team1.id})
+      team_ids = team_ids.merge({ team1_id: team1.id })
     end
     if team2_name.present?
       team2 = Team.where(name: team2_name).first_or_create
       team2.update_columns(country_code: country_codes[team2_name], football_data_tla: tlas[team2_name])
-      team_ids = team_ids.merge({team2_id: team2.id})
+      team_ids = team_ids.merge({ team2_id: team2.id })
     end
 
     Game.create!(data.merge(team_ids))
   end
 end
 
-puts 'recreate team and game data'
+puts 'recreate team and game data' # rubocop:disable Rails/Output -- seed scripts print progress to stdout intentionally
 clear_games_and_teams
 create_team_and_game_data
-puts 'ready!'
+puts 'ready!' # rubocop:disable Rails/Output -- seed scripts print progress to stdout intentionally

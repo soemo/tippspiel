@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Results::ImportFinishedGames do
-
   # Anonymous fake — avoids hitting Net::HTTP and lets us return any payload.
   # Defined as a `let` so it doesn't leak as a top-level constant (which would
   # collide with the equivalent helper in the backfill spec when both run in
@@ -12,11 +13,14 @@ describe Results::ImportFinishedGames do
         @payload = payload
       end
 
-      def fetch_competition_matches(competition_code: nil, status: nil)
+      def fetch_competition_matches(competition_code: nil, status: nil) # rubocop:disable Lint/UnusedMethodArgument -- fake ignores args, real client uses them
         @payload
       end
     end
   end
+  let!(:ger) { create(:team, name: 'Germany', football_data_tla: 'GER') }
+  let!(:bra) { create(:team, name: 'Brazil',  football_data_tla: 'BRA') }
+  let(:base_time) { Time.zone.parse('2026-06-15T18:00:00Z') }
 
   def build_client(payload)
     fake_client_class.new(payload)
@@ -24,23 +28,18 @@ describe Results::ImportFinishedGames do
 
   def fd_match(overrides = {})
     {
-      'id'       => 9001,
-      'utcDate'  => '2026-06-15T18:00:00Z',
-      'status'   => 'FINISHED',
+      'id' => 9001,
+      'utcDate' => '2026-06-15T18:00:00Z',
+      'status' => 'FINISHED',
       'homeTeam' => { 'tla' => 'GER' },
       'awayTeam' => { 'tla' => 'BRA' },
-      'score'    => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => 2, 'away' => 1 } }
+      'score' => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => 2, 'away' => 1 } }
     }.merge(overrides)
   end
 
   def payload(*matches)
     { 'matches' => matches }
   end
-
-  let!(:ger) { create(:team, name: 'Germany', football_data_tla: 'GER') }
-  let!(:bra) { create(:team, name: 'Brazil',  football_data_tla: 'BRA') }
-
-  let(:base_time) { Time.zone.parse('2026-06-15T18:00:00Z') }
 
   before do
     # Avoid hitting the ranking pipeline for the orchestrator's behaviour tests.
@@ -235,5 +234,4 @@ describe Results::ImportFinishedGames do
     expect(Users::UpdatePoints).to have_received(:call).once
     expect(Users::UpdateRankingPerGame).to have_received(:call).once
   end
-
 end

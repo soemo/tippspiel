@@ -1,17 +1,18 @@
-module HttpStatusCodeRenderers
+# frozen_string_literal: true
 
+module HttpStatusCodeRenderers
   def render_bad_request
     respond_to do |format|
-      format.html { render file: "#{Rails.root}/public/400.html", layout: false, status: :bad_request }
-      format.pdf { render file: "#{Rails.root}/public/400.html", layout: false, status: :bad_request }
+      format.html { render file: Rails.public_path.join('400.html').to_s, layout: false, status: :bad_request }
+      format.pdf { render file: Rails.public_path.join('400.html').to_s, layout: false, status: :bad_request }
       format.js { head :bad_request }
     end
   end
 
   def render_forbidden
     respond_to do |format|
-      format.html { render file: "#{Rails.root}/public/403.html", layout: false, status: :forbidden }
-      format.pdf { render file: "#{Rails.root}/public/403.html", layout: false, status: :forbidden }
+      format.html { render file: Rails.public_path.join('403.html').to_s, layout: false, status: :forbidden }
+      format.pdf { render file: Rails.public_path.join('403.html').to_s, layout: false, status: :forbidden }
       format.js { head :forbidden }
       format.json { head :forbidden }
     end

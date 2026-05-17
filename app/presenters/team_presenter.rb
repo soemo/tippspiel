@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class TeamPresenter < DelegateClass(Team)
   include ActionView::Helpers::OutputSafetyHelper
 
   attr_reader :team
 
   def initialize(team)
-    super(team)
+    super
     @team = team
   end
 
@@ -13,12 +15,12 @@ class TeamPresenter < DelegateClass(Team)
   def team_name_with_flag(flag_size: 32, flag_position: 'left')
     flag = teamflag(flag_size)
     case flag_position
-      when 'left'
-        raw "#{flag} #{translated_name}"
-      when 'right'
-        raw "#{translated_name} #{flag}"
-      else
-        raise "Wrong flag_position #{flag_position}"
+    when 'left'
+      raw "#{flag} #{translated_name}" # rubocop:disable Rails/OutputSafety -- safe: flag is a hardcoded HTML span, translated_name uses I18n
+    when 'right'
+      raw "#{translated_name} #{flag}" # rubocop:disable Rails/OutputSafety -- safe: flag is a hardcoded HTML span, translated_name uses I18n
+    else
+      raise "Wrong flag_position #{flag_position}"
     end
   end
 

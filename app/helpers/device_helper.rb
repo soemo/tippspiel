@@ -1,5 +1,6 @@
-module DeviceHelper
+# frozen_string_literal: true
 
+module DeviceHelper
   # angepasste devise Methode
   def custom_devise_error_messages!
     return '' if resource.errors.empty?
@@ -12,7 +13,7 @@ module DeviceHelper
       </div>
     HTML
 
-    html.html_safe
+    html.html_safe # rubocop:disable Rails/OutputSafety -- safe: HTML structure is hardcoded, only user input is escaped via full_messages
   end
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app
@@ -27,6 +28,4 @@ module DeviceHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-
-
 end

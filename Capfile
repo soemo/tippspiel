@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dotenv'
 Dotenv.load
 
@@ -10,7 +12,7 @@ require 'capistrano/deploy'
 # include rails tasks
 require 'capistrano/rails'
 
-require "capistrano/scm/git"
+require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
 
 # include uberspace tasks

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require_relative '../../db/seeds/wm2026'
 
@@ -9,7 +11,7 @@ describe 'WM 2026 seed data' do
   let(:group_games)       { data.select { |g| g[:round] == 'group' } }
   let(:round_of_32_games) { data.select { |g| g[:round] == 'roundof32' } }
   let(:round_of_16_games) { data.select { |g| g[:round] == 'roundof16' } }
-  let(:quarterfinal_games){ data.select { |g| g[:round] == 'quarterfinal' } }
+  let(:quarterfinal_games) { data.select { |g| g[:round] == 'quarterfinal' } }
   let(:semifinal_games)   { data.select { |g| g[:round] == 'semifinal' } }
   let(:place3_games)      { data.select { |g| g[:round] == 'place3' } }
   let(:final_games)       { data.select { |g| g[:round] == 'final' } }

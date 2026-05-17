@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NavBarPresenter
   include Rails.application.routes.url_helpers
   include ApplicationHelper
@@ -26,7 +28,7 @@ class NavBarPresenter
   end
 
   def user_position
-    @position ||= begin
+    @user_position ||= begin
       result = Users::Top3AndOwnPosition.call(user_id: user.id)
       result.own_position
     end
@@ -36,14 +38,14 @@ class NavBarPresenter
     if Tournament.started?
       I18n.t('nav_ranking_info', position: user_position, points: user.points)
     else
-      ""
+      ''
     end
   end
 
   def nav_bar_item_presenters
-    nav_bar_item_configurations.map{ |item_config|
+    nav_bar_item_configurations.map do |item_config|
       nav_bar_item_presenter(item_config)
-    }
+    end
   end
 
   def user_logged_in?
@@ -60,52 +62,51 @@ class NavBarPresenter
                             config[:css_class])
   end
 
-  def nav_bar_item_configurations
+  def nav_bar_item_configurations # rubocop:disable Metrics/MethodLength -- nav item config array, extraction would fragment a single logical structure
     result = []
     if user_logged_in?
       result += [
-        {link_icon_prefix: 'fas',
-         link_icon: 'rocket',
-         link_text: I18n.t('bonus'),
-         link_url: edit_bonus_path,
-         css_class: active_css_class(URL_SCOPES[:bonus])}
+        { link_icon_prefix: 'fas',
+          link_icon: 'rocket',
+          link_text: I18n.t('bonus'),
+          link_url: edit_bonus_path,
+          css_class: active_css_class(URL_SCOPES[:bonus]) }
       ]
       result += [
-        {link_icon_prefix: 'fas',
-         link_icon: 'list-ol',
-         link_text: I18n.t('ranking'),
-         link_url: rankings_path,
-         css_class: active_css_class(URL_SCOPES[:ranking])}
+        { link_icon_prefix: 'fas',
+          link_icon: 'list-ol',
+          link_text: I18n.t('ranking'),
+          link_url: rankings_path,
+          css_class: active_css_class(URL_SCOPES[:ranking]) }
       ]
       result += [
-        {link_icon_prefix: 'far',
-         link_icon: 'comments',
-         link_text: I18n.t('notice'),
-         link_url: notes_path,
-         css_class: active_css_class(URL_SCOPES[:notes])}
+        { link_icon_prefix: 'far',
+          link_icon: 'comments',
+          link_text: I18n.t('notice'),
+          link_url: notes_path,
+          css_class: active_css_class(URL_SCOPES[:notes]) }
       ]
       result += [
-        {link_icon_prefix: 'fas',
-         link_icon: 'angle-double-right',
-         link_text: I18n.t('comparetips'),
-         link_url: compare_tips_path,
-         css_class: active_css_class(URL_SCOPES[:comparetips])}
+        { link_icon_prefix: 'fas',
+          link_icon: 'angle-double-right',
+          link_text: I18n.t('comparetips'),
+          link_url: compare_tips_path,
+          css_class: active_css_class(URL_SCOPES[:comparetips]) }
       ]
     end
 
-    result += [{link_icon_prefix: 'far',
-                link_icon: 'question-circle',
-                link_text: nil,
-                link_url: help_path,
-                css_class: active_css_class(URL_SCOPES[:help])}]
+    result += [{ link_icon_prefix: 'far',
+                 link_icon: 'question-circle',
+                 link_text: nil,
+                 link_url: help_path,
+                 css_class: active_css_class(URL_SCOPES[:help]) }]
 
     if user_logged_in?
-      result +=  [{link_icon_prefix: 'fas',
+      result += [{ link_icon_prefix: 'fas',
                    link_icon: 'sign-out-alt',
                    link_text: I18n.t(:sign_out),
                    link_url: logout_path,
-                   css_class: active_css_class(URL_SCOPES[:user])
-                  }]
+                   css_class: active_css_class(URL_SCOPES[:user]) }]
     end
 
     result

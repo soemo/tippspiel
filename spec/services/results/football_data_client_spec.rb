@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Results::FootballDataClient do
-
   subject(:client) { described_class.new }
 
   let(:fake_http) { instance_double(Net::HTTP) }
@@ -19,7 +20,7 @@ describe Results::FootballDataClient do
 
   describe '#fetch_competition_matches' do
     around do |example|
-      original = ENV['FOOTBALL_DATA_API_TOKEN']
+      original = ENV.fetch('FOOTBALL_DATA_API_TOKEN', nil)
       example.run
     ensure
       ENV['FOOTBALL_DATA_API_TOKEN'] = original
@@ -29,9 +30,9 @@ describe Results::FootballDataClient do
       before { ENV.delete('FOOTBALL_DATA_API_TOKEN') }
 
       it 'raises MissingTokenError' do
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::MissingTokenError)
+        end.to raise_error(Results::FootballDataClient::MissingTokenError)
       end
     end
 
@@ -46,9 +47,9 @@ describe Results::FootballDataClient do
 
       it 'raises ApiError on 401' do
         allow(fake_http).to receive(:request).and_return(fake_response(401, '{"message":"unauthorised"}'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError) { |e|
+        end.to raise_error(Results::FootballDataClient::ApiError) { |e|
           expect(e.status).to eq 401
           expect(e.body).to include('unauthorised')
         }
@@ -56,48 +57,48 @@ describe Results::FootballDataClient do
 
       it 'raises ApiError on 429 rate limit' do
         allow(fake_http).to receive(:request).and_return(fake_response(429, 'rate limit'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError) { |e|
+        end.to raise_error(Results::FootballDataClient::ApiError) { |e|
           expect(e.status).to eq 429
         }
       end
 
       it 'raises ApiError on 500' do
         allow(fake_http).to receive(:request).and_return(fake_response(500, 'oops'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError) { |e|
+        end.to raise_error(Results::FootballDataClient::ApiError) { |e|
           expect(e.status).to eq 500
         }
       end
 
       it 'raises ApiError on open timeout' do
         allow(fake_http).to receive(:request).and_raise(Net::OpenTimeout.new('timeout'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError, /Timeout/)
+        end.to raise_error(Results::FootballDataClient::ApiError, /Timeout/)
       end
 
       it 'raises ApiError on read timeout' do
         allow(fake_http).to receive(:request).and_raise(Net::ReadTimeout.new('timeout'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError, /Timeout/)
+        end.to raise_error(Results::FootballDataClient::ApiError, /Timeout/)
       end
 
       it 'raises ApiError on socket error' do
         allow(fake_http).to receive(:request).and_raise(SocketError.new('dns'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError, /Network/)
+        end.to raise_error(Results::FootballDataClient::ApiError, /Network/)
       end
 
       it 'raises ApiError on malformed JSON' do
         allow(fake_http).to receive(:request).and_return(fake_response(200, 'not-json'))
-        expect {
+        expect do
           client.fetch_competition_matches
-        }.to raise_error(Results::FootballDataClient::ApiError, /Invalid JSON/)
+        end.to raise_error(Results::FootballDataClient::ApiError, /Invalid JSON/)
       end
 
       it 'sends the X-Auth-Token header' do
@@ -121,5 +122,4 @@ describe Results::FootballDataClient do
       end
     end
   end
-
 end

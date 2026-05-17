@@ -1,5 +1,6 @@
-class HelpsController < ApplicationController
+# frozen_string_literal: true
 
+class HelpsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show

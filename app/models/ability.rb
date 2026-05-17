@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
@@ -8,12 +10,12 @@ class Ability
     can :access, :main
     can :access, :help
 
-    if user.present?
-      can :manage, Tip, :user_id => user.id
+    return if user.blank?
 
-      if user.admin?
-        can :manage, Game
-      end
-    end
+    can :manage, Tip, user_id: user.id
+
+    return unless user.admin?
+
+    can :manage, Game
   end
 end

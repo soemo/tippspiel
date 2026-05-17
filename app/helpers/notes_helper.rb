@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
-module NotesHelper
+# frozen_string_literal: true
 
+module NotesHelper
 end

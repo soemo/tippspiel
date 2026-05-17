@@ -1,10 +1,10 @@
-# -*- encoding : utf-8 -*-
-module TipsHelper
+# frozen_string_literal: true
 
+module TipsHelper
   def tip_input(tip_id, attr_name, attr_value)
     name = "tips[#{tip_id}][#{attr_name}]"
     text_field_tag(name,
                    attr_value,
-                   {maxlength: 2, size: 2, class: 'tip_input', inputmode: 'numeric', pattern: '[0-9]*'})
+                   { maxlength: 2, size: 2, class: 'tip_input', inputmode: 'numeric', pattern: '[0-9]*' })
   end
 end

@@ -1,4 +1,6 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -16,7 +18,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
@@ -70,13 +72,13 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  #config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   # Add Rack::LiveReload to the bottom of the middleware stack with the default options.
-  #config.middleware.use Rack::LiveReload
+  # config.middleware.use Rack::LiveReload
 
   $TIPPSPIEL_VERSION    = "development (#{$TIPPSPIEL_VERSION})"
-  $TIPPSPIEL_BUILD_DATE = "server start #{Time.now.strftime("%d.%m.%Y %H:%M:%S")}"
+  $TIPPSPIEL_BUILD_DATE = "server start #{Time.now.strftime('%d.%m.%Y %H:%M:%S')}" # rubocop:disable Rails/TimeZone -- Time.zone is nil during boot, can't use Time.zone.now here
 end

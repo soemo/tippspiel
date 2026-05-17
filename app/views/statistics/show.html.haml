@@ -2,7 +2,7 @@
   .small-12.columns
     %h3=@presenter.header_text
 
-    - if @presenter.has_data_to_show?
+    - if @presenter.data_to_show?
       -# Mobile: summary stats (small only)
       .show-for-small-only
         %h4=@presenter.ranking_summary_header_text

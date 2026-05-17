@@ -11,7 +11,6 @@
 #     and is captured for logging / audit purposes only.
 module Results
   class FootballDataAdapter
-
     Match = Struct.new(
       :fd_id,
       :home_tla,
@@ -41,14 +40,14 @@ module Results
       full_time = hash.dig('score', 'fullTime') || {}
 
       Match.new(
-        fd_id:      fd_id,
-        home_tla:   home,
-        away_tla:   away,
-        utc_date:   Time.zone.parse(utc_date),
-        status:     status,
+        fd_id: fd_id,
+        home_tla: home,
+        away_tla: away,
+        utc_date: Time.zone.parse(utc_date),
+        status: status,
         home_goals: full_time['home'],
         away_goals: full_time['away'],
-        duration:   hash.dig('score', 'duration')
+        duration: hash.dig('score', 'duration')
       )
     end
 
@@ -56,8 +55,7 @@ module Results
     # `FootballDataClient#fetch_competition_matches`.
     def self.from_payload(payload)
       matches = (payload || {})['matches'] || []
-      matches.map { |m| from_hash(m) }.compact
+      matches.filter_map { |m| from_hash(m) }
     end
-
   end
 end

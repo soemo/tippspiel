@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # Ensures both locale files are complete and consistent.
@@ -5,18 +7,17 @@ require 'rails_helper'
 # Adding a key to one locale file will automatically fail this spec
 # until the other locale is updated too.
 
+# Rails provides these namespaces via its own locale gems — we don't need
+# to duplicate them in our en.yml.
+LOCALE_RAILS_OWNED_NAMESPACES = %w[datetime date time number activerecord activemodel errors].freeze
+
+LOCALE_KNOWN_GERMAN_WORDS = %w[bitte deine danke spielen runde achtelfinale viertelfinale
+                               halbfinale finale punkte mannschaft turnier bonusfragen].freeze
+
+# Brand name — intentionally identical in both locales.
+LOCALE_SKIP_GERMAN_CHECK_KEYS = %w[app_name].freeze
+
 describe 'I18n locale completeness' do
-
-  # Rails provides these namespaces via its own locale gems — we don't need
-  # to duplicate them in our en.yml.
-  RAILS_OWNED_NAMESPACES = %w[datetime date time number activerecord activemodel errors].freeze
-
-  KNOWN_GERMAN_WORDS = %w[bitte deine danke spielen runde achtelfinale viertelfinale
-                          halbfinale finale punkte mannschaft turnier bonusfragen].freeze
-
-  # Brand name — intentionally identical in both locales.
-  SKIP_GERMAN_CHECK_KEYS = %w[app_name].freeze
-
   def load_locale(locale)
     path = Rails.root.join("config/locales/#{locale}.yml")
     YAML.load_file(path)[locale.to_s]
@@ -35,7 +36,7 @@ describe 'I18n locale completeness' do
 
   def app_keys(hash)
     flatten_keys(hash).reject do |key|
-      RAILS_OWNED_NAMESPACES.any? { |ns| key.start_with?(ns) }
+      LOCALE_RAILS_OWNED_NAMESPACES.any? { |ns| key.start_with?(ns) }
     end
   end
 
@@ -46,13 +47,13 @@ describe 'I18n locale completeness' do
     it 'every de key exists in en' do
       missing = de_keys - en_keys
       expect(missing).to be_empty,
-        "Keys in de.yml but missing from en.yml:\n#{missing.join("\n")}"
+                         "Keys in de.yml but missing from en.yml:\n#{missing.join("\n")}"
     end
 
     it 'every en key exists in de' do
       missing = en_keys - de_keys
       expect(missing).to be_empty,
-        "Keys in en.yml but missing from de.yml:\n#{missing.join("\n")}"
+                         "Keys in en.yml but missing from de.yml:\n#{missing.join("\n")}"
     end
   end
 
@@ -71,9 +72,9 @@ describe 'I18n locale completeness' do
   describe 'no German leaking into en.yml' do
     it 'contains no untranslated German strings in en.yml' do
       offenders = []
-      (en_keys - SKIP_GERMAN_CHECK_KEYS).each do |key|
+      (en_keys - LOCALE_SKIP_GERMAN_CHECK_KEYS).each do |key|
         value = I18n.t(key, locale: :en, default: '').to_s.downcase
-        KNOWN_GERMAN_WORDS.each do |word|
+        LOCALE_KNOWN_GERMAN_WORDS.each do |word|
           offenders << "#{key}: '#{word}' found in '#{value}'" if value.include?(word)
         end
       end
@@ -91,7 +92,7 @@ describe 'I18n locale completeness' do
         expect(de_val).not_to match(/translation missing/)
         expect(en_val).not_to match(/translation missing/)
         expect(de_val).not_to eq(en_val),
-          "round.#{round} is identical in de and en — likely not translated"
+                              "round.#{round} is identical in de and en — likely not translated"
       end
     end
   end

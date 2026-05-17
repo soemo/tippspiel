@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe TeamPresenter do
-
-  subject { TeamPresenter.new(team) }
+  subject { described_class.new(team) }
 
   let(:team) { build(:team, name: 'Deutschland', country_code: 'de') }
 
@@ -27,7 +28,7 @@ describe TeamPresenter do
 
     it 'falls back to team.name when country_code has no translation' do
       team = build(:team, name: 'Unknown FC', country_code: 'xx')
-      presenter = TeamPresenter.new(team)
+      presenter = described_class.new(team)
       I18n.with_locale(:en) do
         expect(presenter.translated_name).to eq 'Unknown FC'
       end
@@ -41,7 +42,7 @@ describe TeamPresenter do
       allow(subject).to receive(:teamflag).with(flag_size).and_return('flag string')
 
       I18n.with_locale(:en) do
-        expected = "Germany flag string"
+        expected = 'Germany flag string'
         expect(subject.team_name_with_flag(flag_size: flag_size,
                                            flag_position: flag_position)).to eq expected
       end
@@ -53,7 +54,7 @@ describe TeamPresenter do
       allow(subject).to receive(:teamflag).with(flag_size).and_return('flag string')
 
       I18n.with_locale(:en) do
-        expected = "flag string Germany"
+        expected = 'flag string Germany'
         expect(subject.team_name_with_flag(flag_size: flag_size,
                                            flag_position: flag_position)).to eq expected
       end
@@ -64,10 +65,10 @@ describe TeamPresenter do
       flag_position = 'top'
       allow(subject).to receive(:teamflag).with(flag_size).and_return('flag string')
 
-      expect {
+      expect do
         subject.team_name_with_flag(flag_size: flag_size,
                                     flag_position: flag_position)
-      }.to raise_error("Wrong flag_position #{flag_position}")
+      end.to raise_error("Wrong flag_position #{flag_position}")
     end
   end
 

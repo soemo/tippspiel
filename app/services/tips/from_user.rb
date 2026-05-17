@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Tips
   class FromUser < BaseService
-
     attribute :user_id, Integer
 
     def call
@@ -16,39 +17,36 @@ module Tips
 
     private
 
-    def create_user_tips
+    def create_user_tips # rubocop:disable Metrics/MethodLength -- SQL bulk insert builder; extraction would spread related logic across methods
       game_ids = ::GameQueries.all_game_ids
       started_game_ids = GameQueries.started_game_ids
-      if game_ids.present?
+      return if game_ids.blank?
 
-        # https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
-        values = []
-        time = Time.current.to_s(:db)
-        needs_random_tips = ::UserQueries.needs_random_tips_for_user_id?(user_id)
+      # https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
+      values = []
+      time = Time.current.to_s(:db)
+      needs_random_tips = ::UserQueries.needs_random_tips_for_user_id?(user_id)
 
-        game_ids.each do |game_id|
-
-          if needs_random_tips
-            # only add random tips for game in the future
-            if started_game_ids.include?(game_id)
-              values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', null, null)")
-            else
-              values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', #{rand(5)}, #{rand(5)})")
-            end
-          else
-            values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
-          end
-        end
-
+      game_ids.each do |game_id|
         if needs_random_tips
-          sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at, team1_goals, team2_goals) VALUES #{values.join(', ')}"
+          # only add random tips for game in the future
+          if started_game_ids.include?(game_id)
+            values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', null, null)")
+          else
+            values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}', #{rand(5)}, #{rand(5)})")
+          end
         else
-          sql = "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
+          values.push("(#{user_id}, #{game_id}, '#{time}', '#{time}')")
         end
-
-        ::Tip.connection.execute(sql)
       end
-    end
 
+      sql = if needs_random_tips
+              "INSERT INTO tips (user_id, game_id, created_at, updated_at, team1_goals, team2_goals) VALUES #{values.join(', ')}"
+            else
+              "INSERT INTO tips (user_id, game_id, created_at, updated_at) VALUES #{values.join(', ')}"
+            end
+
+      ::Tip.connection.execute(sql)
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Angepasst, damit unsere eigenen Felder auf dem Registrierungsform zu den Strong Parametern von Devise hinzukommen
 module AdaptedDevise
   class RegistrationsController < Devise::RegistrationsController
@@ -11,7 +13,8 @@ module AdaptedDevise
     end
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:email_confirmation, :firstname, :lastname, :create_initial_random_tips])
+      devise_parameter_sanitizer.permit(:sign_up,
+                                        keys: %i[email_confirmation firstname lastname create_initial_random_tips])
     end
 
     def after_inactive_sign_up_path_for(_)

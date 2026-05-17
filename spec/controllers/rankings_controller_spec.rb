@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe RankingsController, :type => :controller do
-
+describe RankingsController do
   describe 'GET "index" with login' do
-    before :each do
-      login(create :active_user)
+    before do
+      login(create(:active_user))
     end
 
-    it 'should be successful with login' do
+    it 'is successful with login' do
       get 'index'
       expect(response).to be_successful
       presenter = assigns(:presenter)
@@ -15,12 +16,10 @@ describe RankingsController, :type => :controller do
       user_count = presenter.user_count
       expect(user_count).to eq(1)
     end
-
   end
 
   describe 'GET "index" without login' do
-
-    it 'should be redirected to root' do
+    it 'is redirected to root' do
       get 'index'
       expect(response).to redirect_to new_user_session_path
     end

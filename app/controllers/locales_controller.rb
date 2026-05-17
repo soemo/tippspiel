@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocalesController < ApplicationController
   skip_before_action :authenticate_user!
 
@@ -15,14 +17,17 @@ class LocalesController < ApplicationController
 
   def safe_return_path
     referer = request.referer
-    return fallback_locale_path unless referer.present?
+    return fallback_locale_path if referer.blank?
 
     # Only redirect back if the referer resolves to a routable GET path.
     # Devise's registration POST renders at /users which has no GET route —
     # redirecting back there would trigger a RoutingError.
     referer_path = URI.parse(referer).path
     begin
-      match = Rails.application.routes.router.recognize({ 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => referer_path, 'rack.input' => StringIO.new }) { |route, _| route }
+      match = Rails.application.routes.router.recognize({ 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => referer_path,
+                                                          'rack.input' => StringIO.new }) do |route, _|
+        route
+      end
       match ? referer : fallback_locale_path
     rescue StandardError
       fallback_locale_path

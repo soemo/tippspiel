@@ -14,15 +14,14 @@
 #     for manual review via the summary email.
 #   - Games with finished == false are silently overwritten even if goals
 #     were set manually — `finished: false` is the unlock signal.
-  #   - Unmatched FD matches are surfaced when the FD match is FINISHED and
-  #     its utc_date is in the past but no DB game could be linked — avoids
-  #     noise for future matches that simply aren't in our DB yet.
+#   - Unmatched FD matches are surfaced when the FD match is FINISHED and
+#     its utc_date is in the past but no DB game could be linked — avoids
+#     noise for future matches that simply aren't in our DB yet.
 #   - One transaction per game (failed game ≠ rolled-back batch).
 #   - Ranking pipeline is run inside its own transaction iff at least one
 #     game was imported (mirrors Admin::StartCalculatingsController).
 module Results
   class ImportFinishedGames < BaseService
-
     # ±6h window for fuzzy game match (rescheduling tolerance).
     TIME_TOLERANCE_SECONDS = 6 * 60 * 60
 
@@ -36,11 +35,11 @@ module Results
     Discrepancy  = Struct.new(:game, :db_score, :fd_score, :fd_status, :duration, keyword_init: true)
     Unmatched    = Struct.new(:fd_match, :reason, keyword_init: true)
 
-    def initialize(client: FootballDataClient.new)
+    def initialize(client: FootballDataClient.new) # rubocop:disable Lint/MissingSuper -- BaseService uses Virtus.model; this service has no Virtus attributes, super is unnecessary
       @client = client
     end
 
-    def call
+    def call # rubocop:disable Metrics/MethodLength -- orchestration method; splitting would scatter the per-match loop logic
       # Fetch all matches (no status filter) so we can also detect Case 5:
       # a game we already marked finished, but FD no longer reports as FINISHED.
       # Competition code (WC vs EC) is set in 01_constants.rb based on IS_WM/IS_EM.
@@ -57,18 +56,14 @@ module Results
         unless game
           # Only surface unmatched FD matches if they were FINISHED in the past
           # AND no candidate game existed — keeps noise low during early stages.
-          if fd.status == 'FINISHED' && fd.utc_date < Time.zone.now
-            unmatched << Unmatched.new(fd_match: fd, reason: :no_match)
-          end
+          unmatched << Unmatched.new(fd_match: fd, reason: :no_match) if fd.status == 'FINISHED' && fd.utc_date < Time.zone.now
           next
         end
 
         process_game(game, fd, imported: imported, discrepancies: discrepancies)
       end
 
-      if imported.any?
-        recalculate_rankings
-      end
+      recalculate_rankings if imported.any?
 
       # Surface unmatched-only runs in the log even when no email is sent.
       # The mailer intentionally suppresses unmatched-only summaries (Result#changes?),
@@ -77,7 +72,7 @@ module Results
       if unmatched.any?
         Rails.logger.warn(
           "Results::ImportFinishedGames: #{unmatched.size} FD match(es) could not be linked " \
-          "(likely missing tla mapping or unresolved placeholder). " \
+          '(likely missing tla mapping or unresolved placeholder). ' \
           "FD ids: #{unmatched.map { |u| u.fd_match.fd_id }.inspect}"
         )
       end
@@ -111,11 +106,11 @@ module Results
 
       game = candidates.first
       # Lock in the link so we never have to fuzzy-match this game again.
-      game.update_column(:football_data_match_id, fd.fd_id)
+      game.update_column(:football_data_match_id, fd.fd_id) # rubocop:disable Rails/SkipsModelValidations -- intentional: lock id without triggering callbacks
       game
     end
 
-    def process_game(game, fd, imported:, discrepancies:)
+    def process_game(game, fd, imported:, discrepancies:) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize -- game-state machine with 6 cases
       teams_swapped = swapped?(game, fd)
       fd_home_for_db = teams_swapped ? fd.away_goals : fd.home_goals
       fd_away_for_db = teams_swapped ? fd.home_goals : fd.away_goals
@@ -124,11 +119,11 @@ module Results
         # Case 5: DB finished, FD not finished — surface as discrepancy.
         if fd.status != 'FINISHED'
           discrepancies << Discrepancy.new(
-            game:      game,
-            db_score:  [game.team1_goals, game.team2_goals],
-            fd_score:  [fd_home_for_db, fd_away_for_db],
+            game: game,
+            db_score: [game.team1_goals, game.team2_goals],
+            fd_score: [fd_home_for_db, fd_away_for_db],
             fd_status: fd.status,
-            duration:  fd.duration
+            duration: fd.duration
           )
           return
         end
@@ -137,11 +132,11 @@ module Results
         # Case 4: already finished, different score → discrepancy.
         if game.team1_goals != fd_home_for_db || game.team2_goals != fd_away_for_db
           discrepancies << Discrepancy.new(
-            game:      game,
-            db_score:  [game.team1_goals, game.team2_goals],
-            fd_score:  [fd_home_for_db, fd_away_for_db],
+            game: game,
+            db_score: [game.team1_goals, game.team2_goals],
+            fd_score: [fd_home_for_db, fd_away_for_db],
             fd_status: fd.status,
-            duration:  fd.duration
+            duration: fd.duration
           )
         end
         return
@@ -156,15 +151,15 @@ module Results
         game.update!(
           team1_goals: fd_home_for_db,
           team2_goals: fd_away_for_db,
-          finished:    true
+          finished: true
         )
       end
 
       imported << ImportedGame.new(
-        game:       game,
+        game: game,
         home_goals: fd_home_for_db,
         away_goals: fd_away_for_db,
-        duration:   fd.duration
+        duration: fd.duration
       )
     rescue ActiveRecord::RecordInvalid => e
       Rails.logger.error("Results::ImportFinishedGames: failed to update game #{game.id}: #{e.message}")
@@ -175,6 +170,7 @@ module Results
     # fixture was seeded. Detect by tla.
     def swapped?(game, fd)
       return false unless game.team1 && game.team2
+
       game.team1.football_data_tla == fd.away_tla && game.team2.football_data_tla == fd.home_tla
     end
 
@@ -185,6 +181,5 @@ module Results
         ::Users::UpdateRankingPerGame.call
       end
     end
-
   end
 end

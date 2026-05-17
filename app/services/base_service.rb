@@ -1,9 +1,9 @@
-# -*- encoding : utf-8 -*-
-class BaseService
+# frozen_string_literal: true
 
+class BaseService
   include Virtus.model
 
-  def self.call(*args)
-    new(*args).call
+  def self.call(*)
+    new(*).call
   end
 end

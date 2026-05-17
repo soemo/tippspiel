@@ -14,13 +14,12 @@
 #   :tla_missing     → team(s) not in our DB by football_data_tla — seed gap
 module Results
   class BackfillFootballDataIds < BaseService
-
     TIME_DRIFT_WARNING_SECONDS = 60 * 60         # >1h drift is worth surfacing
     TIME_TOLERANCE_SECONDS     = 6 * 60 * 60     # matches ImportFinishedGames
 
     Entry = Struct.new(:status, :fd_match, :game, :detail, keyword_init: true)
 
-    def initialize(client: FootballDataClient.new)
+    def initialize(client: FootballDataClient.new) # rubocop:disable Lint/MissingSuper -- BaseService uses Virtus.model; this service has no Virtus attributes, super is unnecessary
       @client = client
     end
 
@@ -34,7 +33,7 @@ module Results
 
     private
 
-    def process(fd)
+    def process(fd) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize -- match-linking algorithm with multiple candidate states
       # Use with_deleted so a soft-deleted game that already holds this FD id
       # is visible — the plain unique index applies to all rows, so without
       # with_deleted a subsequent update_column would raise RecordNotUnique.
@@ -46,9 +45,7 @@ module Results
       missing = []
       missing << fd.home_tla unless team1
       missing << fd.away_tla unless team2
-      if missing.any?
-        return Entry.new(status: :tla_missing, fd_match: fd, detail: "Unknown tla: #{missing.join(', ')}")
-      end
+      return Entry.new(status: :tla_missing, fd_match: fd, detail: "Unknown tla: #{missing.join(', ')}") if missing.any?
 
       lower = fd.utc_date - TIME_TOLERANCE_SECONDS
       upper = fd.utc_date + TIME_TOLERANCE_SECONDS
@@ -62,7 +59,7 @@ module Results
       when 0
         # No team match in time window — maybe still placeholder?
         placeholder_candidate = Game.where(start_at: lower..upper)
-          .where('team1_id IS NULL OR team2_id IS NULL').first
+                                    .where('team1_id IS NULL OR team2_id IS NULL').first
         if placeholder_candidate
           Entry.new(status: :placeholder, fd_match: fd, game: placeholder_candidate)
         else
@@ -70,7 +67,7 @@ module Results
         end
       when 1
         game = candidates.first
-        game.update_column(:football_data_match_id, fd.fd_id)
+        game.update_column(:football_data_match_id, fd.fd_id) # rubocop:disable Rails/SkipsModelValidations -- intentional: lock id without triggering callbacks
         drift = (game.start_at - fd.utc_date).abs
         if drift > TIME_DRIFT_WARNING_SECONDS
           Entry.new(status: :time_mismatch, fd_match: fd, game: game,
@@ -83,6 +80,5 @@ module Results
                   detail: "#{candidates.size} candidates: #{candidates.pluck(:id).inspect}")
       end
     end
-
   end
 end

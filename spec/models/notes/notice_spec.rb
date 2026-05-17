@@ -1,11 +1,11 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe Notice, :type => :model do
+describe Notice do
   it 'uses Factory' do
-      notice = FactoryBot.create(:notice)
-      expect(notice.text).to be_present
-      expect(notice.user).to be_present
+    notice = create(:notice)
+    expect(notice.text).to be_present
+    expect(notice.user).to be_present
   end
-
 end

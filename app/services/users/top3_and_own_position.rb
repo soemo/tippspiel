@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Users
   class Top3AndOwnPosition < BaseService
-
     attribute :user_id, Integer
 
     Result = Struct.new(:user_top3_ranking_hash, :own_position)
@@ -19,10 +20,10 @@ module Users
       if user_ranking_hash.present?
         3.times do |i|
           counter = i + 1
-          user_top3_ranking_hash[counter] = user_ranking_hash[counter] if user_ranking_hash.has_key?(counter)
+          user_top3_ranking_hash[counter] = user_ranking_hash[counter] if user_ranking_hash.key?(counter)
         end
         if user_id.present?
-          user_ranking_hash.each_pair do |k,v|
+          user_ranking_hash.each_pair do |k, v|
             own_position = k if v.map(&:id).include?(user_id)
           end
         end

@@ -1,14 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe CompareTipsController do
-
-  describe "GET #show" do
-
-    it "returns http success" do
-      login(create :active_user)
+  describe 'GET #show' do
+    it 'returns http success' do
+      login(create(:active_user))
       get :show
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
-
 end

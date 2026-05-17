@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe ImprintsController, type: :controller do
-
+describe ImprintsController do
   describe '#show' do
     render_views
-    
+
     it 'renders successful' do
       get :show
       expect(response).to be_successful
     end
   end
-
 end
