@@ -1,27 +1,28 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe BonusEditPresenter do
+  subject { described_class }
 
-  let!(:team_de) {Team.new(id: 40, country_code: :de, name: 'Germany')}
-  let!(:team_cz) {Team.new(id: 50, country_code: :cz, name: 'Czech Republic')}
-  let!(:game1) { Game.new(id:1, team1: team_de, team2: team_cz) }
-  let!(:game2) { Game.new(id:2, team1: team_cz, team2: team_de) }
+  let!(:team_de) { Team.new(id: 40, country_code: :de, name: 'Germany') }
+  let!(:team_cz) { Team.new(id: 50, country_code: :cz, name: 'Czech Republic') }
+  let!(:game1) { Game.new(id: 1, team1: team_de, team2: team_cz) }
+  let!(:game2) { Game.new(id: 2, team1: team_cz, team2: team_de) }
 
-  let(:user) {
+  let(:user) do
     u = create_active_user
     u.bonus_champion_team = team_de
     u.bonus_second_team = team_cz
     u.bonus_when_final_first_goal = 3
     u.bonus_how_many_goals = 9
     u
-  }
+  end
 
-  subject { BonusEditPresenter }
-
-  before :each do
-    Timecop.freeze(Time.now)
-    game1.start_at = Time.now - 1.minute
-    game2.start_at = Time.now + 1.minute
+  before do
+    Timecop.freeze(Time.zone.now)
+    game1.start_at = 1.minute.ago
+    game2.start_at = 1.minute.from_now
   end
 
   describe '#bonus_champion_team' do
@@ -35,7 +36,7 @@ describe BonusEditPresenter do
     context 'if user not present' do
       it 'returns nil' do
         presenter = subject.new(nil)
-        expect(presenter.bonus_champion_team).to eq(nil)
+        expect(presenter.bonus_champion_team).to be_nil
       end
     end
   end
@@ -91,7 +92,7 @@ describe BonusEditPresenter do
     context 'if user not present' do
       it 'returns nil' do
         presenter = subject.new(nil)
-        expect(presenter.bonus_second_team).to eq(nil)
+        expect(presenter.bonus_second_team).to be_nil
       end
     end
   end
@@ -147,7 +148,7 @@ describe BonusEditPresenter do
     context 'if user not present' do
       it 'returns nil' do
         presenter = subject.new(nil)
-        expect(presenter.bonus_when_final_first_goal).to eq(nil)
+        expect(presenter.bonus_when_final_first_goal).to be_nil
       end
     end
   end
@@ -158,7 +159,7 @@ describe BonusEditPresenter do
         presenter = subject.new(user)
 
         expect(presenter.bonus_when_final_first_goal).to eq(3)
-        expect(presenter.bonus_when_final_first_goal_answer).to eq("In der Verlängerung")
+        expect(presenter.bonus_when_final_first_goal_answer).to eq('In der Verlängerung')
       end
     end
 
@@ -183,7 +184,7 @@ describe BonusEditPresenter do
     context 'if user not present' do
       it 'returns nil' do
         presenter = subject.new(nil)
-        expect(presenter.bonus_how_many_goals).to eq(nil)
+        expect(presenter.bonus_how_many_goals).to be_nil
       end
     end
   end
@@ -215,9 +216,9 @@ describe BonusEditPresenter do
       presenter = subject.new(user)
       I18n.with_locale(:de) do
         expect(presenter.options_for_team_tip_select).to eq([
-          ['Tschechien', team_cz.id],
-          ['Deutschland', team_de.id]
-        ])
+                                                              ['Tschechien', team_cz.id],
+                                                              ['Deutschland', team_de.id]
+                                                            ])
       end
     end
   end
@@ -226,10 +227,10 @@ describe BonusEditPresenter do
     it 'returns options for select' do
       presenter = subject.new(user)
       expect(presenter.options_for_when_final_first_goal_select).to eq([
-                                                                         ["In der ersten Halbzeit", 1],
-                                                                         ["In der zweiten Halbzeit", 2],
-                                                                         ["In der Verlängerung", 3],
-                                                                         ["Im Elfmeterschießen", 4]
+                                                                         ['In der ersten Halbzeit', 1],
+                                                                         ['In der zweiten Halbzeit', 2],
+                                                                         ['In der Verlängerung', 3],
+                                                                         ['Im Elfmeterschießen', 4]
                                                                        ])
     end
   end
@@ -246,26 +247,24 @@ describe BonusEditPresenter do
     let(:loser_team)  { create(:team, name: 'Loser') }
     let(:final_game) do
       create(:final, team1: loser_team, team2: winner_team,
-             team1_goals: 0, team2_goals: 2, finished: true)
+                     team1_goals: 0, team2_goals: 2, finished: true)
     end
 
     let(:correct_user) do
       u = create_active_user(create(:user,
-        bonus_champion_team_id: winner_team.id,
-        bonus_second_team_id: loser_team.id,
-        bonus_when_final_first_goal: 2,
-        bonus_how_many_goals: 7
-      ))
+                                    bonus_champion_team_id: winner_team.id,
+                                    bonus_second_team_id: loser_team.id,
+                                    bonus_when_final_first_goal: 2,
+                                    bonus_how_many_goals: 7))
       u
     end
 
     let(:wrong_user) do
       create_active_user(create(:user,
-        bonus_champion_team_id: loser_team.id,
-        bonus_second_team_id: winner_team.id,
-        bonus_when_final_first_goal: 1,
-        bonus_how_many_goals: 3
-      ))
+                                bonus_champion_team_id: loser_team.id,
+                                bonus_second_team_id: winner_team.id,
+                                bonus_when_final_first_goal: 1,
+                                bonus_how_many_goals: 3))
     end
 
     before do
@@ -277,63 +276,63 @@ describe BonusEditPresenter do
 
     describe '#champion_correct?' do
       it 'returns true when user picked the winning team' do
-        expect(BonusEditPresenter.new(correct_user).champion_correct?).to be true
+        expect(described_class.new(correct_user).champion_correct?).to be true
       end
 
       it 'returns false when user picked the wrong team' do
-        expect(BonusEditPresenter.new(wrong_user).champion_correct?).to be false
+        expect(described_class.new(wrong_user).champion_correct?).to be false
       end
     end
 
     describe '#second_correct?' do
       it 'returns true when user picked the losing finalist' do
-        expect(BonusEditPresenter.new(correct_user).second_correct?).to be true
+        expect(described_class.new(correct_user).second_correct?).to be true
       end
 
       it 'returns false when user picked the wrong team' do
-        expect(BonusEditPresenter.new(wrong_user).second_correct?).to be false
+        expect(described_class.new(wrong_user).second_correct?).to be false
       end
     end
 
     describe '#when_first_goal_correct?' do
       it 'returns true when answer matches AppSetting' do
-        expect(BonusEditPresenter.new(correct_user).when_first_goal_correct?).to be true
+        expect(described_class.new(correct_user).when_first_goal_correct?).to be true
       end
 
       it 'returns false when answer does not match' do
-        expect(BonusEditPresenter.new(wrong_user).when_first_goal_correct?).to be false
+        expect(described_class.new(wrong_user).when_first_goal_correct?).to be false
       end
 
       it 'returns false when AppSetting not set' do
         AppSetting.find_by(key: AppSetting::BONUS_WHEN_FIRST_GOAL_KEY)&.destroy
-        expect(BonusEditPresenter.new(correct_user).when_first_goal_correct?).to be false
+        expect(described_class.new(correct_user).when_first_goal_correct?).to be false
       end
     end
 
     describe '#how_many_goals_correct?' do
       it 'returns true when answer matches AppSetting' do
-        expect(BonusEditPresenter.new(correct_user).how_many_goals_correct?).to be true
+        expect(described_class.new(correct_user).how_many_goals_correct?).to be true
       end
 
       it 'returns false when answer does not match' do
-        expect(BonusEditPresenter.new(wrong_user).how_many_goals_correct?).to be false
+        expect(described_class.new(wrong_user).how_many_goals_correct?).to be false
       end
 
       it 'returns false when AppSetting not set' do
         AppSetting.find_by(key: AppSetting::BONUS_HOW_MANY_GOALS_KEY)&.destroy
-        expect(BonusEditPresenter.new(correct_user).how_many_goals_correct?).to be false
+        expect(described_class.new(correct_user).how_many_goals_correct?).to be false
       end
     end
 
     describe '#bonus_points' do
       it 'returns the stored bonus_points from the user' do
         correct_user.update_columns(bonus_points: 24)
-        expect(BonusEditPresenter.new(correct_user).bonus_points).to eq(24)
+        expect(described_class.new(correct_user).bonus_points).to eq(24)
       end
 
       it 'returns 0 when bonus_points is nil' do
         correct_user.update_columns(bonus_points: nil)
-        expect(BonusEditPresenter.new(correct_user).bonus_points).to eq(0)
+        expect(described_class.new(correct_user).bonus_points).to eq(0)
       end
     end
   end

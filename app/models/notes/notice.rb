@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notice < ApplicationRecord
   acts_as_paranoid
 
@@ -6,9 +8,8 @@ class Notice < ApplicationRecord
 
   belongs_to :user
 
-  validates_presence_of :text
-  validates_length_of :text, :maximum => MAX_SIZE
-  validates_presence_of :user
+  validates :text, presence: true
+  validates :text, length: { maximum: MAX_SIZE }
 
   validate :correct_spaces?
 
@@ -17,11 +18,10 @@ class Notice < ApplicationRecord
   # soll verhindern, das man z.B. einfach 200 Zeichen lang a drückt und das Layout zerschiesst
   def correct_spaces?
     unless text.present? &&
-        ((text.size > MAX_SIZE_WITHOUT_SPACES && text.include?(" ")) ||
-            text.size <= MAX_SIZE_WITHOUT_SPACES)
+           ((text.size > MAX_SIZE_WITHOUT_SPACES && text.include?(' ')) ||
+               text.size <= MAX_SIZE_WITHOUT_SPACES)
 
       errors.add(:base, I18n.t(:notice_needs_spaces))
     end
   end
-
 end

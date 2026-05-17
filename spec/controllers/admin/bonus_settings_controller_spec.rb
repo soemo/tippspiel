@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Admin::BonusSettingsController do
-
   let!(:no_admin_user) { create(:active_user) }
   let!(:admin_user)    { create(:active_admin) }
 
@@ -60,5 +61,4 @@ describe Admin::BonusSettingsController do
       end
     end
   end
-
 end

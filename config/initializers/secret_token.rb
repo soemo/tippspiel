@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Your secret key is used for verifying the integrity of signed cookies.
@@ -9,4 +11,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Tippspiel::Application.config.secret_key_base = ENV['SECRET_BASE_KEY']
+Tippspiel::Application.config.secret_key_base = ENV.fetch('SECRET_BASE_KEY', nil)

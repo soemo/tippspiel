@@ -1,5 +1,6 @@
-class NotesController < ApplicationController
+# frozen_string_literal: true
 
+class NotesController < ApplicationController
   def index
     @notice = Notice.new
     @notes = NoticeQueries.order_by_created_at_asc
@@ -13,11 +14,10 @@ class NotesController < ApplicationController
       if error_msg.present?
         flash[:error] = error_msg
       else
-        flash[:notice] = t(:create_successful, :object_name => Notice.model_name.human)
+        flash[:notice] = t(:create_successful, object_name: Notice.model_name.human)
       end
 
-      format.html { redirect_to :action => "index" }
+      format.html { redirect_to action: 'index' }
     end
   end
-
 end

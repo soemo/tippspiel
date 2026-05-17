@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
 namespace :results do
-
   # Friendly error reporter shared by the API-calling tasks. Keeps stacktraces
   # out of cron mailers and exits non-zero so a CI/cron job notices the failure.
   with_friendly_errors = lambda do |&block|
-    begin
-      block.call
-    rescue Results::FootballDataClient::MissingTokenError => e
-      warn "ERROR: FOOTBALL_DATA_API_TOKEN is not set (#{e.message})"
-      exit 1
-    rescue Results::FootballDataClient::ApiError => e
-      warn "ERROR: football-data.org request failed (status=#{e.status || 'n/a'}): #{e.message}"
-      exit 1
-    end
+    block.call
+  rescue Results::FootballDataClient::MissingTokenError => e
+    warn "ERROR: FOOTBALL_DATA_API_TOKEN is not set (#{e.message})"
+    exit 1
+  rescue Results::FootballDataClient::ApiError => e
+    warn "ERROR: football-data.org request failed (status=#{e.status || 'n/a'}): #{e.message}"
+    exit 1
   end
 
   desc 'Import finished game results from football-data.org. Sends summary email to ADMIN_EMAIL.'
@@ -45,7 +42,7 @@ namespace :results do
         puts ''
         puts "=== #{status.to_s.upcase} (#{rows.size}) ==="
         rows.each do |entry|
-          fd   = entry.fd_match
+          fd = entry.fd_match
           teams = "#{fd.home_tla} vs #{fd.away_tla}"
           game_info = entry.game ? " ↔ game ##{entry.game.id} (#{entry.game.round})" : ''
           detail    = entry.detail ? " — #{entry.detail}" : ''
@@ -98,5 +95,4 @@ namespace :results do
       missing.each { |n| puts "  - #{n}" }
     end
   end
-
 end

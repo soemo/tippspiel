@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Tightens up two columns introduced in the football-data integration:
 #
 #   - teams.football_data_tla: replace the plain index with a unique index, so
@@ -8,7 +10,6 @@
 #     the ~6-digit range, so this isn't urgent, but :bigint costs nothing on
 #     MySQL and removes a long-term overflow concern.
 class TightenFootballDataColumns < ActiveRecord::Migration[6.1]
-
   def up
     # Defensive: refuse to apply if duplicate TLAs are present. The seed map
     # is validated as unique by spec, but in production we want a hard guard
@@ -17,9 +18,7 @@ class TightenFootballDataColumns < ActiveRecord::Migration[6.1]
                      .group(:football_data_tla)
                      .having('COUNT(*) > 1')
                      .pluck(:football_data_tla)
-    if duplicates.any?
-      raise "Cannot add unique index — duplicate football_data_tla values found: #{duplicates.inspect}"
-    end
+    raise "Cannot add unique index — duplicate football_data_tla values found: #{duplicates.inspect}" if duplicates.any?
 
     remove_index :teams, :football_data_tla
     add_index    :teams, :football_data_tla, unique: true
@@ -33,5 +32,4 @@ class TightenFootballDataColumns < ActiveRecord::Migration[6.1]
     remove_index :teams, :football_data_tla
     add_index    :teams, :football_data_tla
   end
-
 end

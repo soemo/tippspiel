@@ -1,27 +1,26 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe GamesPresenter do
-
-  subject { GamesPresenter.new(current_user) }
+  subject { described_class.new(current_user) }
 
   let(:current_user) { User.new }
-  let(:games) { [Game.new(id:2), Game.new(id: 1), Game.new(id:3)] }
+  let(:games) { [Game.new(id: 2), Game.new(id: 1), Game.new(id: 3)] }
 
   describe '#games' do
-
     it 'returns all games ordered by start_at' do
-      expect(GameQueries).to receive(:all_ordered_by_start_at).
-          and_return(games)
+      expect(GameQueries).to receive(:all_ordered_by_start_at)
+        .and_return(games)
 
       expect(subject.games).to eq(games)
     end
   end
 
   describe '#game_presenters' do
-
     it 'returns GamePresenters' do
-      expect(GameQueries).to receive(:all_ordered_by_start_at).
-          and_return(games)
+      expect(GameQueries).to receive(:all_ordered_by_start_at)
+        .and_return(games)
 
       game_presenters = subject.game_presenters
 

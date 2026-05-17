@@ -30,6 +30,9 @@ jobs:
         sudo /etc/init.d/mysql start
         mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -proot -e "CREATE DATABASE IF NOT EXISTS tippspiel_test;"
 
+    - name: Run RuboCop lint check
+      run: bundle exec rubocop
+
     - name: create DB and run rspec tests
       env:
         RAILS_ENV: test

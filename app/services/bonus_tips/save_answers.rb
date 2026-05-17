@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module BonusTips
   class SaveAnswers < BaseService
-
     attribute :bonus_champion_team_id, Integer
     attribute :bonus_second_team_id, Integer
     attribute :bonus_when_final_first_goal, Integer
@@ -8,9 +9,8 @@ module BonusTips
     attribute :current_user, User
 
     def call
-
       if Tournament.round_of_16_not_yet_started?
-        current_user.update_columns(
+        current_user.update_columns( # rubocop:disable Rails/SkipsModelValidations -- intentional: bypass callbacks for direct column write
           bonus_champion_team_id: bonus_champion_team_id,
           bonus_second_team_id: bonus_second_team_id,
           bonus_when_final_first_goal: bonus_when_final_first_goal,

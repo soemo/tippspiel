@@ -1,7 +1,7 @@
-class StatisticsShowPresenter
+# frozen_string_literal: true
 
-  attr_reader :current_user
-  attr_reader :user_id
+class StatisticsShowPresenter
+  attr_reader :current_user, :user_id
 
   def initialize(current_user, user_id, finished_games)
     @current_user = current_user
@@ -10,13 +10,11 @@ class StatisticsShowPresenter
   end
 
   def user_to_show
-    @user_to_show ||= begin
-      if shows_current_user_rankings?
-        current_user
-      else
-        User.find(user_id)
-      end
-    end
+    @user_to_show ||= if shows_current_user_rankings?
+                        current_user
+                      else
+                        User.find(user_id)
+                      end
   end
 
   def shows_current_user_rankings?
@@ -28,7 +26,7 @@ class StatisticsShowPresenter
   end
 
   def user_rankings
-    @ranking ||= finished_tips.pluck(:ranking_place).compact.drop(1)
+    @user_rankings ||= finished_tips.pluck(:ranking_place).compact.drop(1)
   end
 
   def header_text
@@ -52,7 +50,9 @@ class StatisticsShowPresenter
   end
 
   def line_chart_x_labels
-    @finished_games.map{ |game| GamePresenter.new(game) }.map{|gp| "#{gp.formatted_start_at_short}: #{gp.team_names_without_flags}"}
+    @finished_games
+      .map { |game| GamePresenter.new(game) }
+      .map { |gp| "#{gp.formatted_start_at_short}: #{gp.team_names_without_flags}" }
   end
 
   def line_chart_max_ticks
@@ -76,7 +76,7 @@ class StatisticsShowPresenter
     result
   end
 
-  def line_chart_data
+  def line_chart_data # rubocop:disable Metrics/MethodLength -- hash literal for Chart.js config, extraction would harm readability
     {
       labels: line_chart_x_labels,
       datasets: [
@@ -84,15 +84,15 @@ class StatisticsShowPresenter
           label: I18n.t(:standings),
           fill: 'start',
           tension: 0.3,
-          borderColor: "rgba(99,179,237,1)",
-          backgroundColor: "rgba(99,179,237,0.15)",
+          borderColor: 'rgba(99,179,237,1)',
+          backgroundColor: 'rgba(99,179,237,0.15)',
           pointRadius: 4,
-          pointBackgroundColor: "rgba(99,179,237,1)",
-          pointBorderColor: "#fff",
+          pointBackgroundColor: 'rgba(99,179,237,1)',
+          pointBorderColor: '#fff',
           pointBorderWidth: 2,
           pointHoverRadius: 6,
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgba(99,179,237,1)",
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(99,179,237,1)',
           pointHoverBorderWidth: 3,
           data: user_rankings
         }
@@ -100,7 +100,7 @@ class StatisticsShowPresenter
     }
   end
 
-  def line_chart_options
+  def line_chart_options # rubocop:disable Metrics/MethodLength -- Chart.js configuration hash, extraction would harm readability
     {
       responsive: true,
       maintainAspectRatio: false,
@@ -128,21 +128,21 @@ class StatisticsShowPresenter
           max: line_chart_max_ticks,
           ticks: {
             stepSize: line_chart_step_size,
-            color: "rgba(160,174,192,1)",
+            color: 'rgba(160,174,192,1)',
             font: {
               size: 13
             }
           },
           grid: {
-            color: "rgba(226,232,240,0.6)"
+            color: 'rgba(226,232,240,0.6)'
           }
         }
       }
     }
   end
 
-  def has_data_to_show?
-    user_rankings.present? && user_rankings.reject(&:blank?).present?
+  def data_to_show?
+    user_rankings.present? && user_rankings.compact_blank.present?
   end
 
   def ranking_current
@@ -173,9 +173,11 @@ class StatisticsShowPresenter
 
   def game_date_for_ranking_index(index)
     return nil unless index
+
     # user_rankings drops the first game, so offset index by 1
     game = @finished_games[index + 1]
     return nil unless game
+
     I18n.l(game.start_at, format: :short)
   end
 end

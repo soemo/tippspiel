@@ -1,5 +1,6 @@
-class GamesPresenter
+# frozen_string_literal: true
 
+class GamesPresenter
   attr_reader :current_user
 
   def initialize(current_user)

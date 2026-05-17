@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe NavBarItemPresenter do
-
-  subject { NavBarItemPresenter }
+  subject { described_class }
 
   describe '#init' do
     it 'returns true' do
-      presenter = subject.new('fas', 'lock', 'text', '/',  'css_class')
+      presenter = subject.new('fas', 'lock', 'text', '/', 'css_class')
       expect(presenter.link_icon_prefix).to eq('fas')
       expect(presenter.link_icon).to eq('lock')
       expect(presenter.link_text).to eq('text')

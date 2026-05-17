@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   acts_as_paranoid
 
@@ -5,18 +7,18 @@ class User < ApplicationRecord
   belongs_to :bonus_second_team, class_name: 'Team', optional: true
   has_many   :tips, dependent: :destroy
 
-  validates               :email, :presence => true
-  validates_uniqueness_of :email, :allow_blank => true, :scope => :deleted_at, :case_sensitive => false, :if => :email_changed?
-  validates_format_of     :email, :with  => Devise.email_regexp, :allow_blank => true
-  validates_confirmation_of :email, if: :email_confirmation_required?
-  validates               :firstname, :presence => true
-  validates               :lastname, :presence => true
+  validates :email, presence: true
+  validates :email, uniqueness: { allow_blank: true, scope: :deleted_at, case_sensitive: false,
+                                  if: :email_changed? }
+  validates :email, format: { with: Devise.email_regexp, allow_blank: true }
+  validates :email, confirmation: { if: :email_confirmation_required? }
+  validates               :firstname, presence: true
+  validates               :lastname, presence: true
   validate :name_fields_must_not_contain_email
 
-  validates_presence_of     :password, if: :password_required?
-  validates_confirmation_of :password, if: :password_required?
-  validates_length_of       :password, within: Devise.password_length, allow_blank: true
-
+  validates :password, presence: { if: :password_required? }
+  validates :password, confirmation: { if: :password_required? }
+  validates :password, length: { within: Devise.password_length, allow_blank: true }
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable , :reconfirmable and :timeoutable
@@ -26,7 +28,7 @@ class User < ApplicationRecord
   scope :inactive, -> { where(confirmed_at: nil) }
 
   def admin?
-    self.email == ADMIN_EMAIL
+    email == ADMIN_EMAIL
   end
 
   def all_bonus_questions_filled_out?
@@ -56,11 +58,9 @@ class User < ApplicationRecord
 
   def name_fields_must_not_contain_email
     email_pattern = Devise.email_regexp
-    if firstname.present? && firstname.match?(email_pattern)
-      errors.add(:firstname, :must_not_contain_email)
-    end
-    if lastname.present? && lastname.match?(email_pattern)
-      errors.add(:lastname, :must_not_contain_email)
-    end
+    errors.add(:firstname, :must_not_contain_email) if firstname.present? && firstname.match?(email_pattern)
+    return unless lastname.present? && lastname.match?(email_pattern)
+
+    errors.add(:lastname, :must_not_contain_email)
   end
 end

@@ -1,38 +1,37 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Results::BackfillFootballDataIds do
-
   let(:fake_client_class) do
     Class.new do
       def initialize(payload)
         @payload = payload
       end
 
-      def fetch_competition_matches(competition_code: nil, status: nil)
+      def fetch_competition_matches(_competition_code: nil, _status: nil)
         @payload
       end
     end
   end
+  let(:base_time) { Time.zone.parse('2026-06-15T18:00:00Z') }
+  let!(:ger) { create(:team, name: 'Germany', football_data_tla: 'GER') }
+  let!(:bra) { create(:team, name: 'Brazil',  football_data_tla: 'BRA') }
 
   def build_client(payload)
     fake_client_class.new(payload)
   end
 
-  let(:base_time) { Time.zone.parse('2026-06-15T18:00:00Z') }
-
   def fd_match(overrides = {})
     {
-      'id'       => 9001,
-      'utcDate'  => '2026-06-15T18:00:00Z',
-      'status'   => 'SCHEDULED',
+      'id' => 9001,
+      'utcDate' => '2026-06-15T18:00:00Z',
+      'status' => 'SCHEDULED',
       'homeTeam' => { 'tla' => 'GER' },
       'awayTeam' => { 'tla' => 'BRA' },
-      'score'    => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => nil, 'away' => nil } }
+      'score' => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => nil, 'away' => nil } }
     }.merge(overrides)
   end
-
-  let!(:ger) { create(:team, name: 'Germany', football_data_tla: 'GER') }
-  let!(:bra) { create(:team, name: 'Brazil',  football_data_tla: 'BRA') }
 
   it 'links an unambiguous match and writes the FD id' do
     game = create(:game, team1: ger, team2: bra, start_at: base_time, football_data_match_id: nil)
@@ -80,5 +79,4 @@ describe Results::BackfillFootballDataIds do
     expect(entries.first.status).to eq :time_mismatch
     expect(game.reload.football_data_match_id).to eq 9001 # still links, but flags
   end
-
 end

@@ -1,5 +1,6 @@
-class BonusTipsController < ApplicationController
+# frozen_string_literal: true
 
+class BonusTipsController < ApplicationController
   def update
     result = BonusTips::SaveAnswers.call(
       bonus_champion_team_id: params[:bonus_champion_team_id],
@@ -9,13 +10,10 @@ class BonusTipsController < ApplicationController
       current_user: current_user
     )
 
-    if result
-      flash[:notice] = t(:succesfully_saved_bonustip)
-    end
+    flash[:notice] = t(:succesfully_saved_bonustip) if result
 
     respond_to do |format|
       format.html { redirect_to edit_bonus_path }
     end
   end
-
 end

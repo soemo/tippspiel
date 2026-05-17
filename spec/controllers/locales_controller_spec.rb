@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe LocalesController do
-
   let(:current_user) { create(:active_user) }
 
   before { login current_user }
 
   describe 'PATCH #update' do
-
     context 'with a supported locale (en)' do
       it 'stores locale in session' do
         patch :update, params: { locale: 'en' }

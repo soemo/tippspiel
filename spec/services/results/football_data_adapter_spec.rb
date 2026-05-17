@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Results::FootballDataAdapter do
-
   describe '.from_hash' do
     let(:base_hash) do
       {
-        'id'       => 12345,
-        'utcDate'  => '2026-06-15T18:00:00Z',
-        'status'   => 'FINISHED',
+        'id' => 12_345,
+        'utcDate' => '2026-06-15T18:00:00Z',
+        'status' => 'FINISHED',
         'homeTeam' => { 'tla' => 'GER' },
         'awayTeam' => { 'tla' => 'BRA' },
-        'score'    => {
+        'score' => {
           'duration' => 'REGULAR',
           'fullTime' => { 'home' => 2, 'away' => 1 }
         }
@@ -19,7 +20,7 @@ describe Results::FootballDataAdapter do
 
     it 'maps a complete FD hash to a Match struct' do
       m = described_class.from_hash(base_hash)
-      expect(m.fd_id).to eq 12345
+      expect(m.fd_id).to eq 12_345
       expect(m.home_tla).to eq 'GER'
       expect(m.away_tla).to eq 'BRA'
       expect(m.status).to eq 'FINISHED'
@@ -75,7 +76,8 @@ describe Results::FootballDataAdapter do
     it 'maps and compacts malformed entries' do
       payload = {
         'matches' => [
-          { 'id' => 1, 'utcDate' => '2026-06-15T18:00:00Z', 'homeTeam' => { 'tla' => 'GER' }, 'awayTeam' => { 'tla' => 'BRA' }, 'score' => { 'fullTime' => { 'home' => 1, 'away' => 0 }, 'duration' => 'REGULAR' }, 'status' => 'FINISHED' },
+          { 'id' => 1, 'utcDate' => '2026-06-15T18:00:00Z', 'homeTeam' => { 'tla' => 'GER' },
+            'awayTeam' => { 'tla' => 'BRA' }, 'score' => { 'fullTime' => { 'home' => 1, 'away' => 0 }, 'duration' => 'REGULAR' }, 'status' => 'FINISHED' },
           nil,
           { 'id' => nil }
         ]
@@ -85,5 +87,4 @@ describe Results::FootballDataAdapter do
       expect(result.first.fd_id).to eq 1
     end
   end
-
 end

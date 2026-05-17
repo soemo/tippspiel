@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe BonusTips::SaveAnswers do
+  subject { described_class }
 
-  subject { BonusTips::SaveAnswers }
+  let!(:user) { create(:user) }
 
-  let!(:user) {create :user}
-
-  let(:bonus_champion_team_id) {42}
-  let(:bonus_second_team_id) {1}
-  let(:bonus_when_final_first_goal) {2}
-  let(:bonus_how_many_goals) {9}
+  let(:bonus_champion_team_id) { 42 }
+  let(:bonus_second_team_id) { 1 }
+  let(:bonus_when_final_first_goal) { 2 }
+  let(:bonus_how_many_goals) { 9 }
 
   context 'if is before tournament ROUND_OF_16' do
-
-    before :each do
+    before do
       expect(Tournament).to receive(:round_of_16_not_yet_started?).and_return(true)
     end
 
@@ -29,8 +29,7 @@ describe BonusTips::SaveAnswers do
   end
 
   context 'if tournament ROUND_OF_16 is running' do
-
-    before :each do
+    before do
       expect(Tournament).to receive(:round_of_16_not_yet_started?).and_return(false)
     end
 
@@ -39,11 +38,12 @@ describe BonusTips::SaveAnswers do
         bonus_champion_team_id: bonus_champion_team_id,
         bonus_second_team_id: bonus_second_team_id,
         bonus_when_final_first_goal: bonus_when_final_first_goal,
-        current_user: user)
+        current_user: user
+      )
 
-      expect(user.bonus_champion_team_id).to be nil
-      expect(user.bonus_second_team_id).to be nil
-      expect(user.bonus_when_final_first_goal).to be nil
+      expect(user.bonus_champion_team_id).to be_nil
+      expect(user.bonus_second_team_id).to be_nil
+      expect(user.bonus_when_final_first_goal).to be_nil
     end
   end
 end

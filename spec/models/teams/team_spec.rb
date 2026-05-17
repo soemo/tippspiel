@@ -1,10 +1,11 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe Team, :type => :model do
-  it "should use Factory" do
-      team = FactoryBot.create(:team)
-      expect(team.name).to be_present
+describe Team do
+  it 'uses Factory' do
+    team = create(:team)
+    expect(team.name).to be_present
   end
 
   describe 'football_data_tla uniqueness' do

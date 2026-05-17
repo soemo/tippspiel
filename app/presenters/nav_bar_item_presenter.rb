@@ -1,5 +1,6 @@
-class NavBarItemPresenter
+# frozen_string_literal: true
 
+class NavBarItemPresenter
   attr_reader :link_icon_prefix, :link_icon, :link_text, :link_url, :css_class
 
   def initialize(link_icon_prefix, link_icon, link_text, link_url, css_class)

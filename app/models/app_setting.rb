@@ -1,7 +1,8 @@
-class AppSetting < ApplicationRecord
+# frozen_string_literal: true
 
-  BONUS_HOW_MANY_GOALS_KEY        = 'bonus_answer_how_many_goals'.freeze
-  BONUS_WHEN_FIRST_GOAL_KEY       = 'bonus_answer_when_will_the_first_goal'.freeze
+class AppSetting < ApplicationRecord
+  BONUS_HOW_MANY_GOALS_KEY        = 'bonus_answer_how_many_goals'
+  BONUS_WHEN_FIRST_GOAL_KEY       = 'bonus_answer_when_will_the_first_goal'
 
   validates :key, presence: true, uniqueness: true
 
@@ -17,15 +18,13 @@ class AppSetting < ApplicationRecord
     value.present? ? value.to_i : nil
   end
 
-  def self.set_bonus_answer_how_many_goals(val)
+  def self.set_bonus_answer_how_many_goals(val) # rubocop:disable Naming/AccessorMethodName -- intentional key-value store API naming
     upsert_value(BONUS_HOW_MANY_GOALS_KEY, val.presence)
   end
 
-  def self.set_bonus_answer_when_will_the_first_goal(val)
+  def self.set_bonus_answer_when_will_the_first_goal(val) # rubocop:disable Naming/AccessorMethodName -- intentional key-value store API naming
     upsert_value(BONUS_WHEN_FIRST_GOAL_KEY, val.presence)
   end
-
-  private
 
   def self.upsert_value(key, value)
     record = find_or_initialize_by(key: key)
@@ -33,5 +32,4 @@ class AppSetting < ApplicationRecord
     record.save!
     record
   end
-
 end

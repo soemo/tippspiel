@@ -11,7 +11,6 @@ require 'uri'
 # See https://docs.football-data.org/general/v4/policies.html
 module Results
   class FootballDataClient
-
     BASE_URL     = 'https://api.football-data.org/v4'
     OPEN_TIMEOUT = 5   # seconds — TCP connect
     READ_TIMEOUT = 15  # seconds — wait for response body
@@ -48,8 +47,9 @@ module Results
     private
 
     def token
-      value = ENV['FOOTBALL_DATA_API_TOKEN']
+      value = ENV.fetch('FOOTBALL_DATA_API_TOKEN', nil)
       raise MissingTokenError, 'FOOTBALL_DATA_API_TOKEN is not set' if value.blank?
+
       value
     end
 
@@ -60,9 +60,9 @@ module Results
       response = perform_request(uri)
       parse_response(response, uri)
     rescue Net::OpenTimeout, Net::ReadTimeout => e
-      raise ApiError.new("Timeout contacting football-data.org: #{e.message}")
+      raise ApiError, "Timeout contacting football-data.org: #{e.message}"
     rescue SocketError, Errno::ECONNREFUSED, Errno::ECONNRESET => e
-      raise ApiError.new("Network error contacting football-data.org: #{e.message}")
+      raise ApiError, "Network error contacting football-data.org: #{e.message}"
     end
 
     def perform_request(uri)
@@ -86,7 +86,7 @@ module Results
         raise ApiError.new(
           "football-data.org responded #{status} for #{uri}",
           status: status,
-          body:   body
+          body: body
         )
       end
 
@@ -94,6 +94,5 @@ module Results
     rescue JSON::ParserError => e
       raise ApiError.new("Invalid JSON from football-data.org: #{e.message}", status: status, body: body)
     end
-
   end
 end

@@ -1,15 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe User, type: :model do
-
+describe User do
   describe 'association' do
-
     it { is_expected.to belong_to(:bonus_champion_team).class_name('Team').optional }
     it { is_expected.to have_many(:tips).dependent(:destroy) }
   end
 
   context 'validation' do
-
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_uniqueness_of(:email).scoped_to([:deleted_at]).ignoring_case_sensitivity }
     it { is_expected.to validate_presence_of(:firstname) }
@@ -57,37 +56,35 @@ describe User, type: :model do
     end
   end
 
-
   it 'does not found if inactive' do
-      user = FactoryBot.create(:user)
-      expect(User.active.to_a).not_to include(user)
-      expect(User.inactive.to_a).to include(user)
+    user = create(:user)
+    expect(described_class.active.to_a).not_to include(user)
+    expect(described_class.inactive.to_a).to include(user)
   end
 
   it 'create_initial_random_tips is default false' do
-    user = FactoryBot.create(:user)
-    expect(user.create_initial_random_tips?).to eq(false)
+    user = create(:user)
+    expect(user.create_initial_random_tips?).to be(false)
   end
 
   describe '#name' do
     it 'returns firstname + lastname' do
-      user = User.new(firstname: 'Firstname', lastname: 'Lastname')
+      user = described_class.new(firstname: 'Firstname', lastname: 'Lastname')
       expect(user.name).to eq('Firstname Lastname')
     end
   end
 
   describe '#admin?' do
     context 'if email == ADMIN_EMAIL' do
-
       it 'returns true' do
-        user = User.new(email: ADMIN_EMAIL)
+        user = described_class.new(email: ADMIN_EMAIL)
         expect(user.admin?).to be true
       end
     end
 
     context 'if email != ADMIN_EMAIL' do
       it 'returns true' do
-        user = User.new(email: 'bla@blub.de')
+        user = described_class.new(email: 'bla@blub.de')
         expect(user.admin?).to be false
       end
     end
@@ -96,7 +93,7 @@ describe User, type: :model do
   describe '#all_bonus_questions_filled_out?' do
     context 'if all question filled out' do
       it 'returns true' do
-        user = User.new(
+        user = described_class.new(
           bonus_champion_team_id: 1,
           bonus_second_team_id: 2,
           bonus_when_final_first_goal: 4,
@@ -108,7 +105,7 @@ describe User, type: :model do
 
     context 'if not all question filled out' do
       it 'returns false' do
-        user = User.new(
+        user = described_class.new(
           bonus_champion_team_id: nil,
           bonus_second_team_id: nil,
           bonus_when_final_first_goal: nil,
@@ -136,13 +133,13 @@ describe User, type: :model do
   end
 
   it 'deletes tips if user delete' do
-    user = FactoryBot.create(:user)
-    5.times{ FactoryBot.create(:tip, :user => user) }
+    user = create(:user)
+    create_list(:tip, 5, user: user)
 
-    tip_ids = Tip.where(:user_id => user.id).pluck(:id)
+    tip_ids = Tip.where(user_id: user.id).pluck(:id)
     expect(tip_ids.count).to eq(5)
 
     user.destroy
-    expect(Tip.only_deleted.where(:user_id => user.id).pluck(:id)).to eq(tip_ids)
+    expect(Tip.only_deleted.where(user_id: user.id).pluck(:id)).to eq(tip_ids)
   end
 end

@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
+
   devise_scope :user do
     get '/logout' => 'devise/sessions#destroy'
   end
 
   devise_for :users,
              controllers: {
-                 registrations: 'adapted_devise/registrations' }
+               registrations: 'adapted_devise/registrations'
+             }
 
   authenticated :user do
     root to: 'main#index', as: 'root'
@@ -21,10 +24,10 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   namespace :admin do
-    resources :games, except: [:show, :create, :new]
+    resources :games, except: %i[show create new]
     resource :start_calculating, only: :new
     resource :result_import, only: :create
-    resource :bonus_settings, only: [:new, :create]
+    resource :bonus_settings, only: %i[new create]
   end
 
   resource :bonus_tips, only: [:update]
@@ -34,7 +37,7 @@ Rails.application.routes.draw do
   resource :imprint, only: :show
   resources :rankings, only: :index
   resources :statistics, only: :show
-  resources :tips, except: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :tips, except: %i[index show new create edit update destroy] do
     collection do
       post :save_tips
     end
@@ -45,7 +48,7 @@ Rails.application.routes.draw do
   get 'notes' => 'notes#index'
   post 'save-notice' => 'notes#create'
 
-  match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => [:get, :post]
+  match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => %i[get post]
 
   # This route must be the last route in this file.
   # It's used when no other routes matches and calls RoutingErrorsController#show with param unknown_route where the

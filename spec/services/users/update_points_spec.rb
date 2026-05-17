@@ -1,12 +1,12 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Users::UpdatePoints do
-
-  subject { Users::UpdatePoints }
+  subject { described_class }
 
   describe 'calculate user points' do
-    before :each do
+    before do
       Game.destroy_all
       Tip.destroy_all
       User.destroy_all
@@ -14,88 +14,86 @@ describe Users::UpdatePoints do
       AppSetting.set_bonus_answer_when_will_the_first_goal(4)
       AppSetting.set_bonus_answer_how_many_goals(9)
 
-      winner_team    = create(:team, :name => 'winner')
-      no_winner_team = create(:team, :name => 'no winner')
+      winner_team    = create(:team, name: 'winner')
+      no_winner_team = create(:team, name: 'no winner')
 
-      @game1 = create(:game,  :team1_goals => 0, :team2_goals => 0)
-      @game2 = create(:game,  :team1_goals => 1, :team2_goals => 0)
-      @game3 = create(:game,  :team1_goals => 0, :team2_goals => 1)
-      @game4 = create(:game,  :team1_goals => 2, :team2_goals => 1)
-      @game5 = create(:final, :team1_goals => 0, :team2_goals => 3, :team1 => no_winner_team, :team2 => winner_team)
+      @game1 = create(:game,  team1_goals: 0, team2_goals: 0)
+      @game2 = create(:game,  team1_goals: 1, team2_goals: 0)
+      @game3 = create(:game,  team1_goals: 0, team2_goals: 1)
+      @game4 = create(:game,  team1_goals: 2, team2_goals: 1)
+      @game5 = create(:final, team1_goals: 0, team2_goals: 3, team1: no_winner_team, team2: winner_team)
 
       # erwartet 8 Punkte (8, 0, 0, 0, 0)
       @user1 = create_active_user
-      create(:tip, :user => @user1, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user1, :game => @game2, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user1, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user1, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user1, :game => @game5, :team1_goals => 0, :team2_goals => 0)
+      create(:tip, user: @user1, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user1, game: @game2, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user1, game: @game3, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user1, game: @game4, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user1, game: @game5, team1_goals: 0, team2_goals: 0)
 
       # erwartet 20 Punkte (8, 4, 0, 0, 0) + Siegertipp richtig (8 Punkte)
-      @user2 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
-      create(:tip, :user => @user2, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user2, :game => @game2, :team1_goals => 3, :team2_goals => 2)
-      create(:tip, :user => @user2, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user2, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user2, :game => @game5, :team1_goals => 0, :team2_goals => 0)
+      @user2 = create_active_user(create(:user, bonus_champion_team_id: winner_team.id))
+      create(:tip, user: @user2, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user2, game: @game2, team1_goals: 3, team2_goals: 2)
+      create(:tip, user: @user2, game: @game3, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user2, game: @game4, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user2, game: @game5, team1_goals: 0, team2_goals: 0)
 
       # erwartet 13 Punkte (8, 0, 0, 0, 5)
       @user3 = create_active_user
-      create(:tip, :user => @user3, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user3, :game => @game2, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user3, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user3, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user3, :game => @game5, :team1_goals => 0, :team2_goals => 1)
+      create(:tip, user: @user3, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user3, game: @game2, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user3, game: @game3, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user3, game: @game4, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user3, game: @game5, team1_goals: 0, team2_goals: 1)
 
       # erwartet 21 Punkte (8, 0, 0, 0, 5) + richtigen Siegertip (8)
-      @user4 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
-      create(:tip, :user => @user4, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user4, :game => @game2, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user4, :game => @game3, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user4, :game => @game4, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user4, :game => @game5, :team1_goals => 0, :team2_goals => 2)
+      @user4 = create_active_user(create(:user, bonus_champion_team_id: winner_team.id))
+      create(:tip, user: @user4, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user4, game: @game2, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user4, game: @game3, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user4, game: @game4, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user4, game: @game5, team1_goals: 0, team2_goals: 2)
 
       # Alles richtig getippt + richtigen Siegertip  (48 Punkte)
-      @user5 = create_active_user(create(:user, :bonus_champion_team_id => winner_team.id))
-      create(:tip, :user => @user5, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user5, :game => @game2, :team1_goals => 1, :team2_goals => 0)
-      create(:tip, :user => @user5, :game => @game3, :team1_goals => 0, :team2_goals => 1)
-      create(:tip, :user => @user5, :game => @game4, :team1_goals => 2, :team2_goals => 1)
-      create(:tip, :user => @user5, :game => @game5, :team1_goals => 0, :team2_goals => 3)
+      @user5 = create_active_user(create(:user, bonus_champion_team_id: winner_team.id))
+      create(:tip, user: @user5, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user5, game: @game2, team1_goals: 1, team2_goals: 0)
+      create(:tip, user: @user5, game: @game3, team1_goals: 0, team2_goals: 1)
+      create(:tip, user: @user5, game: @game4, team1_goals: 2, team2_goals: 1)
+      create(:tip, user: @user5, game: @game5, team1_goals: 0, team2_goals: 3)
 
       # Alles richtig getippt + richtigen Siegertip & second tip  (56 Punkte)
       @user6 = create_active_user(create(:user,
-                                         :bonus_champion_team_id => winner_team.id,
-                                         :bonus_second_team_id => no_winner_team.id,
-                                         :bonus_when_final_first_goal => 1, # 4 is correct
-                                         :bonus_how_many_goals => 6, # 9 is correct
-                                  ))
-      create(:tip, :user => @user6, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user6, :game => @game2, :team1_goals => 1, :team2_goals => 0)
-      create(:tip, :user => @user6, :game => @game3, :team1_goals => 0, :team2_goals => 1)
-      create(:tip, :user => @user6, :game => @game4, :team1_goals => 2, :team2_goals => 1)
-      create(:tip, :user => @user6, :game => @game5, :team1_goals => 0, :team2_goals => 3)
+                                         bonus_champion_team_id: winner_team.id,
+                                         bonus_second_team_id: no_winner_team.id,
+                                         bonus_when_final_first_goal: 1, # 4 is correct
+                                         bonus_how_many_goals: 6)) # 9 is correct
+      create(:tip, user: @user6, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user6, game: @game2, team1_goals: 1, team2_goals: 0)
+      create(:tip, user: @user6, game: @game3, team1_goals: 0, team2_goals: 1)
+      create(:tip, user: @user6, game: @game4, team1_goals: 2, team2_goals: 1)
+      create(:tip, user: @user6, game: @game5, team1_goals: 0, team2_goals: 3)
 
       # hat keinen Tipp abgegeben - 0 Punkte
-      @user7 = create_active_user(create(:user, :bonus_champion_team_id => nil))
-      create(:tip, :user => @user7, :game => @game1, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user7, :game => @game2, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user7, :game => @game3, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user7, :game => @game4, :team1_goals => nil, :team2_goals => nil)
-      create(:tip, :user => @user7, :game => @game5, :team1_goals => nil, :team2_goals => nil)
+      @user7 = create_active_user(create(:user, bonus_champion_team_id: nil))
+      create(:tip, user: @user7, game: @game1, team1_goals: nil, team2_goals: nil)
+      create(:tip, user: @user7, game: @game2, team1_goals: nil, team2_goals: nil)
+      create(:tip, user: @user7, game: @game3, team1_goals: nil, team2_goals: nil)
+      create(:tip, user: @user7, game: @game4, team1_goals: nil, team2_goals: nil)
+      create(:tip, user: @user7, game: @game5, team1_goals: nil, team2_goals: nil)
 
       # Alles richtig getippt + 4 x richtige Bonusantwort (72 Punkte)
       @user8 = create_active_user(create(:user,
-                                         :bonus_champion_team_id => winner_team.id,
-                                         :bonus_second_team_id => no_winner_team.id,
-                                         :bonus_when_final_first_goal => 4,
-                                         :bonus_how_many_goals => 9
-                                  ))
-      create(:tip, :user => @user8, :game => @game1, :team1_goals => 0, :team2_goals => 0)
-      create(:tip, :user => @user8, :game => @game2, :team1_goals => 1, :team2_goals => 0)
-      create(:tip, :user => @user8, :game => @game3, :team1_goals => 0, :team2_goals => 1)
-      create(:tip, :user => @user8, :game => @game4, :team1_goals => 2, :team2_goals => 1)
-      create(:tip, :user => @user8, :game => @game5, :team1_goals => 0, :team2_goals => 3)
+                                         bonus_champion_team_id: winner_team.id,
+                                         bonus_second_team_id: no_winner_team.id,
+                                         bonus_when_final_first_goal: 4,
+                                         bonus_how_many_goals: 9))
+      create(:tip, user: @user8, game: @game1, team1_goals: 0, team2_goals: 0)
+      create(:tip, user: @user8, game: @game2, team1_goals: 1, team2_goals: 0)
+      create(:tip, user: @user8, game: @game3, team1_goals: 0, team2_goals: 1)
+      create(:tip, user: @user8, game: @game4, team1_goals: 2, team2_goals: 1)
+      create(:tip, user: @user8, game: @game5, team1_goals: 0, team2_goals: 3)
     end
 
     it 'after first game finished' do
@@ -175,7 +173,6 @@ describe Users::UpdatePoints do
       expect(user.count4points).to eq(0)
       expect(user.count3points).to eq(0)
       expect(user.count0points).to eq(0)
-
     end
 
     it 'after first two games finished' do
@@ -340,7 +337,5 @@ describe Users::UpdatePoints do
       expect(user.count3points).to eq(0)
       expect(user.count0points).to eq(0)
     end
-
   end
-
 end

@@ -1,4 +1,5 @@
-require 'pp'
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
@@ -15,7 +16,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-
   def set_locale
     I18n.locale = resolve_locale
   end
@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
       path = request.path
 
       URL_SCOPES.each_value do |value|
-
         if path.starts_with?("/#{value}")
           url_scope = value
           break
@@ -55,6 +54,7 @@ class ApplicationController < ActionController::Base
   def locale_from_header
     header = request.env['HTTP_ACCEPT_LANGUAGE']
     return nil if header.blank?
+
     header.split(',').map { |l| l.split(';q=').first.strip[0..1].downcase }
           .find { |lang| SUPPORTED_LOCALES.include?(lang) }
   end

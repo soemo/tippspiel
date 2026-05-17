@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PartialUniqueIndexesForFootballDataColumns < ActiveRecord::Migration[6.1]
   # Replaces the plain unique indexes added in 20260516120000 (games) and
   # 20260516120003 (teams) with partial unique indexes scoped to non-deleted
@@ -9,14 +11,14 @@ class PartialUniqueIndexesForFootballDataColumns < ActiveRecord::Migration[6.1]
     # games.football_data_match_id
     remove_index :games, :football_data_match_id
     add_index :games, :football_data_match_id, unique: true,
-              where: 'deleted_at IS NULL',
-              name: 'index_games_on_football_data_match_id_not_deleted'
+                                               where: 'deleted_at IS NULL',
+                                               name: 'index_games_on_football_data_match_id_not_deleted'
 
     # teams.football_data_tla
     remove_index :teams, :football_data_tla
     add_index :teams, :football_data_tla, unique: true,
-              where: 'deleted_at IS NULL',
-              name: 'index_teams_on_football_data_tla_not_deleted'
+                                          where: 'deleted_at IS NULL',
+                                          name: 'index_teams_on_football_data_tla_not_deleted'
   end
 
   def down

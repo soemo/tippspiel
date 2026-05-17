@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Admin::ResultImportsController do
-
   let!(:no_admin_user) { create(:active_user) }
   let!(:admin_user)    { create(:active_admin) }
 
@@ -11,7 +12,8 @@ describe Admin::ResultImportsController do
 
   let(:result_with_imports) do
     g = build_stubbed(:game)
-    imported = Results::ImportFinishedGames::ImportedGame.new(game: g, home_goals: 1, away_goals: 0, duration: 'REGULAR')
+    imported = Results::ImportFinishedGames::ImportedGame.new(game: g, home_goals: 1, away_goals: 0,
+                                                              duration: 'REGULAR')
     Results::ImportFinishedGames::Result.new(imported: [imported], discrepancies: [], unmatched: [])
   end
 
@@ -119,5 +121,4 @@ describe Admin::ResultImportsController do
       end
     end
   end
-
 end

@@ -1,24 +1,22 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe NavBarPresenter do
+  subject { described_class }
 
   let(:user) { build(:active_admin) }
 
-  subject { NavBarPresenter }
-
   describe '#active_css_class?' do
-
     let(:presenter) { subject.new(:admin, user) }
 
     context 'if url_scope == effective_url_scope' do
-
       it "returns 'active'" do
         expect(presenter.active_css_class(:admin)).to eq('active')
       end
     end
 
     context 'if url_scope != effective_url_scope' do
-
       it "returns ''" do
         expect(presenter.active_css_class(:help)).to eq('')
       end
@@ -26,31 +24,27 @@ describe NavBarPresenter do
   end
 
   describe '#nav_bar_brand_url' do
-
     it 'returns root_url' do
       expect(subject.new(:admin, user).nav_bar_brand_url).to eq(root_path)
     end
   end
 
   describe '#nav_bar_title' do
-
     context 'if user is logged in' do
-      it 'returns "#{I18n.t(tournament_name)} #{I18n.t(your_tips)}"' do
+      it 'returns tournament_name + your_tips' do
         expect(subject.new(:admin, user).nav_bar_title).to eq("#{I18n.t('tournament_name')} #{t('your_tips')}")
       end
     end
 
     context 'if user is not logged in' do
-      it 'returns "#{I18n.t(tournament_name)} #{I18n.t(app_name)}"' do
+      it 'returns tournament_name + app_name' do
         expect(subject.new(:admin, nil).nav_bar_title).to eq("#{I18n.t('tournament_name')} #{t('app_name')}")
       end
     end
   end
 
   describe '#nav_bar_item_presenters?' do
-
     context 'if user not present' do
-
       it 'returns NavBarItemPresenter for help' do
         presenter = subject.new(:admin, nil)
         nav_bar_item_presenters = presenter.nav_bar_item_presenters
@@ -63,7 +57,6 @@ describe NavBarPresenter do
     end
 
     context 'if user present' do
-
       let(:presenter) { subject.new(:main, user) }
 
       it 'returns all NavBarItemPresenters' do
@@ -122,7 +115,6 @@ describe NavBarPresenter do
   end
 
   describe '#nav_ranking_info' do
-
     let(:presenter) { subject.new(:main, user) }
 
     it 'returns nav_ranking_info if Tournament has started' do

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ResultsMailer do
-
   let(:team1) { build_stubbed(:team, name: 'Germany', football_data_tla: 'GER') }
   let(:team2) { build_stubbed(:team, name: 'Brazil',  football_data_tla: 'BRA') }
   let(:game) do
@@ -88,5 +89,4 @@ describe ResultsMailer do
       expect(mail.subject).to include '1 discrepancies'
     end
   end
-
 end

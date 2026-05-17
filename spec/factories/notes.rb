@@ -1,7 +1,8 @@
-# -*- encoding : utf-8 -*-
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :notice do
     user { association :user, strategy: @build_strategy.class }
-    sequence(:text){|n| "text bla blub #{n}" }
+    sequence(:text) { |n| "text bla blub #{n}" }
   end
 end

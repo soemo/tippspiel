@@ -1,18 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ApplicationController do
-
   subject { controller }
-  let(:current_user) { create(:active_admin)}
 
-  it { is_expected.to filter_param(:password) }
+  let(:current_user) { create(:active_admin) }
 
-  before :each do
+  before do
     login current_user
   end
 
-  describe '#set_locale' do
+  it { is_expected.to filter_param(:password) }
 
+  describe '#set_locale' do
     context 'when locale is stored in session' do
       it 'uses the session locale' do
         session[:locale] = 'en'
@@ -77,7 +78,6 @@ describe ApplicationController do
   end
 
   describe '#nav_bar_presenter' do
-
     it 'returns instance of NavBarPresenter' do
       current_url_scope = '/templates'
       expect(subject).to receive(:url_scope).and_return(current_url_scope)
@@ -91,13 +91,11 @@ describe ApplicationController do
   end
 
   describe '#url_scope' do
-
-    before :each do
+    before do
       expect(subject).to receive(:request).and_return(request)
     end
 
     context 'if request path starts with /admin' do
-
       let(:request) { double('request', path: '/admin/some-path') }
 
       it 'returns admin' do
@@ -107,7 +105,6 @@ describe ApplicationController do
     end
 
     context 'if request path starts with /comparetips' do
-
       let(:request) { double('request', path: '/comparetips') }
 
       it 'returns comparetips' do
@@ -117,7 +114,6 @@ describe ApplicationController do
     end
 
     context 'if request path starts with /help' do
-
       let(:request) { double('request', path: '/help') }
 
       it 'returns help' do
@@ -127,7 +123,6 @@ describe ApplicationController do
     end
 
     context 'if request path starts with /notes' do
-
       let(:request) { double('request', path: '/notes') }
 
       it 'returns notes' do
@@ -137,7 +132,6 @@ describe ApplicationController do
     end
 
     context 'if request path starts with /ranking' do
-
       let(:request) { double('request', path: '/ranking') }
 
       it 'returns ranking' do
@@ -147,7 +141,6 @@ describe ApplicationController do
     end
 
     context 'if request path starts with /user' do
-
       let(:request) { double('request', path: '/user/some-path') }
 
       it 'returns user' do
@@ -157,7 +150,6 @@ describe ApplicationController do
     end
 
     context 'if path starts with something unknown' do
-
       let(:request) { double('request', path: '/blablub/admin/some-path') }
 
       it 'returns blank' do

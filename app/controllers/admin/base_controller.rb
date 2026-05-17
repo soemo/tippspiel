@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Admin
   class BaseController < ApplicationController
-
     around_action :do_if_allowed?
 
     private
@@ -12,6 +13,5 @@ module Admin
         render_forbidden
       end
     end
-
   end
 end

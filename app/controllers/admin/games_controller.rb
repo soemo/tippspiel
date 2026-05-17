@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Admin
   class GamesController < Admin::BaseController
-
     def index
       @presenter = GamesPresenter.new(current_user)
     end
@@ -24,13 +25,12 @@ module Admin
     private
 
     def game_params
-      if current_user.admin?
-        params.require(:game).permit(:lock_version, :team1_id, :team2_id,
-                                     :team1_placeholder_name, :team2_placeholder_name,
-                                     :team1_goals, :team2_goals, :finished, :start_at,
-                                     :round, :group, :place )
-      end
+      return unless current_user.admin?
+
+      params.require(:game).permit(:lock_version, :team1_id, :team2_id,
+                                   :team1_placeholder_name, :team2_placeholder_name,
+                                   :team1_goals, :team2_goals, :finished, :start_at,
+                                   :round, :group, :place)
     end
   end
 end
-

@@ -27,7 +27,7 @@
                         = user_points
                   .row
                     .small-5.columns.small-infos
-                      = raw presenter.bonus_ranking_info(user, true)
+                      = raw presenter.bonus_ranking_info(user, for_small_screen: true)
                     .small-7.columns.text-right
                       = statistic_content(user).html_safe
 

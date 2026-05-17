@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe RankingPresenter do
-
-  subject { RankingPresenter.new }
+  subject { described_class.new }
 
   describe '#bonus_answers_visible?' do
     context 'if Tournament.round_of_16_started? == true' do
@@ -66,8 +67,8 @@ describe RankingPresenter do
       user4 = User.new(points: 12)
       query_result = [user4, user2, user3, user1]
 
-      expect(UserQueries).to receive(:all_ordered_by_points_and_all_countxpoints).
-        and_return(query_result)
+      expect(UserQueries).to receive(:all_ordered_by_points_and_all_countxpoints)
+        .and_return(query_result)
 
       expected = {
         1 => [user4],
@@ -76,26 +77,26 @@ describe RankingPresenter do
         4 => [user1]
       }
 
-      expect(Users::PrepareRanking).to receive(:call).
-        with(users_for_ranking: query_result).
-        and_return(expected)
+      expect(Users::PrepareRanking).to receive(:call)
+        .with(users_for_ranking: query_result)
+        .and_return(expected)
 
       expect(subject.user_ranking_hash).to eq([[1, [user4]],
                                                [2, [user2]],
                                                [3, [user3]],
-                                               [4, [user1]],
-                                              ])
+                                               [4, [user1]]])
     end
   end
 
-  describe "#bonus_ranking_info" do
+  describe '#bonus_ranking_info' do
     context 'if bonus_answers_visible? == true' do
       context 'if no bonus answers given' do
-        it 'shows infos with - | - ' do
+        it 'shows infos with - | -' do
           expect(subject).to receive(:bonus_answers_visible?).and_return(true)
           expect(subject.bonus_ranking_info(User.new)).to eq('- | - | - | -')
         end
       end
+
       context 'if all bonus answers given' do
         it 'shows correct infos' do
           expect(subject).to receive(:bonus_answers_visible?).twice.and_return(true)
@@ -107,18 +108,17 @@ describe RankingPresenter do
             bonus_champion_team: team1,
             bonus_second_team: team2,
             bonus_when_final_first_goal: 4,
-            bonus_how_many_goals: 9,
+            bonus_how_many_goals: 9
           )
-          expect(::TeamPresenter).to receive(:new).with(team1).twice.and_return(team_presenter1)
-          expect(::TeamPresenter).to receive(:new).with(team2).twice.and_return(team_presenter2)
-
+          expect(TeamPresenter).to receive(:new).with(team1).twice.and_return(team_presenter1)
+          expect(TeamPresenter).to receive(:new).with(team2).twice.and_return(team_presenter2)
 
           expect(subject.bonus_ranking_info(user)).to eq(
-             "<span class='f32'><i class='flag de'></i></span> | <span class='f32'><i class='flag cz'></i></span> | 11m | 9"
-                                                      )
-          expect(subject.bonus_ranking_info(user, true)).to eq(
-             "<span class='f16'><i class='flag de'></i></span> | <span class='f16'><i class='flag cz'></i></span> | 11m | 9"
-                                                      )
+            "<span class='f32'><i class='flag de'></i></span> | <span class='f32'><i class='flag cz'></i></span> | 11m | 9"
+          )
+          expect(subject.bonus_ranking_info(user, for_small_screen: true)).to eq(
+            "<span class='f16'><i class='flag de'></i></span> | <span class='f16'><i class='flag cz'></i></span> | 11m | 9"
+          )
         end
       end
     end

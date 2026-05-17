@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 module TipQueries
   class << self
-
     def all_ordered_by_tip_points_and_user_firstname_by_game_id(game_id)
       if game_id.present?
-        Tip.where(game_id: game_id).
-            includes('user').
-            where('users.deleted_at' => nil).
-            order('tips.tip_points desc').
-            order('users.firstname asc')
+        Tip.where(game_id: game_id)
+           .includes('user')
+           .where('users.deleted_at' => nil)
+           .order('tips.tip_points desc')
+           .order('users.firstname asc')
       else
         []
       end
@@ -18,23 +19,23 @@ module TipQueries
     end
 
     def all_by_games_and_tip_points(games, tip_points)
-      Tip.where({game_id: games, tip_points: tip_points}).
-        select('id, user_id, game_id, tip_points')
+      Tip.where({ game_id: games, tip_points: tip_points })
+         .select('id, user_id, game_id, tip_points')
     end
 
     def all_by_user_id_ordered_games_start_at(user_id)
-      Tip.preload(game: [:team1, :team2]).joins(:game).
-        where(user_id: user_id).order('games.start_at asc')
+      Tip.preload(game: %i[team1 team2]).joins(:game)
+         .where(user_id: user_id).order('games.start_at asc')
     end
 
     def all_by_user_id_and_game_ids_ordered_games_start_at(user_id, game_ids)
-      Tip.preload(game: [:team1, :team2]).joins(:game).
-        where(user_id: user_id).where(game_id: game_ids).
-        order('games.start_at asc')
+      Tip.preload(game: %i[team1 team2]).joins(:game)
+         .where(user_id: user_id).where(game_id: game_ids)
+         .order('games.start_at asc')
     end
 
     def all_by_user_id_and_tip_points(user_id, tip_points)
-      Tip.where({user_id: user_id, tip_points: tip_points})
+      Tip.where({ user_id: user_id, tip_points: tip_points })
     end
 
     def exists_for_user_id(user_id)
@@ -63,6 +64,5 @@ module TipQueries
       rows.each { |(uid, pts), cnt| result[uid][pts] = cnt }
       result
     end
-
   end
 end

@@ -1,9 +1,10 @@
-class GamePresenter < DelegateClass(Game)
+# frozen_string_literal: true
 
+class GamePresenter < DelegateClass(Game)
   attr_reader :game
 
   def initialize(game)
-    super(game)
+    super
     @game = game
   end
 
@@ -11,7 +12,7 @@ class GamePresenter < DelegateClass(Game)
   def filter_categories_css_classes
     css_classes = ['mix']
     css_classes << "category-#{FILTER_TODAY}" if @game.today?
-    css_classes << "category-#{FILTER_FUTURE}" if !@game.started?
+    css_classes << "category-#{FILTER_FUTURE}" unless @game.started?
     css_classes << "category-#{FILTER_GROUP_PREFIX}#{@game.group}" if @game.group.present?
     css_classes << "category-#{FILTER_ROUND_PREFIX}#{@game.round}" if @game.round.present?
 
@@ -54,7 +55,6 @@ class GamePresenter < DelegateClass(Game)
     end
   end
 
-
   def team_names_with_flags(flag_size: 32, team1_flag_position: 'right', team2_flag_position: 'left')
     team1_name_with_flag = team1_with_flag(flag_size: flag_size, flag_position: team1_flag_position)
     team2_name_with_flag = team2_with_flag(flag_size: flag_size, flag_position: team2_flag_position)
@@ -62,17 +62,17 @@ class GamePresenter < DelegateClass(Game)
   end
 
   def team_names_without_flags
-    if @game.team1_id.present?
-      team1_name = team_presenter(@game.team1).translated_name
-    else
-      team1_name = @game.team1_placeholder_name
-    end
+    team1_name = if @game.team1_id.present?
+                   team_presenter(@game.team1).translated_name
+                 else
+                   @game.team1_placeholder_name
+                 end
 
-    if @game.team2_id.present?
-      team2_name = team_presenter(@game.team2).translated_name
-    else
-      team2_name = @game.team2_placeholder_name
-    end
+    team2_name = if @game.team2_id.present?
+                   team_presenter(@game.team2).translated_name
+                 else
+                   @game.team2_placeholder_name
+                 end
 
     "#{team1_name} - #{team2_name}"
   end
