@@ -88,7 +88,7 @@ describe ApplicationHelper do
 
     context 'if msg is a Array with more than one element' do
       it 'raise an error' do
-        expect  do
+        expect do
           helper.write_flash(%w[test123 test456], 'error_css_class')
         end.to raise_error(RuntimeError)
       end

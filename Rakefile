@@ -13,8 +13,8 @@ namespace :tippspiel do
   placeholder_version    = '###PLACEHOLDER_VERSION###'
 
   desc 'set Versionnumber and Build-Date in normal App-Dir-Structure'
-  task set_version: :environment do
-    today_date   = Time.zone.today.strftime('%d.%m.%Y') # Time.zone is available after :environment
+  task :set_version do
+    today_date   = Date.today.strftime('%d.%m.%Y') # plain Date.today suffices for a build timestamp; no Rails boot needed
     app_version  = ENV.fetch('APP_VERSION', placeholder_version)
     replacements = { placeholder_build_date => today_date }
     replacements[placeholder_version] = app_version unless app_version == placeholder_version
@@ -22,7 +22,7 @@ namespace :tippspiel do
   end
 
   def version_file
-    Rails.root.join('config/version.rb').to_s
+    File.expand_path('config/version.rb', __dir__)
   end
 
   def set_version_from_file(version_file, replacements)

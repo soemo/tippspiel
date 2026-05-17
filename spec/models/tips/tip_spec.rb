@@ -46,7 +46,7 @@ describe Tip do
   end
 
   describe 'tip remove leading zero' do
-    it 'as remove leading zero' do
+    it 'removes leading zero' do
       t = described_class.new({ team1_goals: 0o0, team2_goals: 0o2 })
       t.remove_leading_zero
       expect(t.team1_goals).to eq(0)
