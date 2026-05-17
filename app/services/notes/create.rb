@@ -2,8 +2,8 @@
 
 module Notes
   class Create < BaseService
-    attribute :notice_text, String
-    attribute :current_user_id, Integer
+    attribute :notice_text
+    attribute :current_user_id
 
     def call
       create

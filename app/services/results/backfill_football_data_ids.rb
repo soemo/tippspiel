@@ -19,7 +19,8 @@ module Results
 
     Entry = Struct.new(:status, :fd_match, :game, :detail, keyword_init: true)
 
-    def initialize(client: FootballDataClient.new) # rubocop:disable Lint/MissingSuper -- BaseService uses Virtus.model; this service has no Virtus attributes, super is unnecessary
+    def initialize(client: FootballDataClient.new)
+      super()
       @client = client
     end
 

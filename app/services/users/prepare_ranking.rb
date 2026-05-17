@@ -2,7 +2,7 @@
 
 module Users
   class PrepareRanking < UserBaseService
-    attribute :users_for_ranking, [User]
+    attribute :users_for_ranking
 
     # bekommt eine Liste von Usern
     # sortiert nach Gesamtpunkten, Anzahl6Punkte, Anzahl4Punkte und Anzahl3Punkte geliefert
@@ -12,12 +12,12 @@ module Users
     def call # rubocop:disable Metrics/MethodLength -- ranking algorithm, sequential logic that can't be cleanly split
       result = {}
 
-      if users_for_ranking.present?
+      if Array(users_for_ranking).present?
         place                    = 1
         user_count_on_same_place = 1
         last_used_user           = nil
 
-        users_for_ranking.each do |u|
+        Array(users_for_ranking).each do |u|
           if last_used_user.nil?
             # erste User
             result[place] = [u]

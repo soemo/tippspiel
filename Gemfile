@@ -28,7 +28,6 @@ gem 'lograge'
 gem 'mysql2', '= 0.5.6'
 gem 'sass-rails', '= 5.1.0' # TODO: upgrade later to sassc-rails
 gem 'uglifier'
-gem 'virtus'
 gem 'whenever', require: false # cron schedule for result imports
 
 group :development, :production do

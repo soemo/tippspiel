@@ -2,7 +2,7 @@
 
 module Tips
   class Save < BaseService
-    attribute :current_user, User
+    attribute :current_user
     attribute :tips_params
 
     def call

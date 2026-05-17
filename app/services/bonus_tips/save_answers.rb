@@ -2,11 +2,11 @@
 
 module BonusTips
   class SaveAnswers < BaseService
-    attribute :bonus_champion_team_id, Integer
-    attribute :bonus_second_team_id, Integer
-    attribute :bonus_when_final_first_goal, Integer
-    attribute :bonus_how_many_goals, Integer
-    attribute :current_user, User
+    attribute :bonus_champion_team_id
+    attribute :bonus_second_team_id
+    attribute :bonus_when_final_first_goal
+    attribute :bonus_how_many_goals
+    attribute :current_user
 
     def call
       if Tournament.round_of_16_not_yet_started?
