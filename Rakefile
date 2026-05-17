@@ -9,12 +9,12 @@ require 'fileutils'
 Tippspiel::Application.load_tasks
 
 namespace :tippspiel do
-  today_date             = Time.zone.today.strftime('%d.%m.%Y')
   placeholder_build_date = '###PLACEHOLDER_BUILD_DATE###'
   placeholder_version    = '###PLACEHOLDER_VERSION###'
 
   desc 'set Versionnumber and Build-Date in normal App-Dir-Structure'
   task set_version: :environment do
+    today_date   = Time.zone.today.strftime('%d.%m.%Y') # Time.zone is available after :environment
     app_version  = ENV.fetch('APP_VERSION', placeholder_version)
     replacements = { placeholder_build_date => today_date }
     replacements[placeholder_version] = app_version unless app_version == placeholder_version
