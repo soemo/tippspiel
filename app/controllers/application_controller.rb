@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
     return nil if header.blank?
 
     header.split(',').map { |l| l.split(';q=').first.strip[0..1].downcase }
-          .find { |lang| SUPPORTED_LOCALES.include?(lang) }
+                     .find { |lang| SUPPORTED_LOCALES.include?(lang) }
   end
 
   def set_host_to_mailers

@@ -15,7 +15,7 @@ describe Tips::FromUser do
     context 'and no random tips created' do
       it 'return new created tips without goals' do
         expect(Tip.count).to eq(0)
-        expect(TipQueries).to receive(:exists_for_user_id).with(user_id).and_return(false)
+        expect(TipQueries).to receive(:exists_for_user_id?).with(user_id).and_return(false)
         tips = [Tip.new, Tip.new]
         expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at).with(user_id).once.and_return(tips)
         expect(GameQueries).to receive(:all_game_ids).once.and_return([game1.id, game2.id])
@@ -40,7 +40,7 @@ describe Tips::FromUser do
     context 'and random tips created' do
       it 'return new created tips with goals' do
         expect(Tip.count).to eq(0)
-        expect(TipQueries).to receive(:exists_for_user_id).with(user_id).and_return(false)
+        expect(TipQueries).to receive(:exists_for_user_id?).with(user_id).and_return(false)
         tips = [Tip.new, Tip.new]
         expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at).with(user_id).once.and_return(tips)
         expect(GameQueries).to receive(:all_game_ids).once.and_return([game1.id, game2.id])
@@ -67,7 +67,7 @@ describe Tips::FromUser do
     context 'and random tips created only for games in the future' do
       it 'return new created tips with goals' do
         expect(Tip.count).to eq(0)
-        expect(TipQueries).to receive(:exists_for_user_id).with(user_id).and_return(false)
+        expect(TipQueries).to receive(:exists_for_user_id?).with(user_id).and_return(false)
         tips = [Tip.new, Tip.new]
         expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at).with(user_id).once.and_return(tips)
         expect(GameQueries).to receive(:all_game_ids).once.and_return([game1.id, game2.id, game3_started.id])
@@ -100,7 +100,7 @@ describe Tips::FromUser do
   context 'if user id present? and tips exists' do
     it 'return existing tips' do
       tips = [Tip.new, Tip.new]
-      expect(TipQueries).to receive(:exists_for_user_id).with(user_id).and_return(true)
+      expect(TipQueries).to receive(:exists_for_user_id?).with(user_id).and_return(true)
       expect(TipQueries).to receive(:all_by_user_id_ordered_games_start_at)
         .with(user_id).once.and_return(tips)
       expect(GameQueries).not_to receive(:all_game_ids)

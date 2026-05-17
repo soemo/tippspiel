@@ -28,7 +28,7 @@ describe 'WM 2026 seed data' do
     end
 
     it 'covers all 12 groups A-L' do
-      groups_in_data = group_games.map { |g| g[:group] }.uniq.sort
+      groups_in_data = group_games.pluck(:group).uniq.sort
       expect(groups_in_data).to eq(%w[A B C D E F G H I J K L])
     end
 

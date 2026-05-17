@@ -8,7 +8,7 @@ module Tips
       result = []
 
       if user_id.present?
-        create_user_tips unless ::TipQueries.exists_for_user_id(user_id)
+        create_user_tips unless ::TipQueries.exists_for_user_id?(user_id)
         result = ::TipQueries.all_by_user_id_ordered_games_start_at(user_id)
       end
 

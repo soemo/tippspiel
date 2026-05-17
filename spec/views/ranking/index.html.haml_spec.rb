@@ -46,7 +46,7 @@ describe 'rankings/index' do
     expect(rendered).to have_css('h3', text: I18n.t('ranking'))
     expect(rendered).to have_css('p', text: I18n.t('x_user_bet', user_count: user_size))
 
-    expect(rendered).to have_css('table.ranking.hover') do |table| # rubocop:disable Capybara/SpecificMatcher -- table has CSS classes that have_table doesn't support
+    expect(rendered).to have_css('table.ranking.hover') do |table| # rubocop:disable Capybara/RSpec/SpecificMatcher -- table has CSS classes that have_table doesn't support
       expect(table).to have_css('thead') do |thead|
         expect(thead).to have_css('th', text: I18n.t('standings'))
         expect(thead).to have_css('th', text: User.human_attribute_name('name'))
@@ -107,7 +107,7 @@ describe 'rankings/index' do
     expect(rendered).to have_css('h3', text: I18n.t('ranking'))
     expect(rendered).to have_css('p', text: I18n.t('x_user_bet', user_count: user_size))
 
-    expect(rendered).to have_css('table.ranking') do |table| # rubocop:disable Capybara/SpecificMatcher -- table has CSS class that have_table doesn't support
+    expect(rendered).to have_css('table.ranking') do |table| # rubocop:disable Capybara/RSpec/SpecificMatcher -- table has CSS class that have_table doesn't support
       expect(table).to have_css('thead') do |thead|
         expect(thead).to have_css('th', text: I18n.t('standings'))
         expect(thead).to have_css('th', text: User.human_attribute_name('name'))
