@@ -19,11 +19,27 @@ jobs:
     # source (no precompiled native binaries) for the x86_64-linux target.
     # Catches issues like nokogiri requiring GLIBC >= 2.28 (Uberspace is on
     # CentOS 7 / glibc 2.17) before they hit deploy.
-    - name: Install gems with force_ruby_platform
+    #
+    # Runs in frozen/deployment mode so Bundler is forbidden from mutating
+    # Gemfile.lock; we additionally verify no drift afterwards, otherwise a
+    # missing source-build spec would be silently auto-added by CI but still
+    # be absent on the production server.
+    - name: Install gems with force_ruby_platform (frozen)
       run: |
         bundle config set --local force_ruby_platform true
         bundle config set --local path vendor/bundle-linux-check
+        bundle config set --local deployment true
+        bundle config set --local frozen true
         bundle install --jobs 4
+
+    - name: Ensure Gemfile.lock did not drift
+      run: |
+        if ! git diff --exit-code Gemfile.lock; then
+          echo "::error::Gemfile.lock changed during the linux install check."
+          echo "::error::This means the committed lockfile is missing specs needed for the production deploy."
+          echo "::error::Run 'bundle lock --add-platform ruby' (and/or x86_64-linux) locally and commit the result."
+          exit 1
+        fi
 
   cd:
     name: Continuous Integration
