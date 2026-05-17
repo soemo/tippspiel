@@ -1,11 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe RoutingErrorsController do
-
   describe 'GET #show' do
-
     context 'with bot/scanner paths' do
-
       context 'PHP file probes' do
         it 'returns 404 silently for .php files' do
           get :show, params: { unknown_route: 'admin.php' }
@@ -44,7 +43,7 @@ describe RoutingErrorsController do
         end
       end
 
-      context '.env file harvesting' do
+      describe '.env file harvesting' do
         it 'returns 404 silently for .env' do
           get :show, params: { unknown_route: '.env' }
           expect(response).to have_http_status(:not_found)
@@ -71,7 +70,7 @@ describe RoutingErrorsController do
         end
       end
 
-      context '.git probes' do
+      describe '.git probes' do
         it 'returns 404 silently for .git/config' do
           get :show, params: { unknown_route: '.git/config' }
           expect(response).to have_http_status(:not_found)
@@ -89,7 +88,7 @@ describe RoutingErrorsController do
     context 'with legitimate unknown routes' do
       it 'raises ActionController::RoutingError for a genuinely unknown path' do
         expect { get :show, params: { unknown_route: 'some/unknown/app/path' } }
-          .to raise_error(ActionController::RoutingError, /Unknown route some\/unknown\/app\/path/)
+          .to raise_error(ActionController::RoutingError, %r{Unknown route some/unknown/app/path})
       end
 
       it 'raises ActionController::RoutingError for a typo in a real route' do

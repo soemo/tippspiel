@@ -13,24 +13,23 @@ class RoutingErrorsController < ApplicationController
   # as 404 without raising an exception, to avoid noise in logs and notification emails.
   def show
     path = params[:unknown_route].to_s
-    if bot_scan?(path)
-      head :not_found
-    else
-      raise ActionController::RoutingError, "Unknown route #{path}"
-    end
+    raise ActionController::RoutingError, "Unknown route #{path}" unless bot_scan?(path)
+
+    head :not_found
   end
 
   private
 
   def bot_scan?(path)
     # PHP file probes (WordPress exploit scanners, generic PHP probes)
-    return true if path.end_with?(".php") || path.match?(/\.php\d*\z/i)
+    return true if path.end_with?('.php') || path.match?(/\.php\d*\z/i)
     # WordPress-specific paths
-    return true if path.start_with?("wp-", "wp-content/", "wp-admin/", "wp-includes/")
+    return true if path.start_with?('wp-', 'wp-content/', 'wp-admin/', 'wp-includes/')
     # Credential/config file harvesting and git probes
-    return true if path.start_with?(".env", ".git/", "cgi-bin")
+    return true if path.start_with?('.env', '.git/', 'cgi-bin')
     # .env files nested in subdirectories (e.g. app/.env, laravel/.env, api/v1/.env)
     return true if path.match?(/\.env[\w.\-~]*\z/)
+
     false
   end
 end
