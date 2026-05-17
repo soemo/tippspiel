@@ -17,8 +17,8 @@
         position: relative;
 
         img {
-          width: 350px;
-          height: 350px;
+          width: 350px !important;
+          height: 350px !important;
           max-width: 100%;
           object-fit: cover;
           display: block;
