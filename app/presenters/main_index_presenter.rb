@@ -17,16 +17,18 @@ class MainIndexPresenter
     end
   end
 
-  def tip_presenters
-    tips.map { |tip| TipPresenter.new(tip) }
+  # Returns an array of [TipPresenter, GamePresenter] pairs so the view does
+  # not need to re-instantiate GamePresenter for every row.
+  def tip_and_game_presenter_pairs
+    tips.map { |tip| [TipPresenter.new(tip), GamePresenter.new(tip.game)] }
   end
 
   def tournament_finished?
-    Tournament.finished?
+    @tournament_finished ||= Tournament.finished?
   end
 
   def tournament_started?
-    Tournament.started?
+    @tournament_started ||= Tournament.started?
   end
 
   def user_name
