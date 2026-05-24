@@ -14,10 +14,9 @@ Appsignal.configure do |config|
   # Explicit working dir (AppSignal agent socket/pid files)
   config.working_directory_path = '/tmp/appsignal'
 
-  # Configure actions that should not be monitored by AppSignal.
-  # For more information see our docs:
-  # https://docs.appsignal.com/ruby/configuration/ignore-actions.html
-  # config.ignore_actions << "ApplicationController#isup"
+  # Ignore health check endpoint to avoid consuming plan request quota
+  # (AppSignal uptime monitoring pings this every minute from 4 regions)
+  config.ignore_actions << 'HealthChecksController#show'
 
   # Configure errors that should not be recorded by AppSignal.
   # For more information see our docs:
