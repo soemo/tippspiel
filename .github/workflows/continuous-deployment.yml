@@ -138,6 +138,8 @@ jobs:
 
     - name: Deploy to beta
       if: github.ref == 'refs/heads/main'
+      env:
+        APPSIGNAL_ACTIVE: false
       uses: miloserdow/capistrano-deploy@v3
       with:
         target: beta-tippspiel
@@ -145,6 +147,8 @@ jobs:
         enc_rsa_key_pth: config/deploy_id_ed25519_enc
 
     - name: Deploy to production
+      env:
+        APPSIGNAL_PUSH_API_KEY: ${{ secrets.APPSIGNAL_PUSH_API_KEY }}
       if: startsWith(github.ref, 'refs/tags/v')
       uses: miloserdow/capistrano-deploy@v3
       with:
