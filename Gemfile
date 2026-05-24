@@ -59,7 +59,6 @@ end
 # Development auch, damit Generatoren auch im DEV-Mode lauffaehig sind
 group :development, :test do
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-  gem 'capistrano-maintenance', require: false
   gem 'capistrano-rails'
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capybara' # rspec-rails braucht das um in den Views have_selector zu nutzen
