@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   devise_for :users,
              controllers: {
-               registrations: 'adapted_devise/registrations'
+               registrations: 'adapted_devise/registrations',
+               confirmations: 'adapted_devise/confirmations'
              }
 
   authenticated :user do
