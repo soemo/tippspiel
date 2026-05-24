@@ -4,7 +4,7 @@
 # Visit our documentation for a list of all available configuration options.
 # https://docs.appsignal.com/ruby/configuration/options.html
 Appsignal.configure do |config|
-  config.activate_if_environment('production')
+  config.activate_if_environment('development', 'production')
   config.name = 'Tippspiel'
   config.push_api_key = ENV.fetch('APPSIGNAL_PUSH_API_KEY', nil)
 
