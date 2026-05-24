@@ -47,9 +47,6 @@ set :bundle_flags, ''
 # Adds ~30-90s to each deploy.
 set :bundle_config, { force_ruby_platform: true }
 
-# capistrano-maintenance: use the app's own static maintenance page
-set :maintenance_template_path, 'public/maintenance.html'
-
 # By default, Capistrano::Uberspace uses the ruby versions installed on your uberspace that matches your `.ruby-version` file.
 
 # As of Capistrano 3.x, the `deploy:restart` task is not called automatically.
@@ -57,8 +54,3 @@ after 'deploy:finished', 'deploy:restart'
 
 # Laden der Rezepte
 Dir['config/deploy/recipes/*.rb'].each { |r| load(r) }
-
-namespace :deploy do
-  before :starting, 'maintenance:enable'
-  after :finished, 'maintenance:disable'
-end
