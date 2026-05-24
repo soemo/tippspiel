@@ -22,7 +22,7 @@ gem 'dotenv-rails', require: 'dotenv/load'
 gem 'exception_notification'
 gem 'font-awesome-sass', '= 5.15.1'
 gem 'foundation-rails', '= 6.2.4.0'
-gem 'haml', '= 5.2.2'
+gem 'haml', '7.2.0'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'mysql2', '~> 0.5.6' # keep on 0.5.x; explicit encoding: utf8mb4 in database.yml
