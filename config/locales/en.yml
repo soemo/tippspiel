@@ -152,6 +152,7 @@ en:
   set_pw: "Set password"
   send_pw: "Send new password"
   save_tip: "Save tips"
+  reminder_save_tips: "Don't forget to save your tips!"
   create_initial_random_tips: 'Please activate to generate random tips.'
   create_initial_random_tips_description: "If you are too lazy to enter your own tips, you can have random tips generated when registering.
   Random goals between 0 and 5 will be assigned. You can of course adjust the random tips later yourself."
