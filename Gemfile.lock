@@ -140,6 +140,7 @@ GEM
     dotenv-rails (3.2.0)
       dotenv (= 3.2.0)
       railties (>= 6.1)
+    drb (2.2.3)
     ed25519 (1.4.0)
     erubi (1.13.1)
     exception_notification (4.5.0)
@@ -203,7 +204,9 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.27.0)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
     mysql2 (0.5.7)
       bigdecimal
     net-imap (0.6.4)
@@ -440,7 +443,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   letter_opener_web
-  minitest (< 6)
+  minitest (< 7)
   mysql2 (~> 0.5.6)
   parallel (< 2)
   passenger (~> 6.0.20)
