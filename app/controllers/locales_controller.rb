@@ -19,24 +19,29 @@ class LocalesController < ApplicationController
     referer = request.referer
     return fallback_locale_path if referer.blank?
 
-    # Only redirect back if the referer resolves to a routable GET path.
-    # Devise's registration POST renders at /users which has no GET route —
-    # redirecting back there would trigger a RoutingError.
     referer_path = URI.parse(referer).path
-    begin
-      match = Rails.application.routes.router.recognize({ 'REQUEST_METHOD' => 'GET', 'PATH_INFO' => referer_path,
-                                                          'rack.input' => StringIO.new }) do |route, _|
-        route
-      end
-      match ? referer : fallback_locale_path
-    rescue StandardError
+
+    # Signed-in users can always go back to where they were.
+    # Unauthenticated users may only return to public pages to avoid an
+    # authenticate_user! redirect loop.
+    if user_signed_in? || public_path?(referer_path)
+      referer
+    else
       fallback_locale_path
     end
   rescue URI::InvalidURIError
     fallback_locale_path
   end
 
+  def public_path?(path)
+    public_controllers = %w[devise/sessions devise/registrations imprints helps]
+    route_info = Rails.application.routes.recognize_path(path, method: :get)
+    public_controllers.include?(route_info[:controller])
+  rescue ActionController::RoutingError, ActionController::MethodNotAllowed, NoMethodError
+    false
+  end
+
   def fallback_locale_path
-    user_signed_in? ? root_path : new_user_registration_path
+    user_signed_in? ? root_path : new_user_session_path
   end
 end
