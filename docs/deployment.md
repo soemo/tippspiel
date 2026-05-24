@@ -103,7 +103,22 @@ cd /var/www/virtual/soemo/beta-tippspiel.soemo.org/current   # beta
 RAILS_ENV=production bundle exec rails db:seed
 ```
 
-## 6. Smoke check
+## 6. Redis (ranking cache)
+
+The app uses Redis as the Rails cache store to cache the ranking computation across requests. Redis is not running by default on Uberspace — set it up once per account:
+
+Follow the guide at <https://lab.uberspace.de/guide_redis/>, then add these to each app's shared `.env` file:
+
+```
+REDIS_URL=unix:///home/soemo/.redis/sock
+REDIS_CACHE_NAMESPACE=tippspiel        # use "beta-tippspiel" for the beta app
+```
+
+Both apps share the same Redis instance on Uberspace, so the namespace keeps their caches isolated.
+
+Without Redis running the app falls back gracefully to computing the ranking on every request (same behaviour as before). Redis errors are logged to `log/production.log` and never surfaced to the user.
+
+## 7. Smoke check
 
 - Visit the site and confirm the tournament name displays correctly in both DE and EN
 - Log in as admin, verify games are listed at `/admin/games`

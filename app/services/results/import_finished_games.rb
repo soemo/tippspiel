@@ -176,11 +176,7 @@ module Results
     end
 
     def recalculate_rankings
-      ActiveRecord::Base.transaction do
-        ::Tips::UpdatePoints.call
-        ::Users::UpdatePoints.call
-        ::Users::UpdateRankingPerGame.call
-      end
+      ::Rankings::Recalculate.call
     end
   end
 end

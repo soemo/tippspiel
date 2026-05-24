@@ -26,6 +26,7 @@ gem 'haml', '= 5.2.2'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'mysql2', '~> 0.5.6' # keep on 0.5.x; explicit encoding: utf8mb4 in database.yml
+gem 'redis', '~> 5.0' # used by Rails.cache (:redis_cache_store) and Action Cable
 gem 'sass-rails', '= 5.1.0' # TODO: upgrade later to sassc-rails
 gem 'uglifier'
 gem 'whenever', require: false # cron schedule for result imports

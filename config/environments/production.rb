@@ -57,8 +57,18 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Use Redis as the cache store. REDIS_URL points to the Unix socket
+  # (e.g. unix:///home/soemo/.redis/sock on Uberspace). REDIS_CACHE_NAMESPACE
+  # isolates beta from production since both share the same Redis instance
+  # (e.g. "tippspiel" vs "beta-tippspiel"). If Redis is not running the
+  # error_handler silently degrades to no-op caching — the app keeps working.
+  config.cache_store = :redis_cache_store, {
+    url: ENV.fetch('REDIS_URL', nil),
+    namespace: ENV.fetch('REDIS_CACHE_NAMESPACE', 'tippspiel'),
+    error_handler: lambda { |method:, exception:, returning: nil| # rubocop:disable Lint/UnusedBlockArgument -- Rails API requires the keyword
+      Rails.logger.error("Redis cache error on #{method}: #{exception.class} #{exception.message}")
+    }
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque

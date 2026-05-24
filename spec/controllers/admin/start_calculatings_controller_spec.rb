@@ -10,9 +10,7 @@ describe Admin::StartCalculatingsController do
     context 'if current_user is an admin' do
       it 'runs calculations and redirects to games' do
         login(admin_user)
-        expect(Tips::UpdatePoints).to receive(:call)
-        expect(Users::UpdatePoints).to receive(:call)
-        expect(Users::UpdateRankingPerGame).to receive(:call)
+        expect(Rankings::Recalculate).to receive(:call)
 
         get :new
 
@@ -23,9 +21,7 @@ describe Admin::StartCalculatingsController do
     context 'if current_user is not an admin' do
       it 'does not run calculations' do
         login(no_admin_user)
-        expect(Tips::UpdatePoints).not_to receive(:call)
-        expect(Users::UpdatePoints).not_to receive(:call)
-        expect(Users::UpdateRankingPerGame).not_to receive(:call)
+        expect(Rankings::Recalculate).not_to receive(:call)
 
         get :new
 

@@ -8,14 +8,14 @@ describe RankingPresenter do
   describe '#bonus_answers_visible?' do
     context 'if Tournament.round_of_16_started? == true' do
       it 'returns true' do
-        expect(Tournament).to receive(:round_of_16_started?).and_return(true)
+        allow(Tournament).to receive(:round_of_16_started?).and_return(true)
         expect(subject.bonus_answers_visible?).to be true
       end
     end
 
     context 'if Tournament.round_of_16_started? == false' do
       it 'returns false' do
-        expect(Tournament).to receive(:round_of_16_started?).and_return(false)
+        allow(Tournament).to receive(:round_of_16_started?).and_return(false)
         expect(subject.bonus_answers_visible?).to be false
       end
     end

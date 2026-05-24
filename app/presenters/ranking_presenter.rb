@@ -1,12 +1,27 @@
 # frozen_string_literal: true
 
 class RankingPresenter
+  RANKING_CACHE_KEY = 'rankings/user_ranking_hash'
+
   def initialize(current_user)
     @current_user = current_user
   end
 
   def bonus_answers_visible?
     @bonus_answers_visible ||= Tournament.round_of_16_started?
+    @bonus_answers_visible ||= Tournament.round_of_16_started?
+  end
+
+  def bonus_ranking_info(user, for_small_screen: false)
+    return '' unless bonus_answers_visible?
+
+    flag_size = for_small_screen ? 16 : 32
+    [
+      team_flag_or_dash(user.bonus_champion_team, flag_size),
+      team_flag_or_dash(user.bonus_second_team, flag_size),
+      first_goal_label(user),
+      user.bonus_how_many_goals.presence || '-'
+    ].join(' | ')
   end
 
   def finished_games_count
@@ -22,22 +37,10 @@ class RankingPresenter
   end
 
   def user_ranking_hash
-    @user_ranking_hash ||= begin
+    @user_ranking_hash ||= Rails.cache.fetch(RANKING_CACHE_KEY) do
       user_ranking = Users::PrepareRanking.call(users_for_ranking: ::UserQueries.all_ordered_by_points_and_all_countxpoints)
       user_ranking.sort
     end
-  end
-
-  def bonus_ranking_info(user, for_small_screen: false)
-    return '' unless bonus_answers_visible?
-
-    flag_size = for_small_screen ? 16 : 32
-    [
-      team_flag_or_dash(user.bonus_champion_team, flag_size),
-      team_flag_or_dash(user.bonus_second_team, flag_size),
-      first_goal_label(user),
-      user.bonus_how_many_goals.presence || '-'
-    ].join(' | ')
   end
 
   def bonus_hint_for?(user)
