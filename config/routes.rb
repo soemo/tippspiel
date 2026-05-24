@@ -50,6 +50,8 @@ Rails.application.routes.draw do
 
   match 'comparetips/(:game_id)' => 'compare_tips#show', :as => 'compare_tips', :via => %i[get post]
 
+  resource :health_check, only: :show
+
   # This route must be the last route in this file.
   # It's used when no other routes matches and calls RoutingErrorsController#show with param unknown_route where the
   # specified path is stored.
