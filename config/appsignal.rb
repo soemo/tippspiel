@@ -9,7 +9,7 @@ Appsignal.configure do |config|
   config.push_api_key = ENV.fetch('APPSIGNAL_PUSH_API_KEY', nil)
 
   # Use shared log directory managed by Capistrano
-  config.log_path = Rails.root.join('log').to_s
+  config.log_path = File.expand_path('../log', __dir__)
 
   # Explicit working dir (AppSignal agent socket/pid files)
   config.working_directory_path = '/tmp/appsignal'
