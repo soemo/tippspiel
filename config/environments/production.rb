@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
+require_relative '../../lib/rack/maintenance_page'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -147,7 +148,8 @@ Rails.application.configure do
 
   # Serve maintenance.html as a 503 for all requests except /health_check.
   # capistrano-maintenance uploads/removes this file around each deploy.
-  config.middleware.use Rack::Maintenance,
-                        file: Rails.public_path.join('maintenance.html').to_s,
-                        without: %r{\A/health_check\z}
+  # Using an inline Rack middleware instead of the rack-maintenance gem, which
+  # calls the removed File.exists? and is broken on Ruby 3.2+.
+  maintenance_file = Rails.public_path.join('maintenance.html').to_s
+  config.middleware.insert_before 0, Rack::MaintenancePage, maintenance_file
 end
