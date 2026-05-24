@@ -144,4 +144,10 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # Serve maintenance.html as a 503 for all requests except /health_check.
+  # capistrano-maintenance uploads/removes this file around each deploy.
+  config.middleware.use Rack::Maintenance,
+                        file: Rails.public_path.join('maintenance.html').to_s,
+                        without: %r{\A/health_check\z}
 end
