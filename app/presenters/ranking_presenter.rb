@@ -9,6 +9,7 @@ class RankingPresenter
 
   def bonus_answers_visible?
     @bonus_answers_visible ||= Tournament.round_of_16_started?
+    @bonus_answers_visible ||= Tournament.round_of_16_started?
   end
 
   def bonus_ranking_info(user, for_small_screen: false)

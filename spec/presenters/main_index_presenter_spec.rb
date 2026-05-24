@@ -104,17 +104,22 @@ describe MainIndexPresenter do
     end
   end
 
-  describe '#tip_presenters' do
-    it 'returns TipPresenters' do
+  describe '#tip_and_game_presenter_pairs' do
+    it 'returns [TipPresenter, GamePresenter] pairs for each tip' do
       presenter = subject.new([tip_g1, tip_g2], user)
-      tips_presenters = presenter.tip_presenters
+      pairs = presenter.tip_and_game_presenter_pairs
 
-      expect(tips_presenters.size).to eq(2)
-      expect(tips_presenters[0]).to be_instance_of TipPresenter
-      expect(tips_presenters[0].id).to eq 400
+      expect(pairs.size).to eq(2)
 
-      expect(tips_presenters[1]).to be_instance_of TipPresenter
-      expect(tips_presenters[1].id).to eq 500
+      expect(pairs[0][0]).to be_instance_of TipPresenter
+      expect(pairs[0][0].id).to eq 400
+      expect(pairs[0][1]).to be_instance_of GamePresenter
+      expect(pairs[0][1].id).to eq 1
+
+      expect(pairs[1][0]).to be_instance_of TipPresenter
+      expect(pairs[1][0].id).to eq 500
+      expect(pairs[1][1]).to be_instance_of GamePresenter
+      expect(pairs[1][1].id).to eq 2
     end
   end
 end
