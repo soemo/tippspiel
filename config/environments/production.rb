@@ -148,6 +148,6 @@ Rails.application.configure do
   # Serve maintenance.html as a 503 for all requests except /health.
   # capistrano-maintenance uploads/removes this file around each deploy.
   config.middleware.use Rack::Maintenance,
-                        file: Rails.root.join('public', 'maintenance.html').to_s,
+                        file: Rails.public_path.join('maintenance.html').to_s,
                         without: %r{\A/health}
 end
