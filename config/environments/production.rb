@@ -111,13 +111,6 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  # better Log-Output https://github.com/roidrage/lograge
-  config.lograge.enabled = true
-  # add time to lograge
-  config.lograge.custom_options = lambda do |event|
-    { time: event.time }
-  end
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 

@@ -119,6 +119,66 @@ describe Admin::ResultImportsController do
         expect(flash[:error]).to be_present
         expect(response).to redirect_to admin_games_path
       end
+
+      # ---- Point calculation after game finishes ----
+      #
+      # The controller delegates everything to Results::ImportFinishedGames.
+      # When at least one game transitions to finished=true the service runs
+      # the full ranking pipeline (Tips::UpdatePoints → Users::UpdatePoints →
+      # Users::UpdateRankingPerGame) inside a single transaction.
+      # These tests verify that the controller correctly triggers the service
+      # and that the ranking services are called exactly once per import run.
+
+      it 'triggers point recalculation when a game is newly finished' do
+        allow(Results::ImportFinishedGames).to receive(:call).and_call_original
+        allow(Tips::UpdatePoints).to receive(:call)
+        allow(Users::UpdatePoints).to receive(:call)
+        allow(Users::UpdateRankingPerGame).to receive(:call)
+
+        ger = create(:team, name: 'Germany', football_data_tla: 'GER')
+        bra = create(:team, name: 'Brazil',  football_data_tla: 'BRA')
+        create(:game,
+               team1: ger, team2: bra,
+               start_at: 2.hours.ago,
+               finished: false, team1_goals: 0, team2_goals: 0,
+               football_data_match_id: 42_001)
+
+        fake_client = double('client')
+        allow(fake_client).to receive(:fetch_competition_matches).and_return({
+                                                                               'matches' => [{
+                                                                                 'id' => 42_001,
+                                                                                 'utcDate' => 2.hours.ago.iso8601,
+                                                                                 'status' => 'FINISHED',
+                                                                                 'homeTeam' => { 'tla' => 'GER' },
+                                                                                 'awayTeam' => { 'tla' => 'BRA' },
+                                                                                 'score' => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => 2, 'away' => 1 } }
+                                                                               }]
+                                                                             })
+        allow(Results::FootballDataClient).to receive(:new).and_return(fake_client)
+        allow(ResultsMailer).to receive(:import_summary).and_return(double(deliver_now: true))
+
+        post :create
+
+        expect(assigns(:result).imported.size).to eq 1
+        expect(assigns(:result).imported.first.game.finished?).to be true
+        expect(Tips::UpdatePoints).to have_received(:call).once
+        expect(Users::UpdatePoints).to have_received(:call).once
+        expect(Users::UpdateRankingPerGame).to have_received(:call).once
+      end
+
+      it 'does not trigger point recalculation when no game was newly finished' do
+        allow(Tips::UpdatePoints).to receive(:call)
+        allow(Users::UpdatePoints).to receive(:call)
+        allow(Users::UpdateRankingPerGame).to receive(:call)
+
+        allow(Results::ImportFinishedGames).to receive(:call).and_return(empty_result)
+
+        post :create
+
+        expect(Tips::UpdatePoints).not_to have_received(:call)
+        expect(Users::UpdatePoints).not_to have_received(:call)
+        expect(Users::UpdateRankingPerGame).not_to have_received(:call)
+      end
     end
   end
 end

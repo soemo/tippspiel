@@ -13,6 +13,7 @@ ruby '3.2.11'
 # gem 'psych', '< 4' # https://stackoverflow.com/a/71192990
 
 gem 'acts_as_paranoid'
+gem 'appsignal'
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'cancancan'
 gem 'devise'
@@ -24,7 +25,6 @@ gem 'foundation-rails', '= 6.2.4.0'
 gem 'haml', '= 5.2.2'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'lograge'
 gem 'mysql2', '~> 0.5.6' # keep on 0.5.x; explicit encoding: utf8mb4 in database.yml
 gem 'sass-rails', '= 5.1.0' # TODO: upgrade later to sassc-rails
 gem 'uglifier'

@@ -79,6 +79,9 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     airbrussh (1.6.1)
       sshkit (>= 1.6.1, != 1.7.0)
+    appsignal (4.8.4)
+      logger
+      rack (>= 2.0.0)
     ast (2.4.3)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
@@ -186,11 +189,6 @@ GEM
       rexml
     lint_roller (1.1.0)
     logger (1.7.0)
-    lograge (0.14.0)
-      actionpack (>= 4)
-      activesupport (>= 4)
-      railties (>= 4)
-      request_store (~> 1.0)
     loofah (2.25.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -291,8 +289,6 @@ GEM
     rainbow (3.1.1)
     rake (13.4.2)
     regexp_parser (2.12.0)
-    request_store (1.7.0)
-      rack (>= 1.4)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -424,6 +420,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_paranoid
+  appsignal
   autoprefixer-rails
   bcrypt_pbkdf (>= 1.0, < 2.0)
   cancancan
@@ -443,7 +440,6 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   letter_opener_web
-  lograge
   minitest (< 6)
   mysql2 (~> 0.5.6)
   parallel (< 2)
