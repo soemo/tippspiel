@@ -14,8 +14,7 @@
           %th= Tip.human_attribute_name('tip_points')
           %th= ''
       %tbody
-        - presenter.tip_presenters.each do |tip_presenter|
-          - game_presenter = GamePresenter.new(tip_presenter.game)
+        - presenter.tip_and_game_presenter_pairs.each do |tip_presenter, game_presenter|
           - filter_css_classes = game_presenter.filter_categories_css_classes
 
           - edit_allowed = tip_presenter.edit_allowed?
