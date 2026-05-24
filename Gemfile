@@ -13,7 +13,7 @@ ruby '3.2.11'
 # gem 'psych', '< 4' # https://stackoverflow.com/a/71192990
 
 gem 'acts_as_paranoid'
-gem "appsignal"
+gem 'appsignal'
 gem 'autoprefixer-rails' # Erweitert CSS um Vendor-Prefixe z.B: "-webkit-" oder "-moz-"
 gem 'cancancan'
 gem 'devise'

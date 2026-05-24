@@ -145,15 +145,15 @@ describe Admin::ResultImportsController do
 
         fake_client = double('client')
         allow(fake_client).to receive(:fetch_competition_matches).and_return({
-          'matches' => [{
-            'id' => 42_001,
-            'utcDate' => 2.hours.ago.iso8601,
-            'status' => 'FINISHED',
-            'homeTeam' => { 'tla' => 'GER' },
-            'awayTeam' => { 'tla' => 'BRA' },
-            'score' => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => 2, 'away' => 1 } }
-          }]
-        })
+                                                                               'matches' => [{
+                                                                                 'id' => 42_001,
+                                                                                 'utcDate' => 2.hours.ago.iso8601,
+                                                                                 'status' => 'FINISHED',
+                                                                                 'homeTeam' => { 'tla' => 'GER' },
+                                                                                 'awayTeam' => { 'tla' => 'BRA' },
+                                                                                 'score' => { 'duration' => 'REGULAR', 'fullTime' => { 'home' => 2, 'away' => 1 } }
+                                                                               }]
+                                                                             })
         allow(Results::FootballDataClient).to receive(:new).and_return(fake_client)
         allow(ResultsMailer).to receive(:import_summary).and_return(double(deliver_now: true))
 
