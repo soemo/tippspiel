@@ -12,8 +12,8 @@ BOT_PROBE_PATTERN = /
 
 Tippspiel::Application.config.middleware.use ExceptionNotification::Rack,
                                              ignore_if: lambda { |env, exception|
-                                               exception.is_a?(ActionController::BadRequest) &&
-                                                 env['PATH_INFO'].to_s.match?(BOT_PROBE_PATTERN)
+exception.is_a?(ActionController::BadRequest) &&
+  env['PATH_INFO'].to_s.b.match?(BOT_PROBE_PATTERN)
                                              },
                                              email: {
                                                deliver_with: :deliver_now,
