@@ -8,7 +8,7 @@ BOT_PROBE_PATTERN = /
   (?:^|\/)\.git\/          |  # git directory probes
   (?:^|\/)wp-              |  # WordPress paths
   (?:^|\/)cgi-bin             # CGI probes
-/xi
+/xni
 
 Tippspiel::Application.config.middleware.use ExceptionNotification::Rack,
                                              ignore_if: lambda { |env, exception|
