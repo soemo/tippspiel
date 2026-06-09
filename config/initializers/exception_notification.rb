@@ -3,7 +3,7 @@
 # https://github.com/smartinez87/exception_notification
 
 BOT_PROBE_PATTERN = /
-  (?:^|\/)\.env[\w.\-~%]*| # .env harvesting (including /.env%85 with invalid encoding)
+  (?:^|\/)\.env[\w.\-~%]*| # .env harvesting (including encoded .env probes)
   \.php\d*\z|              # PHP file probes
   (?:^|\/)\.git\/|         # git directory probes
   (?:^|\/)wp-|              # WordPress paths
