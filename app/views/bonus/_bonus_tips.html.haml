@@ -26,7 +26,7 @@
       .small-12.large-6.columns
         %b= I18n.t('bonus_questions.how_many_goals')
         = text_field_tag('bonus_how_many_goals', presenter.bonus_how_many_goals,
-                   {maxlength: 2, size: 2, inputmode: 'numeric', pattern: '[1-9]*'})
+                   {maxlength: 2, size: 2, inputmode: 'numeric', pattern: '[1-9][0-9]*'})
 
     .row
       .small-12.large-6.columns

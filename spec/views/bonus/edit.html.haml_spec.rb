@@ -27,6 +27,7 @@ describe 'bonus/edit.html.haml' do
       expect(rendered).to have_xpath("//select[@id='bonus_second_team_id']")
       expect(rendered).to have_xpath("//select[@id='bonus_when_final_first_goal']")
       expect(rendered).to have_xpath("//input[@id='bonus_how_many_goals']")
+      expect(rendered).to have_xpath("//input[@id='bonus_how_many_goals' and @pattern='[1-9][0-9]*']")
 
       expect(rendered).to have_no_text(I18n.t('no_champion_tip'))
       expect(rendered).to have_no_text(I18n.t('no_second_tip'))
