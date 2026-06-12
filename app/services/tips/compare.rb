@@ -11,7 +11,7 @@ module Tips
       game_to_compare = nil
       tips = nil
 
-      if game_id.present? && possible_games.present? && possible_games.pluck(:id).include?(game_id)
+      if game_id.present? && possible_games.present? && possible_games.pluck(:id).include?(game_id.to_i)
         game_to_compare = possible_games.where(id: game_id).first
       elsif possible_games.present?
         game_to_compare = possible_games.last

@@ -1,0 +1,26 @@
+current directory: /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/src/helper-scripts/download_binaries
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+Attempting to download https://github.com/phusion/passenger/releases/download/release-6.0.27/rubyext-ruby-3.2.3-x86_64-linux.tar.gz into /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/download_cache
+*** Could not download https://github.com/phusion/passenger/releases/download/release-6.0.27/rubyext-ruby-3.2.3-x86_64-linux.tar.gz: The requested URL returned error: 404
+Attempting to download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/6.0.27/rubyext-ruby-3.2.3-x86_64-linux.tar.gz into /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/download_cache
+*** Could not download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/6.0.27/rubyext-ruby-3.2.3-x86_64-linux.tar.gz: Could not resolve host: oss-binaries.phusionpassenger.com
+Attempting to download https://s3.amazonaws.com/phusion-passenger/binaries/passenger/by_release/6.0.27/rubyext-ruby-3.2.3-x86_64-linux.tar.gz into /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/download_cache
+*** Could not download https://s3.amazonaws.com/phusion-passenger/binaries/passenger/by_release/6.0.27/rubyext-ruby-3.2.3-x86_64-linux.tar.gz: Could not resolve host: s3.amazonaws.com
+Attempting to download https://github.com/phusion/passenger/releases/download/release-6.0.27/nginx-1.26.3-x86_64-linux.tar.gz into /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/download_cache
+Attempting to download https://github.com/phusion/passenger/releases/download/release-6.0.27/agent-x86_64-linux.tar.gz into /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/download_cache
+
+current directory: /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20260612-4251-fd4woj sitelibdir\=./.gem.20260612-4251-fd4woj clean
+true
+
+current directory: /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20260612-4251-fd4woj sitelibdir\=./.gem.20260612-4251-fd4woj
+true
+
+current directory: /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20260612-4251-fd4woj sitelibdir\=./.gem.20260612-4251-fd4woj install
+true
+
+current directory: /home/runner/work/tippspiel/tippspiel/soemo/tippspiel/vendor/bundle/ruby/3.2.0/gems/passenger-6.0.27/src/helper-scripts/download_binaries
+make DESTDIR\= sitearchdir\=./.gem.20260612-4251-fd4woj sitelibdir\=./.gem.20260612-4251-fd4woj clean
+true

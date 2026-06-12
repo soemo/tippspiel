@@ -41,6 +41,14 @@ describe Tips::Compare do
     expect(result.tips).to eq([tip_g1_u2, tip_g1_u3, tip_g1_u1])
   end
 
+  it 'returns correct game when game_id is passed as a string (as from form params)' do
+    game2.update_column(:start_at, 1.second.ago)
+    result = subject.call(game_id: game1.id.to_s)
+    expect(result.possible_games).to eq([game1, game2])
+    expect(result.game_to_compare).to eq(game1)
+    expect(result.tips).to eq([tip_g1_u2, tip_g1_u3, tip_g1_u1])
+  end
+
   it 'returns last possible game, if game_id not given' do
     game2.update_column(:start_at, 1.second.ago)
     result = subject.call(game_id: nil)

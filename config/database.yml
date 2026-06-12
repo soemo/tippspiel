@@ -1,20 +1,21 @@
 default: &default
-  adapter: mysql2
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   encoding: utf8mb4
+
+development:
+  adapter: mysql2
   username: root
   password:
   host: 127.0.0.1
-
-development:
-  <<: *default
   database: tippspiel_development_wm_2026
 
 test:
-  <<: *default
-  database: tippspiel_test
+  adapter: sqlite3
+  database: tmp/test.sqlite3
 
-# prod db == dev db
 production:
-  <<: *default
-  database: tippspiel_development_wm_2026 # keep in sync with development
+  adapter: mysql2
+  username: root
+  password:
+  host: 127.0.0.1
+  database: tippspiel_development_wm_2026

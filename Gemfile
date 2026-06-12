@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 6.1.7'
-ruby '3.2.11'
+ruby '3.2.3'
 
 # gem 'psych', '< 4' # https://stackoverflow.com/a/71192990
 
@@ -25,6 +25,7 @@ gem 'foundation-rails', '= 6.2.4.0'
 gem 'haml', '= 5.2.2'
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'sqlite3', '~> 1.4'
 gem 'mysql2', '~> 0.5.6' # keep on 0.5.x; explicit encoding: utf8mb4 in database.yml
 gem 'redis', '~> 5.0' # used by Rails.cache (:redis_cache_store) and Action Cable
 gem 'sass-rails', '= 5.1.0' # TODO: upgrade later to sassc-rails
@@ -60,7 +61,7 @@ end
 group :development, :test do
   gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
   gem 'capistrano-rails'
-  gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
+  #gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capybara' # rspec-rails braucht das um in den Views have_selector zu nutzen
   gem 'ed25519', '>= 1.2', '< 2.0'
   gem 'minitest', '< 6' # minitest 6 drops Logger constant, incompatible with Rails 6.1
