@@ -1,0 +1,22 @@
+.statistic-points-summary {
+  margin-top: 5px;
+
+  .user-points {
+    font-size: 2rem;
+    margin-right: 5px;
+
+    @include breakpoint(medium down) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .badge,
+  .user-statistic {
+    vertical-align: text-bottom;
+  }
+
+  .badge-bonus {
+    color: $eight-point-color;
+    background: $bonus-point-color;
+  }
+}

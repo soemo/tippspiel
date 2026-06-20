@@ -280,4 +280,41 @@ describe StatisticsShowPresenter do
       end
     end
   end
+
+  describe '#total_points' do
+    it 'returns the points of the user to show' do
+      user.update!(points: 168)
+      presenter = subject.new(current_user, user.id, games)
+      expect(presenter.total_points).to eq(168)
+    end
+
+    it 'returns 0 when the user has no points' do
+      user.update!(points: nil)
+      presenter = subject.new(current_user, user.id, games)
+      expect(presenter.total_points).to eq(0)
+    end
+  end
+
+  describe '#points_header_text' do
+    it 'returns the localized points label' do
+      presenter = subject.new(current_user, user.id, games)
+      expect(presenter.points_header_text).to eq(User.human_attribute_name('points'))
+    end
+  end
+
+  describe '#ranking_summary_header_text' do
+    context 'when showing the current user' do
+      it 'returns the personal "Your ranking" label' do
+        presenter = subject.new(current_user, current_user.id, games)
+        expect(presenter.ranking_summary_header_text).to eq(I18n.t(:ranking_summary_header))
+      end
+    end
+
+    context 'when showing another user' do
+      it 'returns the neutral ranking label' do
+        presenter = subject.new(current_user, user.id, games)
+        expect(presenter.ranking_summary_header_text).to eq(I18n.t(:ranking_summary_header_other))
+      end
+    end
+  end
 end
