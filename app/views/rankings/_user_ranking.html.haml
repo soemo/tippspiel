@@ -1,6 +1,10 @@
 - user_ranking_hash = presenter.user_ranking_hash
 - if user_ranking_hash.present?
 
+  = text_field_tag('search', nil, {id: 'ranking-table-filter-input',
+                    class: 'js-table-filter-input',
+                    data: {table: 'ranking'},
+                    placeholder: I18n.t(:type_to_filter)})
   %table.ranking.hover
     %thead.hide-for-small-only
       %tr.white-bg
