@@ -63,7 +63,7 @@ group :development, :test do
   gem 'capistrano-uberspace', git: 'https://github.com/soemo/capistrano-uberspace.git', branch: 'master'
   gem 'capybara' # rspec-rails braucht das um in den Views have_selector zu nutzen
   gem 'ed25519', '>= 1.2', '< 2.0'
-  gem 'minitest', '< 6' # minitest 6 drops Logger constant, incompatible with Rails 6.1
+  gem 'minitest', '< 7' # minitest 6 drops Logger constant, incompatible with Rails 6.1
   gem 'rspec'
   gem 'rspec-rails'
   gem 'webrick'
