@@ -19,6 +19,9 @@ describe 'rankings/index' do
     expect(rendered).to have_css('h3', text: I18n.t('ranking'))
     expect(rendered).to have_css('p', text: I18n.t('x_user_bet', user_count: 0))
     expect(rendered).to have_css('p', text: I18n.t('no_user'))
+
+    # no ranking table means no filter input
+    expect(rendered).to have_no_field(id: 'ranking-table-filter-input')
   end
 
   it 'shows correct user ranking - all user on place 1' do
@@ -45,6 +48,12 @@ describe 'rankings/index' do
 
     expect(rendered).to have_css('h3', text: I18n.t('ranking'))
     expect(rendered).to have_css('p', text: I18n.t('x_user_bet', user_count: user_size))
+
+    # search filter input on top of the ranking table
+    expect(rendered).to have_css(
+      "input#ranking-table-filter-input.js-table-filter-input[data-table='ranking']" \
+      "[placeholder='#{I18n.t(:type_to_filter)}']"
+    )
 
     expect(rendered).to have_css('table.ranking.hover') do |table| # rubocop:disable Capybara/RSpec/SpecificMatcher -- table has CSS classes that have_table doesn't support
       expect(table).to have_css('thead') do |thead|

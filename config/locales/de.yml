@@ -89,7 +89,7 @@ de:
   bonus_settings_submit: "Bonusantworten speichern"
 
   update_successful: "%{object_name} wurde aktualisiert."
-  type_to_filter: Tippen um zu Filtern
+  type_to_filter: Filter bei Namen
 
   bonus_questions:
     which_team_is_champion: '1. Welche Mannschaft wird das Turnier gewinnen?'
