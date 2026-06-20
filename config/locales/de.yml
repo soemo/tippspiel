@@ -131,6 +131,7 @@ de:
   show_statistic_for: Statistik für %{name} anzeigen
   ranking_per_game: Platzierung pro Spiel
   ranking_summary_header: Deine Platzierung
+  ranking_summary_header_other: Platzierung
   ranking_per_game_nothing_to_show: Aktuell liegen keine Daten vor. Bitte schau nach dem nächsten Spiel nochmal vorbei.
   ranking_current: Aktuell
   ranking_best: Beste

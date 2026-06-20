@@ -3,6 +3,12 @@
     %h3=@presenter.header_text
 
     - if @presenter.data_to_show?
+      %h4.statistic-points-header=@presenter.points_header_text
+      %p.statistic-points-summary
+        %span.user-points= @presenter.total_points
+        %span.user-statistic= statistic_content(@presenter.user_to_show).html_safe
+      = render 'shared/point_legend'
+
       -# Mobile: summary stats (small only)
       .show-for-small-only
         %h4=@presenter.ranking_summary_header_text

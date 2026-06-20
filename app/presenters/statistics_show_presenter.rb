@@ -21,6 +21,14 @@ class StatisticsShowPresenter
     user_id.present? && user_id.to_i == current_user.id
   end
 
+  def total_points
+    user_to_show.points || 0
+  end
+
+  def points_header_text
+    User.human_attribute_name('points')
+  end
+
   def finished_tips
     TipQueries.all_by_user_id_and_game_ids_ordered_games_start_at(user_to_show.id, @finished_games.map(&:id))
   end
@@ -42,7 +50,11 @@ class StatisticsShowPresenter
   end
 
   def ranking_summary_header_text
-    I18n.t(:ranking_summary_header)
+    if shows_current_user_rankings?
+      I18n.t(:ranking_summary_header)
+    else
+      I18n.t(:ranking_summary_header_other)
+    end
   end
 
   def tips_header_text
