@@ -188,7 +188,7 @@ en:
 
   round:
     group: Group
-    roundof32: Round of 32
+    roundof32: Round of 16
     roundof16: Round of 16
     quarterfinal: Quarter-final
     semifinal: Semi-final

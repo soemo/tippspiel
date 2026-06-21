@@ -127,14 +127,14 @@ describe GamePresenter do
     it 'returns correct english name for ROUND_OF_32' do
       game.round = ROUND_OF_32
       I18n.with_locale(:en) do
-        expect(subject.round_or_group_name).to eq 'Round of 32'
+        expect(subject.round_or_group_name).to eq 'Round of 16'
       end
     end
 
     it 'returns correct german name for ROUND_OF_32' do
       game.round = ROUND_OF_32
       I18n.with_locale(:de) do
-        expect(subject.round_or_group_name).to eq 'Runde der letzten 32'
+        expect(subject.round_or_group_name).to eq 'Sechzehntelfinale'
       end
     end
 

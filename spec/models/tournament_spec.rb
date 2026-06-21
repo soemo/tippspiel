@@ -122,7 +122,7 @@ describe Tournament do
   end
 
   describe '#round_of_32_started?' do
-    context 'if first game of "Round of 32" is in the future' do
+    context 'if first game of "Round of 16" is in the future' do
       it 'returns false' do
         Timecop.freeze(Time.zone.now)
         create(:game, start_at: 1.second.from_now, round: ROUND_OF_32)
@@ -131,7 +131,7 @@ describe Tournament do
       end
     end
 
-    context 'if first game of "Round of 32" is not in the future' do
+    context 'if first game of "Round of 16" is not in the future' do
       it 'returns true' do
         Timecop.freeze(Time.zone.now)
         create(:game, start_at: 1.second.ago, round: ROUND_OF_32)
@@ -140,7 +140,7 @@ describe Tournament do
       end
     end
 
-    context 'if no Round of 32 games exist' do
+    context 'if no Round of 16 games exist' do
       it 'returns false without raising' do
         expect(subject.round_of_32_started?).to be false
       end
@@ -148,7 +148,7 @@ describe Tournament do
   end
 
   describe '#round_of_32_not_yet_started?' do
-    context 'if first game of "Round of 32" is in the future' do
+    context 'if first game of "Round of 16" is in the future' do
       it 'returns true' do
         Timecop.freeze(Time.zone.now)
         create(:game, start_at: 1.second.from_now, round: ROUND_OF_32)
@@ -157,7 +157,7 @@ describe Tournament do
       end
     end
 
-    context 'if first game of "Round of 32" is not in the future' do
+    context 'if first game of "Round of 16" is not in the future' do
       it 'returns false' do
         Timecop.freeze(Time.zone.now)
         create(:game, start_at: 1.second.ago, round: ROUND_OF_32)
@@ -166,7 +166,7 @@ describe Tournament do
       end
     end
 
-    context 'if no Round of 32 games exist' do
+    context 'if no Round of 16 games exist' do
       it 'returns true without raising' do
         expect(subject.round_of_32_not_yet_started?).to be true
       end
