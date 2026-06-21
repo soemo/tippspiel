@@ -80,7 +80,7 @@ describe Tournament do
       end
     end
 
-    context 'if first game of "Round of 32"" is not in the future' do
+    context 'if first game of "Round of 16" is not in the future' do
       it 'returns true' do
         Timecop.freeze(Time.zone.now)
         create(:game, start_at: 1.second.ago, round: ROUND_OF_16)
