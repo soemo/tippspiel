@@ -74,7 +74,7 @@ describe 'WM 2026 seed data' do
     end
   end
 
-  describe 'Round of 32' do
+  describe 'Round of 16' do
     it 'has 8 games' do
       expect(round_of_16_games.length).to eq(8)
     end
